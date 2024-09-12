@@ -84,13 +84,15 @@ public class ColorExtractionService extends JobService {
                     // We can't extract colors from live wallpapers; always use the default color.
                     extractedColors.updateHotseatPalette(null);
                 } else {
+                    // todo cyx 读取内存需要动态权限算了 或者后面请求？
                     // We extract colors for the hotseat and status bar separately,
                     // since they only consider part of the wallpaper.
-                    extractedColors.updateHotseatPalette(getHotseatPalette());
+//                    extractedColors.updateHotseatPalette(getHotseatPalette());
 
-                    if (FeatureFlags.LIGHT_STATUS_BAR) {
-                        extractedColors.updateStatusBarPalette(getStatusBarPalette());
-                    }
+//                    if (FeatureFlags.LIGHT_STATUS_BAR) {
+//                        extractedColors.updateStatusBarPalette(getStatusBarPalette());
+//                    }
+                    extractedColors.updateHotseatPalette(null);
                 }
 
                 // Save the extracted colors and wallpaper id to LauncherProvider.
