@@ -18,7 +18,6 @@ android {
     buildToolsVersion '34.0.0'
 
     defaultConfig {
-        applicationId 'com.android.launcher3'
         minSdkVersion 21
         targetSdkVersion 34
         versionCode 1
@@ -32,12 +31,25 @@ android {
         }
     }
 
+    flavorDimensions "default"
+
+    productFlavors {
+        aosp {
+            dimension "default"
+            applicationId 'com.android.launcher3'
+            testApplicationId 'com.android.launcher3.tests'
+        }
+    }
     sourceSets {
         main {
             res.srcDirs = ['res']
             java.srcDirs = ['src', 'src_config']
             manifest.srcFile 'AndroidManifest-common.xml'
-            manifest.srcFile 'AndroidManifest.xml'
+        }
+
+
+        aosp {
+            manifest.srcFile "AndroidManifest.xml"
         }
     }
 }
