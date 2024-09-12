@@ -27,9 +27,10 @@ import android.os.CancellationSignal;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.support.annotation.Nullable;
-import android.support.v4.graphics.ColorUtils;
 import android.util.Log;
 import android.util.LongSparseArray;
+
+import androidx.core.graphics.ColorUtils;
 
 import com.android.launcher3.compat.AppWidgetManagerCompat;
 import com.android.launcher3.compat.ShortcutConfigActivityInfo;

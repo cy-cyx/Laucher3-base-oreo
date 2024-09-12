@@ -25,7 +25,6 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.v4.graphics.ColorUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -33,6 +32,8 @@ import android.view.View;
 import android.view.ViewDebug;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
+import androidx.core.graphics.ColorUtils;
 
 import com.android.launcher3.config.FeatureFlags;
 import com.android.launcher3.dynamicui.ExtractedColors;

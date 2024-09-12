@@ -26,7 +26,8 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.provider.Settings;
 import android.provider.Settings.System;
-import android.support.v4.os.BuildCompat;
+
+import androidx.core.os.BuildCompat;
 
 import com.android.launcher3.graphics.IconShapeOverride;
 

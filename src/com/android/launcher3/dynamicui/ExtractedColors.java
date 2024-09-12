@@ -18,9 +18,10 @@ package com.android.launcher3.dynamicui;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.v4.graphics.ColorUtils;
-import android.support.v7.graphics.Palette;
 import android.util.Log;
+
+import androidx.core.graphics.ColorUtils;
+import androidx.palette.graphics.Palette;
 
 import com.android.launcher3.Utilities;
 

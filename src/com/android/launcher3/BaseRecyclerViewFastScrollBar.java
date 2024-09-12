@@ -261,7 +261,7 @@ public class BaseRecyclerViewFastScrollBar {
         if (mThumbOffsetY < 0) {
             return;
         }
-        int saveCount = canvas.save(Canvas.MATRIX_SAVE_FLAG);
+        int saveCount = canvas.save();
         if (!mIsRtl) {
             canvas.translate(mRv.getWidth(), 0);
         }

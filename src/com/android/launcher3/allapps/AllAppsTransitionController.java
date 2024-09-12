@@ -7,13 +7,14 @@ import android.animation.AnimatorSet;
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.graphics.Color;
-import android.support.v4.graphics.ColorUtils;
-import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
+
+import androidx.core.graphics.ColorUtils;
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 
 import com.android.launcher3.AbstractFloatingView;
 import com.android.launcher3.Hotseat;

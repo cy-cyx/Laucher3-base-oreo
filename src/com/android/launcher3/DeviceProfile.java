@@ -141,8 +141,8 @@ public class DeviceProfile {
     public BadgeRenderer mBadgeRenderer;
 
     public DeviceProfile(Context context, InvariantDeviceProfile inv,
-            Point minSize, Point maxSize,
-            int width, int height, boolean isLandscape) {
+                         Point minSize, Point maxSize,
+                         int width, int height, boolean isLandscape) {
 
         this.inv = inv;
         this.isLandscape = isLandscape;
@@ -260,7 +260,7 @@ public class DeviceProfile {
         Resources res = context.getResources();
         float padding = res.getInteger(R.integer.config_allAppsButtonPaddingPercent) / 100f;
         allAppsButtonVisualSize = (int) (hotseatIconSizePx * (1 - padding)) - context.getResources()
-                        .getDimensionPixelSize(R.dimen.all_apps_button_scale_down);
+                .getDimensionPixelSize(R.dimen.all_apps_button_scale_down);
     }
 
     private void updateAvailableDimensions(DisplayMetrics dm, Resources res) {
@@ -362,7 +362,9 @@ public class DeviceProfile {
         allAppsNumCols = allAppsNumPredictiveCols = inv.numColumns;
     }
 
-    /** Returns the width and height of the search bar, ignoring any padding. */
+    /**
+     * Returns the width and height of the search bar, ignoring any padding.
+     */
     public Point getSearchBarDimensForWidgetOpts() {
         if (isVerticalBarLayout()) {
             return new Point(dropTargetBarSizePx, availableHeightPx - 2 * edgeMarginPx);
@@ -426,7 +428,7 @@ public class DeviceProfile {
                 int availablePaddingX = Math.max(0, width - ((inv.numColumns * cellWidthPx) +
                         ((inv.numColumns - 1) * cellWidthPx)));
                 availablePaddingX = (int) Math.min(availablePaddingX,
-                            width * MAX_HORIZONTAL_PADDING_PERCENT);
+                        width * MAX_HORIZONTAL_PADDING_PERCENT);
                 int availablePaddingY = Math.max(0, height - topWorkspacePadding - paddingBottom
                         - (2 * inv.numRows * cellHeightPx) - hotseatBarTopPaddingPx
                         - hotseatBarBottomPaddingPx);
@@ -485,6 +487,7 @@ public class DeviceProfile {
     public static int calculateCellWidth(int width, int countX) {
         return width / countX;
     }
+
     public static int calculateCellHeight(int height, int countY) {
         return height / countY;
     }
@@ -652,13 +655,13 @@ public class DeviceProfile {
     public final int[] getContainerPadding() {
         // No paddings for portrait phone
         if (isPhone && !isVerticalBarLayout()) {
-            return new int[] {0, 0};
+            return new int[]{0, 0};
         }
 
         // In landscape, we match the width of the workspace
         int padding = (pageIndicatorLandGutterRightNavBarPx +
                 hotseatBarHeightPx + hotseatLandGutterPx + mInsets.left) / 2;
-        return new int[]{ padding, padding };
+        return new int[]{padding, padding};
     }
 
     public boolean shouldIgnoreLongPressToOverview(float touchX) {

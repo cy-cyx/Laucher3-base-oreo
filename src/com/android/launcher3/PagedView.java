@@ -95,7 +95,7 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
     private int mNormalChildHeight;
 
     @ViewDebug.ExportedProperty(category = "launcher")
-    protected int mCurrentPage;
+    int mCurrentPage;
     private int mChildCountOnLastLayout;
 
     @ViewDebug.ExportedProperty(category = "launcher")

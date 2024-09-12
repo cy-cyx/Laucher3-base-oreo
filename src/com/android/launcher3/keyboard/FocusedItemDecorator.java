@@ -18,16 +18,15 @@ package com.android.launcher3.keyboard;
 
 import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.ItemDecoration;
-import android.support.v7.widget.RecyclerView.State;
 import android.view.View;
 import android.view.View.OnFocusChangeListener;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * {@link ItemDecoration} for drawing and animating focused view background.
  */
-public class FocusedItemDecorator extends ItemDecoration {
+public class FocusedItemDecorator extends RecyclerView.ItemDecoration {
 
     private FocusIndicatorHelper mHelper;
 
@@ -46,7 +45,7 @@ public class FocusedItemDecorator extends ItemDecoration {
     }
 
     @Override
-    public void onDraw(Canvas c, RecyclerView parent, State state) {
+    public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
         mHelper.draw(c);
     }
 }

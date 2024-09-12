@@ -74,12 +74,14 @@
             android:screenOrientation="nosensor"
             android:configChanges="keyboard|keyboardHidden|navigation"
             android:resizeableActivity="true"
+            android:exported="true"
             android:resumeWhilePausing="true"
             android:taskAffinity=""
             android:enabled="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.MONKEY"/>
             </intent-filter>
@@ -91,6 +93,7 @@
         <activity
             android:name="com.android.launcher3.SettingsActivity"
             android:label="@string/settings_button_text"
+            android:exported="true"
             android:theme="@android:style/Theme.DeviceDefault.Settings"
             android:autoRemoveFromRecents="true">
             <intent-filter>

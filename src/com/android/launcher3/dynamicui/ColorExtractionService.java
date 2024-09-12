@@ -29,8 +29,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.ParcelFileDescriptor;
-import android.support.v7.graphics.Palette;
 import android.util.Log;
+
+import androidx.palette.graphics.Palette;
 
 import com.android.launcher3.LauncherProvider;
 import com.android.launcher3.LauncherSettings;

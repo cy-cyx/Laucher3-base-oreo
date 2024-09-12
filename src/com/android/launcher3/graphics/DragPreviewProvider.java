@@ -22,6 +22,7 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.Region.Op;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.view.View;
 import android.widget.TextView;
 
@@ -92,7 +93,13 @@ public class DragPreviewProvider {
             }
             destCanvas.translate(-mView.getScrollX() + blurSizeOutline / 2,
                     -mView.getScrollY() + blurSizeOutline / 2);
-            destCanvas.clipRect(clipRect, Op.REPLACE);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                destCanvas.clipRect(clipRect);
+            } else {
+                destCanvas.clipRect(clipRect, Op.REPLACE);
+            }
+
             mView.draw(destCanvas);
 
             // Restore text visibility of FolderIcon if necessary

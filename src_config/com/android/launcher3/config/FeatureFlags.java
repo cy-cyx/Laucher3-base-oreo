@@ -51,4 +51,6 @@ public final class FeatureFlags {
     public static final boolean ADAPTIVE_ICON_SHADOW = true;
     // When enabled, app discovery will be enabled if service is implemented
     public static final boolean DISCOVERY_ENABLED = false;
+    // 负一屏
+    public static final boolean HAS_CUSTOM_CONTENT_LEFT = true;
 }

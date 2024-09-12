@@ -189,38 +189,39 @@ public class InvariantDeviceProfile {
 
     ArrayList<InvariantDeviceProfile> getPredefinedDeviceProfiles(Context context) {
         ArrayList<InvariantDeviceProfile> profiles = new ArrayList<>();
-        try (XmlResourceParser parser = context.getResources().getXml(R.xml.device_profiles)) {
-            final int depth = parser.getDepth();
-            int type;
-
-            while (((type = parser.next()) != XmlPullParser.END_TAG ||
-                    parser.getDepth() > depth) && type != XmlPullParser.END_DOCUMENT) {
-                if ((type == XmlPullParser.START_TAG) && "profile".equals(parser.getName())) {
-                    TypedArray a = context.obtainStyledAttributes(
-                            Xml.asAttributeSet(parser), R.styleable.InvariantDeviceProfile);
-                    int numRows = a.getInt(R.styleable.InvariantDeviceProfile_numRows, 0);
-                    int numColumns = a.getInt(R.styleable.InvariantDeviceProfile_numColumns, 0);
-                    float iconSize = a.getFloat(R.styleable.InvariantDeviceProfile_iconSize, 0);
-                    profiles.add(new InvariantDeviceProfile(
-                            a.getString(R.styleable.InvariantDeviceProfile_name),
-                            a.getFloat(R.styleable.InvariantDeviceProfile_minWidthDps, 0),
-                            a.getFloat(R.styleable.InvariantDeviceProfile_minHeightDps, 0),
-                            numRows,
-                            numColumns,
-                            a.getInt(R.styleable.InvariantDeviceProfile_numFolderRows, numRows),
-                            a.getInt(R.styleable.InvariantDeviceProfile_numFolderColumns, numColumns),
-                            a.getInt(R.styleable.InvariantDeviceProfile_minAllAppsPredictionColumns, numColumns),
-                            iconSize,
-                            a.getFloat(R.styleable.InvariantDeviceProfile_iconTextSize, 0),
-                            a.getInt(R.styleable.InvariantDeviceProfile_numHotseatIcons, numColumns),
-                            a.getFloat(R.styleable.InvariantDeviceProfile_hotseatIconSize, iconSize),
-                            a.getResourceId(R.styleable.InvariantDeviceProfile_defaultLayoutId, 0)));
-                    a.recycle();
-                }
-            }
-        } catch (IOException|XmlPullParserException e) {
-            throw new RuntimeException(e);
-        }
+        profiles.add(new InvariantDeviceProfile("",335f,567f,4,4,4,4,4,60f,13f,4,60f, R.xml.default_workspace_4x4));
+//        try (XmlResourceParser parser = context.getResources().getXml(R.xml.device_profiles)) {
+//            final int depth = parser.getDepth();
+//            int type;
+//
+//            while (((type = parser.next()) != XmlPullParser.END_TAG ||
+//                    parser.getDepth() > depth) && type != XmlPullParser.END_DOCUMENT) {
+//                if ((type == XmlPullParser.START_TAG) && "profile".equals(parser.getName())) {
+//                    TypedArray a = context.obtainStyledAttributes(
+//                            Xml.asAttributeSet(parser), R.styleable.InvariantDeviceProfile);
+//                    int numRows = a.getInt(R.styleable.InvariantDeviceProfile_numRows, 0);
+//                    int numColumns = a.getInt(R.styleable.InvariantDeviceProfile_numColumns, 0);
+//                    float iconSize = a.getFloat(R.styleable.InvariantDeviceProfile_iconSize, 0);
+//                    profiles.add(new InvariantDeviceProfile(
+//                            a.getString(R.styleable.InvariantDeviceProfile_name),
+//                            a.getFloat(R.styleable.InvariantDeviceProfile_minWidthDps, 0),
+//                            a.getFloat(R.styleable.InvariantDeviceProfile_minHeightDps, 0),
+//                            numRows,
+//                            numColumns,
+//                            a.getInt(R.styleable.InvariantDeviceProfile_numFolderRows, numRows),
+//                            a.getInt(R.styleable.InvariantDeviceProfile_numFolderColumns, numColumns),
+//                            a.getInt(R.styleable.InvariantDeviceProfile_minAllAppsPredictionColumns, numColumns),
+//                            iconSize,
+//                            a.getFloat(R.styleable.InvariantDeviceProfile_iconTextSize, 0),
+//                            a.getInt(R.styleable.InvariantDeviceProfile_numHotseatIcons, numColumns),
+//                            a.getFloat(R.styleable.InvariantDeviceProfile_hotseatIconSize, iconSize),
+//                            a.getResourceId(R.styleable.InvariantDeviceProfile_defaultLayoutId, 0)));
+//                    a.recycle();
+//                }
+//            }
+//        } catch (IOException|XmlPullParserException e) {
+//            throw new RuntimeException(e);
+//        }
         return profiles;
     }
 

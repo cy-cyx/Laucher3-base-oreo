@@ -11,12 +11,13 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.v4.graphics.ColorUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Property;
 import android.view.ViewConfiguration;
 import android.widget.ImageView;
+
+import androidx.core.graphics.ColorUtils;
 
 import com.android.launcher3.Launcher;
 import com.android.launcher3.R;

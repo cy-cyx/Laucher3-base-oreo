@@ -2,9 +2,10 @@ package com.android.launcher3.allapps;
 
 import android.content.res.Resources;
 import android.graphics.Outline;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewOutlineProvider;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.launcher3.BaseRecyclerView;
 import com.android.launcher3.R;

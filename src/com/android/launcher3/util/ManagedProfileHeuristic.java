@@ -21,7 +21,8 @@ import android.content.SharedPreferences;
 import android.content.pm.LauncherActivityInfo;
 import android.os.Process;
 import android.os.UserHandle;
-import android.support.v4.os.BuildCompat;
+
+import androidx.core.os.BuildCompat;
 
 import com.android.launcher3.AppInfo;
 import com.android.launcher3.FolderInfo;

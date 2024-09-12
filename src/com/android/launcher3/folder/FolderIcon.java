@@ -490,7 +490,7 @@ public class FolderIcon extends FrameLayout implements FolderListener {
     }
 
     private void drawPreviewItem(Canvas canvas, PreviewItemDrawingParams params) {
-        canvas.save(Canvas.MATRIX_SAVE_FLAG);
+        canvas.save();
         canvas.translate(params.transX, params.transY);
         canvas.scale(params.scale, params.scale);
         Drawable d = params.drawable;
@@ -651,10 +651,10 @@ public class FolderIcon extends FrameLayout implements FolderListener {
             if (canvas.isHardwareAccelerated()) {
                 saveCount = canvas.saveLayer(offsetX - mStrokeWidth, offsetY,
                         offsetX + radius + shadowRadius, offsetY + shadowRadius + shadowRadius,
-                        null, Canvas.CLIP_TO_LAYER_SAVE_FLAG | Canvas.HAS_ALPHA_LAYER_SAVE_FLAG);
+                        null, Canvas.ALL_SAVE_FLAG);
 
             } else {
-                saveCount = canvas.save(Canvas.CLIP_SAVE_FLAG);
+                saveCount = canvas.save();
                 clipCanvasSoftware(canvas, Region.Op.DIFFERENCE);
             }
 
@@ -848,9 +848,9 @@ public class FolderIcon extends FrameLayout implements FolderListener {
 
         if (canvas.isHardwareAccelerated()) {
             saveCount = canvas.saveLayer(0, 0, getWidth(), getHeight(), null,
-                    Canvas.HAS_ALPHA_LAYER_SAVE_FLAG | Canvas.CLIP_TO_LAYER_SAVE_FLAG);
+                    Canvas.ALL_SAVE_FLAG);
         } else {
-            saveCount = canvas.save(Canvas.CLIP_SAVE_FLAG);
+            saveCount = canvas.save();
             if (mPreviewLayoutRule.clipToBackground()) {
                 mBackground.clipCanvasSoftware(canvas, Region.Op.INTERSECT);
             }
