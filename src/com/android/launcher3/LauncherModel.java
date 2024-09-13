@@ -34,7 +34,7 @@ import android.os.Process;
 import android.os.SystemClock;
 import android.os.Trace;
 import android.os.UserHandle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.LongSparseArray;

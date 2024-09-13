@@ -17,7 +17,7 @@
 package com.android.launcher3.dragndrop;
 
 import android.graphics.Point;
-import android.support.annotation.CallSuper;
+import androidx.annotation.CallSuper;
 import android.view.View;
 
 import com.android.launcher3.DropTarget;

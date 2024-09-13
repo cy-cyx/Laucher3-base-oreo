@@ -25,7 +25,7 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.Shader;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.SparseArray;
 
 import com.android.launcher3.R;

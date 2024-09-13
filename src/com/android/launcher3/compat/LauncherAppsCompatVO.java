@@ -25,7 +25,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Process;
 import android.os.UserHandle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.Log;
 
 import com.android.launcher3.compat.ShortcutConfigActivityInfo.ShortcutConfigActivityInfoVO;
