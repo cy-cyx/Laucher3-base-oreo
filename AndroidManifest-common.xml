@@ -50,6 +50,7 @@
         android:fullBackupOnly="true"
         android:fullBackupContent="@xml/backupscheme"
         android:hardwareAccelerated="true"
+        android:name="com.theme.lambda.launcher.App"
         android:icon="@drawable/ic_launcher_home"
         android:label="@string/derived_app_name"
         android:largeHeap="@bool/config_largeHeap"
@@ -122,5 +123,6 @@
             android:name="com.android.launcher3.launcher_dump_provider"
             android:value="com.android.launcher3.LauncherProvider" />
 
+        <activity android:name="com.theme.lambda.launcher.ui.weather.WeatherActivity" android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
     </application>
 </manifest>

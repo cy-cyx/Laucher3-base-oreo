@@ -33,6 +33,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import com.android.launcher3.AppWidgetResizeFrame;
 import com.android.launcher3.InvariantDeviceProfile;
@@ -41,6 +42,8 @@ import com.android.launcher3.R;
 import com.android.launcher3.Utilities;
 import com.android.launcher3.compat.AppWidgetManagerCompat;
 import com.android.launcher3.config.FeatureFlags;
+import com.theme.lambda.launcher.utils.TimerUtils;
+import com.theme.lambda.launcher.widget.WeatherWidgetHostView;
 
 /**
  * A frame layout which contains a QSB. This internally uses fragment to bind the view, which
@@ -76,6 +79,7 @@ public class QsbContainerView extends FrameLayout {
         private QsbWidgetHost mQsbWidgetHost;
         private AppWidgetProviderInfo mWidgetInfo;
         private QsbWidgetHostView mQsb;
+        private View mWeather;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -93,7 +97,7 @@ public class QsbContainerView extends FrameLayout {
 
             // Only add the view when enabled
             if (FeatureFlags.QSB_ON_FIRST_SCREEN) {
-                mWrapper.addView(createQsb(mWrapper));
+                addChild();
             }
             return mWrapper;
         }
@@ -161,6 +165,13 @@ public class QsbContainerView extends FrameLayout {
             return v;
         }
 
+        private View createWeather(ViewGroup container) {
+            if (mWeather == null) {
+                mWeather = WeatherWidgetHostView.getDefaultView(container);
+            }
+            return mWeather;
+        }
+
         private void saveWidgetId(int widgetId) {
             Utilities.getPrefs(getActivity()).edit().putInt(QSB_WIDGET_ID, widgetId).apply();
         }
@@ -209,8 +220,23 @@ public class QsbContainerView extends FrameLayout {
 
             if (mWrapper != null && getActivity() != null) {
                 mWrapper.removeAllViews();
-                mWrapper.addView(createQsb(mWrapper));
+                addChild();
             }
+        }
+
+        private void addChild() {
+            LinearLayout linearLayout = new LinearLayout(getActivity());
+            linearLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            linearLayout.setOrientation(LinearLayout.VERTICAL);
+            linearLayout.addView(createQsb(mWrapper), new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            linearLayout.addView(createWeather(mWrapper), new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            mWrapper.addView(linearLayout);
+            TimerUtils.schedule((s, weatherModel) -> {
+                if (mWeather != null) {
+                    getActivity().runOnUiThread(() -> TimerUtils.update(getActivity(), mWeather, s, weatherModel));
+                }
+                return null;
+            });
         }
     }
 
