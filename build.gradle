@@ -11,7 +11,6 @@ buildscript {
 }
 
 apply plugin: 'com.android.application'
-//apply plugin: 'com.google.protobuf'
 apply plugin: 'kotlin-android'
 
 android {
@@ -46,22 +45,12 @@ android {
             res.srcDirs = ['res']
             java.srcDirs = ['src', 'src_config']
             manifest.srcFile 'AndroidManifest-common.xml'
-//            proto.srcDirs 'protos/'
         }
-//
-//        androidTest {
-//            java.srcDirs = ['tests/src']
-//            res.srcDirs = ['tests/res']
-//            manifest.srcFile "tests/AndroidManifest-common.xml"
-//        }
+
 
         aosp {
             manifest.srcFile "AndroidManifest.xml"
         }
-
-//        aospAndroidTest {
-//            manifest.srcFile "tests/AndroidManifest.xml"
-//        }
     }
 }
 
@@ -77,33 +66,4 @@ dependencies {
     implementation 'com.google.protobuf.nano:protobuf-javanano:3.0.0-alpha-7'
     implementation 'com.android.support:support-annotations:26.1.0'
     implementation 'androidx.palette:palette:1.0.0'
-
-//    testCompile 'junit:junit:4.12'
-//    androidTestCompile "org.mockito:mockito-core:1.+"
-//    androidTestCompile 'com.google.dexmaker:dexmaker:1.2'
-//    androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.2'
-//    androidTestCompile 'com.android.support.test:runner:0.5'
-//    androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.2'
-//    androidTestCompile "com.android.support:support-annotations:${SUPPORT_LIBS_VERSION}"
 }
-
-//protobuf {
-//    // Configure the protoc executable
-//    protoc {
-//        artifact = 'com.google.protobuf:protoc:3.0.0-alpha-3'
-//
-//        generateProtoTasks {
-//            all().each { task ->
-//                task.builtins {
-//                    remove java
-//                    javanano {
-//                        option "java_package=launcher_log_extension.proto|com.android.launcher3.userevent.nano"
-//                        option "java_package=launcher_log.proto|com.android.launcher3.userevent.nano"
-//                        option "java_package=launcher_dump.proto|com.android.launcher3.model.nano"
-//                        option "enum_style=java"
-//                    }
-//                }
-//            }
-//        }
-//    }
-//}
