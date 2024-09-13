@@ -36,12 +36,4 @@ object CommonUtil {
     fun getString(res: Int): String {
         return appContext!!.resources.getString(res)
     }
-
-    fun openWebView(context: Context, url: String) {
-        val intent = Intent()
-        intent.action = Intent.ACTION_VIEW
-        intent.addCategory(Intent.CATEGORY_BROWSABLE)
-        intent.data = Uri.parse(url)
-        context.startActivity(Intent.createChooser(intent, "web"))
-    }
 }

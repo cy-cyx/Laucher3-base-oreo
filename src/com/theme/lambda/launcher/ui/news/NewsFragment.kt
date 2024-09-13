@@ -37,7 +37,7 @@ class NewsFragment : BaseFragment<FragmentNewsBinding>() {
                     state: RecyclerView.State
                 ) {
                     super.getItemOffsets(outRect, view, parent, state)
-                    outRect.bottom = CommonUtil.dp2px(10f)
+                    outRect.bottom = CommonUtil.dp2px(5f)
                 }
             })
             setOnScrollListener(object : RecyclerView.OnScrollListener() {
