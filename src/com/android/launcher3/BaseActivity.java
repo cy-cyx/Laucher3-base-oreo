@@ -21,9 +21,11 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.view.View.AccessibilityDelegate;
 
+import androidx.fragment.app.FragmentActivity;
+
 import com.android.launcher3.logging.UserEventDispatcher;
 
-public abstract class BaseActivity extends Activity {
+public abstract class BaseActivity extends FragmentActivity {
 
     protected DeviceProfile mDeviceProfile;
     protected UserEventDispatcher mUserEventDispatcher;

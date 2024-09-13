@@ -854,6 +854,7 @@ public class Launcher extends BaseActivity
     @Override
     protected void onActivityResult(
             final int requestCode, final int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         handleActivityResult(requestCode, resultCode, data);
         if (mLauncherCallbacks != null) {
             mLauncherCallbacks.onActivityResult(requestCode, resultCode, data);
@@ -865,6 +866,7 @@ public class Launcher extends BaseActivity
      */
     public void onRequestPermissionsResult(int requestCode, String[] permissions,
                                            int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         PendingRequestArgs pendingArgs = mPendingRequestArgs;
         if (requestCode == REQUEST_PERMISSION_CALL_PHONE && pendingArgs != null
                 && pendingArgs.getRequestCode() == REQUEST_PERMISSION_CALL_PHONE) {
@@ -1202,8 +1204,9 @@ public class Launcher extends BaseActivity
         return mWorkspace.getPaddingTop();
     }
 
+    @Nullable
     @Override
-    public Object onRetainNonConfigurationInstance() {
+    public Object onRetainCustomNonConfigurationInstance() {
         // Flag the loader to stop early before switching
         if (mModel.isCurrentCallbacks(this)) {
             mModel.stopLoader();
@@ -2230,6 +2233,7 @@ public class Launcher extends BaseActivity
         getModelWriter().deleteItemFromDatabase(widgetInfo);
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         return (event.getKeyCode() == KeyEvent.KEYCODE_HOME) || super.dispatchKeyEvent(event);
