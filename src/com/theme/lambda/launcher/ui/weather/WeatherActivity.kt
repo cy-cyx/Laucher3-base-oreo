@@ -1,13 +1,11 @@
 package com.theme.lambda.launcher.ui.weather
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import com.android.launcher3.R
+import android.view.LayoutInflater
+import com.android.launcher3.databinding.ActivityWeatherBinding
+import com.theme.lambda.launcher.base.BaseActivity
 
-class WeatherActivity : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_weather)
+class WeatherActivity : BaseActivity<ActivityWeatherBinding>() {
+    override fun initViewBinding(layoutInflater: LayoutInflater): ActivityWeatherBinding {
+        return ActivityWeatherBinding.inflate(layoutInflater)
     }
 }
