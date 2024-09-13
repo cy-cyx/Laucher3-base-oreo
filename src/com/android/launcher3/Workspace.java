@@ -1438,7 +1438,7 @@ public class Workspace extends PagedView
         if (!mIgnoreQsbScroll) {
             if (hasCustomContent()) {
                 mLauncher.getQsbContainer().setTranslationX(
-                        mOverlayTranslation + mFirstPageScrollX - getScrollX() + screenWidth);
+                        mOverlayTranslation + mFirstPageScrollX - getScrollX() + screenWidth * mScreenOrder.indexOf(FIRST_SCREEN_ID));
             } else {
                 mLauncher.getQsbContainer().setTranslationX(
                         mOverlayTranslation + mFirstPageScrollX - getScrollX());
