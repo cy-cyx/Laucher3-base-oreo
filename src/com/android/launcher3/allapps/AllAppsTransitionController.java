@@ -265,7 +265,7 @@ public class AllAppsTransitionController implements TouchController, VerticalPul
     }
 
     /**
-     * @param progress       value between 0 and 1, 0 shows all apps and 1 shows workspace
+     * @param progress value between 0 and 1, 0 shows all apps and 1 shows workspace
      */
     public void setProgress(float progress) {
         float shiftPrevious = mProgress * mShiftRange;
@@ -280,7 +280,10 @@ public class AllAppsTransitionController implements TouchController, VerticalPul
                 mHotseatBackgroundColor, mAllAppsBackgroundColor);
         int bgAlpha = Color.alpha((int) mEvaluator.evaluate(alpha,
                 mHotseatBackgroundColor, mAllAppsBackgroundColor));
-
+        // 为了留点透明度
+        if (bgAlpha > 150){
+            bgAlpha = 150;
+        }
         mAppsView.setRevealDrawableColor(ColorUtils.setAlphaComponent(color, bgAlpha));
         mAppsView.getContentView().setAlpha(alpha);
         mAppsView.setTranslationY(shiftCurrent);
@@ -495,7 +498,7 @@ public class AllAppsTransitionController implements TouchController, VerticalPul
 
     @Override
     public void onLayoutChange(View v, int left, int top, int right, int bottom,
-            int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                               int oldLeft, int oldTop, int oldRight, int oldBottom) {
         if (!mLauncher.getDeviceProfile().isVerticalBarLayout()) {
             mShiftRange = top;
         } else {
