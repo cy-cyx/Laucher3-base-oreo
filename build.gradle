@@ -41,7 +41,7 @@ android {
     }
     sourceSets {
         main {
-            res.srcDirs = ['res']
+            res.srcDirs = ['res', 'lambda_res']
             java.srcDirs = ['src', 'src_config']
             manifest.srcFile 'AndroidManifest-common.xml'
         }
