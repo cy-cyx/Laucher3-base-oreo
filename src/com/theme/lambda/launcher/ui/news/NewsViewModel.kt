@@ -13,6 +13,7 @@ class NewsViewModel : BaseViewModel() {
 
     var newsLiveData = MutableLiveData<ArrayList<News>>()
     var refreshFinishLiveData = MutableLiveData<Boolean>()
+    var loadMoreFinishLiveData = MutableLiveData<Boolean>()
     var isLoadMore = false
 
     fun refresh() {
@@ -36,6 +37,7 @@ class NewsViewModel : BaseViewModel() {
             val allData = newsLiveData.value ?: arrayListOf()
             allData.addAll(newsList)
             newsLiveData.value = allData
+            loadMoreFinishLiveData.value = true
             isLoadMore = false
         }
     }

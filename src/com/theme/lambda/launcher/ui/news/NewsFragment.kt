@@ -37,23 +37,7 @@ class NewsFragment : BaseFragment<FragmentNewsBinding>() {
                     state: RecyclerView.State
                 ) {
                     super.getItemOffsets(outRect, view, parent, state)
-                    outRect.bottom = CommonUtil.dp2px(5f)
-                }
-            })
-            setOnScrollListener(object : RecyclerView.OnScrollListener() {
-                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                    super.onScrollStateChanged(recyclerView, newState)
-                    if (newState == RecyclerView.SCROLL_STATE_IDLE && newsAdapter.lastVisibleItem + 3 > newsAdapter.itemCount) {
-                        viewModel.loadMore()
-                    }
-                }
-
-                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                    super.onScrolled(recyclerView, dx, dy)
-
-                    val layoutManager = recyclerView.layoutManager as LinearLayoutManager?
-                    //最后一个可见的ITEM
-                    newsAdapter.lastVisibleItem = layoutManager!!.findLastVisibleItemPosition()
+                    outRect.top = CommonUtil.dp2px(5f)
                 }
             })
         }
@@ -61,14 +45,21 @@ class NewsFragment : BaseFragment<FragmentNewsBinding>() {
         viewBinding.swipeRefreshSrl.setOnRefreshListener {
             viewModel.refresh()
         }
+        viewBinding.swipeRefreshSrl.setOnLoadMoreListener {
+            viewModel.loadMore()
+        }
 
         viewModel.newsLiveData.observe(viewLifecycleOwner, Observer {
             newsAdapter.upData(it)
         })
         viewModel.refreshFinishLiveData.observe(viewLifecycleOwner, Observer {
-            viewBinding.swipeRefreshSrl.isRefreshing = false
+            viewBinding.swipeRefreshSrl.finishRefresh(500, true, false)
         })
+        viewModel.loadMoreFinishLiveData.observe(viewLifecycleOwner, Observer {
+            viewBinding.swipeRefreshSrl.finishLoadMore()
+        })
+
         viewModel.refresh()
-        viewBinding.swipeRefreshSrl.isRefreshing = true
+        viewBinding.swipeRefreshSrl.autoRefresh()
     }
 }

@@ -6,7 +6,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_new"
-        android:name="com.theme.lambda.launcher.ui.news.NewsFragment"
+        android:name="com.theme.lambda.launcher.ui.custom.CustomFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </FrameLayout>
