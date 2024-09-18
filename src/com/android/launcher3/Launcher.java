@@ -134,6 +134,7 @@ import com.android.launcher3.widget.PendingAddWidgetInfo;
 import com.android.launcher3.widget.WidgetAddFlowHandler;
 import com.android.launcher3.widget.WidgetHostViewLoader;
 import com.android.launcher3.widget.WidgetsContainerView;
+import com.theme.lambda.launcher.ui.search.SearchActivity;
 import com.theme.lambda.launcher.ui.theme.ThemeActivity;
 import com.theme.lambda.launcher.utils.CommonUtil;
 
@@ -2507,6 +2508,9 @@ public class Launcher extends BaseActivity
         Intent intent = item.getIntent();
         if (intent == null) {
             throw new IllegalArgumentException("Input must have a valid intent");
+        }
+        if (intent.getComponent() != null) {
+            SearchActivity.addRecentApps(intent.getComponent().getPackageName());
         }
         boolean success = startActivitySafely(v, intent, item);
         getUserEventDispatcher().logAppLaunch(v, intent); // TODO for discovered apps b/35802115

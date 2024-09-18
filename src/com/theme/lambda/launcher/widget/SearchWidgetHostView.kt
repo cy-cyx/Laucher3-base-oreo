@@ -3,19 +3,15 @@ package com.theme.lambda.launcher.widget
 import android.appwidget.AppWidgetHostView
 import android.content.Context
 import android.content.Intent
-import android.provider.AlarmClock
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewDebug.ExportedProperty
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.RemoteViews
 import com.android.launcher3.R
-import com.theme.lambda.launcher.ui.weather.WeatherActivity
-import com.theme.lambda.launcher.utils.TimerUtils
+import com.theme.lambda.launcher.ui.search.SearchActivity
 
-class WeatherWidgetHostView constructor(private val context: Context) : AppWidgetHostView(context) {
+class SearchWidgetHostView constructor(private val context: Context) : AppWidgetHostView(context) {
     @ExportedProperty(category = "launcher")
     private var mPreviousOrientation = 0
     private val remoteViews: RemoteViews by lazy {
@@ -51,28 +47,14 @@ class WeatherWidgetHostView constructor(private val context: Context) : AppWidge
         @JvmStatic
         fun getDefaultView(parent: ViewGroup): View {
             val v = LayoutInflater.from(parent.context)
-                .inflate(R.layout.view_widget_weather, parent, false)
-            v.findViewById<LinearLayout>(R.id.ll1).setOnClickListener {
-                parent.context.startActivity(
-                    Intent(
-                        AlarmClock.ACTION_SHOW_ALARMS
-                    ).apply {
-                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                    }
-                )
-            }
-            v.findViewById<LinearLayout>(R.id.ll2).setOnClickListener {
-                parent.context.startActivity(
-                    Intent(
-                        parent.context,
-                        WeatherActivity::class.java
-                    ).apply {
-                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                    }
-                )
-            }
-            v.findViewById<ImageView>(R.id.iv_refresh).setOnClickListener {
-                TimerUtils.getIpLocation()
+                .inflate(R.layout.view_widget_search, parent, false)
+            v.setOnClickListener {
+                parent.context.startActivity(Intent(
+                    parent.context,
+                    SearchActivity::class.java
+                ).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                })
             }
             return v
         }

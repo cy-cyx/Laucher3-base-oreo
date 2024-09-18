@@ -36,18 +36,26 @@ object TimerUtils {
                             getIpLocation()
                         }
                     },
-                    0,
-                    30 * 1000L
+                    0L,
+                    60 * 60 * 1000L
                 )
             }
         }
     }
 
-    private fun getIpLocation() {
+    fun getIpLocation() {
         val locationModel = WeatherUtils.getSelectLocation()
         if (null != locationModel) {
             getWeather(locationModel)
-            return
+        } else {
+            getWeather(
+                MyLocationModel(
+                    "40.6643",
+                    "-73.9385",
+                    locality = "New York",
+                    thoroughfare = null
+                )
+            )
         }
     }
 
@@ -75,7 +83,7 @@ object TimerUtils {
 
     @SuppressLint("SetTextI18n")
     @JvmStatic
-    fun update(context: Context, view: View, local: String, model: WeatherModel) {
+    fun update(view: View, local: String, model: WeatherModel) {
         view.findViewById<TextView>(R.id.tv_temp).text =
             WeatherUtils.getTemp(model.main?.temp).roundToInt()
                 .toString() + WeatherUtils.getTempUnit()
@@ -87,17 +95,6 @@ object TimerUtils {
                     )
                 )
             }"
-
-//        views.setImageViewResource(
-//            R.id.iv_bg, /*when (model.main?.) {
-//                WidgetModel.SUNNY -> R.drawable.shape_widget_sunny_bg
-//                WidgetModel.OVERCAST -> R.drawable.shape_widget_overcast_bg
-//                WidgetModel.NIGHT -> R.drawable.shape_widget_night_bg
-//                else -> R.drawable.shape_widget_empty_bg
-//            }*/
-//            R.drawable.shape_widget_sunny_bg
-//        )
-        view.findViewById<ImageView>(R.id.iv_bg).setImageResource(R.drawable.shape_widget_night_bg)
         view.findViewById<ImageView>(R.id.iv_icon)
             .setImageResource(WeatherUtils.getIconUrl(model.weather?.get(0)?.icon))
     }

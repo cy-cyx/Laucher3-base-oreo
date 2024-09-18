@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hint_search" translatable="false">Local Apps/Web</string>
+    <string name="search_history" translatable="false">Search History</string>
+    <string name="recent_apps" translatable="false">Recent apps</string>
+    <string name="local_apps" translatable="false">Local apps</string>
+    <string name="weather_setting" translatable="false">Weather Setting</string>
+    <string name="weather_location" translatable="false">Weather Location</string>
+    <string name="temperature_unit" translatable="false">Temperature unit</string>
+    <string name="c" translatable="false">°C</string>
+    <string name="f" translatable="false">°F</string>
+    <string name="reset_city_in_english" translatable="false">Reset city in English</string>
+    <string name="auto_location" translatable="false">Auto-location</string>
+</resources>

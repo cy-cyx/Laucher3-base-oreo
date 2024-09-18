@@ -43,6 +43,7 @@ import com.android.launcher3.Utilities;
 import com.android.launcher3.compat.AppWidgetManagerCompat;
 import com.android.launcher3.config.FeatureFlags;
 import com.theme.lambda.launcher.utils.TimerUtils;
+import com.theme.lambda.launcher.widget.SearchWidgetHostView;
 import com.theme.lambda.launcher.widget.WeatherWidgetHostView;
 
 /**
@@ -104,10 +105,10 @@ public class QsbContainerView extends FrameLayout {
 
         private View createQsb(ViewGroup container) {
             Activity activity = getActivity();
-            mWidgetInfo = getSearchWidgetProvider(activity);
+            //mWidgetInfo = getSearchWidgetProvider(activity);
             if (mWidgetInfo == null) {
                 // There is no search provider, just show the default widget.
-                return QsbWidgetHostView.getDefaultView(container);
+                return SearchWidgetHostView.getDefaultView(container);
             }
 
             AppWidgetManagerCompat widgetManager = AppWidgetManagerCompat.getInstance(activity);
@@ -226,14 +227,20 @@ public class QsbContainerView extends FrameLayout {
 
         private void addChild() {
             LinearLayout linearLayout = new LinearLayout(getActivity());
-            linearLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             linearLayout.setOrientation(LinearLayout.VERTICAL);
-            linearLayout.addView(createQsb(mWrapper), new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            linearLayout.addView(createWeather(mWrapper), new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Utilities.pxFromDp(41, getActivity().getResources().getDisplayMetrics()));
+            layoutParams.leftMargin = Utilities.pxFromDp(13, getActivity().getResources().getDisplayMetrics());
+            layoutParams.rightMargin = Utilities.pxFromDp(13, getActivity().getResources().getDisplayMetrics());
+            linearLayout.addView(createQsb(mWrapper), layoutParams);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Utilities.pxFromDp(82, getActivity().getResources().getDisplayMetrics()));
+            params.leftMargin = Utilities.pxFromDp(13, getActivity().getResources().getDisplayMetrics());
+            params.rightMargin = Utilities.pxFromDp(13, getActivity().getResources().getDisplayMetrics());
+            params.topMargin = Utilities.pxFromDp(20, getActivity().getResources().getDisplayMetrics());
+            linearLayout.addView(createWeather(mWrapper), params);
             mWrapper.addView(linearLayout);
             TimerUtils.schedule((s, weatherModel) -> {
                 if (mWeather != null) {
-                    getActivity().runOnUiThread(() -> TimerUtils.update(getActivity(), mWeather, s, weatherModel));
+                    getActivity().runOnUiThread(() -> TimerUtils.update(mWeather, s, weatherModel));
                 }
                 return null;
             });

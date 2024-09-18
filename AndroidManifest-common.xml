@@ -130,6 +130,9 @@
             android:value="com.android.launcher3.LauncherProvider" />
 
         <activity
+            android:name="com.theme.lambda.launcher.ui.search.SearchActivity"
+            android:theme="@style/LauncherTheme" />
+        <activity
             android:name="com.theme.lambda.launcher.ui.weather.WeatherActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
