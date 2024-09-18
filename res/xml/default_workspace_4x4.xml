@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2009 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2009 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -23,15 +22,23 @@
     <resolve
         launcher:screen="0"
         launcher:x="0"
-        launcher:y="-1" >
+        launcher:y="-1">
+        <favorite
+            launcher:className="com.android.launcher3.Launcher"
+            launcher:packageName="com.theme.lambda.launcher" />
+    </resolve>
+    <resolve
+        launcher:screen="0"
+        launcher:x="1"
+        launcher:y="-1">
         <favorite launcher:uri="#Intent;action=android.intent.action.MAIN;category=android.intent.category.APP_EMAIL;end" />
         <favorite launcher:uri="mailto:" />
     </resolve>
 
     <resolve
         launcher:screen="0"
-        launcher:x="1"
-        launcher:y="-1" >
+        launcher:x="2"
+        launcher:y="-1">
         <favorite launcher:uri="#Intent;action=android.intent.action.MAIN;category=android.intent.category.APP_GALLERY;end" />
         <favorite launcher:uri="#Intent;type=images/*;end" />
     </resolve>
@@ -39,7 +46,7 @@
     <resolve
         launcher:screen="0"
         launcher:x="3"
-        launcher:y="-1" >
+        launcher:y="-1">
         <favorite launcher:uri="#Intent;action=android.intent.action.MAIN;category=android.intent.category.APP_MARKET;end" />
         <favorite launcher:uri="market://details?id=com.android.launcher" />
     </resolve>

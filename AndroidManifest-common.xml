@@ -135,5 +135,8 @@
         <activity
             android:name="com.theme.lambda.launcher.ui.news.NewDetailsActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity
+            android:name="com.theme.lambda.launcher.ui.theme.ThemeActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
     </application>
 </manifest>

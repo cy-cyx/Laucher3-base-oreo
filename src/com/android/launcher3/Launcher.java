@@ -54,7 +54,9 @@ import android.os.StrictMode;
 import android.os.SystemClock;
 import android.os.Trace;
 import android.os.UserHandle;
+
 import androidx.annotation.Nullable;
+
 import android.text.Selection;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
@@ -132,6 +134,8 @@ import com.android.launcher3.widget.PendingAddWidgetInfo;
 import com.android.launcher3.widget.WidgetAddFlowHandler;
 import com.android.launcher3.widget.WidgetHostViewLoader;
 import com.android.launcher3.widget.WidgetsContainerView;
+import com.theme.lambda.launcher.ui.theme.ThemeActivity;
+import com.theme.lambda.launcher.utils.CommonUtil;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -2735,6 +2739,12 @@ public class Launcher extends BaseActivity
     }
 
     public boolean startActivitySafely(View v, Intent intent, ItemInfo item) {
+        // 点击自己去主题页
+        if (item.getIntent().getComponent().getPackageName().equals(CommonUtil.INSTANCE.getAppContext().getPackageName())) {
+            ThemeActivity.Companion.start(this);
+            return true;
+        }
+
         if (mIsSafeModeEnabled && !Utilities.isSystemApp(this, intent)) {
             Toast.makeText(this, R.string.safemode_shortcut_error, Toast.LENGTH_SHORT).show();
             return false;
