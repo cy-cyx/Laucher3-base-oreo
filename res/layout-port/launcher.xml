@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2007 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2007 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,24 +14,23 @@
 -->
 
 <!-- Full screen view projects under the status bar and contains the background -->
-<com.android.launcher3.LauncherRootView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.android.launcher3.LauncherRootView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:launcher="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:viewBindingIgnore="true"
     android:id="@+id/launcher"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    tools:viewBindingIgnore="true">
 
     <com.android.launcher3.dragndrop.DragLayer
         android:id="@+id/drag_layer"
-        android:clipChildren="false"
-        android:importantForAccessibility="no"
-        android:clipToPadding="false"
-        android:background="@drawable/workspace_bg"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/workspace_bg"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:importantForAccessibility="no">
 
         <!-- The workspace contains 5 screens of cells -->
         <!-- DO NOT CHANGE THE ID -->
@@ -41,44 +39,54 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            launcher:pageIndicator="@+id/page_indicator">
-        </com.android.launcher3.Workspace>
+            launcher:pageIndicator="@+id/page_indicator"></com.android.launcher3.Workspace>
 
         <!-- DO NOT CHANGE THE ID -->
-        <include layout="@layout/hotseat"
+        <include
             android:id="@+id/hotseat"
+            layout="@layout/hotseat"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             launcher:layout_ignoreInsets="true" />
 
-        <include layout="@layout/overview_panel"
+        <include
             android:id="@+id/overview_panel"
+            layout="@layout/overview_panel"
             android:visibility="gone" />
 
         <!-- Keep these behind the workspace so that they are not visible when
              we go into AllApps -->
-        <include layout="@layout/page_indicator"
-            android:id="@+id/page_indicator" />
+        <include
+            android:id="@+id/page_indicator"
+            layout="@layout/page_indicator" />
 
         <include
             android:id="@+id/drop_target_bar"
             layout="@layout/drop_target_bar_horz" />
 
         <include
-            layout="@layout/qsb_container"
-            android:id="@+id/qsb_container" />
+            android:id="@+id/qsb_container"
+            layout="@layout/qsb_container" />
 
-        <include layout="@layout/widgets_view"
+        <include
             android:id="@+id/widgets_view"
+            layout="@layout/widgets_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="invisible" />
 
-        <include layout="@layout/all_apps"
+        <include
             android:id="@+id/apps_view"
+            layout="@layout/all_apps"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="invisible" />
     </com.android.launcher3.dragndrop.DragLayer>
+
+    <com.theme.lambda.launcher.widget.PreviewControlView
+        android:id="@+id/previewControlPcv"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </com.android.launcher3.LauncherRootView>

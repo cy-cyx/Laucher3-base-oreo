@@ -1,5 +1,6 @@
 package com.theme.lambda.launcher.ui.theme
 
+import android.app.ProgressDialog
 import android.graphics.Rect
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -18,6 +19,13 @@ class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
     var themeTag = ""
 
     val viewModel by viewModels<ThemeViewModel>()
+
+    val loadDialog by lazy {
+        ProgressDialog(context).apply {
+            setTitle("loading...")
+            setCancelable(false)
+        }
+    }
 
     private val themeAdapter = ThemeAdapter()
 
@@ -70,5 +78,16 @@ class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
         viewModel.refresh()
         viewBinding.swipeRefreshSrl.autoRefresh()
 
+        viewModel.loadDialogLiveData.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                loadDialog.show()
+            } else {
+                loadDialog.dismiss()
+            }
+        })
+
+        themeAdapter.clickItemListen = {
+            viewModel.downloadAndGotoPreview(requireActivity(), it)
+        }
     }
 }

@@ -56,6 +56,7 @@ import android.os.Trace;
 import android.os.UserHandle;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import android.text.Selection;
 import android.text.SpannableStringBuilder;
@@ -136,6 +137,7 @@ import com.android.launcher3.widget.WidgetHostViewLoader;
 import com.android.launcher3.widget.WidgetsContainerView;
 import com.theme.lambda.launcher.ui.theme.ThemeActivity;
 import com.theme.lambda.launcher.utils.CommonUtil;
+import com.theme.lambda.launcher.widget.PreviewControlView;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -356,6 +358,9 @@ public class Launcher extends BaseActivity
 
     private RotationPrefChangeHandler mRotationPrefChangeHandler;
 
+    private final ThemeManager themeManager = new ThemeManager();
+    private PreviewControlView previewControlView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (DEBUG_STRICT_MODE) {
@@ -381,6 +386,8 @@ public class Launcher extends BaseActivity
         }
 
         super.onCreate(savedInstanceState);
+        themeManager.setLauncher(this);
+        themeManager.onCreate();
 
         LauncherAppState app = LauncherAppState.getInstance(this);
 
@@ -965,6 +972,8 @@ public class Launcher extends BaseActivity
         }
 
         NotificationListener.removeNotificationsChangedListener();
+
+        themeManager.onStop();
     }
 
     @Override
@@ -983,6 +992,8 @@ public class Launcher extends BaseActivity
         if (!isWorkspaceLoading()) {
             NotificationListener.setNotificationsChangedListener(mPopupDataProvider);
         }
+
+        themeManager.onStart();
     }
 
     @Override
@@ -1098,6 +1109,7 @@ public class Launcher extends BaseActivity
             mLauncherCallbacks.onResume();
         }
 
+        themeManager.onResume();
     }
 
     @Override
@@ -1119,6 +1131,8 @@ public class Launcher extends BaseActivity
         if (mLauncherCallbacks != null) {
             mLauncherCallbacks.onPause();
         }
+
+        themeManager.onPause();
     }
 
     public interface CustomContentCallbacks {
@@ -1385,6 +1399,9 @@ public class Launcher extends BaseActivity
         if (TestingUtils.MEMORY_DUMP_ENABLED) {
             TestingUtils.addWeightWatcher(this);
         }
+
+        previewControlView = (PreviewControlView) findViewById(R.id.previewControlPcv);
+        themeManager.bindPreviewControlView(previewControlView);
     }
 
     private void setupOverviewPanel() {
@@ -1917,6 +1934,8 @@ public class Launcher extends BaseActivity
         if (mLauncherCallbacks != null) {
             mLauncherCallbacks.onDestroy();
         }
+
+        themeManager.onDestroy();
     }
 
     public LauncherAccessibilityDelegate getAccessibilityDelegate() {
@@ -3280,6 +3299,13 @@ public class Launcher extends BaseActivity
         // Clear the workspace because it's going to be rebound
         mWorkspace.clearDropTargets();
         mWorkspace.removeAllWorkspaceScreens();
+        try {
+            List<Fragment> fragments = getSupportFragmentManager().getFragments();
+            for (Fragment fragment : fragments) {
+                getSupportFragmentManager().beginTransaction().remove(fragment).commitNow();
+            }
+        } catch (Exception e) {
+        }
 
         if (mHotseat != null) {
             mHotseat.resetLayout();
@@ -4163,6 +4189,19 @@ public class Launcher extends BaseActivity
             return (Launcher) context;
         }
         return ((Launcher) ((ContextWrapper) context).getBaseContext());
+    }
+
+    public void reload() {
+        setWorkspaceLoading(true);
+        mModel.startLoader(getCurrentWorkspaceScreen());
+    }
+
+    public void closeAllAppLayoutIfNeed() {
+        if (isAppsViewVisible()) {
+            UserEventDispatcher ued = getUserEventDispatcher();
+            ued.logActionCommand(Action.Command.BACK, ContainerType.ALLAPPS);
+            showWorkspace(true);
+        }
     }
 
     private class RotationPrefChangeHandler implements OnSharedPreferenceChangeListener {

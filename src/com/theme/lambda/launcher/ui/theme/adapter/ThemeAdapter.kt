@@ -11,6 +11,7 @@ import com.theme.lambda.launcher.utils.CommonUtil
 class ThemeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val data = ArrayList<Resources>()
+    var clickItemListen: ((Resources) -> Unit)? = null
 
     @SuppressLint("NotifyDataSetChanged")
     fun upData(d: ArrayList<Resources>) {
@@ -33,6 +34,9 @@ class ThemeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is ThemeViewHolder) {
             holder.bind(data[position])
+            holder.itemView.setOnClickListener {
+                clickItemListen?.invoke(data[position])
+            }
         }
     }
 }

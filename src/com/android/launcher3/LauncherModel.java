@@ -129,7 +129,7 @@ public class LauncherModel extends BroadcastReceiver
     // We start off with everything not loaded. After that, we assume that
     // our monitoring of the package manager provides all updates and we never
     // need to do a requery. This is only ever touched from the loader thread.
-    private boolean mModelLoaded;
+    boolean mModelLoaded;
     public boolean isModelLoaded() {
         synchronized (mLock) {
             return mModelLoaded && mLoaderTask == null;

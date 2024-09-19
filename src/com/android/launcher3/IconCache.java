@@ -585,17 +585,6 @@ public class IconCache {
                     entry.contentDescription = mUserManager.getBadgedLabelForUser(entry.title, user);
                 }
             }
-
-            // 把自己伪装成主题
-            if (entry.title.equals(CommonUtil.INSTANCE.getString(R.string.app_name))) {
-                entry.title = "Theme";
-            }
-
-            // 是否存在替换图标
-            Bitmap themeIcon = ThemeIconMapping.getThemeBitmap(mContext, componentName.getPackageName());
-            if (themeIcon != null) {
-                entry.icon = themeIcon;
-            }
         }
         return entry;
     }

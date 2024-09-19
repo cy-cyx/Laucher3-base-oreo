@@ -81,4 +81,10 @@
             android:visibility="invisible" />
     </com.android.launcher3.dragndrop.DragLayer>
 
+    <com.theme.lambda.launcher.widget.PreviewControlView
+        android:id="@+id/previewControlPcv"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="match_parent" />
+
 </com.android.launcher3.LauncherRootView>
