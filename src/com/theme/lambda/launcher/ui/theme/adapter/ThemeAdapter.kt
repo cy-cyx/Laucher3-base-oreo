@@ -1,29 +1,28 @@
-package com.theme.lambda.launcher.ui.news.adpater
+package com.theme.lambda.launcher.ui.theme.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.android.launcher3.databinding.ItemNewsBinding
-import com.theme.lambda.launcher.data.model.News
+import com.android.launcher3.databinding.ItemThemeBinding
+import com.theme.lambda.launcher.data.model.Resources
 import com.theme.lambda.launcher.utils.CommonUtil
 
-class NewsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ThemeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val data = ArrayList<News>()
+    private val data = ArrayList<Resources>()
 
     @SuppressLint("NotifyDataSetChanged")
-    fun upData(d: ArrayList<News>) {
+    fun upData(d: ArrayList<Resources>) {
         data.clear()
         data.addAll(d)
         notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return NewsViewHolder(ItemNewsBinding.inflate(LayoutInflater.from(parent.context)).root.apply {
+        return ThemeViewHolder(ItemThemeBinding.inflate(LayoutInflater.from(parent.context)).root.apply {
             layoutParams =
-                ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, CommonUtil.dp2px(250f))
+                ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, CommonUtil.dp2px(330f))
         })
     }
 
@@ -32,9 +31,8 @@ class NewsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (holder is NewsViewHolder) {
+        if (holder is ThemeViewHolder) {
             holder.bind(data[position])
         }
     }
-
 }

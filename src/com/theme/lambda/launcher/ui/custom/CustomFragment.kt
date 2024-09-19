@@ -6,7 +6,7 @@ import android.view.View
 import android.widget.FrameLayout
 import com.android.launcher3.databinding.FragmentCustomBinding
 import com.theme.lambda.launcher.base.BaseFragment
-import com.theme.lambda.launcher.ui.custom.adapter.NewFragmentAdapter
+import com.theme.lambda.launcher.widget.adapter.LauncherFragmentAdapter
 import com.theme.lambda.launcher.ui.news.NewsFragment
 import com.theme.lambda.launcher.utils.CommonUtil
 
@@ -25,12 +25,12 @@ class CustomFragment : BaseFragment<FragmentCustomBinding>() {
         viewBinding.tabTl.apply {
             addTab(viewBinding.tabTl.newTab())
         }
-        viewBinding.tabTl.setupWithViewPager(viewBinding.newVp)
 
-        viewBinding.newVp.adapter = NewFragmentAdapter(childFragmentManager).apply {
+        viewBinding.newVp.adapter = LauncherFragmentAdapter(childFragmentManager).apply {
             fragments.add(NewsFragment())
 
             fragmentsTitle.add("Latest")
         }
+        viewBinding.tabTl.setupWithViewPager(viewBinding.newVp)
     }
 }

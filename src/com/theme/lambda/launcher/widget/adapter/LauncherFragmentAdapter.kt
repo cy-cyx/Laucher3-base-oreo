@@ -1,10 +1,10 @@
-package com.theme.lambda.launcher.ui.custom.adapter
+package com.theme.lambda.launcher.widget.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 
-class NewFragmentAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager) {
+class LauncherFragmentAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager) {
 
     val fragments = ArrayList<Fragment>()
     val fragmentsTitle = ArrayList<String>()

@@ -1,17 +1,19 @@
-package com.theme.lambda.launcher.ui.news
+package com.theme.lambda.launcher.ui.theme
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.theme.lambda.launcher.base.BaseViewModel
 import com.theme.lambda.launcher.data.DataRepository
-import com.theme.lambda.launcher.data.model.News
+import com.theme.lambda.launcher.data.model.Resources
+import com.theme.lambda.launcher.utils.requestTag
 import kotlinx.coroutines.launch
 
-class NewsViewModel : BaseViewModel() {
+class ThemeViewModel : BaseViewModel() {
 
+    var tag = ""
     var page = 0L
 
-    var newsLiveData = MutableLiveData<ArrayList<News>>()
+    var themeLiveData = MutableLiveData<ArrayList<Resources>>()
     var refreshFinishLiveData = MutableLiveData<Boolean>()
     var loadMoreFinishLiveData = MutableLiveData<Boolean>()
     var isLoadMore = false
@@ -19,9 +21,9 @@ class NewsViewModel : BaseViewModel() {
     fun refresh() {
         viewModelScope.launch() {
             page = 1L
-            val data = DataRepository.getNewData(page)
-            val newsList = data?.news ?: arrayListOf()
-            newsLiveData.value = newsList
+            val data = DataRepository.getResource(page, tag.requestTag())
+            val resList = data?.resources ?: arrayListOf()
+            themeLiveData.value = resList
             refreshFinishLiveData.value = true
         }
     }
@@ -32,13 +34,14 @@ class NewsViewModel : BaseViewModel() {
 
         viewModelScope.launch() {
             page++
-            val data = DataRepository.getNewData(page)
-            val newsList = data?.news ?: arrayListOf()
-            val allData = newsLiveData.value ?: arrayListOf()
-            allData.addAll(newsList)
-            newsLiveData.value = allData
+            val data = DataRepository.getResource(page, tag.requestTag())
+            val resList = data?.resources ?: arrayListOf()
+            val allData = themeLiveData.value ?: arrayListOf()
+            allData.addAll(resList)
+            themeLiveData.value = allData
             loadMoreFinishLiveData.value = true
             isLoadMore = false
         }
     }
+
 }

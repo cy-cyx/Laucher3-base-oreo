@@ -2,6 +2,7 @@ package com.theme.lambda.launcher
 
 import android.app.Application
 import android.content.Context
+import com.lambda.common.http.HttpProvider
 import com.lambdaweather.LambdaWeather
 import com.theme.lambda.launcher.data.di.allModules
 import com.theme.lambda.launcher.utils.CommonUtil
