@@ -15,6 +15,9 @@ public class ThemeIconMapping {
      * @return 如果有映射，返回 {@link  BitmapFactory#decodeResource(Resources, int)} 没有映射返回 null
      */
     public static Bitmap getThemeBitmap(Context context, String packageName) {
+        if (packageName.equals(context.getPackageName())) {
+            return BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_themes);
+        }
         return null;
     }
 }
