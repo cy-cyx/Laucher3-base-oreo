@@ -45,7 +45,6 @@ class ThemeManager {
             override fun onSet() {
                 themeId = previewThemeId
                 SpUtil.putString(sKeyThemeId, themeId)
-                setCurShowThemeById(themeId)
                 quitPreview()
             }
         }
