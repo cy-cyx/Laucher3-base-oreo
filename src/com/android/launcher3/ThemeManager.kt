@@ -8,6 +8,7 @@ import com.theme.lambda.launcher.utils.GsonUtil
 import com.theme.lambda.launcher.utils.SpUtil
 import com.theme.lambda.launcher.utils.WallPaperUtil
 import com.theme.lambda.launcher.widget.PreviewControlView
+import com.theme.lambda.launcher.widget.dialog.QuitPreviewSureDialog
 import java.io.File
 import java.lang.ref.WeakReference
 
@@ -31,8 +32,14 @@ class ThemeManager {
 
         previewControlView?.controlListen = object : PreviewControlView.ControlListen {
             override fun onCancel() {
-                setCurShowThemeById(themeId)
-                quitPreview()
+                launcher?.let {
+                    QuitPreviewSureDialog(it).apply {
+                        onClickContinueListen = {
+                            setCurShowThemeById(themeId)
+                            quitPreview()
+                        }
+                    }.show()
+                }
             }
 
             override fun onSet() {

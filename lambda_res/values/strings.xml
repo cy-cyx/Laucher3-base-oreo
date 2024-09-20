@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="themes">Themes</string>
+    <string name="set">Set</string>
+    <string name="theme_not_applied">Theme Not Applied</string>
+    <string name="theme_not_applied_tip">You haven\'t finished setting the new theme.Tap \'Set\' to apply it now.</string>
+    <string name="cancel">Cancel</string>
+    <string name="text_continue">Continue</string>
+</resources>
