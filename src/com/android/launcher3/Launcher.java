@@ -2528,7 +2528,7 @@ public class Launcher extends BaseActivity
         if (intent == null) {
             throw new IllegalArgumentException("Input must have a valid intent");
         }
-        if (intent.getComponent() != null) {
+        if (intent.getComponent() != null && !intent.getComponent().getPackageName().equals(getPackageName())) {
             SearchActivity.addRecentApps(intent.getComponent().getPackageName());
         }
         boolean success = startActivitySafely(v, intent, item);

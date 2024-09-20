@@ -28,6 +28,14 @@
                 android:textColor="#FF000000"
                 android:textSize="20dp"
                 android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/MyThemeIv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="17dp"
+                android:src="@drawable/ic_my_themes" />
         </FrameLayout>
 
         <com.google.android.material.tabs.TabLayout
