@@ -5,13 +5,18 @@ import android.content.Context
 import android.graphics.BitmapFactory
 import android.graphics.Rect
 import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.annotation.WorkerThread
+import java.io.File
 
 
 object WallPaperUtil {
 
     @WorkerThread
     fun setHomeScreen(file: String) {
+        if (!File(file).exists()) {
+            return
+        }
         val bitmap = BitmapFactory.decodeFile(file)
         val manager =
             CommonUtil.appContext?.getSystemService(Context.WALLPAPER_SERVICE) as? WallpaperManager
@@ -29,6 +34,9 @@ object WallPaperUtil {
 
     @WorkerThread
     fun setLockScreen(file: String) {
+        if (!File(file).exists()) {
+            return
+        }
         val bitmap = BitmapFactory.decodeFile(file)
         val manager =
             CommonUtil.appContext?.getSystemService(Context.WALLPAPER_SERVICE) as? WallpaperManager
@@ -46,9 +54,13 @@ object WallPaperUtil {
 
     @WorkerThread
     fun setHomeAndLockScreen(file: String) {
-        val bitmap = BitmapFactory.decodeFile(file)
+        if (!File(file).exists()) {
+            return
+        }
         val manager =
             CommonUtil.appContext?.getSystemService(Context.WALLPAPER_SERVICE) as? WallpaperManager
+        val bitmap = BitmapFactory.decodeFile(file)
+
         if (Build.VERSION.SDK_INT >= 24) {
             manager?.setBitmap(
                 bitmap,

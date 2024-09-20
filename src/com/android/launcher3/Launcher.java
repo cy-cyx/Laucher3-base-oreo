@@ -2812,6 +2812,7 @@ public class Launcher extends BaseActivity
 
     @Override
     public boolean onLongClick(View v) {
+        if (themeManager.isPreviewMode()) return false;
         if (!isDraggingEnabled()) return false;
         if (isWorkspaceLocked()) return false;
         if (mState != State.WORKSPACE) return false;
@@ -4191,8 +4192,9 @@ public class Launcher extends BaseActivity
         return ((Launcher) ((ContextWrapper) context).getBaseContext());
     }
 
-    public void reload() {
+    public void reload(boolean force) {
         setWorkspaceLoading(true);
+        mModel.mModelLoaded = !force;
         mModel.startLoader(getCurrentWorkspaceScreen());
     }
 
@@ -4202,6 +4204,11 @@ public class Launcher extends BaseActivity
             ued.logActionCommand(Action.Command.BACK, ContainerType.ALLAPPS);
             showWorkspace(true);
         }
+    }
+
+
+    public ThemeManager getThemeManager() {
+        return themeManager;
     }
 
     private class RotationPrefChangeHandler implements OnSharedPreferenceChangeListener {

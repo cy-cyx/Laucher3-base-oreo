@@ -222,7 +222,7 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver {
 
     private void applyIconAndLabel(Bitmap icon, ItemInfo info) {
         Bitmap showIcon = icon;
-        if (info.getIntent() != null && info.getIntent().getComponent() != null){
+        if (info.getIntent() != null && info.getIntent().getComponent() != null) {
             String pkg = info.getIntent().getComponent().getPackageName();
 
             // 把自己伪装成主题
@@ -231,7 +231,7 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver {
             }
 
             // 是否存在替换图标
-            Bitmap themeIcon = ThemeIconMapping.getThemeBitmap(CommonUtil.INSTANCE.getAppContext(),pkg);
+            Bitmap themeIcon = ThemeIconMapping.getThemeBitmap(CommonUtil.INSTANCE.getAppContext(), pkg);
             if (themeIcon != null) {
                 showIcon = themeIcon;
             }
@@ -317,6 +317,11 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        // 编辑模式不相应点击
+        if (mLauncher.getThemeManager().isPreviewMode()) {
+            return false;
+        }
+
         // Call the superclass onTouchEvent first, because sometimes it changes the state to
         // isPressed() on an ACTION_UP
         boolean result = super.onTouchEvent(event);

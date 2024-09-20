@@ -10,7 +10,28 @@ class PreviewControlView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
 ) : FrameLayout(context, attrs) {
 
+    var controlListen: ControlListen? = null
+
+    var layoutPreviewControlBinding: LayoutPreviewControlBinding? = null
+
     init {
-        LayoutPreviewControlBinding.inflate(LayoutInflater.from(context), this, true)
+
+        layoutPreviewControlBinding =
+            LayoutPreviewControlBinding.inflate(LayoutInflater.from(context), this, true)
+
+        layoutPreviewControlBinding?.backIv?.setOnClickListener {
+            controlListen?.onCancel()
+        }
+        layoutPreviewControlBinding?.setTv?.setOnClickListener {
+            controlListen?.onSet()
+        }
+    }
+
+
+    interface ControlListen {
+
+        fun onCancel()
+
+        fun onSet()
     }
 }

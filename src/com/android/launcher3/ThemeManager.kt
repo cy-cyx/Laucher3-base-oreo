@@ -28,6 +28,20 @@ class ThemeManager {
 
     fun bindPreviewControlView(view: PreviewControlView) {
         previewControlView = view
+
+        previewControlView?.controlListen = object : PreviewControlView.ControlListen {
+            override fun onCancel() {
+                setCurShowThemeById(themeId)
+                quitPreview()
+            }
+
+            override fun onSet() {
+                themeId = previewThemeId
+                SpUtil.putString(sKeyThemeId, themeId)
+                setCurShowThemeById(themeId)
+                quitPreview()
+            }
+        }
     }
 
     companion object {
@@ -92,7 +106,9 @@ class ThemeManager {
 
     private fun setCurShowThemeById(id: String) {
         showThemeId = id
-        launcher?.reload()
+        // 更新桌面
+        launcher?.reload(false)
+        // 更新壁纸
         val manifest = getCurManifest()
         if (manifest != null) {
             val wallpaper = getManifestResRootPath() + manifest.background

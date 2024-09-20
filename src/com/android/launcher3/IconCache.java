@@ -82,8 +82,7 @@ public class IconCache {
 
     private static final boolean DEBUG = false;
 
-    // todo 使用icon替换逻辑 必须不使用缓存不然icon图标会拿不到 （该逻辑可以后续优化）
-    private static final boolean IGNORE_CACHE = true;
+    private static final boolean IGNORE_CACHE = false;
 
     private static final int LOW_RES_SCALE_FACTOR = 5;
 
