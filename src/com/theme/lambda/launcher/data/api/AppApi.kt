@@ -1,8 +1,11 @@
 package com.theme.lambda.launcher.data.api
 
+import com.theme.lambda.launcher.data.model.BaseResult
 import com.theme.lambda.launcher.data.model.NewResult
+import com.theme.lambda.launcher.data.model.ResResult
 import retrofit2.http.GET
 import retrofit2.http.Query
+import retrofit2.http.QueryMap
 
 interface AppApi {
 
@@ -16,5 +19,10 @@ interface AppApi {
         @Query("publish_date_from") publishDateFrom: String?,
         @Query("sort") sort: String?,
         @Query("fallback") fallback: String?,
-    ): NewResult
+    ): BaseResult<NewResult>
+
+    @GET("api/v2/query_tag_resources")
+    suspend fun getResource(
+        @QueryMap map: Map<String, String>
+    ): BaseResult<ResResult>
 }

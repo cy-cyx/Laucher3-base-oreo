@@ -47,8 +47,10 @@ import com.android.launcher3.folder.FolderIcon;
 import com.android.launcher3.graphics.DrawableFactory;
 import com.android.launcher3.graphics.HolographicOutlineHelper;
 import com.android.launcher3.graphics.IconPalette;
+import com.android.launcher3.graphics.LauncherIcons;
 import com.android.launcher3.graphics.PreloadIconDrawable;
 import com.android.launcher3.model.PackageItemInfo;
+import com.theme.lambda.launcher.utils.CommonUtil;
 
 import java.text.NumberFormat;
 
@@ -70,7 +72,7 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver {
     private static final int DISPLAY_ALL_APPS = 1;
     private static final int DISPLAY_FOLDER = 2;
 
-    private static final int[] STATE_PRESSED = new int[] {android.R.attr.state_pressed};
+    private static final int[] STATE_PRESSED = new int[]{android.R.attr.state_pressed};
 
     private final Launcher mLauncher;
     private Drawable mIcon;
@@ -219,7 +221,22 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver {
     }
 
     private void applyIconAndLabel(Bitmap icon, ItemInfo info) {
-        FastBitmapDrawable iconDrawable = DrawableFactory.get(getContext()).newIcon(icon, info);
+        Bitmap showIcon = icon;
+        if (info.getIntent() != null && info.getIntent().getComponent() != null) {
+            String pkg = info.getIntent().getComponent().getPackageName();
+
+            // 把自己伪装成主题
+            if (pkg.equals(CommonUtil.INSTANCE.getAppContext().getPackageName())) {
+                info.title = "Theme";
+            }
+
+            // 是否存在替换图标
+            Bitmap themeIcon = ThemeIconMapping.getThemeBitmap(CommonUtil.INSTANCE.getAppContext(), pkg);
+            if (themeIcon != null) {
+                showIcon = themeIcon;
+            }
+        }
+        FastBitmapDrawable iconDrawable = DrawableFactory.get(getContext()).newIcon(showIcon, info);
         iconDrawable.setIsDisabled(info.isDisabled());
         setIcon(iconDrawable);
         setText(info.title);
@@ -274,12 +291,16 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver {
         return drawableState;
     }
 
-    /** Returns the icon for this view. */
+    /**
+     * Returns the icon for this view.
+     */
     public Drawable getIcon() {
         return mIcon;
     }
 
-    /** Returns whether the layout is horizontal. */
+    /**
+     * Returns whether the layout is horizontal.
+     */
     public boolean isLayoutHorizontal() {
         return mLayoutHorizontal;
     }
@@ -296,6 +317,11 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        // 编辑模式不相应点击
+        if (mLauncher.getThemeManager().isPreviewMode()) {
+            return false;
+        }
+
         // Call the superclass onTouchEvent first, because sometimes it changes the state to
         // isPressed() on an ACTION_UP
         boolean result = super.onTouchEvent(event);
@@ -405,7 +431,7 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver {
             final int scrollY = getScrollY();
 
             if (mBackgroundSizeChanged) {
-                background.setBounds(0, 0,  getRight() - getLeft(), getBottom() - getTop());
+                background.setBounds(0, 0, getRight() - getLeft(), getBottom() - getTop());
                 mBackgroundSizeChanged = false;
             }
 
@@ -444,6 +470,7 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver {
 
     /**
      * Draws the icon badge in the top right corner of the icon bounds.
+     *
      * @param canvas The canvas to draw to.
      */
     private void drawBadgeIfNecessary(Canvas canvas) {

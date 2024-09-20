@@ -9,6 +9,8 @@ import com.theme.lambda.launcher.base.BaseActivity
 import com.theme.lambda.launcher.data.model.News
 import com.theme.lambda.launcher.utils.GlideUtil
 import com.theme.lambda.launcher.utils.GsonUtil
+import com.theme.lambda.launcher.utils.StatusBarUtil
+import com.theme.lambda.launcher.utils.marginStatusBarHeight
 
 class NewDetailsActivity : BaseActivity<ActivityNewDetailBinding>() {
 
@@ -31,6 +33,11 @@ class NewDetailsActivity : BaseActivity<ActivityNewDetailBinding>() {
     private var new: News? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        StatusBarUtil.transparencyBar(this)
+        StatusBarUtil.setStatusBarLightMode(this.window)
+        viewBinding.containerLl.marginStatusBarHeight()
+
 
         intent.getStringExtra(sKeyNewDetail)?.let {
             if (it.isNotBlank()) {

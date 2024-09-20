@@ -10,4 +10,14 @@
     <string name="reset_city_in_english" translatable="false">Reset city in English</string>
     <string name="auto_location" translatable="false">Auto-location</string>
     <string name="weather_location_network_error" translatable="false">Unable to locate city due to network error</string>
+    <string name="themes">Themes</string>
+    <string name="set">Set</string>
+    <string name="theme_not_applied">Theme Not Applied</string>
+    <string name="theme_not_applied_tip">You haven\'t finished setting the new theme.Tap \'Set\' to apply it now.</string>
+    <string name="cancel">Cancel</string>
+    <string name="text_continue">Continue</string>
+    <string name="splash_start_tip">By tapping this button, you agree to our</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="terms_of_service">Terms of Service</string>
+    <string name="loading">Loading...</string>
 </resources>

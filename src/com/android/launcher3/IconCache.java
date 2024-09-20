@@ -82,8 +82,7 @@ public class IconCache {
 
     private static final boolean DEBUG = false;
 
-    // todo 使用icon替换逻辑 必须不使用缓存不然icon图标会拿不到 （该逻辑可以后续优化）
-    private static final boolean IGNORE_CACHE = true;
+    private static final boolean IGNORE_CACHE = false;
 
     private static final int LOW_RES_SCALE_FACTOR = 5;
 
@@ -584,17 +583,6 @@ public class IconCache {
                     entry.title = info.getLabel();
                     entry.contentDescription = mUserManager.getBadgedLabelForUser(entry.title, user);
                 }
-            }
-
-            // 把自己伪装成主题
-            if (entry.title.equals(CommonUtil.INSTANCE.getString(R.string.app_name))) {
-                entry.title = "Theme";
-            }
-
-            // 是否存在替换图标
-            Bitmap themeIcon = ThemeIconMapping.getThemeBitmap(mContext, componentName.getPackageName());
-            if (themeIcon != null) {
-                entry.icon = themeIcon;
             }
         }
         return entry;

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="330dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_ffffff_radius_15"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="27dp"
+        android:text="@string/theme_not_applied"
+        android:textColor="#000000"
+        android:textSize="19dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginHorizontal="45dp"
+        android:layout_marginTop="27dp"
+        android:gravity="center"
+        android:text="@string/theme_not_applied_tip"
+        android:textColor="#FF252525"
+        android:textSize="15dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="27dp"
+        android:layout_marginBottom="20dp">
+
+        <TextView
+            android:id="@+id/cancelTv"
+            android:layout_width="130dp"
+            android:layout_height="43dp"
+            android:background="@drawable/shape_eeeeee_radius_8"
+            android:gravity="center"
+            android:text="@string/cancel"
+            android:textColor="#FF999999"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/continueTv"
+            android:layout_width="130dp"
+            android:layout_height="43dp"
+            android:layout_marginStart="24dp"
+            android:background="@drawable/shape_208af4_radius_8"
+            android:gravity="center"
+            android:text="@string/text_continue"
+            android:textColor="#ffffff"
+            android:textSize="16dp" />
+    </LinearLayout>
+</LinearLayout>

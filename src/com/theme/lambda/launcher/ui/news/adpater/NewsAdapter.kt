@@ -11,8 +11,6 @@ import com.theme.lambda.launcher.utils.CommonUtil
 
 class NewsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    var lastVisibleItem = 0
-
     private val data = ArrayList<News>()
 
     @SuppressLint("NotifyDataSetChanged")

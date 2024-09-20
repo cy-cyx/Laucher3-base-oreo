@@ -20,7 +20,7 @@ class NewsViewModel : BaseViewModel() {
         viewModelScope.launch() {
             page = 1L
             val data = DataRepository.getNewData(page)
-            val newsList = data?.d?.news ?: arrayListOf()
+            val newsList = data?.news ?: arrayListOf()
             newsLiveData.value = newsList
             refreshFinishLiveData.value = true
         }
@@ -33,7 +33,7 @@ class NewsViewModel : BaseViewModel() {
         viewModelScope.launch() {
             page++
             val data = DataRepository.getNewData(page)
-            val newsList = data?.d?.news ?: arrayListOf()
+            val newsList = data?.news ?: arrayListOf()
             val allData = newsLiveData.value ?: arrayListOf()
             allData.addAll(newsList)
             newsLiveData.value = allData

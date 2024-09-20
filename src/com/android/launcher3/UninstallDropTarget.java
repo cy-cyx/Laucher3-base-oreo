@@ -14,6 +14,7 @@ import android.util.AttributeSet;
 import android.widget.Toast;
 
 import com.android.launcher3.compat.LauncherAppsCompat;
+import com.theme.lambda.launcher.utils.CommonUtil;
 
 public class UninstallDropTarget extends ButtonDropTarget {
 
@@ -72,6 +73,11 @@ public class UninstallDropTarget extends ButtonDropTarget {
         if (intent != null) {
             LauncherActivityInfo info = LauncherAppsCompat.getInstance(context)
                     .resolveActivity(intent, user);
+
+            if (info.getComponentName().getPackageName().equals(CommonUtil.INSTANCE.getAppContext().getPackageName())) {
+                return null;
+            }
+
             if (info != null
                     && (info.getApplicationInfo().flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
                 return info.getComponentName();
@@ -127,7 +133,7 @@ public class UninstallDropTarget extends ButtonDropTarget {
 
     /**
      * Notifies the {@param callback} whether the uninstall was successful or not.
-     *
+     * <p>
      * Since there is no direct callback for an uninstall request, we check the package existence
      * when the launch resumes next time. This assumes that the uninstall activity will finish only
      * after the task is completed
@@ -136,7 +142,7 @@ public class UninstallDropTarget extends ButtonDropTarget {
             final Launcher launcher, boolean activityStarted,
             final ComponentName cn, final UserHandle user,
             final DropTargetResultCallback callback) {
-        if (activityStarted)  {
+        if (activityStarted) {
             final Runnable checkIfUninstallWasSuccess = new Runnable() {
                 @Override
                 public void run() {
@@ -156,6 +162,7 @@ public class UninstallDropTarget extends ButtonDropTarget {
     public interface DropTargetResultCallback {
         /**
          * A drag operation was complete.
+         *
          * @param isRemoved true if the drag object should be removed, false otherwise.
          */
         void onDragObjectRemoved(boolean isRemoved);
