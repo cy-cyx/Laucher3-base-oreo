@@ -14,6 +14,7 @@ import com.theme.lambda.launcher.utils.GlideUtil
 import com.theme.lambda.launcher.utils.GsonUtil
 import com.theme.lambda.launcher.utils.StatusBarUtil
 import com.theme.lambda.launcher.utils.withHost
+import com.theme.lambda.launcher.widget.dialog.LoadingDialog
 
 class ThemePreviewActivity : BaseActivity<ActivityThemePreviewBinding>() {
 
@@ -35,8 +36,7 @@ class ThemePreviewActivity : BaseActivity<ActivityThemePreviewBinding>() {
     val viewModel by viewModels<ThemePreviewViewModel>()
 
     val loadDialog by lazy {
-        ProgressDialog(this).apply {
-            setTitle("loading...")
+        LoadingDialog(this).apply {
             setCancelable(false)
         }
     }
