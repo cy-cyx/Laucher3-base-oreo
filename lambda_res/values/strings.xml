@@ -6,4 +6,8 @@
     <string name="theme_not_applied_tip">You haven\'t finished setting the new theme.Tap \'Set\' to apply it now.</string>
     <string name="cancel">Cancel</string>
     <string name="text_continue">Continue</string>
+    <string name="splash_start_tip">By tapping this button, you agree to our</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="terms_of_service">Terms of Service</string>
+    <string name="loading">Loading...</string>
 </resources>

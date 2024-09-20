@@ -17,6 +17,7 @@ import com.theme.lambda.launcher.utils.CommonUtil
 class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
 
     var themeTag = ""
+    var from = ""
 
     val viewModel by viewModels<ThemeViewModel>()
 
@@ -37,6 +38,7 @@ class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.tag = themeTag
+        viewModel.from = from
 
         viewBinding.themeRv.apply {
             layoutManager = GridLayoutManager(context, 2).apply {

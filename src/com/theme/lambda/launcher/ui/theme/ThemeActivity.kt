@@ -14,8 +14,16 @@ import com.theme.lambda.launcher.widget.adapter.LauncherFragmentAdapter
 class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
 
     companion object {
-        fun start(context: Context) {
-            context.startActivity(Intent(context, ThemeActivity::class.java))
+
+        var sFromSplash = "splash"
+        var sFromTheme = "theme"
+
+        var sKeyFrom = "key_from"
+
+        fun start(context: Context, from: String) {
+            context.startActivity(Intent(context, ThemeActivity::class.java).apply {
+                putExtra(sKeyFrom, from)
+            })
         }
     }
 
@@ -23,12 +31,16 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
         return ActivityThemeBinding.inflate(layoutInflater)
     }
 
+    var pageFrom = ThemeActivity.sFromTheme
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         StatusBarUtil.transparencyBar(this)
         StatusBarUtil.setStatusBarLightMode(this.window)
         viewBinding.containerLl.marginStatusBarHeight()
+
+        pageFrom = intent.getStringExtra(sKeyFrom) ?: ThemeActivity.sFromTheme
 
         viewBinding.tabTl.apply {
             Constants.sThemeTag.forEach {
@@ -44,6 +56,7 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
                 Constants.sThemeTag.forEach {
                     fragments.add(ThemeFragment().apply {
                         themeTag = it
+                        from =pageFrom
                     })
 
                     fragmentsTitle.add(it)

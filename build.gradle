@@ -101,7 +101,7 @@ dependencies {
     implementation 'io.github.scwang90:refresh-layout-kernel:2.1.0'      //核心必须依赖
     implementation 'io.github.scwang90:refresh-header-classics:2.1.0'    //经典刷新头
     implementation 'io.github.scwang90:refresh-footer-classics:2.1.0'
-
+    implementation "com.airbnb.android:lottie:6.4.0"
     implementation "com.squareup.okhttp3:okhttp:4.12.0"
     implementation "com.google.code.gson:gson:2.10.1"
     implementation "com.squareup.retrofit2:retrofit:2.9.0"

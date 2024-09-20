@@ -59,6 +59,24 @@ class ThemeManager {
         fun getThemeManagerIfExist(): ThemeManager? {
             return themeManagerCache?.get()
         }
+
+        fun setDefaultTHemeId(id:String){
+            SpUtil.putString(sKeyThemeId, id)
+        }
+
+        private fun decodeManifest(id: String): ManifestBean? {
+            // 解析对应配置
+            val filesDir: String = CommonUtil.appContext!!.getFilesDir().getPath()
+            val manifestFile = File("$filesDir/wallpaper/$id/manifest.json")
+            if (!manifestFile.exists()) return null;
+
+            val manifestJson: String = FileUtil.readStringFromFile(manifestFile)
+            val manifest: ManifestBean = GsonUtil.gson.fromJson(
+                manifestJson,
+                ManifestBean::class.java
+            )
+            return manifest
+        }
     }
 
     // 进入设置预览模式
@@ -72,6 +90,13 @@ class ThemeManager {
 
         themeId = SpUtil.getString(sKeyThemeId)
         showThemeId = themeId
+
+        // 更新壁纸默认壁纸
+        val manifest = getCurManifest()
+        if (manifest != null) {
+            val wallpaper = getManifestResRootPath() + manifest.background
+            WallPaperUtil.setHomeAndLockScreen(wallpaper)
+        }
     }
 
     fun onStart() {
@@ -136,21 +161,6 @@ class ThemeManager {
             }
         }
         return result
-    }
-
-
-    private fun decodeManifest(id: String): ManifestBean? {
-        // 解析对应配置
-        val filesDir: String = CommonUtil.appContext!!.getFilesDir().getPath()
-        val manifestFile = File("$filesDir/wallpaper/$id/manifest.json")
-        if (!manifestFile.exists()) return null;
-
-        val manifestJson: String = FileUtil.readStringFromFile(manifestFile)
-        val manifest: ManifestBean = GsonUtil.gson.fromJson(
-            manifestJson,
-            ManifestBean::class.java
-        )
-        return manifest
     }
 
     fun getManifestResRootPath(): String {

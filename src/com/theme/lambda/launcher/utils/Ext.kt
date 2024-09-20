@@ -23,3 +23,11 @@ fun View.marginStatusBarHeight() {
     lp.topMargin = CommonUtil.getStatusBarHeight()
     requestLayout()
 }
+
+fun View.gone() {
+    this.visibility = View.GONE
+}
+
+fun View.visible() {
+    this.visibility = View.VISIBLE
+}
