@@ -1,8 +1,10 @@
 package com.theme.lambda.launcher.ui.search
 
 import android.app.SearchManager
+import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
+import android.os.UserHandle
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +12,13 @@ import android.view.View.OnFocusChangeListener
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.android.launcher3.AppInfo
 import com.android.launcher3.databinding.ActivitySearchBinding
 import com.lambda.common.http.Preference
+import com.lambda.common.utils.utilcode.util.ActivityUtils
 import com.lambda.common.utils.utilcode.util.AppUtils
 import com.lambda.common.utils.utilcode.util.GsonUtils
+import com.lambda.common.utils.utilcode.util.Utils
 import com.theme.lambda.launcher.base.BaseActivity
 
 class SearchActivity : BaseActivity<ActivitySearchBinding>() {
@@ -49,7 +54,11 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
                 viewBinding.ivSearch.visibility = View.VISIBLE
             }
             val list = AppUtils.getAppsInfo().filter { appInfo ->
-                !appInfo.isSystem && appInfo.name.contains(it.toString(), true)
+                ActivityUtils.getLauncherActivity(appInfo.packageName)
+                    .isNotEmpty() && appInfo.name.contains(
+                    it.toString(),
+                    true
+                ) && appInfo.packageName != packageName
             }.map { appInfo ->
                 appInfo.packageName
             }
@@ -110,17 +119,17 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recentAppsAdapter.setList(recentAppsList)
         recentAppsAdapter.setOnItemClickListener { _, _, position ->
-            recentAppsAdapter.setList(addRecentApps(localAppsAdapter.data[position]))
             viewBinding.et.clearFocus()
             AppUtils.launchApp(recentAppsAdapter.data[position])
+            recentAppsAdapter.setList(addRecentApps(recentAppsAdapter.data[position]))
         }
         viewBinding.rvLocalApps.adapter = localAppsAdapter
         viewBinding.rvLocalApps.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         localAppsAdapter.setOnItemClickListener { _, _, position ->
-            recentAppsAdapter.setList(addRecentApps(localAppsAdapter.data[position]))
             viewBinding.et.clearFocus()
             AppUtils.launchApp(localAppsAdapter.data[position])
+            recentAppsAdapter.setList(addRecentApps(localAppsAdapter.data[position]))
         }
     }
 
@@ -153,6 +162,9 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             } else {
                 mutableListOf()
             }
+            if (packageName == Utils.getApp().packageName) {
+                return list
+            }
             list.add(0, packageName)
             if (list.size > 10) {
                 list = list.subList(0, 10)
@@ -160,5 +172,19 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             recentApps = GsonUtils.toJson(list)
             return list
         }
+    }
+
+    private fun findActivity(
+        apps: ArrayList<AppInfo>, component: ComponentName,
+        user: UserHandle
+    ): Boolean {
+        val n = apps.size
+        for (i in 0 until n) {
+            val info = apps[i]
+            if (info.user == user && info.componentName == component) {
+                return true
+            }
+        }
+        return false
     }
 }
