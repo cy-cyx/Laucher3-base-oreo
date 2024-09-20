@@ -3,6 +3,7 @@ package com.theme.lambda.launcher.ui.splash
 import android.graphics.Paint
 import android.os.Bundle
 import android.view.LayoutInflater
+import androidx.lifecycle.lifecycleScope
 import com.android.launcher3.databinding.ActivitySplashBinding
 import com.theme.lambda.launcher.Constants
 import com.theme.lambda.launcher.base.BaseActivity
@@ -11,6 +12,8 @@ import com.theme.lambda.launcher.utils.ShareUtil
 import com.theme.lambda.launcher.utils.StatusBarUtil
 import com.theme.lambda.launcher.utils.gone
 import com.theme.lambda.launcher.utils.visible
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class SplashActivity : BaseActivity<ActivitySplashBinding>() {
     override fun initViewBinding(layoutInflater: LayoutInflater): ActivitySplashBinding {
@@ -48,8 +51,13 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         viewBinding.loadingTv.visible()
         viewBinding.progressPv.visible()
 
-        viewBinding.progressPv.startProgress(10000) {
-            ThemeActivity.start(this, ThemeActivity.sFromSplash)
+        viewBinding.progressPv.startProgress(5000) {
+
+        }
+
+        lifecycleScope.launch {
+            delay(5000)
+            ThemeActivity.start(this@SplashActivity, ThemeActivity.sFromSplash)
             finish()
         }
     }
