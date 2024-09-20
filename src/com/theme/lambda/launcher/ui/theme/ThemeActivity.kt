@@ -10,6 +10,7 @@ import com.theme.lambda.launcher.base.BaseActivity
 import com.theme.lambda.launcher.utils.StatusBarUtil
 import com.theme.lambda.launcher.utils.marginStatusBarHeight
 import com.theme.lambda.launcher.widget.adapter.LauncherFragmentAdapter
+import java.lang.ref.WeakReference
 
 class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
 
@@ -20,10 +21,17 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
 
         var sKeyFrom = "key_from"
 
+        var themeActivity: WeakReference<ThemeActivity>? = null
+
         fun start(context: Context, from: String) {
             context.startActivity(Intent(context, ThemeActivity::class.java).apply {
                 putExtra(sKeyFrom, from)
             })
+        }
+
+        // 预览不能通过栈顶出，故先用此方法
+        fun closeThemeActivity(){
+            themeActivity?.get()?.finish()
         }
     }
 
@@ -35,6 +43,8 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        themeActivity = WeakReference(this)
 
         StatusBarUtil.transparencyBar(this)
         StatusBarUtil.setStatusBarLightMode(this.window)
@@ -56,7 +66,7 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
                 Constants.sThemeTag.forEach {
                     fragments.add(ThemeFragment().apply {
                         themeTag = it
-                        from =pageFrom
+                        from = pageFrom
                     })
 
                     fragmentsTitle.add(it)
@@ -64,5 +74,10 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
             }
         }
         viewBinding.tabTl.setupWithViewPager(viewBinding.themeVp)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        themeActivity = null
     }
 }

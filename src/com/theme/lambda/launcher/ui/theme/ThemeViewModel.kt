@@ -1,7 +1,6 @@
 package com.theme.lambda.launcher.ui.theme
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
@@ -12,6 +11,7 @@ import com.theme.lambda.launcher.base.BaseViewModel
 import com.theme.lambda.launcher.data.DataRepository
 import com.theme.lambda.launcher.data.model.Resources
 import com.theme.lambda.launcher.task.DownloadZipTask
+import com.theme.lambda.launcher.ui.themepreview.ThemePreviewActivity
 import com.theme.lambda.launcher.utils.requestTag
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -55,25 +55,25 @@ class ThemeViewModel : BaseViewModel() {
     }
 
     fun downloadAndGotoPreview(context: Activity, resources: Resources) {
-        viewModelScope.launch(Dispatchers.IO) {
-            loadDialogLiveData.postValue(true)
+        // 首页进来和主题进来处理不同
+        if (from == ThemeActivity.sFromSplash) {
+            viewModelScope.launch(Dispatchers.IO) {
+                loadDialogLiveData.postValue(true)
 
-            val downloadZipTask = DownloadZipTask(resources)
-            val result = downloadZipTask.execute()
-            loadDialogLiveData.postValue(false)
-            if (result) {
-                // 首页进来和主题进来处理不同
-                if (from == ThemeActivity.sFromSplash) {
+                val downloadZipTask = DownloadZipTask(resources)
+                val result = downloadZipTask.execute()
+                loadDialogLiveData.postValue(false)
+                if (result) {
                     ThemeManager.setDefaultTHemeId(resources.id)
+                    context.finish()
                     context.startActivity(Intent(context, Launcher::class.java))
                 } else {
-                    ThemeManager.getThemeManagerIfExist()?.enterPreviewModeWithId(resources.id)
-                    context.finish()
+                    Toast.makeText(context, "download error!!", Toast.LENGTH_SHORT).show()
                 }
-            } else {
-                Toast.makeText(context, "download error!!", Toast.LENGTH_SHORT).show()
             }
-
+        } else {
+            ThemePreviewActivity.start(context,resources)
         }
+
     }
 }

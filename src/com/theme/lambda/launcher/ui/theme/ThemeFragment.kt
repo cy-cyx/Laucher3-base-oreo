@@ -13,6 +13,7 @@ import com.android.launcher3.databinding.FragmentThemeBinding
 import com.theme.lambda.launcher.base.BaseFragment
 import com.theme.lambda.launcher.ui.theme.adapter.ThemeAdapter
 import com.theme.lambda.launcher.utils.CommonUtil
+import com.theme.lambda.launcher.widget.dialog.LoadingDialog
 
 class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
 
@@ -22,8 +23,7 @@ class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
     val viewModel by viewModels<ThemeViewModel>()
 
     val loadDialog by lazy {
-        ProgressDialog(context).apply {
-            setTitle("loading...")
+        LoadingDialog(requireContext()).apply {
             setCancelable(false)
         }
     }
