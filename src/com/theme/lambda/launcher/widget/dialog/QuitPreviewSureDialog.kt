@@ -23,10 +23,10 @@ class QuitPreviewSureDialog(context: Context) : Dialog(context, R.style.Theme_tr
 
         viewBinding.cancelTv.setOnClickListener {
             dismiss()
+            onClickContinueListen?.invoke()
         }
         viewBinding.continueTv.setOnClickListener {
             dismiss()
-            onClickContinueListen?.invoke()
         }
     }
 }

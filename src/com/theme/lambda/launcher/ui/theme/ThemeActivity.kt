@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import com.android.launcher3.databinding.ActivityThemeBinding
 import com.theme.lambda.launcher.Constants
 import com.theme.lambda.launcher.base.BaseActivity
+import com.theme.lambda.launcher.utils.StatusBarUtil
+import com.theme.lambda.launcher.utils.marginStatusBarHeight
 import com.theme.lambda.launcher.widget.adapter.LauncherFragmentAdapter
 
 class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
@@ -23,6 +25,10 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        StatusBarUtil.transparencyBar(this)
+        StatusBarUtil.setStatusBarLightMode(this.window)
+        viewBinding.containerLl.marginStatusBarHeight()
 
         viewBinding.tabTl.apply {
             Constants.sThemeTag.forEach {

@@ -1,5 +1,8 @@
 package com.theme.lambda.launcher.utils
 
+import android.content.Context
+import android.view.View
+import android.widget.FrameLayout
 import com.theme.lambda.launcher.Constants
 
 fun String.withHost(): String {
@@ -13,4 +16,10 @@ fun String.withHost(): String {
 fun String.requestTag(): String {
     if (this == "Hot") return ""
     return this
+}
+
+fun View.marginStatusBarHeight() {
+    val lp = this.layoutParams as FrameLayout.LayoutParams
+    lp.topMargin = CommonUtil.getStatusBarHeight()
+    requestLayout()
 }
