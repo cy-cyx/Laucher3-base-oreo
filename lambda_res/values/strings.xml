@@ -7,8 +7,7 @@
     <string name="weather_setting" translatable="false">Weather Setting</string>
     <string name="weather_location" translatable="false">Weather Location</string>
     <string name="temperature_unit" translatable="false">Temperature unit</string>
-    <string name="c" translatable="false">°C</string>
-    <string name="f" translatable="false">°F</string>
     <string name="reset_city_in_english" translatable="false">Reset city in English</string>
     <string name="auto_location" translatable="false">Auto-location</string>
+    <string name="weather_location_network_error" translatable="false">Unable to locate city due to network error</string>
 </resources>

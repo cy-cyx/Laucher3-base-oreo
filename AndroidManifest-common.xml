@@ -136,6 +136,15 @@
             android:name="com.theme.lambda.launcher.ui.weather.WeatherActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
+            android:name="com.theme.lambda.launcher.ui.weather.WeatherSettingsActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity
+            android:name="com.theme.lambda.launcher.ui.weather.WeatherLocationActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity
+            android:name="com.theme.lambda.launcher.ui.weather.TemperatureUnitActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity
             android:name="com.theme.lambda.launcher.ui.news.NewDetailsActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity

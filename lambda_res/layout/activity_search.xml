@@ -121,10 +121,10 @@
 
         <ImageView
             android:id="@+id/iv_delete"
-            android:layout_width="14.33dp"
-            android:layout_height="16dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginEnd="17.67dp"
-            android:src="@mipmap/x"
+            android:src="@mipmap/bin"
             app:layout_constraintBottom_toBottomOf="@id/tv_search_history"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_search_history" />
