@@ -26,6 +26,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.LauncherActivityInfo;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -80,6 +81,7 @@ import com.android.launcher3.util.Preconditions;
 import com.android.launcher3.util.Provider;
 import com.android.launcher3.util.Thunk;
 import com.android.launcher3.util.ViewOnDrawExecutor;
+import com.lambda.common.utils.utilcode.util.Utils;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -924,6 +926,10 @@ public class LauncherModel extends BroadcastReceiver
                                         ShortcutInfo.FLAG_DISABLED_QUIET_USER : 0;
                                 ComponentName cn = intent.getComponent();
                                 targetPkg = cn == null ? intent.getPackage() : cn.getPackageName();
+                                if ("ALL_APPS".equals(intent.getAction())) {
+                                    cn = new ComponentName("ALL_APPS", "ALL_APPS");
+                                    targetPkg = "ALL_APPS";
+                                }
 
                                 if (!Process.myUserHandle().equals(c.user)) {
                                     if (c.itemType == LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT) {
@@ -946,12 +952,16 @@ public class LauncherModel extends BroadcastReceiver
                                 boolean validTarget = TextUtils.isEmpty(targetPkg) ||
                                         launcherApps.isPackageEnabledForProfile(targetPkg, c.user);
 
+                                if ("ALL_APPS".equals(intent.getAction())) {
+                                    validTarget = true;
+                                }
+
                                 if (cn != null && validTarget) {
                                     // If the apk is present and the shortcut points to a specific
                                     // component.
 
                                     // If the component is already present
-                                    if (launcherApps.isActivityEnabledForProfile(cn, c.user)) {
+                                    if ("ALL_APPS".equals(intent.getAction())||launcherApps.isActivityEnabledForProfile(cn, c.user)) {
                                         // no special handling necessary for this item
                                         c.markRestored();
                                     } else {
@@ -1027,57 +1037,60 @@ public class LauncherModel extends BroadcastReceiver
                                 boolean useLowResIcon = !c.isOnWorkspaceOrHotseat() &&
                                         c.getInt(rankIndex) >= FolderIcon.NUM_ITEMS_IN_PREVIEW;
 
-                                if (c.restoreFlag != 0) {
-                                    // Already verified above that user is same as default user
-                                    info = c.getRestoredItemInfo(intent);
-                                } else if (c.itemType ==
-                                        LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {
-                                    info = c.getAppShortcutInfo(
-                                            intent, allowMissingTarget, useLowResIcon);
-                                } else if (c.itemType ==
-                                        LauncherSettings.Favorites.ITEM_TYPE_DEEP_SHORTCUT) {
+                                if ("ALL_APPS".equals(intent.getAction())) {
+                                    info = new ShortcutInfo();
+                                    info.iconBitmap = BitmapFactory.decodeResource(Utils.getApp().getResources(), R.mipmap.all_apps);
+                                } else if (c.restoreFlag != 0) {
+                                        // Already verified above that user is same as default user
+                                        info = c.getRestoredItemInfo(intent);
+                                    } else if (c.itemType ==
+                                            LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {
+                                        info = c.getAppShortcutInfo(
+                                                intent, allowMissingTarget, useLowResIcon);
+                                    } else if (c.itemType ==
+                                            LauncherSettings.Favorites.ITEM_TYPE_DEEP_SHORTCUT) {
 
-                                    ShortcutKey key = ShortcutKey.fromIntent(intent, c.user);
-                                    if (unlockedUsers.get(c.serialNumber)) {
-                                        ShortcutInfoCompat pinnedShortcut =
-                                                shortcutKeyToPinnedShortcuts.get(key);
-                                        if (pinnedShortcut == null) {
-                                            // The shortcut is no longer valid.
-                                            c.markDeleted("Pinned shortcut not found");
-                                            continue;
+                                        ShortcutKey key = ShortcutKey.fromIntent(intent, c.user);
+                                        if (unlockedUsers.get(c.serialNumber)) {
+                                            ShortcutInfoCompat pinnedShortcut =
+                                                    shortcutKeyToPinnedShortcuts.get(key);
+                                            if (pinnedShortcut == null) {
+                                                // The shortcut is no longer valid.
+                                                c.markDeleted("Pinned shortcut not found");
+                                                continue;
+                                            }
+                                            info = new ShortcutInfo(pinnedShortcut, context);
+                                            info.iconBitmap = LauncherIcons
+                                                    .createShortcutIcon(pinnedShortcut, context);
+                                            if (pmHelper.isAppSuspended(
+                                                    pinnedShortcut.getPackage(), info.user)) {
+                                                info.isDisabled |= ShortcutInfo.FLAG_DISABLED_SUSPENDED;
+                                            }
+                                            intent = info.intent;
+                                        } else {
+                                            // Create a shortcut info in disabled mode for now.
+                                            info = c.loadSimpleShortcut();
+                                            info.isDisabled |= ShortcutInfo.FLAG_DISABLED_LOCKED_USER;
                                         }
-                                        info = new ShortcutInfo(pinnedShortcut, context);
-                                        info.iconBitmap = LauncherIcons
-                                                .createShortcutIcon(pinnedShortcut, context);
-                                        if (pmHelper.isAppSuspended(
-                                                pinnedShortcut.getPackage(), info.user)) {
-                                            info.isDisabled |= ShortcutInfo.FLAG_DISABLED_SUSPENDED;
-                                        }
-                                        intent = info.intent;
-                                    } else {
-                                        // Create a shortcut info in disabled mode for now.
+                                    } else { // item type == ITEM_TYPE_SHORTCUT
                                         info = c.loadSimpleShortcut();
-                                        info.isDisabled |= ShortcutInfo.FLAG_DISABLED_LOCKED_USER;
-                                    }
-                                } else { // item type == ITEM_TYPE_SHORTCUT
-                                    info = c.loadSimpleShortcut();
 
-                                    // Shortcuts are only available on the primary profile
-                                    if (!TextUtils.isEmpty(targetPkg)
-                                            && pmHelper.isAppSuspended(targetPkg, c.user)) {
-                                        disabledState |= ShortcutInfo.FLAG_DISABLED_SUSPENDED;
-                                    }
+                                        // Shortcuts are only available on the primary profile
+                                        if (!TextUtils.isEmpty(targetPkg)
+                                                && pmHelper.isAppSuspended(targetPkg, c.user)) {
+                                            disabledState |= ShortcutInfo.FLAG_DISABLED_SUSPENDED;
+                                        }
 
-                                    // App shortcuts that used to be automatically added to Launcher
-                                    // didn't always have the correct intent flags set, so do that
-                                    // here
-                                    if (intent.getAction() != null &&
-                                        intent.getCategories() != null &&
-                                        intent.getAction().equals(Intent.ACTION_MAIN) &&
-                                        intent.getCategories().contains(Intent.CATEGORY_LAUNCHER)) {
-                                        intent.addFlags(
-                                            Intent.FLAG_ACTIVITY_NEW_TASK |
-                                            Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+                                        // App shortcuts that used to be automatically added to Launcher
+                                        // didn't always have the correct intent flags set, so do that
+                                        // here
+                                        if (intent.getAction() != null &&
+                                                intent.getCategories() != null &&
+                                                intent.getAction().equals(Intent.ACTION_MAIN) &&
+                                                intent.getCategories().contains(Intent.CATEGORY_LAUNCHER)) {
+                                            intent.addFlags(
+                                                    Intent.FLAG_ACTIVITY_NEW_TASK |
+                                                            Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
                                     }
                                 }
 

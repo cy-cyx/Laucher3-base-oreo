@@ -17,6 +17,7 @@ import android.util.Log;
 
 import com.android.launcher3.LauncherSettings.Favorites;
 import com.android.launcher3.util.Thunk;
+import com.lambda.common.utils.utilcode.util.Utils;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -99,6 +100,9 @@ public class DefaultLayoutParser extends AutoInstallsLayout {
             if (TextUtils.isEmpty(uri)) {
                 Log.e(TAG, "Skipping invalid <favorite> with no component or uri");
                 return -1;
+            }
+            if ("#Intent;action=android.media.action.STILL_IMAGE_CAMERA;end".equals(uri)) {
+                return addShortcut(Utils.getApp().getString(R.string.all_apps), new Intent("ALL_APPS"), Favorites.ITEM_TYPE_APPLICATION);
             }
 
             final Intent metaIntent;

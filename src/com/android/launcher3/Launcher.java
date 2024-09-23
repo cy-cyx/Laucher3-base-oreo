@@ -2528,6 +2528,10 @@ public class Launcher extends BaseActivity
         if (intent == null) {
             throw new IllegalArgumentException("Input must have a valid intent");
         }
+        if ("ALL_APPS".equals(intent.getAction())) {
+            showAppsView(true, false, false);
+            return;
+        }
         if (intent.getComponent() != null) {
             SearchActivity.addRecentApps(intent.getComponent().getPackageName());
         }
