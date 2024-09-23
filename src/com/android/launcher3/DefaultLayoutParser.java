@@ -102,7 +102,7 @@ public class DefaultLayoutParser extends AutoInstallsLayout {
                 return -1;
             }
             // 所有app
-            if ("#Intent;action=android.media.action.All_APP;end".equals(uri)) {
+            if ("#Intent;action=android.action.All_APP;end".equals(uri)) {
                 return addShortcut(Utils.getApp().getString(R.string.all_apps), new Intent("ALL_APPS"), Favorites.ITEM_TYPE_APPLICATION);
             }
 

@@ -71,7 +71,7 @@
         launcher:screen="6"
         launcher:x="6"
         launcher:y="0" >
-        <favorite launcher:uri="#Intent;action=android.media.action.All_APP;end" />
+        <favorite launcher:uri="#Intent;action=android.action.All_APP;end" />
     </resolve>
 
 </favorites>
