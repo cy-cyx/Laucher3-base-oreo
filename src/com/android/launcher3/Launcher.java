@@ -2532,7 +2532,7 @@ public class Launcher extends BaseActivity
             showAppsView(true, false, false);
             return;
         }
-        if (intent.getComponent() != null) {
+        if (intent.getComponent() != null && !intent.getComponent().getPackageName().equals(getPackageName())) {
             SearchActivity.addRecentApps(intent.getComponent().getPackageName());
         }
         boolean success = startActivitySafely(v, intent, item);
