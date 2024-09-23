@@ -24,34 +24,35 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/themes"
+                android:text="@string/my_themes"
                 android:textColor="#FF000000"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
             <ImageView
-                android:id="@+id/meThemeIv"
+                android:id="@+id/backIv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end|center_vertical"
-                android:layout_marginEnd="17dp"
-                android:src="@drawable/ic_my_themes" />
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="17dp"
+                android:src="@drawable/ic_back3" />
         </FrameLayout>
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabTl"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            app:tabIndicatorColor="#FF0E7FFF"
-            app:tabIndicatorFullWidth="false"
-            app:tabIndicatorHeight="4dp"
-            app:tabMode="scrollable"
-            app:tabSelectedTextColor="#FF0269DE"
-            app:tabTextColor="#FF000000" />
-
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/themeVp"
+        <com.scwang.smart.refresh.layout.SmartRefreshLayout
+            android:id="@+id/swipeRefreshSrl"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+
+            <com.scwang.smart.refresh.header.ClassicsHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/themeRv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="6dp" />
+
+        </com.scwang.smart.refresh.layout.SmartRefreshLayout>
     </LinearLayout>
 </FrameLayout>

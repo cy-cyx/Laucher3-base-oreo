@@ -67,6 +67,7 @@ class ThemeViewModel : BaseViewModel() {
                     ThemeManager.setDefaultTHemeId(resources.id)
                     context.finish()
                     context.startActivity(Intent(context, Launcher::class.java))
+                    DataRepository.insertDownLoadThemeIntoDb(resources.toThemeRes())
                 } else {
                     Toast.makeText(context, "download error!!", Toast.LENGTH_SHORT).show()
                 }

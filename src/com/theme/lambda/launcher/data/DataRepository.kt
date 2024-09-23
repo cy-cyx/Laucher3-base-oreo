@@ -1,11 +1,13 @@
 package com.theme.lambda.launcher.data
 
+import androidx.room.Room
 import com.lambda.common.http.RequestParam
 import com.theme.lambda.launcher.Constants
 import com.theme.lambda.launcher.data.api.AppApi
 import com.theme.lambda.launcher.data.http.RetrofitUtil
 import com.theme.lambda.launcher.data.model.NewResult
 import com.theme.lambda.launcher.data.model.ResResult
+import com.theme.lambda.launcher.data.model.ThemeRes
 import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.utils.TimeUtil
 import java.util.Locale
@@ -14,6 +16,14 @@ object DataRepository {
 
     private val service by lazy {
         RetrofitUtil.retrofit.create(AppApi::class.java)
+    }
+
+    private val db by lazy {
+        Room.databaseBuilder(
+            CommonUtil.appContext!!,
+            LauncherDataBase::class.java,
+            "launcher_um_db"
+        ).build()
     }
 
     suspend fun getNewData(page: Long, categories: String = ""): NewResult? {
@@ -51,5 +61,13 @@ object DataRepository {
         } catch (e: Exception) {
         }
         return null
+    }
+
+    fun insertDownLoadThemeIntoDb(themeRes: ThemeRes) {
+        db.themeResDao().insert(themeRes)
+    }
+
+    fun getDownLoadThemeRecord(): List<ThemeRes> {
+        return db.themeResDao().getDownLoadThemeResList()
     }
 }

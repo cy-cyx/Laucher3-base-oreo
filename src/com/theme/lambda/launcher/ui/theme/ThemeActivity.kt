@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import com.android.launcher3.databinding.ActivityThemeBinding
 import com.theme.lambda.launcher.Constants
 import com.theme.lambda.launcher.base.BaseActivity
+import com.theme.lambda.launcher.ui.me.MeActivity
 import com.theme.lambda.launcher.utils.StatusBarUtil
 import com.theme.lambda.launcher.utils.marginStatusBarHeight
 import com.theme.lambda.launcher.widget.adapter.LauncherFragmentAdapter
@@ -30,7 +31,7 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
         }
 
         // 预览不能通过栈顶出，故先用此方法
-        fun closeThemeActivity(){
+        fun closeThemeActivity() {
             themeActivity?.get()?.finish()
         }
     }
@@ -74,6 +75,10 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
             }
         }
         viewBinding.tabTl.setupWithViewPager(viewBinding.themeVp)
+
+        viewBinding.meThemeIv.setOnClickListener {
+            MeActivity.start(this)
+        }
     }
 
     override fun onDestroy() {

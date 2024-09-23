@@ -21,4 +21,16 @@ class Resources {
 
     @SerializedName("zip_url")
     var zipUrl: String = ""
+
+    fun toThemeRes():ThemeRes{
+        val themeRes = ThemeRes()
+        themeRes.let {
+            it.did = this.id
+            it.previewUrl = this.previewUrl
+            it.zipUrl = this.zipUrl
+            it.accessType = this.accessType
+            it.downloadDate = System.currentTimeMillis()
+        }
+        return themeRes
+    }
 }

@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.android.launcher3.ThemeManager
 import com.theme.lambda.launcher.base.BaseViewModel
+import com.theme.lambda.launcher.data.DataRepository
 import com.theme.lambda.launcher.data.model.Resources
 import com.theme.lambda.launcher.task.DownloadZipTask
 import com.theme.lambda.launcher.ui.theme.ThemeActivity
@@ -32,6 +33,7 @@ class ThemePreviewViewModel : BaseViewModel() {
                 ThemeManager.getThemeManagerIfExist()?.enterPreviewModeWithId(resources!!.id)
                 context.finish()
                 ThemeActivity.closeThemeActivity()
+                DataRepository.insertDownLoadThemeIntoDb(resources!!.toThemeRes())
             } else {
                 Toast.makeText(context, "download error!!", Toast.LENGTH_SHORT).show()
             }
