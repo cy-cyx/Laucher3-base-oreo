@@ -101,7 +101,8 @@ public class DefaultLayoutParser extends AutoInstallsLayout {
                 Log.e(TAG, "Skipping invalid <favorite> with no component or uri");
                 return -1;
             }
-            if ("#Intent;action=android.media.action.STILL_IMAGE_CAMERA;end".equals(uri)) {
+            // 所有app
+            if ("#Intent;action=android.media.action.All_APP;end".equals(uri)) {
                 return addShortcut(Utils.getApp().getString(R.string.all_apps), new Intent("ALL_APPS"), Favorites.ITEM_TYPE_APPLICATION);
             }
 
