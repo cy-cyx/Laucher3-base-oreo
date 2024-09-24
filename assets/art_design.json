@@ -1,0 +1,715 @@
+[
+  {
+    "name": "美图秀秀",
+    "package": "com.meitu.meiyancamera"
+  },
+  {
+    "name": "图虫",
+    "package": "com.tuchong"
+  },
+  {
+    "name": "PicsArt",
+    "package": "com.picsart.studio"
+  },
+  {
+    "name": "Snapseed",
+    "package": "com.niksoftware.snapseed"
+  },
+  {
+    "name": "ArtFlow",
+    "package": "com.bytestorm.artflow"
+  },
+  {
+    "name": "Krita",
+    "package": "org.kde.krita"
+  },
+  {
+    "name": "Adobe Illustrator Draw",
+    "package": "com.adobe.creativeapps.draw"
+  },
+  {
+    "name": "Adobe Photoshop Express",
+    "package": "com.adobe.psmobile"
+  },
+  {
+    "name": "Canva",
+    "package": "com.canva.editor"
+  },
+  {
+    "name": "简画",
+    "package": "com.jianhua.kanjia"
+  },
+  {
+    "name": "美图贴贴",
+    "package": "com.meitu.tietie"
+  },
+  {
+    "name": "图解",
+    "package": "com.tugoo"
+  },
+  {
+    "name": "WPS Office",
+    "package": "cn.wps.moffice_eng"
+  },
+  {
+    "name": "水彩画",
+    "package": "com.watercolor"
+  },
+  {
+    "name": "涂鸦",
+    "package": "com.tuya.tugua"
+  },
+  {
+    "name": "GIPHY",
+    "package": "com.giphy.apps.android"
+  },
+  {
+    "name": "PicSay",
+    "package": "com.shinycore.picsay"
+  },
+  {
+    "name": "Artisto",
+    "package": "com.artisto"
+  },
+  {
+    "name": "Pinterest",
+    "package": "com.pinterest"
+  },
+  {
+    "name": "SketchBook",
+    "package": "com.adsk.sketchbook"
+  },
+  {
+    "name": "艺术创意",
+    "package": "com.yishuchuangyi"
+  },
+  {
+    "name": "Pencil Sketch",
+    "package": "com.lymphatic.pencilsketch"
+  },
+  {
+    "name": "Art Editor",
+    "package": "com.arteditor"
+  },
+  {
+    "name": "Bazaart",
+    "package": "com.bazaart"
+  },
+  {
+    "name": "ToonCamera",
+    "package": "com.pancak3.tooncamera"
+  },
+  {
+    "name": "Prisma",
+    "package": "com.neuralprisma"
+  },
+  {
+    "name": "Photo Lab",
+    "package": "com.vladislav.tokarev.photolab"
+  },
+  {
+    "name": "Pixlr",
+    "package": "com.pixlr.express"
+  },
+  {
+    "name": "Fotor",
+    "package": "com.everimaging.photoeffectstudio"
+  },
+  {
+    "name": "PhotoDirector",
+    "package": "com.cyberlink.photodirector"
+  },
+  {
+    "name": "YouCam Makeup",
+    "package": "com.cyberlink.youcam Makeup"
+  },
+  {
+    "name": "Qatar Art",
+    "package": "com.qatarart"
+  },
+  {
+    "name": "Adobe Spark Post",
+    "package": "com.adobe.sparkpost"
+  },
+  {
+    "name": "Over",
+    "package": "com.over.app"
+  },
+  {
+    "name": "Collage Maker",
+    "package": "com.insta.collagemaker"
+  },
+  {
+    "name": "Art Filter",
+    "package": "com.artfilter"
+  },
+  {
+    "name": "Blogger",
+    "package": "com.google.android.apps.blogger"
+  },
+  {
+    "name": "Zyro",
+    "package": "com.zyro"
+  },
+  {
+    "name": "Kdan Mobile",
+    "package": "com.kdanmobile"
+  },
+  {
+    "name": "Articulate Storyline",
+    "package": "com.articulate"
+  },
+  {
+    "name": "Soundtrap",
+    "package": "com.soundtrap"
+  },
+  {
+    "name": "Dribbble",
+    "package": "com.dribbble.android"
+  },
+  {
+    "name": "Vont",
+    "package": "com.vont"
+  },
+  {
+    "name": "Typorama",
+    "package": "com.sizze"
+  },
+  {
+    "name": "Artflow",
+    "package": "com.artflow"
+  },
+  {
+    "name": "Graphic",
+    "package": "com.pencil.grapher"
+  },
+  {
+    "name": "Storyboard That",
+    "package": "com.storyboardthat"
+  },
+  {
+    "name": "Canva Color Palette",
+    "package": "com.canva.palette"
+  },
+  {
+    "name": "Sketch",
+    "package": "com.sketch"
+  },
+  {
+    "name": "Artland",
+    "package": "com.artland"
+  },
+  {
+    "name": "Clip Studio Paint",
+    "package": "com.clipstudio.paint"
+  },
+  {
+    "name": "Tayasui Sketches",
+    "package": "com.tayasui.sketches"
+  },
+  {
+    "name": "Bamboo Paper",
+    "package": "com.wacom.bamboopaper"
+  },
+  {
+    "name": "Concepts",
+    "package": "com.fiftythree.concepts"
+  },
+  {
+    "name": "MediBang Paint",
+    "package": "com.medibang.android.paint.mediBang"
+  },
+  {
+    "name": "PaperColor",
+    "package": "com.hua.papercolor"
+  },
+  {
+    "name": "Artboard",
+    "package": "com.artboard"
+  },
+  {
+    "name": "DesignLab",
+    "package": "com.redstone.designlab"
+  },
+  {
+    "name": "Artivive",
+    "package": "com.artivive"
+  },
+  {
+    "name": "Snapseed",
+    "package": "com.niksoftware.snapseed"
+  },
+  {
+    "name": "Paintology",
+    "package": "com.paintology"
+  },
+  {
+    "name": "PostMaker",
+    "package": "com.postmaker"
+  },
+  {
+    "name": "Watercolor Effect",
+    "package": "com.watercoloreffect"
+  },
+  {
+    "name": "Colorfy",
+    "package": "com.colorfy"
+  },
+  {
+    "name": "Tattoo Maker",
+    "package": "com.tattoo.maker"
+  },
+  {
+    "name": "Art Station",
+    "package": "com.artstation"
+  },
+  {
+    "name": "Book Creator",
+    "package": "com.bluefire.bookcreator"
+  },
+  {
+    "name": "Miro",
+    "package": "com.miro"
+  },
+  {
+    "name": "Flipgrid",
+    "package": "com.flipgrid"
+  },
+  {
+    "name": "Canva Video",
+    "package": "com.canva.video"
+  },
+  {
+    "name": "Figma",
+    "package": "com.figma"
+  },
+  {
+    "name": "Tinkercad",
+    "package": "com.tinkercad"
+  },
+  {
+    "name": "Adobe Fresco",
+    "package": "com.adobe.fresco"
+  },
+  {
+    "name": "Artflow",
+    "package": "com.artflow"
+  },
+  {
+    "name": "Color Note",
+    "package": "com.socialnmobile.dictapps.notepad.color.note"
+  },
+  {
+    "name": "Canvas",
+    "package": "com.canvas"
+  },
+  {
+    "name": "DrawPad",
+    "package": "com.drawpad"
+  },
+  {
+    "name": "Sketchbook",
+    "package": "com.adsk.sketchbook"
+  },
+  {
+    "name": "Art Snap",
+    "package": "com.art.snap"
+  },
+  {
+    "name": "Color Pop",
+    "package": "com.colorpop"
+  },
+  {
+    "name": "Pixel Art",
+    "package": "com.pixart"
+  },
+  {
+    "name": "Doodle",
+    "package": "com.doodle"
+  },
+  {
+    "name": "Manga Maker",
+    "package": "com.mangamaker"
+  },
+  {
+    "name": "Tattoo Design",
+    "package": "com.tattoo.design"
+  },
+  {
+    "name": "Design Home",
+    "package": "com.dreamhouse.designhome"
+  },
+  {
+    "name": "Adobe Illustrator Draw",
+    "package": "com.adobe.creativeapps.draw"
+  },
+  {
+    "name": "Adobe Photoshop Express",
+    "package": "com.adobe.psmobile"
+  },
+  {
+    "name": "Canva",
+    "package": "com.canva.editor"
+  },
+  {
+    "name": "PicsArt",
+    "package": "com.picsart.studio"
+  },
+  {
+    "name": "Snapseed",
+    "package": "com.niksoftware.snapseed"
+  },
+  {
+    "name": "ArtFlow",
+    "package": "com.bytestorm.artflow"
+  },
+  {
+    "name": "Krita",
+    "package": "org.kde.krita"
+  },
+  {
+    "name": "SketchBook",
+    "package": "com.adsk.sketchbook"
+  },
+  {
+    "name": "Fotor",
+    "package": "com.everimaging.photoeffectstudio"
+  },
+  {
+    "name": "Photo Lab",
+    "package": "com.vladislav.tokarev.photolab"
+  },
+  {
+    "name": "Prisma",
+    "package": "com.neuralprisma"
+  },
+  {
+    "name": "Procreate Pocket",
+    "package": "com.fiftythree.procreate"
+  },
+  {
+    "name": "Infinite Painter",
+    "package": "com.sanssouci.infinitepainter"
+  },
+  {
+    "name": "MediBang Paint",
+    "package": "com.medibang.android.paint.mediBang"
+  },
+  {
+    "name": "Artisto",
+    "package": "com.artisto"
+  },
+  {
+    "name": "YouCam Makeup",
+    "package": "com.cyberlink.youcam"
+  },
+  {
+    "name": "Colorfy",
+    "package": "com.colorfy"
+  },
+  {
+    "name": "Pixel Art",
+    "package": "com.sqisland.pixelart"
+  },
+  {
+    "name": "Tayasui Sketches",
+    "package": "com.tayasui.sketches"
+  },
+  {
+    "name": "Book Creator",
+    "package": "com.bluefire.bookcreator"
+  },
+  {
+    "name": "Draw Something",
+    "package": "com.omgpop.drawsomething"
+  },
+  {
+    "name": "Tattoo Maker",
+    "package": "com.tattoo.maker"
+  },
+  {
+    "name": "Flipaclip",
+    "package": "com.cfc.flipaclip"
+  },
+  {
+    "name": "Doodle Buddy",
+    "package": "com.doodle.buddy"
+  },
+  {
+    "name": "Artboard",
+    "package": "com.artboard"
+  },
+  {
+    "name": "PaperColor",
+    "package": "com.hua.papercolor"
+  },
+  {
+    "name": "Sketch",
+    "package": "com.sketch"
+  },
+  {
+    "name": "Vectr",
+    "package": "com.vectr"
+  },
+  {
+    "name": "DesignLab",
+    "package": "com.redstone.designlab"
+  },
+  {
+    "name": "ToonCamera",
+    "package": "com.pancak3.tooncamera"
+  },
+  {
+    "name": "Artweaver",
+    "package": "com.artweaver"
+  },
+  {
+    "name": "MediBang Paint",
+    "package": "com.medibang.android.paint.mediBang"
+  },
+  {
+    "name": "ArtRage",
+    "package": "com.artrage.android"
+  },
+  {
+    "name": "Color Palette",
+    "package": "com.colorpalette"
+  },
+  {
+    "name": "Doodle Art",
+    "package": "com.doodleart"
+  },
+  {
+    "name": "Photoscape",
+    "package": "com.photoscape"
+  },
+  {
+    "name": "Sketch Master",
+    "package": "com.sketchmaster"
+  },
+  {
+    "name": "ZBrush",
+    "package": "com.pixologic.zbrush"
+  },
+  {
+    "name": "Canva Color Palette",
+    "package": "com.canva.palette"
+  },
+  {
+    "name": "Adobe Fresco",
+    "package": "com.adobe.fresco"
+  },
+  {
+    "name": "ArtStudio",
+    "package": "com.rebeloper.artstudio"
+  },
+  {
+    "name": "Art Collage",
+    "package": "com.pnart.collage"
+  },
+  {
+    "name": "Easel.ly",
+    "package": "com.easel.ly"
+  },
+  {
+    "name": "Artistic Effects",
+    "package": "com.artistic.effects"
+  },
+  {
+    "name": "Bazaart",
+    "package": "com.bazaart"
+  },
+  {
+    "name": "Voice Drawing",
+    "package": "com.voicedrawing"
+  },
+  {
+    "name": "Pencil Sketch",
+    "package": "com.lymphatic.pencilsketch"
+  },
+  {
+    "name": "Tattoo Design",
+    "package": "com.tattoo.design"
+  },
+  {
+    "name": "Clip Studio Paint",
+    "package": "com.clipstudio.paint"
+  },
+  {
+    "name": "Photo Editor",
+    "package": "com.photolab.editor"
+  },
+  {
+    "name": "Color Palette",
+    "package": "com.color.palette"
+  },
+  {
+    "name": "Procreate",
+    "package": "com.fiftythree.procreate"
+  },
+  {
+    "name": "Vivid Art",
+    "package": "com.vividart"
+  },
+  {
+    "name": "Art Journal",
+    "package": "com.artjournal"
+  },
+  {
+    "name": "Articulate",
+    "package": "com.articulate"
+  },
+  {
+    "name": "Flipbook",
+    "package": "com.flipbook"
+  },
+  {
+    "name": "Paint Tool SAI",
+    "package": "com.painttool.sai"
+  },
+  {
+    "name": "Bamboo Paper",
+    "package": "com.wacom.bamboopaper"
+  },
+  {
+    "name": "Glitch Art",
+    "package": "com.glitchart"
+  },
+  {
+    "name": "Pixlr",
+    "package": "com.pixlr.express"
+  },
+  {
+    "name": "Artigo",
+    "package": "com.artigo"
+  },
+  {
+    "name": "Draw Now",
+    "package": "com.drawnow"
+  },
+  {
+    "name": "Feng Shui Art",
+    "package": "com.fengshuiart"
+  },
+  {
+    "name": "Mosaic Creator",
+    "package": "com.mosaiccreator"
+  },
+  {
+    "name": "Zen Brush",
+    "package": "com.zenbrush"
+  },
+  {
+    "name": "Art Filter",
+    "package": "com.artfilter"
+  },
+  {
+    "name": "Photo Collage",
+    "package": "com.photo.collage"
+  },
+  {
+    "name": "Color Splash",
+    "package": "com.colorsplash"
+  },
+  {
+    "name": "Artful",
+    "package": "com.artful"
+  },
+  {
+    "name": "Draw It",
+    "package": "com.drawit"
+  },
+  {
+    "name": "Kids Doodle",
+    "package": "com.kidsdoodle"
+  },
+  {
+    "name": "Artcraft",
+    "package": "com.artcraft"
+  },
+  {
+    "name": "Design Home",
+    "package": "com.dreamhouse.designhome"
+  },
+  {
+    "name": "Fashion Design",
+    "package": "com.fashiondesign"
+  },
+  {
+    "name": "Animation Creator",
+    "package": "com.animationcreator"
+  },
+  {
+    "name": "Art Talk",
+    "package": "com.arttalk"
+  },
+  {
+    "name": "Doodle Face",
+    "package": "com.doodleface"
+  },
+  {
+    "name": "Cartoon Art",
+    "package": "com.cartoonart"
+  },
+  {
+    "name": "Coloring Book",
+    "package": "com.coloringbook"
+  },
+  {
+    "name": "InstaSize",
+    "package": "com.instasize"
+  },
+  {
+    "name": "Art Studio Pro",
+    "package": "com.artstudio.pro"
+  },
+  {
+    "name": "Artology",
+    "package": "com.artology"
+  },
+  {
+    "name": "Graphite",
+    "package": "com.graphite"
+  },
+  {
+    "name": "Artful Mood",
+    "package": "com.artfulmood"
+  },
+  {
+    "name": "Silhouette Art",
+    "package": "com.silhouetteart"
+  },
+  {
+    "name": "Storyboard That",
+    "package": "com.storyboardthat"
+  },
+  {
+    "name": "Illustrator Draw",
+    "package": "com.adobe.illustrator"
+  },
+  {
+    "name": "Creative Cloud",
+    "package": "com.adobe.creativecloud"
+  },
+  {
+    "name": "Art House",
+    "package": "com.arthouse"
+  },
+  {
+    "name": "Art Creator",
+    "package": "com.artcreator"
+  },
+  {
+    "name": "Home Design 3D",
+    "package": "com.sweethome3d"
+  },
+  {
+    "name": "Star Maker",
+    "package": "com.starmaker"
+  },
+  {
+    "name": "Sketch Maker",
+    "package": "com.sketchmaker"
+  }
+]
+

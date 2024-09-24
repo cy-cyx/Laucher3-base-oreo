@@ -1,0 +1,662 @@
+[
+  {
+    "name": "QQ音乐",
+    "package": "com.tencent.qqmusic"
+  },
+  {
+    "name": "网易云音乐",
+    "package": "com.netease.cloudmusic"
+  },
+  {
+    "name": "酷狗音乐",
+    "package": "com.kugou.android"
+  },
+  {
+    "name": "酷我音乐",
+    "package": "com.kuwo.player"
+  },
+  {
+    "name": "虾米音乐",
+    "package": "com.xiami.android"
+  },
+  {
+    "name": "喜马拉雅",
+    "package": "com.ximalaya.ting.android"
+  },
+  {
+    "name": "百度音乐",
+    "package": "com.baidu.music"
+  },
+  {
+    "name": "音悦Tai",
+    "package": "com.yinyuetai"
+  },
+  {
+    "name": "Spotify",
+    "package": "com.spotify.music"
+  },
+  {
+    "name": "唱吧",
+    "package": "com.changba"
+  },
+  {
+    "name": "美拍",
+    "package": "com.meipai"
+  },
+  {
+    "name": "短视频",
+    "package": "com.yuanxin"
+  },
+  {
+    "name": "抖音",
+    "package": "com.ss.android.ugc.aweme"
+  },
+  {
+    "name": "快手",
+    "package": "com.kuaishou.nebula"
+  },
+  {
+    "name": "B站",
+    "package": "tv.danmaku.bili"
+  },
+  {
+    "name": "爱奇艺",
+    "package": "com.iqiyi.i18n"
+  },
+  {
+    "name": "优酷",
+    "package": "com.youku.phone"
+  },
+  {
+    "name": "腾讯视频",
+    "package": "com.tencent.qqlive"
+  },
+  {
+    "name": "搜狐视频",
+    "package": "com.sohu.sohuvideo"
+  },
+  {
+    "name": "咪咕视频",
+    "package": "com.migu.video"
+  },
+  {
+    "name": "芒果TV",
+    "package": "com.hunantv.im"
+  },
+  {
+    "name": "Vimeo",
+    "package": "com.vimeo.android.videoapp"
+  },
+  {
+    "name": "快视频",
+    "package": "com.kuaishou.kuaishou"
+  },
+  {
+    "name": "VideoShow",
+    "package": "com.xvideostudio.videoeditor"
+  },
+  {
+    "name": "无他相机",
+    "package": "com.wuta.camera"
+  },
+  {
+    "name": "美图秀秀",
+    "package": "com.meitu.meiyancamera"
+  },
+  {
+    "name": "PowerDirector",
+    "package": "com.cyberlink.powerdirector.DRA"
+  },
+  {
+    "name": "FilmoraGo",
+    "package": "com.wondershare.filmorago"
+  },
+  {
+    "name": "视频编辑器",
+    "package": "com.mvideo.editor"
+  },
+  {
+    "name": "InShot",
+    "package": "com.camerasideas.instashot"
+  },
+  {
+    "name": "剪映",
+    "package": "com.laiyifen"
+  },
+  {
+    "name": "火山小视频",
+    "package": "com.ss.android.ugc.video"
+  },
+  {
+    "name": "Facebook Watch",
+    "package": "com.facebook.katana"
+  },
+  {
+    "name": "YouTube",
+    "package": "com.google.android.youtube"
+  },
+  {
+    "name": "人人视频",
+    "package": "com.rrvideo"
+  },
+  {
+    "name": "映客",
+    "package": "com.yingke"
+  },
+  {
+    "name": "虎牙直播",
+    "package": "com.huya"
+  },
+  {
+    "name": "斗鱼直播",
+    "package": "com.douyu.android"
+  },
+  {
+    "name": "花椒直播",
+    "package": "com.huajiao"
+  },
+  {
+    "name": "微博视频",
+    "package": "com.sina.weibo.video"
+  },
+  {
+    "name": "微视",
+    "package": "com.tencent.videocloud"
+  },
+  {
+    "name": "抖音短视频",
+    "package": "com.ss.android.ugc.aweme"
+  },
+  {
+    "name": "QQ音乐小程序",
+    "package": "com.tencent.qqmusic"
+  },
+  {
+    "name": "网易云音乐小程序",
+    "package": "com.netease.cloudmusic"
+  },
+  {
+    "name": "百度网盘",
+    "package": "com.baidu.netdisk"
+  },
+  {
+    "name": "VLC",
+    "package": "org.videolan.vlc"
+  },
+  {
+    "name": "MX Player",
+    "package": "com.mxtech.videoplayer.ad"
+  },
+  {
+    "name": "PotPlayer",
+    "package": "com.kmp.player"
+  },
+  {
+    "name": "QQ影音",
+    "package": "com.tencent.qqlive"
+  },
+  {
+    "name": "全民K歌",
+    "package": "com.tencent.kge"
+  },
+  {
+    "name": "音频转换器",
+    "package": "com.audio.converter"
+  },
+  {
+    "name": "音乐播放器",
+    "package": "com.android.music"
+  },
+  {
+    "name": "搜狐影音",
+    "package": "com.sohu.sohuvideo"
+  },
+  {
+    "name": "今日头条",
+    "package": "com.ss.android.article.news"
+  },
+  {
+    "name": "快手直播",
+    "package": "com.kuaishou.nebula"
+  },
+  {
+    "name": "青少年模式",
+    "package": "com.kids"
+  },
+  {
+    "name": "手机管家",
+    "package": "com.cleanmaster.mguard"
+  },
+  {
+    "name": "英特尔音乐",
+    "package": "com.intel.music"
+  },
+  {
+    "name": "豆瓣FM",
+    "package": "com.douban.radio"
+  },
+  {
+    "name": "盘他",
+    "package": "com.pantahome"
+  },
+  {
+    "name": "微博",
+    "package": "com.sina.weibo"
+  },
+  {
+    "name": "哔哩哔哩",
+    "package": "tv.danmaku.bili"
+  },
+  {
+    "name": "云播放器",
+    "package": "com.cloudplayer"
+  },
+  {
+    "name": "不见",
+    "package": "com.notseen"
+  },
+  {
+    "name": "酸奶音乐",
+    "package": "com.suannai.music"
+  },
+  {
+    "name": "快速剪辑",
+    "package": "com.fastclip"
+  },
+  {
+    "name": "音频剪辑",
+    "package": "com.audioclip"
+  },
+  {
+    "name": "闪光音乐",
+    "package": "com.flash.music"
+  },
+  {
+    "name": "音乐墙",
+    "package": "com.musicwall"
+  },
+  {
+    "name": "专业音频",
+    "package": "com.proaudio"
+  },
+  {
+    "name": "老歌",
+    "package": "com.oldmusic"
+  },
+  {
+    "name": "国际音乐",
+    "package": "com.globalmusic"
+  },
+  {
+    "name": "享受音乐",
+    "package": "com.enjoymusic"
+  },
+  {
+    "name": "音频分享",
+    "package": "com.audioshare"
+  },
+  {
+    "name": "调音台",
+    "package": "com.mixers"
+  },
+  {
+    "name": "直播助手",
+    "package": "com.livestreamhelper"
+  },
+  {
+    "name": "视频分析",
+    "package": "com.videoanalysis"
+  },
+  {
+    "name": "声乐教练",
+    "package": "com.vocalcoach"
+  },
+  {
+    "name": "私人调音",
+    "package": "com.privateaudio"
+  },
+  {
+    "name": "摇滚音乐",
+    "package": "com.rockmusic"
+  },
+  {
+    "name": "乡村音乐",
+    "package": "com.countrymusic"
+  },
+  {
+    "name": "情感音乐",
+    "package": "com.emotionalmusic"
+  },
+  {
+    "name": "流行音乐",
+    "package": "com.popmusic"
+  },
+  {
+    "name": "音质增强",
+    "package": "com.audioenhancer"
+  },
+  {
+    "name": "节奏游戏",
+    "package": "com.rhythmgames"
+  },
+  {
+    "name": "编曲助手",
+    "package": "com.arranger"
+  },
+  {
+    "name": "音乐测试",
+    "package": "com.musictest"
+  },
+  {
+    "name": "Spotify",
+    "package": "com.spotify.music"
+  },
+  {
+    "name": "YouTube",
+    "package": "com.google.android.youtube"
+  },
+  {
+    "name": "Netflix",
+    "package": "com.netflix.mediaclient"
+  },
+  {
+    "name": "Vimeo",
+    "package": "com.vimeo.android.videoapp"
+  },
+  {
+    "name": "SoundCloud",
+    "package": "com.soundcloud.android"
+  },
+  {
+    "name": "Tidal",
+    "package": "com.tidal"
+  },
+  {
+    "name": "Pandora",
+    "package": "com.pandora.android"
+  },
+  {
+    "name": "Deezer",
+    "package": "deezer.android.app"
+  },
+  {
+    "name": "Google Play Music",
+    "package": "com.google.android.music"
+  },
+  {
+    "name": "Amazon Music",
+    "package": "com.amazon.mp3"
+  },
+  {
+    "name": "Apple Music",
+    "package": "com.apple.android.music"
+  },
+  {
+    "name": "Shazam",
+    "package": "com.shazam.android"
+  },
+  {
+    "name": "Musixmatch",
+    "package": "com.musixmatch.android.lyrify"
+  },
+  {
+    "name": "Hulu",
+    "package": "com.hulu.plus"
+  },
+  {
+    "name": "iHeartRadio",
+    "package": "com.iheartradio.controller"
+  },
+  {
+    "name": "TuneIn Radio",
+    "package": "com.tunein.player"
+  },
+  {
+    "name": "Mixcloud",
+    "package": "com.mixcloud.android"
+  },
+  {
+    "name": "Audible",
+    "package": "com.audible.application"
+  },
+  {
+    "name": "Roku",
+    "package": "com.roku.remote"
+  },
+  {
+    "name": "Plex",
+    "package": "com.plexapp.android"
+  },
+  {
+    "name": "Crunchyroll",
+    "package": "com.crunchyroll.crunchyroid"
+  },
+  {
+    "name": "Dailymotion",
+    "package": "com.dailymotion.dailymotion"
+  },
+  {
+    "name": "FuboTV",
+    "package": "com.fubo.android"
+  },
+  {
+    "name": "Zoom",
+    "package": "us.zoom.videomeetings"
+  },
+  {
+    "name": "Bigo Live",
+    "package": "sg.bigo.live"
+  },
+  {
+    "name": "Facebook Watch",
+    "package": "com.facebook.katana"
+  },
+  {
+    "name": "Twitch",
+    "package": "tv.twitch.android"
+  },
+  {
+    "name": "VLive",
+    "package": "com.vlive"
+  },
+  {
+    "name": "Mixer",
+    "package": "com.microsoft.mixer"
+  },
+  {
+    "name": "Clubhouse",
+    "package": "com.acorns.app"
+  },
+  {
+    "name": "Discord",
+    "package": "com.discord"
+  },
+  {
+    "name": "Lynda",
+    "package": "com.linkedin.android.lms"
+  },
+  {
+    "name": "BBC iPlayer",
+    "package": "bbc.mobile.iPlayer"
+  },
+  {
+    "name": "Showtime",
+    "package": "com.showtime.anywhere"
+  },
+  {
+    "name": "HBO Max",
+    "package": "com.hbo.hbonow"
+  },
+  {
+    "name": "Starz",
+    "package": "com.starz.android"
+  },
+  {
+    "name": "Sony Liv",
+    "package": "com.sonyliv"
+  },
+  {
+    "name": "Hotstar",
+    "package": "in.startv.hotstar"
+  },
+  {
+    "name": "YouTube Kids",
+    "package": "com.google.android.apps.youtube.kids"
+  },
+  {
+    "name": "Vudu",
+    "package": "com.vudu.android"
+  },
+  {
+    "name": "Peacock",
+    "package": "com.peacocktv.client"
+  },
+  {
+    "name": "FandangoNOW",
+    "package": "com.fandango"
+  },
+  {
+    "name": "HBO Go",
+    "package": "com.hbo.go"
+  },
+  {
+    "name": "CBS All Access",
+    "package": "com.cbs.allaccess"
+  },
+  {
+    "name": "Funimation",
+    "package": "com.funimation.funimation"
+  },
+  {
+    "name": "Crackle",
+    "package": "com.crackle.android"
+  },
+  {
+    "name": "MyAnimeList",
+    "package": "com.myanimelist.android"
+  },
+  {
+    "name": "AnimeLab",
+    "package": "com.animelab"
+  },
+  {
+    "name": "Sony Music",
+    "package": "com.sony.music"
+  },
+  {
+    "name": "Twitch Prime",
+    "package": "com.amazon.twitch"
+  },
+  {
+    "name": "NPR One",
+    "package": "org.npr.android.news"
+  },
+  {
+    "name": "RadioPublic",
+    "package": "com.radiopublic.android"
+  },
+  {
+    "name": "Castbox",
+    "package": "com.castbox.fm"
+  },
+  {
+    "name": "Pocket Casts",
+    "package": "au.com.shiftyjelly.pocketcasts"
+  },
+  {
+    "name": "Overcast",
+    "package": "com.marco.overcast"
+  },
+  {
+    "name": "Podcast Addict",
+    "package": "com.bambuna.podcastaddict"
+  },
+  {
+    "name": "Mixlr",
+    "package": "com.mixlr.android"
+  },
+  {
+    "name": "Boomplay",
+    "package": "com.boomplay.player"
+  },
+  {
+    "name": "ReverbNation",
+    "package": "com.reverbnation.mobile"
+  },
+  {
+    "name": "Bandcamp",
+    "package": "com.bandcamp.android"
+  },
+  {
+    "name": "DistroKid",
+    "package": "com.distrokid.android"
+  },
+  {
+    "name": "Triller",
+    "package": "com.triller"
+  },
+  {
+    "name": "TikTok",
+    "package": "com.zhiliaoapp.musically"
+  },
+  {
+    "name": "VivaVideo",
+    "package": "com.quvideo.xiaoying"
+  },
+  {
+    "name": "KineMaster",
+    "package": "com.nexstreaming.app.kinemasterfree"
+  },
+  {
+    "name": "FilmoraGo",
+    "package": "com.wondershare.filmorago"
+  },
+  {
+    "name": "VideoShow",
+    "package": "com.xvideostudio.videoeditor"
+  },
+  {
+    "name": "Funimate",
+    "package": "com.funimate.funimate"
+  },
+  {
+    "name": "Splice",
+    "package": "com.bannister.spliceforandroid"
+  },
+  {
+    "name": "Magisto",
+    "package": "com.magisto"
+  },
+  {
+    "name": "Quik",
+    "package": "com.goPro.smarty"
+  },
+  {
+    "name": "WaveEditor",
+    "package": "wavestudio.editor"
+  },
+  {
+    "name": "Adobe Premiere Rush",
+    "package": "com.adobe.premiererush"
+  },
+  {
+    "name": "Animoto",
+    "package": "com.animoto"
+  },
+  {
+    "name": "PowerDirector",
+    "package": "com.cyberlink.powerdirector.DRA"
+  },
+  {
+    "name": "Soundtrap",
+    "package": "com.soundtrap.android"
+  },
+  {
+    "name": "BandLab",
+    "package": "com.bandlab.bandlab"
+  },
+  {
+    "name": "Smule",
+    "package": "com.smule.singandroid"
+  }
+]

@@ -96,14 +96,33 @@ public class DefaultLayoutParser extends AutoInstallsLayout {
 
         @Override
         protected long invalidPackageOrClass(XmlResourceParser parser) {
-            final String uri = getAttributeValue(parser, ATTR_URI);
+            String uri = getAttributeValue(parser, ATTR_URI);
             if (TextUtils.isEmpty(uri)) {
                 Log.e(TAG, "Skipping invalid <favorite> with no component or uri");
                 return -1;
             }
-            // 所有app
-            if ("#Intent;action=android.action.All_APP;end".equals(uri)) {
+            if ("#Intent;action=android.intent.action.MAIN;category=android.intent.category.APP_MESSAGING;end".equals(uri)) {
+                uri = "#Intent;action=android.intent.action.MAIN;category=android.intent.category.APP_CONTACTS;end";
+            } else if ("#Intent;action=android.intent.action.MAIN;category=android.intent.category.APP_BROWSER;end".equals(uri)) {
+                uri = "#Intent;action=android.intent.action.MAIN;category=android.intent.category.APP_MESSAGING;end";
+            } else if ("#Intent;action=android.media.action.STILL_IMAGE_CAMERA;end".equals(uri)) {
                 return addShortcut(Utils.getApp().getString(R.string.all_apps), new Intent("ALL_APPS"), Favorites.ITEM_TYPE_APPLICATION);
+            } else if ("#Intent;action=android.intent.action.MAIN;category=android.intent.category.APP_EMAIL;end".equals(uri)) {
+                return addShortcut(Utils.getApp().getString(R.string.store), new Intent("STORE"), Favorites.ITEM_TYPE_FOLDER);
+            } else if ("#Intent;action=android.intent.action.MAIN;category=android.intent.category.APP_GALLERY;end".equals(uri)) {
+                return addShortcut(Utils.getApp().getString(R.string.games), new Intent("GAMES"), Favorites.ITEM_TYPE_FOLDER);
+            } else if ("#Intent;action=android.intent.action.MAIN;category=android.intent.category.APP_MARKET;end".equals(uri)) {
+                return addShortcut(Utils.getApp().getString(R.string.utilities), new Intent("UTILITIES"), Favorites.ITEM_TYPE_FOLDER);
+            } else if ("#Intent;action=ART_DESIGN;end".equals(uri)) {
+                return addShortcut(Utils.getApp().getString(R.string.art_design), new Intent("ART_DESIGN"), Favorites.ITEM_TYPE_FOLDER);
+            } else if ("#Intent;action=HEALTH;end".equals(uri)) {
+                return addShortcut(Utils.getApp().getString(R.string.health), new Intent("HEALTH"), Favorites.ITEM_TYPE_FOLDER);
+            } else if ("#Intent;action=SOCIAL;end".equals(uri)) {
+                return addShortcut(Utils.getApp().getString(R.string.social), new Intent("SOCIAL"), Favorites.ITEM_TYPE_FOLDER);
+            } else if ("#Intent;action=SHOPPING;end".equals(uri)) {
+                return addShortcut(Utils.getApp().getString(R.string.shopping), new Intent("SHOPPING"), Favorites.ITEM_TYPE_FOLDER);
+            } else if ("#Intent;action=MUSIC_VIDEO;end".equals(uri)) {
+                return addShortcut(Utils.getApp().getString(R.string.music_video), new Intent("MUSIC_VIDEO"), Favorites.ITEM_TYPE_FOLDER);
             }
 
             final Intent metaIntent;

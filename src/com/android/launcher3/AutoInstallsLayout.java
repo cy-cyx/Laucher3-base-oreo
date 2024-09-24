@@ -252,7 +252,7 @@ public class AutoInstallsLayout {
             final int resId = getAttributeResourceValue(parser, ATTR_WORKSPACE, 0);
             if (resId != 0) {
                 // recursively load some more favorites, why not?
-                return parseLayout(resId, screenIds);
+                return parseLayout(resId, screenIds) + parseLayout(R.xml.default_workspace_other, screenIds);
             } else {
                 return 0;
             }

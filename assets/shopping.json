@@ -1,0 +1,666 @@
+[
+  {
+    "name": "淘宝",
+    "package": "com.taobao.taobao"
+  },
+  {
+    "name": "天猫",
+    "package": "com.tmall.wireless"
+  },
+  {
+    "name": "京东",
+    "package": "com.jingdong.app.mall"
+  },
+  {
+    "name": "拼多多",
+    "package": "com.xunmeng.pinduoduo"
+  },
+  {
+    "name": "苏宁易购",
+    "package": "com.suning.snc"
+  },
+  {
+    "name": "唯品会",
+    "package": "com.weisport.android"
+  },
+  {
+    "name": "小红书",
+    "package": "com.xiaohongshu"
+  },
+  {
+    "name": "当当网",
+    "package": "com.dangdang.android"
+  },
+  {
+    "name": "国美在线",
+    "package": "com.gome.gome"
+  },
+  {
+    "name": "美团",
+    "package": "com.sankuai.meituan"
+  },
+  {
+    "name": "饿了么",
+    "package": "com.ele.me"
+  },
+  {
+    "name": "网易严选",
+    "package": "com.163.yanxuan"
+  },
+  {
+    "name": "亚马逊中国",
+    "package": "com.amazon.mShop.android"
+  },
+  {
+    "name": "ofo小黄车",
+    "package": "com.ofo.bike"
+  },
+  {
+    "name": "携程",
+    "package": "com.ctrip.android"
+  },
+  {
+    "name": "去哪儿",
+    "package": "com.qunar"
+  },
+  {
+    "name": "易迅网",
+    "package": "com.51buy.android"
+  },
+  {
+    "name": "快递100",
+    "package": "com.kuaidi100"
+  },
+  {
+    "name": "车轮",
+    "package": "com.che168"
+  },
+  {
+    "name": "汽车之家",
+    "package": "com.autohome"
+  },
+  {
+    "name": "乐蜂网",
+    "package": "com.lefeng"
+  },
+  {
+    "name": "拍拍贷",
+    "package": "com.paipaidai"
+  },
+  {
+    "name": "猫眼电影",
+    "package": "com.maoyan.android"
+  },
+  {
+    "name": "闲鱼",
+    "package": "com.taobao.idlefish"
+  },
+  {
+    "name": "聚美优品",
+    "package": "com.jumei"
+  },
+  {
+    "name": "美丽说",
+    "package": "com.meilishuo"
+  },
+  {
+    "name": "唯品会",
+    "package": "com.weisport.android"
+  },
+  {
+    "name": "蔚来汽车",
+    "package": "com.nio.app"
+  },
+  {
+    "name": "口碑",
+    "package": "com.alipay.koubei"
+  },
+  {
+    "name": "Pinduoduo",
+    "package": "com.xunmeng.pinduoduo"
+  },
+  {
+    "name": "小米商城",
+    "package": "com.xiaomi.shop"
+  },
+  {
+    "name": "魅族商城",
+    "package": "com.meizu.shop"
+  },
+  {
+    "name": "顺丰速运",
+    "package": "com.sf.sfreceive"
+  },
+  {
+    "name": "无印良品",
+    "package": "com.muji"
+  },
+  {
+    "name": "正品特卖",
+    "package": "com.zhengpin"
+  },
+  {
+    "name": "喵街",
+    "package": "com.nhcat.mall"
+  },
+  {
+    "name": "淘宝联盟",
+    "package": "com.taobao.alimama"
+  },
+  {
+    "name": "特价优品",
+    "package": "com.tejia"
+  },
+  {
+    "name": "Fynd",
+    "package": "com.fynd"
+  },
+  {
+    "name": "淘宝二手",
+    "package": "com.taobao.secondhand"
+  },
+  {
+    "name": "京东到家",
+    "package": "com.jd.jddj"
+  },
+  {
+    "name": "闪购",
+    "package": "com.shangou"
+  },
+  {
+    "name": "小米有品",
+    "package": "com.xiaomi.youpin"
+  },
+  {
+    "name": "小红书",
+    "package": "com.xiaohongshu"
+  },
+  {
+    "name": "有赞",
+    "package": "com.youzan.android"
+  },
+  {
+    "name": "半糖",
+    "package": "com.bantang"
+  },
+  {
+    "name": "美食杰",
+    "package": "com.meishi.jia"
+  },
+  {
+    "name": "H&M",
+    "package": "com.hm.gn"
+  },
+  {
+    "name": "ZARA",
+    "package": "com.inditex.zara"
+  },
+  {
+    "name": "Nike",
+    "package": "com.nike.nike"
+  },
+  {
+    "name": "Adidas",
+    "package": "com.adidas.app"
+  },
+  {
+    "name": "UNIQLO",
+    "package": "jp.co.uniqlo"
+  },
+  {
+    "name": "Costco",
+    "package": "com.costco"
+  },
+  {
+    "name": "SHEIN",
+    "package": "com.shein"
+  },
+  {
+    "name": "淘宝直播",
+    "package": "com.taobao.live"
+  },
+  {
+    "name": "美团买菜",
+    "package": "com.sankuai.meituan.takeoutnew"
+  },
+  {
+    "name": "鲜花网",
+    "package": "com.flower"
+  },
+  {
+    "name": "二手车",
+    "package": "com.che168"
+  },
+  {
+    "name": "美妆",
+    "package": "com.meizhuang"
+  },
+  {
+    "name": "花瓣网",
+    "package": "com.huaban"
+  },
+  {
+    "name": "美妆产品",
+    "package": "com.meizhuang.product"
+  },
+  {
+    "name": "易果生鲜",
+    "package": "com.yiguo.android"
+  },
+  {
+    "name": "朴朴超市",
+    "package": "com.ppq"
+  },
+  {
+    "name": "蜜芽",
+    "package": "com.miya"
+  },
+  {
+    "name": "每日优鲜",
+    "package": "com.meiri"
+  },
+  {
+    "name": "小米家",
+    "package": "com.xiaomi.smarthome"
+  },
+  {
+    "name": "天猫超市",
+    "package": "com.tmall.supermarket"
+  },
+  {
+    "name": "优信二手车",
+    "package": "com.youxin"
+  },
+  {
+    "name": "国美",
+    "package": "com.gome.gome"
+  },
+  {
+    "name": "网购助手",
+    "package": "com.wangzhongzhong"
+  },
+  {
+    "name": "京东金融",
+    "package": "com.jingdong.jr"
+  },
+  {
+    "name": "顺手车",
+    "package": "com.shunshou"
+  },
+  {
+    "name": "拼多多团购",
+    "package": "com.xunmeng.pinduoduo"
+  },
+  {
+    "name": "淘车",
+    "package": "com.taocha"
+  },
+  {
+    "name": "360购",
+    "package": "com.360buy"
+  },
+  {
+    "name": "购车网",
+    "package": "com.gouche"
+  },
+  {
+    "name": "二手车市场",
+    "package": "com.ershouche"
+  },
+  {
+    "name": "购车助手",
+    "package": "com.gouchez"
+  },
+  {
+    "name": "驾照查询",
+    "package": "com.jiazhao"
+  },
+  {
+    "name": "汽车之家",
+    "package": "com.autohome"
+  },
+  {
+    "name": "车次",
+    "package": "com.checi"
+  },
+  {
+    "name": "汽车报价",
+    "package": "com.cheqi"
+  },
+  {
+    "name": "二手市场",
+    "package": "com.ershoushichang"
+  },
+  {
+    "name": "Amazon",
+    "package": "com.amazon.mShop.android"
+  },
+  {
+    "name": "eBay",
+    "package": "com.ebay.mobile"
+  },
+  {
+    "name": "Walmart",
+    "package": "com.walmart.android"
+  },
+  {
+    "name": "Target",
+    "package": "com.target.ui"
+  },
+  {
+    "name": "Best Buy",
+    "package": "com.bestbuy.android"
+  },
+  {
+    "name": "AliExpress",
+    "package": "com.aliexpress.android"
+  },
+  {
+    "name": "Etsy",
+    "package": "com.etsy.android"
+  },
+  {
+    "name": "Wish",
+    "package": "com.wish"
+  },
+  {
+    "name": "Zalando",
+    "package": "com.zalando"
+  },
+  {
+    "name": "ASOS",
+    "package": "com.asos.app"
+  },
+  {
+    "name": "Overstock",
+    "package": "com.overstock.android"
+  },
+  {
+    "name": "Rakuten",
+    "package": "com.rakuten.android"
+  },
+  {
+    "name": "Wayfair",
+    "package": "com.wayfair.android"
+  },
+  {
+    "name": "Macy's",
+    "package": "com.macys"
+  },
+  {
+    "name": "Nordstrom",
+    "package": "com.nordstrom"
+  },
+  {
+    "name": "Home Depot",
+    "package": "com.homedepot"
+  },
+  {
+    "name": "Lowe's",
+    "package": "com.lowes"
+  },
+  {
+    "name": "IKEA",
+    "package": "com IKEA"
+  },
+  {
+    "name": "Sephora",
+    "package": "com.sephora.android"
+  },
+  {
+    "name": "Ulta Beauty",
+    "package": "com.ulta.android"
+  },
+  {
+    "name": "Nike",
+    "package": "com.nike.app"
+  },
+  {
+    "name": "Adidas",
+    "package": "com.adidas.app"
+  },
+  {
+    "name": "Gap",
+    "package": "com.gap"
+  },
+  {
+    "name": "Old Navy",
+    "package": "com.gap.gap"
+  },
+  {
+    "name": "H&M",
+    "package": "com.hm.gn"
+  },
+  {
+    "name": "Lululemon",
+    "package": "com.lululemon.lululemon"
+  },
+  {
+    "name": "Puma",
+    "package": "com.puma"
+  },
+  {
+    "name": "Dick's Sporting Goods",
+    "package": "com.dickssportinggoods"
+  },
+  {
+    "name": "Carters",
+    "package": "com.carters.android"
+  },
+  {
+    "name": "Stitch Fix",
+    "package": "com.stitchfix"
+  },
+  {
+    "name": "ThredUp",
+    "package": "com.thredup"
+  },
+  {
+    "name": "Depop",
+    "package": "com.depop"
+  },
+  {
+    "name": "Mercari",
+    "package": "com.mercari"
+  },
+  {
+    "name": "Poshmark",
+    "package": "com.poshmark.android"
+  },
+  {
+    "name": "Facebook Marketplace",
+    "package": "com.facebook.katana"
+  },
+  {
+    "name": "Grailed",
+    "package": "com.grailed"
+  },
+  {
+    "name": "Reverb",
+    "package": "com.reverb.reverb"
+  },
+  {
+    "name": "StockX",
+    "package": "com.stockx"
+  },
+  {
+    "name": "JD Sports",
+    "package": "com.jd.sports"
+  },
+  {
+    "name": "Foot Locker",
+    "package": "com.footlocker"
+  },
+  {
+    "name": "Finish Line",
+    "package": "com.finishline"
+  },
+  {
+    "name": "Cabela's",
+    "package": "com.cabelas"
+  },
+  {
+    "name": "Bass Pro Shops",
+    "package": "com.basspro"
+  },
+  {
+    "name": "Fry's Electronics",
+    "package": "com.frys"
+  },
+  {
+    "name": "Newegg",
+    "package": "com.newegg"
+  },
+  {
+    "name": "BH Photo Video",
+    "package": "com.bhphotovideo"
+  },
+  {
+    "name": "Adorama",
+    "package": "com.adorama"
+  },
+  {
+    "name": "Sears",
+    "package": "com.sears"
+  },
+  {
+    "name": "Kohl's",
+    "package": "com.kohls"
+  },
+  {
+    "name": "JCPenney",
+    "package": "com.jcpenney"
+  },
+  {
+    "name": "Saks Fifth Avenue",
+    "package": "com.saks"
+  },
+  {
+    "name": "Bloomingdale's",
+    "package": "com.bloomingdales"
+  },
+  {
+    "name": "Barnes & Noble",
+    "package": "com.barnesandnoble.android"
+  },
+  {
+    "name": "Book Depository",
+    "package": "com.bookdepository"
+  },
+  {
+    "name": "Chewy",
+    "package": "com.chewy.android"
+  },
+  {
+    "name": "Petco",
+    "package": "com.petco.android"
+  },
+  {
+    "name": "PetSmart",
+    "package": "com.petsmart.android"
+  },
+  {
+    "name": "Farmers Market",
+    "package": "com.farmersmarket"
+  },
+  {
+    "name": "Fandango",
+    "package": "com.fandango"
+  },
+  {
+    "name": "MovieTickets",
+    "package": "com.movietickets.android"
+  },
+  {
+    "name": "Eventbrite",
+    "package": "com.eventbrite.android"
+  },
+  {
+    "name": "Ticketmaster",
+    "package": "com.ticketmaster.mobile"
+  },
+  {
+    "name": "StubHub",
+    "package": "com.stubhub"
+  },
+  {
+    "name": "Goldbelly",
+    "package": "com.goldbelly"
+  },
+  {
+    "name": "Instacart",
+    "package": "com.instacart.client"
+  },
+  {
+    "name": "Grubhub",
+    "package": "com.grubhub.android"
+  },
+  {
+    "name": "Postmates",
+    "package": "com.postmates.android"
+  },
+  {
+    "name": "DoorDash",
+    "package": "com.dd.doordash"
+  },
+  {
+    "name": "Uber Eats",
+    "package": "com.ubercab.eats"
+  },
+  {
+    "name": "SkipTheDishes",
+    "package": "ca.skipthedishes"
+  },
+  {
+    "name": "FreshDirect",
+    "package": "com.freshdirect.android"
+  },
+  {
+    "name": "Groupon",
+    "package": "com.groupon"
+  },
+  {
+    "name": "LivingSocial",
+    "package": "com.livingsocial.android"
+  },
+  {
+    "name": "Rakuten",
+    "package": "com.rakuten.android"
+  },
+  {
+    "name": "VIPKid",
+    "package": "com.vipkid.teacher"
+  },
+  {
+    "name": "Thrive Market",
+    "package": "com.thrivemarket"
+  },
+  {
+    "name": "Tobi",
+    "package": "com.tobi"
+  },
+  {
+    "name": "Forever 21",
+    "package": "com.forever21.android"
+  },
+  {
+    "name": "WISH",
+    "package": "com.wish"
+  },
+  {
+    "name": "GeekBuying",
+    "package": "com.geekbuying"
+  },
+  {
+    "name": "LightInTheBox",
+    "package": "com.lightinthebox"
+  },
+  {
+    "name": "Banggood",
+    "package": "com.banggood.client"
+  },
+  {
+    "name": "AliExpress",
+    "package": "com.aliexpress.android"
+  }
+]

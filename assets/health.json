@@ -1,0 +1,746 @@
+[
+  {
+    "name": "Keep",
+    "package": "com.keeplive"
+  },
+  {
+    "name": "咕咚",
+    "package": "com.gofit"
+  },
+  {
+    "name": "小米运动",
+    "package": "com.xiaomi.sports"
+  },
+  {
+    "name": "Fitbit",
+    "package": "com.fitbit.FitbitMobile"
+  },
+  {
+    "name": "悦跑圈",
+    "package": "com.yuepao"
+  },
+  {
+    "name": "乐心健康",
+    "package": "com.leseek"
+  },
+  {
+    "name": "华为健康",
+    "package": "com.huawei.health"
+  },
+  {
+    "name": "悦动圈",
+    "package": "com.yuandong"
+  },
+  {
+    "name": "步多多",
+    "package": "com.buduo"
+  },
+  {
+    "name": "运动宝",
+    "package": "com.sport.bao"
+  },
+  {
+    "name": "运动管家",
+    "package": "com.yundongguanjia"
+  },
+  {
+    "name": "小米体重",
+    "package": "com.xiaomi.weight"
+  },
+  {
+    "name": "动动健身",
+    "package": "com.dongdong.fitness"
+  },
+  {
+    "name": "Nike Training Club",
+    "package": "com.nike.ntc"
+  },
+  {
+    "name": "跑步精灵",
+    "package": "com.runkeeper"
+  },
+  {
+    "name": "健身世界",
+    "package": "com.jianshenworld"
+  },
+  {
+    "name": "Keep跑步",
+    "package": "com.keep.run"
+  },
+  {
+    "name": "悦跑",
+    "package": "com.yuepao"
+  },
+  {
+    "name": "美丽健身",
+    "package": "com.meili.jianshen"
+  },
+  {
+    "name": "FitTime",
+    "package": "com.fittime"
+  },
+  {
+    "name": "人人健身",
+    "package": "com.renguo.fitness"
+  },
+  {
+    "name": "健康管理",
+    "package": "com.health.management"
+  },
+  {
+    "name": "体重管理",
+    "package": "com.weight.management"
+  },
+  {
+    "name": "家庭医生",
+    "package": "com.familydoctor"
+  },
+  {
+    "name": "我的运动",
+    "package": "com.wodong"
+  },
+  {
+    "name": "慢跑者",
+    "package": "com.slowrunner"
+  },
+  {
+    "name": "自助健身",
+    "package": "com.selfhelp.fitness"
+  },
+  {
+    "name": "健康助手",
+    "package": "com.health.assistant"
+  },
+  {
+    "name": "运动记录",
+    "package": "com.sport.record"
+  },
+  {
+    "name": "健身计划",
+    "package": "com.fitness.plan"
+  },
+  {
+    "name": "健身指导",
+    "package": "com.fitness.guide"
+  },
+  {
+    "name": "力量训练",
+    "package": "com.strength.training"
+  },
+  {
+    "name": "每日步数",
+    "package": "com.daily.steps"
+  },
+  {
+    "name": "运动达人",
+    "package": "com.sport.expert"
+  },
+  {
+    "name": "健康家",
+    "package": "com.health.home"
+  },
+  {
+    "name": "跑步助手",
+    "package": "com.run.assistant"
+  },
+  {
+    "name": "家庭健身",
+    "package": "com.family.fitness"
+  },
+  {
+    "name": "瑜伽教练",
+    "package": "com.yoga.coach"
+  },
+  {
+    "name": "健身记录",
+    "package": "com.fitness.record"
+  },
+  {
+    "name": "营养食谱",
+    "package": "com.nutrition.recipe"
+  },
+  {
+    "name": "健身视频",
+    "package": "com.fitness.video"
+  },
+  {
+    "name": "运动社交",
+    "package": "com.sport.social"
+  },
+  {
+    "name": "健康检测",
+    "package": "com.health.check"
+  },
+  {
+    "name": "体重记录",
+    "package": "com.weight.record"
+  },
+  {
+    "name": "运动资讯",
+    "package": "com.sport.news"
+  },
+  {
+    "name": "健康日记",
+    "package": "com.health.diary"
+  },
+  {
+    "name": "健身社区",
+    "package": "com.fitness.community"
+  },
+  {
+    "name": "健康指南",
+    "package": "com.health.guide"
+  },
+  {
+    "name": "每日健身",
+    "package": "com.daily.fitness"
+  },
+  {
+    "name": "运动提醒",
+    "package": "com.sport.reminder"
+  },
+  {
+    "name": "健康计划",
+    "package": "com.health.plan"
+  },
+  {
+    "name": "运动日历",
+    "package": "com.sport.calendar"
+  },
+  {
+    "name": "运动追踪",
+    "package": "com.sport.tracker"
+  },
+  {
+    "name": "步数统计",
+    "package": "com.steps.statistic"
+  },
+  {
+    "name": "健康数据",
+    "package": "com.health.data"
+  },
+  {
+    "name": "健康评估",
+    "package": "com.health.assessment"
+  },
+  {
+    "name": "运动打卡",
+    "package": "com.sport.checkin"
+  },
+  {
+    "name": "健身监测",
+    "package": "com.fitness.monitor"
+  },
+  {
+    "name": "我的健康",
+    "package": "com.my.health"
+  },
+  {
+    "name": "运动管理",
+    "package": "com.sport.management"
+  },
+  {
+    "name": "运动计划",
+    "package": "com.sport.schedule"
+  },
+  {
+    "name": "身体测量",
+    "package": "com.body.measure"
+  },
+  {
+    "name": "饮食管理",
+    "package": "com.diet.management"
+  },
+  {
+    "name": "健身教练",
+    "package": "com.fitness.coach"
+  },
+  {
+    "name": "运动竞技",
+    "package": "com.sport.competition"
+  },
+  {
+    "name": "健身目标",
+    "package": "com.fitness.goal"
+  },
+  {
+    "name": "运动健康",
+    "package": "com.sport.health"
+  },
+  {
+    "name": "健身挑战",
+    "package": "com.fitness.challenge"
+  },
+  {
+    "name": "健康记录",
+    "package": "com.health.record"
+  },
+  {
+    "name": "慢跑助手",
+    "package": "com.slowrun.assistant"
+  },
+  {
+    "name": "运动追踪器",
+    "package": "com.sport.tracker"
+  },
+  {
+    "name": "体重管理器",
+    "package": "com.weight.manager"
+  },
+  {
+    "name": "健康活动",
+    "package": "com.health.activity"
+  },
+  {
+    "name": "健身食谱",
+    "package": "com.fitness.recipe"
+  },
+  {
+    "name": "身体健康",
+    "package": "com.body.health"
+  },
+  {
+    "name": "运动测量",
+    "package": "com.sport.measure"
+  },
+  {
+    "name": "日常锻炼",
+    "package": "com.daily.exercise"
+  },
+  {
+    "name": "健身追踪",
+    "package": "com.fitness.tracking"
+  },
+  {
+    "name": "运动分析",
+    "package": "com.sport.analysis"
+  },
+  {
+    "name": "运动效果",
+    "package": "com.sport.effect"
+  },
+  {
+    "name": "健身伙伴",
+    "package": "com.fitness.partner"
+  },
+  {
+    "name": "运动计划表",
+    "package": "com.sport.schedule"
+  },
+  {
+    "name": "运动体验",
+    "package": "com.sport.experience"
+  },
+  {
+    "name": "健身图谱",
+    "package": "com.fitness.chart"
+  },
+  {
+    "name": "健康知识",
+    "package": "com.health.knowledge"
+  },
+  {
+    "name": "健身测评",
+    "package": "com.fitness.assessment"
+  },
+  {
+    "name": "运动营养",
+    "package": "com.sport.nutrition"
+  },
+  {
+    "name": "每日锻炼",
+    "package": "com.daily.workout"
+  },
+  {
+    "name": "慢跑记录",
+    "package": "com.slowrun.record"
+  },
+  {
+    "name": "健身计划器",
+    "package": "com.fitness.planner"
+  },
+  {
+    "name": "健身课表",
+    "package": "com.fitness.classschedule"
+  },
+  {
+    "name": "健康测量",
+    "package": "com.health.measure"
+  },
+  {
+    "name": "运动社区",
+    "package": "com.sport.community"
+  },
+  {
+    "name": "健康分享",
+    "package": "com.health.share"
+  },
+  {
+    "name": "健身助手",
+    "package": "com.fitness.helper"
+  },
+  {
+    "name": "运动健康圈",
+    "package": "com.sport.healthcircle"
+  },
+  {
+    "name": "MyFitnessPal",
+    "package": "com.myfitnesspal.android"
+  },
+  {
+    "name": "Fitbit",
+    "package": "com.fitbit.FitbitMobile"
+  },
+  {
+    "name": "Strava",
+    "package": "com.strava"
+  },
+  {
+    "name": "Nike Training Club",
+    "package": "com.nike.ntc"
+  },
+  {
+    "name": "Runkeeper",
+    "package": "com.fitnesskeeper.runkeeper.pro"
+  },
+  {
+    "name": "Google Fit",
+    "package": "com.google.android.apps.fitness"
+  },
+  {
+    "name": "Samsung Health",
+    "package": "com.samsung.android.health"
+  },
+  {
+    "name": "Lose It!",
+    "package": "com.trimble.losingit"
+  },
+  {
+    "name": "8fit",
+    "package": "com.eightfit.app"
+  },
+  {
+    "name": "JEFIT",
+    "package": "com.jefitapp"
+  },
+  {
+    "name": "Sworkit",
+    "package": "com.sworkitapp"
+  },
+  {
+    "name": "Endomondo",
+    "package": "com.endomondo.android"
+  },
+  {
+    "name": "Pacer",
+    "package": "com.pacer.android"
+  },
+  {
+    "name": "MapMyRun",
+    "package": "com.mapmyfitness.mapmyrun"
+  },
+  {
+    "name": "Runtastic",
+    "package": "com.runtastic.android"
+  },
+  {
+    "name": "Zombies, Run!",
+    "package": "com.digitalorange.zombiesrun"
+  },
+  {
+    "name": "FitOn",
+    "package": "com.fitonapp"
+  },
+  {
+    "name": "Yoga for Beginners",
+    "package": "com.fitness22.yoga"
+  },
+  {
+    "name": "Home Workout",
+    "package": "com.lemonteaworks.homeworkout"
+  },
+  {
+    "name": "HealthifyMe",
+    "package": "com.healthifyme.app"
+  },
+  {
+    "name": "Lifesum",
+    "package": "com.lifesum.app"
+  },
+  {
+    "name": "Sleep Cycle",
+    "package": "com.northcube.sleepcycle"
+  },
+  {
+    "name": "Calm",
+    "package": "com.calm.android"
+  },
+  {
+    "name": "Headspace",
+    "package": "com.getsomeheadspace.android"
+  },
+  {
+    "name": "Fitify",
+    "package": "com.fitifyapp"
+  },
+  {
+    "name": "Peloton",
+    "package": "com.onepeloton.app"
+  },
+  {
+    "name": "StrongLifts",
+    "package": "com.stronglifts"
+  },
+  {
+    "name": "Daily Yoga",
+    "package": "com.dailyyoga.app"
+  },
+  {
+    "name": "BodySpace",
+    "package": "com.bodybuilding.bodyspace"
+  },
+  {
+    "name": "Centr",
+    "package": "com.centr"
+  },
+  {
+    "name": "Walkr",
+    "package": "com.walkr"
+  },
+  {
+    "name": "Fitbod",
+    "package": "com.fitbod.android"
+  },
+  {
+    "name": "Fitness Buddy",
+    "package": "com.fitnessbuddy"
+  },
+  {
+    "name": "Runkeeper",
+    "package": "com.fitnesskeeper.runkeeper.pro"
+  },
+  {
+    "name": "Gymshark",
+    "package": "com.gymshark.app"
+  },
+  {
+    "name": "Pocket Yoga",
+    "package": "com.lmkr.pocketyoga"
+  },
+  {
+    "name": "Sworkit",
+    "package": "com.sworkitapp"
+  },
+  {
+    "name": "ASICS Runkeeper",
+    "package": "com.asics.runkeeper"
+  },
+  {
+    "name": "Fitness Blender",
+    "package": "com.fitnessblender"
+  },
+  {
+    "name": "Fitwell",
+    "package": "com.fitwell"
+  },
+  {
+    "name": "Workout Trainer",
+    "package": "com.skimble.workouttrainer"
+  },
+  {
+    "name": "Step Tracker",
+    "package": "com.fitness.tracksteps"
+  },
+  {
+    "name": "HAPIfork",
+    "package": "com.hapilabs.hapifork"
+  },
+  {
+    "name": "Gains in Bulk",
+    "package": "com.gainsinbulk"
+  },
+  {
+    "name": "MapMyFitness",
+    "package": "com.mapmyfitness"
+  },
+  {
+    "name": "Jefit Workout Planner",
+    "package": "com.jefitapp"
+  },
+  {
+    "name": "Fitocracy",
+    "package": "com.fitocracy"
+  },
+  {
+    "name": "Fooducate",
+    "package": "com.fooducate"
+  },
+  {
+    "name": "Wakie",
+    "package": "com.wakie"
+  },
+  {
+    "name": "Fitness Goals",
+    "package": "com.fitnessgoals"
+  },
+  {
+    "name": "C25K",
+    "package": "com.c25k"
+  },
+  {
+    "name": "Runna",
+    "package": "com.runna"
+  },
+  {
+    "name": "Happify",
+    "package": "com.happify"
+  },
+  {
+    "name": "RunGo",
+    "package": "com.rungomobile"
+  },
+  {
+    "name": "Stepz",
+    "package": "com.stepz"
+  },
+  {
+    "name": "Fitstar Yoga",
+    "package": "com.fitstar.yoga"
+  },
+  {
+    "name": "YAZIO",
+    "package": "com.yazio"
+  },
+  {
+    "name": "Health Coach",
+    "package": "com.health.coach"
+  },
+  {
+    "name": "MyPlate",
+    "package": "com.myplate"
+  },
+  {
+    "name": "Eat This Much",
+    "package": "com.eatthismuch"
+  },
+  {
+    "name": "Freeletics",
+    "package": "com.freeletics.gym"
+  },
+  {
+    "name": "GymGoal",
+    "package": "com.gymgoal"
+  },
+  {
+    "name": "RunGo",
+    "package": "com.rungo"
+  },
+  {
+    "name": "Ovia Fertility",
+    "package": "com.ovuline.fertility"
+  },
+  {
+    "name": "Fit Manager",
+    "package": "com.fitmanager"
+  },
+  {
+    "name": "Health Tracker",
+    "package": "com.healthtracker"
+  },
+  {
+    "name": "Gym Workout",
+    "package": "com.gymworkout"
+  },
+  {
+    "name": "Yoga Daily",
+    "package": "com.yogadaily"
+  },
+  {
+    "name": "My Diet Coach",
+    "package": "com.mydietcoach"
+  },
+  {
+    "name": "Mindfulness",
+    "package": "com.mindfulness"
+  },
+  {
+    "name": "Diet Assistant",
+    "package": "com.dietassistant"
+  },
+  {
+    "name": "DailyBurn",
+    "package": "com.dailyburn"
+  },
+  {
+    "name": "FitMates",
+    "package": "com.fitmates"
+  },
+  {
+    "name": "Health Tools",
+    "package": "com.health.tools"
+  },
+  {
+    "name": "Workout Log",
+    "package": "com.workoutlog"
+  },
+  {
+    "name": "Walking Tracker",
+    "package": "com.walkingtracker"
+  },
+  {
+    "name": "FitPal",
+    "package": "com.fitpal"
+  },
+  {
+    "name": "Fasting Tracker",
+    "package": "com.fastingtracker"
+  },
+  {
+    "name": "Heart Rate Monitor",
+    "package": "com.heartratemonitor"
+  },
+  {
+    "name": "Fitness Assistant",
+    "package": "com.fitnessassistant"
+  },
+  {
+    "name": "Sleep Tracker",
+    "package": "com.sleeptracker"
+  },
+  {
+    "name": "Step Challenge",
+    "package": "com.stepchallenge"
+  },
+  {
+    "name": "Yoga Timer",
+    "package": "com.yogatimer"
+  },
+  {
+    "name": "FitMe",
+    "package": "com.fitme"
+  },
+  {
+    "name": "Runna",
+    "package": "com.runna"
+  },
+  {
+    "name": "Cycle Tracker",
+    "package": "com.cycletracker"
+  },
+  {
+    "name": "Sports Tracker",
+    "package": "com.sportstracker"
+  },
+  {
+    "name": "Wellness Coach",
+    "package": "com.wellnesscoach"
+  },
+  {
+    "name": "Body Fat Calculator",
+    "package": "com.bodyfatcalculator"
+  },
+  {
+    "name": "Athlete Analyzer",
+    "package": "com.athleteanalyzer"
+  }
+]

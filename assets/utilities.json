@@ -1,0 +1,742 @@
+[
+  {
+    "name": "微信",
+    "package": "com.tencent.mm"
+  },
+  {
+    "name": "QQ",
+    "package": "com.tencent.mobileqq"
+  },
+  {
+    "name": "支付宝",
+    "package": "com.eg.android.AlipayGphone"
+  },
+  {
+    "name": "百度地图",
+    "package": "com.baidu.BaiduMap"
+  },
+  {
+    "name": "高德地图",
+    "package": "com.autonavi.minimap"
+  },
+  {
+    "name": "京东",
+    "package": "com.jingdong.app.mall"
+  },
+  {
+    "name": "淘宝",
+    "package": "com.taobao.taobao"
+  },
+  {
+    "name": "今日头条",
+    "package": "com.ss.android.article.news"
+  },
+  {
+    "name": "抖音",
+    "package": "com.ss.android.ugc.aweme"
+  },
+  {
+    "name": "美团",
+    "package": "com.sankuai.meituan"
+  },
+  {
+    "name": "拼多多",
+    "package": "com.xunmeng.pinduoduo"
+  },
+  {
+    "name": "QQ音乐",
+    "package": "com.tencent.music"
+  },
+  {
+    "name": "网易云音乐",
+    "package": "com.netease.cloudmusic"
+  },
+  {
+    "name": "小米音乐",
+    "package": "com.xiaomi.music"
+  },
+  {
+    "name": "腾讯视频",
+    "package": "com.tencent.qqlive"
+  },
+  {
+    "name": "优酷",
+    "package": "com.youku.phone"
+  },
+  {
+    "name": "爱奇艺",
+    "package": "com.iqiyi.android"
+  },
+  {
+    "name": "迅雷",
+    "package": "com.xunlei.downloadprovider"
+  },
+  {
+    "name": "快手",
+    "package": "com.kuaishou.nebula"
+  },
+  {
+    "name": "百度翻译",
+    "package": "com.baidu.translate"
+  },
+  {
+    "name": "有道翻译",
+    "package": "com.youdao.dict"
+  },
+  {
+    "name": "WPS Office",
+    "package": "cn.wps.moffice_eng"
+  },
+  {
+    "name": "Adobe Acrobat Reader",
+    "package": "com.adobe.reader"
+  },
+  {
+    "name": "文件管理",
+    "package": "com.rhmsoft.fm"
+  },
+  {
+    "name": "ES文件浏览器",
+    "package": "com.estrongs.android.pop"
+  },
+  {
+    "name": "腾讯文档",
+    "package": "com.tencent.doc"
+  },
+  {
+    "name": "Microsoft Office",
+    "package": "com.microsoft.office.officelens"
+  },
+  {
+    "name": "扫二维码",
+    "package": "com.saoerweima"
+  },
+  {
+    "name": "记账本",
+    "package": "com.izhangji"
+  },
+  {
+    "name": "日历",
+    "package": "com.android.calendar"
+  },
+  {
+    "name": "钉钉",
+    "package": "com.dingtalk.reader"
+  },
+  {
+    "name": "印象笔记",
+    "package": "com.evernote"
+  },
+  {
+    "name": "网易邮箱",
+    "package": "com.netease.mail"
+  },
+  {
+    "name": "Google Drive",
+    "package": "com.google.android.apps.docs"
+  },
+  {
+    "name": "Dropbox",
+    "package": "com.dropbox.android"
+  },
+  {
+    "name": "今日头条",
+    "package": "com.ss.android.article.news"
+  },
+  {
+    "name": "飞书",
+    "package": "com.larksuite.suite"
+  },
+  {
+    "name": "知乎",
+    "package": "com.zhihu.android"
+  },
+  {
+    "name": "小红书",
+    "package": "com.xingin.xhs"
+  },
+  {
+    "name": "Evernote",
+    "package": "com.evernote"
+  },
+  {
+    "name": "Snapseed",
+    "package": "com.niksoftware.snapseed"
+  },
+  {
+    "name": "印象笔记",
+    "package": "com.evernote"
+  },
+  {
+    "name": "快盘",
+    "package": "com.kuaipang"
+  },
+  {
+    "name": "和云",
+    "package": "com.heyun"
+  },
+  {
+    "name": "省省",
+    "package": "com.shengsheng"
+  },
+  {
+    "name": "极简记账",
+    "package": "com.imooc.jijian"
+  },
+  {
+    "name": "驾考宝典",
+    "package": "com.jiakaobaodian"
+  },
+  {
+    "name": "车轮驾考",
+    "package": "com.chelv.drivingtest"
+  },
+  {
+    "name": "小米家",
+    "package": "com.xiaomi.smarthome"
+  },
+  {
+    "name": "美图秀秀",
+    "package": "com.meitu.meiyancamera"
+  },
+  {
+    "name": "拼图",
+    "package": "com.meitu.pintu"
+  },
+  {
+    "name": "云闪付",
+    "package": "com.ips.app"
+  },
+  {
+    "name": "360手机卫士",
+    "package": "com.qihoo360.mobilesafe"
+  },
+  {
+    "name": "清理大师",
+    "package": "com.cleanmaster.mguard"
+  },
+  {
+    "name": "快手",
+    "package": "com.kuaishou.nebula"
+  },
+  {
+    "name": "我的手机",
+    "package": "com.miui.securitycenter"
+  },
+  {
+    "name": "支付宝扫一扫",
+    "package": "com.eg.android.AlipayGphone"
+  },
+  {
+    "name": "健康助手",
+    "package": "com.kongzhong.hzhelp"
+  },
+  {
+    "name": "天气预报",
+    "package": "com.tencent.weather"
+  },
+  {
+    "name": "小米天气",
+    "package": "com.xiaomi.weather"
+  },
+  {
+    "name": "顺丰快递",
+    "package": "com.sfexpress"
+  },
+  {
+    "name": "快递100",
+    "package": "com.kuaidi100.client"
+  },
+  {
+    "name": "掌中宝",
+    "package": "com.zhangzhongbao"
+  },
+  {
+    "name": "小米商城",
+    "package": "com.xiaomi.shop"
+  },
+  {
+    "name": "淘宝旅行",
+    "package": "com.taobao.trip"
+  },
+  {
+    "name": "旅游管家",
+    "package": "com.lvgou.traffic"
+  },
+  {
+    "name": "公交查询",
+    "package": "com.autonavi.xc.bus"
+  },
+  {
+    "name": "高德打车",
+    "package": "com.autonavi.taxicall"
+  },
+  {
+    "name": "滴滴出行",
+    "package": "com.suishouji"
+  },
+  {
+    "name": "航旅纵横",
+    "package": "com.hanglue"
+  },
+  {
+    "name": "飞常准",
+    "package": "com.feichangzhun"
+  },
+  {
+    "name": "天气通",
+    "package": "com.tianqi.weather"
+  },
+  {
+    "name": "朗读女神",
+    "package": "com.renren.speech"
+  },
+  {
+    "name": "百词斩",
+    "package": "com.baicizhan.client"
+  },
+  {
+    "name": "记单词",
+    "package": "com.jiandianci"
+  },
+  {
+    "name": "全球记单词",
+    "package": "com.zj.qgjdc"
+  },
+  {
+    "name": "星火英语",
+    "package": "com.xh.english"
+  },
+  {
+    "name": "网易云课堂",
+    "package": "com.netease.study"
+  },
+  {
+    "name": "央视影音",
+    "package": "com.cntv.player"
+  },
+  {
+    "name": "搜狐视频",
+    "package": "com.sohu.focusmarket"
+  },
+  {
+    "name": "西瓜视频",
+    "package": "com.panda.android"
+  },
+  {
+    "name": "优酷",
+    "package": "com.youku.phone"
+  },
+  {
+    "name": "豆瓣电影",
+    "package": "com.douban.movie"
+  },
+  {
+    "name": "爱奇艺",
+    "package": "com.iqiyi.android"
+  },
+  {
+    "name": "全民K歌",
+    "package": "com.tencent.karaoke"
+  },
+  {
+    "name": "小米视频",
+    "package": "com.xiaomi.video"
+  },
+  {
+    "name": "全民音乐",
+    "package": "com.tencent.qqmusic"
+  },
+  {
+    "name": "WhatsApp",
+    "package": "com.whatsapp"
+  },
+  {
+    "name": "Google Drive",
+    "package": "com.google.android.apps.docs"
+  },
+  {
+    "name": "Dropbox",
+    "package": "com.dropbox.android"
+  },
+  {
+    "name": "Evernote",
+    "package": "com.evernote"
+  },
+  {
+    "name": "Microsoft OneNote",
+    "package": "com.microsoft.office.onenote"
+  },
+  {
+    "name": "Adobe Acrobat Reader",
+    "package": "com.adobe.reader"
+  },
+  {
+    "name": "Microsoft Office",
+    "package": "com.microsoft.office.officelens"
+  },
+  {
+    "name": "Google Keep",
+    "package": "com.google.android.keep"
+  },
+  {
+    "name": "Todoist",
+    "package": "com.todoist"
+  },
+  {
+    "name": "LastPass",
+    "package": "com.lastpass.lpandroid"
+  },
+  {
+    "name": "CamScanner",
+    "package": "com.intsig.camscanner"
+  },
+  {
+    "name": "Microsoft Outlook",
+    "package": "com.microsoft.office.outlook"
+  },
+  {
+    "name": "Google Maps",
+    "package": "com.google.android.apps.maps"
+  },
+  {
+    "name": "Slack",
+    "package": "com.Slack"
+  },
+  {
+    "name": "Zoom",
+    "package": "us.zoom.videomeetings"
+  },
+  {
+    "name": "Microsoft Teams",
+    "package": "com.microsoft.teams"
+  },
+  {
+    "name": "Trello",
+    "package": "com.trello"
+  },
+  {
+    "name": "Asana",
+    "package": "com.asana.app"
+  },
+  {
+    "name": "Pocket",
+    "package": "com.ideashower.readitlater.pro"
+  },
+  {
+    "name": "IFTTT",
+    "package": "com.ifttt.ifttt"
+  },
+  {
+    "name": "SimpleMind",
+    "package": "com.ThinkBlue.SimpleMind"
+  },
+  {
+    "name": "My Study Life",
+    "package": "com.mystudylife"
+  },
+  {
+    "name": "Habitica",
+    "package": "com.habitica.android"
+  },
+  {
+    "name": "Google Authenticator",
+    "package": "com.google.android.apps.authenticator2"
+  },
+  {
+    "name": "1Password",
+    "package": "com.agilebits.onepassword"
+  },
+  {
+    "name": "Signal",
+    "package": "org.thoughtcrime.securesms"
+  },
+  {
+    "name": "Telegram",
+    "package": "org.telegram.messenger"
+  },
+  {
+    "name": "Google Translate",
+    "package": "com.google.android.apps.translate"
+  },
+  {
+    "name": "Shazam",
+    "package": "com.shazam.android"
+  },
+  {
+    "name": "Waze",
+    "package": "com.waze"
+  },
+  {
+    "name": "Weather Underground",
+    "package": "com.wunderground.android.weather"
+  },
+  {
+    "name": "AccuWeather",
+    "package": "com.accuweather.android"
+  },
+  {
+    "name": "Sleep Cycle",
+    "package": "com.northcube.sleepcycle"
+  },
+  {
+    "name": "Calm",
+    "package": "com.calm.android"
+  },
+  {
+    "name": "Headspace",
+    "package": "com.getsomeheadspace.android"
+  },
+  {
+    "name": "MyFitnessPal",
+    "package": "com.myfitnesspal.android"
+  },
+  {
+    "name": "Fitbit",
+    "package": "com.fitbit.FitbitMobile"
+  },
+  {
+    "name": "Google Fit",
+    "package": "com.google.android.apps.fitness"
+  },
+  {
+    "name": "Mint",
+    "package": "com.mint"
+  },
+  {
+    "name": "PayPal",
+    "package": "com.paypal.android.p2pmobile"
+  },
+  {
+    "name": "Venmo",
+    "package": "com.venmo"
+  },
+  {
+    "name": "Cash App",
+    "package": "com.squareup.cash"
+  },
+  {
+    "name": "Duolingo",
+    "package": "com.duolingo"
+  },
+  {
+    "name": "Quizlet",
+    "package": "com.quizlet.android"
+  },
+  {
+    "name": "Khan Academy",
+    "package": "org.khancoder.khanacademy"
+  },
+  {
+    "name": "Coursera",
+    "package": "org.coursera.android"
+  },
+  {
+    "name": "Udemy",
+    "package": "com.udemy.android"
+  },
+  {
+    "name": "Zoom Cloud Meetings",
+    "package": "us.zoom.videomeetings"
+  },
+  {
+    "name": "Google Classroom",
+    "package": "com.google.android.apps.classroom"
+  },
+  {
+    "name": "Todo.txt",
+    "package": "com.matthewhudson.todotxt"
+  },
+  {
+    "name": "Notion",
+    "package": "notion.id"
+  },
+  {
+    "name": "Microsoft To Do",
+    "package": "com.microsoft.todos"
+  },
+  {
+    "name": "Toggl Track",
+    "package": "com.toggl.giskard"
+  },
+  {
+    "name": "RescueTime",
+    "package": "com.rescuetime.android"
+  },
+  {
+    "name": "Forest",
+    "package": "jp.ne.hardcopy.forest"
+  },
+  {
+    "name": "Pomodoro Timer",
+    "package": "com.mayank.pomodorotimer"
+  },
+  {
+    "name": "Simple Habit Tracker",
+    "package": "com.simplehabittracker"
+  },
+  {
+    "name": "TimeTree",
+    "package": "com.fureai.timetree"
+  },
+  {
+    "name": "MyTherapy",
+    "package": "com.mytherapyapp"
+  },
+  {
+    "name": "Pill Reminder",
+    "package": "com.woaibin.pillreminder"
+  },
+  {
+    "name": "Medisafe",
+    "package": "com.medisafe.android"
+  },
+  {
+    "name": "Scanbot",
+    "package": "net.doo.load"
+  },
+  {
+    "name": "PDF Reader",
+    "package": "com.kdanmobile.pdfreader"
+  },
+  {
+    "name": "Text Fairy",
+    "package": "com.icecreamtech.textfairy"
+  },
+  {
+    "name": "Voice Recorder",
+    "package": "com.coffeebeans.voice"
+  },
+  {
+    "name": "Simple Gallery",
+    "package": "com.simplemobiletools.gallery"
+  },
+  {
+    "name": "Solid Explorer",
+    "package": "pl.solidexplorer2"
+  },
+  {
+    "name": "File Manager+",
+    "package": "com.rhmsoft.fm"
+  },
+  {
+    "name": "CamScanner",
+    "package": "com.intsig.camscanner"
+  },
+  {
+    "name": "Google Files",
+    "package": "com.google.android.apps.nbu.files"
+  },
+  {
+    "name": "Files by Google",
+    "package": "com.google.android.apps.nbu.files"
+  },
+  {
+    "name": "ZArchiver",
+    "package": "ru.zdevs.zarchiver"
+  },
+  {
+    "name": "Office Lens",
+    "package": "com.microsoft.office.officelens"
+  },
+  {
+    "name": "Google Chrome",
+    "package": "com.android.chrome"
+  },
+  {
+    "name": "Firefox",
+    "package": "org.mozilla.firefox"
+  },
+  {
+    "name": "Microsoft Edge",
+    "package": "com.microsoft.emmx"
+  },
+  {
+    "name": "Brave",
+    "package": "com.brave.browser"
+  },
+  {
+    "name": "Opera Mini",
+    "package": "com.opera.mini.native"
+  },
+  {
+    "name": "NordVPN",
+    "package": "com.nordvpn.android"
+  },
+  {
+    "name": "TunnelBear",
+    "package": "com.tunnelbear.android"
+  },
+  {
+    "name": "Speedtest by Ookla",
+    "package": "net.andrew.apn"
+  },
+  {
+    "name": "DiskUsage",
+    "package": "mobi.infolife.filemanager"
+  },
+  {
+    "name": "Network Monitor Mini",
+    "package": "com.kukushkin.networkmonitor"
+  },
+  {
+    "name": "System Monitor",
+    "package": "com.system.monitor"
+  },
+  {
+    "name": "Battery Guru",
+    "package": "com.cyborg.battery.guru"
+  },
+  {
+    "name": "Greenify",
+    "package": "com.oasisfeng.greenify"
+  },
+  {
+    "name": "360 Security",
+    "package": "com.qihoo360.mobilesafe"
+  },
+  {
+    "name": "AVG Antivirus",
+    "package": "com.antivirus"
+  },
+  {
+    "name": "Norton Mobile Security",
+    "package": "com.symantec.mobilesecurity"
+  },
+  {
+    "name": "McAfee Mobile Security",
+    "package": "com.mcafee.android"
+  },
+  {
+    "name": "Bitdefender Mobile Security",
+    "package": "com.bitdefender.security"
+  },
+  {
+    "name": "Truecaller",
+    "package": "com.truecaller"
+  },
+  {
+    "name": "Google Authenticator",
+    "package": "com.google.android.apps.authenticator2"
+  },
+  {
+    "name": "Dashlane",
+    "package": "com.dashlane"
+  },
+  {
+    "name": "LastPass Password Manager",
+    "package": "com.lastpass.lpandroid"
+  },
+  {
+    "name": "Authy",
+    "package": "com.authy.authy"
+  },
+  {
+    "name": "1Password",
+    "package": "com.agilebits.onepassword"
+  },
+  {
+    "name": "NordLocker",
+    "package": "com.nordlocker.android"
+  }
+]

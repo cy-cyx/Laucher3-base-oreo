@@ -1,0 +1,666 @@
+[
+  {
+    "name": "微信",
+    "package": "com.tencent.mm"
+  },
+  {
+    "name": "QQ",
+    "package": "com.tencent.mobileqq"
+  },
+  {
+    "name": "微博",
+    "package": "com.sina.weibo"
+  },
+  {
+    "name": "抖音",
+    "package": "com.ss.android.ugc.aweme"
+  },
+  {
+    "name": "快手",
+    "package": "com.kuaishou.nebula"
+  },
+  {
+    "name": "陌陌",
+    "package": "com.immomo.momo"
+  },
+  {
+    "name": "豆瓣",
+    "package": "com.douban.frodo"
+  },
+  {
+    "name": "知乎",
+    "package": "com.zhihu.android"
+  },
+  {
+    "name": "百度贴吧",
+    "package": "com.baidu.tieba"
+  },
+  {
+    "name": "小红书",
+    "package": "com.xiaohongshu"
+  },
+  {
+    "name": "人人网",
+    "package": "com.renren.mobile"
+  },
+  {
+    "name": "米聊",
+    "package": "com.xiaomi.miliao"
+  },
+  {
+    "name": "LinkedIn",
+    "package": "com.linkedin.android"
+  },
+  {
+    "name": "QQ空间",
+    "package": "com.qzone"
+  },
+  {
+    "name": "贴吧",
+    "package": "com.baidu.tieba"
+  },
+  {
+    "name": "美团",
+    "package": "com.sankuai.meituan"
+  },
+  {
+    "name": "豆瓣电影",
+    "package": "com.douban.movie"
+  },
+  {
+    "name": "飞聊",
+    "package": "com.laiwang"
+  },
+  {
+    "name": "Snapchat",
+    "package": "com.snapchat.android"
+  },
+  {
+    "name": "Instagram",
+    "package": "com.instagram.android"
+  },
+  {
+    "name": "Facebook",
+    "package": "com.facebook.katana"
+  },
+  {
+    "name": "Twitter",
+    "package": "com.twitter.android"
+  },
+  {
+    "name": "Telegram",
+    "package": "org.telegram.messenger"
+  },
+  {
+    "name": "WhatsApp",
+    "package": "com.whatsapp"
+  },
+  {
+    "name": "Discord",
+    "package": "com.discord"
+  },
+  {
+    "name": "Bigo Live",
+    "package": "sg.bigo.live"
+  },
+  {
+    "name": "YY直播",
+    "package": "com.yy.mobile"
+  },
+  {
+    "name": "虎牙直播",
+    "package": "com.huya"
+  },
+  {
+    "name": "小米社区",
+    "package": "com.xiaomi.miwall"
+  },
+  {
+    "name": "高德地图",
+    "package": "com.autonavi.minimap"
+  },
+  {
+    "name": "微视",
+    "package": "com.tencent.videocloud"
+  },
+  {
+    "name": "知乎日报",
+    "package": "com.zhihu.android"
+  },
+  {
+    "name": "爱奇艺",
+    "package": "com.iqiyi.i18n"
+  },
+  {
+    "name": "腾讯视频",
+    "package": "com.tencent.qqlive"
+  },
+  {
+    "name": "优酷",
+    "package": "com.youku.phone"
+  },
+  {
+    "name": "网易云音乐",
+    "package": "com.netease.cloudmusic"
+  },
+  {
+    "name": "酷狗音乐",
+    "package": "com.kugou.android"
+  },
+  {
+    "name": "百度音乐",
+    "package": "com.baidu.music"
+  },
+  {
+    "name": "微博视频",
+    "package": "com.sina.weibo.video"
+  },
+  {
+    "name": "美图秀秀",
+    "package": "com.meitu.meiyancamera"
+  },
+  {
+    "name": "拼多多",
+    "package": "com.xunmeng.pinduoduo"
+  },
+  {
+    "name": "小米商城",
+    "package": "com.xiaomi.shop"
+  },
+  {
+    "name": "京东",
+    "package": "com.jingdong.app.mall"
+  },
+  {
+    "name": "淘宝",
+    "package": "com.taobao.taobao"
+  },
+  {
+    "name": "苏宁易购",
+    "package": "com.suning.snbuy"
+  },
+  {
+    "name": "蘑菇街",
+    "package": "com.mogujie"
+  },
+  {
+    "name": "网易严选",
+    "package": "com.163.yanxuan"
+  },
+  {
+    "name": "京东金融",
+    "package": "com.jingdong.jr"
+  },
+  {
+    "name": "支付宝",
+    "package": "com.eg.android.AlipayGphone"
+  },
+  {
+    "name": "微信支付",
+    "package": "com.tencent.mm"
+  },
+  {
+    "name": "QQ音乐",
+    "package": "com.tencent.qqmusic"
+  },
+  {
+    "name": "小米音响",
+    "package": "com.xiaomi.xiaoai"
+  },
+  {
+    "name": "酷我音乐",
+    "package": "com.kuwo.player"
+  },
+  {
+    "name": "QQ浏览器",
+    "package": "com.tencent.mtt"
+  },
+  {
+    "name": "360浏览器",
+    "package": "com.qihoo.browser"
+  },
+  {
+    "name": "UC浏览器",
+    "package": "com.UCMobile"
+  },
+  {
+    "name": "百度浏览器",
+    "package": "com.baidu.browser"
+  },
+  {
+    "name": "猎豹浏览器",
+    "package": "com.cheetah.browser"
+  },
+  {
+    "name": "小米视频",
+    "package": "com.xiaomi.video"
+  },
+  {
+    "name": "轻松筹",
+    "package": "com.qingsongchou"
+  },
+  {
+    "name": "有赞",
+    "package": "com.youzanchuangke"
+  },
+  {
+    "name": "快团团",
+    "package": "com.kuaidiantuan"
+  },
+  {
+    "name": "美丽说",
+    "package": "com.meilishuo"
+  },
+  {
+    "name": "口碑",
+    "package": "com.koubei.android"
+  },
+  {
+    "name": "拼车网",
+    "package": "com.pingche"
+  },
+  {
+    "name": "58同城",
+    "package": "com.wuba"
+  },
+  {
+    "name": "拉手网",
+    "package": "com.lashou"
+  },
+  {
+    "name": "找呀",
+    "package": "com.zhaoya"
+  },
+  {
+    "name": "聚划算",
+    "package": "com.jhs"
+  },
+  {
+    "name": "驾考宝典",
+    "package": "com.jiakaobaodian"
+  },
+  {
+    "name": "酷狗直播",
+    "package": "com.kugou.live"
+  },
+  {
+    "name": "搜狐视频",
+    "package": "com.sohu.sohuvideo"
+  },
+  {
+    "name": "爱奇艺泡泡",
+    "package": "com.iqiyi.pao"
+  },
+  {
+    "name": "云顶之弈",
+    "package": "com.riotgames.tft"
+  },
+  {
+    "name": "哔哩哔哩",
+    "package": "tv.danmaku.bili"
+  },
+  {
+    "name": "茶杯头",
+    "package": "com.teacuphead"
+  },
+  {
+    "name": "YY小说",
+    "package": "com.yynovel"
+  },
+  {
+    "name": "百度云",
+    "package": "com.baidu.cloud"
+  },
+  {
+    "name": "印象笔记",
+    "package": "com.evernote"
+  },
+  {
+    "name": "小米家",
+    "package": "com.xiaomi.smarthome"
+  },
+  {
+    "name": "华为云",
+    "package": "com.huawei.cloud"
+  },
+  {
+    "name": "聚享游",
+    "package": "com.juxiangyou"
+  },
+  {
+    "name": "淘宝特价版",
+    "package": "com.taobao.cheap"
+  },
+  {
+    "name": "知乎Live",
+    "package": "com.zhihu.live"
+  },
+  {
+    "name": "微视",
+    "package": "com.tencent.videocloud"
+  },
+  {
+    "name": "映客",
+    "package": "com.yingke"
+  },
+  {
+    "name": "美拍",
+    "package": "com.meipai"
+  },
+  {
+    "name": "来电秀",
+    "package": "com.laidian"
+  },
+  {
+    "name": "泡泡社区",
+    "package": "com.paoqiao"
+  },
+  {
+    "name": "Facebook",
+    "package": "com.facebook.katana"
+  },
+  {
+    "name": "Instagram",
+    "package": "com.instagram.android"
+  },
+  {
+    "name": "Twitter",
+    "package": "com.twitter.android"
+  },
+  {
+    "name": "Snapchat",
+    "package": "com.snapchat.android"
+  },
+  {
+    "name": "LinkedIn",
+    "package": "com.linkedin.android"
+  },
+  {
+    "name": "Pinterest",
+    "package": "com.pinterest"
+  },
+  {
+    "name": "Reddit",
+    "package": "com.reddit.frontpage"
+  },
+  {
+    "name": "WhatsApp",
+    "package": "com.whatsapp"
+  },
+  {
+    "name": "Telegram",
+    "package": "org.telegram.messenger"
+  },
+  {
+    "name": "Discord",
+    "package": "com.discord"
+  },
+  {
+    "name": "TikTok",
+    "package": "com.zhiliaoapp.musically"
+  },
+  {
+    "name": "Viber",
+    "package": "com.viber.voip"
+  },
+  {
+    "name": "Tumblr",
+    "package": "com.tumblr"
+  },
+  {
+    "name": "WeChat",
+    "package": "com.tencent.mm"
+  },
+  {
+    "name": "Bumble",
+    "package": "com.bumble.app"
+  },
+  {
+    "name": "Tinder",
+    "package": "com.tinder"
+  },
+  {
+    "name": "Meetup",
+    "package": "com.meetup"
+  },
+  {
+    "name": "Nextdoor",
+    "package": "com.nextdoor"
+  },
+  {
+    "name": "Flickr",
+    "package": "com.flickr.android"
+  },
+  {
+    "name": "Yelp",
+    "package": "com.yelp.android"
+  },
+  {
+    "name": "Quora",
+    "package": "com.quora.android"
+  },
+  {
+    "name": "Houseparty",
+    "package": "com.houseparty"
+  },
+  {
+    "name": "Clubhouse",
+    "package": "com.acorns.app"
+  },
+  {
+    "name": "Badoo",
+    "package": "com.badoo.mobile"
+  },
+  {
+    "name": "Coco",
+    "package": "com.coco"
+  },
+  {
+    "name": "Omegle",
+    "package": "com.omegle.android"
+  },
+  {
+    "name": "Skout",
+    "package": "com.skout.android"
+  },
+  {
+    "name": "Weibo",
+    "package": "com.sina.weibo"
+  },
+  {
+    "name": "VK",
+    "package": "com.vk.android"
+  },
+  {
+    "name": "Signal",
+    "package": "org.thoughtcrime.securesms"
+  },
+  {
+    "name": "Kik",
+    "package": " Kik.android"
+  },
+  {
+    "name": "MeetMe",
+    "package": "com.meetme"
+  },
+  {
+    "name": "Happn",
+    "package": "com.happn"
+  },
+  {
+    "name": "Couchsurfing",
+    "package": "com.couchsurfing.mobile"
+  },
+  {
+    "name": "Patreon",
+    "package": "com.patreon.android"
+  },
+  {
+    "name": "Twitch",
+    "package": "tv.twitch.android"
+  },
+  {
+    "name": "Periscope",
+    "package": "com.pscp"
+  },
+  {
+    "name": "Myspace",
+    "package": "com.myspace"
+  },
+  {
+    "name": "Foursquare",
+    "package": "com.joey.Foursquare"
+  },
+  {
+    "name": "Zoosk",
+    "package": "com.zoosk"
+  },
+  {
+    "name": "Fandango",
+    "package": "com.fandango"
+  },
+  {
+    "name": "HelloTalk",
+    "package": "com.hellotalk"
+  },
+  {
+    "name": "Grouper",
+    "package": "com.grouper"
+  },
+  {
+    "name": "Bumble BFF",
+    "package": "com.bumble.bff"
+  },
+  {
+    "name": "Caffeine",
+    "package": "co.caffeine.app"
+  },
+  {
+    "name": "Telegram X",
+    "package": "org.telegram.messenger.web"
+  },
+  {
+    "name": "WhatsApp Business",
+    "package": "com.whatsapp.w4b"
+  },
+  {
+    "name": "Locket",
+    "package": "com.locketwidget"
+  },
+  {
+    "name": "Zello",
+    "package": "com.zello"
+  },
+  {
+    "name": "Meetup",
+    "package": "com.meetup"
+  },
+  {
+    "name": "Bumble Bizz",
+    "package": "com.bumble.bizz"
+  },
+  {
+    "name": "Fruugo",
+    "package": "com.fruugo"
+  },
+  {
+    "name": "MyYearbook",
+    "package": "com.myyearbook"
+  },
+  {
+    "name": "Rumble",
+    "package": "com.rumble"
+  },
+  {
+    "name": "Tandem",
+    "package": "net.tandem"
+  },
+  {
+    "name": "DuoLingo",
+    "package": "com.duolingo"
+  },
+  {
+    "name": "Plex",
+    "package": "com.plexapp.android"
+  },
+  {
+    "name": "Eventbrite",
+    "package": "com.eventbrite.android"
+  },
+  {
+    "name": "Hype",
+    "package": "com.hype"
+  },
+  {
+    "name": "Discord",
+    "package": "com.discord"
+  },
+  {
+    "name": "ZeeMee",
+    "package": "com.zeemee"
+  },
+  {
+    "name": "Carrot",
+    "package": "com.carrot"
+  },
+  {
+    "name": "Gimkit",
+    "package": "com.gimkit"
+  },
+  {
+    "name": "Ghostwriter",
+    "package": "com.ghostwriter"
+  },
+  {
+    "name": "Chime",
+    "package": "com.chime"
+  },
+  {
+    "name": "Waze",
+    "package": "com.waze"
+  },
+  {
+    "name": "Slack",
+    "package": "com.Slack"
+  },
+  {
+    "name": "MyMediabox",
+    "package": "com.mymediabox"
+  },
+  {
+    "name": "Facebook Messenger",
+    "package": "com.facebook.orca"
+  },
+  {
+    "name": "Google Hangouts",
+    "package": "com.google.android.talk"
+  },
+  {
+    "name": "WeChat Work",
+    "package": "com.tencent.wework"
+  },
+  {
+    "name": "Yubo",
+    "package": "com.yubo"
+  },
+  {
+    "name": "Vero",
+    "package": "co.vero"
+  },
+  {
+    "name": "Scribd",
+    "package": "com.scribd.app"
+  },
+  {
+    "name": "Fandom",
+    "package": "com.fandom.app"
+  },
+  {
+    "name": "Clash of Clans",
+    "package": "com.supercell.clashofclans"
+  },
+  {
+    "name": "Facebook Lite",
+    "package": "com.facebook.lite"
+  }
+]

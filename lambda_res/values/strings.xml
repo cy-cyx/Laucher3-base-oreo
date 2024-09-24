@@ -23,4 +23,12 @@
     <string name="download">Download</string>
     <string name="my_themes">My Themes</string>
     <string name="all_apps" translatable="false">All Apps</string>
+    <string name="store" translatable="false">Store</string>
+    <string name="games" translatable="false">Games</string>
+    <string name="utilities" translatable="false">Utilities</string>
+    <string name="art_design" translatable="false">Art&amp;Design</string>
+    <string name="health" translatable="false">Health</string>
+    <string name="social" translatable="false">Social</string>
+    <string name="shopping" translatable="false">Shopping</string>
+    <string name="music_video" translatable="false">Music&amp;Video</string>
 </resources>

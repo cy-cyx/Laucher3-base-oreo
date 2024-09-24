@@ -1,0 +1,666 @@
+[
+  {
+    "name": "王者荣耀",
+    "package": "com.tencent.tmgp.sgame"
+  },
+  {
+    "name": "和平精英",
+    "package": "com.tencent.ig"
+  },
+  {
+    "name": "阴阳师",
+    "package": "com.netease.onmyoji"
+  },
+  {
+    "name": "崩坏3",
+    "package": "com.bh3.global"
+  },
+  {
+    "name": "原神",
+    "package": "com.miHoYo.GenshinImpact"
+  },
+  {
+    "name": "使命召唤手游",
+    "package": "com.tencent.codm"
+  },
+  {
+    "name": "QQ飞车",
+    "package": "com.tencent.speed"
+  },
+  {
+    "name": "绝地求生：刺激战场",
+    "package": "com.tencent.ig"
+  },
+  {
+    "name": "剑与远征",
+    "package": "com.anzhi.jianyu"
+  },
+  {
+    "name": "小小梦魇",
+    "package": "com.Bandai.NamcoEntertainment.Tollgate"
+  },
+  {
+    "name": "炉石传说",
+    "package": "com.blizzard.wtcg"
+  },
+  {
+    "name": "梦幻西游",
+    "package": "com.netease.mhxy"
+  },
+  {
+    "name": "崩坏学园2",
+    "package": "com.bh2.global"
+  },
+  {
+    "name": "大话西游",
+    "package": "com.netease.xiyou"
+  },
+  {
+    "name": "航海王启航",
+    "package": "com.0716.onepiece"
+  },
+  {
+    "name": "植物大战僵尸2",
+    "package": "com.popcap.pvz2"
+  },
+  {
+    "name": "三国志",
+    "package": "com.koei.sangokushi"
+  },
+  {
+    "name": "欢乐斗地主",
+    "package": "com.tencentsd.happylandlord"
+  },
+  {
+    "name": "真人快打",
+    "package": "com.wb.goog.mkx"
+  },
+  {
+    "name": "跳舞的线",
+    "package": "com.fingerlab.dancingline"
+  },
+  {
+    "name": "火影忍者",
+    "package": "com.nhnent.Naruto"
+  },
+  {
+    "name": "侠客风云传",
+    "package": "com.ahr.ixia"
+  },
+  {
+    "name": "阴阳师：百闻牌",
+    "package": "com.netease.onmyojicard"
+  },
+  {
+    "name": "梦幻模拟战",
+    "package": "com.zlongame.mhsy"
+  },
+  {
+    "name": "炉石传说：魔兽英雄传",
+    "package": "com.blizzard.wtcg.solo"
+  },
+  {
+    "name": "高尔夫：王者",
+    "package": "com.golf.kings"
+  },
+  {
+    "name": "我的世界",
+    "package": "com.mojang.minecraftpe"
+  },
+  {
+    "name": "迷你世界",
+    "package": "com.minigame.miniworld"
+  },
+  {
+    "name": "剑网3：指尖江湖",
+    "package": "com.jx3.mobile"
+  },
+  {
+    "name": "大话西游2",
+    "package": "com.netease.dhx2"
+  },
+  {
+    "name": "和平精英体验服",
+    "package": "com.tencent.igtest"
+  },
+  {
+    "name": "万国觉醒",
+    "package": "com.lilithgames.wgjx"
+  },
+  {
+    "name": "非人学园",
+    "package": "com.netease.nhxy"
+  },
+  {
+    "name": "剑与轮回",
+    "package": "com.jianyu.lunhui"
+  },
+  {
+    "name": "全民飞机大战",
+    "package": "com.tencentsd.qmfd"
+  },
+  {
+    "name": "激战2",
+    "package": "com.garena.gunfight"
+  },
+  {
+    "name": "新大话西游",
+    "package": "com.netease.xdhxy"
+  },
+  {
+    "name": "黑暗料理王",
+    "package": "com.lizhi.blackfood"
+  },
+  {
+    "name": "节奏大师",
+    "package": "com.tencentsd.dancing"
+  },
+  {
+    "name": "风暴英雄",
+    "package": "com.blizzard.heroes"
+  },
+  {
+    "name": "守望先锋",
+    "package": "com.blizzard.ow"
+  },
+  {
+    "name": "幻想神域",
+    "package": "com.fantasyrealm"
+  },
+  {
+    "name": "死亡细胞",
+    "package": "com.playdigious.deadcells"
+  },
+  {
+    "name": "弹力果汁",
+    "package": "com.moe.zhiou"
+  },
+  {
+    "name": "模拟城市：建设",
+    "package": "com.ea.game.simcitymobile"
+  },
+  {
+    "name": "小小军团",
+    "package": "com.xiaoxiao.junqun"
+  },
+  {
+    "name": "模拟人生",
+    "package": "com.ea.game.simlife"
+  },
+  {
+    "name": "神雕侠侣",
+    "package": "com.netease.sdyxl"
+  },
+  {
+    "name": "无尽的任务",
+    "package": "com.endlessquest"
+  },
+  {
+    "name": "仙剑奇侠传",
+    "package": "com.xianjian.ixianjian"
+  },
+  {
+    "name": "合金弹头",
+    "package": "com.snk.castle"
+  },
+  {
+    "name": "愤怒的小鸟",
+    "package": "com.rovio.angrybirds"
+  },
+  {
+    "name": "动物之森",
+    "package": "com.nintendo.animalcrossing"
+  },
+  {
+    "name": "大逃杀",
+    "package": "com.battleroyale"
+  },
+  {
+    "name": "火柴人联盟",
+    "package": "com.stickman.league"
+  },
+  {
+    "name": "逆水寒",
+    "package": "com.niushuihan"
+  },
+  {
+    "name": "绝世武林",
+    "package": "com.jieshi.wulin"
+  },
+  {
+    "name": "足球经理",
+    "package": "com.soccer.manager"
+  },
+  {
+    "name": "现代战争",
+    "package": "com.gameloft.android.GAND.GLOBAL"
+  },
+  {
+    "name": "铁甲小宝",
+    "package": "com.tqgame.tqx"
+  },
+  {
+    "name": "足球明星",
+    "package": "com.football.star"
+  },
+  {
+    "name": "超级马里奥",
+    "package": "com.nintendo.mario"
+  },
+  {
+    "name": "勇者斗恶龙",
+    "package": "com.square.enix.dq"
+  },
+  {
+    "name": "方块世界",
+    "package": "com.square.blockworld"
+  },
+  {
+    "name": "超级英雄",
+    "package": "com.superhero.adventure"
+  },
+  {
+    "name": "生化危机",
+    "package": "com.capcom.residentevil"
+  },
+  {
+    "name": "饥荒",
+    "package": "com.klei.dontstarve"
+  },
+  {
+    "name": "口袋妖怪",
+    "package": "com.pokemon.pocketmonsters"
+  },
+  {
+    "name": "古剑奇谭",
+    "package": "com.gujian.guanqiu"
+  },
+  {
+    "name": "全境封锁",
+    "package": "com.ubisoft.tomclancy"
+  },
+  {
+    "name": "狂野飙车",
+    "package": "com.gameloft.android.ANMP.Glo.asphalt8"
+  },
+  {
+    "name": "英雄联盟",
+    "package": "com.riotgames.leagueoflegends"
+  },
+  {
+    "name": "跑跑卡丁车",
+    "package": "com.kart"
+  },
+  {
+    "name": "圆桌骑士",
+    "package": "com.rounstable.knights"
+  },
+  {
+    "name": "奇迹暖暖",
+    "package": "com.nikkigames.miracle"
+  },
+  {
+    "name": "火炬之光",
+    "package": "com.runicgames.torchlight"
+  },
+  {
+    "name": "狼人杀",
+    "package": "com.wolfkill"
+  },
+  {
+    "name": "刀塔传奇",
+    "package": "com.dota.legend"
+  },
+  {
+    "name": "最终幻想",
+    "package": "com.square.finalfantasy"
+  },
+  {
+    "name": "PUBG Mobile",
+    "package": "com.tencent.ig"
+  },
+  {
+    "name": "Fortnite",
+    "package": "com.epicgames.fortnite"
+  },
+  {
+    "name": "Call of Duty: Mobile",
+    "package": "com.activision.callofduty.shooter"
+  },
+  {
+    "name": "Among Us",
+    "package": "com.innersloth.spacemafia"
+  },
+  {
+    "name": "Genshin Impact",
+    "package": "com.miHoYo.GenshinImpact"
+  },
+  {
+    "name": "Minecraft",
+    "package": "com.mojang.minecraftpe"
+  },
+  {
+    "name": "Clash of Clans",
+    "package": "com.supercell.clashofclans"
+  },
+  {
+    "name": "Clash Royale",
+    "package": "com.supercell.clashroyale"
+  },
+  {
+    "name": "Candy Crush Saga",
+    "package": "com.king.candycrushsaga"
+  },
+  {
+    "name": "Brawl Stars",
+    "package": "com.supercell.brawlstars"
+  },
+  {
+    "name": "Roblox",
+    "package": "com.roblox.client"
+  },
+  {
+    "name": "Pokemon GO",
+    "package": "com.nianticlabs.pokemongo"
+  },
+  {
+    "name": "Subway Surfers",
+    "package": "com.kiloo.subwaysurf"
+  },
+  {
+    "name": "Angry Birds 2",
+    "package": "com.rovio.birdsgame"
+  },
+  {
+    "name": "Fruit Ninja",
+    "package": "com.halfbrick.fruitninja"
+  },
+  {
+    "name": "Assassin's Creed Rebellion",
+    "package": "com.ubisoft.acrebellion"
+  },
+  {
+    "name": "FIFA Soccer",
+    "package": "com.ea.game.fifa19"
+  },
+  {
+    "name": "Gardenscapes",
+    "package": "com.playrix.gardenscapes"
+  },
+  {
+    "name": "Homescapes",
+    "package": "com.playrix.homescapes"
+  },
+  {
+    "name": "The Walking Dead: Survivors",
+    "package": "com.foxnext.walkingdead"
+  },
+  {
+    "name": "League of Legends: Wild Rift",
+    "package": "com.riotgames.league.wildrift"
+  },
+  {
+    "name": "Stardew Valley",
+    "package": "com.chucklefish.stardewvalley"
+  },
+  {
+    "name": "Geometry Dash",
+    "package": "com.robox.geometric"
+  },
+  {
+    "name": "Dragon Ball Legends",
+    "package": "com.bandainamcoent.dblegends"
+  },
+  {
+    "name": "Fall Guys: Ultimate Knockout",
+    "package": "com.mediatonic.fallguys"
+  },
+  {
+    "name": "World of Tanks Blitz",
+    "package": "net.wargaming.wot.blitz"
+  },
+  {
+    "name": "Final Fantasy XV: Pocket Edition",
+    "package": "com.squareenix.ff15"
+  },
+  {
+    "name": "Tekken",
+    "package": "com.bandainamcoent.tekken"
+  },
+  {
+    "name": "NBA LIVE Mobile Basketball",
+    "package": "com.ea.gp.nbamobile"
+  },
+  {
+    "name": "Monster Hunter Stories",
+    "package": "com.capcom.monsterhunterstories"
+  },
+  {
+    "name": "Rider",
+    "package": "com.ketchapp.rider"
+  },
+  {
+    "name": "Head Ball 2",
+    "package": "com.hazmob.headball2"
+  },
+  {
+    "name": "Battlelands Royale",
+    "package": "com.battlelands.royale"
+  },
+  {
+    "name": "World of Warships Blitz",
+    "package": "com.wargaming.wows.blitz"
+  },
+  {
+    "name": "War Robots",
+    "package": "com.walgame.robotbattle"
+  },
+  {
+    "name": "Clash of Kings",
+    "package": "com.klashofkings"
+  },
+  {
+    "name": "The Sims Mobile",
+    "package": "com.ea.games.simsmobile"
+  },
+  {
+    "name": "Sonic Dash",
+    "package": "com.sega.sonicdash"
+  },
+  {
+    "name": "Doodle Jump",
+    "package": "com.lima.doodlejump"
+  },
+  {
+    "name": "Ace of Spades",
+    "package": "com.acsofspades"
+  },
+  {
+    "name": "Mini Militia",
+    "package": "com.doodlearmy.battleground"
+  },
+  {
+    "name": "Zombie Tsunami",
+    "package": "com.mobigame.zombietsunami"
+  },
+  {
+    "name": "My Talking Angela",
+    "package": "com.outfit7.talkingangela"
+  },
+  {
+    "name": "CSR Racing",
+    "package": "com.zynga.csr"
+  },
+  {
+    "name": "Need for Speed: Most Wanted",
+    "package": "com.ea.games.nfs13"
+  },
+  {
+    "name": "Real Racing 3",
+    "package": "com.ea.games.racing3"
+  },
+  {
+    "name": "Gangstar Vegas",
+    "package": "com.gameloft.android.ANMP.Glo.gangstarvegas"
+  },
+  {
+    "name": "Payback 2",
+    "package": "com.akr.android.payback"
+  },
+  {
+    "name": "Gangstar New Orleans",
+    "package": "com.gameloft.android.ANMP.Glo.gangstarneworleans"
+  },
+  {
+    "name": "CarX Drift Racing",
+    "package": "com.carxtech.drift"
+  },
+  {
+    "name": "War of Colony",
+    "package": "com.warofcolony"
+  },
+  {
+    "name": "Need for Speed: No Limits",
+    "package": "com.ea.game.nfs14"
+  },
+  {
+    "name": "Mordhau",
+    "package": "com.tgs.mordhau"
+  },
+  {
+    "name": "SpongeBob: Battle for Bikini Bottom",
+    "package": "com.thq.bfbk"
+  },
+  {
+    "name": "Farming Simulator",
+    "package": "com.giants.farmingsimulator"
+  },
+  {
+    "name": "World War Heroes",
+    "package": "com.gamedev.wwh"
+  },
+  {
+    "name": "Survival Island",
+    "package": "com.garage.survivalisland"
+  },
+  {
+    "name": "Plague Inc.",
+    "package": "com.miniclip.plagueinc"
+  },
+  {
+    "name": "Murder Mystery",
+    "package": "com.murdermystery"
+  },
+  {
+    "name": "Gangstar Rio",
+    "package": "com.gameloft.android.ANMP.Glo.gangstarrio"
+  },
+  {
+    "name": "Cut the Rope",
+    "package": "com.zeptolab.ctr"
+  },
+  {
+    "name": "Dragon Mania Legends",
+    "package": "com.gameloft.android.ANMP.Glo.dragonmania"
+  },
+  {
+    "name": "Shadow Fight 3",
+    "package": "com.leo.shadowfight"
+  },
+  {
+    "name": "SimCity BuildIt",
+    "package": "com.ea.game.simcitybuildit"
+  },
+  {
+    "name": "Need for Speed: Heat",
+    "package": "com.ea.game.nfsheat"
+  },
+  {
+    "name": "Bloxburg",
+    "package": "com.bloxburg"
+  },
+  {
+    "name": "Prison Escape",
+    "package": "com.jailbreak.escape"
+  },
+  {
+    "name": "Battle Royale 2",
+    "package": "com.battleroyale.battle"
+  },
+  {
+    "name": "Rebel Racing",
+    "package": "com.hutchgames.rebelracing"
+  },
+  {
+    "name": "EVE Echoes",
+    "package": "com.netease.eveechoes"
+  },
+  {
+    "name": "Final Fantasy Brave Exvius",
+    "package": "com.square.finalfantasybraveexvius"
+  },
+  {
+    "name": "Terraria",
+    "package": "com.relogic.terraria"
+  },
+  {
+    "name": "The Binding of Isaac: Rebirth",
+    "package": "com.nicalis.bindingofisaac"
+  },
+  {
+    "name": "Shovel Knight",
+    "package": "com.yachtclubgames.shovelknight"
+  },
+  {
+    "name": "LEGO Legacy: Heroes Unboxed",
+    "package": "com.lego.legacy"
+  },
+  {
+    "name": "Assassin's Creed: Identity",
+    "package": "com.ubisoft.assassinscreedidentity"
+  },
+  {
+    "name": "RPG Toram Online",
+    "package": "com.asobimo.toramonline"
+  },
+  {
+    "name": "Portal Knights",
+    "package": "com.keen.games.portalknights"
+  },
+  {
+    "name": "XCOM: Enemy Within",
+    "package": "com.firaxis.xcom"
+  },
+  {
+    "name": "Life is Strange",
+    "package": "com.squareenix.lis"
+  },
+  {
+    "name": "Goat Simulator",
+    "package": "com.coffeestainstudios.goatsimulator"
+  },
+  {
+    "name": "Infinity Blade",
+    "package": "com.epicgames.infinityblade"
+  },
+  {
+    "name": "Star Wars: Galaxy of Heroes",
+    "package": "com.ea.game.starwarsgalaxy"
+  },
+  {
+    "name": "The Room",
+    "package": "com.FireproofStudios.TheRoom"
+  },
+  {
+    "name": "Monster Legends",
+    "package": "com.socialpoint.monsterlegends"
+  },
+  {
+    "name": "Baldur's Gate: Enhanced Edition",
+    "package": "com.beamdog.baldursgateee"
+  },
+  {
+    "name": "Cities: Skylines",
+    "package": "com.paradox.interactive.citiesskylines"
+  }
+]

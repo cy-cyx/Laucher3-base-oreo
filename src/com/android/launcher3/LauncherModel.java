@@ -26,6 +26,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.LauncherActivityInfo;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Handler;
@@ -81,7 +82,10 @@ import com.android.launcher3.util.Preconditions;
 import com.android.launcher3.util.Provider;
 import com.android.launcher3.util.Thunk;
 import com.android.launcher3.util.ViewOnDrawExecutor;
+import com.lambda.common.utils.utilcode.util.AppUtils;
+import com.lambda.common.utils.utilcode.util.ConvertUtils;
 import com.lambda.common.utils.utilcode.util.Utils;
+import com.theme.lambda.launcher.utils.AppCategoryFilter;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -1130,6 +1134,21 @@ public class LauncherModel extends BroadcastReceiver
                                 folderInfo.spanX = 1;
                                 folderInfo.spanY = 1;
                                 folderInfo.options = c.getInt(optionsIndex);
+                                final List<UserHandle> profiles = mUserManager.getUserProfiles();
+                                for (AppInfo appInfo : AppCategoryFilter.getAppInfoList(mLauncherApps, profiles, mUserManager)) {
+                                    ShortcutInfo shortcutInfo = new ShortcutInfo(appInfo);
+                                    String packageName = appInfo.componentName.getPackageName();
+                                    if (packageName != null) {
+                                        shortcutInfo.iconBitmap = ConvertUtils.drawable2Bitmap(AppUtils.getAppIcon(packageName));
+                                        Bitmap themeBitmap = ThemeIconMapping.getThemeBitmap(Utils.getApp(), packageName);
+                                        if (themeBitmap != null) {
+                                            shortcutInfo.iconBitmap = themeBitmap;
+                                        }
+                                    }
+                                    if (AppCategoryFilter.filter(packageName, folderInfo.title)) {
+                                        folderInfo.add(shortcutInfo, false);
+                                    }
+                                }
 
                                 // no special handling required for restored folders
                                 c.markRestored();

@@ -61,6 +61,7 @@ android {
         main {
             res.srcDirs = ['res', 'lambda_res']
             java.srcDirs = ['src', 'src_config']
+            assets.srcDirs = ['assets']
             manifest.srcFile 'AndroidManifest-common.xml'
         }
 

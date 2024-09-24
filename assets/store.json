@@ -1,0 +1,614 @@
+[
+  {
+    "name": "应用宝",
+    "package": "com.tencent.android.qqdownloader"
+  },
+  {
+    "name": "360手机助手",
+    "package": "com.qihoo.appstore"
+  },
+  {
+    "name": "豌豆荚",
+    "package": "com.wandoujia.android"
+  },
+  {
+    "name": "百度手机助手",
+    "package": "com.baidu.appsearch"
+  },
+  {
+    "name": "小米应用商店",
+    "package": "com.xiaomi.market"
+  },
+  {
+    "name": "华为应用市场",
+    "package": "com.huawei.appmarket"
+  },
+  {
+    "name": "OPPO软件商店",
+    "package": "com.oppo.market"
+  },
+  {
+    "name": "Vivo应用商店",
+    "package": "com.vivo.appstore"
+  },
+  {
+    "name": "魅族应用商店",
+    "package": "com.meizu.mstore"
+  },
+  {
+    "name": "应用汇",
+    "package": "com.appchina"
+  },
+  {
+    "name": "TapTap",
+    "package": "com.taptap"
+  },
+  {
+    "name": "安智市场",
+    "package": "com.anzhi.market"
+  },
+  {
+    "name": "安卓市场",
+    "package": "com.androidmarket"
+  },
+  {
+    "name": "手机巴士",
+    "package": "com.shoujibashi"
+  },
+  {
+    "name": "小白管家",
+    "package": "com.xiaobaiguanjia"
+  },
+  {
+    "name": "蓝奏云",
+    "package": "com.lanzou"
+  },
+  {
+    "name": "下载工具",
+    "package": "com.downloadtool"
+  },
+  {
+    "name": "APKPure",
+    "package": "com.apkpure.aegon"
+  },
+  {
+    "name": "极客市场",
+    "package": "com.geekmarket"
+  },
+  {
+    "name": "小米游戏中心",
+    "package": "com.xiaomi.gamecenter"
+  },
+  {
+    "name": "爱思助手",
+    "package": "com.i4s"
+  },
+  {
+    "name": "酷安",
+    "package": "com.coolapk.market"
+  },
+  {
+    "name": "游戏盒",
+    "package": "com.gamebox"
+  },
+  {
+    "name": "TapTap游戏",
+    "package": "com.taptap.games"
+  },
+  {
+    "name": "腾讯游戏管家",
+    "package": "com.tencent.gamemanage"
+  },
+  {
+    "name": "百度贴吧",
+    "package": "com.baidu.tieba"
+  },
+  {
+    "name": "应用助手",
+    "package": "com.apphelper"
+  },
+  {
+    "name": "安卓软件市场",
+    "package": "com.androidsoftware"
+  },
+  {
+    "name": "多玩游戏盒",
+    "package": "com.duowan.gamebox"
+  },
+  {
+    "name": "芒果游戏",
+    "package": "com.mgtv.gamer"
+  },
+  {
+    "name": "游侠网",
+    "package": "com.ali213"
+  },
+  {
+    "name": "橙子助手",
+    "package": "com.orange.assistant"
+  },
+  {
+    "name": "天天模拟器",
+    "package": "com.tian.tian"
+  },
+  {
+    "name": "掌中宝",
+    "package": "com.zhangzhongbao"
+  },
+  {
+    "name": "猪猪助手",
+    "package": "com.pig.assistant"
+  },
+  {
+    "name": "小众软件",
+    "package": "com.appinn"
+  },
+  {
+    "name": "软件管家",
+    "package": "com.softmanager"
+  },
+  {
+    "name": "应用市场",
+    "package": "com.appmarket"
+  },
+  {
+    "name": "APKTIME",
+    "package": "com.apktime"
+  },
+  {
+    "name": "游戏天堂",
+    "package": "com.gamersparadise"
+  },
+  {
+    "name": "大象市场",
+    "package": "com.elephantmarket"
+  },
+  {
+    "name": "华为游戏中心",
+    "package": "com.huawei.gamecenter"
+  },
+  {
+    "name": "金山软件市场",
+    "package": "com.kingsoft.appstore"
+  },
+  {
+    "name": "彩云小助手",
+    "package": "com.colorcloud"
+  },
+  {
+    "name": "玩吧",
+    "package": "com.wanba"
+  },
+  {
+    "name": "QQ应用中心",
+    "package": "com.tencent.qqappcenter"
+  },
+  {
+    "name": "小米游戏中心",
+    "package": "com.xiaomi.gamecenter"
+  },
+  {
+    "name": "神游市场",
+    "package": "com.shenyoushichang"
+  },
+  {
+    "name": "软件推荐",
+    "package": "com.softrecommend"
+  },
+  {
+    "name": "一键下载",
+    "package": "com.oneclickdownload"
+  },
+  {
+    "name": "汉堡游戏",
+    "package": "com.hamburger"
+  },
+  {
+    "name": "华为应用助手",
+    "package": "com.huawei.appassistant"
+  },
+  {
+    "name": "安卓市场",
+    "package": "com.android.market"
+  },
+  {
+    "name": "安卓应用汇",
+    "package": "com.androidappchina"
+  },
+  {
+    "name": "找应用",
+    "package": "com.findapp"
+  },
+  {
+    "name": "乐玩市场",
+    "package": "com.lewan"
+  },
+  {
+    "name": "应用之家",
+    "package": "com.apphome"
+  },
+  {
+    "name": "软件集",
+    "package": "com.softcollection"
+  },
+  {
+    "name": "微商助手",
+    "package": "com.weishangassistant"
+  },
+  {
+    "name": "手游社区",
+    "package": "com.shouyoucommunity"
+  },
+  {
+    "name": "我的市场",
+    "package": "com.mymarket"
+  },
+  {
+    "name": "最新软件",
+    "package": "com.latestsoftware"
+  },
+  {
+    "name": "应用筛选器",
+    "package": "com.appsfilter"
+  },
+  {
+    "name": "好玩市场",
+    "package": "com.hao玩market"
+  },
+  {
+    "name": "安卓应用工具",
+    "package": "com.androidtools"
+  },
+  {
+    "name": "乐享市场",
+    "package": "com.lexiang"
+  },
+  {
+    "name": "小米助手",
+    "package": "com.xiaomi.assistant"
+  },
+  {
+    "name": "掌上软件",
+    "package": "com.zhangshangsoft"
+  },
+  {
+    "name": "苹果助手",
+    "package": "com.appleassistant"
+  },
+  {
+    "name": "酷比市场",
+    "package": "com.coolbimarket"
+  },
+  {
+    "name": "天天游戏盒",
+    "package": "com.tiantian"
+  },
+  {
+    "name": "亲亲市场",
+    "package": "com.qinqin"
+  },
+  {
+    "name": "安卓之家",
+    "package": "com.androidhome"
+  },
+  {
+    "name": "先锋市场",
+    "package": "com.xfmarket"
+  },
+  {
+    "name": "随身助手",
+    "package": "com.suishenzhushou"
+  },
+  {
+    "name": "云应用市场",
+    "package": "com.yunmarket"
+  },
+  {
+    "name": "应用开发者",
+    "package": "com.dev"
+  },
+  {
+    "name": "一起玩",
+    "package": "com.yiqiwan"
+  },
+  {
+    "name": "助手应用",
+    "package": "com.assistantapp"
+  },
+  {
+    "name": "Google Play Store",
+    "package": "com.android.vending"
+  },
+  {
+    "name": "Amazon Appstore",
+    "package": "com.amazon.venezia"
+  },
+  {
+    "name": "Samsung Galaxy Store",
+    "package": "com.sec.android.app.samsungapps"
+  },
+  {
+    "name": "APKPure",
+    "package": "com.apkpure.aegon"
+  },
+  {
+    "name": "Aptoide",
+    "package": "cm.aptoide.pt"
+  },
+  {
+    "name": "GetJar",
+    "package": "com.getjar"
+  },
+  {
+    "name": "SlideME",
+    "package": "com.slideme.sam"
+  },
+  {
+    "name": "F-Droid",
+    "package": "org.fdroid.fdroid"
+  },
+  {
+    "name": "1Mobile Market",
+    "package": "com.mstore.client"
+  },
+  {
+    "name": "Mobogenie",
+    "package": "com.mobogenie"
+  },
+  {
+    "name": "AppBrain",
+    "package": "com.appbrain.android"
+  },
+  {
+    "name": "AppValley",
+    "package": "com.appvalley"
+  },
+  {
+    "name": "Uptodown",
+    "package": "com.uptodown"
+  },
+  {
+    "name": "TutuApp",
+    "package": "com.tutuapp"
+  },
+  {
+    "name": "BlackMart",
+    "package": "com.blackmart.alpha"
+  },
+  {
+    "name": "GetAPK",
+    "package": "com.getapk"
+  },
+  {
+    "name": "QooApp",
+    "package": "com.qooapp"
+  },
+  {
+    "name": "APKMonk",
+    "package": "com.apkmonk"
+  },
+  {
+    "name": "ACMarket",
+    "package": "com.acmarket"
+  },
+  {
+    "name": "AppCake",
+    "package": "com.appcake"
+  },
+  {
+    "name": "Happymod",
+    "package": "com.happymod"
+  },
+  {
+    "name": "SnapPea",
+    "package": "com.snapeas"
+  },
+  {
+    "name": "ZTE App Store",
+    "package": "com.zte.appstore"
+  },
+  {
+    "name": "Oppo App Store",
+    "package": "com.oppo.market"
+  },
+  {
+    "name": "Vivo App Store",
+    "package": "com.vivo.appstore"
+  },
+  {
+    "name": "Huawei App Gallery",
+    "package": "com.huawei.appmarket"
+  },
+  {
+    "name": "Nokia Store",
+    "package": "com.nokia.appstore"
+  },
+  {
+    "name": "Yandex.Store",
+    "package": "ru.yandex.store"
+  },
+  {
+    "name": "Mobango",
+    "package": "com.mobango"
+  },
+  {
+    "name": "Zinio",
+    "package": "com.zinio.reader"
+  },
+  {
+    "name": "F-Droid",
+    "package": "org.fdroid.fdroid"
+  },
+  {
+    "name": "APKMirror Installer",
+    "package": "com.apkmirror.installer"
+  },
+  {
+    "name": "Appland",
+    "package": "com.appland"
+  },
+  {
+    "name": "CNET Download",
+    "package": "com.cnet"
+  },
+  {
+    "name": "Bloatware Remover",
+    "package": "com.bloatware"
+  },
+  {
+    "name": "Play Store",
+    "package": "com.google.android.gms"
+  },
+  {
+    "name": "MoboMarket",
+    "package": "com.mobo.market"
+  },
+  {
+    "name": "TorrApk",
+    "package": "com.torrapk"
+  },
+  {
+    "name": "Waptrick",
+    "package": "com.waptrick"
+  },
+  {
+    "name": "ApkReal",
+    "package": "com.apkreal"
+  },
+  {
+    "name": "JioStore",
+    "package": "com.jio.store"
+  },
+  {
+    "name": "Lenovo App Store",
+    "package": "com.lenovo.appstore"
+  },
+  {
+    "name": "Samsung Galaxy Apps",
+    "package": "com.sec.android.app.samsungapps"
+  },
+  {
+    "name": "AppBrain Market",
+    "package": "com.appbrain"
+  },
+  {
+    "name": "Play Store Pro",
+    "package": "com.playstore.pro"
+  },
+  {
+    "name": "ExoPlayer",
+    "package": "com.google.android.exoplayer"
+  },
+  {
+    "name": "ApkShare",
+    "package": "com.apkshare"
+  },
+  {
+    "name": "ApkChecker",
+    "package": "com.apkchecker"
+  },
+  {
+    "name": "Z4Root",
+    "package": "com.z4root"
+  },
+  {
+    "name": "APK-Store",
+    "package": "com.apkstore"
+  },
+  {
+    "name": "Supermarket",
+    "package": "com.supermarket"
+  },
+  {
+    "name": "BetaZone",
+    "package": "com.betazone"
+  },
+  {
+    "name": "Aptoide TV",
+    "package": "pt.aptoide.tv"
+  },
+  {
+    "name": "Cydia",
+    "package": "com.cydia"
+  },
+  {
+    "name": "iOS Apps",
+    "package": "com.iosapps"
+  },
+  {
+    "name": "AirDroid",
+    "package": "com.sandstudio.airdroid"
+  },
+  {
+    "name": "ApkFree",
+    "package": "com.apkfree"
+  },
+  {
+    "name": "APK Store",
+    "package": "com.apkstore"
+  },
+  {
+    "name": "F-Droid",
+    "package": "org.fdroid.fdroid"
+  },
+  {
+    "name": "AppNinja",
+    "package": "com.appninja"
+  },
+  {
+    "name": "APK Explorer",
+    "package": "com.apkpedia"
+  },
+  {
+    "name": "APK Installer",
+    "package": "com.apkinstaller"
+  },
+  {
+    "name": "Google Play Services",
+    "package": "com.google.android.gms"
+  },
+  {
+    "name": "ApkDroid",
+    "package": "com.apkdroid"
+  },
+  {
+    "name": "Yandex.Store",
+    "package": "ru.yandex.store"
+  },
+  {
+    "name": "Vivaldi Browser",
+    "package": "com.vivaldi"
+  },
+  {
+    "name": "Opera Browser",
+    "package": "com.opera.browser"
+  },
+  {
+    "name": "UC Browser",
+    "package": "com.UCMobile"
+  },
+  {
+    "name": "F-Droid",
+    "package": "org.fdroid.fdroid"
+  },
+  {
+    "name": "Humble Bundle",
+    "package": "com.humblebundle"
+  },
+  {
+    "name": "Pirate Bay",
+    "package": "com.piratebay"
+  },
+  {
+    "name": "TorrApk",
+    "package": "com.torrapk"
+  },
+  {
+    "name": "APKLand",
+    "package": "com.apkland"
+  },
+  {
+    "name": "QooApp",
+    "package": "com.qooapp"
+  }
+]
