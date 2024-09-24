@@ -22,7 +22,7 @@
     <resolve
         launcher:screen="0"
         launcher:x="0"
-        launcher:y="-1">
+        launcher:y="-2">
         <favorite
             launcher:className="com.android.launcher3.Launcher"
             launcher:packageName="com.theme.lambda.launcher" />
@@ -30,25 +30,56 @@
     <resolve
         launcher:screen="0"
         launcher:x="1"
+        launcher:y="-2">
+        <favorite launcher:uri="#Intent;action=STORE;end" />
+    </resolve>
+
+    <resolve
+        launcher:screen="0"
+        launcher:x="2"
+        launcher:y="-2">
+        <favorite launcher:uri="#Intent;action=GAMES;end" />
+    </resolve>
+
+    <resolve
+        launcher:screen="0"
+        launcher:x="3"
+        launcher:y="-2">
+        <favorite launcher:uri="#Intent;action=UTILITIES;end" />
+    </resolve>
+
+    <resolve
+        launcher:screen="0"
+        launcher:x="0"
         launcher:y="-1">
-        <favorite launcher:uri="#Intent;action=android.intent.action.MAIN;category=android.intent.category.APP_EMAIL;end" />
-        <favorite launcher:uri="mailto:" />
+        <favorite launcher:uri="#Intent;action=ART_DESIGN;end" />
+    </resolve>
+    <resolve
+        launcher:screen="0"
+        launcher:x="1"
+        launcher:y="-1">
+        <favorite launcher:uri="#Intent;action=HEALTH;end" />
     </resolve>
 
     <resolve
         launcher:screen="0"
         launcher:x="2"
         launcher:y="-1">
-        <favorite launcher:uri="#Intent;action=android.intent.action.MAIN;category=android.intent.category.APP_GALLERY;end" />
-        <favorite launcher:uri="#Intent;type=images/*;end" />
+        <favorite launcher:uri="#Intent;action=SOCIAL;end" />
     </resolve>
 
     <resolve
         launcher:screen="0"
         launcher:x="3"
         launcher:y="-1">
-        <favorite launcher:uri="#Intent;action=android.intent.action.MAIN;category=android.intent.category.APP_MARKET;end" />
-        <favorite launcher:uri="market://details?id=com.android.launcher" />
+        <favorite launcher:uri="#Intent;action=SHOPPING;end" />
+    </resolve>
+
+    <resolve
+        launcher:screen="0"
+        launcher:x="0"
+        launcher:y="-3">
+        <favorite launcher:uri="#Intent;action=MUSIC_VIDEO;end" />
     </resolve>
 
 </favorites>

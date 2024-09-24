@@ -101,17 +101,13 @@ public class DefaultLayoutParser extends AutoInstallsLayout {
                 Log.e(TAG, "Skipping invalid <favorite> with no component or uri");
                 return -1;
             }
-            if ("#Intent;action=android.intent.action.MAIN;category=android.intent.category.APP_MESSAGING;end".equals(uri)) {
-                uri = "#Intent;action=android.intent.action.MAIN;category=android.intent.category.APP_CONTACTS;end";
-            } else if ("#Intent;action=android.intent.action.MAIN;category=android.intent.category.APP_BROWSER;end".equals(uri)) {
-                uri = "#Intent;action=android.intent.action.MAIN;category=android.intent.category.APP_MESSAGING;end";
-            } else if ("#Intent;action=android.media.action.STILL_IMAGE_CAMERA;end".equals(uri)) {
+            if ("#Intent;action=All_APPS;end".equals(uri)) {
                 return addShortcut(Utils.getApp().getString(R.string.all_apps), new Intent("ALL_APPS"), Favorites.ITEM_TYPE_APPLICATION);
-            } else if ("#Intent;action=android.intent.action.MAIN;category=android.intent.category.APP_EMAIL;end".equals(uri)) {
+            } else if ("#Intent;action=STORE;end".equals(uri)) {
                 return addShortcut(Utils.getApp().getString(R.string.store), new Intent("STORE"), Favorites.ITEM_TYPE_FOLDER);
-            } else if ("#Intent;action=android.intent.action.MAIN;category=android.intent.category.APP_GALLERY;end".equals(uri)) {
+            } else if ("#Intent;action=GAMES;end".equals(uri)) {
                 return addShortcut(Utils.getApp().getString(R.string.games), new Intent("GAMES"), Favorites.ITEM_TYPE_FOLDER);
-            } else if ("#Intent;action=android.intent.action.MAIN;category=android.intent.category.APP_MARKET;end".equals(uri)) {
+            } else if ("#Intent;action=UTILITIES;end".equals(uri)) {
                 return addShortcut(Utils.getApp().getString(R.string.utilities), new Intent("UTILITIES"), Favorites.ITEM_TYPE_FOLDER);
             } else if ("#Intent;action=ART_DESIGN;end".equals(uri)) {
                 return addShortcut(Utils.getApp().getString(R.string.art_design), new Intent("ART_DESIGN"), Favorites.ITEM_TYPE_FOLDER);

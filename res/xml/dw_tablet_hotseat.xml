@@ -71,7 +71,8 @@
         launcher:screen="6"
         launcher:x="6"
         launcher:y="0" >
-        <favorite launcher:uri="#Intent;action=android.action.All_APP;end" />
+        <favorite launcher:uri="#Intent;action=android.media.action.STILL_IMAGE_CAMERA;end" />
+        <favorite launcher:uri="#Intent;action=android.intent.action.CAMERA_BUTTON;end" />
     </resolve>
 
 </favorites>
