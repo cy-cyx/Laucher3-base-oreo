@@ -101,7 +101,7 @@ public class AllAppsTransitionController implements TouchController, VerticalPul
         mProgress = 1f;
 
         mEvaluator = new ArgbEvaluator();
-        mAllAppsBackgroundColor = Themes.getAttrColor(l, android.R.attr.colorPrimary);
+        mAllAppsBackgroundColor = Color.BLACK;
     }
 
     @Override
@@ -281,7 +281,7 @@ public class AllAppsTransitionController implements TouchController, VerticalPul
         int bgAlpha = Color.alpha((int) mEvaluator.evaluate(alpha,
                 mHotseatBackgroundColor, mAllAppsBackgroundColor));
         // 为了留点透明度
-        if (bgAlpha > 150){
+        if (bgAlpha > 150) {
             bgAlpha = 150;
         }
         mAppsView.setRevealDrawableColor(ColorUtils.setAlphaComponent(color, bgAlpha));

@@ -20,8 +20,10 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.InsetDrawable;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import android.text.Selection;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -60,6 +62,7 @@ import com.android.launcher3.keyboard.FocusedItemDecorator;
 import com.android.launcher3.userevent.nano.LauncherLogProto.Target;
 import com.android.launcher3.util.ComponentKey;
 import com.android.launcher3.util.PackageUserKey;
+import com.theme.lambda.launcher.ui.theme.ThemeActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -258,6 +261,13 @@ public class AllAppsContainerView extends BaseContainerView implements DragSourc
         });
 
         mSearchContainer = findViewById(R.id.search_container);
+
+        findViewById(R.id.themeIv).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ThemeActivity.Companion.start(mLauncher, ThemeActivity.Companion.getSFromTheme());
+            }
+        });
         mSearchInput = (ExtendedEditText) findViewById(R.id.search_box_input);
 
         // Update the hint to contain the icon.
@@ -298,7 +308,8 @@ public class AllAppsContainerView extends BaseContainerView implements DragSourc
     }
 
     @Override
-    public void onBoundsChanged(Rect newBounds) { }
+    public void onBoundsChanged(Rect newBounds) {
+    }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -413,7 +424,7 @@ public class AllAppsContainerView extends BaseContainerView implements DragSourc
 
     @Override
     public void onDropCompleted(View target, DropTarget.DragObject d, boolean isFlingToDelete,
-            boolean success) {
+                                boolean success) {
         if (isFlingToDelete || !success || (target != mLauncher.getWorkspace() &&
                 !(target instanceof DeleteDropTarget) && !(target instanceof Folder))) {
             // Exit spring loaded mode if we have not successfully dropped or have not handled the
@@ -439,7 +450,7 @@ public class AllAppsContainerView extends BaseContainerView implements DragSourc
 
     @Override
     public void onAppDiscoverySearchUpdate(@Nullable AppDiscoveryItem app,
-            @NonNull AppDiscoveryUpdateState state) {
+                                           @NonNull AppDiscoveryUpdateState state) {
         if (!mLauncher.isDestroyed()) {
             mApps.onAppDiscoverySearchUpdate(app, state);
             mAppsRecyclerView.onSearchResultsChanged();

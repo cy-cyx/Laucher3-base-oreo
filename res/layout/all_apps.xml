@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2016 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2016 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -46,9 +45,9 @@
         <!-- DO NOT CHANGE THE ID -->
         <com.android.launcher3.allapps.AllAppsRecyclerView
             android:id="@+id/apps_list_view"
-            android:layout_below="@+id/search_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@+id/search_container"
             android:layout_gravity="center_horizontal|top"
             android:clipToPadding="false"
             android:descendantFocusability="afterDescendants"
@@ -58,9 +57,9 @@
 
         <!-- Fast scroller popup -->
         <TextView
+            android:id="@+id/fast_scroller_popup"
             style="@style/FastScrollerPopup"
             android:layout_below="@+id/search_container"
-            android:id="@+id/fast_scroller_popup"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="@dimen/container_fastscroll_popup_margin" />
 
@@ -73,29 +72,49 @@
             android:orientation="horizontal"
             android:saveEnabled="false">
 
-            <com.android.launcher3.ExtendedEditText
-                android:id="@+id/search_box_input"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/all_apps_search_bar_field_height"
-                android:background="@android:color/transparent"
+                android:layout_height="41dp"
                 android:layout_gravity="bottom"
-                android:focusableInTouchMode="true"
-                android:gravity="center"
-                android:imeOptions="actionSearch|flagNoExtractUi"
-                android:inputType="text|textNoSuggestions|textCapWords"
-                android:maxLines="1"
-                android:scrollHorizontally="true"
-                android:singleLine="true"
-                android:textColor="?android:attr/textColorSecondary"
-                android:hint="@string/all_apps_search_bar_hint"
-                android:textColorHint="@drawable/all_apps_search_hint"
-                android:textSize="16sp" />
+                android:layout_marginBottom="5dp">
+
+                <ImageView
+                    android:id="@+id/themeIv"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="13dp"
+                    android:src="@drawable/ic_themes_2" />
+
+                <com.android.launcher3.ExtendedEditText
+                    android:id="@+id/search_box_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="41dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="13dp"
+                    android:background="@drawable/shape_28ffffff_radius_8"
+                    android:focusableInTouchMode="true"
+                    android:hint="@string/all_apps_search_bar_hint"
+                    android:imeOptions="actionSearch|flagNoExtractUi"
+                    android:inputType="text|textNoSuggestions|textCapWords"
+                    android:maxLines="1"
+                    android:paddingStart="15dp"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:textColor="#ccffffff"
+                    android:textColorHint="#ccffffff"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+
         </FrameLayout>
 
     </com.android.launcher3.allapps.AllAppsRecyclerViewContainerView>
+
     <View
-        style="@style/AllAppsNavBarProtection"
         android:id="@+id/nav_bar_bg"
+        style="@style/AllAppsNavBarProtection"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="bottom"

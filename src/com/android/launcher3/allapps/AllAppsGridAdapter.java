@@ -17,7 +17,9 @@ package com.android.launcher3.allapps;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -338,6 +340,7 @@ public class AllAppsGridAdapter extends RecyclerView.Adapter<AllAppsGridAdapter.
                 BubbleTextView icon = (BubbleTextView) holder.itemView;
                 icon.applyFromApplicationInfo(info);
                 icon.setAccessibilityDelegate(mLauncher.getAccessibilityDelegate());
+                icon.setTextColor(Color.WHITE);
                 break;
             case VIEW_TYPE_DISCOVERY_ITEM:
                 AppDiscoveryAppInfo appDiscoveryAppInfo = (AppDiscoveryAppInfo)
@@ -348,6 +351,7 @@ public class AllAppsGridAdapter extends RecyclerView.Adapter<AllAppsGridAdapter.
             case VIEW_TYPE_EMPTY_SEARCH:
                 TextView emptyViewText = (TextView) holder.itemView;
                 emptyViewText.setText(mEmptySearchMessage);
+                emptyViewText.setTextColor(Color.WHITE);
                 emptyViewText.setGravity(mApps.hasNoFilteredResults() ? Gravity.CENTER :
                         Gravity.START | Gravity.CENTER_VERTICAL);
                 break;

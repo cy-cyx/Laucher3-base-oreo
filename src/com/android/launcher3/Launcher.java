@@ -2767,7 +2767,7 @@ public class Launcher extends BaseActivity
 
     public boolean startActivitySafely(View v, Intent intent, ItemInfo item) {
         // 点击自己去主题页
-        if (item.getIntent().getComponent().getPackageName().equals(CommonUtil.INSTANCE.getAppContext().getPackageName())) {
+        if (item != null && item.getIntent().getComponent().getPackageName().equals(CommonUtil.INSTANCE.getAppContext().getPackageName())) {
             ThemeActivity.Companion.start(this, ThemeActivity.Companion.getSFromTheme());
             return true;
         }

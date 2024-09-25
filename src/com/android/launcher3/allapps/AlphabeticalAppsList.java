@@ -429,8 +429,8 @@ public class AlphabeticalAppsList {
             }
         }
 
-        // Add the search divider
-        mAdapterItems.add(AdapterItem.asSearchDivider(position++));
+        // Add the search divider todo 就是显示那条线
+//        mAdapterItems.add(AdapterItem.asSearchDivider(position++));
 
         // Process the predicted app components
         mPredictedApps.clear();
