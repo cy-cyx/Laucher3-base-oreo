@@ -138,7 +138,7 @@ class ThemeManager {
     private fun setCurShowThemeById(id: String) {
         showThemeId = id
         // 更新桌面
-        launcher?.reload(false)
+        launcher?.reload(true)
         // 更新壁纸
         val manifest = getCurManifest()
         if (manifest != null) {
