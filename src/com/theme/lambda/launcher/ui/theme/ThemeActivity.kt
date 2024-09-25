@@ -2,6 +2,7 @@ package com.theme.lambda.launcher.ui.theme
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import com.android.launcher3.databinding.ActivityThemeBinding
@@ -11,6 +12,7 @@ import com.theme.lambda.launcher.ui.me.MeActivity
 import com.theme.lambda.launcher.utils.StatusBarUtil
 import com.theme.lambda.launcher.utils.marginStatusBarHeight
 import com.theme.lambda.launcher.widget.adapter.LauncherFragmentAdapter
+import dalvik.system.ZipPathValidator
 import java.lang.ref.WeakReference
 
 class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
@@ -78,6 +80,11 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
 
         viewBinding.meThemeIv.setOnClickListener {
             MeActivity.start(this)
+        }
+
+        // https://stackoverflow.com/questions/77683434/the-getnextentry-method-of-zipinputstream-throws-a-zipexception-invalid-zip-ent/77697327#77697327
+        if (Build.VERSION.SDK_INT >= 34) {
+            ZipPathValidator.clearCallback()
         }
     }
 
