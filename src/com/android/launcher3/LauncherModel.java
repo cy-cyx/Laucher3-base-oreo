@@ -1145,6 +1145,8 @@ public class LauncherModel extends BroadcastReceiver
                                             shortcutInfo.iconBitmap = themeBitmap;
                                         }
                                     }
+                                    shortcutInfo.title = appInfo.title;
+                                    shortcutInfo.contentDescription = "";
                                     if (AppCategoryFilter.filter(packageName, folderInfo.title)) {
                                         folderInfo.add(shortcutInfo, false);
                                     }

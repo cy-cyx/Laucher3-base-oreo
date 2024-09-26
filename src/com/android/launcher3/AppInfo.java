@@ -71,6 +71,7 @@ public class AppInfo extends ItemInfoWithIcon {
         }
 
         intent = makeLaunchIntent(info);
+        title =info.getLabel();
     }
 
     public AppInfo(AppInfo info) {
