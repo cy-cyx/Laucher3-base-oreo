@@ -115,7 +115,7 @@
         -->
         <provider
             android:name="com.android.launcher3.LauncherProvider"
-            android:authorities="com.android.launcher3.settings"
+            android:authorities="${applicationId}.settings"
             android:exported="true"
             android:readPermission="com.android.launcher3.permission.READ_SETTINGS"
             android:writePermission="com.android.launcher3.permission.WRITE_SETTINGS" />
