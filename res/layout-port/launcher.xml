@@ -23,6 +23,11 @@
     android:fitsSystemWindows="true"
     tools:viewBindingIgnore="true">
 
+    <com.theme.lambda.launcher.widget.WallpaperView
+        android:id="@+id/wallpaperView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <com.android.launcher3.dragndrop.DragLayer
         android:id="@+id/drag_layer"
         android:layout_width="match_parent"
@@ -85,8 +90,8 @@
 
     <com.theme.lambda.launcher.widget.PreviewControlView
         android:id="@+id/previewControlPcv"
-        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
 </com.android.launcher3.LauncherRootView>

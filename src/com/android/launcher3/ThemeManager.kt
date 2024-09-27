@@ -1,14 +1,21 @@
 package com.android.launcher3
 
 import android.view.View
+import com.bumptech.glide.Glide
 import com.theme.lambda.launcher.data.model.ManifestBean
 import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.utils.FileUtil
 import com.theme.lambda.launcher.utils.GsonUtil
 import com.theme.lambda.launcher.utils.SpUtil
 import com.theme.lambda.launcher.utils.WallPaperUtil
+import com.theme.lambda.launcher.utils.gone
+import com.theme.lambda.launcher.utils.visible
 import com.theme.lambda.launcher.widget.PreviewControlView
+import com.theme.lambda.launcher.widget.WallpaperView
 import com.theme.lambda.launcher.widget.dialog.QuitPreviewSureDialog
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.io.File
 import java.lang.ref.WeakReference
 
@@ -25,6 +32,20 @@ class ThemeManager {
     var isPreviewMode = false
         private set
 
+    var wallpaperView: WallpaperView? = null
+
+    fun bindWallpaperView(view: WallpaperView) {
+        wallpaperView = view
+        val manifest = getCurManifest()
+        if (manifest != null) {
+            val wallpaper = getManifestResRootPath() + manifest.background
+            wallpaperView?.setPic(wallpaper)
+            wallpaperView?.visible()
+        } else {
+            wallpaperView?.gone()
+        }
+    }
+
     var previewControlView: PreviewControlView? = null
 
     fun bindPreviewControlView(view: PreviewControlView) {
@@ -35,8 +56,8 @@ class ThemeManager {
                 launcher?.let {
                     QuitPreviewSureDialog(it).apply {
                         onClickContinueListen = {
-                            setCurShowThemeById(themeId)
                             quitPreview()
+                            setCurShowThemeById(themeId)
                         }
                     }.show()
                 }
@@ -46,6 +67,7 @@ class ThemeManager {
                 themeId = previewThemeId
                 SpUtil.putString(sKeyThemeId, themeId)
                 quitPreview()
+                setCurShowThemeById(themeId)
             }
         }
     }
@@ -147,7 +169,17 @@ class ThemeManager {
         val manifest = getCurManifest()
         if (manifest != null) {
             val wallpaper = getManifestResRootPath() + manifest.background
-            WallPaperUtil.setHomeAndLockScreen(wallpaper)
+            wallpaperView?.setPic(wallpaper)
+            wallpaperView?.visible()
+
+            // 顺便设置一下手机背景壁纸
+            if (!isPreviewMode) {
+                GlobalScope.launch(Dispatchers.IO) {
+                    WallPaperUtil.setHomeAndLockScreen(wallpaper)
+                }
+            }
+        } else {
+            wallpaperView?.gone()
         }
     }
 

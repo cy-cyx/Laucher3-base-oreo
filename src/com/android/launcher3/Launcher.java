@@ -139,6 +139,7 @@ import com.theme.lambda.launcher.ui.search.SearchActivity;
 import com.theme.lambda.launcher.ui.theme.ThemeActivity;
 import com.theme.lambda.launcher.utils.CommonUtil;
 import com.theme.lambda.launcher.widget.PreviewControlView;
+import com.theme.lambda.launcher.widget.WallpaperView;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -361,9 +362,11 @@ public class Launcher extends BaseActivity
 
     private final ThemeManager themeManager = new ThemeManager();
     private PreviewControlView previewControlView;
+    private WallpaperView wallpaperView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("Launcher", "onCreate");
         if (DEBUG_STRICT_MODE) {
             StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
                     .detectDiskReads()
@@ -1403,6 +1406,8 @@ public class Launcher extends BaseActivity
 
         previewControlView = (PreviewControlView) findViewById(R.id.previewControlPcv);
         themeManager.bindPreviewControlView(previewControlView);
+        wallpaperView = (WallpaperView) findViewById(R.id.wallpaperView);
+        themeManager.bindWallpaperView(wallpaperView);
     }
 
     private void setupOverviewPanel() {
