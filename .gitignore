@@ -15,3 +15,4 @@ gradle/
 build/
 gradlew*
 aosp/
+.DS_Store
