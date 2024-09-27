@@ -138,6 +138,8 @@ import com.android.launcher3.widget.WidgetsContainerView;
 import com.theme.lambda.launcher.ui.search.SearchActivity;
 import com.theme.lambda.launcher.ui.theme.ThemeActivity;
 import com.theme.lambda.launcher.utils.CommonUtil;
+import com.theme.lambda.launcher.utils.LauncherUtil;
+import com.theme.lambda.launcher.utils.SpUtil;
 import com.theme.lambda.launcher.widget.PreviewControlView;
 import com.theme.lambda.launcher.widget.WallpaperView;
 
@@ -1114,6 +1116,12 @@ public class Launcher extends BaseActivity
         }
 
         themeManager.onResume();
+
+        // 第一次设置需要提示一下权限
+        if (!SpUtil.INSTANCE.getBool("first_req_premission", false)) {
+            LauncherUtil.INSTANCE.gotoSetLauncher(this);
+            SpUtil.INSTANCE.putBool("first_req_premission", true);
+        }
     }
 
     @Override
