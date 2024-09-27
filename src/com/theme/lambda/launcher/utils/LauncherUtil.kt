@@ -7,13 +7,17 @@ import android.content.pm.PackageManager
 object LauncherUtil {
 
     fun gotoSetLauncher(context: Context) {
-        val intent = Intent(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_HOME);
-        intent.setClassName(
-            "android",
-            "com.android.internal.app.ResolverActivity"
-        );
-        context.startActivity(intent)
+        try {
+            val intent = Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            intent.setClassName(
+                "android",
+                "com.android.internal.app.ResolverActivity"
+            );
+            context.startActivity(intent)
+        } catch (e: Exception) {
+        }
     }
 
     fun isDefaultLauncher(context: Context): Boolean {

@@ -28,6 +28,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -240,7 +242,13 @@ public class QsbContainerView extends FrameLayout {
             mWrapper.addView(linearLayout);
             TimerUtils.schedule((s, weatherModel) -> {
                 if (mWeather != null) {
-                    getActivity().runOnUiThread(() -> TimerUtils.update(mWeather, s, weatherModel));
+                   Handler mainHandler = new Handler(Looper.getMainLooper());
+                   mainHandler.post(new Runnable() {
+                       @Override
+                       public void run() {
+                           TimerUtils.update(mWeather, s, weatherModel);
+                       }
+                   });
                 }
                 return null;
             });
