@@ -98,3 +98,8 @@
 -keep interface com.android.launcher3.model.nano.LauncherDumpProto.** {
   *;
 }
+
+-keep class com.android.launcher3.IconProvider {*;}
+-keep class com.android.launcher3.AppFilter {*;}
+-keep class com.android.launcher3.logging.UserEventDispatcher {*;}
+-keep class com.android.launcher3.graphics.DrawableFactory {*;}
