@@ -36,7 +36,8 @@ public class LauncherRootView extends InsettableFrameLayout {
         if (getChildCount() > 0) {
             // LauncherRootView contains only one child, which should be aligned
             // based on the horizontal insets.
-            mAlignedView = getChildAt(0);
+            // todo 多了个壁纸
+            mAlignedView = getChildAt(1);
         }
         super.onFinishInflate();
     }

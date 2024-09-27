@@ -1,15 +1,9 @@
 package com.theme.lambda.launcher.utils
 
-import android.annotation.SuppressLint
+import android.R
 import android.content.Context
-import android.content.Intent
 import android.graphics.drawable.Drawable
-import android.net.Uri
-import android.os.Build
 import android.util.TypedValue
-import android.view.View
-import android.view.Window
-import android.view.WindowManager
 
 object CommonUtil {
 
@@ -26,6 +20,16 @@ object CommonUtil {
         val resources = appContext?.resources
         val resourceId = resources?.getIdentifier("status_bar_height", "dimen", "android")
         return resources?.getDimensionPixelSize(resourceId ?: 0) ?: 0
+    }
+
+    fun getActionBarHeight(): Int {
+        val tv = TypedValue()
+        if (appContext!!.getTheme().resolveAttribute(R.attr.actionBarSize, tv, true)) {
+            return TypedValue.complexToDimensionPixelSize(
+                tv.data, appContext!!.getResources().getDisplayMetrics()
+            )
+        }
+        return 0
     }
 
     fun getScreenWidth(): Int {
