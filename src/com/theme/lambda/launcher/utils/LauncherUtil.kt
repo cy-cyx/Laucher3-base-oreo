@@ -3,6 +3,7 @@ package com.theme.lambda.launcher.utils
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.provider.Settings
 
 object LauncherUtil {
 
@@ -17,6 +18,13 @@ object LauncherUtil {
             );
             context.startActivity(intent)
         } catch (e: Exception) {
+            try {
+                val intent: Intent = Intent(Settings.ACTION_HOME_SETTINGS)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                context.startActivity(intent)
+            }catch (e:Exception){
+
+            }
         }
     }
 
