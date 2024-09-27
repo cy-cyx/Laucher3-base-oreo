@@ -6,6 +6,8 @@ import com.theme.lambda.launcher.data.model.ManifestBean
 import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.utils.FileUtil
 import com.theme.lambda.launcher.utils.GsonUtil
+import com.theme.lambda.launcher.utils.LauncherUtil
+import com.theme.lambda.launcher.utils.ShareUtil
 import com.theme.lambda.launcher.utils.SpUtil
 import com.theme.lambda.launcher.utils.WallPaperUtil
 import com.theme.lambda.launcher.utils.gone
@@ -68,6 +70,13 @@ class ThemeManager {
                 SpUtil.putString(sKeyThemeId, themeId)
                 quitPreview()
                 setCurShowThemeById(themeId)
+
+                // 判断以下自己是不是默认launcher
+                launcher?.let {
+                    if (!LauncherUtil.isDefaultLauncher(it)) {
+                        LauncherUtil.gotoSetLauncher(it)
+                    }
+                }
             }
         }
     }
