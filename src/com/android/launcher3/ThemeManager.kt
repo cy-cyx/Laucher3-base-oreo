@@ -60,7 +60,7 @@ class ThemeManager {
             return themeManagerCache?.get()
         }
 
-        fun setDefaultTHemeId(id:String){
+        fun setDefaultTHemeId(id: String) {
             SpUtil.putString(sKeyThemeId, id)
         }
 
@@ -127,12 +127,16 @@ class ThemeManager {
 
     private fun enterPreview() {
         isPreviewMode = true
-        previewControlView?.visibility = View.VISIBLE
+        launcher?.runOnUiThread {
+            previewControlView?.visibility = View.VISIBLE
+        }
     }
 
     private fun quitPreview() {
         isPreviewMode = false
-        previewControlView?.visibility = View.GONE
+        launcher?.runOnUiThread {
+            previewControlView?.visibility = View.GONE
+        }
     }
 
     private fun setCurShowThemeById(id: String) {

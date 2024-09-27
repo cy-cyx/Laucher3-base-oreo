@@ -79,12 +79,12 @@ public class DeepShortcutManager {
 
     /**
      * Queries for the shortcuts with the package name and provided ids.
-     *
+     * <p>
      * This method is intended to get the full details for shortcuts when they are added or updated,
      * because we only get "key" fields in onShortcutsChanged().
      */
     public List<ShortcutInfoCompat> queryForFullDetails(String packageName,
-            List<String> shortcutIds, UserHandle user) {
+                                                        List<String> shortcutIds, UserHandle user) {
         return query(FLAG_GET_ALL, packageName, null, shortcutIds, user);
     }
 
@@ -93,7 +93,7 @@ public class DeepShortcutManager {
      * to be displayed in the shortcuts container on long press.
      */
     public List<ShortcutInfoCompat> queryForShortcutsContainer(ComponentName activity,
-            List<String> ids, UserHandle user) {
+                                                               List<String> ids, UserHandle user) {
         return query(ShortcutQuery.FLAG_MATCH_MANIFEST | ShortcutQuery.FLAG_MATCH_DYNAMIC,
                 activity.getPackageName(), activity, ids, user);
     }
@@ -113,7 +113,7 @@ public class DeepShortcutManager {
             try {
                 mLauncherApps.pinShortcuts(packageName, pinnedIds, user);
                 mWasLastCallSuccess = true;
-            } catch (SecurityException|IllegalStateException e) {
+            } catch (SecurityException | IllegalStateException e) {
                 Log.w(TAG, "Failed to unpin shortcut", e);
                 mWasLastCallSuccess = false;
             }
@@ -135,7 +135,7 @@ public class DeepShortcutManager {
             try {
                 mLauncherApps.pinShortcuts(packageName, pinnedIds, user);
                 mWasLastCallSuccess = true;
-            } catch (SecurityException|IllegalStateException e) {
+            } catch (SecurityException | IllegalStateException e) {
                 Log.w(TAG, "Failed to pin shortcut", e);
                 mWasLastCallSuccess = false;
             }
@@ -144,13 +144,13 @@ public class DeepShortcutManager {
 
     @TargetApi(25)
     public void startShortcut(String packageName, String id, Rect sourceBounds,
-          Bundle startActivityOptions, UserHandle user) {
+                              Bundle startActivityOptions, UserHandle user) {
         if (Utilities.ATLEAST_NOUGAT_MR1) {
             try {
                 mLauncherApps.startShortcut(packageName, id, sourceBounds,
                         startActivityOptions, user);
                 mWasLastCallSuccess = true;
-            } catch (SecurityException|IllegalStateException e) {
+            } catch (SecurityException | IllegalStateException e) {
                 Log.e(TAG, "Failed to start shortcut", e);
                 mWasLastCallSuccess = false;
             }
@@ -165,7 +165,7 @@ public class DeepShortcutManager {
                         shortcutInfo.getShortcutInfo(), density);
                 mWasLastCallSuccess = true;
                 return icon;
-            } catch (SecurityException|IllegalStateException e) {
+            } catch (SecurityException | IllegalStateException e) {
                 Log.e(TAG, "Failed to get shortcut icon", e);
                 mWasLastCallSuccess = false;
             }
@@ -175,7 +175,7 @@ public class DeepShortcutManager {
 
     /**
      * Returns the id's of pinned shortcuts associated with the given package and user.
-     *
+     * <p>
      * If packageName is null, returns all pinned shortcuts regardless of package.
      */
     public List<ShortcutInfoCompat> queryForPinnedShortcuts(String packageName, UserHandle user) {
@@ -197,12 +197,15 @@ public class DeepShortcutManager {
     /**
      * Query the system server for all the shortcuts matching the given parameters.
      * If packageName == null, we query for all shortcuts with the passed flags, regardless of app.
-     *
+     * <p>
      * TODO: Use the cache to optimize this so we don't make an RPC every time.
      */
     @TargetApi(25)
     private List<ShortcutInfoCompat> query(int flags, String packageName,
-            ComponentName activity, List<String> shortcutIds, UserHandle user) {
+                                           ComponentName activity, List<String> shortcutIds, UserHandle user) {
+        // todo 涉及权限暂时隐藏
+        if (true) return new ArrayList<>();
+
         if (Utilities.ATLEAST_NOUGAT_MR1) {
             ShortcutQuery q = new ShortcutQuery();
             q.setQueryFlags(flags);
@@ -215,7 +218,7 @@ public class DeepShortcutManager {
             try {
                 shortcutInfos = mLauncherApps.getShortcuts(q, user);
                 mWasLastCallSuccess = true;
-            } catch (SecurityException|IllegalStateException e) {
+            } catch (SecurityException | IllegalStateException e) {
                 Log.e(TAG, "Failed to query for shortcuts", e);
                 mWasLastCallSuccess = false;
             }
@@ -237,7 +240,7 @@ public class DeepShortcutManager {
         if (Utilities.ATLEAST_NOUGAT_MR1) {
             try {
                 return mLauncherApps.hasShortcutHostPermission();
-            } catch (SecurityException|IllegalStateException e) {
+            } catch (SecurityException | IllegalStateException e) {
                 Log.e(TAG, "Failed to make shortcut manager call", e);
             }
         }
