@@ -4,6 +4,7 @@ import android.appwidget.AppWidgetHostView
 import android.content.Context
 import android.content.Intent
 import android.provider.AlarmClock
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewDebug.ExportedProperty
@@ -53,13 +54,24 @@ class WeatherWidgetHostView constructor(private val context: Context) : AppWidge
             val v = LayoutInflater.from(parent.context)
                 .inflate(R.layout.view_widget_weather, parent, false)
             v.findViewById<LinearLayout>(R.id.ll1).setOnClickListener {
-                parent.context.startActivity(
-                    Intent(
-                        AlarmClock.ACTION_SHOW_ALARMS
-                    ).apply {
-                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                    }
-                )
+                try {
+                    parent.context.startActivity(
+                        Intent(
+                            AlarmClock.ACTION_SHOW_ALARMS
+                        ).apply {
+                            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                        }
+                    )
+                } catch (e: Exception) {
+                    // 跳不过去就去时间设置页
+                    parent.context.startActivity(
+                        Intent(
+                            Settings.ACTION_DATE_SETTINGS
+                        ).apply {
+                            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                        }
+                    )
+                }
             }
             v.findViewById<LinearLayout>(R.id.ll2).setOnClickListener {
                 parent.context.startActivity(
