@@ -29,18 +29,6 @@
         app:layout_constraintStart_toStartOf="@id/logoIv"
         app:layout_constraintTop_toBottomOf="@id/logoIv" />
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/startBnLav"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:layout_marginBottom="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/start_button" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -91,7 +79,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="107dp"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
