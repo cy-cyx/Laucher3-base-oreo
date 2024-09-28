@@ -201,14 +201,15 @@ public class IconShapeOverride {
             }
 
             // Schedule an alarm before we kill ourself.
-            Intent homeIntent = new Intent(Intent.ACTION_MAIN)
-                    .addCategory(Intent.CATEGORY_HOME)
-                    .setPackage(mContext.getPackageName())
-                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            PendingIntent pi = PendingIntent.getActivity(mContext, RESTART_REQUEST_CODE,
-                    homeIntent, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_ONE_SHOT);
-            mContext.getSystemService(AlarmManager.class).setExact(
-                    AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + 50, pi);
+            // todo 该做法调用隐式intent 修改icon形状入口隐藏 相关代码注释
+//            Intent homeIntent = new Intent(Intent.ACTION_MAIN)
+//                    .addCategory(Intent.CATEGORY_HOME)
+//                    .setPackage(mContext.getPackageName())
+//                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            PendingIntent pi = PendingIntent.getActivity(mContext, RESTART_REQUEST_CODE,
+//                    homeIntent, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_ONE_SHOT);
+//            mContext.getSystemService(AlarmManager.class).setExact(
+//                    AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + 50, pi);
 
             // Kill process
             android.os.Process.killProcess(android.os.Process.myPid());

@@ -99,14 +99,14 @@ public class SettingsActivity extends Activity {
                 mIconBadgingObserver.onChange(true);
             }
 
-            Preference iconShapeOverride = findPreference(IconShapeOverride.KEY_PREFERENCE);
-            if (iconShapeOverride != null) {
-                if (IconShapeOverride.isSupported(getActivity())) {
-                    IconShapeOverride.handlePreferenceUi((ListPreference) iconShapeOverride);
-                } else {
-                    getPreferenceScreen().removePreference(iconShapeOverride);
-                }
-            }
+//            Preference iconShapeOverride = findPreference(IconShapeOverride.KEY_PREFERENCE);
+//            if (iconShapeOverride != null) {
+//                if (IconShapeOverride.isSupported(getActivity())) {
+//                    IconShapeOverride.handlePreferenceUi((ListPreference) iconShapeOverride);
+//                } else {
+//                    getPreferenceScreen().removePreference(iconShapeOverride);
+//                }
+//            }
         }
 
         @Override
