@@ -7,16 +7,24 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.android.launcher3.Launcher
 import com.android.launcher3.ThemeManager
+import com.google.gson.reflect.TypeToken
 import com.theme.lambda.launcher.base.BaseViewModel
 import com.theme.lambda.launcher.data.DataRepository
 import com.theme.lambda.launcher.data.model.Resources
 import com.theme.lambda.launcher.task.DownloadZipTask
 import com.theme.lambda.launcher.ui.themepreview.ThemePreviewActivity
+import com.theme.lambda.launcher.utils.GsonUtil
+import com.theme.lambda.launcher.utils.SpUtil
 import com.theme.lambda.launcher.utils.requestTag
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ThemeViewModel : BaseViewModel() {
+
+    companion object {
+        val sKeyCache = "key_cache_"
+    }
+
 
     var tag = ""
     var from = ""
@@ -28,6 +36,21 @@ class ThemeViewModel : BaseViewModel() {
     var loadDialogLiveData = MutableLiveData<Boolean>()
     var isLoadMore = false
 
+    fun refreshCache() {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val cache = SpUtil.getString("sKeyCache$tag")
+                if (cache.isNotEmpty()) {
+                    val typeToken = object : TypeToken<List<Resources>>() {}
+                    themeLiveData.postValue(ArrayList(GsonUtil.gson.fromJson(cache, typeToken)))
+                }
+
+            } catch (e: Exception) {
+
+            }
+        }
+    }
+
     fun refresh() {
         viewModelScope.launch() {
             page = 1L
@@ -35,6 +58,10 @@ class ThemeViewModel : BaseViewModel() {
             val resList = data?.resources ?: arrayListOf()
             themeLiveData.value = resList
             refreshFinishLiveData.value = true
+
+            if (resList.isNotEmpty()) {
+                SpUtil.putString("sKeyCache$tag", GsonUtil.gson.toJson(resList))
+            }
         }
     }
 
@@ -73,7 +100,7 @@ class ThemeViewModel : BaseViewModel() {
                 }
             }
         } else {
-            ThemePreviewActivity.start(context,resources)
+            ThemePreviewActivity.start(context, resources)
         }
 
     }

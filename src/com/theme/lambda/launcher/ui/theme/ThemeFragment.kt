@@ -78,6 +78,7 @@ class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
         })
 
         viewModel.refresh()
+        viewModel.refreshCache()
         viewBinding.swipeRefreshSrl.autoRefresh()
 
         viewModel.loadDialogLiveData.observe(viewLifecycleOwner, Observer {
