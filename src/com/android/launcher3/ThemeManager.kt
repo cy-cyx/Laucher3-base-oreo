@@ -71,7 +71,14 @@ class ThemeManager {
                 // 判断以下自己是不是默认launcher
                 launcher?.let {
                     if (!LauncherUtil.isDefaultLauncher(it)) {
-                        LauncherUtil.gotoSetLauncher(it)
+                        ApplyLauncherPermissionDialog(it).apply {
+                            clickApplyListen = {
+                                dismiss()
+                            }
+                            clickNotNowListen = {
+                                dismiss()
+                            }
+                        }.show()
                     }
                 }
             }
@@ -81,7 +88,7 @@ class ThemeManager {
     var firstApplyQuit = true
 
     fun applyQuitPreviewMode(context: Context) {
-        if (firstApplyQuit) {
+        if (firstApplyQuit && !LauncherUtil.isDefaultLauncher(context)) {
             firstApplyQuit = false
             ApplyLauncherPermissionDialog(context).apply {
                 clickApplyListen = {

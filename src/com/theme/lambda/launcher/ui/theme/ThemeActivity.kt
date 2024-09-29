@@ -11,6 +11,7 @@ import com.theme.lambda.launcher.base.BaseActivity
 import com.theme.lambda.launcher.ui.me.MeActivity
 import com.theme.lambda.launcher.utils.LauncherUtil
 import com.theme.lambda.launcher.utils.StatusBarUtil
+import com.theme.lambda.launcher.utils.gone
 import com.theme.lambda.launcher.utils.marginStatusBarHeight
 import com.theme.lambda.launcher.utils.visible
 import com.theme.lambda.launcher.widget.adapter.LauncherFragmentAdapter
@@ -94,6 +95,14 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
         // https://stackoverflow.com/questions/77683434/the-getnextentry-method-of-zipinputstream-throws-a-zipexception-invalid-zip-ent/77697327#77697327
         if (Build.VERSION.SDK_INT >= 34) {
             ZipPathValidator.clearCallback()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // 重建回来
+        if (LauncherUtil.isDefaultLauncher(this)) {
+            viewBinding.applyTv.gone()
         }
     }
 
