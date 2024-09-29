@@ -58,12 +58,7 @@ class ThemeManager {
         previewControlView?.controlListen = object : PreviewControlView.ControlListen {
             override fun onCancel() {
                 launcher?.let {
-                    QuitPreviewSureDialog(it).apply {
-                        onClickContinueListen = {
-                            quitPreview()
-                            setCurShowThemeById(themeId)
-                        }
-                    }.show()
+                    applyQuitPreviewMode(it)
                 }
             }
 
