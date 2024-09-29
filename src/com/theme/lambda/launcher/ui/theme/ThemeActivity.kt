@@ -9,8 +9,10 @@ import com.android.launcher3.databinding.ActivityThemeBinding
 import com.theme.lambda.launcher.Constants
 import com.theme.lambda.launcher.base.BaseActivity
 import com.theme.lambda.launcher.ui.me.MeActivity
+import com.theme.lambda.launcher.utils.LauncherUtil
 import com.theme.lambda.launcher.utils.StatusBarUtil
 import com.theme.lambda.launcher.utils.marginStatusBarHeight
+import com.theme.lambda.launcher.utils.visible
 import com.theme.lambda.launcher.widget.adapter.LauncherFragmentAdapter
 import dalvik.system.ZipPathValidator
 import java.lang.ref.WeakReference
@@ -80,6 +82,13 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
 
         viewBinding.meThemeIv.setOnClickListener {
             MeActivity.start(this)
+        }
+
+        if (!LauncherUtil.isDefaultLauncher(this)) {
+            viewBinding.applyTv.visible()
+            viewBinding.applyTv.setOnClickListener {
+                LauncherUtil.gotoSetLauncher(this)
+            }
         }
 
         // https://stackoverflow.com/questions/77683434/the-getnextentry-method-of-zipinputstream-throws-a-zipexception-invalid-zip-ent/77697327#77697327

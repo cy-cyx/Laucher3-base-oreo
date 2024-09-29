@@ -5,6 +5,8 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import com.android.launcher3.databinding.LayoutPreviewControlBinding
+import com.theme.lambda.launcher.utils.LauncherUtil
+import com.theme.lambda.launcher.utils.visible
 
 class PreviewControlView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
@@ -24,6 +26,13 @@ class PreviewControlView @JvmOverloads constructor(
         }
         layoutPreviewControlBinding?.setTv?.setOnClickListener {
             controlListen?.onSet()
+        }
+
+        if (!LauncherUtil.isDefaultLauncher(context)) {
+            layoutPreviewControlBinding?.applyFl?.visible()
+            layoutPreviewControlBinding?.applyFl?.setOnClickListener {
+                LauncherUtil.gotoSetLauncher(context)
+            }
         }
     }
 

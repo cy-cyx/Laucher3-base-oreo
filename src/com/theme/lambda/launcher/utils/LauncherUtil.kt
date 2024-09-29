@@ -1,32 +1,34 @@
 package com.theme.lambda.launcher.utils
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.provider.Settings
+import com.theme.lambda.launcher.ui.permissionguide.HomeLauncherSetGuideActivity
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 object LauncherUtil {
 
     fun gotoSetLauncher(context: Context) {
-        // todo 跳去设置页
-//        try {
-//            val intent = Intent(Intent.ACTION_MAIN);
-//            intent.addCategory(Intent.CATEGORY_HOME);
-//            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-//            intent.setClassName(
-//                "android",
-//                "com.android.internal.app.ResolverActivity"
-//            );
-//            context.startActivity(intent)
-//        } catch (e: Exception) {
-            try {
-                val intent: Intent = Intent(Settings.ACTION_HOME_SETTINGS)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        try {
+            val intent: Intent = Intent(Settings.ACTION_HOME_SETTINGS)
+            if (context is Activity) {
+                context.startActivityForResult(intent, 0)
+            } else {
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
                 context.startActivity(intent)
-            }catch (e:Exception){
-
             }
-//        }
+
+            // 引导
+            GlobalScope.launch {
+                delay(300)
+                HomeLauncherSetGuideActivity.start(context)
+            }
+        } catch (e: Exception) {
+        }
     }
 
     fun isDefaultLauncher(context: Context): Boolean {

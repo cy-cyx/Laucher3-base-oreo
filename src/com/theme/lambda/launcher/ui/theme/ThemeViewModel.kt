@@ -14,8 +14,10 @@ import com.theme.lambda.launcher.data.model.Resources
 import com.theme.lambda.launcher.task.DownloadZipTask
 import com.theme.lambda.launcher.ui.themepreview.ThemePreviewActivity
 import com.theme.lambda.launcher.utils.GsonUtil
+import com.theme.lambda.launcher.utils.LauncherUtil
 import com.theme.lambda.launcher.utils.SpUtil
 import com.theme.lambda.launcher.utils.requestTag
+import com.theme.lambda.launcher.widget.dialog.ApplyLauncherPermissionDialog
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -100,7 +102,21 @@ class ThemeViewModel : BaseViewModel() {
                 }
             }
         } else {
-            ThemePreviewActivity.start(context, resources)
+            if (!LauncherUtil.isDefaultLauncher(context)) {
+                ApplyLauncherPermissionDialog(context).apply {
+                    clickApplyListen = {
+                        dismiss()
+                        ThemePreviewActivity.start(context, resources)
+                        LauncherUtil.gotoSetLauncher(context)
+                    }
+                    clickNotNowListen = {
+                        dismiss()
+                        ThemePreviewActivity.start(context, resources)
+                    }
+                }.show()
+            } else {
+                ThemePreviewActivity.start(context, resources)
+            }
         }
 
     }

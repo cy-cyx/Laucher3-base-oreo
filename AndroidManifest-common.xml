@@ -34,7 +34,7 @@
     <!--        android:permissionGroup="android.permission-group.SYSTEM_TOOLS"-->
     <!--        android:protectionLevel="dangerous" />-->
 
-    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
@@ -156,5 +156,8 @@
             android:name="com.theme.lambda.launcher.ui.me.MeActivity"
             android:launchMode="singleTask"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity
+            android:name="com.theme.lambda.launcher.ui.permissionguide.HomeLauncherSetGuideActivity"
+            android:theme="@style/TransDialog" />
     </application>
 </manifest>

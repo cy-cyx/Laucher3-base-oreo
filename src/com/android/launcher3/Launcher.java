@@ -142,6 +142,7 @@ import com.theme.lambda.launcher.utils.LauncherUtil;
 import com.theme.lambda.launcher.utils.SpUtil;
 import com.theme.lambda.launcher.widget.PreviewControlView;
 import com.theme.lambda.launcher.widget.WallpaperView;
+import com.theme.lambda.launcher.widget.dialog.ApplyLauncherPermissionDialog;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -151,6 +152,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function0;
 
 /**
  * Default launcher application.
@@ -1119,7 +1123,22 @@ public class Launcher extends BaseActivity
 
         // 第一次设置需要提示一下权限
         if (!SpUtil.INSTANCE.getBool("first_req_premission", false)) {
-            LauncherUtil.INSTANCE.gotoSetLauncher(this);
+            ApplyLauncherPermissionDialog applyLauncherPermissionDialog = new ApplyLauncherPermissionDialog(this);
+            applyLauncherPermissionDialog.setClickApplyListen(new Function0<Unit>() {
+                @Override
+                public Unit invoke() {
+                    applyLauncherPermissionDialog.dismiss();
+                    return null;
+                }
+            });
+            applyLauncherPermissionDialog.setClickNotNowListen(new Function0<Unit>() {
+                @Override
+                public Unit invoke() {
+                    applyLauncherPermissionDialog.dismiss();
+                    return null;
+                }
+            });
+            applyLauncherPermissionDialog.show();
             SpUtil.INSTANCE.putBool("first_req_premission", true);
         }
     }
@@ -2307,6 +2326,8 @@ public class Launcher extends BaseActivity
         } else if (isAppsViewVisible()) {
             ued.logActionCommand(Action.Command.BACK, ContainerType.ALLAPPS);
             showWorkspace(true);
+        } else if (themeManager.isPreviewMode()) {
+            themeManager.applyQuitPreviewMode(this);
         } else if (isWidgetsViewVisible()) {
             ued.logActionCommand(Action.Command.BACK, ContainerType.WIDGETS);
             showOverviewMode(true);

@@ -31,4 +31,10 @@
     <string name="social" translatable="false">Social</string>
     <string name="shopping" translatable="false">Shopping</string>
     <string name="music_video" translatable="false">Music&amp;Video</string>
+    <string name="set_default_home_app">Please set "%s" as default home app to take effect</string>
+    <string name="home_launcher_permission_tip">Find %s and click it to grant permission</string>
+    <string name="allow">Allow</string>
+    <string name="not_now">Not now</string>
+    <string name="apply_theme">Apply Theme</string>
+    <string name="apply">Apply</string>
 </resources>

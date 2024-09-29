@@ -1,5 +1,6 @@
 package com.android.launcher3
 
+import android.content.Context
 import android.view.View
 import com.bumptech.glide.Glide
 import com.theme.lambda.launcher.data.model.ManifestBean
@@ -14,6 +15,7 @@ import com.theme.lambda.launcher.utils.gone
 import com.theme.lambda.launcher.utils.visible
 import com.theme.lambda.launcher.widget.PreviewControlView
 import com.theme.lambda.launcher.widget.WallpaperView
+import com.theme.lambda.launcher.widget.dialog.ApplyLauncherPermissionDialog
 import com.theme.lambda.launcher.widget.dialog.QuitPreviewSureDialog
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -78,6 +80,30 @@ class ThemeManager {
                     }
                 }
             }
+        }
+    }
+
+    var firstApplyQuit = true
+
+    fun applyQuitPreviewMode(context: Context) {
+        if (firstApplyQuit) {
+            firstApplyQuit = false
+            ApplyLauncherPermissionDialog(context).apply {
+                clickApplyListen = {
+                    dismiss()
+                    LauncherUtil.gotoSetLauncher(context)
+                }
+                clickNotNowListen = {
+                    dismiss()
+                }
+            }.show()
+        } else {
+            QuitPreviewSureDialog(context).apply {
+                onClickContinueListen = {
+                    quitPreview()
+                    setCurShowThemeById(themeId)
+                }
+            }.show()
         }
     }
 
@@ -158,6 +184,7 @@ class ThemeManager {
 
     private fun enterPreview() {
         isPreviewMode = true
+        firstApplyQuit = true
         launcher?.runOnUiThread {
             previewControlView?.visibility = View.VISIBLE
         }
