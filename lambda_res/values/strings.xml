@@ -26,11 +26,11 @@
     <string name="store" translatable="false">Store</string>
     <string name="games" translatable="false">Games</string>
     <string name="utilities" translatable="false">Utilities</string>
-    <string name="art_design" translatable="false">Art&amp;Design</string>
+    <string name="art_design" translatable="false">Art &amp; Design</string>
     <string name="health" translatable="false">Health</string>
     <string name="social" translatable="false">Social</string>
     <string name="shopping" translatable="false">Shopping</string>
-    <string name="music_video" translatable="false">Music&amp;Video</string>
+    <string name="music_video" translatable="false">Music &amp; Video</string>
     <string name="set_default_home_app">Please set "%s" as default home app to take effect</string>
     <string name="home_launcher_permission_tip">Find %s and click it to grant permission</string>
     <string name="allow">Allow</string>
