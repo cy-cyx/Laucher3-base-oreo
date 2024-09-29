@@ -73,6 +73,7 @@ class ThemeManager {
                     if (!LauncherUtil.isDefaultLauncher(it)) {
                         ApplyLauncherPermissionDialog(it).apply {
                             clickApplyListen = {
+                                LauncherUtil.gotoSetLauncher(it)
                                 dismiss()
                             }
                             clickNotNowListen = {
