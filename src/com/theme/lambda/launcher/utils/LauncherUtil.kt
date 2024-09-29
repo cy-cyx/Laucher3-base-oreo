@@ -8,16 +8,17 @@ import android.provider.Settings
 object LauncherUtil {
 
     fun gotoSetLauncher(context: Context) {
-        try {
-            val intent = Intent(Intent.ACTION_MAIN);
-            intent.addCategory(Intent.CATEGORY_HOME);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            intent.setClassName(
-                "android",
-                "com.android.internal.app.ResolverActivity"
-            );
-            context.startActivity(intent)
-        } catch (e: Exception) {
+        // todo 跳去设置页
+//        try {
+//            val intent = Intent(Intent.ACTION_MAIN);
+//            intent.addCategory(Intent.CATEGORY_HOME);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+//            intent.setClassName(
+//                "android",
+//                "com.android.internal.app.ResolverActivity"
+//            );
+//            context.startActivity(intent)
+//        } catch (e: Exception) {
             try {
                 val intent: Intent = Intent(Settings.ACTION_HOME_SETTINGS)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -25,7 +26,7 @@ object LauncherUtil {
             }catch (e:Exception){
 
             }
-        }
+//        }
     }
 
     fun isDefaultLauncher(context: Context): Boolean {

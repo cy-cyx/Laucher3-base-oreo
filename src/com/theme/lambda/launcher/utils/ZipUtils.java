@@ -35,6 +35,9 @@ public class ZipUtils {
         ZipInputStream inZip = new ZipInputStream(new FileInputStream(zipFileString));
         ZipEntry zipEntry;
         String szName = "";
+
+        File rootPath = new File(outPathString);
+
         while ((zipEntry = inZip.getNextEntry()) != null) {
             szName = zipEntry.getName();
 
@@ -48,7 +51,7 @@ public class ZipUtils {
                 File folder = new File(outPathString + File.separator + szName);
 
                 String canonicalPath = folder.getCanonicalPath();
-                if (!canonicalPath.startsWith(outPathString)) {
+                if (!canonicalPath.startsWith(rootPath.getCanonicalPath())) {
                     continue;
                 }
 
@@ -63,7 +66,7 @@ public class ZipUtils {
                 }
 
                 String canonicalPath = file.getCanonicalPath();
-                if (!canonicalPath.startsWith(outPathString)) {
+                if (!canonicalPath.startsWith(rootPath.getCanonicalPath())) {
                     continue;
                 }
 
