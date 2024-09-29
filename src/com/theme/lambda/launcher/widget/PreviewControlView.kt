@@ -28,12 +28,6 @@ class PreviewControlView @JvmOverloads constructor(
             controlListen?.onSet()
         }
 
-        if (!LauncherUtil.isDefaultLauncher(context)) {
-            layoutPreviewControlBinding?.applyFl?.visible()
-            layoutPreviewControlBinding?.applyFl?.setOnClickListener {
-                LauncherUtil.gotoSetLauncher(context)
-            }
-        }
     }
 
 

@@ -15,6 +15,7 @@ import com.theme.lambda.launcher.utils.gone
 import com.theme.lambda.launcher.utils.marginStatusBarHeight
 import com.theme.lambda.launcher.utils.visible
 import com.theme.lambda.launcher.widget.adapter.LauncherFragmentAdapter
+import com.theme.lambda.launcher.widget.dialog.ApplyLauncherPermissionDialog
 import dalvik.system.ZipPathValidator
 import java.lang.ref.WeakReference
 
@@ -88,7 +89,16 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
         if (!LauncherUtil.isDefaultLauncher(this)) {
             viewBinding.applyTv.visible()
             viewBinding.applyTv.setOnClickListener {
-                LauncherUtil.gotoSetLauncher(this)
+                ApplyLauncherPermissionDialog(this).apply {
+                    clickApplyListen = {
+                        dismiss()
+                        LauncherUtil.gotoSetLauncher(this@ThemeActivity)
+                    }
+                    clickNotNowListen = {
+                        dismiss()
+                    }
+                }.show()
+
             }
         }
 
