@@ -39,6 +39,10 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         return ActivitySearchBinding.inflate(layoutInflater)
     }
 
+    private val appsInfo by lazy {
+        AppUtils.getAppsInfo()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initView()
@@ -53,7 +57,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
                 viewBinding.ivClear.visibility = View.VISIBLE
                 viewBinding.ivSearch.visibility = View.VISIBLE
             }
-            val list = AppUtils.getAppsInfo().filter { appInfo ->
+            val list = appsInfo.filter { appInfo ->
                 ActivityUtils.getLauncherActivity(appInfo.packageName)
                     .isNotEmpty() && appInfo.name.contains(
                     it.toString(),
