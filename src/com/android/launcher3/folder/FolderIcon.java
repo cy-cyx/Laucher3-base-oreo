@@ -32,6 +32,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.RadialGradient;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.Region;
 import android.graphics.Shader;
 import android.graphics.drawable.Drawable;
@@ -77,6 +78,7 @@ import com.android.launcher3.dragndrop.DragLayer;
 import com.android.launcher3.dragndrop.DragView;
 import com.android.launcher3.graphics.IconPalette;
 import com.android.launcher3.util.Thunk;
+import com.theme.lambda.launcher.utils.CommonUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -136,6 +138,8 @@ public class FolderIcon extends FrameLayout implements FolderListener {
     private BadgeRenderer mBadgeRenderer;
     private float mBadgeScale;
     private Point mTempSpaceForBadgeOffset = new Point();
+
+    private static float roundedCorners = CommonUtil.INSTANCE.dp2px(12f);
 
     private static final Property<FolderIcon, Float> BADGE_SCALE_PROPERTY
             = new Property<FolderIcon, Float>(Float.TYPE, "badgeScale") {
@@ -635,50 +639,53 @@ public class FolderIcon extends FrameLayout implements FolderListener {
             mPaint.setStyle(Paint.Style.FILL);
             int alpha = (int) Math.min(MAX_BG_OPACITY, BG_OPACITY * mColorMultiplier);
             mPaint.setColor(Color.argb(alpha, BG_INTENSITY, BG_INTENSITY, BG_INTENSITY));
-
-            drawCircle(canvas, 0 /* deltaRadius */);
-
-            // Draw shadow.
-            if (mShadowShader == null) {
-                return;
-            }
             float radius = getScaledRadius();
-            float shadowRadius = radius + mStrokeWidth;
-            mPaint.setColor(Color.BLACK);
-            int offsetX = getOffsetX();
-            int offsetY = getOffsetY();
-            final int saveCount;
-            if (canvas.isHardwareAccelerated()) {
-                saveCount = canvas.saveLayer(offsetX - mStrokeWidth, offsetY,
-                        offsetX + radius + shadowRadius, offsetY + shadowRadius + shadowRadius,
-                        null, Canvas.ALL_SAVE_FLAG);
-
-            } else {
-                saveCount = canvas.save();
-                clipCanvasSoftware(canvas, Region.Op.DIFFERENCE);
-            }
-
-            mShaderMatrix.setScale(shadowRadius, shadowRadius);
-            mShaderMatrix.postTranslate(radius + offsetX, shadowRadius + offsetY);
-            mShadowShader.setLocalMatrix(mShaderMatrix);
-            mPaint.setShader(mShadowShader);
-            canvas.drawPaint(mPaint);
-            mPaint.setShader(null);
-
-            if (canvas.isHardwareAccelerated()) {
-                mPaint.setXfermode(mShadowPorterDuffXfermode);
-                canvas.drawCircle(radius + offsetX, radius + offsetY, radius, mPaint);
-                mPaint.setXfermode(null);
-            }
-
-            canvas.restoreToCount(saveCount);
+            canvas.drawRoundRect(getOffsetX(), getOffsetY(), 2 * radius + getOffsetX(), 2 * radius + getOffsetY(), roundedCorners, roundedCorners, mPaint);
+//
+//            drawCircle(canvas, 0 /* deltaRadius */);
+//
+//            // Draw shadow.
+//            if (mShadowShader == null) {
+//                return;
+//            }
+//            float radius = getScaledRadius();
+//            float shadowRadius = radius + mStrokeWidth;
+//            mPaint.setColor(Color.BLACK);
+//            int offsetX = getOffsetX();
+//            int offsetY = getOffsetY();
+//            final int saveCount;
+//            if (canvas.isHardwareAccelerated()) {
+//                saveCount = canvas.saveLayer(offsetX - mStrokeWidth, offsetY,
+//                        offsetX + radius + shadowRadius, offsetY + shadowRadius + shadowRadius,
+//                        null, Canvas.ALL_SAVE_FLAG);
+//
+//            } else {
+//                saveCount = canvas.save();
+//                clipCanvasSoftware(canvas, Region.Op.DIFFERENCE);
+//            }
+//
+//            mShaderMatrix.setScale(shadowRadius, shadowRadius);
+//            mShaderMatrix.postTranslate(radius + offsetX, shadowRadius + offsetY);
+//            mShadowShader.setLocalMatrix(mShaderMatrix);
+//            mPaint.setShader(mShadowShader);
+//            canvas.drawPaint(mPaint);
+//            mPaint.setShader(null);
+//
+//            if (canvas.isHardwareAccelerated()) {
+//                mPaint.setXfermode(mShadowPorterDuffXfermode);
+//                canvas.drawCircle(radius + offsetX, radius + offsetY, radius, mPaint);
+//                mPaint.setXfermode(null);
+//            }
+//
+//            canvas.restoreToCount(saveCount);
         }
 
         public void drawBackgroundStroke(Canvas canvas) {
             mPaint.setColor(Color.argb(255, BG_INTENSITY, BG_INTENSITY, BG_INTENSITY));
             mPaint.setStyle(Paint.Style.STROKE);
             mPaint.setStrokeWidth(mStrokeWidth);
-            drawCircle(canvas, 1 /* deltaRadius */);
+//            drawCircle(canvas, 1 /* deltaRadius */);
+            canvas.drawPath(getRoundedCorners(),mPaint);
         }
 
         public void drawLeaveBehind(Canvas canvas) {
@@ -700,10 +707,18 @@ public class FolderIcon extends FrameLayout implements FolderListener {
 
         // It is the callers responsibility to save and restore the canvas layers.
         private void clipCanvasSoftware(Canvas canvas, Region.Op op) {
-            mPath.reset();
-            float r = getScaledRadius();
-            mPath.addCircle(r + getOffsetX(), r + getOffsetY(), r, Path.Direction.CW);
-            canvas.clipPath(mPath, op);
+//            mPath.reset();
+//            float r = getScaledRadius();
+//            mPath.addCircle(r + getOffsetX(), r + getOffsetY(), r, Path.Direction.CW);
+            canvas.clipPath(getRoundedCorners(), op);
+        }
+
+        private Path getRoundedCorners() {
+            Path path = new Path();
+            float radius = getScaledRadius();
+            RectF rect = new RectF(getOffsetX(), getOffsetY(), 2 * radius + getOffsetX(), 2 * radius + getOffsetY());
+            path.addRoundRect(rect, roundedCorners, roundedCorners, Path.Direction.CW);
+            return path;
         }
 
         // It is the callers responsibility to save and restore the canvas layers.
@@ -846,7 +861,7 @@ public class FolderIcon extends FrameLayout implements FolderListener {
 
         final int saveCount;
 
-        if (canvas.isHardwareAccelerated()) {
+        if (false) {
             saveCount = canvas.saveLayer(0, 0, getWidth(), getHeight(), null,
                     Canvas.ALL_SAVE_FLAG);
         } else {
@@ -868,7 +883,7 @@ public class FolderIcon extends FrameLayout implements FolderListener {
         }
         canvas.translate(-mBackground.basePreviewOffsetX, -mBackground.basePreviewOffsetY);
 
-        if (mPreviewLayoutRule.clipToBackground() && canvas.isHardwareAccelerated()) {
+        if (mPreviewLayoutRule.clipToBackground() && false) {
             mBackground.clipCanvasHardware(canvas);
         }
         canvas.restoreToCount(saveCount);
