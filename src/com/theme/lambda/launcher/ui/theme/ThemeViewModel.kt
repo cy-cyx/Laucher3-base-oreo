@@ -81,21 +81,21 @@ class ThemeViewModel : BaseViewModel() {
     }
 
     fun gotoPreview(context: Activity, resources: Resources) {
-        if (!LauncherUtil.isDefaultLauncher(context)) {
-            ApplyLauncherPermissionDialog(context).apply {
-                clickApplyListen = {
-                    dismiss()
-                    LauncherUtil.gotoSetLauncher(context)
-                }
-                clickNotNowListen = {
-                    dismiss()
-                    ThemePreviewActivity.start(context, resources)
-                    AdUtil.showAd(AdName.interleaving)
-                }
-            }.show()
-        } else {
+//        if (!LauncherUtil.isDefaultLauncher(context)) {
+//            ApplyLauncherPermissionDialog(context).apply {
+//                clickApplyListen = {
+//                    dismiss()
+//                    LauncherUtil.gotoSetLauncher(context)
+//                }
+//                clickNotNowListen = {
+//                    dismiss()
+//                    ThemePreviewActivity.start(context, resources)
+//                    AdUtil.showAd(AdName.interleaving)
+//                }
+//            }.show()
+//        } else {
             ThemePreviewActivity.start(context, resources)
             AdUtil.showAd(AdName.interleaving)
-        }
+//        }
     }
 }
