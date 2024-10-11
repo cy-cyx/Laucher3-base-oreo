@@ -79,6 +79,6 @@ class ADBanner @JvmOverloads constructor(
                     }
                 })
         }
-        mBannerAdapter?.loadBanner(false)
+        mBannerAdapter?.loadBanner(false, tryCollapse = true)
     }
 }
