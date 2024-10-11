@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "807472682183",
+    "project_id": "lambda-launcher",
+    "storage_bucket": "lambda-launcher.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:807472682183:android:0da9b3eaf136d4fbc31ae2",
+        "android_client_info": {
+          "package_name": "com.theme.lambda.launcher"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5MMp0M0y0NsqtGbsSKzORksXoEAkMYws"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

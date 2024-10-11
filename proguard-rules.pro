@@ -84,3 +84,6 @@
 -keep,allowobfuscation,allowshrinking class retrofit2.Response
 
 -keep class com.lambdaweather.data.model.* { *; }
+
+-keep class com.facebook.** { *; }
+-keep class com.lambda.** { *; }

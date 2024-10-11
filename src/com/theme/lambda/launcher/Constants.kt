@@ -6,6 +6,8 @@ object Constants {
     const val PRIVACY_POLICY = "https://d218bwdbonjwkx.cloudfront.net/privacy-policy"
     const val TERMS_OF_SERVICE = "https://d218bwdbonjwkx.cloudfront.net/terms-of-service"
 
+    const val adjustToken = "zsckz2n5xcsg"
+
     val sThemeTag =
         arrayListOf("Hot", "Glittery", "Anime", "Aesthetic", "Cool", "Pink", "Color", "Neon")
 }
