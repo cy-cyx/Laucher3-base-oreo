@@ -27,9 +27,7 @@ class MeViewModel : BaseViewModel() {
 
     fun download(context: Activity, res: ThemeRes) {
         ThemeManager.enterPreviewId = res.did
-        if (!Launcher.isExist()) {
-            context.startActivity(Intent(context, Launcher::class.java))
-        }
+        context.startActivity(Intent(context, Launcher::class.java))
         ThemeActivity.closeThemeActivity()
         context.finish()
     }

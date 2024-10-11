@@ -49,9 +49,7 @@ class ThemePreviewViewModel : BaseViewModel() {
 
             if (result) {
                 ThemeManager.enterPreviewId = resources?.id ?: ""
-                if (!Launcher.isExist()) {
-                    context.startActivity(Intent(context, Launcher::class.java))
-                }
+                context.startActivity(Intent(context, Launcher::class.java))
                 context.finish()
                 ThemeActivity.closeThemeActivity()
                 DataRepository.insertDownLoadThemeIntoDb(resources!!.toThemeRes())
