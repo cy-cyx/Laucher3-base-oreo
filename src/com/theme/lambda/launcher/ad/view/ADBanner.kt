@@ -50,6 +50,7 @@ class ADBanner @JvmOverloads constructor(
     }
 
     private var lastShowAdTimeStamp = -1L
+    private var bannerLoadCnt = 0
 
     private var mBannerAdapter: LAdMultipleAdapter? = null
     private fun showBannerAd() {
@@ -79,6 +80,6 @@ class ADBanner @JvmOverloads constructor(
                     }
                 })
         }
-        mBannerAdapter?.loadBanner(false, tryCollapse = true)
+        mBannerAdapter?.loadBanner(isAuto = true, tryCollapse = bannerLoadCnt++ % 5 == 0)
     }
 }
