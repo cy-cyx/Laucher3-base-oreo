@@ -1,10 +1,18 @@
 package com.theme.lambda.launcher.ad
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
+import android.content.Context
 import android.os.Bundle
+import android.view.LayoutInflater
 import com.android.launcher3.BuildConfig
 import com.android.launcher3.R
+import com.android.launcher3.databinding.LayoutNativeAdAdmob1Binding
+import com.android.launcher3.databinding.LayoutNativeAdMax1Binding
+import com.applovin.mediation.nativeAds.MaxNativeAdView
+import com.applovin.mediation.nativeAds.MaxNativeAdViewBinder
+import com.google.android.gms.ads.nativead.NativeAdView
 import com.lambda.adlib.LambdaAd
 import com.lambda.adlib.LambdaAdAdapter
 import com.lambda.adlib.LambdaAdSdk
@@ -23,6 +31,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 
+@SuppressLint("StaticFieldLeak")
 object AdUtil : Application.ActivityLifecycleCallbacks {
 
     val TAG = "AdUtil"
@@ -410,6 +419,37 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
         }
         getADAdapter(scenes)?.showInterstitial()
         return true
+    }
+
+
+    fun populateNativeAdViewMax1(context: Context, layoutId: Int): MaxNativeAdView {
+        val binding = LayoutNativeAdMax1Binding.bind(
+            LayoutInflater.from(context).inflate(layoutId, null)
+        )
+        return MaxNativeAdView(
+            MaxNativeAdViewBinder.Builder(binding.root).setTitleTextViewId(binding.titleTv.id)
+                .setBodyTextViewId(binding.desTv.id).setIconImageViewId(binding.iconIv.id)
+                .setMediaContentViewGroupId(binding.logoFl.id)
+                .setCallToActionButtonId(binding.buttonBn.id)
+//                .setAdvertiserTextViewId(binding.advertiserTextView.id)
+//                .setOptionsContentViewGroupId(binding.adOptionsView.id)
+                .build(), context
+        )
+    }
+
+    fun populateNativeAdViewAdmob1(context: Context, layoutId: Int): NativeAdView {
+        val binding = LayoutNativeAdAdmob1Binding.bind(
+            LayoutInflater.from(context).inflate(layoutId, null)
+        )
+        val nativeView = binding.root as NativeAdView
+
+        nativeView.mediaView = binding.logoFl
+        nativeView.iconView = binding.iconIv
+        nativeView.headlineView = binding.titleTv
+        nativeView.bodyView = binding.desTv
+        nativeView.callToActionView = binding.buttonBn
+
+        return nativeView
     }
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {

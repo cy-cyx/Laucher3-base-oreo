@@ -5,26 +5,61 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.android.launcher3.databinding.ItemAdBinding
 import com.android.launcher3.databinding.ItemNewsBinding
+import com.theme.lambda.launcher.ad.AdName
+import com.theme.lambda.launcher.ad.view.ADNativeSmallView
 import com.theme.lambda.launcher.data.model.News
+import com.theme.lambda.launcher.ui.news.item.AdItem
+import com.theme.lambda.launcher.ui.news.item.BaseItem
+import com.theme.lambda.launcher.ui.news.item.NewsItem
 import com.theme.lambda.launcher.utils.CommonUtil
 
 class NewsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val data = ArrayList<News>()
+    companion object {
+        val viewTypeNew = 1
+        val viewTypeAd = 2
+    }
+
+    private val data = ArrayList<BaseItem>()
 
     @SuppressLint("NotifyDataSetChanged")
-    fun upData(d: ArrayList<News>) {
+    fun upData(d: ArrayList<BaseItem>) {
         data.clear()
         data.addAll(d)
         notifyDataSetChanged()
     }
 
+    override fun getItemViewType(position: Int): Int {
+        val baseItem = data[position]
+        when (baseItem) {
+            is NewsItem -> {
+                return viewTypeNew
+            }
+
+            is AdItem -> {
+                return viewTypeAd
+            }
+        }
+        return super.getItemViewType(position)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return NewsViewHolder(ItemNewsBinding.inflate(LayoutInflater.from(parent.context)).root.apply {
-            layoutParams =
-                ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, CommonUtil.dp2px(250f))
-        })
+        when (viewType) {
+            viewTypeAd ->{
+                return AdViewHolder(ItemAdBinding.inflate(LayoutInflater.from(parent.context)).root.apply {
+                    layoutParams =
+                        ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, CommonUtil.dp2px(160f))
+                })
+            }
+            else ->{
+                return NewsViewHolder(ItemNewsBinding.inflate(LayoutInflater.from(parent.context)).root.apply {
+                    layoutParams =
+                        ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, CommonUtil.dp2px(250f))
+                })
+            }
+        }
     }
 
     override fun getItemCount(): Int {
@@ -32,9 +67,22 @@ class NewsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (holder is NewsViewHolder) {
-            holder.bind(data[position])
+        when(holder){
+            is NewsViewHolder ->{
+                (data[position] as? NewsItem)?.let {
+                    holder.bind(it.new)
+                }
+            }
         }
     }
 
+    override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {
+        super.onViewAttachedToWindow(holder)
+        (holder as? AdViewHolder)?.onViewAttachedToWindow()
+    }
+
+    override fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder) {
+        super.onViewDetachedFromWindow(holder)
+        (holder as? AdViewHolder)?.onViewDetachedFromWindow()
+    }
 }

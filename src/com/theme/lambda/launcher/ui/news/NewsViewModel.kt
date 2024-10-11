@@ -5,13 +5,18 @@ import androidx.lifecycle.viewModelScope
 import com.theme.lambda.launcher.base.BaseViewModel
 import com.theme.lambda.launcher.data.DataRepository
 import com.theme.lambda.launcher.data.model.News
+import com.theme.lambda.launcher.ui.news.item.AdItem
+import com.theme.lambda.launcher.ui.news.item.BaseItem
+import com.theme.lambda.launcher.ui.news.item.NewsItem
 import kotlinx.coroutines.launch
 
 class NewsViewModel : BaseViewModel() {
 
     var page = 0L
+    private val adInterval = 5
+    private var curAdInterval = 3 // 间隔是5个 开始为2个故从3个起
 
-    var newsLiveData = MutableLiveData<ArrayList<News>>()
+    var newsLiveData = MutableLiveData<ArrayList<BaseItem>>()
     var refreshFinishLiveData = MutableLiveData<Boolean>()
     var loadMoreFinishLiveData = MutableLiveData<Boolean>()
     var isLoadMore = false
@@ -21,7 +26,7 @@ class NewsViewModel : BaseViewModel() {
             page = 1L
             val data = DataRepository.getNewData(page)
             val newsList = data?.news ?: arrayListOf()
-            newsLiveData.value = newsList
+            newsLiveData.value = assembleData(newsList, true)
             refreshFinishLiveData.value = true
         }
     }
@@ -35,10 +40,28 @@ class NewsViewModel : BaseViewModel() {
             val data = DataRepository.getNewData(page)
             val newsList = data?.news ?: arrayListOf()
             val allData = newsLiveData.value ?: arrayListOf()
-            allData.addAll(newsList)
+            allData.addAll(assembleData(newsList, false))
             newsLiveData.value = allData
             loadMoreFinishLiveData.value = true
             isLoadMore = false
         }
+    }
+
+    // 混入ad广告位
+    private fun assembleData(newsList: ArrayList<News>, upData: Boolean): ArrayList<BaseItem> {
+        if (upData) {
+            curAdInterval = 3
+        }
+
+        val list = ArrayList<BaseItem>()
+        newsList.forEach {
+            curAdInterval++
+            list.add(NewsItem(it))
+            if (curAdInterval >= adInterval) {
+                list.add(AdItem())
+                curAdInterval = 0
+            }
+        }
+        return list
     }
 }
