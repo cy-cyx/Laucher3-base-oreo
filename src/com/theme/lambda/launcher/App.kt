@@ -3,10 +3,10 @@ package com.theme.lambda.launcher
 import android.app.Application
 import android.content.Context
 import android.os.Build
-import android.os.Looper
 import android.text.TextUtils
 import android.webkit.WebView
 import com.lambdaweather.LambdaWeather
+import com.theme.lambda.launcher.ad.AdUtil
 import com.theme.lambda.launcher.data.di.allModules
 import com.theme.lambda.launcher.statistics.EventUtil
 import com.theme.lambda.launcher.statistics.FirebaseAnalyticsUtil
@@ -33,6 +33,7 @@ class App : Application() {
                 LambdaWeather.init(this, Constants.BASE_URL)
                 FirebaseAnalyticsUtil.init(this)
                 EventUtil.init()
+                AdUtil.initAd(this)
             }
         }
 

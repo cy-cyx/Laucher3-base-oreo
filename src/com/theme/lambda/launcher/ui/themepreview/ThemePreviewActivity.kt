@@ -5,11 +5,18 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
+import com.android.launcher3.R
 import com.android.launcher3.databinding.ActivityThemePreviewBinding
+import com.lambda.adlib.LambdaAd
+import com.theme.lambda.launcher.ad.AdName
+import com.theme.lambda.launcher.ad.AdUtil
+import com.theme.lambda.launcher.ad.IAdCallBack
 import com.theme.lambda.launcher.base.BaseActivity
 import com.theme.lambda.launcher.data.model.Resources
+import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.utils.GlideUtil
 import com.theme.lambda.launcher.utils.GsonUtil
 import com.theme.lambda.launcher.utils.StatusBarUtil
@@ -57,9 +64,28 @@ class ThemePreviewActivity : BaseActivity<ActivityThemePreviewBinding>() {
 
         viewBinding.backIv.setOnClickListener {
             finish()
+            AdUtil.showAd(AdName.interleaving)
         }
         viewBinding.setTv.setOnClickListener {
-            viewModel.download(this@ThemePreviewActivity)
+            if (AdUtil.isReady(AdName.unlock)){
+                AdUtil.showAd(AdName.unlock,object :IAdCallBack{
+                    override fun onNoReady() {
+
+                    }
+
+                    override fun onAdClose(status: Int) {
+                        if (status == LambdaAd.AD_CLOSE_REWARD_COMPLETE || status == LambdaAd.AD_CLOSE) {
+                            viewModel.download(this@ThemePreviewActivity)
+                        }
+                    }
+                })
+            }else{
+                Toast.makeText(
+                    this,
+                    CommonUtil.getString(R.string.ad_no_fill_tip), Toast.LENGTH_SHORT
+                ).show()
+            }
+
         }
 
         viewModel.loadDialogLiveData.observe(this, Observer {
@@ -69,5 +95,10 @@ class ThemePreviewActivity : BaseActivity<ActivityThemePreviewBinding>() {
                 loadDialog.dismiss()
             }
         })
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        AdUtil.showAd(AdName.interleaving)
     }
 }

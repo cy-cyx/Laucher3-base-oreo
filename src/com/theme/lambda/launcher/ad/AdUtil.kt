@@ -1,0 +1,457 @@
+package com.theme.lambda.launcher.ad
+
+import android.app.Activity
+import android.app.Application
+import android.os.Bundle
+import com.android.launcher3.BuildConfig
+import com.android.launcher3.R
+import com.lambda.adlib.LambdaAd
+import com.lambda.adlib.LambdaAdAdapter
+import com.lambda.adlib.LambdaAdSdk
+import com.lambda.adlib.adapter.LAdMultipleAdapter
+import com.lambda.common.utils.utilcode.util.ActivityUtils
+import com.theme.lambda.launcher.Constants
+import com.theme.lambda.launcher.statistics.ADEventName
+import com.theme.lambda.launcher.statistics.EventUtil
+import com.theme.lambda.launcher.statistics.FirebaseAnalyticsUtil
+import com.theme.lambda.launcher.utils.LogUtil
+import com.theme.lambda.launcher.utils.SpKey
+import com.theme.lambda.launcher.utils.getMMKVFloat
+import com.theme.lambda.launcher.utils.putMMKVFloat
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
+
+object AdUtil : Application.ActivityLifecycleCallbacks {
+
+    val TAG = "AdUtil"
+    private var initSuccess = false
+
+    // 专门留一个activity用于泄露使用
+    private var adActivity: Activity? = null
+
+    fun getWapActivity(): Activity? = adActivity ?: ActivityUtils.getTopActivity()
+
+    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
+
+    private val lAdMultipleAdapters = mutableMapOf<String, LAdMultipleAdapter?>()
+
+    // 这种写法 需求所需 可能存在泄露 但是不能使用弱引用
+    private var lastCallback: IAdCallBack? = null
+
+    // 由于adapter是单个，回调会被顶，故用集合
+    private val nativeAdapterCloseMap =
+        HashMap<String, ArrayList<LambdaAdAdapter.OnAdapterClose<LAdMultipleAdapter>>>()
+
+    private var lastShowAdMillis = 0L
+
+    @Synchronized
+    fun addNativeAdapterClose(
+        scenes: String, adapterClose: LambdaAdAdapter.OnAdapterClose<LAdMultipleAdapter>
+    ) {
+        val list = nativeAdapterCloseMap[scenes] ?: ArrayList()
+        if (!list.contains(adapterClose)) {
+            // 确保最后进的第一个设置
+            list.add(0, adapterClose)
+        }
+        nativeAdapterCloseMap[scenes] = list
+    }
+
+    @Synchronized
+    fun removeNativeAdapterClose(
+        scenes: String, adapterClose: LambdaAdAdapter.OnAdapterClose<LAdMultipleAdapter>
+    ) {
+        val list = nativeAdapterCloseMap[scenes] ?: ArrayList()
+        list.remove(adapterClose)
+        nativeAdapterCloseMap[scenes] = list
+    }
+
+
+    fun initAd(app: Application) {
+        app.registerActivityLifecycleCallbacks(this)
+        LambdaAdSdk.registerLife(app)
+
+        LambdaAdSdk.init(
+            Constants.BASE_URL, Constants.SECRET_KEY, object : LambdaAd.LogAdEvent {
+                override fun onLog(step: Int, logParam: LambdaAd.LogAdEvent.LogParam?, ad: Any?) {
+                    LogUtil.d(TAG, "step: $step, logParam: $logParam, ad: $ad")
+                    when (step) {
+                        LambdaAd.LogAdEvent.LOG_LOAD -> {
+                            EventUtil.logEvent(ADEventName.adLoad, Bundle().apply {
+                                putString("adid", logParam?.adId ?: "")
+                                putString("ad_source", logParam?.adSource ?: "")
+                                putInt("ad_type", logParam?.ad_type ?: 0)
+                                putString("ad_type_alias", logParam?.getAdTypeAlias() ?: "")
+                                putInt("reload", logParam?.reload ?: 0)
+                                putLong("start_time", System.currentTimeMillis())
+                                putString("scene_alias", logParam?.name ?: "")
+                            })
+                        }
+
+                        LambdaAd.LogAdEvent.LOG_FILL -> {
+                            EventUtil.logEvent(ADEventName.adFill, Bundle().apply {
+                                putString("adid", logParam?.adId ?: "")
+                                putString("ad_source", logParam?.adSource ?: "")
+                                putInt("ad_type", logParam?.ad_type ?: 0)
+                                putString("ad_type_alias", logParam?.getAdTypeAlias() ?: "")
+                                putInt("reload", logParam?.reload ?: 0)
+                                putString("med_source", logParam?.med_source ?: "0")
+                                putString("scene_alias", logParam?.name ?: "")
+                                putLong("loadtime", logParam?.loadTime ?: 0L)
+                                putFloat("revenue", logParam?.revenue?.toFloat() ?: 0.0f)
+                                putFloat("value", logParam?.revenue?.toFloat() ?: 0.0f)
+                                putString("currency", "USD")
+                            })
+                        }
+
+                        LambdaAd.LogAdEvent.LOG_LOAD_FAIL -> {
+                            EventUtil.logEvent(ADEventName.adLoadFailed, Bundle().apply {
+                                putString("adid", logParam?.adId ?: "")
+                                putString("ad_source", logParam?.adSource ?: "")
+                                putInt("ad_type", logParam?.ad_type ?: 0)
+                                putString("ad_type_alias", logParam?.getAdTypeAlias() ?: "")
+                                putString("scene_alias", logParam?.name ?: "")
+                                putInt("reload", logParam?.reload ?: 0)
+                                putString("med_source", logParam?.med_source ?: "0")
+                                putInt("code", logParam?.code ?: 0)
+                                putString("err_msg", logParam?.errMsg ?: "")
+                            })
+                        }
+
+                        LambdaAd.LogAdEvent.LOG_REQUEST -> {
+                            EventUtil.logEvent(ADEventName.adRequest, Bundle().apply {
+                                putString("adid", logParam?.adId ?: "")
+                                putString("ad_source", logParam?.adSource ?: "")
+                                putInt("ad_type", logParam?.ad_type ?: 0)
+                                putString("ad_type_alias", logParam?.getAdTypeAlias() ?: "")
+                                putString("scene_alias", logParam?.name ?: "")
+                                putInt("code", 0)
+                            })
+                        }
+
+                        LambdaAd.LogAdEvent.LOG_SHOW -> {
+                            EventUtil.logEvent(ADEventName.adShow, Bundle().apply {
+                                putString("adid", logParam?.adId ?: "")
+                                putString("ad_source", logParam?.adSource ?: "")
+                                putInt("ad_type", logParam?.ad_type ?: 0)
+                                putString("ad_type_alias", logParam?.getAdTypeAlias() ?: "")
+                                putString("med_source", logParam?.med_source ?: "0")
+                                putInt("reload", logParam?.reload ?: 0)
+                                putString("scene_alias", logParam?.name ?: "")
+                                putBoolean("isVisible", logParam?.isVisible ?: false)
+                            })
+                        }
+
+                        LambdaAd.LogAdEvent.LOG_SHOW_FAIL -> {
+                            EventUtil.logEvent(ADEventName.adShowFailed, Bundle().apply {
+                                putString("adid", logParam?.adId ?: "")
+                                putString("ad_source", logParam?.adSource ?: "")
+                                putInt("ad_type", logParam?.ad_type ?: 0)
+                                putString("ad_type_alias", logParam?.getAdTypeAlias() ?: "")
+                                putString("scene_alias", logParam?.name ?: "")
+                                putInt("code", logParam?.code ?: 0)
+                                putString("err_msg", logParam?.errMsg ?: "")
+                            })
+                        }
+
+                        LambdaAd.LogAdEvent.LOG_CLICK -> {
+                            EventUtil.logEvent(ADEventName.adClick, Bundle().apply {
+                                putString("adid", logParam?.adId ?: "")
+                                putString("ad_source", logParam?.adSource ?: "")
+                                putInt("ad_type", logParam?.ad_type ?: 0)
+                                putString("ad_type_alias", logParam?.getAdTypeAlias() ?: "")
+                                putString("med_source", logParam?.med_source ?: "0")
+                                putString("scene_alias", logParam?.name ?: "")
+                            })
+                        }
+
+                        LambdaAd.LogAdEvent.LOG_REVENUE -> {
+                            EventUtil.logEvent(ADEventName.adRevenue, Bundle().apply {
+                                putString("adid", logParam?.adId ?: "")
+                                putString("ad_source", logParam?.adSource ?: "")
+                                putFloat("revenue", logParam?.revenue?.toFloat() ?: 0.0f)
+                                putFloat("value", logParam?.revenue?.toFloat() ?: 0.0f)
+                                putInt("ad_type", logParam?.ad_type ?: 0)
+                                putString("ad_type_alias", logParam?.getAdTypeAlias() ?: "")
+                                putString("scene_alias", logParam?.name ?: "")
+                                putString("resp_id", logParam?.resp_id ?: "")
+                                putLong("cache_time", logParam?.cache_time ?: 0L)
+                                putString("currency", "USD")
+                                putBoolean("isVisible", logParam?.isVisible ?: false)
+                            })
+                            EventUtil.logEvent(ADEventName.adRevenue, Bundle().apply {
+                                putString("adid", logParam?.adId ?: "")
+                                putString("ad_source", logParam?.adSource ?: "")
+                                putFloat("revenue", logParam?.revenue?.toFloat() ?: 0.0f)
+                                putFloat("value", logParam?.revenue?.toFloat() ?: 0.0f)
+                                putInt("ad_type", logParam?.ad_type ?: 0)
+                                putString("ad_type_alias", logParam?.getAdTypeAlias() ?: "")
+                                putString("scene_alias", logParam?.name ?: "")
+                                putString("resp_id", logParam?.resp_id ?: "")
+                                putLong("cache_time", logParam?.cache_time ?: 0L)
+                                putString("currency", "USD")
+                            })
+
+                            // 多上传一份给firebase（单独）
+                            FirebaseAnalyticsUtil.logEvent(
+                                ADEventName.ad_impression,
+                                Bundle().apply {
+                                    putFloat("value", logParam?.revenue?.toFloat() ?: 0.0f)
+                                    putString("currency", "USD")
+                                    putString("adid", logParam?.adId ?: "")
+                                })
+
+                            // 累计收益上传两份firebase（单独）
+                            // 用于每累计满0.01 0.02 0.03上传一次，上传后清零
+                            var income001 = SpKey.cumulative_income_001.getMMKVFloat(0f)
+                            logParam?.revenue?.toFloat()?.let {
+                                income001 += it
+                            }
+                            SpKey.cumulative_income_001.putMMKVFloat(income001)
+
+                            if (income001 > 0.01f) {
+                                FirebaseAnalyticsUtil.logEvent(ADEventName.totalAdRevenue001,
+                                    Bundle().apply {
+                                        putFloat("value", income001)
+                                        putString("currency", "USD")
+                                    })
+                                FirebaseAnalyticsUtil.logEvent(
+                                    ADEventName.adRev001,
+                                    Bundle().apply {
+                                        putFloat("value", income001)
+                                        putString("currency", "USD")
+                                    })
+                                FirebaseAnalyticsUtil.logEvent(
+                                    ADEventName.totalAdRevenue001,
+                                    Bundle().apply {
+                                        putFloat("value", income001)
+                                        putString("currency", "USD")
+                                    })
+                                SpKey.cumulative_income_001.putMMKVFloat(0f)
+                            }
+
+                            var income002 = SpKey.cumulative_income_002.getMMKVFloat(0f)
+                            logParam?.revenue?.toFloat()?.let {
+                                income002 += it
+                            }
+                            SpKey.cumulative_income_002.putMMKVFloat(income002)
+
+                            if (income002 > 0.02f) {
+                                FirebaseAnalyticsUtil.logEvent(ADEventName.totalAdRevenue002,
+                                    Bundle().apply {
+                                        putFloat("value", income002)
+                                        putString("currency", "USD")
+                                    })
+                                FirebaseAnalyticsUtil.logEvent(
+                                    ADEventName.adRev002,
+                                    Bundle().apply {
+                                        putFloat("value", income002)
+                                        putString("currency", "USD")
+                                    })
+                                EventUtil.logEvent(ADEventName.totalAdRevenue002, Bundle().apply {
+                                    putFloat("value", income002)
+                                    putString("currency", "USD")
+                                })
+
+                                SpKey.cumulative_income_002.putMMKVFloat(0f)
+                            }
+
+                            var income003 = SpKey.cumulative_income_003.getMMKVFloat(0f)
+                            logParam?.revenue?.toFloat()?.let {
+                                income003 += it
+                            }
+                            SpKey.cumulative_income_003.putMMKVFloat(income003)
+
+                            if (income003 > 0.03f) {
+                                FirebaseAnalyticsUtil.logEvent(ADEventName.totalAdRevenue003,
+                                    Bundle().apply {
+                                        putFloat("value", income003)
+                                        putString("currency", "USD")
+                                    })
+                                FirebaseAnalyticsUtil.logEvent(
+                                    ADEventName.adRev003,
+                                    Bundle().apply {
+                                        putFloat("value", income003)
+                                        putString("currency", "USD")
+                                    })
+                                EventUtil.logEvent(ADEventName.totalAdRevenue003, Bundle().apply {
+                                    putFloat("value", income003)
+                                    putString("currency", "USD")
+                                })
+
+                                SpKey.cumulative_income_003.putMMKVFloat(0f)
+                            }
+
+                        }
+
+                        LambdaAd.LogAdEvent.LOG_INIT_SDK_SUCCESS -> {
+                            initSuccess = true
+                            // 广告预加载
+                            getWapActivity()?.let {
+                                loadAd(it)
+                            }
+                        }
+                    }
+                }
+            }, BuildConfig.isDebug
+        )
+            // 存在ANR，又必须在主线程 -_-
+            .initRemoteConfig(
+                R.xml.remote_config_defaults,
+                listOf("AdConfig"),
+                "AdConfig"
+            )
+    }
+
+    private var isInit = false
+
+    fun loadAd(activity: Activity) {
+        if (!initSuccess) {
+            return
+        }
+
+        // 防止重复调用
+        if (isInit) return
+        isInit = true
+
+        // 全屏类
+        for (i in listOf(
+            AdName.splash,
+            AdName.interleaving,
+            AdName.unlock
+        )) {
+            if (lAdMultipleAdapters[i] != null) {
+                continue
+            }
+            LAdMultipleAdapter(activity,
+                i,
+                object : LambdaAdAdapter.OnAdapterClose<LAdMultipleAdapter>() {
+                    override fun onClose(adapter: LAdMultipleAdapter, status: Int) {
+                        super.onClose(adapter, status)
+                        LogUtil.d(TAG, "adapter: ${adapter}, status: $status")
+                        if (status != LambdaAd.AD_SHOWING) {
+                            lastCallback?.onAdClose(status)
+                            lastCallback = null
+                        }
+                    }
+                }).apply {
+                lAdMultipleAdapters[i] = this
+                loadInterstitial(true)
+            }
+        }
+        // native
+        for (i in listOf(
+            AdName.download_nat,
+            AdName.theme_new_nat
+        )) {
+            if (lAdMultipleAdapters[i] != null) {
+                continue
+            }
+            LAdMultipleAdapter(activity,
+                i,
+                object : LambdaAdAdapter.OnAdapterClose<LAdMultipleAdapter>() {}).apply {
+                lAdMultipleAdapters[i] = this
+                loadNative()
+                onAdapterClose = object : LambdaAdAdapter.OnAdapterClose<LAdMultipleAdapter>() {
+                    override fun onLoad(adapter: LAdMultipleAdapter, status: Int) {
+                        super.onLoad(adapter, status)
+                        // 如果不切到主线程回调 可能出现异步问题
+                        scope.launch {
+                            nativeAdapterCloseMap[i]?.let {
+                                val temp = ArrayList(it)
+                                temp.forEach { close ->
+                                    close.onLoad(adapter, status)
+                                }
+                            }
+                        }
+                    }
+
+                    override fun onClose(adapter: LAdMultipleAdapter, status: Int) {
+                        super.onClose(adapter, status)
+                        nativeAdapterCloseMap[i]?.let {
+                            val temp = ArrayList(it)
+                            temp.forEach { close ->
+                                close.onClose(adapter, status)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // banner
+        for (i in listOf(
+            AdName.home_ban
+        )) {
+            if (lAdMultipleAdapters[i] != null) {
+                continue
+            }
+            LAdMultipleAdapter(activity,
+                i,
+                object : LambdaAdAdapter.OnAdapterClose<LAdMultipleAdapter>() {}).apply {
+                lAdMultipleAdapters[i] = this
+                loadBanner()
+            }
+        }
+    }
+
+    fun getADAdapter(scenes: String): LAdMultipleAdapter? {
+        val temp = lAdMultipleAdapters[scenes]
+        temp?.name = scenes
+        return temp
+    }
+
+    fun isReady(scenes: String): Boolean {
+        return getADAdapter(scenes)?.isReady() ?: false
+    }
+
+    fun showAd(scenes: String, callback: IAdCallBack? = null): Boolean {
+        val currentTimeMillis = System.currentTimeMillis()
+        if (currentTimeMillis - lastShowAdMillis < 500L) {
+            return false
+        }
+        lastShowAdMillis = currentTimeMillis
+
+        lastCallback = null
+
+        if (!isReady(scenes)) {
+            callback?.onNoReady()
+            return false
+        }
+        val multiAdCallback = callback
+        if (multiAdCallback != null) {
+            lastCallback = multiAdCallback
+        }
+        getADAdapter(scenes)?.showInterstitial()
+        return true
+    }
+
+    override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
+        adActivity = activity
+        loadAd(activity)
+    }
+
+    override fun onActivityStarted(activity: Activity) {
+
+    }
+
+    override fun onActivityResumed(activity: Activity) {
+
+    }
+
+    override fun onActivityPaused(activity: Activity) {
+
+    }
+
+    override fun onActivityStopped(activity: Activity) {
+
+    }
+
+    override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
+
+    }
+
+    override fun onActivityDestroyed(activity: Activity) {
+
+    }
+}

@@ -7,6 +7,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.android.launcher3.Launcher
 import com.android.launcher3.ThemeManager
+import com.theme.lambda.launcher.ad.AdName
+import com.theme.lambda.launcher.ad.AdUtil
 import com.theme.lambda.launcher.base.BaseViewModel
 import com.theme.lambda.launcher.data.DataRepository
 import com.theme.lambda.launcher.data.model.Resources
@@ -14,6 +16,7 @@ import com.theme.lambda.launcher.task.DownloadZipTask
 import com.theme.lambda.launcher.ui.theme.ThemeActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ThemePreviewViewModel : BaseViewModel() {
 

@@ -3,6 +3,8 @@ package com.android.launcher3
 import android.content.Context
 import android.view.View
 import com.bumptech.glide.Glide
+import com.theme.lambda.launcher.ad.AdName
+import com.theme.lambda.launcher.ad.AdUtil
 import com.theme.lambda.launcher.data.model.ManifestBean
 import com.theme.lambda.launcher.ui.theme.ThemeActivity
 import com.theme.lambda.launcher.utils.CommonUtil
@@ -105,6 +107,7 @@ class ThemeManager {
                     if (themeId == "") {
                         launcher?.finish()
                     }
+                    AdUtil.showAd(AdName.interleaving)
                 }
             }.show()
         }

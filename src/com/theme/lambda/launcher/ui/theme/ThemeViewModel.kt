@@ -4,6 +4,8 @@ import android.app.Activity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.gson.reflect.TypeToken
+import com.theme.lambda.launcher.ad.AdName
+import com.theme.lambda.launcher.ad.AdUtil
 import com.theme.lambda.launcher.base.BaseViewModel
 import com.theme.lambda.launcher.data.DataRepository
 import com.theme.lambda.launcher.data.model.Resources
@@ -83,16 +85,17 @@ class ThemeViewModel : BaseViewModel() {
             ApplyLauncherPermissionDialog(context).apply {
                 clickApplyListen = {
                     dismiss()
-                    ThemePreviewActivity.start(context, resources)
                     LauncherUtil.gotoSetLauncher(context)
                 }
                 clickNotNowListen = {
                     dismiss()
                     ThemePreviewActivity.start(context, resources)
+                    AdUtil.showAd(AdName.interleaving)
                 }
             }.show()
         } else {
             ThemePreviewActivity.start(context, resources)
+            AdUtil.showAd(AdName.interleaving)
         }
     }
 }
