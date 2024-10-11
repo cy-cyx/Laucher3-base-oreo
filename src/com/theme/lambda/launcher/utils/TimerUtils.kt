@@ -41,6 +41,8 @@ object TimerUtils {
                 )
             }
         }
+        // 初始化强行设置一次
+        getIpLocation()
     }
 
     fun getIpLocation() {
