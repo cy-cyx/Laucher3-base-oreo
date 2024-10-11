@@ -174,9 +174,9 @@
             "closeDelay": 0,
             "closeTrick": 0,
             "impCapacity": 0,
-            "impInterval": 0,
+            "impInterval": 3,
             "impTime": 0,
-            "startInterval": 0,
+            "startInterval": 1,
             "startTime": 0,
             "adShowingAlready": 0
             },
