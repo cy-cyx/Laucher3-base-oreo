@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.os.Build
 import android.text.TextUtils
+import android.util.Log
 import android.webkit.WebView
 import com.lambdaweather.LambdaWeather
 import com.theme.lambda.launcher.ad.AdUtil
@@ -21,6 +22,9 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        val start = System.currentTimeMillis()
+        Log.d("App", "start")
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             val process = getProcessName()
             if (packageName != process) WebView.setDataDirectorySuffix(process)
@@ -37,7 +41,7 @@ class App : Application() {
             }
         }
 
-
+        Log.d("App", "init time : ${System.currentTimeMillis() - start}")
     }
 
     override fun attachBaseContext(base: Context?) {

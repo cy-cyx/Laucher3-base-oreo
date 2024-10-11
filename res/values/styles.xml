@@ -29,8 +29,9 @@
 
     <style name="LauncherTheme" parent="@style/BaseLauncherTheme"></style>
 
-    <style name="LauncherThemeSplash" parent="@style/LauncherTheme">
+    <style name="LauncherThemeSplash" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@drawable/bg_splash</item>
     </style>
 
     <!-- Theme for the widget container. Overridden on API 26. -->
