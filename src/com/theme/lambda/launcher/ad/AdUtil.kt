@@ -220,7 +220,8 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
                             SpKey.cumulative_income_001.putMMKVFloat(income001)
 
                             if (income001 > 0.01f) {
-                                FirebaseAnalyticsUtil.logEvent(ADEventName.totalAdRevenue001,
+                                FirebaseAnalyticsUtil.logEvent(
+                                    ADEventName.totalAdRevenue001,
                                     Bundle().apply {
                                         putFloat("value", income001)
                                         putString("currency", "USD")
@@ -231,67 +232,8 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
                                         putFloat("value", income001)
                                         putString("currency", "USD")
                                     })
-                                FirebaseAnalyticsUtil.logEvent(
-                                    ADEventName.totalAdRevenue001,
-                                    Bundle().apply {
-                                        putFloat("value", income001)
-                                        putString("currency", "USD")
-                                    })
                                 SpKey.cumulative_income_001.putMMKVFloat(0f)
                             }
-
-                            var income002 = SpKey.cumulative_income_002.getMMKVFloat(0f)
-                            logParam?.revenue?.toFloat()?.let {
-                                income002 += it
-                            }
-                            SpKey.cumulative_income_002.putMMKVFloat(income002)
-
-                            if (income002 > 0.02f) {
-                                FirebaseAnalyticsUtil.logEvent(ADEventName.totalAdRevenue002,
-                                    Bundle().apply {
-                                        putFloat("value", income002)
-                                        putString("currency", "USD")
-                                    })
-                                FirebaseAnalyticsUtil.logEvent(
-                                    ADEventName.adRev002,
-                                    Bundle().apply {
-                                        putFloat("value", income002)
-                                        putString("currency", "USD")
-                                    })
-                                EventUtil.logEvent(ADEventName.totalAdRevenue002, Bundle().apply {
-                                    putFloat("value", income002)
-                                    putString("currency", "USD")
-                                })
-
-                                SpKey.cumulative_income_002.putMMKVFloat(0f)
-                            }
-
-                            var income003 = SpKey.cumulative_income_003.getMMKVFloat(0f)
-                            logParam?.revenue?.toFloat()?.let {
-                                income003 += it
-                            }
-                            SpKey.cumulative_income_003.putMMKVFloat(income003)
-
-                            if (income003 > 0.03f) {
-                                FirebaseAnalyticsUtil.logEvent(ADEventName.totalAdRevenue003,
-                                    Bundle().apply {
-                                        putFloat("value", income003)
-                                        putString("currency", "USD")
-                                    })
-                                FirebaseAnalyticsUtil.logEvent(
-                                    ADEventName.adRev003,
-                                    Bundle().apply {
-                                        putFloat("value", income003)
-                                        putString("currency", "USD")
-                                    })
-                                EventUtil.logEvent(ADEventName.totalAdRevenue003, Bundle().apply {
-                                    putFloat("value", income003)
-                                    putString("currency", "USD")
-                                })
-
-                                SpKey.cumulative_income_003.putMMKVFloat(0f)
-                            }
-
                         }
 
                         LambdaAd.LogAdEvent.LOG_INIT_SDK_SUCCESS -> {
