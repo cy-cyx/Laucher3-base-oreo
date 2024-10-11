@@ -154,6 +154,17 @@ class ThemeManager {
                 WallPaperUtil.setHomeAndLockScreen(wallpaper)
             }
         }
+
+        // 首次启动在onResume设置，避免二次加载
+        if (enterPreviewId != "") {
+            previewThemeId = enterPreviewId
+            enterPreview()
+            enterPreviewId = ""
+        }
+        if (isPreviewMode) {
+            launcher?.closeAllAppLayoutIfNeed()
+            setCurShowThemeById(previewThemeId, reload = false)
+        }
     }
 
     fun onStart() {
@@ -181,7 +192,7 @@ class ThemeManager {
     }
 
     fun onDestroy() {
-        themeManagerCache = null
+
     }
 
     private fun enterPreview() {
@@ -199,10 +210,12 @@ class ThemeManager {
         }
     }
 
-    private fun setCurShowThemeById(id: String) {
+    private fun setCurShowThemeById(id: String, reload: Boolean = true) {
         showThemeId = id
         // 更新桌面
-        launcher?.reload(true)
+        if (reload) {
+            launcher?.reload(true)
+        }
         // 更新壁纸
         val manifest = getCurManifest()
         if (manifest != null) {

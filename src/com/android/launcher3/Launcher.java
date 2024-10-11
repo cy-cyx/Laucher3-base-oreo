@@ -406,7 +406,6 @@ public class Launcher extends BaseActivity
 
         super.onCreate(savedInstanceState);
         themeManager.setLauncher(this);
-        themeManager.onCreate();
 
         LauncherAppState app = LauncherAppState.getInstance(this);
 
@@ -503,6 +502,8 @@ public class Launcher extends BaseActivity
         if (mLauncherCallbacks != null) {
             mLauncherCallbacks.onCreate(savedInstanceState);
         }
+
+        themeManager.onCreate();
     }
 
     @Override

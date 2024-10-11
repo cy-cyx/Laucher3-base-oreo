@@ -29,6 +29,7 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Process;
 import android.os.UserHandle;
+
 import androidx.annotation.Nullable;
 
 import com.android.launcher3.compat.ShortcutConfigActivityInfo.ShortcutConfigActivityInfoVL;
@@ -57,6 +58,17 @@ public class LauncherAppsCompatVL extends LauncherAppsCompat {
         return mLauncherApps.getActivityList(packageName, user);
     }
 
+    List<LauncherActivityInfo> activityListCache;
+
+    // 谨慎使用,仅用于特殊场景下 无刷新机制
+    public List<LauncherActivityInfo> getActivityListCache(UserHandle user) {
+        if (activityListCache != null && !activityListCache.isEmpty()) {
+            return activityListCache;
+        }
+        activityListCache = mLauncherApps.getActivityList(null, user);
+        return activityListCache;
+    }
+
     @Override
     public LauncherActivityInfo resolveActivity(Intent intent, UserHandle user) {
         return mLauncherApps.resolveActivity(intent, user);
@@ -64,7 +76,7 @@ public class LauncherAppsCompatVL extends LauncherAppsCompat {
 
     @Override
     public void startActivityForProfile(ComponentName component, UserHandle user,
-            Rect sourceBounds, Bundle opts) {
+                                        Rect sourceBounds, Bundle opts) {
         mLauncherApps.startMainActivity(component, user, sourceBounds, opts);
     }
 
@@ -96,7 +108,7 @@ public class LauncherAppsCompatVL extends LauncherAppsCompat {
 
     @Override
     public void showAppDetailsForProfile(ComponentName component, UserHandle user,
-            Rect sourceBounds, Bundle opts) {
+                                         Rect sourceBounds, Bundle opts) {
         mLauncherApps.startAppDetailsActivity(component, user, sourceBounds, opts);
     }
 
@@ -154,7 +166,7 @@ public class LauncherAppsCompatVL extends LauncherAppsCompat {
         }
 
         public void onPackagesUnavailable(String[] packageNames, UserHandle user,
-                boolean replacing) {
+                                          boolean replacing) {
             mCallback.onPackagesUnavailable(packageNames, user, replacing);
         }
 
@@ -167,7 +179,7 @@ public class LauncherAppsCompatVL extends LauncherAppsCompat {
         }
 
         public void onShortcutsChanged(String packageName, List<ShortcutInfo> shortcuts,
-                UserHandle user) {
+                                       UserHandle user) {
             List<ShortcutInfoCompat> shortcutInfoCompats = new ArrayList<>(shortcuts.size());
             for (ShortcutInfo shortcutInfo : shortcuts) {
                 shortcutInfoCompats.add(new ShortcutInfoCompat(shortcutInfo));

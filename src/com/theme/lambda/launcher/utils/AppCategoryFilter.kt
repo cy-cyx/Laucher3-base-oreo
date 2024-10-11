@@ -72,7 +72,7 @@ object AppCategoryFilter {
     ): List<AppInfo> {
         if (appInfoList.isEmpty()) {
             for (user in profiles) {
-                val apps: List<LauncherActivityInfo> = launcherApps.getActivityList(null, user)
+                val apps: List<LauncherActivityInfo> = launcherApps.getActivityListCache(user)
                 for (app in apps) {
                     appInfoList.add(AppInfo(app, user, userManager.isQuietModeEnabled(user)))
                 }

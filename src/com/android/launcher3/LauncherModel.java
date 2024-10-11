@@ -1136,18 +1136,18 @@ public class LauncherModel extends BroadcastReceiver
                                 folderInfo.options = c.getInt(optionsIndex);
                                 final List<UserHandle> profiles = mUserManager.getUserProfiles();
                                 for (AppInfo appInfo : AppCategoryFilter.getAppInfoList(mLauncherApps, profiles, mUserManager)) {
-                                    ShortcutInfo shortcutInfo = new ShortcutInfo(appInfo);
                                     String packageName = appInfo.componentName.getPackageName();
-                                    if (packageName != null) {
-                                        shortcutInfo.iconBitmap = ConvertUtils.drawable2Bitmap(AppUtils.getAppIcon(packageName));
-                                        Bitmap themeBitmap = ThemeIconMapping.getThemeBitmap(Utils.getApp(), packageName);
-                                        if (themeBitmap != null) {
-                                            shortcutInfo.iconBitmap = themeBitmap;
-                                        }
-                                    }
-                                    shortcutInfo.title = appInfo.title;
-                                    shortcutInfo.contentDescription = "";
                                     if (AppCategoryFilter.filter(packageName, folderInfo.title)) {
+                                        ShortcutInfo shortcutInfo = new ShortcutInfo(appInfo);
+                                        if (packageName != null) {
+                                            shortcutInfo.iconBitmap = ConvertUtils.drawable2Bitmap(AppUtils.getAppIcon(packageName));
+                                            Bitmap themeBitmap = ThemeIconMapping.getThemeBitmap(Utils.getApp(), packageName);
+                                            if (themeBitmap != null) {
+                                                shortcutInfo.iconBitmap = themeBitmap;
+                                            }
+                                        }
+                                        shortcutInfo.title = appInfo.title;
+                                        shortcutInfo.contentDescription = "";
                                         folderInfo.add(shortcutInfo, false);
                                     }
                                 }
