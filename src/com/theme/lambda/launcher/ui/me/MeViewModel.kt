@@ -1,8 +1,10 @@
 package com.theme.lambda.launcher.ui.me
 
 import android.app.Activity
+import android.content.Intent
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.android.launcher3.Launcher
 import com.android.launcher3.ThemeManager
 import com.theme.lambda.launcher.base.BaseViewModel
 import com.theme.lambda.launcher.data.DataRepository
@@ -24,7 +26,10 @@ class MeViewModel : BaseViewModel() {
     }
 
     fun download(context: Activity, res: ThemeRes) {
-        ThemeManager.getThemeManagerIfExist()?.enterPreviewModeWithId(res.did)
+        ThemeManager.enterPreviewId = res.did
+        if (!Launcher.isExist()) {
+            context.startActivity(Intent(context, Launcher::class.java))
+        }
         ThemeActivity.closeThemeActivity()
         context.finish()
     }

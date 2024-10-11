@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.View
 import com.bumptech.glide.Glide
 import com.theme.lambda.launcher.data.model.ManifestBean
+import com.theme.lambda.launcher.ui.theme.ThemeActivity
 import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.utils.FileUtil
 import com.theme.lambda.launcher.utils.GsonUtil
@@ -28,29 +29,23 @@ class ThemeManager {
     private var themeId = "" // 当前的主题id
     private var previewThemeId = "" // 预览的主题id 可能为空
     private var showThemeId = "" // 当前展示主题id，可能是预览
+
     private var curManifestId = "" // 当前配置文件的主题id
+    private var manifestBean: ManifestBean? = null
 
     var launcher: Launcher? = null
-    private var manifestBean: ManifestBean? = null
 
     var isPreviewMode = false
         private set
 
-    var wallpaperView: WallpaperView? = null
+    private var wallpaperView: WallpaperView? = null
 
     fun bindWallpaperView(view: WallpaperView) {
         wallpaperView = view
-        val manifest = getCurManifest()
-        if (manifest != null) {
-            val wallpaper = getManifestResRootPath() + manifest.background
-            wallpaperView?.setPic(wallpaper)
-            wallpaperView?.visible()
-        } else {
-            wallpaperView?.gone()
-        }
+        wallpaperView?.gone()
     }
 
-    var previewControlView: PreviewControlView? = null
+    private var previewControlView: PreviewControlView? = null
 
     fun bindPreviewControlView(view: PreviewControlView) {
         previewControlView = view
@@ -86,7 +81,7 @@ class ThemeManager {
         }
     }
 
-    var firstApplyQuit = true
+    private var firstApplyQuit = true
 
     fun applyQuitPreviewMode(context: Context) {
         if (firstApplyQuit && !LauncherUtil.isDefaultLauncher(context)) {
@@ -105,6 +100,11 @@ class ThemeManager {
                 onClickContinueListen = {
                     quitPreview()
                     setCurShowThemeById(themeId)
+                    // 返回主题选择页,如果是首次还要关一下launcher
+                    ThemeActivity.start(context, ThemeActivity.sFromTheme)
+                    if (themeId == "") {
+                        launcher?.finish()
+                    }
                 }
             }.show()
         }
@@ -114,14 +114,12 @@ class ThemeManager {
 
         val sKeyThemeId = "key_theme_id"
 
+        var enterPreviewId = ""
+
         var themeManagerCache: WeakReference<ThemeManager>? = null
 
         fun getThemeManagerIfExist(): ThemeManager? {
             return themeManagerCache?.get()
-        }
-
-        fun setDefaultTHemeId(id: String) {
-            SpUtil.putString(sKeyThemeId, id)
         }
 
         private fun decodeManifest(id: String): ManifestBean? {
@@ -139,12 +137,6 @@ class ThemeManager {
         }
     }
 
-    // 进入设置预览模式
-    fun enterPreviewModeWithId(themeId: String) {
-        previewThemeId = themeId
-        enterPreview()
-    }
-
     fun onCreate() {
         themeManagerCache = WeakReference(this)
 
@@ -152,10 +144,12 @@ class ThemeManager {
         showThemeId = themeId
 
         // 更新壁纸默认壁纸
-        val manifest = getCurManifest()
-        if (manifest != null) {
-            val wallpaper = getManifestResRootPath() + manifest.background
-            WallPaperUtil.setHomeAndLockScreen(wallpaper)
+        GlobalScope.launch(Dispatchers.IO) {
+            val manifest = getCurManifest()
+            if (manifest != null) {
+                val wallpaper = getManifestResRootPath() + manifest.background
+                WallPaperUtil.setHomeAndLockScreen(wallpaper)
+            }
         }
     }
 
@@ -164,11 +158,13 @@ class ThemeManager {
     }
 
     fun onResume() {
+        if (enterPreviewId != "") {
+            previewThemeId = enterPreviewId
+            enterPreview()
+            enterPreviewId = ""
+        }
         if (isPreviewMode) {
             launcher?.closeAllAppLayoutIfNeed()
-        }
-        if (isPreviewMode && previewThemeId != "" && previewThemeId != showThemeId) {
-            // 如果在预览模式下，预览的主题和现在当前的主题不一致 重新加载桌面
             setCurShowThemeById(previewThemeId)
         }
     }
@@ -211,7 +207,7 @@ class ThemeManager {
             wallpaperView?.setPic(wallpaper)
             wallpaperView?.visible()
 
-            // 顺便设置一下手机背景壁纸
+            // 不是预览模式下 顺便设置一下手机背景壁纸
             if (!isPreviewMode) {
                 GlobalScope.launch(Dispatchers.IO) {
                     WallPaperUtil.setHomeAndLockScreen(wallpaper)

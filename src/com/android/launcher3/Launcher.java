@@ -146,6 +146,7 @@ import com.theme.lambda.launcher.widget.dialog.ApplyLauncherPermissionDialog;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -163,6 +164,13 @@ public class Launcher extends BaseActivity
         implements LauncherExterns, View.OnClickListener, OnLongClickListener,
         LauncherModel.Callbacks, View.OnTouchListener, LauncherProviderChangeListener,
         AccessibilityManager.AccessibilityStateChangeListener {
+
+    static WeakReference<Launcher> launcherWeakReference = null;
+
+    public static boolean isExist() {
+        return launcherWeakReference != null;
+    }
+
     public static final String TAG = "Launcher";
     static final boolean LOGD = false;
 
@@ -373,6 +381,7 @@ public class Launcher extends BaseActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("Launcher", "onCreate");
+        launcherWeakReference = new WeakReference(this);
         if (DEBUG_STRICT_MODE) {
             StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
                     .detectDiskReads()
@@ -1120,27 +1129,27 @@ public class Launcher extends BaseActivity
         }
 
         themeManager.onResume();
-
-        // 第一次设置需要提示一下权限
-        if (!SpUtil.INSTANCE.getBool("first_req_premission", false)) {
-            ApplyLauncherPermissionDialog applyLauncherPermissionDialog = new ApplyLauncherPermissionDialog(this);
-            applyLauncherPermissionDialog.setClickApplyListen(new Function0<Unit>() {
-                @Override
-                public Unit invoke() {
-                    applyLauncherPermissionDialog.dismiss();
-                    return null;
-                }
-            });
-            applyLauncherPermissionDialog.setClickNotNowListen(new Function0<Unit>() {
-                @Override
-                public Unit invoke() {
-                    applyLauncherPermissionDialog.dismiss();
-                    return null;
-                }
-            });
-            applyLauncherPermissionDialog.show();
-            SpUtil.INSTANCE.putBool("first_req_premission", true);
-        }
+//
+//        // 第一次设置需要提示一下权限
+//        if (!SpUtil.INSTANCE.getBool("first_req_premission", false)) {
+//            ApplyLauncherPermissionDialog applyLauncherPermissionDialog = new ApplyLauncherPermissionDialog(this);
+//            applyLauncherPermissionDialog.setClickApplyListen(new Function0<Unit>() {
+//                @Override
+//                public Unit invoke() {
+//                    applyLauncherPermissionDialog.dismiss();
+//                    return null;
+//                }
+//            });
+//            applyLauncherPermissionDialog.setClickNotNowListen(new Function0<Unit>() {
+//                @Override
+//                public Unit invoke() {
+//                    applyLauncherPermissionDialog.dismiss();
+//                    return null;
+//                }
+//            });
+//            applyLauncherPermissionDialog.show();
+//            SpUtil.INSTANCE.putBool("first_req_premission", true);
+//        }
     }
 
     @Override
@@ -1934,6 +1943,7 @@ public class Launcher extends BaseActivity
     @Override
     public void onDestroy() {
         super.onDestroy();
+        launcherWeakReference = null;
 
         mWorkspace.removeCallbacks(mBuildLayersRunnable);
         mWorkspace.removeFolderListeners();

@@ -1,17 +1,12 @@
 package com.theme.lambda.launcher.ui.theme
 
 import android.app.Activity
-import android.content.Intent
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.android.launcher3.Launcher
-import com.android.launcher3.ThemeManager
 import com.google.gson.reflect.TypeToken
 import com.theme.lambda.launcher.base.BaseViewModel
 import com.theme.lambda.launcher.data.DataRepository
 import com.theme.lambda.launcher.data.model.Resources
-import com.theme.lambda.launcher.task.DownloadZipTask
 import com.theme.lambda.launcher.ui.themepreview.ThemePreviewActivity
 import com.theme.lambda.launcher.utils.GsonUtil
 import com.theme.lambda.launcher.utils.LauncherUtil
@@ -83,41 +78,21 @@ class ThemeViewModel : BaseViewModel() {
         }
     }
 
-    fun downloadAndGotoPreview(context: Activity, resources: Resources) {
-        // 首页进来和主题进来处理不同
-        if (from == ThemeActivity.sFromSplash) {
-            viewModelScope.launch(Dispatchers.IO) {
-                loadDialogLiveData.postValue(true)
-
-                val downloadZipTask = DownloadZipTask(resources)
-                val result = downloadZipTask.execute()
-                loadDialogLiveData.postValue(false)
-                if (result) {
-                    ThemeManager.setDefaultTHemeId(resources.id)
-                    context.finish()
-                    context.startActivity(Intent(context, Launcher::class.java))
-                    DataRepository.insertDownLoadThemeIntoDb(resources.toThemeRes())
-                } else {
-                    Toast.makeText(context, "download error!!", Toast.LENGTH_SHORT).show()
+    fun gotoPreview(context: Activity, resources: Resources) {
+        if (!LauncherUtil.isDefaultLauncher(context)) {
+            ApplyLauncherPermissionDialog(context).apply {
+                clickApplyListen = {
+                    dismiss()
+                    ThemePreviewActivity.start(context, resources)
+                    LauncherUtil.gotoSetLauncher(context)
                 }
-            }
+                clickNotNowListen = {
+                    dismiss()
+                    ThemePreviewActivity.start(context, resources)
+                }
+            }.show()
         } else {
-            if (!LauncherUtil.isDefaultLauncher(context)) {
-                ApplyLauncherPermissionDialog(context).apply {
-                    clickApplyListen = {
-                        dismiss()
-                        ThemePreviewActivity.start(context, resources)
-                        LauncherUtil.gotoSetLauncher(context)
-                    }
-                    clickNotNowListen = {
-                        dismiss()
-                        ThemePreviewActivity.start(context, resources)
-                    }
-                }.show()
-            } else {
-                ThemePreviewActivity.start(context, resources)
-            }
+            ThemePreviewActivity.start(context, resources)
         }
-
     }
 }

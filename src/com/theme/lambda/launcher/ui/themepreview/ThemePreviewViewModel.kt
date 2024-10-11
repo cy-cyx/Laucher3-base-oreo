@@ -1,9 +1,11 @@
 package com.theme.lambda.launcher.ui.themepreview
 
 import android.app.Activity
+import android.content.Intent
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.android.launcher3.Launcher
 import com.android.launcher3.ThemeManager
 import com.theme.lambda.launcher.base.BaseViewModel
 import com.theme.lambda.launcher.data.DataRepository
@@ -30,7 +32,10 @@ class ThemePreviewViewModel : BaseViewModel() {
             val result = downloadZipTask.execute()
             loadDialogLiveData.postValue(false)
             if (result) {
-                ThemeManager.getThemeManagerIfExist()?.enterPreviewModeWithId(resources!!.id)
+                ThemeManager.enterPreviewId = resources?.id ?: ""
+                if (!Launcher.isExist()) {
+                    context.startActivity(Intent(context, Launcher::class.java))
+                }
                 context.finish()
                 ThemeActivity.closeThemeActivity()
                 DataRepository.insertDownLoadThemeIntoDb(resources!!.toThemeRes())

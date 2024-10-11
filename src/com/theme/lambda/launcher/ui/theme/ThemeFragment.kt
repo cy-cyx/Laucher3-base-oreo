@@ -1,6 +1,5 @@
 package com.theme.lambda.launcher.ui.theme
 
-import android.app.ProgressDialog
 import android.graphics.Rect
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -90,7 +89,7 @@ class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
         })
 
         themeAdapter.clickItemListen = {
-            viewModel.downloadAndGotoPreview(requireActivity(), it)
+            viewModel.gotoPreview(requireActivity(), it)
         }
     }
 }
