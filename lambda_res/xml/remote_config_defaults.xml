@@ -10,7 +10,7 @@
             "strategy": 1,
             "params": [
             {
-            "adid": "ca-app-pub-3912577259305392/8633147067",
+            "adid": "ca-app-pub-3912577259305392/9471053186",
             "order": 0,
             "per": 0,
             "plat": 1,
@@ -18,10 +18,10 @@
             "ecpm": 0
             },
             {
-            "adid": "20ceccd077458848",
+            "adid": "ca-app-pub-3912577259305392/3751822643",
             "order": 0,
             "per": 0,
-            "plat": 2,
+            "plat": 1,
             "type": 5,
             "ecpm": 0
             }
@@ -31,6 +31,14 @@
             "auid": "int_group",
             "strategy": 1,
             "params": [
+            {
+            "adid": "ca-app-pub-3912577259305392/8157971517",
+            "order": 0,
+            "per": 0,
+            "plat": 1,
+            "type": 4,
+            "ecpm": 0
+            },
             {
             "adid": "ca-app-pub-3912577259305392/5077045434",
             "order": 0,
@@ -50,7 +58,7 @@
             ]
             },
             {
-            "auid": "rew_group",
+            "auid": "rv_group",
             "strategy": 1,
             "params": [
             {
@@ -80,8 +88,8 @@
             ]
             },
             {
-            "auid": "native_group_default",
-            "strategy": 1,
+            "auid": "nat_group",
+            "strategy": 2,
             "params": [
             {
             "adid": "ca-app-pub-3912577259305392/2067738717",
@@ -92,8 +100,16 @@
             "ecpm": 0
             },
             {
+            "adid": "ca-app-pub-3912577259305392/3624562654",
+            "order": 1,
+            "per": 0,
+            "plat": 1,
+            "type": 2,
+            "ecpm": 0
+            },
+            {
             "adid": "6c3302fceadc2041",
-            "order": 0,
+            "order": 2,
             "per": 0,
             "plat": 2,
             "type": 2,
@@ -102,22 +118,8 @@
             ]
             },
             {
-            "auid": "int_splash",
-            "strategy": 1,
-            "params": [
-            {
-            "adid": "8c2d0b96ff596ba4",
-            "order": 0,
-            "per": 0,
-            "plat": 2,
-            "type": 4,
-            "ecpm": 0
-            }
-            ]
-            },
-            {
-            "auid": "banner_group",
-            "strategy": 1,
+            "auid": "ban_group",
+            "strategy": 2,
             "params": [
             {
             "adid": "ca-app-pub-3912577259305392/7788535926",
@@ -128,10 +130,18 @@
             "ecpm": 0
             },
             {
-            "adid": "d98752b20bdeba5d",
-            "order": 0,
+            "adid": "ca-app-pub-3912577259305392/9587335775",
+            "order": 1,
             "per": 0,
             "plat": 1,
+            "type": 1,
+            "ecpm": 0
+            },
+            {
+            "adid": "d98752b20bdeba5d",
+            "order": 2,
+            "per": 0,
+            "plat": 2,
             "type": 1,
             "ecpm": 0
             }
@@ -153,7 +163,7 @@
             "startTime": 0,
             "adShowingAlready": 0
             },
-            "unit": "open_group,int_splash",
+            "unit": "open_group, int_group",
             "disabled": 0
             },
             {
@@ -187,12 +197,12 @@
             "startTime": 0,
             "adShowingAlready": 0
             },
-            "unit": "rew_group,int_group",
+            "unit": "rv_group, int_group",
             "disabled": 0
             },
             {
             "asid": "",
-            "name": "download_nat",
+            "name": "download_nat, theme_new_nat",
             "ctrl": {
             "closeCountDown": 0,
             "closeDelay": 0,
@@ -204,24 +214,7 @@
             "startTime": 0,
             "adShowingAlready": 0
             },
-            "unit": "native_group_default",
-            "disabled": 0
-            },
-            {
-            "asid": "",
-            "name": "theme_new_nat",
-            "ctrl": {
-            "closeCountDown": 0,
-            "closeDelay": 0,
-            "closeTrick": 0,
-            "impCapacity": 0,
-            "impInterval": 1,
-            "impTime": 0,
-            "startInterval": 1,
-            "startTime": 0,
-            "adShowingAlready": 0
-            },
-            "unit": "native_group_default",
+            "unit": "nat_group",
             "disabled": 0
             },
             {
@@ -238,7 +231,7 @@
             "startTime": 0,
             "adShowingAlready": 0
             },
-            "unit": "banner_group",
+            "unit": "ban_group",
             "disabled": 0
             }
             ],
@@ -255,6 +248,7 @@
             }
             ],
             "expiredTime": 3600000
-            }</value>
+            }
+        </value>
     </entry>
 </defaults>
