@@ -22,6 +22,7 @@ import com.theme.lambda.launcher.utils.GsonUtil
 import com.theme.lambda.launcher.utils.StatusBarUtil
 import com.theme.lambda.launcher.utils.withHost
 import com.theme.lambda.launcher.widget.dialog.LoadingDialog
+import com.theme.lambda.launcher.widget.dialog.LoadingWithAdDialog
 
 class ThemePreviewActivity : BaseActivity<ActivityThemePreviewBinding>() {
 
@@ -43,7 +44,7 @@ class ThemePreviewActivity : BaseActivity<ActivityThemePreviewBinding>() {
     val viewModel by viewModels<ThemePreviewViewModel>()
 
     val loadDialog by lazy {
-        LoadingDialog(this).apply {
+        LoadingWithAdDialog(this).apply {
             setCancelable(false)
         }
     }

@@ -15,6 +15,7 @@ import com.theme.lambda.launcher.data.model.Resources
 import com.theme.lambda.launcher.task.DownloadZipTask
 import com.theme.lambda.launcher.ui.theme.ThemeActivity
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -24,16 +25,28 @@ class ThemePreviewViewModel : BaseViewModel() {
 
     var loadDialogLiveData = MutableLiveData<Boolean>()
 
+
+    private var startDownLoadTimeStamp = 0L
+
     fun download(context: Activity) {
 
         if (resources == null || resources?.id == "") return
 
         viewModelScope.launch(Dispatchers.IO) {
             loadDialogLiveData.postValue(true)
+            startDownLoadTimeStamp = System.currentTimeMillis()
 
             val downloadZipTask = DownloadZipTask(resources!!)
             val result = downloadZipTask.execute()
+            val downLoadTime = System.currentTimeMillis() - startDownLoadTimeStamp
+
+            // 至少需要下载3秒等待
+            val waitTime = 3000 - downLoadTime
+            if (waitTime > 0) {
+                delay(waitTime)
+            }
             loadDialogLiveData.postValue(false)
+
             if (result) {
                 ThemeManager.enterPreviewId = resources?.id ?: ""
                 if (!Launcher.isExist()) {
