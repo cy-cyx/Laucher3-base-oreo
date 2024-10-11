@@ -379,20 +379,6 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
                 }
             }
         }
-        // banner
-        for (i in listOf(
-            AdName.home_ban
-        )) {
-            if (lAdMultipleAdapters[i] != null) {
-                continue
-            }
-            LAdMultipleAdapter(activity,
-                i,
-                object : LambdaAdAdapter.OnAdapterClose<LAdMultipleAdapter>() {}).apply {
-                lAdMultipleAdapters[i] = this
-                loadBanner()
-            }
-        }
     }
 
     fun getADAdapter(scenes: String): LAdMultipleAdapter? {

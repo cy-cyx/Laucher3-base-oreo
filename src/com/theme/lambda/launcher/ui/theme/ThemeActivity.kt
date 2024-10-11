@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import com.android.launcher3.databinding.ActivityThemeBinding
 import com.theme.lambda.launcher.Constants
+import com.theme.lambda.launcher.ad.AdName
 import com.theme.lambda.launcher.base.BaseActivity
 import com.theme.lambda.launcher.ui.me.MeActivity
 import com.theme.lambda.launcher.utils.LauncherUtil
@@ -101,6 +102,8 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
 
             }
         }
+
+        viewBinding.adBanner.scenesName = AdName.home_ban
 
         // https://stackoverflow.com/questions/77683434/the-getnextentry-method-of-zipinputstream-throws-a-zipexception-invalid-zip-ent/77697327#77697327
         if (Build.VERSION.SDK_INT >= 34) {
