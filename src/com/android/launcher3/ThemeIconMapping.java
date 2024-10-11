@@ -18,6 +18,9 @@ import com.theme.lambda.launcher.data.model.ManifestBean;
 import com.theme.lambda.launcher.utils.CommonUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import io.appmetrica.analytics.impl.H;
 
 public class ThemeIconMapping {
 
@@ -28,6 +31,12 @@ public class ThemeIconMapping {
     private static float whiteFrame = CommonUtil.INSTANCE.dp2px(3f);
     private static float roundedCorners = CommonUtil.INSTANCE.dp2px(10f);
 
+    static HashMap<String, Bitmap> cacheBitmap = new HashMap();
+
+    public static void cleanThemeIconCache() {
+        cacheBitmap.clear();
+    }
+
     /**
      * 根据包名获取映射图片
      *
@@ -36,9 +45,16 @@ public class ThemeIconMapping {
      * @return 如果有映射，返回 {@link  BitmapFactory#decodeResource(Resources, int)} 没有映射返回 null
      */
     public static Bitmap getThemeBitmap(Context context, String packageName) {
+        // 使用缓存
+        if (cacheBitmap.containsKey(packageName)) {
+            return cacheBitmap.get(packageName);
+        }
+
         // 把自己伪装成主题
         if (packageName.equals(context.getPackageName())) {
-            return BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_themes);
+            Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_themes);
+            cacheBitmap.put(packageName, bitmap);
+            return bitmap;
         }
 
         // 看一下主题用不用替换icon
@@ -52,7 +68,9 @@ public class ThemeIconMapping {
                         String iconPath = themeManager.getManifestResRootPath() + iconBean.getIcon();
 
                         try {
-                            return BitmapFactory.decodeFile(iconPath);
+                            Bitmap bitmap = BitmapFactory.decodeFile(iconPath);
+                            cacheBitmap.put(packageName, bitmap);
+                            return bitmap;
                         } catch (Exception e) {
                             Log.e(TAG, "icon path no exit:" + iconPath);
                         }
@@ -103,13 +121,14 @@ public class ThemeIconMapping {
                             Rect dstRect = new Rect((int) left, (int) top, (int) right, (int) bottom);
 
 
-                            RectF whiteFrameRect = new RectF(left - whiteFrame,top - whiteFrame,right + whiteFrame, bottom + whiteFrame);
+                            RectF whiteFrameRect = new RectF(left - whiteFrame, top - whiteFrame, right + whiteFrame, bottom + whiteFrame);
                             Paint paint = new Paint();
                             paint.setAntiAlias(true);
                             paint.setColor(Color.WHITE);
 
-                            frameCanvas.drawRoundRect(whiteFrameRect, roundedCorners,roundedCorners,paint);
+                            frameCanvas.drawRoundRect(whiteFrameRect, roundedCorners, roundedCorners, paint);
                             frameCanvas.drawBitmap(appBitmap, resRect, dstRect, paint);
+                            cacheBitmap.put(packageName, frameBm);
                             return frameBm;
                         } catch (Exception e) {
                             e.printStackTrace();

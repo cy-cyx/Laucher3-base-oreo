@@ -147,12 +147,11 @@ class ThemeManager {
         showThemeId = themeId
 
         // 更新壁纸默认壁纸
-        GlobalScope.launch(Dispatchers.IO) {
-            val manifest = getCurManifest()
-            if (manifest != null) {
-                val wallpaper = getManifestResRootPath() + manifest.background
-                WallPaperUtil.setHomeAndLockScreen(wallpaper)
-            }
+        val manifest = getCurManifest()
+        if (manifest != null) {
+            val wallpaper = getManifestResRootPath() + manifest.background
+            wallpaperView?.setPic(wallpaper)
+            wallpaperView?.visible()
         }
 
         // 首次启动在onResume设置，避免二次加载
@@ -211,6 +210,7 @@ class ThemeManager {
     }
 
     private fun setCurShowThemeById(id: String, reload: Boolean = true) {
+        ThemeIconMapping.cleanThemeIconCache()
         showThemeId = id
         // 更新桌面
         if (reload) {
