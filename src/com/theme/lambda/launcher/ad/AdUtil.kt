@@ -453,7 +453,9 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
     }
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
-        adActivity = activity
+        if (adActivity != null) {
+            adActivity = activity
+        }
         loadAd(activity)
     }
 
