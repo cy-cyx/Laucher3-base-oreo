@@ -38,4 +38,6 @@
     <string name="apply_theme">Apply Theme</string>
     <string name="apply">Apply</string>
     <string name="ad_no_fill_tip">The ad has not been filled yet! Try again later</string>
+    <string name="guide_1_text">Click the Theme Icon to open the theme list</string>
+    <string name="guide_2_text">Swiping right or pressing the back key to exit preview mode</string>
 </resources>

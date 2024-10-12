@@ -94,4 +94,10 @@
         android:layout_height="match_parent"
         android:visibility="gone" />
 
+    <com.theme.lambda.launcher.widget.FirstGuideView
+        android:id="@+id/firstGuideView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
 </com.android.launcher3.LauncherRootView>

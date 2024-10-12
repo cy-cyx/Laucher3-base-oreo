@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/step1Fl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <com.theme.lambda.launcher.widget.MaskHoleView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:id="@+id/guideTextLl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:src="@drawable/ic_guide_arrow" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:background="@drawable/shape_ffffff_radius_15"
+                android:paddingHorizontal="19dp"
+                android:paddingVertical="13dp"
+                android:text="@string/guide_1_text"
+                android:textColor="#000000"
+                android:textSize="14dp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/next1Tv"
+            android:layout_width="96dp"
+            android:layout_height="34dp"
+            android:layout_gravity="bottom|right"
+            android:layout_marginRight="38dp"
+            android:layout_marginBottom="130dp"
+            android:background="@drawable/bg_step_bn"
+            android:gravity="center"
+            android:text="GET(1/2)"
+            android:textColor="#ffffff" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/step2Fl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_gravity="center|left"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:src="@drawable/ic_slide_right"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="60dp"
+                    android:src="@drawable/ic_guide_arrow" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:background="@drawable/shape_ffffff_radius_15"
+                    android:paddingHorizontal="19dp"
+                    android:paddingVertical="13dp"
+                    android:text="@string/guide_2_text"
+                    android:textColor="#000000"
+                    android:textSize="14dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/next2Tv"
+            android:layout_width="96dp"
+            android:layout_height="34dp"
+            android:layout_gravity="bottom|right"
+            android:layout_marginRight="38dp"
+            android:layout_marginBottom="130dp"
+            android:background="@drawable/bg_step_bn"
+            android:gravity="center"
+            android:text="GET(2/2)"
+            android:textColor="#ffffff" />
+    </FrameLayout>
+
+</FrameLayout>

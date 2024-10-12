@@ -31,7 +31,5 @@ class WallpaperView @JvmOverloads constructor(
         lp.topMargin = -CommonUtil.getStatusBarHeight()
         lp.bottomMargin = -CommonUtil.getActionBarHeight()
         requestLayout()
-
-
     }
 }

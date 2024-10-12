@@ -159,9 +159,7 @@ class ThemeManager {
             previewThemeId = enterPreviewId
             enterPreview()
             enterPreviewId = ""
-        }
-        if (isPreviewMode) {
-            launcher?.closeAllAppLayoutIfNeed()
+
             setCurShowThemeById(previewThemeId, reload = false)
         }
     }
@@ -175,8 +173,8 @@ class ThemeManager {
             previewThemeId = enterPreviewId
             enterPreview()
             enterPreviewId = ""
-        }
-        if (isPreviewMode) {
+
+            // 可能打开着all app需要关闭
             launcher?.closeAllAppLayoutIfNeed()
             setCurShowThemeById(previewThemeId)
         }
@@ -210,8 +208,9 @@ class ThemeManager {
     }
 
     private fun setCurShowThemeById(id: String, reload: Boolean = true) {
-        ThemeIconMapping.cleanThemeIconCache()
+        if (showThemeId == id) return
         showThemeId = id
+        ThemeIconMapping.cleanThemeIconCache()
         // 更新桌面
         if (reload) {
             launcher?.reload(true)
@@ -222,13 +221,6 @@ class ThemeManager {
             val wallpaper = getManifestResRootPath() + manifest.background
             wallpaperView?.setPic(wallpaper)
             wallpaperView?.visible()
-
-            // 不是预览模式下 顺便设置一下手机背景壁纸
-            if (!isPreviewMode) {
-                GlobalScope.launch(Dispatchers.IO) {
-                    WallPaperUtil.setHomeAndLockScreen(wallpaper)
-                }
-            }
         } else {
             wallpaperView?.gone()
         }

@@ -8,4 +8,6 @@ object SpKey {
     const val keyReferrer = "keyReferrer"
     const val keyPromoSource = "keyPromoSource"
     const val install_time = "install_time"
+
+    const val first_guide = "first_guide"
 }

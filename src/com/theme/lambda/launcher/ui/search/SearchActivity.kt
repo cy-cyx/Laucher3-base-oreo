@@ -13,6 +13,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.launcher3.AppInfo
+import com.android.launcher3.ThemeManager
 import com.android.launcher3.databinding.ActivitySearchBinding
 import com.lambda.common.http.Preference
 import com.lambda.common.utils.utilcode.util.ActivityUtils
@@ -20,6 +21,10 @@ import com.lambda.common.utils.utilcode.util.AppUtils
 import com.lambda.common.utils.utilcode.util.GsonUtils
 import com.lambda.common.utils.utilcode.util.Utils
 import com.theme.lambda.launcher.base.BaseActivity
+import com.theme.lambda.launcher.data.model.ManifestBean
+import com.theme.lambda.launcher.utils.StatusBarUtil
+import com.theme.lambda.launcher.utils.marginStatusBarHeight
+import com.theme.lambda.launcher.utils.visible
 
 class SearchActivity : BaseActivity<ActivitySearchBinding>() {
     private var searchHistory by Preference("search_history", "")
@@ -45,10 +50,32 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        StatusBarUtil.transparencyBar(this)
+        StatusBarUtil.setStatusBarLightMode(this.window)
+        viewBinding.containerLl.marginStatusBarHeight()
+
+        window.decorView.setSystemUiVisibility(
+            View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
+                    or View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
+                    or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        )
         initView()
     }
 
     private fun initView() {
+        // 处理显示壁纸
+        val curManifest = ThemeManager.getThemeManagerIfExist()?.getCurManifest()
+        curManifest?.let {
+            val wallpaper =
+                ThemeManager.getThemeManagerIfExist()?.getManifestResRootPath() + it.background
+            viewBinding.wallpaperView.setPic(wallpaper)
+            viewBinding.wallpaperView.visible()
+        }
+
         viewBinding.et.addTextChangedListener {
             if (it.isNullOrEmpty()) {
                 viewBinding.ivClear.visibility = View.GONE

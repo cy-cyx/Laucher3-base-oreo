@@ -139,7 +139,9 @@ import com.theme.lambda.launcher.ui.search.SearchActivity;
 import com.theme.lambda.launcher.ui.theme.ThemeActivity;
 import com.theme.lambda.launcher.utils.CommonUtil;
 import com.theme.lambda.launcher.utils.LauncherUtil;
+import com.theme.lambda.launcher.utils.SpKey;
 import com.theme.lambda.launcher.utils.SpUtil;
+import com.theme.lambda.launcher.widget.FirstGuideView;
 import com.theme.lambda.launcher.widget.PreviewControlView;
 import com.theme.lambda.launcher.widget.WallpaperView;
 import com.theme.lambda.launcher.widget.dialog.ApplyLauncherPermissionDialog;
@@ -377,6 +379,7 @@ public class Launcher extends BaseActivity
     private final ThemeManager themeManager = new ThemeManager();
     private PreviewControlView previewControlView;
     private WallpaperView wallpaperView;
+    private FirstGuideView firstGuideView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -1130,27 +1133,14 @@ public class Launcher extends BaseActivity
         }
 
         themeManager.onResume();
-//
-//        // 第一次设置需要提示一下权限
-//        if (!SpUtil.INSTANCE.getBool("first_req_premission", false)) {
-//            ApplyLauncherPermissionDialog applyLauncherPermissionDialog = new ApplyLauncherPermissionDialog(this);
-//            applyLauncherPermissionDialog.setClickApplyListen(new Function0<Unit>() {
-//                @Override
-//                public Unit invoke() {
-//                    applyLauncherPermissionDialog.dismiss();
-//                    return null;
-//                }
-//            });
-//            applyLauncherPermissionDialog.setClickNotNowListen(new Function0<Unit>() {
-//                @Override
-//                public Unit invoke() {
-//                    applyLauncherPermissionDialog.dismiss();
-//                    return null;
-//                }
-//            });
-//            applyLauncherPermissionDialog.show();
-//            SpUtil.INSTANCE.putBool("first_req_premission", true);
-//        }
+
+        // 第一次需要
+        if (!SpUtil.INSTANCE.getBool(SpKey.first_guide, false)) {
+            firstGuideView.setVisibility(View.VISIBLE);
+            firstGuideView.startGuide();
+
+            SpUtil.INSTANCE.putBool(SpKey.first_guide, true);
+        }
     }
 
     @Override
@@ -1445,6 +1435,7 @@ public class Launcher extends BaseActivity
         themeManager.bindPreviewControlView(previewControlView);
         wallpaperView = (WallpaperView) findViewById(R.id.wallpaperView);
         themeManager.bindWallpaperView(wallpaperView);
+        firstGuideView = (FirstGuideView) findViewById(R.id.firstGuideView);
     }
 
     private void setupOverviewPanel() {
@@ -2308,6 +2299,10 @@ public class Launcher extends BaseActivity
 
     @Override
     public void onBackPressed() {
+        if (firstGuideView.getVisibility() == View.VISIBLE) {
+            return;
+        }
+
         if (mLauncherCallbacks != null && mLauncherCallbacks.handleBackPressed()) {
             return;
         }
