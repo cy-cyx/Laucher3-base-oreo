@@ -2,14 +2,10 @@ package com.theme.lambda.launcher.ui.news.adpater
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.launcher3.databinding.ItemAdBinding
 import com.android.launcher3.databinding.ItemNewsBinding
-import com.theme.lambda.launcher.ad.AdName
-import com.theme.lambda.launcher.ad.view.ADNativeSmallView
-import com.theme.lambda.launcher.data.model.News
 import com.theme.lambda.launcher.ui.news.item.AdItem
 import com.theme.lambda.launcher.ui.news.item.BaseItem
 import com.theme.lambda.launcher.ui.news.item.NewsItem
@@ -50,7 +46,7 @@ class NewsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             viewTypeAd ->{
                 return AdViewHolder(ItemAdBinding.inflate(LayoutInflater.from(parent.context)).root.apply {
                     layoutParams =
-                        ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, CommonUtil.dp2px(160f))
+                        ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, CommonUtil.dp2px(260f))
                 })
             }
             else ->{

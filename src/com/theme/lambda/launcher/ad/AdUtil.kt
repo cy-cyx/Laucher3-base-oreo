@@ -9,7 +9,9 @@ import android.view.LayoutInflater
 import com.android.launcher3.BuildConfig
 import com.android.launcher3.R
 import com.android.launcher3.databinding.LayoutNativeAdAdmob1Binding
+import com.android.launcher3.databinding.LayoutNativeAdAdmob2Binding
 import com.android.launcher3.databinding.LayoutNativeAdMax1Binding
+import com.android.launcher3.databinding.LayoutNativeAdMax2Binding
 import com.applovin.mediation.nativeAds.MaxNativeAdView
 import com.applovin.mediation.nativeAds.MaxNativeAdViewBinder
 import com.google.android.gms.ads.nativead.NativeAdView
@@ -381,6 +383,36 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
 
     fun populateNativeAdViewAdmob1(context: Context, layoutId: Int): NativeAdView {
         val binding = LayoutNativeAdAdmob1Binding.bind(
+            LayoutInflater.from(context).inflate(layoutId, null)
+        )
+        val nativeView = binding.root as NativeAdView
+
+        nativeView.mediaView = binding.logoFl
+        nativeView.iconView = binding.iconIv
+        nativeView.headlineView = binding.titleTv
+        nativeView.bodyView = binding.desTv
+        nativeView.callToActionView = binding.buttonBn
+
+        return nativeView
+    }
+
+    fun populateNativeAdViewMax2(context: Context, layoutId: Int): MaxNativeAdView {
+        val binding = LayoutNativeAdMax2Binding.bind(
+            LayoutInflater.from(context).inflate(layoutId, null)
+        )
+        return MaxNativeAdView(
+            MaxNativeAdViewBinder.Builder(binding.root).setTitleTextViewId(binding.titleTv.id)
+                .setBodyTextViewId(binding.desTv.id).setIconImageViewId(binding.iconIv.id)
+                .setMediaContentViewGroupId(binding.logoFl.id)
+                .setCallToActionButtonId(binding.buttonBn.id)
+//                .setAdvertiserTextViewId(binding.advertiserTextView.id)
+//                .setOptionsContentViewGroupId(binding.adOptionsView.id)
+                .build(), context
+        )
+    }
+
+    fun populateNativeAdViewAdmob2(context: Context, layoutId: Int): NativeAdView {
+        val binding = LayoutNativeAdAdmob2Binding.bind(
             LayoutInflater.from(context).inflate(layoutId, null)
         )
         val nativeView = binding.root as NativeAdView

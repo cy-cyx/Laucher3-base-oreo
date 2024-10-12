@@ -8,9 +8,6 @@ import android.view.ViewGroup
 import com.android.launcher3.R
 import com.android.launcher3.databinding.DialogLoadingWithAdBinding
 import com.theme.lambda.launcher.ad.AdName
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class LoadingWithAdDialog(context: Context) : Dialog(context, R.style.Theme_translucentDialog) {
 
