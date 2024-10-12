@@ -145,6 +145,7 @@ import com.theme.lambda.launcher.widget.FirstGuideView;
 import com.theme.lambda.launcher.widget.PreviewControlView;
 import com.theme.lambda.launcher.widget.WallpaperView;
 import com.theme.lambda.launcher.widget.dialog.ApplyLauncherPermissionDialog;
+import com.theme.lambda.launcher.widget.dialog.LoadingDialog;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -174,7 +175,7 @@ public class Launcher extends BaseActivity
     }
 
     public static final String TAG = "Launcher";
-    static final boolean LOGD = false;
+    static final boolean LOGD = BuildConfig.isDebug;
 
     static final boolean DEBUG_WIDGETS = false;
     static final boolean DEBUG_STRICT_MODE = false;
@@ -381,9 +382,11 @@ public class Launcher extends BaseActivity
     private WallpaperView wallpaperView;
     private FirstGuideView firstGuideView;
 
+    private LoadingDialog loadingDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("Launcher", "onCreate");
+        if (LOGD) Log.d(TAG, "onCreate");
         launcherWeakReference = new WeakReference(this);
         if (DEBUG_STRICT_MODE) {
             StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
@@ -468,6 +471,8 @@ public class Launcher extends BaseActivity
         if (savedInstanceState != null) {
             currentScreen = savedInstanceState.getInt(RUNTIME_STATE_CURRENT_SCREEN, currentScreen);
         }
+        themeManager.onCreate();
+        if (LOGD) Log.d(TAG, "startLoader----------->>");
         if (!mModel.startLoader(currentScreen)) {
             // If we are not binding synchronously, show a fade in animation when
             // the first page bind completes.
@@ -506,7 +511,7 @@ public class Launcher extends BaseActivity
             mLauncherCallbacks.onCreate(savedInstanceState);
         }
 
-        themeManager.onCreate();
+
     }
 
     @Override
@@ -1022,6 +1027,7 @@ public class Launcher extends BaseActivity
     @Override
     protected void onResume() {
         long startTime = 0;
+        if (LOGD) Log.d(TAG, "onResume");
         if (DEBUG_RESUME_TIME) {
             startTime = System.currentTimeMillis();
             Log.v(TAG, "Launcher.onResume()");
@@ -1140,6 +1146,10 @@ public class Launcher extends BaseActivity
             firstGuideView.startGuide();
 
             SpUtil.INSTANCE.putBool(SpKey.first_guide, true);
+        }
+
+        if (isWorkspaceLoading()) {
+            showLoading();
         }
     }
 
@@ -3337,6 +3347,8 @@ public class Launcher extends BaseActivity
      * Implementation of the method from LauncherModel.Callbacks.
      */
     public void startBinding() {
+        if (LOGD) Log.d(TAG, "startBinding <<-----------");
+        hideLoading();
         if (LauncherAppState.PROFILE_STARTUP) {
             Trace.beginSection("Starting page bind");
         }
@@ -4269,6 +4281,19 @@ public class Launcher extends BaseActivity
                 // it will initialize the rotation preference again.
                 finish();
             }
+        }
+    }
+
+    private void showLoading() {
+        if (loadingDialog == null) {
+            loadingDialog = new LoadingDialog(this);
+        }
+        loadingDialog.show();
+    }
+
+    private void hideLoading() {
+        if (loadingDialog.isShowing()) {
+            loadingDialog.dismiss();
         }
     }
 }
