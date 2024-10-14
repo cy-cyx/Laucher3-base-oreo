@@ -47,7 +47,7 @@
                     android:layout_height="82dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="10dp"
-                    android:src="@drawable/ic__vivo_setting_title" />
+                    android:src="@drawable/ic_vivo_setting_title" />
 
                 <FrameLayout
                     android:layout_width="338dp"
