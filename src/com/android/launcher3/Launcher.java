@@ -4292,7 +4292,7 @@ public class Launcher extends BaseActivity
     }
 
     private void hideLoading() {
-        if (loadingDialog.isShowing()) {
+        if (loadingDialog != null && loadingDialog.isShowing()) {
             loadingDialog.dismiss();
         }
     }
