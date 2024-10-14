@@ -46,7 +46,7 @@ class ADNativeDigView @JvmOverloads constructor(
         addView(lottie, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
         lottie.loop(true)
         lottie.scaleType = ImageView.ScaleType.FIT_XY
-        lottie.setAnimation(R.raw.native_middle_loading)
+        lottie.setAnimation(R.raw.native_big_loading)
     }
 
     // 修复泄露，用这层UI去断context泄露

@@ -2317,8 +2317,7 @@ public class Workspace extends PagedView
         }
 
         if (child instanceof BubbleTextView && !dragOptions.isAccessibleDrag &&
-                !(child.getTag() instanceof ShortcutInfo &&
-                        ((ShortcutInfo) child.getTag()).contentDescription == CommonUtil.INSTANCE.getString(R.string.app_name))) {
+                !(child.getTag() instanceof ShortcutInfo && ((ShortcutInfo) child.getTag()).title == "Theme")) {
             PopupContainerWithArrow popupContainer = PopupContainerWithArrow
                     .showForIcon((BubbleTextView) child);
             if (popupContainer != null) {
