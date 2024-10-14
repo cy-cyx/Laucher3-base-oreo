@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.android.launcher3.compat.LauncherAppsCompat;
 import com.android.launcher3.util.Themes;
+import com.theme.lambda.launcher.utils.CommonUtil;
 
 public class InfoDropTarget extends UninstallDropTarget {
 
@@ -66,7 +67,7 @@ public class InfoDropTarget extends UninstallDropTarget {
     }
 
     public static boolean startDetailsActivityForInfo(ItemInfo info, Launcher launcher,
-            DropTargetResultCallback callback, Rect sourceBounds, Bundle opts) {
+                                                      DropTargetResultCallback callback, Rect sourceBounds, Bundle opts) {
         boolean result = false;
         ComponentName componentName = null;
         if (info instanceof AppInfo) {
@@ -101,6 +102,8 @@ public class InfoDropTarget extends UninstallDropTarget {
     }
 
     public static boolean supportsDrop(Context context, ItemInfo info) {
+        if (info.contentDescription == CommonUtil.INSTANCE.getString(R.string.app_name))
+            return false;
         // Only show the App Info drop target if developer settings are enabled.
         boolean developmentSettingsEnabled = Settings.Global.getInt(context.getContentResolver(),
                 Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0) == 1;
@@ -109,9 +112,9 @@ public class InfoDropTarget extends UninstallDropTarget {
         }
         return info.itemType != LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT &&
                 (info instanceof AppInfo ||
-                (info instanceof ShortcutInfo && !((ShortcutInfo) info).isPromise()) ||
-                (info instanceof LauncherAppWidgetInfo &&
-                        ((LauncherAppWidgetInfo) info).restoreStatus == 0) ||
-                info instanceof PendingAddItemInfo);
+                        (info instanceof ShortcutInfo && !((ShortcutInfo) info).isPromise()) ||
+                        (info instanceof LauncherAppWidgetInfo &&
+                                ((LauncherAppWidgetInfo) info).restoreStatus == 0) ||
+                        info instanceof PendingAddItemInfo);
     }
 }

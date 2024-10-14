@@ -87,6 +87,7 @@ import com.android.launcher3.util.VerticalFlingDetector;
 import com.android.launcher3.util.WallpaperOffsetInterpolator;
 import com.android.launcher3.widget.PendingAddShortcutInfo;
 import com.android.launcher3.widget.PendingAddWidgetInfo;
+import com.theme.lambda.launcher.utils.CommonUtil;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -2315,7 +2316,9 @@ public class Workspace extends PagedView
             mDragSourceInternal = (ShortcutAndWidgetContainer) child.getParent();
         }
 
-        if (child instanceof BubbleTextView && !dragOptions.isAccessibleDrag) {
+        if (child instanceof BubbleTextView && !dragOptions.isAccessibleDrag &&
+                !(child.getTag() instanceof ShortcutInfo &&
+                        ((ShortcutInfo) child.getTag()).contentDescription == CommonUtil.INSTANCE.getString(R.string.app_name))) {
             PopupContainerWithArrow popupContainer = PopupContainerWithArrow
                     .showForIcon((BubbleTextView) child);
             if (popupContainer != null) {
