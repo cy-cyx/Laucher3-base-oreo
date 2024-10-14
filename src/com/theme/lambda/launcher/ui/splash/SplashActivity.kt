@@ -79,7 +79,9 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
         lifecycleScope.launch {
             delay(adWaitingTime)
-            gotoNext()
+            if(!isShowAd){
+                gotoNext()
+            }
         }
     }
 
