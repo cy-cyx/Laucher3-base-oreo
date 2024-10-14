@@ -129,36 +129,49 @@
 
         <activity
             android:name="com.theme.lambda.launcher.ui.search.SearchActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/LauncherTheme" />
         <activity
             android:name="com.theme.lambda.launcher.ui.weather.WeatherActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name="com.theme.lambda.launcher.ui.weather.WeatherSettingsActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name="com.theme.lambda.launcher.ui.weather.WeatherLocationActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name="com.theme.lambda.launcher.ui.weather.TemperatureUnitActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name="com.theme.lambda.launcher.ui.news.NewDetailsActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name="com.theme.lambda.launcher.ui.theme.ThemeActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTask"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name="com.theme.lambda.launcher.ui.themepreview.ThemePreviewActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name="com.theme.lambda.launcher.ui.me.MeActivity"
             android:launchMode="singleTask"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name="com.theme.lambda.launcher.ui.permissionguide.HomeLauncherSetGuideActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/TransDialog" />
+        <activity android:name="com.theme.lambda.launcher.ui.vivosetting.VivoSettingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"

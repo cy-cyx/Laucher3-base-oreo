@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.provider.Settings
 import com.theme.lambda.launcher.ui.permissionguide.HomeLauncherSetGuideActivity
+import com.theme.lambda.launcher.ui.vivosetting.VivoSettingActivity
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -13,6 +14,11 @@ import kotlinx.coroutines.launch
 object LauncherUtil {
 
     fun gotoSetLauncher(context: Context) {
+        if (SystemUtil.getDeviceBrand() == SystemUtil.PHONE_VIVO) {
+            VivoSettingActivity.start(context)
+            return
+        }
+
         try {
             val intent: Intent = Intent(Settings.ACTION_HOME_SETTINGS)
             if (context is Activity) {
