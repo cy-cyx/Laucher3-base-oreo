@@ -181,6 +181,23 @@ class ThemeManager {
     }
 
     fun onPause() {
+        // 如果是默认的launcher的情况下
+        launcher?.let {
+            if (LauncherUtil.isDefaultLauncher(it) && isPreviewMode){
+                QuitPreviewSureDialog(it).apply {
+                    onClickContinueListen = {
+                        quitPreview()
+                        setCurShowThemeById(themeId)
+                        // 返回主题选择页,如果是首次还要关一下launcher
+                        ThemeActivity.start(context, ThemeActivity.sFromTheme)
+                        if (themeId == "") {
+                            launcher?.finish()
+                        }
+                        AdUtil.showAd(AdName.interleaving)
+                    }
+                }.show()
+            }
+        }
 
     }
 
