@@ -45,4 +45,5 @@
     <string name="vivo_setting_part_2">&#160;&#160;&#160;&#160;&#160;Click  “more security settings”</string>
     <string name="vivo_setting_part_3">&#160;&#160;&#160;&#160;&#160;Click  “Replace the system launcher”</string>
     <string name="vivo_setting_part_4">&#160;&#160;&#160;&#160;&#160;Turn on the “Allow the launcher to be replaced” to complete the setup.</string>
+    <string name="vivo_setting_part_5">&#160;&#160;&#160;&#160;&#160;Find Lambda Launcher and click it to grant permission.</string>
 </resources>
