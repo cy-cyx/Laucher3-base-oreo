@@ -12,6 +12,7 @@ class QuitPreviewSureDialog(context: Context) : Dialog(context, R.style.Theme_tr
 
     val viewBinding = DialogQuitPreviewSureBinding.inflate(LayoutInflater.from(context))
     var onClickContinueListen: (() -> Unit)? = null
+    var onClickQuitListen: (() -> Unit)? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,10 +24,12 @@ class QuitPreviewSureDialog(context: Context) : Dialog(context, R.style.Theme_tr
 
         viewBinding.cancelTv.setOnClickListener {
             dismiss()
-            onClickContinueListen?.invoke()
+            onClickQuitListen?.invoke()
+
         }
         viewBinding.continueTv.setOnClickListener {
             dismiss()
+            onClickContinueListen?.invoke()
         }
     }
 }

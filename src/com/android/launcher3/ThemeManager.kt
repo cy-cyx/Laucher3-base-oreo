@@ -40,6 +40,9 @@ class ThemeManager {
     var isPreviewMode = false
         private set
 
+    // 有些场景onPause不需要出退出询问
+    private var ignoreQuitReq = false
+
     private var wallpaperView: WallpaperView? = null
 
     fun bindWallpaperView(view: WallpaperView) {
@@ -60,57 +63,21 @@ class ThemeManager {
             }
 
             override fun onSet() {
-                themeId = previewThemeId
-                SpUtil.putString(sKeyThemeId, themeId)
-                quitPreview()
-                setCurShowThemeById(themeId)
-
-                // 判断以下自己是不是默认launcher
-                launcher?.let {
-                    if (!LauncherUtil.isDefaultLauncher(it)) {
-                        ApplyLauncherPermissionDialog(it).apply {
-                            clickApplyListen = {
-                                LauncherUtil.gotoSetLauncher(it)
-                                dismiss()
-                            }
-                            clickNotNowListen = {
-                                dismiss()
-                            }
-                        }.show()
-                    }
-                }
+                set()
             }
         }
     }
 
-    private var firstApplyQuit = true
 
     fun applyQuitPreviewMode(context: Context) {
-        if (firstApplyQuit && !LauncherUtil.isDefaultLauncher(context)) {
-            firstApplyQuit = false
-            ApplyLauncherPermissionDialog(context).apply {
-                clickApplyListen = {
-                    dismiss()
-                    LauncherUtil.gotoSetLauncher(context)
-                }
-                clickNotNowListen = {
-                    dismiss()
-                }
-            }.show()
-        } else {
-            QuitPreviewSureDialog(context).apply {
-                onClickContinueListen = {
-                    quitPreview()
-                    setCurShowThemeById(themeId)
-                    // 返回主题选择页,如果是首次还要关一下launcher
-                    ThemeActivity.start(context, ThemeActivity.sFromTheme)
-                    if (themeId == "") {
-                        launcher?.finish()
-                    }
-                    AdUtil.showAd(AdName.interleaving)
-                }
-            }.show()
-        }
+        QuitPreviewSureDialog(context).apply {
+            onClickContinueListen = {
+                set()
+            }
+            onClickQuitListen = {
+                quit(context)
+            }
+        }.show()
     }
 
     companion object {
@@ -138,6 +105,41 @@ class ThemeManager {
             )
             return manifest
         }
+    }
+
+    private fun set() {
+        launcher?.let {
+            if (!LauncherUtil.isDefaultLauncher(it)) {
+                ApplyLauncherPermissionDialog(it).apply {
+                    clickApplyListen = {
+                        LauncherUtil.gotoSetLauncher(it)
+                        // 避免重建回来所选主题丢失
+                        SpUtil.putString(sKeyThemeId, previewThemeId)
+                        ignoreQuitReq = true
+                        dismiss()
+                    }
+                    clickNotNowListen = {
+                        dismiss()
+                    }
+                }.show()
+            } else {
+                themeId = previewThemeId
+                SpUtil.putString(sKeyThemeId, themeId)
+                quitPreview()
+                setCurShowThemeById(themeId)
+            }
+        }
+    }
+
+    private fun quit(context: Context) {
+        quitPreview()
+        setCurShowThemeById(themeId)
+        // 返回主题选择页,如果是首次还要关一下launcher
+        ThemeActivity.start(context, ThemeActivity.sFromTheme)
+        if (themeId == "") {
+            launcher?.finish()
+        }
+        AdUtil.showAd(AdName.interleaving)
     }
 
     fun onCreate() {
@@ -182,23 +184,14 @@ class ThemeManager {
 
     fun onPause() {
         // 如果是默认的launcher的情况下
-        launcher?.let {
-            if (LauncherUtil.isDefaultLauncher(it) && isPreviewMode){
-                QuitPreviewSureDialog(it).apply {
-                    onClickContinueListen = {
-                        quitPreview()
-                        setCurShowThemeById(themeId)
-                        // 返回主题选择页,如果是首次还要关一下launcher
-                        ThemeActivity.start(context, ThemeActivity.sFromTheme)
-                        if (themeId == "") {
-                            launcher?.finish()
-                        }
-                        AdUtil.showAd(AdName.interleaving)
-                    }
-                }.show()
+        if (!ignoreQuitReq) {
+            launcher?.let {
+                if (LauncherUtil.isDefaultLauncher(it) && isPreviewMode) {
+                    applyQuitPreviewMode(it)
+                }
             }
         }
-
+        ignoreQuitReq = false
     }
 
     fun onStop() {
@@ -211,7 +204,6 @@ class ThemeManager {
 
     private fun enterPreview() {
         isPreviewMode = true
-        firstApplyQuit = true
         launcher?.runOnUiThread {
             previewControlView?.visibility = View.VISIBLE
         }
