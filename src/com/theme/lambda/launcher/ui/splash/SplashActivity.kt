@@ -4,7 +4,6 @@ import android.graphics.Paint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.FrameLayout
 import androidx.lifecycle.lifecycleScope
 import com.android.launcher3.databinding.ActivitySplashBinding
 import com.theme.lambda.launcher.Constants
@@ -12,12 +11,11 @@ import com.theme.lambda.launcher.ad.AdName
 import com.theme.lambda.launcher.ad.AdUtil
 import com.theme.lambda.launcher.ad.IAdCallBack
 import com.theme.lambda.launcher.base.BaseActivity
+import com.theme.lambda.launcher.statistics.EventName
+import com.theme.lambda.launcher.statistics.EventUtil
 import com.theme.lambda.launcher.ui.theme.ThemeActivity
-import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.utils.ShareUtil
 import com.theme.lambda.launcher.utils.StatusBarUtil
-import com.theme.lambda.launcher.utils.gone
-import com.theme.lambda.launcher.utils.marginStatusBarHeight
 import com.theme.lambda.launcher.utils.visible
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -53,6 +51,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
                     or View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
                     or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
         )
+        EventUtil.logEvent(EventName.splashPageView, Bundle())
     }
 
     override fun onResume() {
@@ -79,7 +78,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
         lifecycleScope.launch {
             delay(adWaitingTime)
-            if(!isShowAd){
+            if (!isShowAd) {
                 gotoNext()
             }
         }

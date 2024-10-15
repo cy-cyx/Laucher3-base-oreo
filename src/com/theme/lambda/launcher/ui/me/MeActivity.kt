@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.launcher3.databinding.ActivityMeBinding
 import com.theme.lambda.launcher.base.BaseActivity
+import com.theme.lambda.launcher.statistics.EventName
+import com.theme.lambda.launcher.statistics.EventUtil
 import com.theme.lambda.launcher.ui.me.adapter.MeThemeAdapter
 import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.utils.StatusBarUtil
@@ -82,5 +84,7 @@ class MeActivity : BaseActivity<ActivityMeBinding>() {
 
         viewModel.load()
         viewBinding.swipeRefreshSrl.autoRefresh()
+
+        EventUtil.logEvent(EventName.minePageView, Bundle())
     }
 }

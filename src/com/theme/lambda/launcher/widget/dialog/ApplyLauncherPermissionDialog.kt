@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import com.android.launcher3.R
 import com.android.launcher3.databinding.DialogApplyLauncherPermissionBinding
+import com.theme.lambda.launcher.statistics.EventName
+import com.theme.lambda.launcher.statistics.EventUtil.logEvent
 import com.theme.lambda.launcher.utils.CommonUtil
 
 class ApplyLauncherPermissionDialog(context: Context) :
@@ -15,6 +17,13 @@ class ApplyLauncherPermissionDialog(context: Context) :
 
     var clickApplyListen: (() -> Unit)? = null
     var clickNotNowListen: (() -> Unit)? = null
+
+    var from = sFromHome
+
+    companion object {
+        const val sFromHome = "home"
+        const val sFromDetail = "detail"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,10 +42,25 @@ class ApplyLauncherPermissionDialog(context: Context) :
 
         viewBinding.allowTv.setOnClickListener {
             clickApplyListen?.invoke()
+            logEvent(EventName.permissionDialogClick, Bundle().apply {
+                putString("scene", from)
+                putString("permission", "launcher")
+                putString("type", "allow")
+            })
         }
 
         viewBinding.notNowTv.setOnClickListener {
             clickNotNowListen?.invoke()
+            logEvent(EventName.permissionDialogClick, Bundle().apply {
+                putString("scene", from)
+                putString("permission", "launcher")
+                putString("type", "dismiss")
+            })
         }
+
+        logEvent(EventName.permissionDialogShow, Bundle().apply {
+            putString("scene", from)
+            putString("permission", "launcher")
+        })
     }
 }

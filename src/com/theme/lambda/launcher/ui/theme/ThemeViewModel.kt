@@ -55,6 +55,9 @@ class ThemeViewModel : BaseViewModel() {
             page = 1L
             val data = DataRepository.getResource(page, tag.requestTag())
             val resList = data?.resources ?: arrayListOf()
+            resList.forEach {
+                it.tag = tag
+            }
             themeLiveData.value = resList
             refreshFinishLiveData.value = true
 
@@ -72,6 +75,9 @@ class ThemeViewModel : BaseViewModel() {
             page++
             val data = DataRepository.getResource(page, tag.requestTag())
             val resList = data?.resources ?: arrayListOf()
+            resList.forEach {
+                it.tag = tag
+            }
             val allData = themeLiveData.value ?: arrayListOf()
             allData.addAll(resList)
             themeLiveData.value = allData

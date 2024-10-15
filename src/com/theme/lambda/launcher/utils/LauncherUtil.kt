@@ -13,6 +13,8 @@ import kotlinx.coroutines.launch
 
 object LauncherUtil {
 
+    var gotoSetting = false
+
     fun gotoSetLauncher(context: Context) {
         if (SystemUtil.getDeviceBrand() == SystemUtil.PHONE_VIVO) {
             VivoSettingActivity.start(context)
@@ -33,6 +35,7 @@ object LauncherUtil {
                 delay(300)
                 HomeLauncherSetGuideActivity.start(context)
             }
+            gotoSetting = true
         } catch (e: Exception) {
         }
     }

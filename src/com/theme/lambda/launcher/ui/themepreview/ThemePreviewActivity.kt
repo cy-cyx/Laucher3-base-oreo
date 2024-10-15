@@ -16,6 +16,8 @@ import com.theme.lambda.launcher.ad.AdUtil
 import com.theme.lambda.launcher.ad.IAdCallBack
 import com.theme.lambda.launcher.base.BaseActivity
 import com.theme.lambda.launcher.data.model.Resources
+import com.theme.lambda.launcher.statistics.EventName
+import com.theme.lambda.launcher.statistics.EventUtil.logEvent
 import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.utils.GlideUtil
 import com.theme.lambda.launcher.utils.GsonUtil
@@ -68,8 +70,8 @@ class ThemePreviewActivity : BaseActivity<ActivityThemePreviewBinding>() {
             AdUtil.showAd(AdName.interleaving)
         }
         viewBinding.setTv.setOnClickListener {
-            if (AdUtil.isReady(AdName.unlock)){
-                AdUtil.showAd(AdName.unlock,object :IAdCallBack{
+            if (AdUtil.isReady(AdName.unlock)) {
+                AdUtil.showAd(AdName.unlock, object : IAdCallBack {
                     override fun onNoReady() {
 
                     }
@@ -80,13 +82,15 @@ class ThemePreviewActivity : BaseActivity<ActivityThemePreviewBinding>() {
                         }
                     }
                 })
-            }else{
+            } else {
                 Toast.makeText(
                     this,
                     CommonUtil.getString(R.string.ad_no_fill_tip), Toast.LENGTH_SHORT
                 ).show()
             }
-
+            logEvent(EventName.downloadClick, Bundle().apply {
+                putString("id", viewModel.resources?.id ?: "")
+            })
         }
 
         viewModel.loadDialogLiveData.observe(this, Observer {
@@ -95,6 +99,9 @@ class ThemePreviewActivity : BaseActivity<ActivityThemePreviewBinding>() {
             } else {
                 loadDialog.dismiss()
             }
+        })
+        logEvent(EventName.previewPageView, Bundle().apply {
+            putString("id", viewModel.resources?.id ?: "")
         })
     }
 

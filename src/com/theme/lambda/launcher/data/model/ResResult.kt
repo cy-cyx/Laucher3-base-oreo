@@ -22,7 +22,9 @@ class Resources {
     @SerializedName("zip_url")
     var zipUrl: String = ""
 
-    fun toThemeRes():ThemeRes{
+    var tag = ""
+
+    fun toThemeRes(): ThemeRes {
         val themeRes = ThemeRes()
         themeRes.let {
             it.did = this.id

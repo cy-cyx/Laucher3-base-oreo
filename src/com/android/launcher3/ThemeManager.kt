@@ -1,11 +1,15 @@
 package com.android.launcher3
 
 import android.content.Context
+import android.os.Bundle
 import android.view.View
 import com.bumptech.glide.Glide
 import com.theme.lambda.launcher.ad.AdName
 import com.theme.lambda.launcher.ad.AdUtil
 import com.theme.lambda.launcher.data.model.ManifestBean
+import com.theme.lambda.launcher.statistics.EventName
+import com.theme.lambda.launcher.statistics.EventUtil.logEvent
+import com.theme.lambda.launcher.statistics.FirebaseAnalyticsUtil
 import com.theme.lambda.launcher.ui.theme.ThemeActivity
 import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.utils.FileUtil
@@ -88,6 +92,8 @@ class ThemeManager {
 
         var themeManagerCache: WeakReference<ThemeManager>? = null
 
+        var clickSet = false
+
         fun getThemeManagerIfExist(): ThemeManager? {
             return themeManagerCache?.get()
         }
@@ -111,12 +117,19 @@ class ThemeManager {
         launcher?.let {
             if (!LauncherUtil.isDefaultLauncher(it)) {
                 ApplyLauncherPermissionDialog(it).apply {
+                    from = ApplyLauncherPermissionDialog.sFromDetail
                     clickApplyListen = {
                         LauncherUtil.gotoSetLauncher(it)
+                        logEvent(EventName.permissionDialog2Show, Bundle().apply {
+                            putString("scene", ApplyLauncherPermissionDialog.sFromDetail)
+                            putString("permission", "launcher")
+                        })
                         // 避免重建回来所选主题丢失
                         SpUtil.putString(sKeyThemeId, previewThemeId)
                         ignoreQuitReq = true
                         dismiss()
+
+                        clickSet = true
                     }
                     clickNotNowListen = {
                         dismiss()
@@ -127,8 +140,15 @@ class ThemeManager {
                 SpUtil.putString(sKeyThemeId, themeId)
                 quitPreview()
                 setCurShowThemeById(themeId)
+
+                logEvent(EventName.setSuccess, Bundle().apply {
+                    putString("id", previewThemeId)
+                })
             }
         }
+        logEvent(EventName.setClick, Bundle().apply {
+            putString("id", previewThemeId)
+        })
     }
 
     private fun quit(context: Context) {
@@ -164,6 +184,14 @@ class ThemeManager {
 
             setCurShowThemeById(previewThemeId, reload = false)
         }
+
+        // 由于重建故得这么统计
+        if (clickSet) {
+            logEvent(EventName.setSuccess, Bundle().apply {
+                putString("id", themeId)
+            })
+            clickSet = false
+        }
     }
 
     fun onStart() {
@@ -180,6 +208,20 @@ class ThemeManager {
             launcher?.closeAllAppLayoutIfNeed()
             setCurShowThemeById(previewThemeId)
         }
+
+        launcher?.let {
+            if (LauncherUtil.isDefaultLauncher(it)) {
+                logEvent(EventName.activate, Bundle())
+                FirebaseAnalyticsUtil.logEvent(EventName.activate, Bundle())
+                if (LauncherUtil.gotoSetting){
+                    logEvent(EventName.permissionGrant, Bundle().apply {
+                        putString("scene","detail")
+                        putString("permission","launcher")
+                    })
+                }
+            }
+        }
+        LauncherUtil.gotoSetting = false
     }
 
     fun onPause() {
@@ -207,6 +249,9 @@ class ThemeManager {
         launcher?.runOnUiThread {
             previewControlView?.visibility = View.VISIBLE
         }
+        logEvent(EventName.detailPageView, Bundle().apply {
+            putString("id", previewThemeId)
+        })
     }
 
     private fun quitPreview() {

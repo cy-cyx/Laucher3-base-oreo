@@ -2,6 +2,7 @@ package com.theme.lambda.launcher.ui.themepreview
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -12,6 +13,8 @@ import com.theme.lambda.launcher.ad.AdUtil
 import com.theme.lambda.launcher.base.BaseViewModel
 import com.theme.lambda.launcher.data.DataRepository
 import com.theme.lambda.launcher.data.model.Resources
+import com.theme.lambda.launcher.statistics.EventName
+import com.theme.lambda.launcher.statistics.EventUtil.logEvent
 import com.theme.lambda.launcher.task.DownloadZipTask
 import com.theme.lambda.launcher.ui.theme.ThemeActivity
 import kotlinx.coroutines.Dispatchers
@@ -39,6 +42,11 @@ class ThemePreviewViewModel : BaseViewModel() {
             val downloadZipTask = DownloadZipTask(resources!!)
             val result = downloadZipTask.execute()
             val downLoadTime = System.currentTimeMillis() - startDownLoadTimeStamp
+
+            logEvent(EventName.downloadSuccess, Bundle().apply {
+                putString("id", resources?.id ?: "")
+                putLong("duration", downLoadTime)
+            })
 
             // 至少需要下载3秒等待
             val waitTime = 3000 - downLoadTime

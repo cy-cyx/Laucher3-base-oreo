@@ -8,8 +8,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.OnScrollListener
+import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_DRAGGING
 import com.android.launcher3.databinding.FragmentThemeBinding
 import com.theme.lambda.launcher.base.BaseFragment
+import com.theme.lambda.launcher.statistics.EventName
+import com.theme.lambda.launcher.statistics.EventUtil
 import com.theme.lambda.launcher.ui.theme.adapter.ThemeAdapter
 import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.widget.dialog.LoadingDialog
@@ -58,6 +62,16 @@ class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
                 }
             })
         }
+        viewBinding.themeRv.addOnScrollListener(object : OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (newState == SCROLL_STATE_DRAGGING){
+                    EventUtil.logEvent(EventName.homePageInteract, Bundle().apply {
+                        putString("type","scroll")
+                    })
+                }
+            }
+        })
 
         viewBinding.swipeRefreshSrl.setOnRefreshListener {
             viewModel.refresh()
@@ -90,6 +104,16 @@ class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
 
         themeAdapter.clickItemListen = {
             viewModel.gotoPreview(requireActivity(), it)
+            EventUtil.logEvent(EventName.homePageInteract, Bundle().apply {
+                putString("type","click_item")
+            })
+            EventUtil.logEvent(EventName.AppResourcePageClick, Bundle().apply {
+                putString("id", it.id)
+                putString("cat", "theme")
+                putString("tag", it.tag)
+            })
         }
     }
+
+
 }

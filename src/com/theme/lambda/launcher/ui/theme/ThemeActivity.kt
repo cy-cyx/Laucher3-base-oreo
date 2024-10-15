@@ -6,9 +6,13 @@ import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import com.android.launcher3.databinding.ActivityThemeBinding
+import com.google.android.material.tabs.TabLayout
 import com.theme.lambda.launcher.Constants
 import com.theme.lambda.launcher.ad.AdName
 import com.theme.lambda.launcher.base.BaseActivity
+import com.theme.lambda.launcher.statistics.EventName
+import com.theme.lambda.launcher.statistics.EventUtil
+import com.theme.lambda.launcher.statistics.FirebaseAnalyticsUtil
 import com.theme.lambda.launcher.ui.me.MeActivity
 import com.theme.lambda.launcher.utils.LauncherUtil
 import com.theme.lambda.launcher.utils.StatusBarUtil
@@ -82,24 +86,49 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
             }
         }
         viewBinding.tabTl.setupWithViewPager(viewBinding.themeVp)
+        viewBinding.tabTl.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                EventUtil.logEvent(EventName.homePageInteract, Bundle().apply {
+                    putString("type", "change_tag")
+                })
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+
+            }
+        })
 
         viewBinding.meThemeIv.setOnClickListener {
             MeActivity.start(this)
+            EventUtil.logEvent(EventName.homePageInteract, Bundle().apply {
+                putString("type", "mine")
+            })
         }
 
         if (!LauncherUtil.isDefaultLauncher(this)) {
             viewBinding.applyTv.visible()
             viewBinding.applyTv.setOnClickListener {
                 ApplyLauncherPermissionDialog(this).apply {
+                    from = ApplyLauncherPermissionDialog.sFromHome
                     clickApplyListen = {
                         dismiss()
                         LauncherUtil.gotoSetLauncher(this@ThemeActivity)
+                        EventUtil.logEvent(EventName.permissionDialog2Show, Bundle().apply {
+                            putString("scene", ApplyLauncherPermissionDialog.sFromHome)
+                            putString("permission", "launcher")
+                        })
                     }
                     clickNotNowListen = {
                         dismiss()
                     }
                 }.show()
-
+                EventUtil.logEvent(EventName.homePageInteract, Bundle().apply {
+                    putString("type", "apply_theme")
+                })
             }
         }
 
@@ -109,6 +138,8 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
         if (Build.VERSION.SDK_INT >= 34) {
             ZipPathValidator.clearCallback()
         }
+
+        EventUtil.logEvent(EventName.homePageView, Bundle())
     }
 
     override fun onResume() {
@@ -116,7 +147,16 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
         // 重建回来
         if (LauncherUtil.isDefaultLauncher(this)) {
             viewBinding.applyTv.gone()
+            EventUtil.logEvent(EventName.activate, Bundle())
+            FirebaseAnalyticsUtil.logEvent(EventName.activate, Bundle())
         }
+        if (LauncherUtil.gotoSetting) {
+            EventUtil.logEvent(EventName.permissionGrant, Bundle().apply {
+                putString("scene", "home")
+                putString("permission", "launcher")
+            })
+        }
+        LauncherUtil.gotoSetting = false
     }
 
     override fun onDestroy() {
