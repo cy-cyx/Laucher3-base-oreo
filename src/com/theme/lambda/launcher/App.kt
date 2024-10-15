@@ -9,6 +9,7 @@ import android.webkit.WebView
 import com.lambdaweather.LambdaWeather
 import com.theme.lambda.launcher.ad.AdUtil
 import com.theme.lambda.launcher.data.di.allModules
+import com.theme.lambda.launcher.service.FirebaseService
 import com.theme.lambda.launcher.statistics.EventUtil
 import com.theme.lambda.launcher.statistics.FirebaseAnalyticsUtil
 import com.theme.lambda.launcher.utils.CommonUtil
@@ -38,6 +39,7 @@ class App : Application() {
                 FirebaseAnalyticsUtil.init(this)
                 EventUtil.init()
                 AdUtil.initAd(this)
+                FirebaseService.subscribe()
             }
         }
 

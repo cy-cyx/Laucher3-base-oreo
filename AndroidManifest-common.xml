@@ -153,8 +153,8 @@
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name="com.theme.lambda.launcher.ui.theme.ThemeActivity"
-            android:screenOrientation="portrait"
             android:launchMode="singleTask"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name="com.theme.lambda.launcher.ui.themepreview.ThemePreviewActivity"
@@ -169,9 +169,18 @@
             android:name="com.theme.lambda.launcher.ui.permissionguide.HomeLauncherSetGuideActivity"
             android:screenOrientation="portrait"
             android:theme="@style/TransDialog" />
-        <activity android:name="com.theme.lambda.launcher.ui.vivosetting.VivoSettingActivity"
+        <activity
+            android:name="com.theme.lambda.launcher.ui.vivosetting.VivoSettingActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+
+        <service
+            android:name="com.theme.lambda.launcher.service.FirebaseService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"

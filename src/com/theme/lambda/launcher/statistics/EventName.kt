@@ -20,6 +20,7 @@ object ADEventName {
 
 object EventName {
     val AppInstall = "AppInstall"
+    val AppAlive = "AppAlive"
     val splashPageView = "splashPageView"
     val homePageView = "homePageView"
     val homePageInteract = "homePageInteract"
