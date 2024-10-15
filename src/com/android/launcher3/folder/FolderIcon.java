@@ -563,7 +563,7 @@ public class FolderIcon extends FrameLayout implements FolderListener {
         private static final float ACCEPT_COLOR_MULTIPLIER = 1.5f;
 
         // Expressed on a scale from 0 to 255.
-        private static final int BG_OPACITY = 160;
+        private static final int BG_OPACITY = 100;
         private static final int MAX_BG_OPACITY = 225;
         private static final int BG_INTENSITY = 245;
         private static final int SHADOW_OPACITY = 40;
@@ -638,7 +638,7 @@ public class FolderIcon extends FrameLayout implements FolderListener {
         public void drawBackground(Canvas canvas) {
             mPaint.setStyle(Paint.Style.FILL);
             int alpha = (int) Math.min(MAX_BG_OPACITY, BG_OPACITY * mColorMultiplier);
-            mPaint.setColor(Color.argb(alpha, BG_INTENSITY, BG_INTENSITY, BG_INTENSITY));
+            mPaint.setColor(Color.argb(alpha, 10, 10, 10));
             float radius = getScaledRadius();
             canvas.drawRoundRect(getOffsetX(), getOffsetY(), 2 * radius + getOffsetX(), 2 * radius + getOffsetY(), roundedCorners, roundedCorners, mPaint);
 //

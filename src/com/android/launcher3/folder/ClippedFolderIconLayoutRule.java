@@ -3,6 +3,7 @@ package com.android.launcher3.folder;
 import android.view.View;
 
 import com.android.launcher3.config.FeatureFlags;
+import com.theme.lambda.launcher.utils.CommonUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ public class ClippedFolderIconLayoutRule implements FolderIcon.PreviewLayoutRule
     final float MIN_SCALE = 0.48f;
     final float MAX_SCALE = 0.58f;
     final float MAX_RADIUS_DILATION = 0.15f;
-    final float ITEM_RADIUS_SCALE_FACTOR = 1.33f;
+    final float ITEM_RADIUS_SCALE_FACTOR = 1.1f;
 
     private float[] mTmpPoint = new float[2];
 
@@ -32,7 +33,7 @@ public class ClippedFolderIconLayoutRule implements FolderIcon.PreviewLayoutRule
         mRadius = ITEM_RADIUS_SCALE_FACTOR * availableSpace / 2f;
         mIconSize = intrinsicIconSize;
         mIsRtl = rtl;
-        mBaselineIconScale = availableSpace / (intrinsicIconSize * 1f);
+        mBaselineIconScale = availableSpace / (intrinsicIconSize * 1f) - 0.2f;
     }
 
     @Override
