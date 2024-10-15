@@ -270,6 +270,92 @@
 
                 </FrameLayout>
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="12dp"
+                    android:src="@drawable/ic_vivo_setting_next" />
+
+                <FrameLayout
+                    android:layout_width="338dp"
+                    android:layout_height="260dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginHorizontal="13dp"
+                    android:layout_marginTop="10dp">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/shape_ffffff_radius_10">
+
+                        <ImageView
+                            android:layout_width="184dp"
+                            android:layout_height="200dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_vivo_setting_part5" />
+
+                        <LinearLayout
+                            android:layout_width="130dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|end"
+                            android:layout_marginEnd="15dp"
+                            android:orientation="vertical">
+
+                            <FrameLayout
+                                android:layout_width="130dp"
+                                android:layout_height="wrap_content">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_num_5" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:lineHeight="20dp"
+                                    android:text="@string/vivo_setting_part_4"
+                                    android:textColor="#000000"
+                                    android:textSize="13dp"
+                                    android:textStyle="bold" />
+                            </FrameLayout>
+
+                            <FrameLayout
+                                android:id="@+id/allowFl"
+                                android:layout_width="120dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="20dp"
+                                android:background="@drawable/shape_ff208af4_radius_8">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center|end"
+                                    android:layout_marginEnd="7dp"
+                                    android:src="@drawable/ic_arrow" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text="@string/allow"
+                                    android:textColor="#ffffff"
+                                    android:textSize="14dp" />
+                            </FrameLayout>
+                        </LinearLayout>
+                    </FrameLayout>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/ic_step5" />
+
+                </FrameLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="100dp" />

@@ -21,6 +21,10 @@ object LauncherUtil {
             return
         }
 
+        gotoSetLauncherWithOutGuide(context)
+    }
+
+    fun gotoSetLauncherWithOutGuide(context: Context) {
         try {
             val intent: Intent = Intent(Settings.ACTION_HOME_SETTINGS)
             if (context is Activity) {

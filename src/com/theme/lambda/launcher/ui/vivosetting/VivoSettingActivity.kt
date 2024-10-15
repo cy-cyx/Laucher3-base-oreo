@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import com.android.launcher3.databinding.ActivityVivoSettingBinding
 import com.theme.lambda.launcher.base.BaseActivity
+import com.theme.lambda.launcher.utils.LauncherUtil
 import com.theme.lambda.launcher.utils.StatusBarUtil
 import com.theme.lambda.launcher.utils.marginStatusBarHeight
 
@@ -26,6 +27,10 @@ class VivoSettingActivity : BaseActivity<ActivityVivoSettingBinding>() {
         StatusBarUtil.transparencyBar(this)
         StatusBarUtil.setStatusBarLightMode(this.window)
         viewBinding.containerLl.marginStatusBarHeight()
+
+        viewBinding.allowFl.setOnClickListener {
+            LauncherUtil.gotoSetLauncherWithOutGuide(this)
+        }
 
         viewBinding.backIv.setOnClickListener {
             finish()
