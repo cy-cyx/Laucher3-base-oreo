@@ -2,9 +2,10 @@ package com.theme.lambda.launcher.utils
 
 import android.R
 import android.app.Application
-import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.TypedValue
+import java.util.Locale
+
 
 object CommonUtil {
 
@@ -52,4 +53,10 @@ object CommonUtil {
     fun getString(res: Int): String {
         return appContext!!.resources.getString(res)
     }
+
+    fun getRegion(): String {
+        val locale = Locale.getDefault()
+        return locale.country // This returns the country code (e.g., "US")
+    }
+
 }

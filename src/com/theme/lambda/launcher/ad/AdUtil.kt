@@ -20,10 +20,12 @@ import com.lambda.adlib.LambdaAdAdapter
 import com.lambda.adlib.LambdaAdSdk
 import com.lambda.adlib.adapter.LAdMultipleAdapter
 import com.lambda.common.utils.utilcode.util.ActivityUtils
+import com.lambda.common.utils.utilcode.util.LogUtils
 import com.theme.lambda.launcher.Constants
 import com.theme.lambda.launcher.statistics.ADEventName
 import com.theme.lambda.launcher.statistics.EventUtil
 import com.theme.lambda.launcher.statistics.FirebaseAnalyticsUtil
+import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.utils.LogUtil
 import com.theme.lambda.launcher.utils.SpKey
 import com.theme.lambda.launcher.utils.getMMKVFloat
@@ -252,7 +254,15 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
         )
             // 存在ANR，又必须在主线程 -_-
             .initRemoteConfig(
-                R.xml.remote_config_defaults,
+                when (CommonUtil.getRegion()) {
+                    "RU" -> {
+                        R.xml.remote_config_ru
+                    }
+
+                    else -> {
+                        R.xml.remote_config_defaults
+                    }
+                },
                 listOf("AdConfig"),
                 "AdConfig"
             )
