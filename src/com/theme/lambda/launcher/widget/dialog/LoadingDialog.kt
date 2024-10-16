@@ -22,6 +22,5 @@ class LoadingDialog(context: Context) : Dialog(context, R.style.Theme_translucen
         window?.attributes = params
 
         setCanceledOnTouchOutside(false)
-        setCancelable(false)
     }
 }
