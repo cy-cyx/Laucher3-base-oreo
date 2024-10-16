@@ -46,4 +46,9 @@
     <string name="vivo_setting_part_3">&#160;&#160;&#160;&#160;&#160;Click  “Replace the system launcher”</string>
     <string name="vivo_setting_part_4">&#160;&#160;&#160;&#160;&#160;Open "Allow the launcher to be replaced" and keep "Tap the home button to lock the system home screen" closed.</string>
     <string name="vivo_setting_part_5">&#160;&#160;&#160;&#160;&#160;Find Lambda Launcher and click it to grant permission.</string>
+    <string name="vip_no_ad">No Ads</string>
+    <string name="vip_unlock_all">Unlock ALL Exclusive Themes</string>
+    <string name="vip_weekly_update">Weekly Update</string>
+    <string name="vip_customer">VIP Customer Support</string>
+    <string name="secure_by_google_pay">Secure by Google Pay</string>
 </resources>

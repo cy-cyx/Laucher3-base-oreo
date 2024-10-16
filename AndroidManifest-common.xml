@@ -173,6 +173,10 @@
             android:name="com.theme.lambda.launcher.ui.vivosetting.VivoSettingActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity
+            android:name="com.theme.lambda.launcher.ui.iap.VipActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
 
         <service
             android:name="com.theme.lambda.launcher.service.FirebaseService"

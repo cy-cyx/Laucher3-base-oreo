@@ -14,6 +14,10 @@ import com.theme.lambda.launcher.statistics.EventUtil
 import com.theme.lambda.launcher.statistics.FirebaseAnalyticsUtil
 import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.utils.OsUtil
+import com.theme.lambda.launcher.vip.VipManager
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -40,6 +44,7 @@ class App : Application() {
                 EventUtil.init()
                 AdUtil.initAd(this)
                 FirebaseService.subscribe()
+                VipManager.init()
             }
         }
 

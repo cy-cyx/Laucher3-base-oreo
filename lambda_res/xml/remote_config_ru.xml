@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<defaults xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="ResourceName">
+    <entry>
+        <key>AdConfig</key>
+        <value>{
+            "units": [
+            {
+            "auid": "open_group",
+            "strategy": 1,
+            "params": [
+            {
+            "adid": "ca-app-pub-3912577259305392/9471053186",
+            "order": 0,
+            "per": 0,
+            "plat": 1,
+            "type": 5,
+            "ecpm": 0
+            },
+            {
+            "adid": "ca-app-pub-3912577259305392/3751822643",
+            "order": 0,
+            "per": 0,
+            "plat": 1,
+            "type": 5,
+            "ecpm": 0
+            }
+            ]
+            },
+            {
+            "auid": "int_group",
+            "strategy": 1,
+            "params": [
+            {
+            "adid": "ca-app-pub-3912577259305392/8157971517",
+            "order": 0,
+            "per": 0,
+            "plat": 1,
+            "type": 4,
+            "ecpm": 0
+            },
+            {
+            "adid": "ca-app-pub-3912577259305392/5077045434",
+            "order": 0,
+            "per": 0,
+            "plat": 1,
+            "type": 4,
+            "ecpm": 0
+            },
+            {
+            "adid": "6e9856a238f27ebc",
+            "order": 0,
+            "per": 0,
+            "plat": 2,
+            "type": 4,
+            "ecpm": 0
+            }
+            ]
+            },
+            {
+            "auid": "rv_group",
+            "strategy": 1,
+            "params": [
+            {
+            "adid": "ca-app-pub-3912577259305392/4007506348",
+            "order": 0,
+            "per": 0,
+            "plat": 1,
+            "type": 3,
+            "ecpm": 0
+            },
+            {
+            "adid": "ca-app-pub-3912577259305392/5402109375",
+            "order": 0,
+            "per": 0,
+            "plat": 1,
+            "type": 6,
+            "ecpm": 0
+            },
+            {
+            "adid": "43d1faae53ed9d52",
+            "order": 0,
+            "per": 0,
+            "plat": 2,
+            "type": 3,
+            "ecpm": 0
+            }
+            ]
+            },
+            {
+            "auid": "nat_group",
+            "strategy": 2,
+            "params": [
+            {
+            "adid": "ca-app-pub-3912577259305392/2067738717",
+            "order": 0,
+            "per": 0,
+            "plat": 1,
+            "type": 2,
+            "ecpm": 0
+            },
+            {
+            "adid": "ca-app-pub-3912577259305392/3624562654",
+            "order": 1,
+            "per": 0,
+            "plat": 1,
+            "type": 2,
+            "ecpm": 0
+            },
+            {
+            "adid": "6c3302fceadc2041",
+            "order": 2,
+            "per": 0,
+            "plat": 2,
+            "type": 2,
+            "ecpm": 0
+            }
+            ]
+            },
+            {
+            "auid": "ban_group",
+            "strategy": 2,
+            "params": [
+            {
+            "adid": "ca-app-pub-3912577259305392/7788535926",
+            "order": 0,
+            "per": 0,
+            "plat": 1,
+            "type": 1,
+            "ecpm": 0
+            },
+            {
+            "adid": "ca-app-pub-3912577259305392/9587335775",
+            "order": 1,
+            "per": 0,
+            "plat": 1,
+            "type": 1,
+            "ecpm": 0
+            },
+            {
+            "adid": "d98752b20bdeba5d",
+            "order": 2,
+            "per": 0,
+            "plat": 2,
+            "type": 1,
+            "ecpm": 0
+            }
+            ]
+            }
+            ],
+            "scenes": [
+            {
+            "asid": "",
+            "name": "splash",
+            "ctrl": {
+            "closeCountDown": 0,
+            "closeDelay": 0,
+            "closeTrick": 0,
+            "impCapacity": 0,
+            "impInterval": 0,
+            "impTime": 0,
+            "startInterval": 0,
+            "startTime": 0,
+            "adShowingAlready": 0
+            },
+            "unit": "open_group, int_group",
+            "disabled": 0
+            },
+            {
+            "asid": "",
+            "name": "interleaving",
+            "ctrl": {
+            "closeCountDown": 0,
+            "closeDelay": 0,
+            "closeTrick": 0,
+            "impCapacity": 0,
+            "impInterval": 3,
+            "impTime": 0,
+            "startInterval": 1,
+            "startTime": 0,
+            "adShowingAlready": 0
+            },
+            "unit": "int_group",
+            "disabled": 0
+            },
+            {
+            "asid": "",
+            "name": "unlock",
+            "ctrl": {
+            "closeCountDown": 0,
+            "closeDelay": 0,
+            "closeTrick": 0,
+            "impCapacity": 0,
+            "impInterval": 0,
+            "impTime": 0,
+            "startInterval": 0,
+            "startTime": 0,
+            "adShowingAlready": 0
+            },
+            "unit": "rv_group, int_group",
+            "disabled": 0
+            },
+            {
+            "asid": "",
+            "name": "download_nat, theme_new_nat",
+            "ctrl": {
+            "closeCountDown": 0,
+            "closeDelay": 0,
+            "closeTrick": 0,
+            "impCapacity": 0,
+            "impInterval": 0,
+            "impTime": 0,
+            "startInterval": 0,
+            "startTime": 0,
+            "adShowingAlready": 0
+            },
+            "unit": "nat_group",
+            "disabled": 0
+            },
+            {
+            "asid": "",
+            "name": "home_ban",
+            "ctrl": {
+            "closeCountDown": 0,
+            "closeDelay": 0,
+            "closeTrick": 0,
+            "impCapacity": 0,
+            "impInterval": 0,
+            "impTime": 0,
+            "startInterval": 0,
+            "startTime": 0,
+            "adShowingAlready": 0
+            },
+            "unit": "ban_group",
+            "disabled": 0
+            }
+            ],
+            "keys": [
+            {
+            "key": "ca-app-pub-3912577259305392~1546646929",
+            "plat": 1,
+            "appId": ""
+            },
+            {
+            "key": "ziaXswlqLx7LCqxNXg6SewP_fz_BasfGL82KxU0kcTQZ7WRsacmw0FWHwn7zwemJHWomTSWyDKxgnK63EmyOaa",
+            "plat": 2,
+            "appId": ""
+            }
+            ],
+            "expiredTime": 3600000
+            }
+        </value>
+    </entry>
+</defaults>

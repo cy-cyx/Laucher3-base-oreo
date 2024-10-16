@@ -16,6 +16,7 @@ import com.lambda.adlib.LambdaAdAdapter
 import com.lambda.adlib.adapter.LAdMultipleAdapter
 import com.theme.lambda.launcher.utils.gone
 import com.theme.lambda.launcher.utils.visible
+import com.theme.lambda.launcher.vip.VipManager
 
 // 支持折叠banner且仅切换时刷新（不然折叠banner一直挡住使用）
 class ADBanner @JvmOverloads constructor(
@@ -38,7 +39,9 @@ class ADBanner @JvmOverloads constructor(
     override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
         when (event) {
             Lifecycle.Event.ON_RESUME -> {
-                showBannerAd()
+                if (VipManager.isVip.value == false) {
+                    showBannerAd()
+                }
             }
 
             Lifecycle.Event.ON_DESTROY -> {

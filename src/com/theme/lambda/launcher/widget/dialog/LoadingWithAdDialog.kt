@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import com.android.launcher3.R
 import com.android.launcher3.databinding.DialogLoadingWithAdBinding
 import com.theme.lambda.launcher.ad.AdName
+import com.theme.lambda.launcher.utils.gone
+import com.theme.lambda.launcher.vip.VipManager
 
 class LoadingWithAdDialog(context: Context) : Dialog(context, R.style.Theme_translucentDialog) {
 
@@ -24,6 +26,10 @@ class LoadingWithAdDialog(context: Context) : Dialog(context, R.style.Theme_tran
 
         setCanceledOnTouchOutside(false)
         setCancelable(false)
+
+        if (VipManager.isVip.value == true) {
+            viewBinding.adView.gone()
+        }
     }
 
     private var hasLoadingAd = false
@@ -39,6 +45,8 @@ class LoadingWithAdDialog(context: Context) : Dialog(context, R.style.Theme_tran
 
     override fun show() {
         super.show()
-        loadAd()
+        if (VipManager.isVip.value == false) {
+            loadAd()
+        }
     }
 }

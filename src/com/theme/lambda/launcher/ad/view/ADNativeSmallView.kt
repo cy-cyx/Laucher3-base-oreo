@@ -156,7 +156,9 @@ class ADNativeSmallView @JvmOverloads constructor(
         when (event) {
             Lifecycle.Event.ON_DESTROY -> {
                 removeView(adLayout)
-                AdUtil.removeNativeAdapterClose(placement!!, adListen!!)
+                adListen?.let {
+                    AdUtil.removeNativeAdapterClose(placement!!, it)
+                }
                 adListen?.listen = null
             }
 

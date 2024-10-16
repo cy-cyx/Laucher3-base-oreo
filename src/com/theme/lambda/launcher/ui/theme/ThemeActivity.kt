@@ -13,12 +13,14 @@ import com.theme.lambda.launcher.base.BaseActivity
 import com.theme.lambda.launcher.statistics.EventName
 import com.theme.lambda.launcher.statistics.EventUtil
 import com.theme.lambda.launcher.statistics.FirebaseAnalyticsUtil
+import com.theme.lambda.launcher.ui.iap.VipActivity
 import com.theme.lambda.launcher.ui.me.MeActivity
 import com.theme.lambda.launcher.utils.LauncherUtil
 import com.theme.lambda.launcher.utils.StatusBarUtil
 import com.theme.lambda.launcher.utils.gone
 import com.theme.lambda.launcher.utils.marginStatusBarHeight
 import com.theme.lambda.launcher.utils.visible
+import com.theme.lambda.launcher.vip.VipManager
 import com.theme.lambda.launcher.widget.adapter.LauncherFragmentAdapter
 import com.theme.lambda.launcher.widget.dialog.ApplyLauncherPermissionDialog
 import dalvik.system.ZipPathValidator
@@ -134,11 +136,20 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
 
         viewBinding.adBanner.scenesName = AdName.home_ban
 
+        viewBinding.vipIv.setOnClickListener {
+            VipActivity.start(this)
+        }
+
+        if (VipManager.isVip.value == true) {
+            viewBinding.adBanner.gone()
+        }
+
         // https://stackoverflow.com/questions/77683434/the-getnextentry-method-of-zipinputstream-throws-a-zipexception-invalid-zip-ent/77697327#77697327
         if (Build.VERSION.SDK_INT >= 34) {
             ZipPathValidator.clearCallback()
         }
 
+        VipManager.bindVipActivity(this)
         EventUtil.logEvent(EventName.homePageView, Bundle())
     }
 
@@ -157,6 +168,8 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
             })
         }
         LauncherUtil.gotoSetting = false
+
+        VipManager.upDataFreeAdUntil()
     }
 
     override fun onDestroy() {

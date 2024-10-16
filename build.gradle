@@ -184,6 +184,7 @@ dependencies {
     implementation "com.lambda.common:remoteconfig:0.1.5"
     implementation "com.lambda.common:lambdaad:1167"
     implementation "com.lambda.common:event:1.2.0.56"
+    implementation "com.lambda.common:billing:1.0.0.14"
 
     implementation 'com.facebook.infer.annotation:infer-annotation:0.18.0'
     implementation 'com.applovin:applovin-sdk:12.5.0'

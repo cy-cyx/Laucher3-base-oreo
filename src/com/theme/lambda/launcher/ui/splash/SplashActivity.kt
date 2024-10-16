@@ -17,6 +17,7 @@ import com.theme.lambda.launcher.ui.theme.ThemeActivity
 import com.theme.lambda.launcher.utils.ShareUtil
 import com.theme.lambda.launcher.utils.StatusBarUtil
 import com.theme.lambda.launcher.utils.visible
+import com.theme.lambda.launcher.vip.VipManager
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -25,7 +26,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         return ActivitySplashBinding.inflate(layoutInflater)
     }
 
-    private val adWaitingTime = 30000L
+    private val adWaitingTime = if (VipManager.isVip.value == true) 5000L else 30000L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,6 +90,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
     private var lastTryToShowAdTimeStamp = System.currentTimeMillis()
 
     private fun tryToShowAd() {
+        if (VipManager.isVip.value == true) return
         if (isShowAd) return
 
         // 500 尝试去展示广告

@@ -18,11 +18,13 @@ import com.theme.lambda.launcher.base.BaseActivity
 import com.theme.lambda.launcher.data.model.Resources
 import com.theme.lambda.launcher.statistics.EventName
 import com.theme.lambda.launcher.statistics.EventUtil.logEvent
+import com.theme.lambda.launcher.ui.iap.VipActivity
 import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.utils.GlideUtil
 import com.theme.lambda.launcher.utils.GsonUtil
 import com.theme.lambda.launcher.utils.StatusBarUtil
 import com.theme.lambda.launcher.utils.withHost
+import com.theme.lambda.launcher.vip.VipManager
 import com.theme.lambda.launcher.widget.dialog.LoadingDialog
 import com.theme.lambda.launcher.widget.dialog.LoadingWithAdDialog
 
@@ -70,6 +72,12 @@ class ThemePreviewActivity : BaseActivity<ActivityThemePreviewBinding>() {
             AdUtil.showAd(AdName.interleaving)
         }
         viewBinding.setTv.setOnClickListener {
+
+            if (VipManager.isVip.value == true) {
+                viewModel.download(this@ThemePreviewActivity)
+                return@setOnClickListener
+            }
+
             if (AdUtil.isReady(AdName.unlock)) {
                 AdUtil.showAd(AdName.unlock, object : IAdCallBack {
                     override fun onNoReady() {
@@ -83,10 +91,7 @@ class ThemePreviewActivity : BaseActivity<ActivityThemePreviewBinding>() {
                     }
                 })
             } else {
-                Toast.makeText(
-                    this,
-                    CommonUtil.getString(R.string.ad_no_fill_tip), Toast.LENGTH_SHORT
-                ).show()
+                VipActivity.start(this)
             }
             logEvent(EventName.downloadClick, Bundle().apply {
                 putString("id", viewModel.resources?.id ?: "")

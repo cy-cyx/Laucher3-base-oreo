@@ -8,6 +8,7 @@ import com.theme.lambda.launcher.data.model.News
 import com.theme.lambda.launcher.ui.news.item.AdItem
 import com.theme.lambda.launcher.ui.news.item.BaseItem
 import com.theme.lambda.launcher.ui.news.item.NewsItem
+import com.theme.lambda.launcher.vip.VipManager
 import kotlinx.coroutines.launch
 
 class NewsViewModel : BaseViewModel() {
@@ -58,7 +59,10 @@ class NewsViewModel : BaseViewModel() {
             curAdInterval++
             list.add(NewsItem(it))
             if (curAdInterval >= adInterval) {
-                list.add(AdItem())
+                // vip去掉广告
+                if (VipManager.isVip.value == false) {
+                    list.add(AdItem())
+                }
                 curAdInterval = 0
             }
         }

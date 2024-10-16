@@ -1,13 +1,14 @@
 package com.theme.lambda.launcher.utils
 
 import android.R
+import android.app.Application
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.TypedValue
 
 object CommonUtil {
 
-    var appContext: Context? = null
+    var appContext: Application? = null
 
     fun dp2px(dpVal: Float): Int {
         return TypedValue.applyDimension(

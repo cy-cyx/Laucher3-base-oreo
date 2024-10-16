@@ -28,6 +28,7 @@ import com.theme.lambda.launcher.utils.LogUtil
 import com.theme.lambda.launcher.utils.SpKey
 import com.theme.lambda.launcher.utils.getMMKVFloat
 import com.theme.lambda.launcher.utils.putMMKVFloat
+import com.theme.lambda.launcher.vip.VipManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -344,10 +345,15 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
         return getADAdapter(scenes)?.isReady() ?: false
     }
 
-    fun showAd(scenes: String, callback: IAdCallBack? = null): Boolean {
+    fun showAd(scenes: String, callback: IAdCallBack? = null) {
+        if (VipManager.isVip.value == true) {
+            callback?.onAdClose(LambdaAd.AD_CLOSE)
+            return
+        }
+
         val currentTimeMillis = System.currentTimeMillis()
         if (currentTimeMillis - lastShowAdMillis < 500L) {
-            return false
+            return
         }
         lastShowAdMillis = currentTimeMillis
 
@@ -355,14 +361,14 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
 
         if (!isReady(scenes)) {
             callback?.onNoReady()
-            return false
+            return
         }
         val multiAdCallback = callback
         if (multiAdCallback != null) {
             lastCallback = multiAdCallback
         }
         getADAdapter(scenes)?.showInterstitial()
-        return true
+        return
     }
 
 

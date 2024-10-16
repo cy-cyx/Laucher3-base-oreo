@@ -4,6 +4,7 @@ object AdName {
     val splash = "splash"
     val interleaving = "interleaving"
     val unlock = "unlock"
+    val iap_close = "iap_close"
 
     val download_nat = "download_nat"
     val theme_new_nat = "theme_new_nat"

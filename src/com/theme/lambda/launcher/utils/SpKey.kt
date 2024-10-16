@@ -10,4 +10,6 @@ object SpKey {
     const val install_time = "install_time"
 
     const val first_guide = "first_guide"
+
+    const val isVip = "isVip"
 }
