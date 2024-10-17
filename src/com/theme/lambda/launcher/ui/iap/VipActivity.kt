@@ -81,6 +81,13 @@ class VipActivity : BaseActivity<ActivityVipBinding>() {
             }
         })
 
+        viewModel.monthlyPriceLiveData.observe(this, Observer {
+            viewBinding.mouthTv.text = it
+        })
+        viewModel.yearlyPriceLiveData.observe(this, Observer {
+            viewBinding.yearTv.text = it
+        })
+
         viewModel.initBilling()
     }
 

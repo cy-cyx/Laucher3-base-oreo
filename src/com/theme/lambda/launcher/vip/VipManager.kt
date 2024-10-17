@@ -4,6 +4,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
 import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.ProductDetails
+import com.android.launcher3.BuildConfig
 import com.lambda.common.billing.Billing
 import com.lambda.common.billing.core.InitParam
 import com.lambda.common.billing.data.FreeAdUntilRes
@@ -27,6 +28,7 @@ object VipManager {
     var productDetails: List<ProductDetails?>? = null
 
     fun init() {
+        Billing.isDebug = BuildConfig.isDebug
         Billing.init(InitParam.Builder(Constants.BASE_URL, Constants.SECRET_KEY).build())
         isVip.value = SpKey.isVip.getMMKVBool()
         // 延迟请求网络有坑，归因问题
