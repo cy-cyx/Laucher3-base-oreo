@@ -10,18 +10,18 @@
             "strategy": 1,
             "params": [
             {
-            "adid": "ca-app-pub-3912577259305392/9471053186",
+            "adid": "R-M-12398626-9",
             "order": 0,
             "per": 0,
-            "plat": 1,
+            "plat": 7,
             "type": 5,
             "ecpm": 0
             },
             {
-            "adid": "ca-app-pub-3912577259305392/3751822643",
+            "adid": "43c807cacc69de1a",
             "order": 0,
             "per": 0,
-            "plat": 1,
+            "plat": 2,
             "type": 5,
             "ecpm": 0
             }
@@ -32,26 +32,26 @@
             "strategy": 1,
             "params": [
             {
-            "adid": "ca-app-pub-3912577259305392/8157971517",
-            "order": 0,
-            "per": 0,
-            "plat": 1,
-            "type": 4,
-            "ecpm": 0
-            },
-            {
-            "adid": "ca-app-pub-3912577259305392/5077045434",
-            "order": 0,
-            "per": 0,
-            "plat": 1,
-            "type": 4,
-            "ecpm": 0
-            },
-            {
-            "adid": "6e9856a238f27ebc",
+            "adid": "2c37ceea3f2d0ae8",
             "order": 0,
             "per": 0,
             "plat": 2,
+            "type": 4,
+            "ecpm": 0
+            },
+            {
+            "adid": "22464421",
+            "order": 0,
+            "per": 0,
+            "plat": 8,
+            "type": 4,
+            "ecpm": 0
+            },
+            {
+            "adid": "R-M-12398626-7",
+            "order": 0,
+            "per": 0,
+            "plat": 7,
             "type": 4,
             "ecpm": 0
             }
@@ -62,26 +62,26 @@
             "strategy": 1,
             "params": [
             {
-            "adid": "ca-app-pub-3912577259305392/4007506348",
+            "adid": "b3921dab1cc21cda",
             "order": 0,
             "per": 0,
-            "plat": 1,
+            "plat": 2,
             "type": 3,
             "ecpm": 0
             },
             {
-            "adid": "ca-app-pub-3912577259305392/5402109375",
+            "adid": "22464423",
             "order": 0,
             "per": 0,
-            "plat": 1,
-            "type": 6,
+            "plat": 8,
+            "type": 3,
             "ecpm": 0
             },
             {
-            "adid": "43d1faae53ed9d52",
+            "adid": "R-M-12398626-8",
             "order": 0,
             "per": 0,
-            "plat": 2,
+            "plat": 7,
             "type": 3,
             "ecpm": 0
             }
@@ -92,26 +92,18 @@
             "strategy": 2,
             "params": [
             {
-            "adid": "ca-app-pub-3912577259305392/2067738717",
-            "order": 0,
-            "per": 0,
-            "plat": 1,
-            "type": 2,
-            "ecpm": 0
-            },
-            {
-            "adid": "ca-app-pub-3912577259305392/3624562654",
-            "order": 1,
-            "per": 0,
-            "plat": 1,
-            "type": 2,
-            "ecpm": 0
-            },
-            {
-            "adid": "6c3302fceadc2041",
+            "adid": "394af0a6b69f6129",
             "order": 2,
             "per": 0,
             "plat": 2,
+            "type": 2,
+            "ecpm": 0
+            },
+            {
+            "adid": "R-M-12398626-6",
+            "order": 0,
+            "per": 0,
+            "plat": 7,
             "type": 2,
             "ecpm": 0
             }
@@ -122,26 +114,26 @@
             "strategy": 2,
             "params": [
             {
-            "adid": "ca-app-pub-3912577259305392/7788535926",
-            "order": 0,
-            "per": 0,
-            "plat": 1,
-            "type": 1,
-            "ecpm": 0
-            },
-            {
-            "adid": "ca-app-pub-3912577259305392/9587335775",
-            "order": 1,
-            "per": 0,
-            "plat": 1,
-            "type": 1,
-            "ecpm": 0
-            },
-            {
-            "adid": "d98752b20bdeba5d",
+            "adid": "92dc9072856dcce3",
             "order": 2,
             "per": 0,
             "plat": 2,
+            "type": 1,
+            "ecpm": 0
+            },
+            {
+            "adid": "22464425",
+            "order": 0,
+            "per": 0,
+            "plat": 8,
+            "type": 1,
+            "ecpm": 0
+            },
+            {
+            "adid": "R-M-12398626-5",
+            "order": 0,
+            "per": 0,
+            "plat": 7,
             "type": 1,
             "ecpm": 0
             }
@@ -233,17 +225,39 @@
             },
             "unit": "ban_group",
             "disabled": 0
+            },
+            {
+            "asid": "",
+            "name": "iap_close",
+            "ctrl": {
+            "closeCountDown": 0,
+            "closeDelay": 0,
+            "closeTrick": 0,
+            "impCapacity": 0,
+            "impInterval": 0,
+            "impTime": 0,
+            "startInterval": 0,
+            "startTime": 0,
+            "adShowingAlready": 0
+            },
+            "unit": "int_group",
+            "disabled": 0
             }
             ],
             "keys": [
             {
-            "key": "ca-app-pub-3912577259305392~1546646929",
-            "plat": 1,
+            "key": "ziaXswlqLx7LCqxNXg6SewP_fz_BasfGL82KxU0kcTQZ7WRsacmw0FWHwn7zwemJHWomTSWyDKxgnK63EmyOaa",
+            "plat": 2,
             "appId": ""
             },
             {
-            "key": "ziaXswlqLx7LCqxNXg6SewP_fz_BasfGL82KxU0kcTQZ7WRsacmw0FWHwn7zwemJHWomTSWyDKxgnK63EmyOaa",
-            "plat": 2,
+            "key": "1fdccf76d",
+            "plat": 8,
+            "appId": ""
+            },
+            {
+            "key": "12398626",
+            "plat": 7,
             "appId": ""
             }
             ],

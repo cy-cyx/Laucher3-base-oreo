@@ -233,6 +233,23 @@
             },
             "unit": "ban_group",
             "disabled": 0
+            },
+            {
+            "asid": "",
+            "name": "iap_close",
+            "ctrl": {
+            "closeCountDown": 0,
+            "closeDelay": 0,
+            "closeTrick": 0,
+            "impCapacity": 0,
+            "impInterval": 0,
+            "impTime": 0,
+            "startInterval": 0,
+            "startTime": 0,
+            "adShowingAlready": 0
+            },
+            "unit": "int_group",
+            "disabled": 0
             }
             ],
             "keys": [
