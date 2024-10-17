@@ -105,37 +105,6 @@ android {
     }
 }
 
-repositories {
-    mavenCentral()
-    google()
-    maven { url 'https://jitpack.io' }
-    maven {
-        name "uniteman"
-        url 'https://gitlab.umcasual.cn/api/v4/groups/16/-/packages/maven'
-        credentials(HttpHeaderCredentials) {
-//            name = "Job-Token"
-//            value = System.getenv("CI_JOB_TOKEN")
-
-            // 如果要在本地发布，则注释上面配置，并启用以下配置
-            // https://docs.gitlab.com/ee/user/packages/maven_repository/#authenticate-with-a-personal-access-token-in-gradle
-            name = "Private-Token"
-//             value = gitLabPrivateToken // the variable resides in ~/.gradle/gradle.properties
-            value = "xsnU8ybXyNpAjPsqJWuD"
-        }
-        authentication {
-            header(HttpHeaderAuthentication)
-        }
-    }
-    maven { url = uri("https://artifact.bytedance.com/repository/pangle") }
-    maven { url = uri("https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea") }
-    maven { url = uri("https://android-sdk.is.com") }
-    maven {
-        url "https://jfrog.anythinktech.com/artifactory/overseas_sdk"
-    }
-    maven { url "https://artifactory.bidmachine.io/bidmachine" }
-    maven { url 'https://developer.huawei.com/repo/' }
-}
-
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.7.0'
     implementation "androidx.dynamicanimation:dynamicanimation:1.0.0"
