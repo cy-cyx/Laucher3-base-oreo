@@ -677,6 +677,17 @@ public class Launcher extends BaseActivity
         if (mLauncherCallbacks != null) {
             mLauncherCallbacks.populateCustomContentContainer();
         }
+        // 再次确认移除
+        try {
+            List<Fragment> fragments = getSupportFragmentManager().getFragments();
+            for (Fragment fragment : fragments) {
+                if (fragment.getTag().equals("customFragment")) {
+                    getSupportFragmentManager().beginTransaction().remove(fragment).commitNow();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         CustomView customView = new CustomView(this);
         addToCustomContentPage(customView, customView, "");
     }
@@ -3366,6 +3377,7 @@ public class Launcher extends BaseActivity
                 getSupportFragmentManager().beginTransaction().remove(fragment).commitNow();
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
 
         if (mHotseat != null) {
