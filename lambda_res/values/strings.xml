@@ -51,4 +51,6 @@
     <string name="vip_weekly_update">Weekly Update</string>
     <string name="vip_customer">VIP Customer Support</string>
     <string name="secure_by_google_pay">Secure by Google Pay</string>
+    <string name="all_content_no_ads">All content No ads.</string>
+    <string name="get">Get</string>
 </resources>

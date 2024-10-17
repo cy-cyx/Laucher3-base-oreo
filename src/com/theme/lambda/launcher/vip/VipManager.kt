@@ -71,7 +71,10 @@ object VipManager {
         Billing.initClient(activity)
         Billing.initBilling(activity)
 
-        queryProducts()
+        GlobalScope.launch {
+            delay(1000)
+            queryProducts()
+        }
     }
 
     fun queryProducts(callback: Callback<List<ProductDetails?>?>? = null) {

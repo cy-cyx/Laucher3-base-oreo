@@ -14,6 +14,8 @@ import com.theme.lambda.launcher.base.BaseActivity
 import com.theme.lambda.launcher.utils.StatusBarUtil
 import com.theme.lambda.launcher.vip.ProductIds
 import com.theme.lambda.launcher.vip.VipManager
+import com.theme.lambda.launcher.widget.dialog.LoadingDialog
+import com.theme.lambda.launcher.widget.dialog.LoadingWithAdDialog
 
 class VipActivity : BaseActivity<ActivityVipBinding>() {
 
@@ -29,6 +31,13 @@ class VipActivity : BaseActivity<ActivityVipBinding>() {
     }
 
     private val viewModel by viewModels<VipViewModel>()
+
+
+    val loadDialog by lazy {
+        LoadingDialog(this).apply {
+            setCancelable(false)
+        }
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,6 +69,15 @@ class VipActivity : BaseActivity<ActivityVipBinding>() {
                 viewBinding.yearFl.setBackgroundResource(R.drawable.ic_vip_super_sale_bn_sel)
                 viewBinding.monthSelectIv.setImageResource(R.drawable.ic_bn_no_select)
                 viewBinding.yearSelectIv.setImageResource(R.drawable.ic_bn_select)
+            }
+        })
+
+
+        viewModel.loadDialogLiveData.observe(this, Observer {
+            if (it) {
+                loadDialog.show()
+            } else {
+                loadDialog.dismiss()
             }
         })
 

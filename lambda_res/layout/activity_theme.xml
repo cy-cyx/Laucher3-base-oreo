@@ -75,7 +75,7 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="110dp"
         android:background="@drawable/ic_home_authorization"
         android:text="apply"
         android:visibility="gone"
@@ -90,5 +90,34 @@
             android:textColor="#ffffff"
             android:textSize="16dp"
             android:textStyle="bold" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/vipBannerFl"
+        android:layout_width="340dp"
+        android:layout_height="37dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="62dp"
+        android:background="@drawable/bg_vip_banner">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="64dp"
+            android:text="@string/all_content_no_ads"
+            android:textColor="#ffffff"
+            android:textSize="15dp" />
+
+        <TextView
+            android:layout_width="53dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginEnd="7dp"
+            android:background="@drawable/bg_vip_banner_bn"
+            android:gravity="center"
+            android:text="@string/get"
+            android:textColor="#FFD65606"
+            android:textSize="15dp" />
     </FrameLayout>
 </FrameLayout>
