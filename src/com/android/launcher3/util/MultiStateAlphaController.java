@@ -24,6 +24,8 @@ import android.content.Context;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 
+import com.theme.lambda.launcher.utils.CommonUtil;
+
 import java.util.Arrays;
 
 /**
@@ -41,7 +43,11 @@ public class MultiStateAlphaController {
         mAlphas = new float[stateCount];
         Arrays.fill(mAlphas, 1);
 
-        mAm = (AccessibilityManager) view.getContext().getSystemService(Context.ACCESSIBILITY_SERVICE);
+        if (view != null) {
+            mAm = (AccessibilityManager) view.getContext().getSystemService(Context.ACCESSIBILITY_SERVICE);
+        } else {
+            mAm = (AccessibilityManager) CommonUtil.INSTANCE.getAppContext().getSystemService(Context.ACCESSIBILITY_SERVICE);
+        }
     }
 
     public void setAlphaAtIndex(float alpha, int index) {

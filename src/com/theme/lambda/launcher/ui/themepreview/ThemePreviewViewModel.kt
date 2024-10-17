@@ -62,7 +62,9 @@ class ThemePreviewViewModel : BaseViewModel() {
                 ThemeActivity.closeThemeActivity()
                 DataRepository.insertDownLoadThemeIntoDb(resources!!.toThemeRes())
             } else {
-                Toast.makeText(context, "download error!!", Toast.LENGTH_SHORT).show()
+                withContext(Dispatchers.Main){
+                    Toast.makeText(context, "download error!!", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }

@@ -74,7 +74,8 @@ public class UninstallDropTarget extends ButtonDropTarget {
             LauncherActivityInfo info = LauncherAppsCompat.getInstance(context)
                     .resolveActivity(intent, user);
 
-            if (info.getComponentName().getPackageName().equals(CommonUtil.INSTANCE.getAppContext().getPackageName())) {
+            if (info != null &&
+                    info.getComponentName().getPackageName().equals(CommonUtil.INSTANCE.getAppContext().getPackageName())) {
                 return null;
             }
 

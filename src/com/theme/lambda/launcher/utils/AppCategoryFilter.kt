@@ -2,6 +2,7 @@ package com.theme.lambda.launcher.utils
 
 import android.content.pm.ApplicationInfo
 import android.content.pm.LauncherActivityInfo
+import android.os.Build
 import android.os.UserHandle
 import com.android.launcher3.AppInfo
 import com.android.launcher3.R
@@ -86,7 +87,9 @@ object AppCategoryFilter {
         val pm = Utils.getApp().packageManager
         var c = -1
         try {
-            c = pm.getApplicationInfo(packageName, 0).category
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                c = pm.getApplicationInfo(packageName, 0).category
+            }
         } catch (ignored: Exception) {
         }
         if (Utils.getApp().getString(R.string.store).contentEquals(category)) {
