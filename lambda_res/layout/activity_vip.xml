@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_vip">
@@ -119,19 +120,19 @@
                 android:id="@+id/monthFl"
                 android:layout_width="310dp"
                 android:layout_height="62dp"
-                android:background="@drawable/bg_vip_select"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="62dp">
+                android:layout_marginTop="62dp"
+                android:background="@drawable/bg_vip_select">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="23dp"
+                    android:text="$9.99/Month"
                     android:textColor="#FF131619"
                     android:textSize="16dp"
-                    android:textStyle="bold"
-                    android:text="$9.99/Month" />
+                    android:textStyle="bold" />
 
                 <ImageView
                     android:id="@+id/monthSelectIv"
@@ -156,10 +157,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="23dp"
+                    android:text="$35.99/Year"
                     android:textColor="#FF131619"
                     android:textSize="16dp"
-                    android:textStyle="bold"
-                    android:text="$35.99/Year" />
+                    android:textStyle="bold" />
 
                 <ImageView
                     android:id="@+id/yearSelectIv"
@@ -170,24 +171,35 @@
                     android:src="@drawable/ic_bn_no_select" />
             </FrameLayout>
 
-            <TextView
-                android:id="@+id/continueTv"
-                android:layout_width="300dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="44dp"
-                android:background="@drawable/ic_vip_bn"
-                android:gravity="center"
-                android:text="@string/text_continue"
-                android:textColor="#ffffff"
-                android:textSize="16dp"
-                android:textStyle="bold" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="20dp">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/continueTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center_horizontal"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/subs_bn" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/text_continue"
+                    android:textColor="#ffffff"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+            </FrameLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="12dp"
                 android:orientation="horizontal">
 
                 <ImageView
