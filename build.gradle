@@ -152,7 +152,6 @@ dependencies {
     implementation("com.lambda.common:http:1.0.1.25")
     implementation "com.lambda.common:remoteconfig:0.1.5"
     implementation "com.lambda.common:lambdaad:1167"
-    implementation "com.lambda.common:event:1.2.0.56"
     implementation 'com.lambda.common:billing-google:0.0.0.10'
 
     implementation 'com.facebook.infer.annotation:infer-annotation:0.18.0'
