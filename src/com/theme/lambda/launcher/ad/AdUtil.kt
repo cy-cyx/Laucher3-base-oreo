@@ -283,7 +283,8 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
         for (i in listOf(
             AdName.splash,
             AdName.interleaving,
-            AdName.unlock
+            AdName.unlock,
+            AdName.iap_close
         )) {
             if (lAdMultipleAdapters[i] != null) {
                 continue
