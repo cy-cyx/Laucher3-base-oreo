@@ -12,4 +12,6 @@ object SpKey {
     const val first_guide = "first_guide"
 
     const val isVip = "isVip"
+
+    const val curUserWallpaperId = "curUserWallpaperId"
 }

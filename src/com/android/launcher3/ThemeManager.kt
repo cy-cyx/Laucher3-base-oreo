@@ -16,9 +16,12 @@ import com.theme.lambda.launcher.utils.FileUtil
 import com.theme.lambda.launcher.utils.GsonUtil
 import com.theme.lambda.launcher.utils.LauncherUtil
 import com.theme.lambda.launcher.utils.ShareUtil
+import com.theme.lambda.launcher.utils.SpKey
 import com.theme.lambda.launcher.utils.SpUtil
 import com.theme.lambda.launcher.utils.WallPaperUtil
+import com.theme.lambda.launcher.utils.getMMKVString
 import com.theme.lambda.launcher.utils.gone
+import com.theme.lambda.launcher.utils.putMMKVString
 import com.theme.lambda.launcher.utils.visible
 import com.theme.lambda.launcher.widget.PreviewControlView
 import com.theme.lambda.launcher.widget.WallpaperView
@@ -213,10 +216,10 @@ class ThemeManager {
             if (LauncherUtil.isDefaultLauncher(it)) {
                 logEvent(EventName.activate, Bundle())
                 FirebaseAnalyticsUtil.logEvent(EventName.activate, Bundle())
-                if (LauncherUtil.gotoSetting){
+                if (LauncherUtil.gotoSetting) {
                     logEvent(EventName.permissionGrant, Bundle().apply {
-                        putString("scene","detail")
-                        putString("permission","launcher")
+                        putString("scene", "detail")
+                        putString("permission", "launcher")
                     })
                 }
             }
@@ -237,7 +240,20 @@ class ThemeManager {
     }
 
     fun onStop() {
-
+        // 找个时机偷换用户真正的壁纸
+        launcher?.let {
+            if (isPreviewMode) return
+            if (LauncherUtil.isDefaultLauncher(it)) {
+                if (SpKey.curUserWallpaperId.getMMKVString() != themeId) {
+                    val manifest = getCurManifest()
+                    if (manifest != null) {
+                        val wallpaper = getManifestResRootPath() + manifest.background
+                        WallPaperUtil.setHomeAndLockScreen(wallpaper)
+                    }
+                    SpKey.curUserWallpaperId.putMMKVString(themeId)
+                }
+            }
+        }
     }
 
     fun onDestroy() {
