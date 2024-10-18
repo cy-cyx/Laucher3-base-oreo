@@ -144,14 +144,14 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
             VipActivity.start(this)
         }
 
-//        VipManager.isVip.observe(this, Observer {
-//            if (it) {
-//                viewBinding.adBanner.gone()
-//                viewBinding.vipBannerFl.gone()
-//            }else{
-//                viewBinding.vipBannerFl.visible()
-//            }
-//        })
+        VipManager.isVip.observe(this, Observer {
+            if (it) {
+                viewBinding.adBanner.gone()
+                viewBinding.vipBannerFl.gone()
+            } else {
+                viewBinding.vipBannerFl.visible()
+            }
+        })
 
 
         // https://stackoverflow.com/questions/77683434/the-getnextentry-method-of-zipinputstream-throws-a-zipexception-invalid-zip-ent/77697327#77697327

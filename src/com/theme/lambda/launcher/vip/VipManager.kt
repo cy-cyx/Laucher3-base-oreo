@@ -7,7 +7,8 @@ import com.android.billingclient.api.ProductDetails
 import com.android.launcher3.BuildConfig
 import com.lambda.common.billing.Billing
 import com.lambda.common.billing.core.InitParam
-import com.lambda.common.billing.data.FreeAdUntilRes
+import com.lambda.common.billing.data.ProductRes
+import com.lambda.common.billing.data.UserAssets
 import com.lambda.common.http.AppException
 import com.lambda.common.http.Callback
 import com.theme.lambda.launcher.Constants
@@ -26,6 +27,7 @@ object VipManager {
     val isVip = MutableLiveData<Boolean>(false)
 
     var productDetails: List<ProductDetails?>? = null
+    var productRes: ProductRes? = null
 
     fun init() {
         Billing.isDebug = BuildConfig.isDebug
@@ -47,7 +49,7 @@ object VipManager {
         lastUpDataFreeAdUntilTimeStamp = System.currentTimeMillis()
 
         LogUtil.d(TAG, "getFreeAdUntil ------>>>")
-        Billing.getFreeAdUntil(object : Callback<FreeAdUntilRes?> {
+        Billing.getFreeAdUntil(object : Callback<com.lambda.common.billing.data.UserAssets?> {
             override fun onFailed(e: AppException) {
                 LogUtil.e(TAG, "upDataFreeAdUntil onFailed $e")
             }
@@ -56,11 +58,16 @@ object VipManager {
 
             }
 
-            override fun onSuccess(t: FreeAdUntilRes?) {
-                val freeAdUntil = t?.freeAdUntil ?: 0
-                isVip.postValue(freeAdUntil > System.currentTimeMillis())
-                SpKey.isVip.putMMKVBool(freeAdUntil > System.currentTimeMillis())
-                LogUtil.d(TAG, "upDataFreeAdUntil onSuccess freeAdUntil:$freeAdUntil")
+            override fun onSuccess(t: UserAssets?) {
+                if (t?.assets?.isNotEmpty() == true) {
+                    val freeAdUntil: Long = t.assets.maxBy { it.expireAt }.expireAt
+                    isVip.postValue(freeAdUntil > System.currentTimeMillis())
+                    SpKey.isVip.putMMKVBool(freeAdUntil > System.currentTimeMillis())
+                    LogUtil.d(TAG, "upDataFreeAdUntil onSuccess freeAdUntil:$freeAdUntil")
+                } else {
+                    isVip.postValue(false)
+                    SpKey.isVip.putMMKVBool(false)
+                }
             }
 
         })
@@ -76,10 +83,31 @@ object VipManager {
         GlobalScope.launch {
             delay(1000)
             queryProducts()
+            getSubscriptions()
         }
     }
 
+    fun getSubscriptions() {
+        LogUtil.d(TAG, "getSubscriptions ------>>>")
+        Billing.getSubscriptions(
+            mutableMapOf(),
+            object : Callback<ProductRes?> {
+                override fun onFailed(e: AppException) {
+                    LogUtil.d(TAG, "getSubscriptions onFailed : ${e}")
+                }
+
+                override fun onRequest() {
+                }
+
+                override fun onSuccess(t: ProductRes?) {
+                    productRes = t
+                    LogUtil.d(TAG, "getSubscriptions onSuccess : ${t}")
+                }
+            })
+    }
+
     fun queryProducts(callback: Callback<List<ProductDetails?>?>? = null) {
+        getSubscriptions()
         LogUtil.d(TAG, "queryProducts ------>>>")
         Billing.queryProducts(
             arrayListOf(ProductIds.Yearly.id, ProductIds.Monthly.id),
@@ -104,18 +132,44 @@ object VipManager {
         )
     }
 
-    fun purchase(activity: FragmentActivity, product: String, callback: Callback<Void?>) {
+    fun purchase(
+        activity: FragmentActivity,
+        product: String,
+        tag: String,
+        callback: Callback<Void?>
+    ) {
         LogUtil.d(TAG, "purchase ------>>>")
+        val subscriptions = productRes?.products?.flatMap { subscriptionType ->
+            subscriptionType.platProducts
+        }
+        val subscription = subscriptions?.lastOrNull { platProducts ->
+            platProducts.platPid == product
+        }
+        val extraData = subscription?.croExtraData ?: ""
+
+        if (extraData == "") {
+            callback.onFailed(AppException())
+            return
+        }
+
         Billing.purchase(
             activity,
             product,
-            "",
+            extraData,
             BillingClient.ProductType.SUBS,
-            "",
+            tag,
             object : Callback<Void?> {
                 override fun onFailed(e: AppException) {
                     LogUtil.d(TAG, "purchase onFailed ${e}")
-                    callback.onFailed(e)
+
+                    // 轮询失败当做成功处理
+                    if (e.c == com.lambda.common.billing.core.Constants.ERROR_CODE_PENDING) {
+                        LogUtil.d(TAG, "success")
+                        markSubsSuccess()
+                        callback.onSuccess(null)
+                    } else {
+                        callback.onFailed(e)
+                    }
                 }
 
                 override fun onRequest() {
@@ -124,10 +178,14 @@ object VipManager {
 
                 override fun onSuccess(t: Void?) {
                     LogUtil.d(TAG, "purchase onSuccess")
-                    isVip.postValue(true)
-                    SpKey.isVip.putMMKVBool(true)
+                    markSubsSuccess()
                     callback.onSuccess(t)
                 }
             })
+    }
+
+    fun markSubsSuccess() {
+        isVip.postValue(true)
+        SpKey.isVip.putMMKVBool(true)
     }
 }

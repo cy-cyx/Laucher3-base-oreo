@@ -13,7 +13,7 @@ class VipViewModel : BaseViewModel() {
 
     var details: List<ProductDetails?>? = null
 
-    var curSelectProduct = MutableLiveData(ProductIds.Monthly.id)
+    var curSelectProduct = MutableLiveData(ProductIds.Monthly)
 
     var loadDialogLiveData = MutableLiveData<Boolean>()
 
@@ -77,7 +77,9 @@ class VipViewModel : BaseViewModel() {
         }
         loadDialogLiveData.postValue(true)
 
-        VipManager.purchase(activity, curSelectProduct.value!!, object : Callback<Void?> {
+        val productId = curSelectProduct.value!!
+
+        VipManager.purchase(activity, productId.id, productId.tag, object : Callback<Void?> {
             override fun onFailed(e: AppException) {
                 loadDialogLiveData.postValue(false)
             }

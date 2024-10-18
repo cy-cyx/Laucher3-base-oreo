@@ -91,11 +91,7 @@ class ThemePreviewActivity : BaseActivity<ActivityThemePreviewBinding>() {
                     }
                 })
             } else {
-//                VipActivity.start(this)
-                Toast.makeText(
-                    this,
-                    CommonUtil.getString(R.string.ad_no_fill_tip), Toast.LENGTH_SHORT
-                ).show()
+                VipActivity.start(this)
             }
             logEvent(EventName.downloadClick, Bundle().apply {
                 putString("id", viewModel.resources?.id ?: "")

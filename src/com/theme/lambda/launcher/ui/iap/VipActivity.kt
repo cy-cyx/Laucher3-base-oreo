@@ -46,11 +46,11 @@ class VipActivity : BaseActivity<ActivityVipBinding>() {
         StatusBarUtil.setStatusBarDarkMode(this.window)
 
         viewBinding.monthFl.setOnClickListener {
-            viewModel.curSelectProduct.value = ProductIds.Monthly.id
+            viewModel.curSelectProduct.value = ProductIds.Monthly
         }
 
         viewBinding.yearFl.setOnClickListener {
-            viewModel.curSelectProduct.value = ProductIds.Yearly.id
+            viewModel.curSelectProduct.value = ProductIds.Yearly
         }
 
         viewBinding.continueTv.setOnClickListener {
@@ -58,7 +58,7 @@ class VipActivity : BaseActivity<ActivityVipBinding>() {
         }
 
         viewModel.curSelectProduct.observe(this, Observer {
-            if (it == ProductIds.Monthly.id) {
+            if (it == ProductIds.Monthly) {
                 viewBinding.monthFl.setBackgroundResource(R.drawable.bg_vip_select)
                 viewBinding.yearFl.setBackgroundResource(R.drawable.ic_vip_super_sale_bn)
                 viewBinding.monthSelectIv.setImageResource(R.drawable.ic_bn_select)

@@ -22,7 +22,6 @@ object EventUtil {
         init = true
         Event.init(InitParam.Builder(Constants.BASE_URL, "").apply {
             adOrigin(true)
-            adjustAppToken(Constants.adjustToken)
         }.build())
 
         logInstallEvent()
