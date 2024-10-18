@@ -50,12 +50,17 @@ public class ThemeIconMapping {
             return cacheBitmap.get(packageName);
         }
 
-        // 把自己伪装成主题
+        Bitmap result = null;
+
+        // 主题,all apps 默认
         if (packageName.equals(context.getPackageName())) {
-            Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_themes);
-            cacheBitmap.put(packageName, bitmap);
-            return bitmap;
+            result = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_themes);
+            cacheBitmap.put(packageName, result);
+        } else if (packageName.equals("ALL_APPS")) {
+            result = BitmapFactory.decodeResource(context.getResources(), R.mipmap.all_apps);
+            cacheBitmap.put(packageName, result);
         }
+        // 往后走走看看需不需要换主题
 
         // 看一下主题用不用替换icon
         ThemeManager themeManager = ThemeManager.Companion.getThemeManagerIfExist();
@@ -88,8 +93,12 @@ public class ThemeIconMapping {
                             float frameWidth = frameBm.getWidth();
                             float frameHeight = frameBm.getHeight();
                             Canvas frameCanvas = new Canvas(frameBm);
-
-                            Bitmap appBitmap = ConvertUtils.drawable2Bitmap(AppUtils.getAppIcon(packageName));
+                            Bitmap appBitmap = null;
+                            if (result != null) {
+                                appBitmap = result;
+                            } else {
+                                appBitmap = ConvertUtils.drawable2Bitmap(AppUtils.getAppIcon(packageName));
+                            }
                             float width = appBitmap.getWidth();
                             float height = appBitmap.getHeight();
 
@@ -138,6 +147,6 @@ public class ThemeIconMapping {
             }
         }
 
-        return null;
+        return result;
     }
 }

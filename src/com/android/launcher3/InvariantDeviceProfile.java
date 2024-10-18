@@ -189,7 +189,7 @@ public class InvariantDeviceProfile {
 
     ArrayList<InvariantDeviceProfile> getPredefinedDeviceProfiles(Context context) {
         ArrayList<InvariantDeviceProfile> profiles = new ArrayList<>();
-        profiles.add(new InvariantDeviceProfile("",335f,567f,4,4,4,4,4,60f,13f,4,60f, R.xml.default_workspace_4x4));
+        profiles.add(new InvariantDeviceProfile("",335f,567f,4,4,4,4,4,50f,13f,4,50f, R.xml.default_workspace_4x4));
 //        try (XmlResourceParser parser = context.getResources().getXml(R.xml.device_profiles)) {
 //            final int depth = parser.getDepth();
 //            int type;

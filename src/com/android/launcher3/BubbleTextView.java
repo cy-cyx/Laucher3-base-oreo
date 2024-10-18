@@ -235,6 +235,11 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver {
             if (themeIcon != null) {
                 showIcon = themeIcon;
             }
+        } else if (info.getIntent().getAction().equals("ALL_APPS")) {
+            Bitmap themeIcon = ThemeIconMapping.getThemeBitmap(CommonUtil.INSTANCE.getAppContext(), "ALL_APPS");
+            if (themeIcon != null) {
+                showIcon = themeIcon;
+            }
         }
         FastBitmapDrawable iconDrawable = DrawableFactory.get(getContext()).newIcon(showIcon, info);
         iconDrawable.setIsDisabled(info.isDisabled());
