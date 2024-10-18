@@ -15,7 +15,6 @@ import com.theme.lambda.launcher.utils.StatusBarUtil
 import com.theme.lambda.launcher.vip.ProductIds
 import com.theme.lambda.launcher.vip.VipManager
 import com.theme.lambda.launcher.widget.dialog.LoadingDialog
-import com.theme.lambda.launcher.widget.dialog.LoadingWithAdDialog
 
 class VipActivity : BaseActivity<ActivityVipBinding>() {
 
@@ -55,6 +54,11 @@ class VipActivity : BaseActivity<ActivityVipBinding>() {
 
         viewBinding.continueTv.setOnClickListener {
             viewModel.purchase(this)
+        }
+
+        viewBinding.backIv.setOnClickListener {
+            finish()
+            AdUtil.showAd(AdName.iap_close)
         }
 
         viewModel.curSelectProduct.observe(this, Observer {

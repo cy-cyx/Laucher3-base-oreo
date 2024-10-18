@@ -2,6 +2,7 @@ package com.theme.lambda.launcher.ui.news.adpater
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.android.launcher3.ThemeManager
 import com.android.launcher3.databinding.ItemNewsBinding
 import com.theme.lambda.launcher.data.model.News
 import com.theme.lambda.launcher.ui.news.NewDetailsActivity
@@ -23,7 +24,8 @@ class NewsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         viewBinding.titleTv.text = data.title
         viewBinding.timeTv.text = data.publishDate
         viewBinding.root.setOnClickListener {
-            NewDetailsActivity.start(viewBinding.root.context,data)
+            if (ThemeManager.getThemeManagerIfExist()?.isPreviewMode == true) return@setOnClickListener
+            NewDetailsActivity.start(viewBinding.root.context, data)
         }
     }
 }

@@ -9,6 +9,7 @@ import android.view.ViewDebug.ExportedProperty
 import android.view.ViewGroup
 import android.widget.RemoteViews
 import com.android.launcher3.R
+import com.android.launcher3.ThemeManager
 import com.theme.lambda.launcher.ui.search.SearchActivity
 
 class SearchWidgetHostView constructor(private val context: Context) : AppWidgetHostView(context) {
@@ -49,6 +50,7 @@ class SearchWidgetHostView constructor(private val context: Context) : AppWidget
             val v = LayoutInflater.from(parent.context)
                 .inflate(R.layout.view_widget_search, parent, false)
             v.setOnClickListener {
+                if (ThemeManager.getThemeManagerIfExist()?.isPreviewMode == true) return@setOnClickListener
                 parent.context.startActivity(Intent(
                     parent.context,
                     SearchActivity::class.java

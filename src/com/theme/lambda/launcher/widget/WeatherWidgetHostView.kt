@@ -13,6 +13,8 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RemoteViews
 import com.android.launcher3.R
+import com.android.launcher3.ThemeIconMapping
+import com.android.launcher3.ThemeManager
 import com.theme.lambda.launcher.ui.weather.WeatherActivity
 import com.theme.lambda.launcher.utils.TimerUtils
 
@@ -54,6 +56,7 @@ class WeatherWidgetHostView constructor(private val context: Context) : AppWidge
             val v = LayoutInflater.from(parent.context)
                 .inflate(R.layout.view_widget_weather, parent, false)
             v.findViewById<LinearLayout>(R.id.ll1).setOnClickListener {
+                if (ThemeManager.getThemeManagerIfExist()?.isPreviewMode == true) return@setOnClickListener
                 try {
                     parent.context.startActivity(
                         Intent(
@@ -74,6 +77,7 @@ class WeatherWidgetHostView constructor(private val context: Context) : AppWidge
                 }
             }
             v.findViewById<LinearLayout>(R.id.ll2).setOnClickListener {
+                if (ThemeManager.getThemeManagerIfExist()?.isPreviewMode == true) return@setOnClickListener
                 parent.context.startActivity(
                     Intent(
                         parent.context,

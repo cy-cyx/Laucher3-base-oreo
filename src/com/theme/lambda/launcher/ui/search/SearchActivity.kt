@@ -2,6 +2,7 @@ package com.theme.lambda.launcher.ui.search
 
 import android.app.SearchManager
 import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.UserHandle
@@ -196,6 +197,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             if (packageName == Utils.getApp().packageName) {
                 return list
             }
+            list.remove(packageName)
             list.add(0, packageName)
             if (list.size > 10) {
                 list = list.subList(0, 10)
