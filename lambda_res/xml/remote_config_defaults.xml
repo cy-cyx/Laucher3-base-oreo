@@ -54,6 +54,22 @@
             "plat": 2,
             "type": 4,
             "ecpm": 0
+            },
+            {
+            "adid": "b89sr0nsgf5k9ds9",
+            "order": 0,
+            "per": 0,
+            "plat": 8,
+            "type": 4,
+            "ecpm": 0
+            },
+            {
+            "adid": "10961146-10794783",
+            "order": 0,
+            "per": 0,
+            "plat": 4,
+            "type": 4,
+            "ecpm": 0
             }
             ]
             },
@@ -248,7 +264,7 @@
             "startTime": 0,
             "adShowingAlready": 0
             },
-            "unit": "int_group",
+            "unit": "open_group, int_group",
             "disabled": 0
             }
             ],
@@ -261,6 +277,16 @@
             {
             "key": "ziaXswlqLx7LCqxNXg6SewP_fz_BasfGL82KxU0kcTQZ7WRsacmw0FWHwn7zwemJHWomTSWyDKxgnK63EmyOaa",
             "plat": 2,
+            "appId": ""
+            },
+            {
+            "key": "1fdccf76d",
+            "plat": 8,
+            "appId": ""
+            },
+            {
+            "key": "10961146",
+            "plat": 4,
             "appId": ""
             }
             ],

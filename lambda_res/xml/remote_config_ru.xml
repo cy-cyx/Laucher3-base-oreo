@@ -24,6 +24,14 @@
             "plat": 2,
             "type": 5,
             "ecpm": 0
+            },
+            {
+            "adid": "10961146-10988845",
+            "order": 0,
+            "per": 0,
+            "plat": 4,
+            "type": 5,
+            "ecpm": 0
             }
             ]
             },
@@ -40,7 +48,7 @@
             "ecpm": 0
             },
             {
-            "adid": "22464421",
+            "adid": "b89sr0nsgf5k9ds9",
             "order": 0,
             "per": 0,
             "plat": 8,
@@ -52,6 +60,14 @@
             "order": 0,
             "per": 0,
             "plat": 7,
+            "type": 4,
+            "ecpm": 0
+            },
+            {
+            "adid": "10961146-10894488",
+            "order": 0,
+            "per": 0,
+            "plat": 4,
             "type": 4,
             "ecpm": 0
             }
@@ -70,7 +86,7 @@
             "ecpm": 0
             },
             {
-            "adid": "22464423",
+            "adid": "e5bukdxqqen0gp6x",
             "order": 0,
             "per": 0,
             "plat": 8,
@@ -84,6 +100,14 @@
             "plat": 7,
             "type": 3,
             "ecpm": 0
+            },
+            {
+            "adid": "10961146-10650174",
+            "order": 0,
+            "per": 0,
+            "plat": 4,
+            "type": 3,
+            "ecpm": 0
             }
             ]
             },
@@ -93,7 +117,7 @@
             "params": [
             {
             "adid": "394af0a6b69f6129",
-            "order": 2,
+            "order": 1,
             "per": 0,
             "plat": 2,
             "type": 2,
@@ -106,6 +130,14 @@
             "plat": 7,
             "type": 2,
             "ecpm": 0
+            },
+            {
+            "adid": "10961146-10909383",
+            "order": 2,
+            "per": 0,
+            "plat": 4,
+            "type": 2,
+            "ecpm": 0
             }
             ]
             },
@@ -115,14 +147,14 @@
             "params": [
             {
             "adid": "92dc9072856dcce3",
-            "order": 2,
+            "order": 1,
             "per": 0,
             "plat": 2,
             "type": 1,
             "ecpm": 0
             },
             {
-            "adid": "22464425",
+            "adid": "13z2pyyfh795p395",
             "order": 0,
             "per": 0,
             "plat": 8,
@@ -134,6 +166,14 @@
             "order": 0,
             "per": 0,
             "plat": 7,
+            "type": 1,
+            "ecpm": 0
+            },
+            {
+            "adid": "10961146-10624797",
+            "order": 2,
+            "per": 0,
+            "plat": 4,
             "type": 1,
             "ecpm": 0
             }
@@ -240,7 +280,7 @@
             "startTime": 0,
             "adShowingAlready": 0
             },
-            "unit": "int_group",
+            "unit": "open_group, int_group",
             "disabled": 0
             }
             ],
@@ -258,6 +298,11 @@
             {
             "key": "12398626",
             "plat": 7,
+            "appId": ""
+            },
+            {
+            "key": "10961146",
+            "plat": 4,
             "appId": ""
             }
             ],
