@@ -191,7 +191,6 @@
                 android:id="@+id/rv_recent_apps"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16.67dp"
                 android:layout_marginEnd="16.67dp"
                 android:paddingTop="16.67dp"
                 app:layout_constraintBottom_toBottomOf="parent"

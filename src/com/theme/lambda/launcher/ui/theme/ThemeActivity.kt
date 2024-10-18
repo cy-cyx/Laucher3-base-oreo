@@ -41,6 +41,7 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
         fun start(context: Context, from: String) {
             context.startActivity(Intent(context, ThemeActivity::class.java).apply {
                 putExtra(sKeyFrom, from)
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             })
         }
 

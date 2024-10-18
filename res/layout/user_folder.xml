@@ -18,7 +18,8 @@
     xmlns:launcher="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/round_rect_primary"
+    android:background="@drawable/shape_ffffff_radius_20"
+    android:paddingTop="10dp"
     android:elevation="5dp"
     android:orientation="vertical" >
 
