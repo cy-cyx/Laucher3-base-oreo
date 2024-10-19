@@ -8,5 +8,6 @@
         android:name="com.theme.lambda.launcher.ui.weather.WeatherFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:tag="qsb_view" />
+        android:id="@+id/weatherFragment"
+        android:tag="weather_view" />
 </androidx.constraintlayout.widget.ConstraintLayout>

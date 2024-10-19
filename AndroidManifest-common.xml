@@ -167,7 +167,6 @@
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name="com.theme.lambda.launcher.ui.permissionguide.HomeLauncherSetGuideActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/TransDialog" />
         <activity
             android:name="com.theme.lambda.launcher.ui.vivosetting.VivoSettingActivity"
