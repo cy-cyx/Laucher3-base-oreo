@@ -1,36 +1,27 @@
 package com.theme.lambda.launcher.ui.search
 
-import android.app.SearchManager
-import android.content.ComponentName
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.os.UserHandle
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnFocusChangeListener
+import androidx.activity.viewModels
 import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.android.launcher3.AppInfo
 import com.android.launcher3.ThemeManager
 import com.android.launcher3.databinding.ActivitySearchBinding
 import com.lambda.common.http.Preference
-import com.lambda.common.utils.utilcode.util.ActivityUtils
 import com.lambda.common.utils.utilcode.util.AppUtils
 import com.lambda.common.utils.utilcode.util.GsonUtils
 import com.lambda.common.utils.utilcode.util.Utils
 import com.theme.lambda.launcher.base.BaseActivity
-import com.theme.lambda.launcher.data.model.ManifestBean
 import com.theme.lambda.launcher.utils.StatusBarUtil
+import com.theme.lambda.launcher.utils.gone
 import com.theme.lambda.launcher.utils.marginStatusBarHeight
 import com.theme.lambda.launcher.utils.visible
 
 class SearchActivity : BaseActivity<ActivitySearchBinding>() {
-    private var searchHistory by Preference("search_history", "")
-    private var searchHistoryList = mutableListOf<String>()
-    private var recentAppsList = mutableListOf<String>()
     private val searchHistoryAdapter: SearchHistoryAdapter by lazy {
         SearchHistoryAdapter()
     }
@@ -45,9 +36,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         return ActivitySearchBinding.inflate(layoutInflater)
     }
 
-    private val appsInfo by lazy {
-        AppUtils.getAppsInfo()
-    }
+    private val viewModel by viewModels<SearchViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,6 +54,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
                     or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
         )
         initView()
+        initData()
     }
 
     private fun initView() {
@@ -85,76 +75,48 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
                 viewBinding.ivClear.visibility = View.VISIBLE
                 viewBinding.ivSearch.visibility = View.VISIBLE
             }
-            val list = appsInfo.filter { appInfo ->
-                ActivityUtils.getLauncherActivity(appInfo.packageName)
-                    .isNotEmpty() && appInfo.name.contains(
-                    it.toString(),
-                    true
-                ) && appInfo.packageName != packageName
-            }.map { appInfo ->
-                appInfo.packageName
-            }
             viewBinding.clRecentApps.visibility =
-                if (it.isNullOrEmpty() && recentAppsList.isNotEmpty()) View.VISIBLE else View.GONE
+                if (it.isNullOrEmpty() && recentAppsAdapter.data.isNotEmpty()) View.VISIBLE else View.GONE
             viewBinding.clLocalApps.visibility =
-                if (it.isNullOrEmpty() || list.isEmpty()) View.GONE else View.VISIBLE
-            localAppsAdapter.setList(list)
+                if (it.isNullOrEmpty() || localAppsAdapter.data.isEmpty()) View.GONE else View.VISIBLE
+
+            viewModel.searchLocalApp(it.toString())
         }
         viewBinding.et.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
             viewBinding.clSearchHistory.visibility =
-                if (hasFocus && searchHistoryList.isNotEmpty()) View.VISIBLE else View.GONE
+                if (hasFocus && searchHistoryAdapter.data.isNotEmpty()) View.VISIBLE else View.GONE
         }
         viewBinding.ivClear.setOnClickListener {
             viewBinding.et.setText("")
             viewBinding.et.clearFocus()
         }
         viewBinding.ivSearch.setOnClickListener {
-            searchHistoryList.add(0, viewBinding.et.text.toString())
-            if (searchHistoryList.size > 10) {
-                searchHistoryList = searchHistoryList.subList(0, 10)
-            }
-            searchHistory = GsonUtils.toJson(searchHistoryList)
-            searchHistoryAdapter.setList(searchHistoryList)
             viewBinding.et.clearFocus()
-            startGlobalSearch(viewBinding.et.text.toString())
+            viewModel.search(this, viewBinding.et.text.toString())
         }
         viewBinding.ivDelete.setOnClickListener {
-            searchHistoryList.clear()
-            searchHistory = GsonUtils.toJson(searchHistoryList)
-            searchHistoryAdapter.setList(searchHistoryList)
+            viewModel.cleanSearchHistory()
             viewBinding.clSearchHistory.visibility = View.GONE
         }
-        if (searchHistory.isNotEmpty()) {
-            searchHistoryList = GsonUtils.fromJson(
-                searchHistory,
-                GsonUtils.getListType(String::class.java)
-            )
-        }
+
         viewBinding.rvSearchHistory.adapter = searchHistoryAdapter
         viewBinding.rvSearchHistory.layoutManager =
             GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false)
-        searchHistoryAdapter.setList(searchHistoryList)
+
         searchHistoryAdapter.setOnItemClickListener { _, _, position ->
             viewBinding.et.setText(searchHistoryAdapter.data[position])
             viewBinding.et.setSelection(searchHistoryAdapter.data[position].length)
         }
-        if (recentApps.isNotEmpty()) {
-            recentAppsList = GsonUtils.fromJson(
-                recentApps,
-                GsonUtils.getListType(String::class.java)
-            )
-        }
-        viewBinding.clRecentApps.visibility =
-            if (recentAppsList.isEmpty()) View.GONE else View.VISIBLE
+
         viewBinding.rvRecentApps.adapter = recentAppsAdapter
         viewBinding.rvRecentApps.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        recentAppsAdapter.setList(recentAppsList)
         recentAppsAdapter.setOnItemClickListener { _, _, position ->
             viewBinding.et.clearFocus()
             AppUtils.launchApp(recentAppsAdapter.data[position])
             recentAppsAdapter.setList(addRecentApps(recentAppsAdapter.data[position]))
         }
+
         viewBinding.rvLocalApps.adapter = localAppsAdapter
         viewBinding.rvLocalApps.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
@@ -165,24 +127,28 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         }
     }
 
-    private fun startGlobalSearch(initialQuery: String?) {
-        val searchManager =
-            getSystemService(SEARCH_SERVICE) as SearchManager
-        val globalSearchActivity = searchManager.globalSearchActivity ?: return
-        val intent = Intent(SearchManager.INTENT_ACTION_GLOBAL_SEARCH)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        intent.setComponent(globalSearchActivity)
-        if (!TextUtils.isEmpty(initialQuery)) {
-            intent.putExtra(SearchManager.QUERY, initialQuery)
-        }
-        try {
-            startActivity(intent)
-        } catch (_: Exception) {
-        }
+    private fun initData() {
+        viewModel.recentAppLiveData.observe(this, Observer {
+            viewBinding.clRecentApps.visibility = if (it.isEmpty()) View.GONE else View.VISIBLE
+            recentAppsAdapter.setList(it)
+        })
+        viewModel.searchHistoryLiveData.observe(this, Observer {
+            searchHistoryAdapter.setList(it)
+        })
+        viewModel.localAppLiveData.observe(this, Observer {
+            localAppsAdapter.setList(it)
+            if (viewBinding.et.text.isNotEmpty() && it.isNotEmpty()) {
+                viewBinding.clLocalApps.visible()
+            } else {
+                viewBinding.clLocalApps.gone()
+            }
+        })
+
+        viewModel.initData()
     }
 
     companion object {
-        private var recentApps by Preference("recent_apps", "")
+        var recentApps by Preference("recent_apps", "")
 
         @JvmStatic
         fun addRecentApps(packageName: String): List<String> {
@@ -205,19 +171,5 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             recentApps = GsonUtils.toJson(list)
             return list
         }
-    }
-
-    private fun findActivity(
-        apps: ArrayList<AppInfo>, component: ComponentName,
-        user: UserHandle
-    ): Boolean {
-        val n = apps.size
-        for (i in 0 until n) {
-            val info = apps[i]
-            if (info.user == user && info.componentName == component) {
-                return true
-            }
-        }
-        return false
     }
 }
