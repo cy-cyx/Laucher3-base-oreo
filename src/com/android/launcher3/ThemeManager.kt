@@ -1,9 +1,11 @@
 package com.android.launcher3
 
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import com.bumptech.glide.Glide
+import com.lambda.common.utils.utilcode.util.AppUtils
 import com.theme.lambda.launcher.ad.AdName
 import com.theme.lambda.launcher.ad.AdUtil
 import com.theme.lambda.launcher.data.model.ManifestBean
@@ -11,6 +13,7 @@ import com.theme.lambda.launcher.statistics.EventName
 import com.theme.lambda.launcher.statistics.EventUtil.logEvent
 import com.theme.lambda.launcher.statistics.FirebaseAnalyticsUtil
 import com.theme.lambda.launcher.ui.theme.ThemeActivity
+import com.theme.lambda.launcher.utils.AppUtil
 import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.utils.FileUtil
 import com.theme.lambda.launcher.utils.GsonUtil
@@ -18,6 +21,7 @@ import com.theme.lambda.launcher.utils.LauncherUtil
 import com.theme.lambda.launcher.utils.ShareUtil
 import com.theme.lambda.launcher.utils.SpKey
 import com.theme.lambda.launcher.utils.SpUtil
+import com.theme.lambda.launcher.utils.SystemUtil
 import com.theme.lambda.launcher.utils.WallPaperUtil
 import com.theme.lambda.launcher.utils.getMMKVString
 import com.theme.lambda.launcher.utils.gone
@@ -244,6 +248,8 @@ class ThemeManager {
         launcher?.let {
             if (isPreviewMode) return
             if (LauncherUtil.isDefaultLauncher(it)) {
+                // 华为安卓8 会报设置线程没有内存权限
+                if (SystemUtil.getDeviceBrand() == SystemUtil.PHONE_HUAWEI && Build.VERSION.SDK_INT < Build.VERSION_CODES.P) return
                 if (SpKey.curUserWallpaperId.getMMKVString() != themeId) {
                     val manifest = getCurManifest()
                     if (manifest != null) {
