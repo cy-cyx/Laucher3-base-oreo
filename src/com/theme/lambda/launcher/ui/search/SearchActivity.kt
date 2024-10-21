@@ -12,10 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.launcher3.ThemeManager
 import com.android.launcher3.databinding.ActivitySearchBinding
 import com.lambda.common.http.Preference
-import com.lambda.common.utils.utilcode.util.AppUtils
 import com.lambda.common.utils.utilcode.util.GsonUtils
 import com.lambda.common.utils.utilcode.util.Utils
 import com.theme.lambda.launcher.base.BaseActivity
+import com.theme.lambda.launcher.ui.search.adapter.LocalAppsAdapter
+import com.theme.lambda.launcher.ui.search.adapter.RecentAppsAdapter
+import com.theme.lambda.launcher.ui.search.adapter.SearchHistoryAdapter
 import com.theme.lambda.launcher.utils.StatusBarUtil
 import com.theme.lambda.launcher.utils.gone
 import com.theme.lambda.launcher.utils.marginStatusBarHeight
@@ -113,8 +115,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recentAppsAdapter.setOnItemClickListener { _, _, position ->
             viewBinding.et.clearFocus()
-            AppUtils.launchApp(recentAppsAdapter.data[position])
-            recentAppsAdapter.setList(addRecentApps(recentAppsAdapter.data[position]))
+            viewModel.clickApp(recentAppsAdapter.data[position])
         }
 
         viewBinding.rvLocalApps.adapter = localAppsAdapter
@@ -122,8 +123,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         localAppsAdapter.setOnItemClickListener { _, _, position ->
             viewBinding.et.clearFocus()
-            AppUtils.launchApp(localAppsAdapter.data[position])
-            recentAppsAdapter.setList(addRecentApps(localAppsAdapter.data[position]))
+            viewModel.clickApp(localAppsAdapter.data[position])
         }
     }
 

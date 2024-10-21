@@ -1,4 +1,4 @@
-package com.theme.lambda.launcher.ui.search
+package com.theme.lambda.launcher.ui.search.adapter
 
 import com.android.launcher3.R
 import com.android.launcher3.databinding.ItemSearchHistoryBinding

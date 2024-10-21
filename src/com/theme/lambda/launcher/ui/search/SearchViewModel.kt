@@ -12,6 +12,7 @@ import com.lambda.common.utils.utilcode.util.ActivityUtils
 import com.lambda.common.utils.utilcode.util.AppUtils
 import com.lambda.common.utils.utilcode.util.GsonUtils
 import com.theme.lambda.launcher.base.BaseViewModel
+import com.theme.lambda.launcher.ui.search.SearchActivity.Companion.addRecentApps
 import com.theme.lambda.launcher.ui.search.SearchActivity.Companion.recentApps
 import com.theme.lambda.launcher.utils.AppUtil
 import com.theme.lambda.launcher.utils.CommonUtil
@@ -109,6 +110,19 @@ class SearchViewModel : BaseViewModel() {
         try {
             context.startActivity(intent)
         } catch (_: Exception) {
+        }
+    }
+
+    fun clickApp(app: String) {
+        AppUtils.launchApp(app)
+        viewModelScope.launch(Dispatchers.IO) {
+            val apps = addRecentApps(app)
+            recentAppLiveData.postValue(apps.filter {
+                AppUtil.checkAppInstalled(
+                    CommonUtil.appContext,
+                    it
+                )
+            }.toMutableList() as ArrayList)
         }
     }
 }
