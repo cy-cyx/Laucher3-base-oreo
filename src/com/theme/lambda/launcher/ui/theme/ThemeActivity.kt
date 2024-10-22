@@ -92,9 +92,12 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
         viewBinding.tabTl.setupWithViewPager(viewBinding.themeVp)
         viewBinding.tabTl.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                EventUtil.logEvent(EventName.homePageInteract, Bundle().apply {
-                    putString("type", "change_tag")
-                })
+                if (!EventUtil.hasLogHomeChangeTag) {
+                    EventUtil.logEvent(EventName.homePageInteract, Bundle().apply {
+                        putString("type", "change_tag")
+                    })
+                    EventUtil.hasLogHomeChangeTag = true
+                }
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {

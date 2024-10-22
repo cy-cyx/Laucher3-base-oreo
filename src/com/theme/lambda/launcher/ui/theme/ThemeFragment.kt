@@ -65,10 +65,13 @@ class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
         viewBinding.themeRv.addOnScrollListener(object : OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
-                if (newState == SCROLL_STATE_DRAGGING){
-                    EventUtil.logEvent(EventName.homePageInteract, Bundle().apply {
-                        putString("type","scroll")
-                    })
+                if (newState == SCROLL_STATE_DRAGGING) {
+                    if (!EventUtil.hasLogHomeScroll) {
+                        EventUtil.logEvent(EventName.homePageInteract, Bundle().apply {
+                            putString("type", "scroll")
+                        })
+                        EventUtil.hasLogHomeScroll = true
+                    }
                 }
             }
         })
@@ -105,7 +108,7 @@ class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
         themeAdapter.clickItemListen = {
             viewModel.gotoPreview(requireActivity(), it)
             EventUtil.logEvent(EventName.homePageInteract, Bundle().apply {
-                putString("type","click_item")
+                putString("type", "click_item")
             })
             EventUtil.logEvent(EventName.AppResourcePageClick, Bundle().apply {
                 putString("id", it.id)

@@ -18,6 +18,11 @@ object EventUtil {
     private var TAG = "EventUtil"
 
     private var init = false
+
+    // 一些防止重复上报的标志位
+    var hasLogHomeChangeTag = false
+    var hasLogHomeScroll = false
+
     fun init() {
         if (init) {
             return
