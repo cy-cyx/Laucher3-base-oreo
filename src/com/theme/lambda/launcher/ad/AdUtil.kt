@@ -104,6 +104,7 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
                                 putString("ad_type_alias", logParam?.getAdTypeAlias() ?: "")
                                 putInt("reload", logParam?.reload ?: 0)
                                 putLong("start_time", System.currentTimeMillis())
+                                putString("med_source", logParam?.med_source ?: "0")
                                 putString("scene_alias", logParam?.name ?: "")
                             })
                         }

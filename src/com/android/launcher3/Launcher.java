@@ -3371,14 +3371,6 @@ public class Launcher extends BaseActivity
         // Clear the workspace because it's going to be rebound
         mWorkspace.clearDropTargets();
         mWorkspace.removeAllWorkspaceScreens();
-        try {
-            List<Fragment> fragments = getSupportFragmentManager().getFragments();
-            for (Fragment fragment : fragments) {
-                getSupportFragmentManager().beginTransaction().remove(fragment).commitNow();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         if (mHotseat != null) {
             mHotseat.resetLayout();
