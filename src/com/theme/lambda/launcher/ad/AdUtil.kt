@@ -26,6 +26,7 @@ import com.theme.lambda.launcher.statistics.EventUtil
 import com.theme.lambda.launcher.statistics.FirebaseAnalyticsUtil
 import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.utils.LogUtil
+import com.theme.lambda.launcher.recall.RecallManager
 import com.theme.lambda.launcher.utils.SpKey
 import com.theme.lambda.launcher.utils.getSpFloat
 import com.theme.lambda.launcher.utils.putSpFloat
@@ -63,7 +64,8 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
     private const val adSourceMAXFacebook = "Facebook" // max聚合里facebook的ad_source
     private const val adSourceAdMobAdMob = "AdMob Network" // admob聚合里admob的ad_source
     private const val adSourceTestAdMob = "Reservation campaign" // admob测试广告
-    val AdmobAdSources = listOf(adSourceAdMobAdMob, adSourceMAXAdMob, adSourceMAXFacebook, adSourceTestAdMob)
+    val AdmobAdSources =
+        listOf(adSourceAdMobAdMob, adSourceMAXAdMob, adSourceMAXFacebook, adSourceTestAdMob)
 
     @Synchronized
     fun addNativeAdapterClose(
@@ -187,6 +189,9 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
                                 putString("scene_alias", logParam?.name ?: "")
                                 putString("med_source", logParam?.med_source ?: "0")
                             })
+                            ActivityUtils.getTopActivity()?.let {
+                                RecallManager.startTimeoutRecall(it)
+                            }
                         }
 
                         LambdaAd.LogAdEvent.LOG_REVENUE -> {

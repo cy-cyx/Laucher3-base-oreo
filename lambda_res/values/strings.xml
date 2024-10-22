@@ -55,4 +55,5 @@
     <string name="get">Get</string>
     <string name="permission_refuse_tip">Please go to the settings page to grant required permissions</string>
     <string name="goto_set">Go &amp; Set</string>
+    <string name="default_home_app_callback">⏰ Finish setting up for your new homeScreen! Tap here!</string>
 </resources>
