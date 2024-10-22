@@ -55,7 +55,7 @@ class FirstGuideView @JvmOverloads constructor(
             (CommonUtil.getScreenHeight() - CommonUtil.dp2px(88f) - CommonUtil.dp2px(28f) - CommonUtil.getStatusBarHeight()) / row * (row - 1) + CommonUtil.getStatusBarHeight()
         layoutParams.topMargin = guideTopMargin.toInt()
         binding.guideTextLl.requestLayout()
-        binding.next1Tv.setOnClickListener {
+        binding.step1Fl.setOnClickListener {
             binding.step1Fl.gone()
             showSecondStep()
         }
@@ -63,7 +63,7 @@ class FirstGuideView @JvmOverloads constructor(
 
     private fun showSecondStep() {
         binding.step2Fl.visible()
-        binding.next2Tv.setOnClickListener {
+        binding.step2Fl.setOnClickListener {
             gone()
         }
     }
