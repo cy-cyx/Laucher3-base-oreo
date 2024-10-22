@@ -135,8 +135,10 @@ import com.android.launcher3.widget.PendingAddWidgetInfo;
 import com.android.launcher3.widget.WidgetAddFlowHandler;
 import com.android.launcher3.widget.WidgetHostViewLoader;
 import com.android.launcher3.widget.WidgetsContainerView;
+import com.theme.lambda.launcher.ad.AdUtil;
 import com.theme.lambda.launcher.ui.search.SearchActivity;
 import com.theme.lambda.launcher.ui.theme.ThemeActivity;
+import com.theme.lambda.launcher.utils.AppUtil;
 import com.theme.lambda.launcher.utils.CommonUtil;
 import com.theme.lambda.launcher.utils.LauncherUtil;
 import com.theme.lambda.launcher.utils.SpKey;
@@ -2593,15 +2595,34 @@ public class Launcher extends BaseActivity
             showAppsView(true, false, false);
             return;
         }
-        if (intent.getComponent() != null && !intent.getComponent().getPackageName().equals(getPackageName())) {
-            SearchActivity.addRecentApps(intent.getComponent().getPackageName());
+
+        String packageName = "";
+        if (intent.getComponent() != null) {
+            packageName = intent.getComponent().getPackageName();
         }
+        if (AppUtil.isSystemApplication(this, packageName) || packageName.equals(getPackageName())) {
+            startActivity(v, intent, item);
+        } else {
+            AdUtil.INSTANCE.showOpenAppAdNeed(new Runnable() {
+                @Override
+                public void run() {
+                    startActivity(v, intent, item);
+                }
+            });
+        }
+    }
+
+    private void startActivity(View v, Intent intent, ItemInfo item) {
         boolean success = startActivitySafely(v, intent, item);
         getUserEventDispatcher().logAppLaunch(v, intent); // TODO for discovered apps b/35802115
 
         if (success && v instanceof BubbleTextView) {
             mWaitingForResume = (BubbleTextView) v;
             mWaitingForResume.setStayPressed(true);
+        }
+
+        if (intent.getComponent() != null && !intent.getComponent().getPackageName().equals(getPackageName())) {
+            SearchActivity.addRecentApps(intent.getComponent().getPackageName());
         }
     }
 
@@ -2847,6 +2868,7 @@ public class Launcher extends BaseActivity
 
         // Prepare intent
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         if (v != null) {
             intent.setSourceBounds(getViewBounds(v));
         }

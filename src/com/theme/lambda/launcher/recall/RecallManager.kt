@@ -77,7 +77,7 @@ object RecallManager : Application.ActivityLifecycleCallbacks {
         // Android8.0以上的系统，新建消息通道
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             //通道的重要程度
-            val importance = NotificationManager.IMPORTANCE_MAX
+            val importance = NotificationManager.IMPORTANCE_HIGH
             val notificationChannel =
                 NotificationChannel(
                     "timeout_recall",

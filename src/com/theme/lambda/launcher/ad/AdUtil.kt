@@ -15,6 +15,7 @@ import com.android.launcher3.databinding.LayoutNativeAdMax2Binding
 import com.applovin.mediation.nativeAds.MaxNativeAdView
 import com.applovin.mediation.nativeAds.MaxNativeAdViewBinder
 import com.google.android.gms.ads.nativead.NativeAdView
+import com.ironsource.tr
 import com.lambda.adlib.LambdaAd
 import com.lambda.adlib.LambdaAdAdapter
 import com.lambda.adlib.LambdaAdSdk
@@ -27,8 +28,10 @@ import com.theme.lambda.launcher.statistics.FirebaseAnalyticsUtil
 import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.utils.LogUtil
 import com.theme.lambda.launcher.recall.RecallManager
+import com.theme.lambda.launcher.utils.FirebaseConfigUtil
 import com.theme.lambda.launcher.utils.SpKey
 import com.theme.lambda.launcher.utils.getSpFloat
+import com.theme.lambda.launcher.utils.getSpLong
 import com.theme.lambda.launcher.utils.putSpFloat
 import com.theme.lambda.launcher.vip.VipManager
 import kotlinx.coroutines.CoroutineScope
@@ -287,7 +290,8 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
             AdName.splash,
             AdName.interleaving,
             AdName.unlock,
-            AdName.iap_close
+            AdName.iap_close,
+            AdName.app_open
         )) {
             if (lAdMultipleAdapters[i] != null) {
                 continue
@@ -448,6 +452,35 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
         nativeView.callToActionView = binding.buttonBn
 
         return nativeView
+    }
+
+    private var lastShowAppOpenAd = 0L
+
+    fun showOpenAppAdNeed(runnable: Runnable) {
+        // 进行一些参数判断
+        var needShowAd = false
+        val appOpenWaitInSec = FirebaseConfigUtil.getLong("app_open_wait_in_sec") ?: 43200
+        val appOpenIntervalInSec = FirebaseConfigUtil.getLong("app_open_interval_in_sec") ?: 1800
+
+        if (System.currentTimeMillis() - SpKey.install_time.getSpLong() > appOpenWaitInSec
+            && System.currentTimeMillis() - lastShowAppOpenAd > appOpenIntervalInSec
+        ) {
+            needShowAd = true
+        }
+
+        if (needShowAd && isReady(AdName.app_open)) {
+            showAd(AdName.app_open, object : IAdCallBack {
+                override fun onNoReady() {
+                    runnable.run()
+                }
+
+                override fun onAdClose(status: Int) {
+                    runnable.run()
+                }
+            })
+        } else {
+            runnable.run()
+        }
     }
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {

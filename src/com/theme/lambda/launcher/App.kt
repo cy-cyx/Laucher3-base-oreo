@@ -13,6 +13,7 @@ import com.theme.lambda.launcher.service.FirebaseService
 import com.theme.lambda.launcher.statistics.EventUtil
 import com.theme.lambda.launcher.statistics.FirebaseAnalyticsUtil
 import com.theme.lambda.launcher.utils.CommonUtil
+import com.theme.lambda.launcher.utils.FirebaseConfigUtil
 import com.theme.lambda.launcher.utils.OsUtil
 import com.theme.lambda.launcher.vip.VipManager
 import kotlinx.coroutines.GlobalScope
@@ -45,6 +46,7 @@ class App : Application() {
                 AdUtil.initAd(this)
                 FirebaseService.subscribe()
                 VipManager.init()
+                FirebaseConfigUtil.initRemoteConfig()
             }
         }
 
