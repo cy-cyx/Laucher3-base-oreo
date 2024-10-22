@@ -194,18 +194,6 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
                                 putString("currency", "USD")
                                 putBoolean("isVisible", logParam?.isVisible ?: false)
                             })
-                            EventUtil.logEvent(ADEventName.adRevenue, Bundle().apply {
-                                putString("adid", logParam?.adId ?: "")
-                                putString("ad_source", logParam?.adSource ?: "")
-                                putFloat("revenue", logParam?.revenue?.toFloat() ?: 0.0f)
-                                putFloat("value", logParam?.revenue?.toFloat() ?: 0.0f)
-                                putInt("ad_type", logParam?.ad_type ?: 0)
-                                putString("ad_type_alias", logParam?.getAdTypeAlias() ?: "")
-                                putString("scene_alias", logParam?.name ?: "")
-                                putString("resp_id", logParam?.resp_id ?: "")
-                                putLong("cache_time", logParam?.cache_time ?: 0L)
-                                putString("currency", "USD")
-                            })
 
                             // 多上传一份给firebase（单独）
                             FirebaseAnalyticsUtil.logEvent(

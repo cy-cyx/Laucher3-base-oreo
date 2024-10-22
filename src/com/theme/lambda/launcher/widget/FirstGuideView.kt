@@ -13,6 +13,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
+import com.android.launcher3.LauncherAppState
 import com.android.launcher3.databinding.ViewFirstGuideBinding
 import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.utils.gone
@@ -47,8 +48,11 @@ class FirstGuideView @JvmOverloads constructor(
         binding.step1Fl.visible()
 
         val layoutParams = binding.guideTextLl.layoutParams as FrameLayout.LayoutParams
+        var row = LauncherAppState.getInstanceNoCreate().getInvariantDeviceProfile().numRows
+        var column = LauncherAppState.getInstanceNoCreate().getInvariantDeviceProfile().numColumns
+
         val guideTopMargin =
-            (CommonUtil.getScreenHeight() - CommonUtil.dp2px(88f) - CommonUtil.dp2px(28f) - CommonUtil.getStatusBarHeight()) / 4f * 3f + CommonUtil.getStatusBarHeight()
+            (CommonUtil.getScreenHeight() - CommonUtil.dp2px(88f) - CommonUtil.dp2px(28f) - CommonUtil.getStatusBarHeight()) / row * (row - 1) + CommonUtil.getStatusBarHeight()
         layoutParams.topMargin = guideTopMargin.toInt()
         binding.guideTextLl.requestLayout()
         binding.next1Tv.setOnClickListener {
@@ -80,13 +84,16 @@ class MaskHoleView @JvmOverloads constructor(
         paint.setColor(Color.parseColor("#80000000"))
         canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), paint)
 
+        var row = LauncherAppState.getInstanceNoCreate().getInvariantDeviceProfile().numRows
+        var column = LauncherAppState.getInstanceNoCreate().getInvariantDeviceProfile().numColumns
+
         val guideTopMargin =
-            (CommonUtil.getScreenHeight() - CommonUtil.dp2px(88f) - CommonUtil.dp2px(28f) - CommonUtil.getStatusBarHeight()) / 2f + CommonUtil.getStatusBarHeight()
+            (CommonUtil.getScreenHeight() - CommonUtil.dp2px(88f) - CommonUtil.dp2px(28f) - CommonUtil.getStatusBarHeight()) / row * (row - 2) + CommonUtil.getStatusBarHeight()
 
         val guideHeight =
-            (CommonUtil.getScreenHeight() - CommonUtil.dp2px(88f) - CommonUtil.dp2px(28f) - CommonUtil.getStatusBarHeight()) / 4f
+            (CommonUtil.getScreenHeight() - CommonUtil.dp2px(88f) - CommonUtil.dp2px(28f) - CommonUtil.getStatusBarHeight()) / row
 
-        val guideWidth = CommonUtil.getScreenWidth() / 4f
+        val guideWidth = CommonUtil.getScreenWidth() / column.toFloat()
 
         paint.setColor(Color.WHITE)
         paint.setXfermode(PorterDuffXfermode(PorterDuff.Mode.CLEAR));

@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2009 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2012 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -16,16 +17,9 @@
 <favorites xmlns:launcher="http://schemas.android.com/apk/res-auto/com.android.launcher3">
 
     <!-- Hotseat -->
-    <include launcher:workspace="@xml/dw_phone_hotseat" />
+    <include launcher:workspace="@xml/dw_tablet_hotseat" />
 
     <!-- Bottom row -->
-    <resolve
-        launcher:screen="0"
-        launcher:x="0"
-        launcher:y="-3">
-        <favorite launcher:uri="#Intent;action=MUSIC_VIDEO;end" />
-    </resolve>
-
     <resolve
         launcher:screen="0"
         launcher:x="0"
@@ -76,6 +70,12 @@
         launcher:x="3"
         launcher:y="-1">
         <favorite launcher:uri="#Intent;action=SHOPPING;end" />
+    </resolve>
+    <resolve
+        launcher:screen="0"
+        launcher:x="4"
+        launcher:y="-1">
+        <favorite launcher:uri="#Intent;action=MUSIC_VIDEO;end" />
     </resolve>
 
 </favorites>
