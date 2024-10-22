@@ -9,8 +9,8 @@ import com.lambda.common.utils.utilcode.util.Utils
 import com.theme.lambda.launcher.Constants
 import com.theme.lambda.launcher.utils.LogUtil
 import com.theme.lambda.launcher.utils.SpKey
-import com.theme.lambda.launcher.utils.getMMKVLong
-import com.theme.lambda.launcher.utils.putMMKVLong
+import com.theme.lambda.launcher.utils.getSpLong
+import com.theme.lambda.launcher.utils.putSpLong
 
 
 object EventUtil {
@@ -46,8 +46,8 @@ object EventUtil {
     }
 
     private fun logInstallEvent() {
-        if (SpKey.install_time.getMMKVLong() == 0L) {
-            SpKey.install_time.putMMKVLong(System.currentTimeMillis())
+        if (SpKey.install_time.getSpLong() == 0L) {
+            SpKey.install_time.putSpLong(System.currentTimeMillis())
             logEvent(EventName.AppInstall, Bundle())
         }
     }

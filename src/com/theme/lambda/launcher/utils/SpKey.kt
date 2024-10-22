@@ -14,4 +14,5 @@ object SpKey {
     const val isVip = "isVip"
 
     const val curUserWallpaperId = "curUserWallpaperId"
+    const val keyFirstCheckPermission = "keyFirstCheckPermission"
 }

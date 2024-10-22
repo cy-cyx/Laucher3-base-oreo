@@ -8,14 +8,14 @@ import com.theme.lambda.launcher.statistics.EventName
 import com.theme.lambda.launcher.statistics.EventUtil.logEvent
 import com.theme.lambda.launcher.utils.LogUtil
 import com.theme.lambda.launcher.utils.SpKey
-import com.theme.lambda.launcher.utils.getMMKVLong
+import com.theme.lambda.launcher.utils.getSpLong
 
 class FirebaseService : FirebaseMessagingService() {
 
     companion object {
         private val TAG = "FBM"
         fun subscribe() {
-            val index = SpKey.install_time.getMMKVLong(0) % 10
+            val index = SpKey.install_time.getSpLong(0) % 10
             val topic = "all$index"
             LogUtil.d(TAG, "subscribe topic : $topic")
             FirebaseMessaging.getInstance().subscribeToTopic(topic).addOnCompleteListener {

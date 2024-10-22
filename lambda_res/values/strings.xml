@@ -53,4 +53,6 @@
     <string name="secure_by_google_pay">Secure by Google Pay</string>
     <string name="all_content_no_ads">All content No ads.</string>
     <string name="get">Get</string>
+    <string name="permission_refuse_tip">Please go to the settings page to grant required permissions</string>
+    <string name="goto_set">Go &amp; Set</string>
 </resources>
