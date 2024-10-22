@@ -146,6 +146,7 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
                                 putInt("ad_type", logParam?.ad_type ?: 0)
                                 putString("ad_type_alias", logParam?.getAdTypeAlias() ?: "")
                                 putString("scene_alias", logParam?.name ?: "")
+                                putString("med_source", logParam?.med_source ?: "0")
                                 putInt("code", 0)
                             })
                         }
@@ -170,6 +171,7 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
                                 putInt("ad_type", logParam?.ad_type ?: 0)
                                 putString("ad_type_alias", logParam?.getAdTypeAlias() ?: "")
                                 putString("scene_alias", logParam?.name ?: "")
+                                putString("med_source", logParam?.med_source ?: "0")
                                 putInt("code", logParam?.code ?: 0)
                                 putString("err_msg", logParam?.errMsg ?: "")
                             })
@@ -183,6 +185,7 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
                                 putString("ad_type_alias", logParam?.getAdTypeAlias() ?: "")
                                 putString("med_source", logParam?.med_source ?: "0")
                                 putString("scene_alias", logParam?.name ?: "")
+                                putString("med_source", logParam?.med_source ?: "0")
                             })
                         }
 
@@ -195,6 +198,7 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
                                 putInt("ad_type", logParam?.ad_type ?: 0)
                                 putString("ad_type_alias", logParam?.getAdTypeAlias() ?: "")
                                 putString("scene_alias", logParam?.name ?: "")
+                                putString("med_source", logParam?.med_source ?: "0")
                                 putString("resp_id", logParam?.resp_id ?: "")
                                 putLong("cache_time", logParam?.cache_time ?: 0L)
                                 putString("currency", "USD")
