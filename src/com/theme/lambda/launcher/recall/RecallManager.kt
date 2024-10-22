@@ -90,7 +90,7 @@ object RecallManager : Application.ActivityLifecycleCallbacks {
 
         val builder = NotificationCompat.Builder(context, "timeout_recall")
         builder.setContentText(context.getString(R.string.default_home_app_callback))
-        builder.setSmallIcon(R.mipmap.ic_launcher)
+        builder.setSmallIcon(R.mipmap.ic_launcher_notification)
         builder.setWhen(System.currentTimeMillis())
         builder.priority = NotificationCompat.PRIORITY_MAX
         builder.setContentIntent(pendingIntent)
