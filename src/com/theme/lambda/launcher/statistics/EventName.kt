@@ -38,4 +38,6 @@ object EventName {
     val permissionDialog2Show = "permissionDialog2Show"
     val permissionGrant = "permissionGrant"
     val activate = "activate"
+    @JvmField
+    val LAppOpen = "LAppOpen"
 }

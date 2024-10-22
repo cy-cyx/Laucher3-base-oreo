@@ -54,10 +54,6 @@ import android.os.StrictMode;
 import android.os.SystemClock;
 import android.os.Trace;
 import android.os.UserHandle;
-
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.text.Selection;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
@@ -81,6 +77,9 @@ import android.view.animation.OvershootInterpolator;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.android.launcher3.DropTarget.DragObject;
 import com.android.launcher3.LauncherSettings.Favorites;
@@ -136,17 +135,17 @@ import com.android.launcher3.widget.WidgetAddFlowHandler;
 import com.android.launcher3.widget.WidgetHostViewLoader;
 import com.android.launcher3.widget.WidgetsContainerView;
 import com.theme.lambda.launcher.ad.AdUtil;
+import com.theme.lambda.launcher.statistics.EventName;
+import com.theme.lambda.launcher.statistics.EventUtil;
 import com.theme.lambda.launcher.ui.search.SearchActivity;
 import com.theme.lambda.launcher.ui.theme.ThemeActivity;
 import com.theme.lambda.launcher.utils.AppUtil;
 import com.theme.lambda.launcher.utils.CommonUtil;
-import com.theme.lambda.launcher.utils.LauncherUtil;
 import com.theme.lambda.launcher.utils.SpKey;
 import com.theme.lambda.launcher.utils.SpUtil;
 import com.theme.lambda.launcher.widget.FirstGuideView;
 import com.theme.lambda.launcher.widget.PreviewControlView;
 import com.theme.lambda.launcher.widget.WallpaperView;
-import com.theme.lambda.launcher.widget.dialog.ApplyLauncherPermissionDialog;
 import com.theme.lambda.launcher.widget.dialog.LoadingDialog;
 
 import java.io.FileDescriptor;
@@ -158,9 +157,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import kotlin.Unit;
-import kotlin.jvm.functions.Function0;
 
 /**
  * Default launcher application.
@@ -2602,11 +2598,18 @@ public class Launcher extends BaseActivity
         }
         if (AppUtil.isSystemApplication(this, packageName) || packageName.equals(getPackageName())) {
             startActivity(v, intent, item);
+            Bundle bundle = new Bundle();
+            bundle.putString("pn", packageName);
+            EventUtil.INSTANCE.logEvent(EventName.INSTANCE.LAppOpen, bundle);
         } else {
+            String finalPackageName = packageName;
             AdUtil.INSTANCE.showOpenAppAdNeed(new Runnable() {
                 @Override
                 public void run() {
                     startActivity(v, intent, item);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("pn", finalPackageName);
+                    EventUtil.INSTANCE.logEvent(EventName.INSTANCE.LAppOpen, bundle);
                 }
             });
         }
