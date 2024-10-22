@@ -78,7 +78,6 @@
             android:configChanges="keyboard|keyboardHidden|navigation"
             android:enabled="true"
             android:exported="true"
-            android:launchMode="singleTask"
             android:resizeableActivity="true"
             android:resumeWhilePausing="true"
             android:screenOrientation="portrait"

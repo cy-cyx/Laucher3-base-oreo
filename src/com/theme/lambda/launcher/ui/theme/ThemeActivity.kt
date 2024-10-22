@@ -42,6 +42,8 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
             context.startActivity(Intent(context, ThemeActivity::class.java).apply {
                 putExtra(sKeyFrom, from)
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                // 设置成功返回可能会存在异常（可能会回到旧的launcher上），故如此处理
+                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
             })
         }
 

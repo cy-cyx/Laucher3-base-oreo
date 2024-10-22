@@ -26,19 +26,16 @@ object LauncherUtil {
 
     fun gotoSetLauncherWithOutGuide(context: Context) {
         try {
-            val intent: Intent = Intent(Settings.ACTION_HOME_SETTINGS)
-            if (context is Activity) {
-                context.startActivityForResult(intent, 0)
-            } else {
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                context.startActivity(intent)
-            }
+            val intent = Intent(Settings.ACTION_HOME_SETTINGS)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+            context.startActivity(intent)
 
             // 引导
-            GlobalScope.launch {
-                delay(300)
-                HomeLauncherSetGuideActivity.start(context)
-            }
+//            GlobalScope.launch {
+//                delay(300)
+//                HomeLauncherSetGuideActivity.start(context)
+//            }
             gotoSetting = true
         } catch (e: Exception) {
         }
