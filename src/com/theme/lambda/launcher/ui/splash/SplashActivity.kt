@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import com.android.launcher3.databinding.ActivitySplashBinding
+import com.lambda.adlib.LambdaAd
+import com.lambda.common.utils.utilcode.util.LogUtils
 import com.theme.lambda.launcher.Constants
 import com.theme.lambda.launcher.ad.AdName
 import com.theme.lambda.launcher.ad.AdUtil
@@ -14,6 +16,7 @@ import com.theme.lambda.launcher.base.BaseActivity
 import com.theme.lambda.launcher.statistics.EventName
 import com.theme.lambda.launcher.statistics.EventUtil
 import com.theme.lambda.launcher.ui.theme.ThemeActivity
+import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.utils.ShareUtil
 import com.theme.lambda.launcher.utils.StatusBarUtil
 import com.theme.lambda.launcher.utils.visible
@@ -26,7 +29,8 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         return ActivitySplashBinding.inflate(layoutInflater)
     }
 
-    private val adWaitingTime = if (VipManager.isVip.value == true) 5000L else 30000L
+    private val adWaitingTime = if (VipManager.isVip.value == true) 5000L else 15000L
+    private var showTryAdTimestamp = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,6 +80,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         viewBinding.progressPv.startProgress(adWaitingTime) {
             tryToShowAd()
         }
+        showTryAdTimestamp = System.currentTimeMillis()
 
         lifecycleScope.launch {
             delay(adWaitingTime)
@@ -94,22 +99,39 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         if (isShowAd) return
 
         // 500 尝试去展示广告
-        if (System.currentTimeMillis() - lastTryToShowAdTimeStamp > 500) {
-            lastTryToShowAdTimeStamp = System.currentTimeMillis()
-
-            if (AdUtil.isReady(AdName.splash)) {
-                isShowAd = true
-                AdUtil.showAd(AdName.splash, object : IAdCallBack {
-                    override fun onNoReady() {
-                        isShowAd = false
-                    }
-
-                    override fun onAdClose(status: Int) {
-                        gotoNext()
-                    }
-                })
-            }
+        if (System.currentTimeMillis() - lastTryToShowAdTimeStamp < 500) {
+            return
         }
+        lastTryToShowAdTimeStamp = System.currentTimeMillis()
+
+        var isWantedAdReady: Boolean
+        var region = CommonUtil.getRegion()
+        if (System.currentTimeMillis() - showTryAdTimestamp > adWaitingTime / 2 || region == "RU") {
+            // 等待超过一半时间 此时都不用等admob，meta等加载
+            isWantedAdReady = AdUtil.isReady(AdName.splash)
+        } else {
+            val isWantedIntReady = AdUtil.AdmobAdSources.any {
+                AdUtil.isReady(AdName.splash, it, LambdaAd.LambdaAdType.TYPE_INTERSTITIAL)
+            }
+            val isWantedOpenReady = AdUtil.AdmobAdSources.any {
+                AdUtil.isReady(AdName.splash, it, LambdaAd.LambdaAdType.TYPE_OPEN)
+            }
+            // 让int和open充分竞争
+            isWantedAdReady = isWantedIntReady && isWantedOpenReady
+        }
+        if (isWantedAdReady) {
+            isShowAd = true
+            AdUtil.showAd(AdName.splash, object : IAdCallBack {
+                override fun onNoReady() {
+                    isShowAd = false
+                }
+
+                override fun onAdClose(status: Int) {
+                    gotoNext()
+                }
+            })
+        }
+
     }
 
     private var hasGotoNext = false

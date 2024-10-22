@@ -20,7 +20,6 @@ import com.lambda.adlib.LambdaAdAdapter
 import com.lambda.adlib.LambdaAdSdk
 import com.lambda.adlib.adapter.LAdMultipleAdapter
 import com.lambda.common.utils.utilcode.util.ActivityUtils
-import com.lambda.common.utils.utilcode.util.LogUtils
 import com.theme.lambda.launcher.Constants
 import com.theme.lambda.launcher.statistics.ADEventName
 import com.theme.lambda.launcher.statistics.EventUtil
@@ -59,6 +58,12 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
         HashMap<String, ArrayList<LambdaAdAdapter.OnAdapterClose<LAdMultipleAdapter>>>()
 
     private var lastShowAdMillis = 0L
+
+    private const val adSourceMAXAdMob = "Google AdMob" // max聚合里admob的ad_source
+    private const val adSourceMAXFacebook = "Facebook" // max聚合里facebook的ad_source
+    private const val adSourceAdMobAdMob = "AdMob Network" // admob聚合里admob的ad_source
+    private const val adSourceTestAdMob = "Reservation campaign" // admob测试广告
+    val AdmobAdSources = listOf(adSourceAdMobAdMob, adSourceMAXAdMob, adSourceMAXFacebook, adSourceTestAdMob)
 
     @Synchronized
     fun addNativeAdapterClose(
@@ -342,6 +347,10 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
 
     fun isReady(scenes: String): Boolean {
         return getADAdapter(scenes)?.isReady() ?: false
+    }
+
+    fun isReady(scenes: String, network: String, format: Int): Boolean {
+        return getADAdapter(scenes)?.isReady(network, format) ?: false
     }
 
     fun showAd(scenes: String, callback: IAdCallBack? = null) {
