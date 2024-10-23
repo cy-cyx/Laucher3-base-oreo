@@ -27,6 +27,7 @@ import com.theme.lambda.launcher.widget.PreviewControlView
 import com.theme.lambda.launcher.widget.WallpaperView
 import com.theme.lambda.launcher.widget.dialog.ApplyLauncherPermissionDialog
 import com.theme.lambda.launcher.widget.dialog.QuitPreviewSureDialog
+import com.theme.lambda.launcher.widget.dialog.SetDefaultFailedDialog
 import java.io.File
 import java.lang.ref.WeakReference
 
@@ -213,11 +214,19 @@ class ThemeManager {
             if (LauncherUtil.isDefaultLauncher(it)) {
                 logEvent(EventName.activate, Bundle())
                 FirebaseAnalyticsUtil.logEvent(EventName.activate, Bundle())
-                if (LauncherUtil.gotoSetting) {
+            }
+            if (LauncherUtil.gotoSetting) {
+                if (LauncherUtil.isDefaultLauncher(it)) {
+                    // 设置回来成功
+
+
                     logEvent(EventName.permissionGrant, Bundle().apply {
                         putString("scene", "detail")
                         putString("permission", "launcher")
                     })
+                } else {
+                    // 设置回来失败
+                    SetDefaultFailedDialog(it).show()
                 }
             }
         }

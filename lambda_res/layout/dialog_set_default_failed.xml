@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="330dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_ffffff_radius_15"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="31dp"
+        android:src="@drawable/ic_oops" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:text="@string/oops"
+        android:textColor="#FF000000"
+        android:textSize="19dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        android:text="@string/set_default_failed_tip"
+        android:textColor="#FF252525"
+        android:textSize="15dp" />
+
+    <TextView
+        android:id="@+id/tryAgainTv"
+        android:layout_width="284dp"
+        android:layout_height="43dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="27dp"
+        android:background="@drawable/shape_208af4_radius_8"
+        android:gravity="center"
+        android:text="@string/try_again"
+        android:textColor="#FFFFFFFF"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/doNotTv"
+        android:layout_width="284dp"
+        android:layout_height="43dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/shape_d2e8fb_radius_8"
+        android:gravity="center"
+        android:text="@string/do_not_know_how_to_set"
+        android:textColor="#FF208AF4"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/lateTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/maybe_late"
+        android:textColor="#FF666666"
+        android:textSize="15dp" />
+
+</LinearLayout>

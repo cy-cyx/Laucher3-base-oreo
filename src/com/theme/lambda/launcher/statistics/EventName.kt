@@ -40,4 +40,5 @@ object EventName {
     val activate = "activate"
     @JvmField
     val LAppOpen = "LAppOpen"
+    val permissionFeedback = "permissionFeedback"
 }

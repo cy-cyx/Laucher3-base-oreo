@@ -56,4 +56,10 @@
     <string name="permission_refuse_tip">Please go to the settings page to grant required permissions</string>
     <string name="goto_set">Go &amp; Set</string>
     <string name="default_home_app_callback">⏰ Finish setting up for your new homeScreen! Tap here!</string>
+    <string name="oops">Oops</string>
+    <string name="set_default_failed_tip">Permission is not granted.Would you please tell us the reason?</string>
+    <string name="try_again">Try Again</string>
+    <string name="do_not_know_how_to_set">Don‘t know how to set</string>
+    <string name="maybe_late">Maybe late</string>
+    <string name="feedback_sent">Feedback Sent</string>
 </resources>

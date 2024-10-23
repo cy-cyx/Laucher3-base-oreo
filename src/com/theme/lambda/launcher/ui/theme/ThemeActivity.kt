@@ -27,6 +27,7 @@ import com.theme.lambda.launcher.utils.visible
 import com.theme.lambda.launcher.vip.VipManager
 import com.theme.lambda.launcher.widget.adapter.LauncherFragmentAdapter
 import com.theme.lambda.launcher.widget.dialog.ApplyLauncherPermissionDialog
+import com.theme.lambda.launcher.widget.dialog.SetDefaultFailedDialog
 import dalvik.system.ZipPathValidator
 import java.lang.ref.WeakReference
 
@@ -207,16 +208,22 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
             viewBinding.applyTv.gone()
             EventUtil.logEvent(EventName.activate, Bundle())
             FirebaseAnalyticsUtil.logEvent(EventName.activate, Bundle())
+        }
+        if (LauncherUtil.gotoSetting) {
+            if (LauncherUtil.isDefaultLauncher(this)) {
+                // 设置回来成功
 
-            if (LauncherUtil.gotoSetting) {
                 EventUtil.logEvent(EventName.permissionGrant, Bundle().apply {
                     putString("scene", "home")
                     putString("permission", "launcher")
                 })
+            } else {
+                // 设置回来失败
+                SetDefaultFailedDialog(this).show()
             }
         }
         LauncherUtil.gotoSetting = false
-        if (NotificationUtil.notificationsEnabled(this)){
+        if (NotificationUtil.notificationsEnabled(this)) {
             EventUtil.logEvent(EventName.permissionGrant, Bundle().apply {
                 putString("scene", "home")
                 putString("permission", "notification")
