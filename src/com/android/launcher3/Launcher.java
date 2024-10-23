@@ -49,6 +49,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Process;
 import android.os.StrictMode;
 import android.os.SystemClock;
@@ -385,7 +386,7 @@ public class Launcher extends BaseActivity
 
     private boolean needShowRate = false;
 
-    Handler mainHander = new Handler(getMainLooper());
+    Handler mainHander = new Handler(Looper.getMainLooper());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -603,8 +603,7 @@ public class Workspace extends PagedView
     }
 
     private int getEmbeddedQsbId() {
-        return mLauncher.getDeviceProfile().isVerticalBarLayout()
-                ? R.id.qsb_container : R.id.workspace_blocked_row;
+        return R.id.qsb_container;
     }
 
     /**
@@ -649,9 +648,7 @@ public class Workspace extends PagedView
         if (qsb == null) {
             // In transposed layout, we add the QSB in the Grid. As workspace does not touch the
             // edges, we do not need a full width QSB.
-            qsb = mLauncher.getLayoutInflater().inflate(
-                    mLauncher.getDeviceProfile().isVerticalBarLayout()
-                            ? R.layout.qsb_container : R.layout.qsb_blocker_view,
+            qsb = mLauncher.getLayoutInflater().inflate(R.layout.qsb_container,
                     firstPage, false);
         }
 
