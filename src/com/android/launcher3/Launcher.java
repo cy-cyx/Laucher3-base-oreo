@@ -385,6 +385,8 @@ public class Launcher extends BaseActivity
 
     private boolean needShowRate = false;
 
+    Handler mainHander = new Handler(getMainLooper());
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (LOGD) Log.d(TAG, "onCreate");
@@ -1161,7 +1163,7 @@ public class Launcher extends BaseActivity
         }
 
         if (isWorkspaceLoading()) {
-            showLoading();
+            showLoading(10000);
         }
 
         if (needShowRate) {
@@ -4324,16 +4326,28 @@ public class Launcher extends BaseActivity
         }
     }
 
-    private void showLoading() {
+    Runnable loadingTimeOutRunnable = new Runnable() {
+        @Override
+        public void run() {
+            hideLoading();
+        }
+    };
+
+    private void showLoading(int timeOut) {
         if (loadingDialog == null) {
             loadingDialog = new LoadingDialog(this);
         }
         loadingDialog.show();
+        mainHander.removeCallbacks(loadingTimeOutRunnable);
+        if (timeOut > 0) {
+            mainHander.postDelayed(loadingTimeOutRunnable, timeOut);
+        }
     }
 
     private void hideLoading() {
         if (loadingDialog != null && loadingDialog.isShowing()) {
             loadingDialog.dismiss();
         }
+        mainHander.removeCallbacks(loadingTimeOutRunnable);
     }
 }
