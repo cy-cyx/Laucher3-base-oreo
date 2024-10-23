@@ -2619,7 +2619,7 @@ public class Launcher extends BaseActivity
         }
 
         // 浏览过三次以上的主题，点击icon出评分弹窗
-        if (SpUtil.INSTANCE.getInt(SpKey.intoThemeNum, 0) > 3) {
+        if (SpUtil.INSTANCE.getInt(SpKey.intoThemeNum, 0) >= 3) {
             needShowRate = true;
         }
     }

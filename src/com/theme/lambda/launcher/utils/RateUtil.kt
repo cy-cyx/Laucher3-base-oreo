@@ -17,6 +17,7 @@ object RateUtil {
                 val intent = Intent(Intent.ACTION_VIEW, currentPackageUri)
                 intent.setPackage(playPackage)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 context.startActivity(intent)
             }
         } catch (e: Exception) {
@@ -25,6 +26,7 @@ object RateUtil {
                 Uri.parse("https://play.google.com/store/apps/details?id=" + context.packageName)
             val intent = Intent(Intent.ACTION_VIEW, currentPackageUri)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
             context.startActivity(intent)
         }
     }
@@ -45,6 +47,8 @@ object RateUtil {
                             "Your device brand: ${Build.BRAND}\nYour system version: ${Build.VERSION.RELEASE}\n" +
                                     "Your app version:${SystemUtil.getSystemVersion()}\nYour feedback or suggestion:"
                         )
+                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                     }, "feedback"
                 )
             )
