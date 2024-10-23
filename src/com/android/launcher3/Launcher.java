@@ -1405,7 +1405,8 @@ public class Launcher extends BaseActivity
         mDragLayer = (DragLayer) findViewById(R.id.drag_layer);
         mFocusHandler = mDragLayer.getFocusIndicatorHelper();
         mWorkspace = (Workspace) mDragLayer.findViewById(R.id.workspace);
-        mQsbContainer = mDragLayer.findViewById(R.id.qsb_container);
+        mQsbContainer = mDragLayer.findViewById(mDeviceProfile.isVerticalBarLayout()
+                ? R.id.workspace_blocked_row : R.id.qsb_container);
         mWorkspace.initParentViews(mDragLayer);
 
         mLauncherView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
