@@ -3840,6 +3840,8 @@ public class Launcher extends BaseActivity
         mWorkspace.restoreInstanceStateForRemainingPages();
 
         setWorkspaceLoading(false);
+        // 保证一定能关闭
+        hideLoading();
 
         if (mPendingActivityResult != null) {
             handleActivityResult(mPendingActivityResult.requestCode,
