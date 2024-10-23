@@ -14,8 +14,8 @@ import com.lambda.common.http.Callback
 import com.theme.lambda.launcher.Constants
 import com.theme.lambda.launcher.utils.LogUtil
 import com.theme.lambda.launcher.utils.SpKey
-import com.theme.lambda.launcher.utils.getMMKVBool
-import com.theme.lambda.launcher.utils.putMMKVBool
+import com.theme.lambda.launcher.utils.getSpBool
+import com.theme.lambda.launcher.utils.putSpBool
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -32,7 +32,7 @@ object VipManager {
     fun init() {
         Billing.isDebug = BuildConfig.isDebug
         Billing.init(InitParam.Builder(Constants.BASE_URL, Constants.SECRET_KEY).build())
-        isVip.value = SpKey.isVip.getMMKVBool()
+        isVip.value = SpKey.isVip.getSpBool()
         // 延迟请求网络有坑，归因问题
         GlobalScope.launch {
             delay(3000)
@@ -62,11 +62,11 @@ object VipManager {
                 if (t?.assets?.isNotEmpty() == true) {
                     val freeAdUntil: Long = t.assets.maxBy { it.expireAt }.expireAt
                     isVip.postValue(freeAdUntil > System.currentTimeMillis())
-                    SpKey.isVip.putMMKVBool(freeAdUntil > System.currentTimeMillis())
+                    SpKey.isVip.putSpBool(freeAdUntil > System.currentTimeMillis())
                     LogUtil.d(TAG, "upDataFreeAdUntil onSuccess freeAdUntil:$freeAdUntil")
                 } else {
                     isVip.postValue(false)
-                    SpKey.isVip.putMMKVBool(false)
+                    SpKey.isVip.putSpBool(false)
                 }
             }
 
@@ -186,6 +186,6 @@ object VipManager {
 
     fun markSubsSuccess() {
         isVip.postValue(true)
-        SpKey.isVip.putMMKVBool(true)
+        SpKey.isVip.putSpBool(true)
     }
 }

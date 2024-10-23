@@ -26,9 +26,10 @@ import com.theme.lambda.launcher.statistics.EventUtil
 import com.theme.lambda.launcher.statistics.FirebaseAnalyticsUtil
 import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.utils.LogUtil
+import com.theme.lambda.launcher.recall.RecallManager
 import com.theme.lambda.launcher.utils.SpKey
-import com.theme.lambda.launcher.utils.getMMKVFloat
-import com.theme.lambda.launcher.utils.putMMKVFloat
+import com.theme.lambda.launcher.utils.getSpFloat
+import com.theme.lambda.launcher.utils.putSpFloat
 import com.theme.lambda.launcher.vip.VipManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -63,7 +64,8 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
     private const val adSourceMAXFacebook = "Facebook" // max聚合里facebook的ad_source
     private const val adSourceAdMobAdMob = "AdMob Network" // admob聚合里admob的ad_source
     private const val adSourceTestAdMob = "Reservation campaign" // admob测试广告
-    val AdmobAdSources = listOf(adSourceAdMobAdMob, adSourceMAXAdMob, adSourceMAXFacebook, adSourceTestAdMob)
+    val AdmobAdSources =
+        listOf(adSourceAdMobAdMob, adSourceMAXAdMob, adSourceMAXFacebook, adSourceTestAdMob)
 
     @Synchronized
     fun addNativeAdapterClose(
@@ -187,6 +189,9 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
                                 putString("scene_alias", logParam?.name ?: "")
                                 putString("med_source", logParam?.med_source ?: "0")
                             })
+                            ActivityUtils.getTopActivity()?.let {
+                                RecallManager.startTimeoutRecall(it)
+                            }
                         }
 
                         LambdaAd.LogAdEvent.LOG_REVENUE -> {
@@ -216,11 +221,11 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
 
                             // 累计收益上传两份firebase（单独）
                             // 用于每累计满0.01 0.02 0.03上传一次，上传后清零
-                            var income001 = SpKey.cumulative_income_001.getMMKVFloat(0f)
+                            var income001 = SpKey.cumulative_income_001.getSpFloat(0f)
                             logParam?.revenue?.toFloat()?.let {
                                 income001 += it
                             }
-                            SpKey.cumulative_income_001.putMMKVFloat(income001)
+                            SpKey.cumulative_income_001.putSpFloat(income001)
 
                             if (income001 > 0.01f) {
                                 FirebaseAnalyticsUtil.logEvent(
@@ -235,7 +240,7 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
                                         putFloat("value", income001)
                                         putString("currency", "USD")
                                     })
-                                SpKey.cumulative_income_001.putMMKVFloat(0f)
+                                SpKey.cumulative_income_001.putSpFloat(0f)
                             }
                         }
 

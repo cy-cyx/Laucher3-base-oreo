@@ -124,14 +124,6 @@
             "ecpm": 0
             },
             {
-            "adid": "R-M-12398626-6",
-            "order": 0,
-            "per": 0,
-            "plat": 7,
-            "type": 2,
-            "ecpm": 0
-            },
-            {
             "adid": "10961146-10909383",
             "order": 2,
             "per": 0,
@@ -217,7 +209,7 @@
             },
             {
             "asid": "",
-            "name": "unlock",
+            "name": "unlock, icon_unlock",
             "ctrl": {
             "closeCountDown": 0,
             "closeDelay": 0,
@@ -268,7 +260,7 @@
             },
             {
             "asid": "",
-            "name": "iap_close",
+            "name": "iap_close, app_open",
             "ctrl": {
             "closeCountDown": 0,
             "closeDelay": 0,

@@ -209,7 +209,7 @@
             },
             {
             "asid": "",
-            "name": "unlock",
+            "name": "unlock, icon_unlock",
             "ctrl": {
             "closeCountDown": 0,
             "closeDelay": 0,
@@ -260,7 +260,7 @@
             },
             {
             "asid": "",
-            "name": "iap_close",
+            "name": "iap_close, app_open",
             "ctrl": {
             "closeCountDown": 0,
             "closeDelay": 0,

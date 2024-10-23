@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 import com.theme.lambda.launcher.utils.CommonUtil
+import com.theme.lambda.launcher.utils.PermissionUtil
 
 abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
 
@@ -24,5 +25,14 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         viewBinding = initViewBinding(LayoutInflater.from(this))
         setContentView(viewBinding.root)
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        PermissionUtil.onRequestPermissionsResult(this, requestCode, permissions, grantResults)
     }
 }

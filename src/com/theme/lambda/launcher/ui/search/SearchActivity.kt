@@ -1,9 +1,13 @@
 package com.theme.lambda.launcher.ui.search
 
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnFocusChangeListener
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
+import android.widget.TextView.OnEditorActionListener
 import androidx.activity.viewModels
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
@@ -22,6 +26,7 @@ import com.theme.lambda.launcher.utils.StatusBarUtil
 import com.theme.lambda.launcher.utils.gone
 import com.theme.lambda.launcher.utils.marginStatusBarHeight
 import com.theme.lambda.launcher.utils.visible
+import okhttp3.internal.cache.DiskLruCache
 
 class SearchActivity : BaseActivity<ActivitySearchBinding>() {
     private val searchHistoryAdapter: SearchHistoryAdapter by lazy {
@@ -88,6 +93,15 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             viewBinding.clSearchHistory.visibility =
                 if (hasFocus && searchHistoryAdapter.data.isNotEmpty()) View.VISIBLE else View.GONE
         }
+        viewBinding.et.setOnEditorActionListener(object : OnEditorActionListener {
+            override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    viewBinding.et.clearFocus()
+                    viewModel.search(this@SearchActivity, viewBinding.et.text.toString())
+                }
+                return true
+            }
+        })
         viewBinding.ivClear.setOnClickListener {
             viewBinding.et.setText("")
             viewBinding.et.clearFocus()

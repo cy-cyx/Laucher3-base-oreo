@@ -31,13 +31,13 @@ fun View.visible() {
     this.visibility = View.VISIBLE
 }
 
-fun String.getMMKVBool(default: Boolean = false) = SpUtil.getBool(this, default)
-fun String.putMMKVBool(value: Boolean) = SpUtil.putBool(this, value)
-fun String.getMMKVInt(default: Int = 0) = SpUtil.getInt(this, default)
-fun String.putMMKVInt(value: Int) = SpUtil.putInt(this, value)
-fun String.putMMKVFloat(value: Float) = SpUtil.putFloat(this, value)
-fun String.getMMKVFloat(default: Float = 0f) = SpUtil.getFloat(this, default)
-fun String.putMMKVLong(value: Long) = SpUtil.putLong(this, value)
-fun String.getMMKVLong(default: Long = 0L) = SpUtil.getLong(this, default)
-fun String.putMMKVString(value: String) = SpUtil.putString(this, value)
-fun String.getMMKVString() = SpUtil.getString(this)
+fun String.getSpBool(default: Boolean = false) = SpUtil.getBool(this, default)
+fun String.putSpBool(value: Boolean) = SpUtil.putBool(this, value)
+fun String.getSpInt(default: Int = 0) = SpUtil.getInt(this, default)
+fun String.putSpInt(value: Int) = SpUtil.putInt(this, value)
+fun String.putSpFloat(value: Float) = SpUtil.putFloat(this, value)
+fun String.getSpFloat(default: Float = 0f) = SpUtil.getFloat(this, default)
+fun String.putSpLong(value: Long) = SpUtil.putLong(this, value)
+fun String.getSpLong(default: Long = 0L) = SpUtil.getLong(this, default)
+fun String.putSpString(value: String) = SpUtil.putString(this, value)
+fun String.getSpString() = SpUtil.getString(this)

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="themes">Темы</string>
+    <string name="set">Набор</string>
+    <string name="theme_not_applied">Тема не применена</string>
+    <string name="theme_not_applied_tip">Вы не закончили настройку новой темы. Нажмите «Установить», чтобы применить ее сейчас.</string>
+    <string name="cancel">Отмена</string>
+    <string name="text_continue">ПРОДОЛЖАТЬ</string>
+    <string name="splash_start_tip">Нажимая эту кнопку, вы соглашаетесь с нашими</string>
+    <string name="privacy_policy">Политика конфиденциальности</string>
+    <string name="terms_of_service">Условия использования</string>
+    <string name="loading">загрузка...</string>
+    <string name="download">Скачать</string>
+    <string name="my_themes">Мои темы</string>
+    <string name="set_default_home_app">Чтобы изменения вступили в силу, установите «%s» в качестве домашнего приложения по умолчанию.</string>
+    <string name="home_launcher_permission_tip">Найдите %s и щелкните по нему, чтобы предоставить разрешение.</string>
+    <string name="allow">Позволять</string>
+    <string name="not_now">не сейчас</string>
+    <string name="apply_theme">Применить тему</string>
+    <string name="apply">Применять</string>
+    <string name="ad_no_fill_tip">Объявление еще не заполнено! Попробуйте позже</string>
+    <string name="guide_1_text">Нажмите на значок темы, чтобы открыть список тем.</string>
+    <string name="guide_2_text">Проведите пальцем вправо или нажмите клавишу «Назад», чтобы выйти из режима предварительного просмотра.</string>
+    <string name="tutorial">Учебник</string>
+    <string name="vivo_setting_part_1">&#160;&#160;&#160;&#160;&#160;Откройте настройки системы и выберите «Безопасность и конфиденциальность».</string>
+    <string name="vivo_setting_part_2">&#160;&#160;&#160;&#160;Нажмите «Дополнительные настройки безопасности»</string>
+    <string name="vivo_setting_part_3">&#160;&#160;&#160;&#160;&#160;Нажмите «Заменить системный лаунчер»</string>
+    <string name="vivo_setting_part_4">&#160;&#160;&#160;&#160;&#160;Откройте «Разрешить замену средства запуска» и оставьте закрытым «Нажмите кнопку «Домой», чтобы заблокировать главный экран системы».</string>
+    <string name="vivo_setting_part_5">&#160;&#160;&#160;&#160;&#160;Найдите Lambda Launcher и щелкните по нему, чтобы предоставить разрешение.</string>
+    <string name="vip_no_ad">Без рекламы</string>
+    <string name="vip_unlock_all">Разблокируйте ВСЕ эксклюзивные темы</string>
+    <string name="vip_weekly_update">Еженедельное обновление</string>
+    <string name="vip_customer">Поддержка VIP-клиентов</string>
+    <string name="secure_by_google_pay">Безопасно с помощью Google Pay</string>
+    <string name="all_content_no_ads">Весь контент Без рекламы.</string>
+    <string name="get">Получать</string>
+</resources>

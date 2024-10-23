@@ -25,7 +25,6 @@ class HomeLauncherSetGuideActivity : ComponentActivity() {
 
         fun start(context: Context) {
             val intent = Intent(context, HomeLauncherSetGuideActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             context.startActivity(intent)
         }
     }

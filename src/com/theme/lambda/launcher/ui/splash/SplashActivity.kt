@@ -1,5 +1,7 @@
 package com.theme.lambda.launcher.ui.splash
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -25,6 +27,14 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class SplashActivity : BaseActivity<ActivitySplashBinding>() {
+
+    companion object {
+        fun start(context: Context) {
+            context.startActivity(Intent(context, SplashActivity::class.java).apply {
+            })
+        }
+    }
+
     override fun initViewBinding(layoutInflater: LayoutInflater): ActivitySplashBinding {
         return ActivitySplashBinding.inflate(layoutInflater)
     }

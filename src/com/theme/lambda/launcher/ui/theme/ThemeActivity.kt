@@ -1,5 +1,6 @@
 package com.theme.lambda.launcher.ui.theme
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -17,6 +18,8 @@ import com.theme.lambda.launcher.statistics.FirebaseAnalyticsUtil
 import com.theme.lambda.launcher.ui.iap.VipActivity
 import com.theme.lambda.launcher.ui.me.MeActivity
 import com.theme.lambda.launcher.utils.LauncherUtil
+import com.theme.lambda.launcher.utils.NotificationUtil
+import com.theme.lambda.launcher.utils.PermissionUtil
 import com.theme.lambda.launcher.utils.StatusBarUtil
 import com.theme.lambda.launcher.utils.gone
 import com.theme.lambda.launcher.utils.marginStatusBarHeight
@@ -42,6 +45,8 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
             context.startActivity(Intent(context, ThemeActivity::class.java).apply {
                 putExtra(sKeyFrom, from)
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                // 设置成功返回可能会存在异常（可能会回到旧的launcher上），故如此处理
+                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
             })
         }
 
@@ -165,6 +170,34 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
 
         VipManager.bindVipActivity(this)
         EventUtil.logEvent(EventName.homePageView, Bundle())
+
+        requestNotificationPermission()
+    }
+
+    private fun requestNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            PermissionUtil.requestRuntimePermissions(
+                this,
+                arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                object : PermissionUtil.IPermissionCallback {
+                    override fun nextStep() {
+                        EventUtil.logEvent(EventName.permissionGrant, Bundle().apply {
+                            putString("scene", "home")
+                            putString("permission", "notification")
+                        })
+                    }
+
+                    override fun noPermission() {
+
+                    }
+
+                    override fun gotoSet(internal: Boolean) {
+
+                    }
+                },
+                showGotoSetDialog = false
+            )
+        }
     }
 
     override fun onResume() {
@@ -174,14 +207,21 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
             viewBinding.applyTv.gone()
             EventUtil.logEvent(EventName.activate, Bundle())
             FirebaseAnalyticsUtil.logEvent(EventName.activate, Bundle())
-        }
-        if (LauncherUtil.gotoSetting) {
-            EventUtil.logEvent(EventName.permissionGrant, Bundle().apply {
-                putString("scene", "home")
-                putString("permission", "launcher")
-            })
+
+            if (LauncherUtil.gotoSetting) {
+                EventUtil.logEvent(EventName.permissionGrant, Bundle().apply {
+                    putString("scene", "home")
+                    putString("permission", "launcher")
+                })
+            }
         }
         LauncherUtil.gotoSetting = false
+        if (NotificationUtil.notificationsEnabled(this)){
+            EventUtil.logEvent(EventName.permissionGrant, Bundle().apply {
+                putString("scene", "home")
+                putString("permission", "notification")
+            })
+        }
 
         VipManager.upDataFreeAdUntil()
     }
