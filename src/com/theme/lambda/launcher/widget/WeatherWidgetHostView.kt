@@ -3,6 +3,7 @@ package com.theme.lambda.launcher.widget
 import android.appwidget.AppWidgetHostView
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.provider.AlarmClock
 import android.provider.Settings
 import android.view.LayoutInflater
@@ -15,6 +16,8 @@ import android.widget.RemoteViews
 import com.android.launcher3.R
 import com.android.launcher3.ThemeIconMapping
 import com.android.launcher3.ThemeManager
+import com.theme.lambda.launcher.statistics.EventName
+import com.theme.lambda.launcher.statistics.EventUtil
 import com.theme.lambda.launcher.ui.weather.WeatherActivity
 import com.theme.lambda.launcher.utils.TimerUtils
 
@@ -86,9 +89,15 @@ class WeatherWidgetHostView constructor(private val context: Context) : AppWidge
                         flags = Intent.FLAG_ACTIVITY_NEW_TASK
                     }
                 )
+                EventUtil.logEvent(EventName.LWeather, Bundle().apply {
+                    putString("type", "click")
+                })
             }
             v.findViewById<ImageView>(R.id.iv_refresh).setOnClickListener {
                 TimerUtils.getIpLocation()
+                EventUtil.logEvent(EventName.LWeather, Bundle().apply {
+                    putString("type", "refresh")
+                })
             }
             return v
         }

@@ -91,7 +91,7 @@ class ThemePreviewActivity : BaseActivity<ActivityThemePreviewBinding>() {
                     }
                 })
             } else {
-                VipActivity.start(this)
+                VipActivity.start(this, VipActivity.FromPreviewDownload)
             }
             logEvent(EventName.downloadClick, Bundle().apply {
                 putString("id", viewModel.resources?.id ?: "")

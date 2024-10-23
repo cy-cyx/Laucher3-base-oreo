@@ -41,4 +41,9 @@ object EventName {
     @JvmField
     val LAppOpen = "LAppOpen"
     val permissionFeedback = "permissionFeedback"
+    val LWeather = "LWeather"
+    val iapEntryView = "iapEntryView"
+    val iapEntryClick = "iapEntryClick"
+    val iapPageView = "iapPageView"
+    val iapPageClick = "iapPageClick"
 }

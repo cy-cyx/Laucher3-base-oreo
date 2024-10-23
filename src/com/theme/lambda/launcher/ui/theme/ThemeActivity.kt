@@ -149,18 +149,26 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
         viewBinding.adBanner.scenesName = AdName.home_ban
 
         viewBinding.vipIv.setOnClickListener {
-            VipActivity.start(this)
+            VipActivity.start(this, VipActivity.FromHomeIcon)
         }
         viewBinding.vipBannerFl.setOnClickListener {
-            VipActivity.start(this)
+            VipActivity.start(this, VipActivity.FromHomeBanner)
         }
 
         VipManager.isVip.observe(this, Observer {
             if (it) {
                 viewBinding.adBanner.gone()
                 viewBinding.vipBannerFl.gone()
+                viewBinding.vipIv.gone()
             } else {
                 viewBinding.vipBannerFl.visible()
+                viewBinding.vipIv.visible()
+                EventUtil.logEvent(EventName.iapEntryView, Bundle().apply {
+                    putString("placement", VipActivity.FromHomeIcon)
+                })
+                EventUtil.logEvent(EventName.iapEntryView, Bundle().apply {
+                    putString("placement", VipActivity.FromHomeBanner)
+                })
             }
         })
 

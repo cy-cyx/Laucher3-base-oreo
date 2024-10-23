@@ -11,6 +11,8 @@ import com.android.launcher3.databinding.ActivityVipBinding
 import com.theme.lambda.launcher.ad.AdName
 import com.theme.lambda.launcher.ad.AdUtil
 import com.theme.lambda.launcher.base.BaseActivity
+import com.theme.lambda.launcher.statistics.EventName
+import com.theme.lambda.launcher.statistics.EventUtil
 import com.theme.lambda.launcher.utils.StatusBarUtil
 import com.theme.lambda.launcher.vip.ProductIds
 import com.theme.lambda.launcher.vip.VipManager
@@ -19,9 +21,21 @@ import com.theme.lambda.launcher.widget.dialog.LoadingDialog
 class VipActivity : BaseActivity<ActivityVipBinding>() {
 
     companion object {
-        fun start(context: Context) {
+
+        final val FromHomeIcon = "home_icon"
+        final val FromHomeBanner = "home_banner"
+        final val FromPreviewDownload = "preview_download"
+
+        val keyFrom = "keyFrom"
+
+        fun start(context: Context, from: String) {
             if (VipManager.isVip.value == true) return
-            context.startActivity(Intent(context, VipActivity::class.java))
+            context.startActivity(Intent(context, VipActivity::class.java).apply {
+                putExtra(keyFrom, from)
+            })
+            EventUtil.logEvent(EventName.iapEntryClick, Bundle().apply {
+                putString("placement", from)
+            })
         }
     }
 
@@ -38,27 +52,46 @@ class VipActivity : BaseActivity<ActivityVipBinding>() {
         }
     }
 
+    var from = VipActivity.FromHomeIcon
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         StatusBarUtil.transparencyBar(this)
         StatusBarUtil.setStatusBarDarkMode(this.window)
 
+        from = intent.getStringExtra(keyFrom) ?: FromHomeIcon
+
         viewBinding.monthFl.setOnClickListener {
             viewModel.curSelectProduct.value = ProductIds.Monthly
+            EventUtil.logEvent(EventName.iapPageClick, Bundle().apply {
+                putString("from", from)
+                putInt("pos", 1)
+            })
         }
 
         viewBinding.yearFl.setOnClickListener {
             viewModel.curSelectProduct.value = ProductIds.Yearly
+            EventUtil.logEvent(EventName.iapPageClick, Bundle().apply {
+                putString("from", from)
+                putInt("pos", 1)
+            })
         }
 
         viewBinding.continueTv.setOnClickListener {
             viewModel.purchase(this)
+            EventUtil.logEvent(EventName.iapPageClick, Bundle().apply {
+                putString("from", from)
+                putInt("pos", 2)
+            })
         }
 
         viewBinding.backIv.setOnClickListener {
             finish()
             AdUtil.showAd(AdName.iap_close)
+            EventUtil.logEvent(EventName.iapPageClick, Bundle().apply {
+                putString("from", from)
+                putInt("pos", 0)
+            })
         }
 
         viewModel.curSelectProduct.observe(this, Observer {
@@ -87,12 +120,17 @@ class VipActivity : BaseActivity<ActivityVipBinding>() {
 
         viewModel.monthlyPriceLiveData.observe(this, Observer {
             viewBinding.mouthTv.text = it
+
         })
         viewModel.yearlyPriceLiveData.observe(this, Observer {
             viewBinding.yearTv.text = it
         })
 
         viewModel.initBilling()
+
+        EventUtil.logEvent(EventName.iapPageView, Bundle().apply {
+            putString("from", from)
+        })
     }
 
     override fun onBackPressed() {
