@@ -129,6 +129,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recentAppsAdapter.setOnItemClickListener { _, _, position ->
             viewBinding.et.clearFocus()
+            viewBinding.et.setText("")
             viewModel.clickApp(recentAppsAdapter.data[position])
         }
 
@@ -137,6 +138,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         localAppsAdapter.setOnItemClickListener { _, _, position ->
             viewBinding.et.clearFocus()
+            viewBinding.et.setText("")
             viewModel.clickApp(localAppsAdapter.data[position])
         }
     }

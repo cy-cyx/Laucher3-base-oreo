@@ -142,6 +142,7 @@ import com.theme.lambda.launcher.ui.search.SearchActivity;
 import com.theme.lambda.launcher.ui.theme.ThemeActivity;
 import com.theme.lambda.launcher.utils.AppUtil;
 import com.theme.lambda.launcher.utils.CommonUtil;
+import com.theme.lambda.launcher.utils.LauncherUtil;
 import com.theme.lambda.launcher.utils.SpKey;
 import com.theme.lambda.launcher.utils.SpUtil;
 import com.theme.lambda.launcher.widget.FirstGuideView;
@@ -1155,8 +1156,8 @@ public class Launcher extends BaseActivity
 
         themeManager.onResume();
 
-        // 第一次需要
-        if (!SpUtil.INSTANCE.getBool(SpKey.first_guide, false)) {
+        // 第一次需要,如果已经授权就不展示了
+        if (!SpUtil.INSTANCE.getBool(SpKey.first_guide, false) && !LauncherUtil.INSTANCE.isDefaultLauncher(this)) {
             firstGuideView.setVisibility(View.VISIBLE);
             firstGuideView.startGuide();
 
