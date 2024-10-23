@@ -39,7 +39,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         return ActivitySplashBinding.inflate(layoutInflater)
     }
 
-    private val adWaitingTime = if (VipManager.isVip.value == true) 5000L else 15000L
+    private val adWaitingTime = if (VipManager.isVip.value == true) 3000L else 15000L
     private var showTryAdTimestamp = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
