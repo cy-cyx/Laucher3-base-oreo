@@ -17,6 +17,9 @@ import com.applovin.mediation.nativeAds.MaxNativeAdViewBinder
 import com.google.android.gms.ads.nativead.NativeAdView
 import com.ironsource.tr
 import com.lambda.adlib.LambdaAd
+import com.lambda.adlib.LambdaAd.LambdaAdTypeAlias.Companion.TYPE_INTERSTITIAL_TEXT
+import com.lambda.adlib.LambdaAd.LambdaAdTypeAlias.Companion.TYPE_OPEN_TEXT
+import com.lambda.adlib.LambdaAd.LambdaAdTypeAlias.Companion.TYPE_REWARDED_VIDEO_TEXT
 import com.lambda.adlib.LambdaAdAdapter
 import com.lambda.adlib.LambdaAdSdk
 import com.lambda.adlib.adapter.LAdMultipleAdapter
@@ -244,6 +247,18 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
                                         putString("currency", "USD")
                                     })
                                 SpKey.cumulative_income_001.putSpFloat(0f)
+                            }
+
+                            // 买量事件
+                            if (logParam?.getAdTypeAlias() == TYPE_INTERSTITIAL_TEXT ||
+                                logParam?.getAdTypeAlias() == TYPE_OPEN_TEXT ||
+                                logParam?.getAdTypeAlias() == TYPE_REWARDED_VIDEO_TEXT
+                            ) {
+                                if (System.currentTimeMillis() - SpKey.install_time.getSpLong() > 24 * 60 * 60 * 1000
+                                    && System.currentTimeMillis() - SpKey.install_time.getSpLong() < 2 * 24 * 60 * 60 * 1000
+                                ) {
+                                    FirebaseAnalyticsUtil.logEvent(ADEventName.R1d, Bundle())
+                                }
                             }
                         }
 

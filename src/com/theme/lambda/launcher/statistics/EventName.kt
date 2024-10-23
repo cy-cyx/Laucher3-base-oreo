@@ -16,6 +16,7 @@ object ADEventName {
     val adRev001 = "adRev001" // fb
     val adRev002 = "adRev002" // fb
     val adRev003 = "adRev003" // fb
+    val R1d = "R1d"
 }
 
 object EventName {
