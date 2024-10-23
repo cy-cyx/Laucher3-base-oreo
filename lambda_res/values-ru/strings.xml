@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="hint_search">Локальные приложения/Интернет</string>
+    <string name="search_history">История поиска</string>
+    <string name="recent_apps">Недавние приложения</string>
+    <string name="local_apps">Локальные приложения</string>
+    <string name="weather_setting">Настройка погоды</string>
+    <string name="weather_location">Погода Местоположение</string>
+    <string name="temperature_unit">Единица измерения температуры</string>
+    <string name="reset_city_in_english">Сбросить город на английском языке</string>
+    <string name="auto_location">Авто-локация</string>
+    <string name="weather_location_network_error">Не удалось найти город из-за ошибки сети</string>
     <string name="themes">Темы</string>
     <string name="set">Набор</string>
     <string name="theme_not_applied">Тема не применена</string>
@@ -12,6 +22,15 @@
     <string name="loading">загрузка...</string>
     <string name="download">Скачать</string>
     <string name="my_themes">Мои темы</string>
+    <string name="all_apps">Все приложения</string>
+    <string name="store">Магазин</string>
+    <string name="games">Игры</string>
+    <string name="utilities">Коммунальные услуги</string>
+    <string name="art_design">Искусство и дизайн</string>
+    <string name="health">Здоровье</string>
+    <string name="social">Социальный</string>
+    <string name="shopping">Покупки</string>
+    <string name="music_video">Музыка и видео</string>
     <string name="set_default_home_app">Чтобы изменения вступили в силу, установите «%s» в качестве домашнего приложения по умолчанию.</string>
     <string name="home_launcher_permission_tip">Найдите %s и щелкните по нему, чтобы предоставить разрешение.</string>
     <string name="allow">Позволять</string>
@@ -34,4 +53,16 @@
     <string name="secure_by_google_pay">Безопасно с помощью Google Pay</string>
     <string name="all_content_no_ads">Весь контент Без рекламы.</string>
     <string name="get">Получать</string>
+    <string name="permission_refuse_tip">Пожалуйста, перейдите на страницу настроек, чтобы предоставить необходимые разрешения.</string>
+    <string name="goto_set">Иди и amp; Набор</string>
+    <string name="default_home_app_callback">⏰ Завершите настройку вашего нового домашнего экрана! Нажмите здесь!</string>
+    <string name="oops">Упс</string>
+    <string name="set_default_failed_tip">Разрешение не предоставлено. Не могли бы вы сообщить нам причину?</string>
+    <string name="try_again">Попробуйте еще раз</string>
+    <string name="do_not_know_how_to_set">Не знаю как настроить</string>
+    <string name="maybe_late">Может быть поздно</string>
+    <string name="feedback_sent">Отзыв отправлен</string>
+    <string name="rate_us">Оцените нас</string>
+    <string name="rate_us_tip">Спасибо за ваши лайки, мы продолжим усердно работать!</string>
+    <string name="submit">Представлять на рассмотрение</string>
 </resources>
