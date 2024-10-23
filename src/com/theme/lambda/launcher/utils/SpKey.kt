@@ -15,4 +15,6 @@ object SpKey {
 
     const val curUserWallpaperId = "curUserWallpaperId"
     const val keyFirstCheckPermission = "keyFirstCheckPermission"
+
+    const val hasStoreRatings = "hasStoreRatings"
 }

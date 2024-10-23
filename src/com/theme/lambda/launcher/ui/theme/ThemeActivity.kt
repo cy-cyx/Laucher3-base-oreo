@@ -28,6 +28,7 @@ import com.theme.lambda.launcher.vip.VipManager
 import com.theme.lambda.launcher.widget.adapter.LauncherFragmentAdapter
 import com.theme.lambda.launcher.widget.dialog.ApplyLauncherPermissionDialog
 import com.theme.lambda.launcher.widget.dialog.SetDefaultFailedDialog
+import com.theme.lambda.launcher.widget.dialog.StoreRatingsDialog
 import dalvik.system.ZipPathValidator
 import java.lang.ref.WeakReference
 
@@ -212,6 +213,7 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
         if (LauncherUtil.gotoSetting) {
             if (LauncherUtil.isDefaultLauncher(this)) {
                 // 设置回来成功
+                StoreRatingsDialog.show(this)
 
                 EventUtil.logEvent(EventName.permissionGrant, Bundle().apply {
                     putString("scene", "home")

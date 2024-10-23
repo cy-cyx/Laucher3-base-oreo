@@ -62,4 +62,7 @@
     <string name="do_not_know_how_to_set">Don‘t know how to set</string>
     <string name="maybe_late">Maybe late</string>
     <string name="feedback_sent">Feedback Sent</string>
+    <string name="rate_us">Rate Us</string>
+    <string name="rate_us_tip">Thank you for your likes,we will continue to work hard!</string>
+    <string name="submit">Submit</string>
 </resources>
