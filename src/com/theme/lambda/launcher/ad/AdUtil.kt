@@ -254,8 +254,8 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
                                 logParam?.getAdTypeAlias() == TYPE_OPEN_TEXT ||
                                 logParam?.getAdTypeAlias() == TYPE_REWARDED_VIDEO_TEXT
                             ) {
-                                if (System.currentTimeMillis() - SpKey.install_time.getSpLong() > 86400
-                                    && System.currentTimeMillis() - SpKey.install_time.getSpLong() < 86400 * 2
+                                if (System.currentTimeMillis() - SpKey.install_time.getSpLong() > 86400 * 1000
+                                    && System.currentTimeMillis() - SpKey.install_time.getSpLong() < 86400 * 2 * 1000
                                 ) {
                                     FirebaseAnalyticsUtil.logEvent(ADEventName.R1d, Bundle())
                                 }
@@ -477,8 +477,8 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
         val appOpenWaitInSec = FirebaseConfigUtil.getLong("app_open_wait_in_sec") ?: 43200
         val appOpenIntervalInSec = FirebaseConfigUtil.getLong("app_open_interval_in_sec") ?: 1800
 
-        if (System.currentTimeMillis() - SpKey.install_time.getSpLong() > appOpenWaitInSec
-            && System.currentTimeMillis() - lastShowAppOpenAd > appOpenIntervalInSec
+        if (System.currentTimeMillis() - SpKey.install_time.getSpLong() > appOpenWaitInSec * 1000
+            && System.currentTimeMillis() - lastShowAppOpenAd > appOpenIntervalInSec * 1000
         ) {
             needShowAd = true
         }
@@ -490,6 +490,10 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
                 }
 
                 override fun onAdClose(status: Int) {
+                    if (status == LambdaAd.AD_SHOWING) {
+                        lastShowAppOpenAd = System.currentTimeMillis()
+                    }
+
                     runnable.run()
                 }
             })
