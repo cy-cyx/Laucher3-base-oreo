@@ -2598,20 +2598,16 @@ public class Launcher extends BaseActivity
         }
         if (AppUtil.isSystemApplication(this, packageName) || packageName.equals(getPackageName())) {
             startActivity(v, intent, item);
-            Bundle bundle = new Bundle();
-            bundle.putString("pn", packageName);
-            EventUtil.INSTANCE.logEvent(EventName.INSTANCE.LAppOpen, bundle);
         } else {
-            String finalPackageName = packageName;
             AdUtil.INSTANCE.showOpenAppAdNeed(new Runnable() {
                 @Override
                 public void run() {
                     startActivity(v, intent, item);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("pn", finalPackageName);
-                    EventUtil.INSTANCE.logEvent(EventName.INSTANCE.LAppOpen, bundle);
                 }
             });
+            Bundle bundle = new Bundle();
+            bundle.putString("pn", packageName);
+            EventUtil.INSTANCE.logEvent(EventName.INSTANCE.LAppOpen, bundle);
         }
     }
 
