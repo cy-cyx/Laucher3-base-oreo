@@ -13,7 +13,7 @@
     <string name="themes">Themes</string>
     <string name="set">Set</string>
     <string name="theme_not_applied">Theme Not Applied</string>
-    <string name="theme_not_applied_tip">You haven\'t finished setting the new theme.Tap \'Set\' to apply it now.</string>
+    <string name="theme_not_applied_tip">You haven\'t finished setting the new theme. Tap \'Set\' to apply it now.</string>
     <string name="cancel">Cancel</string>
     <string name="text_continue">Continue</string>
     <string name="splash_start_tip">By tapping this button, you agree to our</string>
@@ -34,7 +34,7 @@
     <string name="set_default_home_app">Please set "%s" as default home app to take effect</string>
     <string name="home_launcher_permission_tip">Find %s and click it to grant permission</string>
     <string name="allow">Allow</string>
-    <string name="not_now">Not now</string>
+    <string name="not_now">not now</string>
     <string name="apply_theme">Apply Theme</string>
     <string name="apply">Apply</string>
     <string name="ad_no_fill_tip">The ad has not been filled yet! Try again later</string>
@@ -42,8 +42,8 @@
     <string name="guide_2_text">Swiping right or pressing the back key to exit preview mode</string>
     <string name="tutorial">Tutorial</string>
     <string name="vivo_setting_part_1">&#160;&#160;&#160;&#160;&#160;Open the system settings and select Security and Privacy.</string>
-    <string name="vivo_setting_part_2">&#160;&#160;&#160;&#160;&#160;Click  “more security settings”</string>
-    <string name="vivo_setting_part_3">&#160;&#160;&#160;&#160;&#160;Click  “Replace the system launcher”</string>
+    <string name="vivo_setting_part_2">&#160;&#160;&#160;&#160;&#160;Click "more security settings"</string>
+    <string name="vivo_setting_part_3">&#160;&#160;&#160;&#160;&#160;Click "Replace the system launcher"</string>
     <string name="vivo_setting_part_4">&#160;&#160;&#160;&#160;&#160;Open "Allow the launcher to be replaced" and keep "Tap the home button to lock the system home screen" closed.</string>
     <string name="vivo_setting_part_5">&#160;&#160;&#160;&#160;&#160;Find Lambda Launcher and click it to grant permission.</string>
     <string name="vip_no_ad">No Ads</string>
@@ -51,18 +51,18 @@
     <string name="vip_weekly_update">Weekly Update</string>
     <string name="vip_customer">VIP Customer Support</string>
     <string name="secure_by_google_pay">Secure by Google Pay</string>
-    <string name="all_content_no_ads">All content No ads.</string>
+    <string name="all_content_no_ads">All content NO ADS.</string>
     <string name="get">Get</string>
     <string name="permission_refuse_tip">Please go to the settings page to grant required permissions</string>
     <string name="goto_set">Go &amp; Set</string>
-    <string name="default_home_app_callback">⏰ Finish setting up for your new homeScreen! Tap here!</string>
-    <string name="oops">Oops</string>
-    <string name="set_default_failed_tip">Permission is not granted.Would you please tell us the reason?</string>
+    <string name="default_home_app_callback">⏰ Finish setting up for your new home screen! Tap here!</string>
+    <string name="oops">Oops...</string>
+    <string name="set_default_failed_tip">Permission is not granted. \nWould you please tell us the reason?</string>
     <string name="try_again">Try Again</string>
-    <string name="do_not_know_how_to_set">Don‘t know how to set</string>
-    <string name="maybe_late">Maybe late</string>
+    <string name="do_not_know_how_to_set">Don\'t know how to set</string>
+    <string name="maybe_late">maybe later</string>
     <string name="feedback_sent">Feedback Sent</string>
     <string name="rate_us">Rate Us</string>
-    <string name="rate_us_tip">Thank you for your likes,we will continue to work hard!</string>
+    <string name="rate_us_tip">Thank you for your likes, we will continue to work hard!</string>
     <string name="submit">Submit</string>
 </resources>
