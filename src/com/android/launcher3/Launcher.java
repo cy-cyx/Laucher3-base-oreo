@@ -2000,6 +2000,7 @@ public class Launcher extends BaseActivity
         }
 
         themeManager.onDestroy();
+        hideLoading();
     }
 
     public LauncherAccessibilityDelegate getAccessibilityDelegate() {
@@ -4345,7 +4346,7 @@ public class Launcher extends BaseActivity
     }
 
     private void hideLoading() {
-        if (loadingDialog != null && loadingDialog.isShowing()) {
+        if (loadingDialog != null && loadingDialog.isShowing() && !isDestroyed()) {
             loadingDialog.dismiss();
         }
         mainHander.removeCallbacks(loadingTimeOutRunnable);
