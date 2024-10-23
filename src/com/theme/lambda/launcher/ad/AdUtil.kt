@@ -254,8 +254,8 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
                                 logParam?.getAdTypeAlias() == TYPE_OPEN_TEXT ||
                                 logParam?.getAdTypeAlias() == TYPE_REWARDED_VIDEO_TEXT
                             ) {
-                                if (System.currentTimeMillis() - SpKey.install_time.getSpLong() > 24 * 60 * 60 * 1000
-                                    && System.currentTimeMillis() - SpKey.install_time.getSpLong() < 2 * 24 * 60 * 60 * 1000
+                                if (System.currentTimeMillis() - SpKey.install_time.getSpLong() > 86400
+                                    && System.currentTimeMillis() - SpKey.install_time.getSpLong() < 86400 * 2
                                 ) {
                                     FirebaseAnalyticsUtil.logEvent(ADEventName.R1d, Bundle())
                                 }

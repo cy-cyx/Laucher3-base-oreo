@@ -147,6 +147,7 @@ import com.theme.lambda.launcher.widget.FirstGuideView;
 import com.theme.lambda.launcher.widget.PreviewControlView;
 import com.theme.lambda.launcher.widget.WallpaperView;
 import com.theme.lambda.launcher.widget.dialog.LoadingDialog;
+import com.theme.lambda.launcher.widget.dialog.StoreRatingsDialog;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -381,6 +382,8 @@ public class Launcher extends BaseActivity
     private FirstGuideView firstGuideView;
 
     private LoadingDialog loadingDialog;
+
+    private boolean needShowRate = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -1159,6 +1162,11 @@ public class Launcher extends BaseActivity
 
         if (isWorkspaceLoading()) {
             showLoading();
+        }
+
+        if (needShowRate) {
+            StoreRatingsDialog.Companion.show(this);
+            needShowRate = false;
         }
     }
 
@@ -2608,6 +2616,11 @@ public class Launcher extends BaseActivity
             Bundle bundle = new Bundle();
             bundle.putString("pn", packageName);
             EventUtil.INSTANCE.logEvent(EventName.INSTANCE.LAppOpen, bundle);
+        }
+
+        // 浏览过三次以上的主题，点击icon出评分弹窗
+        if (SpUtil.INSTANCE.getInt(SpKey.intoThemeNum, 0) > 3) {
+            needShowRate = true;
         }
     }
 

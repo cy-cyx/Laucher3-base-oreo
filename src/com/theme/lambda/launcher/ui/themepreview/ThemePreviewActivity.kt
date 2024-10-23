@@ -22,7 +22,10 @@ import com.theme.lambda.launcher.ui.iap.VipActivity
 import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.utils.GlideUtil
 import com.theme.lambda.launcher.utils.GsonUtil
+import com.theme.lambda.launcher.utils.SpKey
 import com.theme.lambda.launcher.utils.StatusBarUtil
+import com.theme.lambda.launcher.utils.getSpInt
+import com.theme.lambda.launcher.utils.putSpInt
 import com.theme.lambda.launcher.utils.withHost
 import com.theme.lambda.launcher.vip.VipManager
 import com.theme.lambda.launcher.widget.dialog.LoadingDialog
@@ -105,6 +108,11 @@ class ThemePreviewActivity : BaseActivity<ActivityThemePreviewBinding>() {
                 loadDialog.dismiss()
             }
         })
+
+
+        var intoThemeNum = SpKey.intoThemeNum.getSpInt() ?: 0
+        SpKey.intoThemeNum.putSpInt(++intoThemeNum)
+
         logEvent(EventName.previewPageView, Bundle().apply {
             putString("id", viewModel.resources?.id ?: "")
         })

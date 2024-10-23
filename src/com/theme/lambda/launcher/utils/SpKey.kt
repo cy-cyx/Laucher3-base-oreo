@@ -17,4 +17,5 @@ object SpKey {
     const val keyFirstCheckPermission = "keyFirstCheckPermission"
 
     const val hasStoreRatings = "hasStoreRatings"
+    const val intoThemeNum = "intoThemeNum"
 }
