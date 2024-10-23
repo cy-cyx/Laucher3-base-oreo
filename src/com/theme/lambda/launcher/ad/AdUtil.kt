@@ -482,6 +482,7 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
         ) {
             needShowAd = true
         }
+        needShowAd = needShowAd || BuildConfig.isDebug
 
         if (needShowAd && isReady(AdName.app_open)) {
             showAd(AdName.app_open, object : IAdCallBack {
