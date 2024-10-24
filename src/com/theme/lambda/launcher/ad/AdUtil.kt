@@ -291,6 +291,19 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
 
     private var isInit = false
 
+    private val intAndRawIds = listOf(
+        AdName.splash,
+        AdName.interleaving,
+        AdName.unlock,
+        AdName.iap_close,
+        AdName.app_open
+    )
+
+    private val netIds = listOf(
+        AdName.download_nat,
+        AdName.theme_new_nat
+    )
+
     fun loadAd(activity: Activity) {
         if (!initSuccess) {
             return
@@ -301,13 +314,7 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
         isInit = true
 
         // 全屏类
-        for (i in listOf(
-            AdName.splash,
-            AdName.interleaving,
-            AdName.unlock,
-            AdName.iap_close,
-            AdName.app_open
-        )) {
+        for (i in intAndRawIds) {
             if (lAdMultipleAdapters[i] != null) {
                 continue
             }
@@ -328,10 +335,7 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
             }
         }
         // native
-        for (i in listOf(
-            AdName.download_nat,
-            AdName.theme_new_nat
-        )) {
+        for (i in netIds) {
             if (lAdMultipleAdapters[i] != null) {
                 continue
             }
@@ -365,6 +369,18 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
                     }
                 }
             }
+        }
+    }
+
+    // 该方法用于网络重连时调，其实sdk里面加载失败也会超时重试，如果该方法仅仅只是加快重试的时机而已
+    fun reLoadIfNeed() {
+        if (!isInit) return
+
+        for (id in intAndRawIds) {
+            lAdMultipleAdapters[id]?.loadInterstitial(true)
+        }
+        for (id in netIds) {
+            lAdMultipleAdapters[id]?.loadNative()
         }
     }
 

@@ -15,6 +15,8 @@ import com.theme.lambda.launcher.ad.AdName
 import com.theme.lambda.launcher.ad.AdUtil
 import com.theme.lambda.launcher.ad.IAdCallBack
 import com.theme.lambda.launcher.base.BaseActivity
+import com.theme.lambda.launcher.netstate.NetStateUtil
+import com.theme.lambda.launcher.netstate.NetworkType
 import com.theme.lambda.launcher.statistics.EventName
 import com.theme.lambda.launcher.statistics.EventUtil
 import com.theme.lambda.launcher.ui.theme.ThemeActivity
@@ -23,6 +25,9 @@ import com.theme.lambda.launcher.utils.ShareUtil
 import com.theme.lambda.launcher.utils.StatusBarUtil
 import com.theme.lambda.launcher.utils.visible
 import com.theme.lambda.launcher.vip.VipManager
+import com.theme.lambda.launcher.widget.dialog.LoadingDialog
+import com.theme.lambda.launcher.widget.dialog.NetErrorDialog
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -71,19 +76,32 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
     override fun onResume() {
         super.onResume()
-        startLoading()
+        startLoadingCheckNet()
         // 保底ad没有回调返回
         if (isShowAd) {
             gotoNext()
+        }
+        // 处理重连网络
+        if (hasClickConnectNow) {
+            hasClickConnectNow = false
+            cacheBlock?.let {
+                checkNetState(it)
+            }
         }
     }
 
     private var isLoading = false
 
-    private fun startLoading() {
+    private fun startLoadingCheckNet() {
         if (isLoading) return
         isLoading = true
 
+        checkNetState() {
+            startLoading()
+        }
+    }
+
+    private fun startLoading() {
         viewBinding.loadingTv.visible()
         viewBinding.progressPv.visible()
 
@@ -151,5 +169,44 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         hasGotoNext = true
         ThemeActivity.start(this@SplashActivity, ThemeActivity.sFromSplash)
         finish()
+    }
+
+    private var cacheBlock: (() -> Unit)? = null
+    private var hasClickConnectNow = false
+    private val loadingDialog by lazy {
+        LoadingDialog(this).apply {
+            setCancelable(false)
+            setCanceledOnTouchOutside(false)
+        }
+    }
+
+    private fun checkNetState(block: (() -> Unit)) {
+        if (NetStateUtil.getNetworkType(this) != NetworkType.NETWORK_NO) {
+            block()
+            cacheBlock = null
+        } else {
+            cacheBlock = block
+            NetErrorDialog(this).apply {
+                clickRetryListen = {
+                    dismiss()
+                    lifecycleScope.launch {
+                        loadingDialog.show()
+                        delay(3000)
+                        if (!isDestroyed){
+                            loadingDialog.dismiss()
+
+                            cacheBlock?.let {
+                                checkNetState(it)
+                            }
+                        }
+                    }
+                }
+                clickConnectNewListen = {
+                    dismiss()
+                    NetStateUtil.openNetSettingUI(this@SplashActivity)
+                    hasClickConnectNow = true
+                }
+            }.show()
+        }
     }
 }
