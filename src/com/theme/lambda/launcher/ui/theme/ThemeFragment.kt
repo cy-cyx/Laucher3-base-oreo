@@ -16,6 +16,8 @@ import com.theme.lambda.launcher.statistics.EventName
 import com.theme.lambda.launcher.statistics.EventUtil
 import com.theme.lambda.launcher.ui.theme.adapter.ThemeAdapter
 import com.theme.lambda.launcher.utils.CommonUtil
+import com.theme.lambda.launcher.utils.gone
+import com.theme.lambda.launcher.utils.visible
 import com.theme.lambda.launcher.widget.dialog.LoadingDialog
 
 class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
@@ -85,6 +87,12 @@ class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
 
         viewModel.themeLiveData.observe(viewLifecycleOwner, Observer {
             themeAdapter.upData(it)
+
+            if (it.isEmpty()) {
+                viewBinding.emptyFl.visible()
+            } else {
+                viewBinding.emptyFl.gone()
+            }
         })
         viewModel.refreshFinishLiveData.observe(viewLifecycleOwner, Observer {
             viewBinding.swipeRefreshSrl.finishRefresh(500, true, false)
