@@ -13,7 +13,7 @@
     <string name="themes">Temas</string>
     <string name="set">Definir</string>
     <string name="theme_not_applied">Tema Não Aplicado</string>
-    <string name="theme_not_applied_tip">Você não terminou de configurar o novo tema. Toque em 'Definir' para aplicá-lo agora.</string>
+    <string name="theme_not_applied_tip">Você não terminou de configurar o novo tema. Toque em \'Definir\' para aplicá-lo agora.</string>
     <string name="cancel">Cancelar</string>
     <string name="text_continue">Continuar</string>
     <string name="splash_start_tip">Ao tocar neste botão, você concorda com nossa</string>
