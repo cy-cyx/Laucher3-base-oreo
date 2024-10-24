@@ -79,7 +79,7 @@ public class ModelWriter {
      * <container, screen, cellX, cellY>
      */
     public void addOrMoveItemInDatabase(ItemInfo item,
-            long container, long screenId, int cellX, int cellY) {
+                                        long container, long screenId, int cellX, int cellY) {
         if (item.container == ItemInfo.NO_ID) {
             // From all apps
             addItemToDatabase(item, container, screenId, cellX, cellY);
@@ -114,16 +114,15 @@ public class ModelWriter {
             // the modelItem needs to match up perfectly with item if our model is
             // to be consistent with the database-- for now, just require
             // modelItem == item or the equality check above
-            // todo 暂时不崩溃
-//            String msg = "item: " + ((item != null) ? item.toString() : "null") +
-//                    "modelItem: " +
-//                    ((modelItem != null) ? modelItem.toString() : "null") +
-//                    "Error: ItemInfo passed to checkItemInfo doesn't match original";
-//            RuntimeException e = new RuntimeException(msg);
-//            if (stackTrace != null) {
-//                e.setStackTrace(stackTrace);
-//            }
-//            throw e;
+            String msg = "item: " + ((item != null) ? item.toString() : "null") +
+                    "modelItem: " +
+                    ((modelItem != null) ? modelItem.toString() : "null") +
+                    "Error: ItemInfo passed to checkItemInfo doesn't match original";
+            RuntimeException e = new RuntimeException(msg);
+            if (stackTrace != null) {
+                e.setStackTrace(stackTrace);
+            }
+            throw e;
         }
     }
 
@@ -131,7 +130,7 @@ public class ModelWriter {
      * Move an item in the DB to a new <container, screen, cellX, cellY>
      */
     public void moveItemInDatabase(final ItemInfo item,
-            long container, long screenId, int cellX, int cellY) {
+                                   long container, long screenId, int cellX, int cellY) {
         updateItemInfoProps(item, container, screenId, cellX, cellY);
 
         final ContentWriter writer = new ContentWriter(mContext)
@@ -172,7 +171,7 @@ public class ModelWriter {
      * Move and/or resize item in the DB to a new <container, screen, cellX, cellY, spanX, spanY>
      */
     public void modifyItemInDatabase(final ItemInfo item,
-            long container, long screenId, int cellX, int cellY, int spanX, int spanY) {
+                                     long container, long screenId, int cellX, int cellY, int spanX, int spanY) {
         updateItemInfoProps(item, container, screenId, cellX, cellY);
         item.spanX = spanX;
         item.spanY = spanY;
@@ -203,7 +202,7 @@ public class ModelWriter {
      * cellY fields of the item. Also assigns an ID to the item.
      */
     public void addItemToDatabase(final ItemInfo item,
-            long container, long screenId, int cellX, int cellY) {
+                                  long container, long screenId, int cellX, int cellY) {
         updateItemInfoProps(item, container, screenId, cellX, cellY);
 
         final ContentWriter writer = new ContentWriter(mContext);

@@ -60,9 +60,9 @@
 
         <activity
             android:name="com.theme.lambda.launcher.ui.splash.SplashActivity"
-            android:theme="@style/LauncherThemeSplash"
+            android:exported="true"
             android:screenOrientation="portrait"
-            android:exported="true">
+            android:theme="@style/LauncherThemeSplash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -78,6 +78,7 @@
             android:configChanges="keyboard|keyboardHidden|navigation"
             android:enabled="true"
             android:exported="true"
+            android:launchMode="singleTop"
             android:resizeableActivity="true"
             android:resumeWhilePausing="true"
             android:screenOrientation="portrait"

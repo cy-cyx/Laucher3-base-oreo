@@ -74,16 +74,20 @@ class ThemeManager {
         }
     }
 
+    private var quitPreviewSureDialog: QuitPreviewSureDialog? = null
 
     fun applyQuitPreviewMode(context: Context) {
-        QuitPreviewSureDialog(context).apply {
-            onClickContinueListen = {
-                set()
+        if (quitPreviewSureDialog == null) {
+            quitPreviewSureDialog = QuitPreviewSureDialog(context).apply {
+                onClickContinueListen = {
+                    set()
+                }
+                onClickQuitListen = {
+                    quit(context)
+                }
             }
-            onClickQuitListen = {
-                quit(context)
-            }
-        }.show()
+        }
+        quitPreviewSureDialog?.show()
     }
 
     companion object {
@@ -193,6 +197,19 @@ class ThemeManager {
                 putString("id", themeId)
             })
             clickSet = false
+        }
+    }
+
+    fun reLoad() {
+        themeId = SpUtil.getString(sKeyThemeId)
+        showThemeId = themeId
+
+        // 更新壁纸默认壁纸
+        val manifest = getCurManifest()
+        if (manifest != null) {
+            val wallpaper = getManifestResRootPath() + manifest.background
+            wallpaperView?.setPic(wallpaper)
+            wallpaperView?.visible()
         }
     }
 

@@ -18,4 +18,6 @@ object SpKey {
 
     const val hasStoreRatings = "hasStoreRatings"
     const val intoThemeNum = "intoThemeNum"
+
+    const val keyLastLoadDataLauncherHashcode = "keyLastLoadDataLauncherHashcode"
 }

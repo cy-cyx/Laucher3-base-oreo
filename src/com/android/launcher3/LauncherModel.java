@@ -347,16 +347,15 @@ public class LauncherModel extends BroadcastReceiver
             // the modelItem needs to match up perfectly with item if our model is
             // to be consistent with the database-- for now, just require
             // modelItem == item or the equality check above
-// todo 暂时不崩溃
-//            String msg = "item: " + ((item != null) ? item.toString() : "null") +
-//                    "modelItem: " +
-//                    ((modelItem != null) ? modelItem.toString() : "null") +
-//                    "Error: ItemInfo passed to checkItemInfo doesn't match original";
-//            RuntimeException e = new RuntimeException(msg);
-//            if (stackTrace != null) {
-//                e.setStackTrace(stackTrace);
-//            }
-//            throw e;
+            String msg = "item: " + ((item != null) ? item.toString() : "null") +
+                    "modelItem: " +
+                    ((modelItem != null) ? modelItem.toString() : "null") +
+                    "Error: ItemInfo passed to checkItemInfo doesn't match original";
+            RuntimeException e = new RuntimeException(msg);
+            if (stackTrace != null) {
+                e.setStackTrace(stackTrace);
+            }
+            throw e;
         }
     }
 

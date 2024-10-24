@@ -56,10 +56,10 @@ class ThemePreviewViewModel : BaseViewModel() {
             loadDialogLiveData.postValue(false)
 
             if (result) {
+                ThemeActivity.closeThemeActivity()
+                context.finish()
                 ThemeManager.enterPreviewId = resources?.id ?: ""
                 context.startActivity(Intent(context, Launcher::class.java))
-                context.finish()
-                ThemeActivity.closeThemeActivity()
                 DataRepository.insertDownLoadThemeIntoDb(resources!!.toThemeRes())
             } else {
                 withContext(Dispatchers.Main){

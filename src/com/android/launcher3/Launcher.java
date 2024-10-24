@@ -1039,7 +1039,8 @@ public class Launcher extends BaseActivity
     @Override
     protected void onResume() {
         long startTime = 0;
-        if (LOGD) Log.d(TAG, "onResume");
+        if (LOGD)
+            Log.d(TAG, "onResume,(Launcher:" + this.hashCode() + ",DataModel:" + LauncherModel.sBgDataModel.hashCode() + ")");
         if (DEBUG_RESUME_TIME) {
             startTime = System.currentTimeMillis();
             Log.v(TAG, "Launcher.onResume()");
@@ -1161,13 +1162,41 @@ public class Launcher extends BaseActivity
         }
 
         if (isWorkspaceLoading()) {
-            showLoading(10000);
+            showLoading(60000);
         }
 
         if (needShowRate) {
             StoreRatingsDialog.Companion.show(this);
             needShowRate = false;
         }
+
+        fillMultiLauncherBug();
+    }
+
+    /**
+     * 用于解决多launcher 和 单例数据导致 数据不一致的问题
+     * 解决思路：由于无法从根源上解决，故在onResume判断上次绑定的数据是否还是最新的，重新加载数据进行绑定
+     * 出现异常场景：首次设置后，从历史任务栏返回
+     */
+    private void fillMultiLauncherBug() {
+        // 数据加载中忽略
+        if (isWorkspaceLoading()) return;
+
+        int lastHashCode = SpUtil.INSTANCE.getInt(SpKey.keyLastLoadDataLauncherHashcode, 0);
+        if (lastHashCode == 0) return;
+
+        if (this.hashCode() != lastHashCode) {
+            LauncherAppState.getInstance(this).setLauncher(this);
+            themeManager.reLoad();
+            reload(true);
+            showLoading(60000);
+            Log.e(TAG, "Launcher data is error,reload!!!!!!!!!!!!!,(Launcher:" + this.hashCode() + ")");
+        }
+    }
+
+    private void markLastLauncherBindData() {
+        int hashCode = this.hashCode();
+        SpUtil.INSTANCE.putInt(SpKey.keyLastLoadDataLauncherHashcode, hashCode);
     }
 
     @Override
@@ -3392,7 +3421,7 @@ public class Launcher extends BaseActivity
      * Implementation of the method from LauncherModel.Callbacks.
      */
     public void startBinding() {
-        if (LOGD) Log.d(TAG, "startBinding <<-----------");
+        if (LOGD) Log.d(TAG, "startBinding <<-----------(Launcher:" + this.hashCode() + ")");
         hideLoading();
         if (LauncherAppState.PROFILE_STARTUP) {
             Trace.beginSection("Starting page bind");
@@ -3412,6 +3441,8 @@ public class Launcher extends BaseActivity
         if (LauncherAppState.PROFILE_STARTUP) {
             Trace.endSection();
         }
+
+        markLastLauncherBindData();
     }
 
     @Override
