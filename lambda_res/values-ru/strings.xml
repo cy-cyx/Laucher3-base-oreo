@@ -55,14 +55,18 @@
     <string name="get">Получать</string>
     <string name="permission_refuse_tip">Пожалуйста, перейдите на страницу настроек, чтобы предоставить необходимые разрешения.</string>
     <string name="goto_set">Иди и amp; Набор</string>
-    <string name="default_home_app_callback">⏰ Завершите настройку вашего нового домашнего экрана! Нажмите здесь!</string>
-    <string name="oops">Упс</string>
-    <string name="set_default_failed_tip">Разрешение не предоставлено. Не могли бы вы сообщить нам причину?</string>
+    <string name="default_home_app_callback">⏰ Завершите настройку нового домашнего экрана! Нажмите здесь!</string>
+    <string name="oops">Упс...</string>
+    <string name="set_default_failed_tip">Разрешение не предоставлено. \nНе могли бы вы сообщить нам причину?</string>
     <string name="try_again">Попробуйте еще раз</string>
     <string name="do_not_know_how_to_set">Не знаю как настроить</string>
-    <string name="maybe_late">Может быть поздно</string>
+    <string name="maybe_late">Может быть позже</string>
     <string name="feedback_sent">Отзыв отправлен</string>
     <string name="rate_us">Оцените нас</string>
-    <string name="rate_us_tip">Спасибо за ваши лайки, мы продолжим усердно работать!</string>
+    <string name="rate_us_tip">Спасибо за ваши лайки, мы будем продолжать усердно работать!</string>
     <string name="submit">Представлять на рассмотрение</string>
+    <string name="net_error_tip">Сеть отключена. Повторите попытку.</string>
+    <string name="connect_now">Подключитесь сейчас</string>
+    <string name="retry">Повторить попытку</string>
+    <string name="no_data">Нет данных</string>
 </resources>
