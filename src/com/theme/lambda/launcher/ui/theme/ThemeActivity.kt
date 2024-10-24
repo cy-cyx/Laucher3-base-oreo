@@ -183,6 +183,11 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
         EventUtil.logEvent(EventName.homePageView, Bundle())
 
         requestNotificationPermission()
+
+        // 进入首页加载所有广告
+        AdUtil.getWapActivity()?.let {
+            AdUtil.loadAd(it, false)
+        }
     }
 
     private fun requestNotificationPermission() {

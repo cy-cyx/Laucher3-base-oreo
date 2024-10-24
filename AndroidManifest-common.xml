@@ -51,6 +51,7 @@
         android:fullBackupContent="@xml/backupscheme"
         android:fullBackupOnly="true"
         android:hardwareAccelerated="true"
+        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/derived_app_name"
         android:largeHeap="@bool/config_largeHeap"
@@ -179,6 +180,10 @@
         <activity
             android:name="com.theme.lambda.launcher.ui.timeoutrecall.TimeoutRecallActivity"
             android:theme="@style/Translucent" />
+        <activity
+            android:name="com.theme.lambda.launcher.ui.web.WebViewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
 
         <service
             android:name="com.theme.lambda.launcher.service.FirebaseService"

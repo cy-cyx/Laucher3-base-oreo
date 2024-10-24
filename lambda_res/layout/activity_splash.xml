@@ -29,17 +29,6 @@
         app:layout_constraintStart_toStartOf="@id/logoIv"
         app:layout_constraintTop_toBottomOf="@id/logoIv" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/splash_start_tip"
-        android:textColor="#FF999999"
-        android:textSize="12dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/privacyLl"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <LinearLayout
         android:id="@+id/privacyLl"
         android:layout_width="wrap_content"

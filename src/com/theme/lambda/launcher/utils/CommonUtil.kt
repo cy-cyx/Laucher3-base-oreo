@@ -3,9 +3,12 @@ package com.theme.lambda.launcher.utils
 import android.R
 import android.app.Activity
 import android.app.Application
+import android.content.Context
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.TypedArray
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.util.TypedValue
 import java.lang.reflect.Field
 import java.lang.reflect.Method
@@ -97,4 +100,14 @@ object CommonUtil {
         return false
     }
 
+    fun openWebView(context: Context, url: String) {
+        try {
+            val uri = Uri.parse(url)
+            val intent = Intent(Intent.ACTION_VIEW, uri)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            context.startActivity(intent)
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
+    }
 }

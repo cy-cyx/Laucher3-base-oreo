@@ -288,7 +288,7 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
                         R.xml.remote_config_defaults
                     }
                 },
-                listOf("AdConfig"),
+                listOf("AdConfig", "SearchConfig"),
                 "AdConfig"
             )
     }
@@ -320,16 +320,16 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
         }
 
         val loadIntAndRawIds = arrayListOf<String>()
-        if (priority){
+        if (priority) {
             loadIntAndRawIds.addAll(priorityLoadIntAndRawIds)
-        }else{
+        } else {
             loadIntAndRawIds.addAll(intAndRawIds)
         }
 
         val loadNetIds = arrayListOf<String>()
-        if (priority){
+        if (priority) {
             // no
-        }else{
+        } else {
             loadNetIds.addAll(netIds)
         }
 

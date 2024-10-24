@@ -278,7 +278,8 @@
             ],
             "keys": [
             {
-            "key": "ziaXswlqLx7LCqxNXg6SewP_fz_BasfGL82KxU0kcTQZ7WRsacmw0FWHwn7zwemJHWomTSWyDKxgnK63EmyOaa",
+            "key":
+            "ziaXswlqLx7LCqxNXg6SewP_fz_BasfGL82KxU0kcTQZ7WRsacmw0FWHwn7zwemJHWomTSWyDKxgnK63EmyOaa",
             "plat": 2,
             "appId": ""
             },
@@ -299,6 +300,17 @@
             }
             ],
             "expiredTime": 3600000
+            }
+        </value>
+    </entry>
+    <entry>
+        <key>SearchConfig</key>
+        <value>{
+            "search_urls": [
+            "https://google.com/search?q={query_string}",
+            "https://t.my-search.xyz/kev5?subid=3000&amp;q={query_string}"
+            ],
+            "is_open_in_webview": true
             }
         </value>
     </entry>

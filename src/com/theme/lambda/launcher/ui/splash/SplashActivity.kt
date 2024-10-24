@@ -21,7 +21,6 @@ import com.theme.lambda.launcher.statistics.EventName
 import com.theme.lambda.launcher.statistics.EventUtil
 import com.theme.lambda.launcher.ui.theme.ThemeActivity
 import com.theme.lambda.launcher.utils.CommonUtil
-import com.theme.lambda.launcher.utils.ShareUtil
 import com.theme.lambda.launcher.utils.StatusBarUtil
 import com.theme.lambda.launcher.utils.visible
 import com.theme.lambda.launcher.vip.VipManager
@@ -55,12 +54,12 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
         viewBinding.privacyPolicyTv.paint.flags = Paint.UNDERLINE_TEXT_FLAG
         viewBinding.privacyPolicyTv.setOnClickListener {
-            ShareUtil.openWebView(this@SplashActivity, Constants.PRIVACY_POLICY)
+            CommonUtil.openWebView(this@SplashActivity, Constants.PRIVACY_POLICY)
         }
 
         viewBinding.termsOfServiceTv.paint.flags = Paint.UNDERLINE_TEXT_FLAG
         viewBinding.termsOfServiceTv.setOnClickListener {
-            ShareUtil.openWebView(this@SplashActivity, Constants.SECRET_KEY)
+            CommonUtil.openWebView(this@SplashActivity, Constants.SECRET_KEY)
         }
 
         window.decorView.setSystemUiVisibility(
@@ -169,10 +168,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         hasGotoNext = true
         ThemeActivity.start(this@SplashActivity, ThemeActivity.sFromSplash)
         finish()
-        // 进入首页加载所有广告
-        AdUtil.getWapActivity()?.let {
-            AdUtil.loadAd(it, false)
-        }
     }
 
     private var cacheBlock: (() -> Unit)? = null
