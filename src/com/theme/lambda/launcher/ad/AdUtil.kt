@@ -15,6 +15,7 @@ import com.android.launcher3.databinding.LayoutNativeAdMax2Binding
 import com.applovin.mediation.nativeAds.MaxNativeAdView
 import com.applovin.mediation.nativeAds.MaxNativeAdViewBinder
 import com.google.android.gms.ads.nativead.NativeAdView
+import com.ironsource.sc
 import com.ironsource.tr
 import com.lambda.adlib.LambdaAd
 import com.lambda.adlib.LambdaAd.LambdaAdTypeAlias.Companion.TYPE_INTERSTITIAL_TEXT
@@ -264,10 +265,13 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
 
                         LambdaAd.LogAdEvent.LOG_INIT_SDK_SUCCESS -> {
                             initSuccess = true
-                            // 广告预加载
-                            getWapActivity()?.let {
-                                loadAd(it)
+                            scope.launch(Dispatchers.Main) {
+                                // 广告预加载
+                                getWapActivity()?.let {
+                                    loadAd(it, true)
+                                }
                             }
+
                         }
                     }
                 }
@@ -289,7 +293,10 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
             )
     }
 
-    private var isInit = false
+    private val priorityLoadIntAndRawIds = listOf(
+        AdName.splash,
+        AdName.interleaving
+    )
 
     private val intAndRawIds = listOf(
         AdName.splash,
@@ -304,17 +311,30 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
         AdName.theme_new_nat
     )
 
-    fun loadAd(activity: Activity) {
+    /**
+     * @param priority 是否优先初始化部分
+     */
+    fun loadAd(activity: Activity, priority: Boolean) {
         if (!initSuccess) {
             return
         }
 
-        // 防止重复调用
-        if (isInit) return
-        isInit = true
+        val loadIntAndRawIds = arrayListOf<String>()
+        if (priority){
+            loadIntAndRawIds.addAll(priorityLoadIntAndRawIds)
+        }else{
+            loadIntAndRawIds.addAll(intAndRawIds)
+        }
+
+        val loadNetIds = arrayListOf<String>()
+        if (priority){
+            // no
+        }else{
+            loadNetIds.addAll(netIds)
+        }
 
         // 全屏类
-        for (i in intAndRawIds) {
+        for (i in loadIntAndRawIds) {
             if (lAdMultipleAdapters[i] != null) {
                 continue
             }
@@ -335,7 +355,7 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
             }
         }
         // native
-        for (i in netIds) {
+        for (i in loadNetIds) {
             if (lAdMultipleAdapters[i] != null) {
                 continue
             }
@@ -374,8 +394,6 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
 
     // 该方法用于网络重连时调，其实sdk里面加载失败也会超时重试，如果该方法仅仅只是加快重试的时机而已
     fun reLoadIfNeed() {
-        if (!isInit) return
-
         for (id in intAndRawIds) {
             lAdMultipleAdapters[id]?.loadInterstitial(true)
         }
@@ -522,8 +540,8 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
         if (adActivity == null) {
             adActivity = activity
+            loadAd(activity, true)
         }
-        loadAd(activity)
     }
 
     override fun onActivityStarted(activity: Activity) {

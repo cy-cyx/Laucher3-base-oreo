@@ -169,6 +169,10 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         hasGotoNext = true
         ThemeActivity.start(this@SplashActivity, ThemeActivity.sFromSplash)
         finish()
+        // 进入首页加载所有广告
+        AdUtil.getWapActivity()?.let {
+            AdUtil.loadAd(it, false)
+        }
     }
 
     private var cacheBlock: (() -> Unit)? = null
@@ -192,7 +196,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
                     lifecycleScope.launch {
                         loadingDialog.show()
                         delay(3000)
-                        if (!isDestroyed){
+                        if (!isDestroyed) {
                             loadingDialog.dismiss()
 
                             cacheBlock?.let {

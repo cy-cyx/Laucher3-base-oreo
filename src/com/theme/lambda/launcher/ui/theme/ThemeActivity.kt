@@ -11,6 +11,7 @@ import com.android.launcher3.databinding.ActivityThemeBinding
 import com.google.android.material.tabs.TabLayout
 import com.theme.lambda.launcher.Constants
 import com.theme.lambda.launcher.ad.AdName
+import com.theme.lambda.launcher.ad.AdUtil
 import com.theme.lambda.launcher.base.BaseActivity
 import com.theme.lambda.launcher.statistics.EventName
 import com.theme.lambda.launcher.statistics.EventUtil
