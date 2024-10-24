@@ -31,11 +31,11 @@ object VipManager {
 
     fun init() {
         Billing.isDebug = BuildConfig.isDebug
-        Billing.init(InitParam.Builder(Constants.BASE_URL, Constants.SECRET_KEY).build())
         isVip.value = SpKey.isVip.getSpBool()
         // 延迟请求网络有坑，归因问题
         GlobalScope.launch {
             delay(3000)
+            Billing.init(InitParam.Builder(Constants.BASE_URL, Constants.SECRET_KEY).build())
             upDataFreeAdUntil()
         }
     }

@@ -3,6 +3,8 @@ package com.theme.lambda.launcher
 import android.app.Application
 import android.content.Context
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import android.text.TextUtils
 import android.util.Log
 import android.webkit.WebView
@@ -23,11 +25,13 @@ import org.koin.core.context.startKoin
 
 class App : Application() {
 
+    private val TAG = "LauncherApp"
+
     override fun onCreate() {
         super.onCreate()
 
         val start = System.currentTimeMillis()
-        Log.d("App", "start")
+        Log.d(TAG, "start")
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             val process = getProcessName()
@@ -37,19 +41,28 @@ class App : Application() {
         if (!TextUtils.isEmpty(processName)) {
             val defaultProcess = processName == packageName
             if (defaultProcess) {
-                initKoin()
-                LambdaWeather.init(this, Constants.BASE_URL)
+                initWeather()
+                Log.d(TAG, "init 1 : ${System.currentTimeMillis() - start}")
                 FirebaseAnalyticsUtil.init(this)
+                Log.d(TAG, "init 2 : ${System.currentTimeMillis() - start}")
                 EventUtil.init()
+                Log.d(TAG, "init 3 : ${System.currentTimeMillis() - start}")
                 AdUtil.initAd(this)
-                FirebaseService.subscribe()
+                Log.d(TAG, "init 4 : ${System.currentTimeMillis() - start}")
                 VipManager.init()
+                Log.d(TAG, "init 5 : ${System.currentTimeMillis() - start}")
                 FirebaseConfigUtil.initRemoteConfig()
-                NetStateChangeReceiver.registerReceiver(this)
+                Log.d(TAG, "init 6 : ${System.currentTimeMillis() - start}")
+
+                Looper.myQueue().addIdleHandler {
+                    FirebaseService.subscribe()
+                    NetStateChangeReceiver.registerReceiver(this)
+                    false
+                }
             }
         }
 
-        Log.d("App", "init time : ${System.currentTimeMillis() - start}")
+        Log.d(TAG, "init time : ${System.currentTimeMillis() - start}")
     }
 
     override fun attachBaseContext(base: Context?) {
@@ -57,11 +70,12 @@ class App : Application() {
         CommonUtil.appContext = this
     }
 
-    private fun initKoin() {
+    private fun initWeather() {
         startKoin {
             androidLogger()
             androidContext(this@App)
             modules(allModules)
         }
+        LambdaWeather.init(this, Constants.BASE_URL)
     }
 }

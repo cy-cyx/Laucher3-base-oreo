@@ -389,9 +389,12 @@ public class Launcher extends BaseActivity
 
     Handler mainHander = new Handler(Looper.getMainLooper());
 
+    private long onCreateStartTime = System.currentTimeMillis();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (LOGD) Log.d(TAG, "onCreate");
+        onCreateStartTime = System.currentTimeMillis();
         launcherWeakReference = new WeakReference(this);
         if (DEBUG_STRICT_MODE) {
             StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
@@ -516,7 +519,8 @@ public class Launcher extends BaseActivity
             mLauncherCallbacks.onCreate(savedInstanceState);
         }
 
-
+        long time = System.currentTimeMillis() - onCreateStartTime;
+        if (LOGD) Log.d(TAG, "onCreate finish :" + time);
     }
 
     @Override
@@ -1176,6 +1180,7 @@ public class Launcher extends BaseActivity
 
     @Override
     protected void onPause() {
+        if (LOGD) Log.d(TAG, "onPause");
         // Ensure that items added to Launcher are queued until Launcher returns
         InstallShortcutReceiver.enableInstallQueue();
 
