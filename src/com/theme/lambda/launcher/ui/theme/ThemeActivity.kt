@@ -211,6 +211,7 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
 
                     }
                 },
+                force = false,
                 showGotoSetDialog = false
             )
         }

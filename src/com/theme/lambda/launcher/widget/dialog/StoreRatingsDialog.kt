@@ -90,6 +90,10 @@ class StoreRatingsDialog(context: Context) : Dialog(context, R.style.Theme_trans
             SpKey.hasStoreRatings.putSpBool(true)
         }
         viewBinding.submitTv.alpha = 0.3f
+
+        viewBinding.closeIv.setOnClickListener {
+            dismiss()
+        }
     }
 
     private fun upDataStar(num: Int) {
