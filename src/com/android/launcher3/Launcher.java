@@ -153,7 +153,6 @@ import com.theme.lambda.launcher.widget.dialog.StoreRatingsDialog;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -168,12 +167,6 @@ public class Launcher extends BaseActivity
         implements LauncherExterns, View.OnClickListener, OnLongClickListener,
         LauncherModel.Callbacks, View.OnTouchListener, LauncherProviderChangeListener,
         AccessibilityManager.AccessibilityStateChangeListener {
-
-    static WeakReference<Launcher> launcherWeakReference = null;
-
-    public static boolean isExist() {
-        return launcherWeakReference != null;
-    }
 
     public static final String TAG = "Launcher";
     static final boolean LOGD = BuildConfig.isDebug;
@@ -395,7 +388,6 @@ public class Launcher extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) {
         if (LOGD) Log.d(TAG, "onCreate");
         onCreateStartTime = System.currentTimeMillis();
-        launcherWeakReference = new WeakReference(this);
         if (DEBUG_STRICT_MODE) {
             StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
                     .detectDiskReads()
@@ -1970,7 +1962,6 @@ public class Launcher extends BaseActivity
     @Override
     public void onDestroy() {
         super.onDestroy();
-        launcherWeakReference = null;
 
         mWorkspace.removeCallbacks(mBuildLayersRunnable);
         mWorkspace.removeFolderListeners();

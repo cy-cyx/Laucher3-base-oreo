@@ -3,14 +3,11 @@ package com.theme.lambda.launcher.ui.search
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity.SEARCH_SERVICE
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.google.gson.reflect.TypeToken
-import com.lambda.adlib.LambdaAd
-import com.lambda.adlib.config.LambdaAdConfigHandle
 import com.lambda.common.http.Preference
 import com.lambda.common.utils.utilcode.util.ActivityUtils
 import com.lambda.common.utils.utilcode.util.AppUtils
@@ -18,6 +15,8 @@ import com.lambda.common.utils.utilcode.util.GsonUtils
 import com.lambda.remoteconfig.LambdaRemoteConfig
 import com.theme.lambda.launcher.base.BaseViewModel
 import com.theme.lambda.launcher.data.model.SearchInfo
+import com.theme.lambda.launcher.statistics.EventName
+import com.theme.lambda.launcher.statistics.EventUtil
 import com.theme.lambda.launcher.ui.search.SearchActivity.Companion.addRecentApps
 import com.theme.lambda.launcher.ui.search.SearchActivity.Companion.recentApps
 import com.theme.lambda.launcher.ui.web.WebViewActivity
@@ -136,6 +135,7 @@ class SearchViewModel : BaseViewModel() {
             } catch (_: Exception) {
             }
         }
+        EventUtil.logEvent(EventName.LWebSearch, Bundle())
     }
 
     fun clickApp(app: String) {

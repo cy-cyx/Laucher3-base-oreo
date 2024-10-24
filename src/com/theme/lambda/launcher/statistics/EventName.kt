@@ -47,4 +47,5 @@ object EventName {
     val iapEntryClick = "iapEntryClick"
     val iapPageView = "iapPageView"
     val iapPageClick = "iapPageClick"
+    val LWebSearch = "LWebSearch"
 }
