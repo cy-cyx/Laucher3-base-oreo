@@ -303,7 +303,8 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
         AdName.interleaving,
         AdName.unlock,
         AdName.iap_close,
-        AdName.app_open
+        AdName.app_open,
+        AdName.icon_unlock
     )
 
     private val netIds = listOf(

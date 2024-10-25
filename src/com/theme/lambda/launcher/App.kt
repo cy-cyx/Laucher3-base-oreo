@@ -10,6 +10,7 @@ import android.util.Log
 import android.webkit.WebView
 import com.lambdaweather.LambdaWeather
 import com.theme.lambda.launcher.ad.AdUtil
+import com.theme.lambda.launcher.appinfo.AppInfoCache
 import com.theme.lambda.launcher.data.di.allModules
 import com.theme.lambda.launcher.netstate.NetStateChangeReceiver
 import com.theme.lambda.launcher.service.FirebaseService
@@ -57,6 +58,7 @@ class App : Application() {
                 Looper.myQueue().addIdleHandler {
                     FirebaseService.subscribe()
                     NetStateChangeReceiver.registerReceiver(this)
+                    AppInfoCache.init(this)
                     false
                 }
             }

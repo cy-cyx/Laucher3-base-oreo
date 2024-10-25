@@ -1,0 +1,87 @@
+package com.theme.lambda.launcher.ui.seticon
+
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
+import android.view.LayoutInflater
+import androidx.activity.viewModels
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.android.launcher3.R
+import com.android.launcher3.databinding.ActivitySetIconBinding
+import com.theme.lambda.launcher.base.BaseActivity
+import com.theme.lambda.launcher.ui.seticon.adpater.SetIconAdapter
+import com.theme.lambda.launcher.utils.StatusBarUtil
+import com.theme.lambda.launcher.utils.marginStatusBarHeight
+
+class SetIconActivity : BaseActivity<ActivitySetIconBinding>() {
+
+    companion object {
+        val sKeyId = "key_id"
+
+        fun start(context: Context, id: String) {
+            context.startActivity(Intent(context, SetIconActivity::class.java).apply {
+                putExtra(sKeyId, id)
+            })
+        }
+    }
+
+    override fun initViewBinding(layoutInflater: LayoutInflater): ActivitySetIconBinding {
+        return ActivitySetIconBinding.inflate(layoutInflater)
+    }
+
+    private val viewModel by viewModels<SetIconViewModel>()
+
+    private val setIconAdapter = SetIconAdapter()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        StatusBarUtil.transparencyBar(this)
+        StatusBarUtil.setStatusBarLightMode(this.window)
+        viewBinding.containerLl.marginStatusBarHeight()
+
+        viewBinding.dataRv.apply {
+            layoutManager = LinearLayoutManager(this@SetIconActivity)
+            adapter = setIconAdapter
+        }
+
+        setIconAdapter.apply {
+            onClickDownLoadOrUnLockListen = {
+                if (it.isLock) {
+                    viewModel.unLock(this@SetIconActivity, it)
+                } else {
+                    viewModel.downLoad(this@SetIconActivity, it)
+                }
+            }
+            onClickRadioBnListen = {
+                viewModel.clickRadioBn(it)
+            }
+            onClickAppIconListen = {
+                viewModel.selectOrChangeAppInfo(it)
+            }
+        }
+
+        viewBinding.selectAllTv.setOnClickListener {
+            viewModel.selectAllOrDeselectAll()
+        }
+
+        viewModel.iconInfoLiveData.observe(this, Observer {
+            setIconAdapter.upData(it)
+        })
+        viewModel.isAllSelectLiveData.observe(this, Observer {
+            if (it) {
+                viewBinding.selectAllTv.setText(R.string.deselect_all)
+            } else {
+                viewBinding.selectAllTv.setText(R.string.select_all)
+            }
+        })
+
+        val id = intent.getStringExtra(sKeyId)
+        if (id == null) {
+            finish()
+            return
+        }
+        viewModel.init(id)
+    }
+}

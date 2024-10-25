@@ -1,11 +1,14 @@
 package com.theme.lambda.launcher.widget
 
 import android.content.Context
+import android.os.Build
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import com.android.launcher3.databinding.LayoutPreviewControlBinding
 import com.theme.lambda.launcher.utils.LauncherUtil
+import com.theme.lambda.launcher.utils.SystemUtil
+import com.theme.lambda.launcher.utils.gone
 import com.theme.lambda.launcher.utils.visible
 
 class PreviewControlView @JvmOverloads constructor(
@@ -27,6 +30,21 @@ class PreviewControlView @JvmOverloads constructor(
         layoutPreviewControlBinding?.setTv?.setOnClickListener {
             controlListen?.onSet()
         }
+        layoutPreviewControlBinding?.setHomeScreenTv?.setOnClickListener {
+            controlListen?.onSet()
+        }
+        layoutPreviewControlBinding?.setIconTv?.setOnClickListener {
+            controlListen?.setIcon()
+        }
+
+        // 处理兼容性问题 已经知道华为安卓10
+//        if (!LauncherUtil.isDefaultLauncher(context) && SystemUtil.getDeviceBrand() == SystemUtil.PHONE_HUAWEI && Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
+//        layoutPreviewControlBinding?.setTv?.gone()
+//        layoutPreviewControlBinding?.setLl?.visible()
+//        } else {
+        layoutPreviewControlBinding?.setTv?.visible()
+        layoutPreviewControlBinding?.setLl?.gone()
+//        }
 
     }
 
@@ -36,5 +54,7 @@ class PreviewControlView @JvmOverloads constructor(
         fun onCancel()
 
         fun onSet()
+
+        fun setIcon()
     }
 }

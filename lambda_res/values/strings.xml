@@ -69,4 +69,11 @@
     <string name="connect_now">Connect Now</string>
     <string name="retry">Retry</string>
     <string name="no_data">No Data</string>
+    <string name="set_home_screen">Set HomeScreen</string>
+    <string name="set_icons">Set Icons</string>
+    <string name="select_all">Select All</string>
+    <string name="deselect_all">Deselect All</string>
+    <string name="fail_icon_hint">Fail to create icon. Please check your system configuration…</string>
+    <string name="install">Install</string>
+    <string name="app_no_install">You must select a related app before installing the icon</string>
 </resources>

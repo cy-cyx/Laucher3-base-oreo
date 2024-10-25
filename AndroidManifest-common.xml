@@ -51,12 +51,12 @@
         android:fullBackupContent="@xml/backupscheme"
         android:fullBackupOnly="true"
         android:hardwareAccelerated="true"
-        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/derived_app_name"
         android:largeHeap="@bool/config_largeHeap"
         android:restoreAnyVersion="true"
-        android:supportsRtl="true">
+        android:supportsRtl="true"
+        android:usesCleartextTraffic="true">
 
         <!-- Intent received used to install shortcuts from other applications -->
         <receiver
@@ -86,6 +86,10 @@
                 <action android:name="android.appwidget.action.APPWIDGET_HOST_RESTORED" />
             </intent-filter>
         </receiver>
+
+        <receiver
+            android:name="com.theme.lambda.launcher.shortcut.InstallShortCutSuccessBroadcastReceiver"
+            android:exported="true" />
 
         <service
             android:name="com.android.launcher3.dynamicui.ColorExtractionService"
@@ -184,6 +188,17 @@
             android:name="com.theme.lambda.launcher.ui.web.WebViewActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity
+            android:name="com.theme.lambda.launcher.ui.seticon.SetIconActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity
+            android:name="com.theme.lambda.launcher.shortcut.IntentGuideActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:noHistory="true"
+            android:taskAffinity=":remind"
+            android:theme="@style/Translucent" />
 
         <service
             android:name="com.theme.lambda.launcher.service.FirebaseService"

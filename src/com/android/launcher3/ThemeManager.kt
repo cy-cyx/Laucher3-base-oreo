@@ -4,12 +4,14 @@ import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import com.ironsource.tr
 import com.theme.lambda.launcher.ad.AdName
 import com.theme.lambda.launcher.ad.AdUtil
 import com.theme.lambda.launcher.data.model.ManifestBean
 import com.theme.lambda.launcher.statistics.EventName
 import com.theme.lambda.launcher.statistics.EventUtil.logEvent
 import com.theme.lambda.launcher.statistics.FirebaseAnalyticsUtil
+import com.theme.lambda.launcher.ui.seticon.SetIconActivity
 import com.theme.lambda.launcher.ui.theme.ThemeActivity
 import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.utils.FileUtil
@@ -70,6 +72,13 @@ class ThemeManager {
 
             override fun onSet() {
                 set()
+            }
+
+            override fun setIcon() {
+                launcher?.let {
+                    SetIconActivity.start(it, previewThemeId)
+                    ignoreQuitReq = true
+                }
             }
         }
     }
