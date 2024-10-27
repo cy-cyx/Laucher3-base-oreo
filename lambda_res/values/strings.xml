@@ -76,4 +76,6 @@
     <string name="fail_icon_hint">Fail to create icon. Please check your system configuration…</string>
     <string name="install">Install</string>
     <string name="app_no_install">You must select a related app before installing the icon</string>
+    <string name="get_all_in_theme">Get all in theme</string>
+    <string name="select_apps_to_icons">Select apps to icons</string>
 </resources>

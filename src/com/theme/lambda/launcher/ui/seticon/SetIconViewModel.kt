@@ -5,19 +5,25 @@ import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.android.launcher3.R
+import com.ironsource.tr
 import com.theme.lambda.launcher.ad.AdName
 import com.theme.lambda.launcher.ad.AdUtil
 import com.theme.lambda.launcher.ad.IAdCallBack
+import com.theme.lambda.launcher.appinfo.AppIconInfo
 import com.theme.lambda.launcher.appinfo.AppIconMap
 import com.theme.lambda.launcher.appinfo.AppInfoCache
+import com.theme.lambda.launcher.base.BaseItem
 import com.theme.lambda.launcher.base.BaseViewModel
 import com.theme.lambda.launcher.data.model.IconBean
 import com.theme.lambda.launcher.data.model.ManifestBean
 import com.theme.lambda.launcher.shortcut.ShortCutUtil
 import com.theme.lambda.launcher.ui.iap.VipActivity
+import com.theme.lambda.launcher.ui.seticon.item.BottomWhiteItem
+import com.theme.lambda.launcher.ui.seticon.item.IconItem
 import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.utils.FileUtil
 import com.theme.lambda.launcher.utils.GsonUtil
+import com.theme.lambda.launcher.widget.dialog.SelectAppDialog
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
@@ -26,7 +32,7 @@ class SetIconViewModel : BaseViewModel() {
 
     var id = ""
 
-    var iconInfoLiveData = MutableLiveData<ArrayList<IconBean>>()
+    var iconInfoLiveData = MutableLiveData<ArrayList<BaseItem>>()
 
     var isAllSelectLiveData = MutableLiveData<Boolean>()
 
@@ -61,7 +67,10 @@ class SetIconViewModel : BaseViewModel() {
             }
             icons.sort()
 
-            iconInfoLiveData.postValue(icons)
+            val result = ArrayList<BaseItem>()
+            result.addAll(icons.map { IconItem(it) })
+            result.add(BottomWhiteItem())
+            iconInfoLiveData.postValue(result)
         }
     }
 
@@ -71,15 +80,25 @@ class SetIconViewModel : BaseViewModel() {
 
         var isAllSelect = true
         iconInfoLiveData.value?.forEach {
-            if (!it.isSelect) {
-                isAllSelect = false
+            if (it is IconItem) {
+                if (!it.iconBean.isSelect) {
+                    isAllSelect = false
+                }
             }
         }
         isAllSelectLiveData.postValue(isAllSelect)
     }
 
-    fun selectOrChangeAppInfo(iconBean: IconBean) {
-
+    fun selectOrChangeAppInfo(context: Context, iconBean: IconBean) {
+        SelectAppDialog(context).apply {
+            selectAppListen = {
+                dismiss()
+                iconBean.appIconInfo = null
+                iconBean.isInstall = true
+                iconBean.AppInfo = it
+                iconInfoLiveData.postValue(iconInfoLiveData.value)
+            }
+        }.show()
     }
 
     fun unLock(context: Context, iconBean: IconBean) {
@@ -111,13 +130,17 @@ class SetIconViewModel : BaseViewModel() {
     fun selectAllOrDeselectAll() {
         if (isAllSelectLiveData.value == true) {
             iconInfoLiveData.value?.forEach {
-                it.isSelect = false
+                if (it is IconItem) {
+                    it.iconBean.isSelect = false
+                }
             }
             iconInfoLiveData.postValue(iconInfoLiveData.value)
             isAllSelectLiveData.value = false
         } else {
             iconInfoLiveData.value?.forEach {
-                it.isSelect = true
+                if (it is IconItem) {
+                    it.iconBean.isSelect = true
+                }
             }
             iconInfoLiveData.postValue(iconInfoLiveData.value)
             isAllSelectLiveData.value = true

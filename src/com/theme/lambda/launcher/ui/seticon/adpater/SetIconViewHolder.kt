@@ -20,15 +20,19 @@ class SetIconViewHolder(view: View) : ViewHolder(view) {
     fun init(icon: IconBean) {
         GlideUtil.load(viewBinding.iconIv, icon.icon)
 
-        if (icon.appIconInfo != null) {
-            viewBinding.appIv.setImageResource(icon.appIconInfo!!.icon)
+        if ((icon.appIconInfo != null || icon.AppInfo != null)) {
+            if (icon.appIconInfo != null) {
+                viewBinding.appIv.setImageResource(icon.appIconInfo!!.icon)
+            } else if (icon.AppInfo != null) {
+                GlideUtil.load(viewBinding.appIv, icon.AppInfo!!.getIconPath())
+            }
             viewBinding.editIv.visible()
         } else {
             viewBinding.appIv.setImageResource(R.drawable.ic_set_icon_add)
             viewBinding.editIv.gone()
         }
 
-        if (icon.appIconInfo != null && !icon.isInstall) {
+        if ((icon.appIconInfo != null || icon.AppInfo != null) && !icon.isInstall) {
             viewBinding.appIv.alpha = 0.5f
         } else {
             viewBinding.appIv.alpha = 1f

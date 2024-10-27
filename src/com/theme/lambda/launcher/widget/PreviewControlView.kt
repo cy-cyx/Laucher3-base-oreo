@@ -39,11 +39,11 @@ class PreviewControlView @JvmOverloads constructor(
 
         // 处理兼容性问题 已经知道华为安卓10
 //        if (!LauncherUtil.isDefaultLauncher(context) && SystemUtil.getDeviceBrand() == SystemUtil.PHONE_HUAWEI && Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
-//        layoutPreviewControlBinding?.setTv?.gone()
-//        layoutPreviewControlBinding?.setLl?.visible()
+        layoutPreviewControlBinding?.setTv?.gone()
+        layoutPreviewControlBinding?.setLl?.visible()
 //        } else {
-        layoutPreviewControlBinding?.setTv?.visible()
-        layoutPreviewControlBinding?.setLl?.gone()
+//            layoutPreviewControlBinding?.setTv?.visible()
+//            layoutPreviewControlBinding?.setLl?.gone()
 //        }
 
     }

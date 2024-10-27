@@ -2,6 +2,7 @@ package com.theme.lambda.launcher.data.model
 
 import com.google.gson.annotations.SerializedName
 import com.theme.lambda.launcher.appinfo.AppIconInfo
+import com.theme.lambda.launcher.appinfo.AppInfo
 
 class ManifestBean {
 
@@ -20,6 +21,7 @@ class IconBean : Comparable<IconBean> {
     var icon: String = ""
 
     var appIconInfo: AppIconInfo? = null
+    var AppInfo: AppInfo? = null
     var isInstall = false
     var isLock = true
     var isSelect = false

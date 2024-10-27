@@ -6,7 +6,7 @@ import com.theme.lambda.launcher.base.BaseViewModel
 import com.theme.lambda.launcher.data.DataRepository
 import com.theme.lambda.launcher.data.model.News
 import com.theme.lambda.launcher.ui.news.item.AdItem
-import com.theme.lambda.launcher.ui.news.item.BaseItem
+import com.theme.lambda.launcher.base.BaseItem
 import com.theme.lambda.launcher.ui.news.item.NewsItem
 import com.theme.lambda.launcher.vip.VipManager
 import kotlinx.coroutines.launch

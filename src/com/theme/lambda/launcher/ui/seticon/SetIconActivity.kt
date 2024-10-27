@@ -58,14 +58,15 @@ class SetIconActivity : BaseActivity<ActivitySetIconBinding>() {
                 viewModel.clickRadioBn(it)
             }
             onClickAppIconListen = {
-                viewModel.selectOrChangeAppInfo(it)
+                viewModel.selectOrChangeAppInfo(this@SetIconActivity, it)
             }
         }
-
         viewBinding.selectAllTv.setOnClickListener {
             viewModel.selectAllOrDeselectAll()
         }
-
+        viewBinding.backIv.setOnClickListener {
+            finish()
+        }
         viewModel.iconInfoLiveData.observe(this, Observer {
             setIconAdapter.upData(it)
         })
