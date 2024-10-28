@@ -10,6 +10,9 @@ import com.android.launcher3.databinding.DialogUnlockAllIconBinding
 import com.theme.lambda.launcher.ad.AdName
 import com.theme.lambda.launcher.ad.AdUtil
 import com.theme.lambda.launcher.ad.IAdCallBack
+import com.theme.lambda.launcher.statistics.EventName
+import com.theme.lambda.launcher.statistics.EventUtil
+import com.theme.lambda.launcher.ui.iap.VipActivity
 import com.theme.lambda.launcher.utils.CommonUtil
 
 class UnLockAllIconDialog(context: Context) : Dialog(context, R.style.Theme_translucentDialog) {
@@ -64,6 +67,10 @@ class UnLockAllIconDialog(context: Context) : Dialog(context, R.style.Theme_tran
         }
 
         upDataBnText()
+
+        EventUtil.logEvent(EventName.iapEntryView, Bundle().apply {
+            putString("placement", VipActivity.FromGetAllInTheme)
+        })
     }
 
     private fun upDataBnText() {
