@@ -62,9 +62,10 @@ class ThemePreviewViewModel : BaseViewModel() {
                 context.startActivity(Intent(context, Launcher::class.java))
                 DataRepository.insertDownLoadThemeIntoDb(resources!!.toThemeRes())
             } else {
-                withContext(Dispatchers.Main){
+                withContext(Dispatchers.Main) {
                     Toast.makeText(context, "download error!!", Toast.LENGTH_SHORT).show()
                 }
+                logEvent(EventName.downloadFailed, Bundle())
             }
         }
     }

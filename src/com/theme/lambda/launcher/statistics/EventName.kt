@@ -31,6 +31,7 @@ object EventName {
     val previewPageView = "previewPageView"
     val downloadClick = "downloadClick"
     val downloadSuccess = "downloadSuccess"
+    val downloadFailed = "downloadFailed"
     val detailPageView = "detailPageView"
     val setClick = "setClick"
     val setSuccess = "setSuccess"
