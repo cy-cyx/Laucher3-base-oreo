@@ -20,4 +20,6 @@ object SpKey {
     const val intoThemeNum = "intoThemeNum"
 
     const val keyLastLoadDataLauncherHashcode = "keyLastLoadDataLauncherHashcode"
+
+    const val keyNewInstallAppList = "keyNewInstallAppList"
 }

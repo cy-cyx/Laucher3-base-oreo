@@ -28,6 +28,9 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.Region;
 import android.graphics.drawable.Drawable;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ImageSpan;
 import android.util.AttributeSet;
 import android.util.Property;
 import android.util.TypedValue;
@@ -39,6 +42,8 @@ import android.view.ViewDebug;
 import android.view.ViewParent;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+
 import com.android.launcher3.IconCache.IconLoadRequest;
 import com.android.launcher3.IconCache.ItemInfoUpdateReceiver;
 import com.android.launcher3.badge.BadgeInfo;
@@ -47,7 +52,6 @@ import com.android.launcher3.folder.FolderIcon;
 import com.android.launcher3.graphics.DrawableFactory;
 import com.android.launcher3.graphics.HolographicOutlineHelper;
 import com.android.launcher3.graphics.IconPalette;
-import com.android.launcher3.graphics.LauncherIcons;
 import com.android.launcher3.graphics.PreloadIconDrawable;
 import com.android.launcher3.model.PackageItemInfo;
 import com.theme.lambda.launcher.utils.CommonUtil;
@@ -59,7 +63,7 @@ import java.text.NumberFormat;
  * because we want to make the bubble taller than the text and TextView's clip is
  * too aggressive.
  */
-public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver {
+public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver, NewInstallationManager.NewInstallationClickUpDataListen {
 
     // Dimensions in DP
     private static final float AMBIENT_SHADOW_RADIUS = 2.5f;
@@ -103,6 +107,8 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver {
     private boolean mForceHideBadge;
     private Point mTempSpaceForBadgeOffset = new Point();
     private Rect mTempIconBounds = new Rect();
+
+    private String label = "";
 
     private static final Property<BubbleTextView, Float> BADGE_SCALE_PROPERTY
             = new Property<BubbleTextView, Float>(Float.TYPE, "badgeScale") {
@@ -244,7 +250,21 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver {
         FastBitmapDrawable iconDrawable = DrawableFactory.get(getContext()).newIcon(showIcon, info);
         iconDrawable.setIsDisabled(info.isDisabled());
         setIcon(iconDrawable);
-        setText(info.title);
+
+        // 新安装加红点
+        if (NewInstallationManager.INSTANCE.isNewInstallApp(info)) {
+            SpannableString ss = new SpannableString("※" + info.title);
+            Drawable d = ContextCompat.getDrawable(getContext(), (R.drawable.ic_dot));
+            d.setBounds(0, 0, d.getIntrinsicWidth(), d.getIntrinsicHeight());
+            ImageSpan span = new ImageSpan(d, ImageSpan.ALIGN_BASELINE);
+            ss.setSpan(span, 0, 1, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+            setText(ss);
+            label = info.title.toString();
+            NewInstallationManager.INSTANCE.bindListen(this);
+        } else {
+            setText(info.title);
+        }
+
         if (info.contentDescription != null) {
             setContentDescription(info.isDisabled()
                     ? getContext().getString(R.string.disabled_app_label, info.contentDescription)
@@ -694,6 +714,16 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver {
             if (info.usingLowResIcon) {
                 mIconLoadRequest = LauncherAppState.getInstance(getContext()).getIconCache()
                         .updateIconInBackground(BubbleTextView.this, info);
+            }
+        }
+    }
+
+    @Override
+    public void onUpData() {
+        Object tag = getTag();
+        if (tag instanceof ItemInfo) {
+            if (!NewInstallationManager.INSTANCE.isNewInstallApp((ItemInfo) tag)) {
+                setText(label);
             }
         }
     }

@@ -2645,6 +2645,7 @@ public class Launcher extends BaseActivity
             Bundle bundle = new Bundle();
             bundle.putString("pn", packageName);
             EventUtil.INSTANCE.logEvent(EventName.INSTANCE.LAppOpen, bundle);
+            NewInstallationManager.INSTANCE.clickApp(packageName);
         }
 
         // 浏览过三次以上的主题，点击icon出评分弹窗

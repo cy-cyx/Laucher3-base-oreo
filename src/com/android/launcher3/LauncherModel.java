@@ -452,6 +452,8 @@ public class LauncherModel extends BroadcastReceiver
     public void onPackageAdded(String packageName, UserHandle user) {
         int op = PackageUpdatedTask.OP_ADD;
         enqueueModelUpdateTask(new PackageUpdatedTask(op, user, packageName));
+        Log.d(TAG, "app install:" + packageName + "----->>>>>");
+        NewInstallationManager.INSTANCE.addNewInstallAppPackName(packageName);
     }
 
     @Override
