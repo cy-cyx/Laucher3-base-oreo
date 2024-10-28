@@ -5,11 +5,9 @@ import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.android.launcher3.R
-import com.ironsource.tr
 import com.theme.lambda.launcher.ad.AdName
 import com.theme.lambda.launcher.ad.AdUtil
 import com.theme.lambda.launcher.ad.IAdCallBack
-import com.theme.lambda.launcher.appinfo.AppIconInfo
 import com.theme.lambda.launcher.appinfo.AppIconMap
 import com.theme.lambda.launcher.appinfo.AppInfoCache
 import com.theme.lambda.launcher.base.BaseItem
@@ -24,6 +22,7 @@ import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.utils.FileUtil
 import com.theme.lambda.launcher.utils.GsonUtil
 import com.theme.lambda.launcher.widget.dialog.SelectAppDialog
+import com.theme.lambda.launcher.widget.dialog.UnLockAllIconDialog
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
@@ -32,9 +31,11 @@ class SetIconViewModel : BaseViewModel() {
 
     var id = ""
 
-    var iconInfoLiveData = MutableLiveData<ArrayList<BaseItem>>()
+    var iconInfoLiveData = MutableLiveData<ArrayList<BaseItem>>(arrayListOf())
 
     var isAllSelectLiveData = MutableLiveData<Boolean>()
+
+    var showGetAllBnLiveData = MutableLiveData<Boolean>(true)
 
     fun init(i: String) {
         id = i
@@ -114,7 +115,7 @@ class SetIconViewModel : BaseViewModel() {
                 }
             })
         } else {
-            VipActivity.start(context, VipActivity.FromPreviewDownload)
+            Toast.makeText(context, R.string.ad_no_fill_tip, Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -145,5 +146,28 @@ class SetIconViewModel : BaseViewModel() {
             iconInfoLiveData.postValue(iconInfoLiveData.value)
             isAllSelectLiveData.value = true
         }
+    }
+
+    fun unLockAll(context: Context) {
+        UnLockAllIconDialog(context).apply {
+            clickVipListen = {
+                dismiss()
+                VipActivity.start(context, VipActivity.FromGetAllInTheme)
+            }
+            unLockAllListen = {
+                dismiss()
+                unLockAllIcon()
+            }
+        }.show()
+    }
+
+    fun unLockAllIcon() {
+        showGetAllBnLiveData.postValue(false)
+        iconInfoLiveData.value?.forEach {
+            if (it is IconItem) {
+                it.iconBean.isLock = false
+            }
+        }
+        iconInfoLiveData.postValue(iconInfoLiveData.value)
     }
 }

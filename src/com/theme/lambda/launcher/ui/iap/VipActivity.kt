@@ -25,6 +25,7 @@ class VipActivity : BaseActivity<ActivityVipBinding>() {
         final val FromHomeIcon = "home_icon"
         final val FromHomeBanner = "home_banner"
         final val FromPreviewDownload = "preview_download"
+        final val FromGetAllInTheme = "get_all_in_theme"
 
         val keyFrom = "keyFrom"
 

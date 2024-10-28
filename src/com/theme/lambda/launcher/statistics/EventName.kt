@@ -48,4 +48,7 @@ object EventName {
     val iapPageView = "iapPageView"
     val iapPageClick = "iapPageClick"
     val LWebSearch = "LWebSearch"
+    val setIconEnable = "setIconEnable"
+    val iconPageView = "iconPageView"
+    val getAllClick = "getAllClick"
 }

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="320dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_ffffff_radius_15"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_unlock_all_top" />
+
+        <TextView
+            android:id="@+id/clickAdTv"
+            android:layout_width="284dp"
+            android:layout_height="43dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/bg_button"
+            android:gravity="center"
+            android:text="@string/watch_ad_to_unlock_all"
+            android:textColor="#ffffff"
+            android:textSize="16dp" />
+
+        <FrameLayout
+            android:id="@+id/clickVipTv"
+            android:layout_width="284dp"
+            android:layout_height="43dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="17dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_unlock_vip_bn">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_diamond" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/join_premium_plan"
+                    android:textColor="#ffffff"
+                    android:textSize="16dp" />
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/closeIv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_close2" />
+</LinearLayout>

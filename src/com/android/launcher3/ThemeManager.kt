@@ -37,7 +37,7 @@ import java.lang.ref.WeakReference
 class ThemeManager {
 
     private var themeId = "" // 当前的主题id
-    private var previewThemeId = "" // 预览的主题id 可能为空
+    var previewThemeId = "" // 预览的主题id 可能为空
     private var showThemeId = "" // 当前展示主题id，可能是预览
 
     private var curManifestId = "" // 当前配置文件的主题id
@@ -227,6 +227,9 @@ class ThemeManager {
     }
 
     fun onResume() {
+        // 解决多launcher问题
+        themeManagerCache = WeakReference(this)
+
         if (enterPreviewId != "") {
             previewThemeId = enterPreviewId
             enterPreview()

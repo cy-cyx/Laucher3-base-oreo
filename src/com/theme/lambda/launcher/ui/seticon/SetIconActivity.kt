@@ -8,11 +8,17 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.launcher3.R
+import com.android.launcher3.ThemeManager
 import com.android.launcher3.databinding.ActivitySetIconBinding
 import com.theme.lambda.launcher.base.BaseActivity
+import com.theme.lambda.launcher.statistics.EventName
+import com.theme.lambda.launcher.statistics.EventUtil
 import com.theme.lambda.launcher.ui.seticon.adpater.SetIconAdapter
 import com.theme.lambda.launcher.utils.StatusBarUtil
+import com.theme.lambda.launcher.utils.gone
 import com.theme.lambda.launcher.utils.marginStatusBarHeight
+import com.theme.lambda.launcher.utils.visible
+import com.theme.lambda.launcher.vip.VipManager
 
 class SetIconActivity : BaseActivity<ActivitySetIconBinding>() {
 
@@ -67,6 +73,12 @@ class SetIconActivity : BaseActivity<ActivitySetIconBinding>() {
         viewBinding.backIv.setOnClickListener {
             finish()
         }
+        viewBinding.getAllTv.setOnClickListener {
+            viewModel.unLockAll(this)
+            EventUtil.logEvent(EventName.getAllClick, Bundle().apply {
+                putString("id", ThemeManager.getThemeManagerIfExist()?.previewThemeId)
+            })
+        }
         viewModel.iconInfoLiveData.observe(this, Observer {
             setIconAdapter.upData(it)
         })
@@ -77,6 +89,18 @@ class SetIconActivity : BaseActivity<ActivitySetIconBinding>() {
                 viewBinding.selectAllTv.setText(R.string.select_all)
             }
         })
+        viewModel.showGetAllBnLiveData.observe(this, Observer {
+            if (it) {
+                viewBinding.getAllTv.visible()
+            } else {
+                viewBinding.getAllTv.gone()
+            }
+        })
+        VipManager.isVip.observe(this, Observer {
+            if (it) {
+                viewModel.unLockAllIcon()
+            }
+        })
 
         val id = intent.getStringExtra(sKeyId)
         if (id == null) {
@@ -84,5 +108,9 @@ class SetIconActivity : BaseActivity<ActivitySetIconBinding>() {
             return
         }
         viewModel.init(id)
+
+        EventUtil.logEvent(EventName.iconPageView, Bundle().apply {
+            putString("id", ThemeManager.getThemeManagerIfExist()?.previewThemeId)
+        })
     }
 }

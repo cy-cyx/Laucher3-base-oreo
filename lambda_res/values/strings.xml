@@ -78,4 +78,6 @@
     <string name="app_no_install">You must select a related app before installing the icon</string>
     <string name="get_all_in_theme">Get all in theme</string>
     <string name="select_apps_to_icons">Select apps to icons</string>
+    <string name="join_premium_plan">Join Premium Plan</string>
+    <string name="watch_ad_to_unlock_all">Watch (%s/3) Ads to Unlock ALL</string>
 </resources>
