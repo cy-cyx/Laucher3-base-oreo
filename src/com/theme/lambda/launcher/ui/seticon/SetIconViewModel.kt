@@ -121,7 +121,19 @@ class SetIconViewModel : BaseViewModel() {
 
     fun downLoad(context: Context, iconBean: IconBean) {
         if (iconBean.isInstall) {
-            ShortCutUtil.addShortCut(iconBean.pn, iconBean.icon, iconBean.appIconInfo?.name ?: "")
+            if (iconBean.appIconInfo != null) {
+                ShortCutUtil.addShortCut(
+                    iconBean.appIconInfo?.pn ?: "",
+                    iconBean.icon,
+                    iconBean.appIconInfo?.name ?: ""
+                )
+            } else if (iconBean.AppInfo != null) {
+                ShortCutUtil.addShortCut(
+                    iconBean.AppInfo?.getPackage_name() ?: "",
+                    iconBean.icon,
+                    iconBean.AppInfo?.getLabel() ?: ""
+                )
+            }
         } else {
             Toast.makeText(context, R.string.app_no_install, Toast.LENGTH_SHORT)
                 .show()
