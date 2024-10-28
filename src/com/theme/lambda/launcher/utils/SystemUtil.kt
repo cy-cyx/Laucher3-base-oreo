@@ -6,10 +6,10 @@ import java.util.Locale
 object SystemUtil {
 
     // 华为
-    const val PHONE_HUAWEI = "Huawei"
+    const val PHONE_HUAWEI = "huawei"
 
     // 荣耀
-    const val PHONE_HONOR = "HONOR"
+    const val PHONE_HONOR = "honor"
 
     // 华为 NOVA
     const val PHONE_NOVA = "nova"
@@ -21,7 +21,7 @@ object SystemUtil {
     const val PHONE_VIVO = "vivo"
 
     // 魅族
-    const val PHONE_MEIZU = "Meizu"
+    const val PHONE_MEIZU = "meizu"
 
     // 索尼
     const val PHONE_SONY = "sony"
@@ -36,7 +36,7 @@ object SystemUtil {
     const val PHONE_Letv = "letv"
 
     // 一加
-    const val PHONE_OnePlus = "OnePlus"
+    const val PHONE_OnePlus = "oneplus"
 
     // 锤子
     const val PHONE_SMARTISAN = "smartisan"
@@ -92,7 +92,7 @@ object SystemUtil {
      * @return  手机厂商
      */
     fun getDeviceBrand(): String? {
-        return Build.BRAND
+        return Build.BRAND.toLowerCase()
     }
 
 }
