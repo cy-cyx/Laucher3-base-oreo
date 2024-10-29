@@ -2650,17 +2650,16 @@ public class Launcher extends BaseActivity
                 @Override
                 public void run() {
                     startActivity(v, intent, item);
+                    // 浏览过三次以上的主题，点击icon出评分弹窗
+                    if (SpUtil.INSTANCE.getInt(SpKey.intoThemeNum, 0) >= 3) {
+                        needShowRate = true;
+                    }
                 }
             });
             Bundle bundle = new Bundle();
             bundle.putString("pn", packageName);
             EventUtil.INSTANCE.logEvent(EventName.INSTANCE.LAppOpen, bundle);
             NewInstallationManager.INSTANCE.clickApp(packageName);
-        }
-
-        // 浏览过三次以上的主题，点击icon出评分弹窗
-        if (SpUtil.INSTANCE.getInt(SpKey.intoThemeNum, 0) >= 3) {
-            needShowRate = true;
         }
     }
 
