@@ -308,7 +308,7 @@
             "search_urls": [
             "https://google.com/search?q={query_string}"
             ],
-            "is_open_in_webview": true
+            "is_open_in_webview": false
             }
         </value>
     </entry>
@@ -319,16 +319,14 @@
             {
             "id": "1",
             "name": "Ultimate Charging Animation",
-            "icon_url":
-            "https://play-lh.googleusercontent.com/AfFiDIY3_MpUaW4ZntnsM1etuHqiEEIE5PAMSJkhUomACv6aXAbVdN6icy1xCYb47w=w240-h480-rw",
-            "imp_url": "https://view.adjust.com/impression/1ffi0b9g?gps_adid={gaid}&amp;campaign={package}&amp;adgroup={placement}",
+            "icon_url": "https://s.dlapp.pro/com.ultimate.charging.screen.effect.png",
             "click_url": "https://app.adjust.com/1ffi0b9g?gps_adid={gaid}&amp;campaign={package}&amp;adgroup={placement}"
             },
             {
             "id": "2",
             "name": "Deltaork Games",
-            "icon_url": "https://d1jpiup2kknrgj.cloudfront.net/idea.gif",
-            "click_url": "https://deltaork.com/?debug=true"
+            "icon_url": "https://s.dlapp.pro/deltaork.com.png",
+            "click_url": "https://deltaork.com/"
             }
             ],
             "is_show_in_box": true
