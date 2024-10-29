@@ -52,6 +52,7 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
     // 专门留一个activity用于泄露使用
     private var adActivity: Activity? = null
 
+    @JvmStatic
     fun getWapActivity(): Activity? = adActivity ?: ActivityUtils.getTopActivity()
 
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
@@ -315,6 +316,7 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
     /**
      * @param priority 是否优先初始化部分
      */
+    @JvmStatic
     fun loadAd(activity: Activity, priority: Boolean) {
         if (!initSuccess) {
             return

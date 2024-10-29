@@ -1172,6 +1172,9 @@ public class Launcher extends BaseActivity
         }
 
         fillMultiLauncherBug();
+        if (AdUtil.getWapActivity() != null) {
+            AdUtil.loadAd(AdUtil.getWapActivity(), false);
+        }
     }
 
     /**
@@ -2455,8 +2458,8 @@ public class Launcher extends BaseActivity
                 (v == mAllAppsButton && mAllAppsButton != null)) {
             onClickAllAppsButton(v);
         } else if (tag instanceof AppInfo) {
-            if (RecommendAppManager.isRecommendApp((AppInfo)tag)) {
-                RecommendAppManager.clickRecommendApp((AppInfo)tag);
+            if (RecommendAppManager.isRecommendApp((AppInfo) tag)) {
+                RecommendAppManager.clickRecommendApp((AppInfo) tag);
                 return;
             }
             startAppShortcutOrInfoActivity(v);
@@ -4376,7 +4379,7 @@ public class Launcher extends BaseActivity
         if (loadingDialog == null) {
             loadingDialog = new LoadingDialog(this);
         }
-        if (!isDestroyed()){
+        if (!isDestroyed()) {
             loadingDialog.show();
             mainHander.removeCallbacks(loadingTimeOutRunnable);
             if (timeOut > 0) {
