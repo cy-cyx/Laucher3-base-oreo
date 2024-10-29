@@ -43,7 +43,7 @@ public class ThemeIconMapping {
      *
      * @param context     上下文
      * @param packageName 包名
-     * @param url 图标源路径
+     * @param url         图标源路径（特殊情况下不为空）
      * @return 如果有映射，返回 {@link  BitmapFactory#decodeResource(Resources, int)} 没有映射返回 null
      */
     public static Bitmap getThemeBitmap(Context context, String packageName, String url) {
@@ -64,7 +64,13 @@ public class ThemeIconMapping {
         }
         // 推荐
         if (packageName.contains(RecommendAppManager.getActionHost())) {
-            result = BitmapFactory.decodeFile(url);
+            var temp = BitmapFactory.decodeFile(url);
+            // 配置的图片需要强制控制一下宽高
+            Bitmap target = Bitmap.createBitmap(LauncherAppState.getInstance(context).getInvariantDeviceProfile().iconBitmapSize, LauncherAppState.getInstance(context).getInvariantDeviceProfile().iconBitmapSize, Bitmap.Config.ARGB_8888);
+            Canvas temp_canvas = new Canvas(target);
+            temp_canvas.drawBitmap(temp, null, new Rect(0, 0, target.getWidth(), target.getHeight()), null);
+            result = target;
+            cacheBitmap.put(packageName, result);
         }
 
         // 往后走走看看需不需要换主题
