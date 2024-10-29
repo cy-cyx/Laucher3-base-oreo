@@ -24,7 +24,7 @@ object NewInstallationManager {
     }
 
     fun isNewInstallApp(info: ItemInfo): Boolean {
-        val pkg = info.intent.component?.packageName ?: ""
+        val pkg = info.intent?.component?.packageName ?: ""
         return newInstallAppList.contains(pkg)
     }
 
