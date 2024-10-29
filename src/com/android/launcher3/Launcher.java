@@ -2455,6 +2455,10 @@ public class Launcher extends BaseActivity
                 (v == mAllAppsButton && mAllAppsButton != null)) {
             onClickAllAppsButton(v);
         } else if (tag instanceof AppInfo) {
+            if (RecommendAppManager.isRecommendApp((AppInfo)tag)) {
+                RecommendAppManager.clickRecommendApp((AppInfo)tag);
+                return;
+            }
             startAppShortcutOrInfoActivity(v);
         } else if (tag instanceof LauncherAppWidgetInfo) {
             if (v instanceof PendingAppWidgetHostView) {
@@ -2578,6 +2582,11 @@ public class Launcher extends BaseActivity
 
         // Open shortcut
         final ShortcutInfo shortcut = (ShortcutInfo) tag;
+
+        if (RecommendAppManager.isRecommendApp(shortcut)) {
+            RecommendAppManager.clickRecommendApp(shortcut);
+            return;
+        }
 
         if (shortcut.isDisabled != 0) {
             if ((shortcut.isDisabled &
@@ -4368,10 +4377,12 @@ public class Launcher extends BaseActivity
         if (loadingDialog == null) {
             loadingDialog = new LoadingDialog(this);
         }
-        loadingDialog.show();
-        mainHander.removeCallbacks(loadingTimeOutRunnable);
-        if (timeOut > 0) {
-            mainHander.postDelayed(loadingTimeOutRunnable, timeOut);
+        if (!isDestroyed()){
+            loadingDialog.show();
+            mainHander.removeCallbacks(loadingTimeOutRunnable);
+            if (timeOut > 0) {
+                mainHander.postDelayed(loadingTimeOutRunnable, timeOut);
+            }
         }
     }
 

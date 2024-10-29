@@ -13,7 +13,7 @@ class RecentAppsAdapter : BaseQuickAdapter<String, BaseViewHolder>(R.layout.item
     override fun convert(holder: BaseViewHolder, item: String) {
         ItemRecentAppsBinding.bind(holder.itemView).apply {
             iv.setImageBitmap(
-                ThemeIconMapping.getThemeBitmap(holder.itemView.context, item)
+                ThemeIconMapping.getThemeBitmap(holder.itemView.context, item, "")
                     ?: ConvertUtils.drawable2Bitmap(AppUtils.getAppIcon(item))
             )
             tv.text = AppUtils.getAppName(item)

@@ -1005,14 +1005,17 @@ public class LauncherModel extends BroadcastReceiver
                                     // 或者是all_app
                                     boolean validTarget = TextUtils.isEmpty(targetPkg) ||
                                             launcherApps.isPackageEnabledForProfile(targetPkg, c.user) ||
-                                            Constants.sAllppAction.equals(intent.getAction());
+                                            Constants.sAllppAction.equals(intent.getAction()) ||
+                                            cn.getPackageName().contains(RecommendAppManager.getActionHost());
 
                                     if (cn != null && validTarget) {
                                         // If the apk is present and the shortcut points to a specific
                                         // component.
 
                                         // If the component is already present
-                                        if (Constants.sAllppAction.equals(intent.getAction()) || launcherApps.isActivityEnabledForProfile(cn, c.user)) {
+                                        if (Constants.sAllppAction.equals(intent.getAction()) ||
+                                                cn.getPackageName().contains(RecommendAppManager.getActionHost()) ||
+                                                launcherApps.isActivityEnabledForProfile(cn, c.user)) {
                                             // no special handling necessary for this item
                                             c.markRestored();
                                         } else {
@@ -1088,7 +1091,19 @@ public class LauncherModel extends BroadcastReceiver
                                     boolean useLowResIcon = !c.isOnWorkspaceOrHotseat() &&
                                             c.getInt(rankIndex) >= FolderIcon.NUM_ITEMS_IN_PREVIEW;
 
-                                    if (Constants.sAllppAction.equals(intent.getAction())) {
+                                    if (cn.getPackageName().contains(RecommendAppManager.getActionHost())) {
+                                        info = new ShortcutInfo();
+                                        Intent tempIntent = new Intent(cn.getPackageName());
+                                        tempIntent.setComponent(cn);
+                                        info.iconBitmap =
+                                                ThemeIconMapping.getThemeBitmap(
+                                                        Utils.getApp(),
+                                                        cn.getPackageName(),
+                                                        cn.getClassName()
+                                                );
+                                        info.title = c.getTitle();
+                                        info.contentDescription = "";
+                                    } else if (Constants.sAllppAction.equals(intent.getAction())) {
                                         info = new ShortcutInfo();
                                         info.iconBitmap = BitmapFactory.decodeResource(Utils.getApp().getResources(), R.mipmap.all_apps);
                                     } else if (c.restoreFlag != 0) {
@@ -1190,7 +1205,7 @@ public class LauncherModel extends BroadcastReceiver
                                                 ShortcutInfo shortcutInfo = new ShortcutInfo(appInfo);
                                                 if (packageName != null) {
                                                     shortcutInfo.iconBitmap = ConvertUtils.drawable2Bitmap(AppUtils.getAppIcon(packageName));
-                                                    Bitmap themeBitmap = ThemeIconMapping.getThemeBitmap(Utils.getApp(), packageName);
+                                                    Bitmap themeBitmap = ThemeIconMapping.getThemeBitmap(Utils.getApp(), packageName, "");
                                                     if (themeBitmap != null) {
                                                         shortcutInfo.iconBitmap = themeBitmap;
                                                     }
@@ -1201,6 +1216,12 @@ public class LauncherModel extends BroadcastReceiver
                                             }
                                         }
                                     }
+
+                                    // 推荐文件夹
+                                    if (RecommendAppManager.isFeaturedFolder(folderInfo.title.toString())) {
+                                        RecommendAppManager.addOfferIntoFeaturedFolder(folderInfo);
+                                    }
+
 
                                     // no special handling required for restored folders
                                     c.markRestored();
@@ -1842,6 +1863,10 @@ public class LauncherModel extends BroadcastReceiver
                     scheduleManagedHeuristicRunnable(heuristic, user, apps);
                 }
             }
+
+            // 添加推荐
+            RecommendAppManager.addInfoAllAppsList(mBgAllAppsList);
+
             // Huh? Shouldn't this be inside the Runnable below?
             final ArrayList<AppInfo> added = mBgAllAppsList.added;
             mBgAllAppsList.added = new ArrayList<AppInfo>();

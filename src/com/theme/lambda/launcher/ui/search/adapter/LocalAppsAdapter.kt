@@ -13,7 +13,7 @@ class LocalAppsAdapter :
     override fun convert(holder: BaseViewHolder, item: String) {
         ItemLocalAppsBinding.bind(holder.itemView).apply {
             iv.setImageBitmap(
-                ThemeIconMapping.getThemeBitmap(holder.itemView.context, item)
+                ThemeIconMapping.getThemeBitmap(holder.itemView.context, item, "")
                     ?: ConvertUtils.drawable2Bitmap(AppUtils.getAppIcon(item))
             )
             tv.text = AppUtils.getAppName(item)

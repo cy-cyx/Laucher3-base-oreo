@@ -288,7 +288,7 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
                         R.xml.remote_config_defaults
                     }
                 },
-                listOf("AdConfig", "SearchConfig"),
+                listOf("AdConfig", "SearchConfig", "OfferConfig"),
                 "AdConfig"
             )
     }

@@ -43,9 +43,10 @@ public class ThemeIconMapping {
      *
      * @param context     上下文
      * @param packageName 包名
+     * @param url 图标源路径
      * @return 如果有映射，返回 {@link  BitmapFactory#decodeResource(Resources, int)} 没有映射返回 null
      */
-    public static Bitmap getThemeBitmap(Context context, String packageName) {
+    public static Bitmap getThemeBitmap(Context context, String packageName, String url) {
         // 使用缓存
         if (cacheBitmap.containsKey(packageName)) {
             return cacheBitmap.get(packageName);
@@ -61,6 +62,11 @@ public class ThemeIconMapping {
             result = BitmapFactory.decodeResource(context.getResources(), R.mipmap.all_apps);
             cacheBitmap.put(packageName, result);
         }
+        // 推荐
+        if (packageName.contains(RecommendAppManager.getActionHost())) {
+            result = BitmapFactory.decodeFile(url);
+        }
+
         // 往后走走看看需不需要换主题
 
         // 看一下主题用不用替换icon

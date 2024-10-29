@@ -312,4 +312,27 @@
             }
         </value>
     </entry>
+    <entry>
+        <key>OfferConfig</key>
+        <value>{
+            "offers": [
+            {
+            "id": "1",
+            "name": "Ultimate Charging Animation",
+            "icon_url":
+            "https://play-lh.googleusercontent.com/AfFiDIY3_MpUaW4ZntnsM1etuHqiEEIE5PAMSJkhUomACv6aXAbVdN6icy1xCYb47w=w240-h480-rw",
+            "imp_url": "https://view.adjust.com/impression/1ffi0b9g?gps_adid={gaid}&amp;campaign={package}&amp;adgroup={placement}",
+            "click_url": "https://app.adjust.com/1ffi0b9g?gps_adid={gaid}&amp;campaign={package}&amp;adgroup={placement}"
+            },
+            {
+            "id": "2",
+            "name": "Deltaork Games",
+            "icon_url": "https://d1jpiup2kknrgj.cloudfront.net/idea.gif",
+            "click_url": "https://deltaork.com/?debug=true"
+            }
+            ],
+            "is_show_in_box": true
+            }
+        </value>
+    </entry>
 </defaults>

@@ -51,7 +51,7 @@ public class DefaultLayoutParser extends AutoInstallsLayout {
             "com.android.launcher.action.APPWIDGET_DEFAULT_WORKSPACE_CONFIGURE";
 
     public DefaultLayoutParser(Context context, AppWidgetHost appWidgetHost,
-            LayoutParserCallback callback, Resources sourceRes, int layoutId) {
+                               LayoutParserCallback callback, Resources sourceRes, int layoutId) {
         super(context, appWidgetHost, callback, sourceRes, layoutId, TAG_FAVORITES);
     }
 
@@ -60,7 +60,8 @@ public class DefaultLayoutParser extends AutoInstallsLayout {
         return getFolderElementsMap(mSourceRes);
     }
 
-    @Thunk HashMap<String, TagParser> getFolderElementsMap(Resources res) {
+    @Thunk
+    HashMap<String, TagParser> getFolderElementsMap(Resources res) {
         HashMap<String, TagParser> parsers = new HashMap<String, TagParser>();
         parsers.put(TAG_FAVORITE, new AppShortcutWithUriParser());
         parsers.put(TAG_SHORTCUT, new UriShortcutParser(res));
@@ -119,6 +120,8 @@ public class DefaultLayoutParser extends AutoInstallsLayout {
                 return addShortcut(Utils.getApp().getString(R.string.shopping), new Intent("SHOPPING"), Favorites.ITEM_TYPE_FOLDER);
             } else if ("#Intent;action=MUSIC_VIDEO;end".equals(uri)) {
                 return addShortcut(Utils.getApp().getString(R.string.music_video), new Intent("MUSIC_VIDEO"), Favorites.ITEM_TYPE_FOLDER);
+            } else if ("#Intent;action=FEATURED;end".equals(uri)) {
+                return addShortcut(Utils.getApp().getString(R.string.featured), new Intent("FEATURED"), Favorites.ITEM_TYPE_FOLDER);
             }
 
             final Intent metaIntent;
@@ -183,7 +186,7 @@ public class DefaultLayoutParser extends AutoInstallsLayout {
         }
 
         private boolean wouldLaunchResolverActivity(ResolveInfo resolved,
-                List<ResolveInfo> appList) {
+                                                    List<ResolveInfo> appList) {
             // If the list contains the above resolved activity, then it can't be
             // ResolverActivity itself.
             for (int i = 0; i < appList.size(); ++i) {
@@ -253,7 +256,8 @@ public class DefaultLayoutParser extends AutoInstallsLayout {
     /**
      * A parser which adds a folder whose contents come from partner apk.
      */
-    @Thunk class PartnerFolderParser implements TagParser {
+    @Thunk
+    class PartnerFolderParser implements TagParser {
 
         @Override
         public long parseAndAdd(XmlResourceParser parser) throws XmlPullParserException,
@@ -279,7 +283,8 @@ public class DefaultLayoutParser extends AutoInstallsLayout {
     /**
      * An extension of FolderParser which allows adding items from a different xml.
      */
-    @Thunk class MyFolderParser extends FolderParser {
+    @Thunk
+    class MyFolderParser extends FolderParser {
 
         @Override
         public long parseAndAdd(XmlResourceParser parser) throws XmlPullParserException,
@@ -305,7 +310,7 @@ public class DefaultLayoutParser extends AutoInstallsLayout {
                 mPackageManager.getReceiverInfo(cn, 0);
             } catch (Exception e) {
                 String[] packages = mPackageManager.currentToCanonicalPackageNames(
-                        new String[] { cn.getPackageName() });
+                        new String[]{cn.getPackageName()});
                 cn = new ComponentName(packages[0], cn.getClassName());
                 try {
                     mPackageManager.getReceiverInfo(cn, 0);

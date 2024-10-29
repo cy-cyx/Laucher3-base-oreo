@@ -13,8 +13,10 @@ object NewInstallationManager {
     private val newInstallAppList: ArrayList<String> by lazy {
         val result = ArrayList<String>()
         val appListString = SpUtil.getString(SpKey.keyNewInstallAppList)
-        val typeToken = object : TypeToken<List<String>>() {}
-        GsonUtil.gson.fromJson(appListString, typeToken)
+        if (appListString.isNotBlank()){
+            val typeToken = object : TypeToken<List<String>>() {}
+            result.addAll(GsonUtil.gson.fromJson(appListString, typeToken).toMutableList())
+        }
         result
     }
 

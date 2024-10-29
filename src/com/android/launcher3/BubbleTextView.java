@@ -22,6 +22,7 @@ import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
@@ -237,13 +238,19 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver, 
                 info.title = "Theme";
             }
 
+            String url = "";
+            // 特殊处理推广图标，
+            if (info.getIntent().getAction() != null && info.getIntent().getAction().contains(RecommendAppManager.getActionHost())) {
+                url = info.getIntent().getComponent().getClassName();
+            }
+
             // 是否存在替换图标
-            Bitmap themeIcon = ThemeIconMapping.getThemeBitmap(CommonUtil.INSTANCE.getAppContext(), pkg);
+            Bitmap themeIcon = ThemeIconMapping.getThemeBitmap(CommonUtil.INSTANCE.getAppContext(), pkg, url);
             if (themeIcon != null) {
                 showIcon = themeIcon;
             }
         } else if (info.getIntent() != null && info.getIntent().getAction() != null && info.getIntent().getAction().equals(Constants.sAllppAction)) {
-            Bitmap themeIcon = ThemeIconMapping.getThemeBitmap(CommonUtil.INSTANCE.getAppContext(), Constants.sAllppAction);
+            Bitmap themeIcon = ThemeIconMapping.getThemeBitmap(CommonUtil.INSTANCE.getAppContext(), Constants.sAllppAction, "");
             if (themeIcon != null) {
                 showIcon = themeIcon;
             }
@@ -252,8 +259,10 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver, 
         iconDrawable.setIsDisabled(info.isDisabled());
         setIcon(iconDrawable);
 
+        boolean showRedDot = NewInstallationManager.INSTANCE.isNewInstallApp(info);
+
         // 新安装加红点
-        if (NewInstallationManager.INSTANCE.isNewInstallApp(info)) {
+        if (showRedDot) {
             SpannableString ss = new SpannableString("※" + info.title);
             Drawable d = ContextCompat.getDrawable(getContext(), (R.drawable.ic_dot));
             d.setBounds(0, 0, d.getIntrinsicWidth(), d.getIntrinsicHeight());

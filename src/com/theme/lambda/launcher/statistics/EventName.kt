@@ -52,4 +52,5 @@ object EventName {
     val setIconEnable = "setIconEnable"
     val iconPageView = "iconPageView"
     val getAllClick = "getAllClick"
+    val LOfferClick = "LOfferClick"
 }

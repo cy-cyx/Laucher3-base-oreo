@@ -7,6 +7,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.lifecycle.Observer
+import com.android.launcher3.RecommendAppManager
 import com.android.launcher3.databinding.ActivityThemeBinding
 import com.google.android.material.tabs.TabLayout
 import com.theme.lambda.launcher.Constants
@@ -188,6 +189,8 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
         AdUtil.getWapActivity()?.let {
             AdUtil.loadAd(it, false)
         }
+
+        RecommendAppManager.init(this)
     }
 
     private fun requestNotificationPermission() {

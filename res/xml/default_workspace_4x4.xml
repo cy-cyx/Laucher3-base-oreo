@@ -25,6 +25,12 @@
         launcher:y="-3">
         <favorite launcher:uri="#Intent;action=MUSIC_VIDEO;end" />
     </resolve>
+    <resolve
+        launcher:screen="0"
+        launcher:x="1"
+        launcher:y="-3">
+        <favorite launcher:uri="#Intent;action=FEATURED;end" />
+    </resolve>
 
     <resolve
         launcher:screen="0"

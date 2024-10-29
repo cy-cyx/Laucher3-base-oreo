@@ -22,4 +22,6 @@ object SpKey {
     const val keyLastLoadDataLauncherHashcode = "keyLastLoadDataLauncherHashcode"
 
     const val keyNewInstallAppList = "keyNewInstallAppList"
+
+    const val keyOfferConfig = "keyOfferConfig"
 }

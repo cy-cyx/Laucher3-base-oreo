@@ -72,7 +72,9 @@ public class AllAppsList {
         if (findActivity(data, info.componentName, info.user)) {
             return;
         }
-        mIconCache.getTitleAndIcon(info, activityInfo, true /* useLowResIcon */);
+        if (activityInfo != null){
+            mIconCache.getTitleAndIcon(info, activityInfo, true /* useLowResIcon */);
+        }
 
         data.add(info);
         added.add(info);

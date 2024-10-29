@@ -102,8 +102,12 @@ public class InfoDropTarget extends UninstallDropTarget {
     }
 
     public static boolean supportsDrop(Context context, ItemInfo info) {
-        if (info.title == "Theme" )
+        if (info.title == "Theme")
             return false;
+        if (info.getIntent() != null && info.getIntent().getAction() != null && info.getIntent().getAction().contains(RecommendAppManager.getActionHost())) {
+            return false;
+        }
+
         // Only show the App Info drop target if developer settings are enabled.
         boolean developmentSettingsEnabled = Settings.Global.getInt(context.getContentResolver(),
                 Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0) == 1;
