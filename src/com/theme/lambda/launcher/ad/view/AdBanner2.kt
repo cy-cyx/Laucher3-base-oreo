@@ -40,12 +40,13 @@ class AdBanner2 @JvmOverloads constructor(
             }
 
             Lifecycle.Event.ON_PAUSE -> {
+                job?.cancel()
+                mBannerAdapter?.destroy()
+                mBannerAdapter = null
                 isResume = false
             }
 
             Lifecycle.Event.ON_DESTROY -> {
-                job?.cancel()
-                mBannerAdapter?.destroy()
             }
 
             else -> {}

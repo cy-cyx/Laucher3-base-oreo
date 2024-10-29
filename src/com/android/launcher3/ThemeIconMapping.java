@@ -21,8 +21,6 @@ import com.theme.lambda.launcher.utils.CommonUtil;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import io.appmetrica.analytics.impl.H;
-
 public class ThemeIconMapping {
 
 
@@ -103,55 +101,16 @@ public class ThemeIconMapping {
                             Bitmap frameBmTemp = BitmapFactory.decodeFile(iconPath);
                             Bitmap frameBm = frameBmTemp.copy(Bitmap.Config.ARGB_8888, true);
 
-                            float frameWidth = frameBm.getWidth();
-                            float frameHeight = frameBm.getHeight();
-                            Canvas frameCanvas = new Canvas(frameBm);
-                            Bitmap appBitmap = null;
+                            Bitmap appBitmap;
                             if (result != null) {
                                 appBitmap = result;
                             } else {
                                 appBitmap = ConvertUtils.drawable2Bitmap(AppUtils.getAppIcon(packageName));
                             }
-                            float width = appBitmap.getWidth();
-                            float height = appBitmap.getHeight();
+                            result = addFrameIcon(frameBm, appBitmap);
 
-                            Rect resRect = new Rect(0, 0, (int) width, (int) height);
-
-                            // 计算缩放
-                            float left = 0;
-                            float top = 0;
-                            float right = 0;
-                            float bottom = 0;
-                            if (width >= height) {
-                                float iconWidth = frameWidth * iconZoom;
-                                float iconHeight = iconWidth / width * height;
-
-                                top = (frameHeight - iconHeight) / 2f;
-                                bottom = top + iconHeight;
-                                left = (frameWidth - iconWidth) / 2f;
-                                right = left + iconWidth;
-                            } else {
-                                float iconHeight = frameHeight * iconZoom;
-                                float iconWidth = iconHeight / height * width;
-
-                                top = (frameHeight - iconHeight) / 2f;
-                                bottom = top + iconHeight;
-                                left = (frameWidth - iconWidth) / 2f;
-                                right = left + iconWidth;
-                            }
-
-                            Rect dstRect = new Rect((int) left, (int) top, (int) right, (int) bottom);
-
-
-                            RectF whiteFrameRect = new RectF(left - whiteFrame, top - whiteFrame, right + whiteFrame, bottom + whiteFrame);
-                            Paint paint = new Paint();
-                            paint.setAntiAlias(true);
-                            paint.setColor(Color.WHITE);
-
-                            frameCanvas.drawRoundRect(whiteFrameRect, roundedCorners, roundedCorners, paint);
-                            frameCanvas.drawBitmap(appBitmap, resRect, dstRect, paint);
-                            cacheBitmap.put(packageName, frameBm);
-                            return frameBm;
+                            cacheBitmap.put(packageName, result);
+                            return result;
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -160,6 +119,64 @@ public class ThemeIconMapping {
             }
         }
 
+        // 都没有套一层默认的
+        Bitmap temp = BitmapFactory.decodeResource(context.getResources(),R.drawable.bg_default_icon);
+        Bitmap frameBm = temp.copy(Bitmap.Config.ARGB_8888, true);
+        Bitmap appBitmap;
+        if (result != null) {
+            appBitmap = result;
+        } else {
+            appBitmap = ConvertUtils.drawable2Bitmap(AppUtils.getAppIcon(packageName));
+        }
+        result = addFrameIcon(frameBm, appBitmap);
+        cacheBitmap.put(packageName, result);
         return result;
+    }
+
+    static Bitmap addFrameIcon(Bitmap frameBm, Bitmap appBm) {
+        float frameWidth = frameBm.getWidth();
+        float frameHeight = frameBm.getHeight();
+        Canvas frameCanvas = new Canvas(frameBm);
+
+        float width = appBm.getWidth();
+        float height = appBm.getHeight();
+
+        Rect resRect = new Rect(0, 0, (int) width, (int) height);
+
+        // 计算缩放
+        float left = 0;
+        float top = 0;
+        float right = 0;
+        float bottom = 0;
+        if (width >= height) {
+            float iconWidth = frameWidth * iconZoom;
+            float iconHeight = iconWidth / width * height;
+
+            top = (frameHeight - iconHeight) / 2f;
+            bottom = top + iconHeight;
+            left = (frameWidth - iconWidth) / 2f;
+            right = left + iconWidth;
+        } else {
+            float iconHeight = frameHeight * iconZoom;
+            float iconWidth = iconHeight / height * width;
+
+            top = (frameHeight - iconHeight) / 2f;
+            bottom = top + iconHeight;
+            left = (frameWidth - iconWidth) / 2f;
+            right = left + iconWidth;
+        }
+
+        Rect dstRect = new Rect((int) left, (int) top, (int) right, (int) bottom);
+
+
+        RectF whiteFrameRect = new RectF(left - whiteFrame, top - whiteFrame, right + whiteFrame, bottom + whiteFrame);
+        Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        paint.setColor(Color.WHITE);
+
+        frameCanvas.drawRoundRect(whiteFrameRect, roundedCorners, roundedCorners, paint);
+        frameCanvas.drawBitmap(appBm, resRect, dstRect, paint);
+
+        return frameBm;
     }
 }

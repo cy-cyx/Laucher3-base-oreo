@@ -1173,7 +1173,7 @@ public class Launcher extends BaseActivity
 
         fillMultiLauncherBug();
         if (AdUtil.getWapActivity() != null) {
-            AdUtil.loadAd(AdUtil.getWapActivity(), false);
+            AdUtil.loadAdOpenAppOnly(AdUtil.getWapActivity());
         }
     }
 

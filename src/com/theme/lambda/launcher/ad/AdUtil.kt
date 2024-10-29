@@ -24,6 +24,7 @@ import com.lambda.adlib.LambdaAdSdk
 import com.lambda.adlib.adapter.LAdMultipleAdapter
 import com.lambda.common.utils.utilcode.util.ActivityUtils
 import com.theme.lambda.launcher.Constants
+import com.theme.lambda.launcher.base.BaseActivity
 import com.theme.lambda.launcher.recall.RecallManager
 import com.theme.lambda.launcher.statistics.ADEventName
 import com.theme.lambda.launcher.statistics.EventUtil
@@ -100,7 +101,7 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
     fun initAd(app: Application) {
         if (init) return
         init = true
-        LogUtil.d("Launcher", "init ad ------>>>")
+        LogUtil.d("Launcher", "init ad ------>>> ${Thread.currentThread().id}")
 
         app.registerActivityLifecycleCallbacks(this)
         LambdaAdSdk.registerLife(app)
@@ -360,6 +361,7 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
                 lAdMultipleAdapters[i] = this
                 loadInterstitial(true)
             }
+            LogUtil.d("Launcher", "loadInterstitial:${i} ------>>> ${Thread.currentThread().id}")
         }
         // native
         for (i in loadNetIds) {
@@ -371,6 +373,7 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
                 object : LambdaAdAdapter.OnAdapterClose<LAdMultipleAdapter>() {}).apply {
                 lAdMultipleAdapters[i] = this
                 loadNative()
+                LogUtil.d("Launcher", "loadNative:${i} ------>>> ${Thread.currentThread().id}")
                 onAdapterClose = object : LambdaAdAdapter.OnAdapterClose<LAdMultipleAdapter>() {
                     override fun onLoad(adapter: LAdMultipleAdapter, status: Int) {
                         super.onLoad(adapter, status)
@@ -399,8 +402,38 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
         }
     }
 
+    // 单独抽出来Launcher初始化
+    @JvmStatic
+    fun loadAdOpenAppOnly(activity: Activity) {
+        if (!initSuccess) {
+            return
+        }
+        for (i in arrayListOf(AdName.app_open)) {
+            if (lAdMultipleAdapters[i] != null) {
+                continue
+            }
+            LAdMultipleAdapter(activity,
+                i,
+                object : LambdaAdAdapter.OnAdapterClose<LAdMultipleAdapter>() {
+                    override fun onClose(adapter: LAdMultipleAdapter, status: Int) {
+                        super.onClose(adapter, status)
+                        LogUtil.d(TAG, "adapter: ${adapter}, status: $status")
+                        if (status != LambdaAd.AD_SHOWING) {
+                            lastCallback?.onAdClose(status)
+                            lastCallback = null
+                        }
+                    }
+                }).apply {
+                lAdMultipleAdapters[i] = this
+                loadInterstitial(true)
+            }
+            LogUtil.d("Launcher", "loadInterstitial:${i} ------>>> ${Thread.currentThread().id}")
+        }
+    }
+
     // 该方法用于网络重连时调，其实sdk里面加载失败也会超时重试，如果该方法仅仅只是加快重试的时机而已
     fun reLoadIfNeed() {
+        LogUtil.d("Launcher", "reLoadIfNeed !! ------>>> ${Thread.currentThread().id}")
         for (id in intAndRawIds) {
             lAdMultipleAdapters[id]?.loadInterstitial(true)
         }
@@ -535,8 +568,10 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
         if (adActivity == null) {
-            adActivity = activity
             loadAd(activity, true)
+        }
+        if (activity is BaseActivity<*>) {
+            adActivity = activity
         }
     }
 
