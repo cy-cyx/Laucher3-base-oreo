@@ -87,6 +87,7 @@ import com.android.launcher3.util.ViewOnDrawExecutor;
 import com.lambda.common.utils.utilcode.util.AppUtils;
 import com.lambda.common.utils.utilcode.util.ConvertUtils;
 import com.lambda.common.utils.utilcode.util.Utils;
+import com.theme.lambda.launcher.Constants;
 import com.theme.lambda.launcher.utils.AppCategoryFilter;
 
 import java.io.FileDescriptor;
@@ -977,9 +978,10 @@ public class LauncherModel extends BroadcastReceiver
                                             ShortcutInfo.FLAG_DISABLED_QUIET_USER : 0;
                                     ComponentName cn = intent.getComponent();
                                     targetPkg = cn == null ? intent.getPackage() : cn.getPackageName();
-                                    if ("ALL_APPS".equals(intent.getAction())) {
-                                        cn = new ComponentName("ALL_APPS", "ALL_APPS");
-                                        targetPkg = "ALL_APPS";
+                                    // all_app特殊处理
+                                    if (Constants.sAllppAction.equals(intent.getAction())) {
+                                        cn = new ComponentName(Constants.sAllppAction, Constants.sAllppAction);
+                                        targetPkg = Constants.sAllppAction;
                                     }
 
                                     if (!Process.myUserHandle().equals(c.user)) {
@@ -1000,19 +1002,17 @@ public class LauncherModel extends BroadcastReceiver
 
                                     // If there is no target package, its an implicit intent
                                     // (legacy shortcut) which is always valid
+                                    // 或者是all_app
                                     boolean validTarget = TextUtils.isEmpty(targetPkg) ||
-                                            launcherApps.isPackageEnabledForProfile(targetPkg, c.user);
-
-                                    if ("ALL_APPS".equals(intent.getAction())) {
-                                        validTarget = true;
-                                    }
+                                            launcherApps.isPackageEnabledForProfile(targetPkg, c.user) ||
+                                            Constants.sAllppAction.equals(intent.getAction());
 
                                     if (cn != null && validTarget) {
                                         // If the apk is present and the shortcut points to a specific
                                         // component.
 
                                         // If the component is already present
-                                        if ("ALL_APPS".equals(intent.getAction()) || launcherApps.isActivityEnabledForProfile(cn, c.user)) {
+                                        if (Constants.sAllppAction.equals(intent.getAction()) || launcherApps.isActivityEnabledForProfile(cn, c.user)) {
                                             // no special handling necessary for this item
                                             c.markRestored();
                                         } else {
@@ -1088,7 +1088,7 @@ public class LauncherModel extends BroadcastReceiver
                                     boolean useLowResIcon = !c.isOnWorkspaceOrHotseat() &&
                                             c.getInt(rankIndex) >= FolderIcon.NUM_ITEMS_IN_PREVIEW;
 
-                                    if ("ALL_APPS".equals(intent.getAction())) {
+                                    if (Constants.sAllppAction.equals(intent.getAction())) {
                                         info = new ShortcutInfo();
                                         info.iconBitmap = BitmapFactory.decodeResource(Utils.getApp().getResources(), R.mipmap.all_apps);
                                     } else if (c.restoreFlag != 0) {
@@ -1181,21 +1181,24 @@ public class LauncherModel extends BroadcastReceiver
                                     folderInfo.spanX = 1;
                                     folderInfo.spanY = 1;
                                     folderInfo.options = c.getInt(optionsIndex);
-                                    final List<UserHandle> profiles = mUserManager.getUserProfiles();
-                                    for (AppInfo appInfo : AppCategoryFilter.getAppInfoList(mLauncherApps, profiles, mUserManager)) {
-                                        String packageName = appInfo.componentName.getPackageName();
-                                        if (AppCategoryFilter.filter(packageName, folderInfo.title)) {
-                                            ShortcutInfo shortcutInfo = new ShortcutInfo(appInfo);
-                                            if (packageName != null) {
-                                                shortcutInfo.iconBitmap = ConvertUtils.drawable2Bitmap(AppUtils.getAppIcon(packageName));
-                                                Bitmap themeBitmap = ThemeIconMapping.getThemeBitmap(Utils.getApp(), packageName);
-                                                if (themeBitmap != null) {
-                                                    shortcutInfo.iconBitmap = themeBitmap;
+                                    // 同类型app收拢成文件夹展示逻辑
+                                    if (AppCategoryFilter.customFoldersName.contains(folderInfo.title.toString())) {
+                                        final List<UserHandle> profiles = mUserManager.getUserProfiles();
+                                        for (AppInfo appInfo : AppCategoryFilter.getAppInfoList(mLauncherApps, profiles, mUserManager)) {
+                                            String packageName = appInfo.componentName.getPackageName();
+                                            if (AppCategoryFilter.filter(packageName, folderInfo.title)) {
+                                                ShortcutInfo shortcutInfo = new ShortcutInfo(appInfo);
+                                                if (packageName != null) {
+                                                    shortcutInfo.iconBitmap = ConvertUtils.drawable2Bitmap(AppUtils.getAppIcon(packageName));
+                                                    Bitmap themeBitmap = ThemeIconMapping.getThemeBitmap(Utils.getApp(), packageName);
+                                                    if (themeBitmap != null) {
+                                                        shortcutInfo.iconBitmap = themeBitmap;
+                                                    }
                                                 }
+                                                shortcutInfo.title = appInfo.title;
+                                                shortcutInfo.contentDescription = "";
+                                                folderInfo.add(shortcutInfo, false);
                                             }
-                                            shortcutInfo.title = appInfo.title;
-                                            shortcutInfo.contentDescription = "";
-                                            folderInfo.add(shortcutInfo, false);
                                         }
                                     }
 

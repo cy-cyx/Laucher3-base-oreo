@@ -11,4 +11,7 @@ object Constants {
 
     val sThemeTag =
         arrayListOf("Hot", "Glittery", "Anime", "Aesthetic", "Cool", "Pink", "Color", "Neon")
+
+    @JvmField
+    val sAllppAction = "ALL_APPS"
 }

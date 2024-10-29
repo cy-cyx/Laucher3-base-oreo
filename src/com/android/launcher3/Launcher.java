@@ -135,6 +135,7 @@ import com.android.launcher3.widget.PendingAddWidgetInfo;
 import com.android.launcher3.widget.WidgetAddFlowHandler;
 import com.android.launcher3.widget.WidgetHostViewLoader;
 import com.android.launcher3.widget.WidgetsContainerView;
+import com.theme.lambda.launcher.Constants;
 import com.theme.lambda.launcher.ad.AdUtil;
 import com.theme.lambda.launcher.statistics.EventName;
 import com.theme.lambda.launcher.statistics.EventUtil;
@@ -2624,7 +2625,7 @@ public class Launcher extends BaseActivity
         if (intent == null) {
             throw new IllegalArgumentException("Input must have a valid intent");
         }
-        if ("ALL_APPS".equals(intent.getAction())) {
+        if (Constants.sAllppAction.equals(intent.getAction())) {
             showAppsView(true, false, false);
             return;
         }

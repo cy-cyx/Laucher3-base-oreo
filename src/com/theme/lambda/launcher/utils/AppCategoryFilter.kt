@@ -64,6 +64,16 @@ object AppCategoryFilter {
         ).map { it.packageX ?: "" }
     }
 
+    @JvmField
+    val customFoldersName = arrayListOf(
+        Utils.getApp().getString(R.string.games),
+        Utils.getApp().getString(R.string.utilities),
+        Utils.getApp().getString(R.string.art_design),
+        Utils.getApp().getString(R.string.health),
+        Utils.getApp().getString(R.string.social),
+        Utils.getApp().getString(R.string.shopping),
+        Utils.getApp().getString(R.string.music_video)
+    )
 
     @JvmStatic
     fun getAppInfoList(

@@ -13,6 +13,7 @@ import android.util.Log;
 
 import com.lambda.common.utils.utilcode.util.AppUtils;
 import com.lambda.common.utils.utilcode.util.ConvertUtils;
+import com.theme.lambda.launcher.Constants;
 import com.theme.lambda.launcher.data.model.IconBean;
 import com.theme.lambda.launcher.data.model.ManifestBean;
 import com.theme.lambda.launcher.utils.CommonUtil;
@@ -56,7 +57,7 @@ public class ThemeIconMapping {
         if (packageName.equals(context.getPackageName())) {
             result = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_themes);
             cacheBitmap.put(packageName, result);
-        } else if (packageName.equals("ALL_APPS")) {
+        } else if (packageName.equals(Constants.sAllppAction)) {
             result = BitmapFactory.decodeResource(context.getResources(), R.mipmap.all_apps);
             cacheBitmap.put(packageName, result);
         }

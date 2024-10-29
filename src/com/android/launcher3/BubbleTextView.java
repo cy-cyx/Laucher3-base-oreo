@@ -54,6 +54,7 @@ import com.android.launcher3.graphics.HolographicOutlineHelper;
 import com.android.launcher3.graphics.IconPalette;
 import com.android.launcher3.graphics.PreloadIconDrawable;
 import com.android.launcher3.model.PackageItemInfo;
+import com.theme.lambda.launcher.Constants;
 import com.theme.lambda.launcher.utils.CommonUtil;
 
 import java.text.NumberFormat;
@@ -241,8 +242,8 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver, 
             if (themeIcon != null) {
                 showIcon = themeIcon;
             }
-        } else if (info.getIntent() != null && info.getIntent().getAction() != null && info.getIntent().getAction().equals("ALL_APPS")) {
-            Bitmap themeIcon = ThemeIconMapping.getThemeBitmap(CommonUtil.INSTANCE.getAppContext(), "ALL_APPS");
+        } else if (info.getIntent() != null && info.getIntent().getAction() != null && info.getIntent().getAction().equals(Constants.sAllppAction)) {
+            Bitmap themeIcon = ThemeIconMapping.getThemeBitmap(CommonUtil.INSTANCE.getAppContext(), Constants.sAllppAction);
             if (themeIcon != null) {
                 showIcon = themeIcon;
             }
