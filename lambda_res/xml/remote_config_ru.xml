@@ -312,19 +312,4 @@
             }
         </value>
     </entry>
-    <entry>
-        <key>OfferConfig</key>
-        <value>{
-            "offers": [
-            {
-            "id": "1",
-            "name": "Ultimate Charging Animation",
-            "icon_url": "https://s.dlapp.pro/com.ultimate.charging.screen.effect.png",
-            "click_url": "https://app.adjust.com/1ffi0b9g?gps_adid={gaid}&amp;campaign={package}&amp;adgroup={placement}"
-            }
-            ],
-            "is_show_in_box": true
-            }
-        </value>
-    </entry>
 </defaults>
