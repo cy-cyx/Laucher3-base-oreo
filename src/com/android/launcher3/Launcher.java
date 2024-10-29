@@ -230,7 +230,7 @@ public class Launcher extends BaseActivity
 
     private boolean mIsSafeModeEnabled;
 
-    public static final int APPWIDGET_HOST_ID = 1024;
+    public static int APPWIDGET_HOST_ID = 1024;
     public static final int EXIT_SPRINGLOADED_MODE_SHORT_TIMEOUT = 500;
     private static final int ON_ACTIVITY_RESULT_ANIMATION_DELAY = 500;
     private static final int ACTIVITY_START_DELAY = 1000;
@@ -388,6 +388,8 @@ public class Launcher extends BaseActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (LOGD) Log.d(TAG, "onCreate");
+        // todo 尝试修复线上奔溃
+        APPWIDGET_HOST_ID++;
         onCreateStartTime = System.currentTimeMillis();
         if (DEBUG_STRICT_MODE) {
             StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
