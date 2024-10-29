@@ -15,8 +15,6 @@ import com.android.launcher3.databinding.LayoutNativeAdMax2Binding
 import com.applovin.mediation.nativeAds.MaxNativeAdView
 import com.applovin.mediation.nativeAds.MaxNativeAdViewBinder
 import com.google.android.gms.ads.nativead.NativeAdView
-import com.ironsource.sc
-import com.ironsource.tr
 import com.lambda.adlib.LambdaAd
 import com.lambda.adlib.LambdaAd.LambdaAdTypeAlias.Companion.TYPE_INTERSTITIAL_TEXT
 import com.lambda.adlib.LambdaAd.LambdaAdTypeAlias.Companion.TYPE_OPEN_TEXT
@@ -26,13 +24,13 @@ import com.lambda.adlib.LambdaAdSdk
 import com.lambda.adlib.adapter.LAdMultipleAdapter
 import com.lambda.common.utils.utilcode.util.ActivityUtils
 import com.theme.lambda.launcher.Constants
+import com.theme.lambda.launcher.recall.RecallManager
 import com.theme.lambda.launcher.statistics.ADEventName
 import com.theme.lambda.launcher.statistics.EventUtil
 import com.theme.lambda.launcher.statistics.FirebaseAnalyticsUtil
 import com.theme.lambda.launcher.utils.CommonUtil
-import com.theme.lambda.launcher.utils.LogUtil
-import com.theme.lambda.launcher.recall.RecallManager
 import com.theme.lambda.launcher.utils.FirebaseConfigUtil
+import com.theme.lambda.launcher.utils.LogUtil
 import com.theme.lambda.launcher.utils.SpKey
 import com.theme.lambda.launcher.utils.getSpFloat
 import com.theme.lambda.launcher.utils.getSpLong
@@ -96,8 +94,14 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
         nativeAdapterCloseMap[scenes] = list
     }
 
+    var init = false
+
 
     fun initAd(app: Application) {
+        if (init) return
+        init = true
+        LogUtil.d("Launcher", "init ad ------>>>")
+
         app.registerActivityLifecycleCallbacks(this)
         LambdaAdSdk.registerLife(app)
 
@@ -508,7 +512,7 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
 
     private var lastShowAppOpenAd = 0L
 
-    fun showOpenAppAdNeed(runnable: Runnable) {
+    fun showOpenAppAdNeed(context: Context, runnable: Runnable) {
         // 进行一些参数判断
         var needShowAd = false
         val appOpenWaitInSec = FirebaseConfigUtil.getLong("app_open_wait_in_sec") ?: 43200
@@ -522,19 +526,8 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
         needShowAd = needShowAd || BuildConfig.isDebug
 
         if (needShowAd && isReady(AdName.app_open)) {
-            showAd(AdName.app_open, object : IAdCallBack {
-                override fun onNoReady() {
-                    runnable.run()
-                }
-
-                override fun onAdClose(status: Int) {
-                    if (status == LambdaAd.AD_SHOWING) {
-                        lastShowAppOpenAd = System.currentTimeMillis()
-                    }
-
-                    runnable.run()
-                }
-            })
+            lastShowAppOpenAd = System.currentTimeMillis()
+            OpenAppAdActivity.start(context, AdName.app_open, runnable)
         } else {
             runnable.run()
         }

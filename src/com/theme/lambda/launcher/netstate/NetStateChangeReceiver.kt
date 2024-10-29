@@ -14,7 +14,10 @@ class NetStateChangeReceiver : BroadcastReceiver() {
     private val TAG = "NetStateChangeReceiver"
 
     companion object {
+        var init = false
         fun registerReceiver(context: Context) {
+            if (init) return
+            init = true
             val intentFilter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
             context.registerReceiver(NetStateChangeReceiver(), intentFilter);
         }

@@ -10,9 +10,13 @@ object FirebaseConfigUtil : OnCompleteListener<Boolean> {
 
     private val TAG = "RemoteConfigUtil"
 
+    var init = false
+
     @SuppressLint("StaticFieldLeak")
     private var firebaseRemoteConfig: FirebaseRemoteConfig? = null
     fun initRemoteConfig() {
+        if (init) return
+        init = true
         LogUtil.d(TAG, "init")
         firebaseRemoteConfig = FirebaseRemoteConfig.getInstance()
         val configSettings = FirebaseRemoteConfigSettings.Builder().apply {

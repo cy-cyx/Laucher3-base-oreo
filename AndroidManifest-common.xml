@@ -199,6 +199,10 @@
             android:noHistory="true"
             android:taskAffinity=":remind"
             android:theme="@style/Translucent" />
+        <activity
+            android:name="com.theme.lambda.launcher.ad.OpenAppAdActivity"
+            android:excludeFromRecents="true"
+            android:theme="@style/Translucent" />
 
         <service
             android:name="com.theme.lambda.launcher.service.FirebaseService"

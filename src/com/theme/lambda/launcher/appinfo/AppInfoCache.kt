@@ -9,9 +9,13 @@ object AppInfoCache {
 
     val appInfos = ArrayList<AppInfo>()
 
-    fun init(context: Context){
+    var init = false
+
+    fun init(context: Context) {
+        if (init) return
+        init = true
         GlobalScope.launch(Dispatchers.IO) {
-            appInfos.addAll(AppInfoUtil.getAppInfo(context,true))
+            appInfos.addAll(AppInfoUtil.getAppInfo(context, true))
         }
     }
 

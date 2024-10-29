@@ -29,7 +29,11 @@ object VipManager {
     var productDetails: List<ProductDetails?>? = null
     var productRes: ProductRes? = null
 
+    var init = false
+
     fun init() {
+        if (init) return
+        init = true
         Billing.isDebug = BuildConfig.isDebug
         isVip.value = SpKey.isVip.getSpBool()
         // 延迟请求网络有坑，归因问题

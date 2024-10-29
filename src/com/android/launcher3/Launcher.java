@@ -2649,7 +2649,7 @@ public class Launcher extends BaseActivity
         if (AppUtil.isSystemApplication(this, packageName) || packageName.equals(getPackageName())) {
             startActivity(v, intent, item);
         } else {
-            AdUtil.INSTANCE.showOpenAppAdNeed(new Runnable() {
+            AdUtil.INSTANCE.showOpenAppAdNeed(this, new Runnable() {
                 @Override
                 public void run() {
                     startActivity(v, intent, item);

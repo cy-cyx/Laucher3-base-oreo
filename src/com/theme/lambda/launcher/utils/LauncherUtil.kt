@@ -25,6 +25,7 @@ object LauncherUtil {
             val intent = Intent(Settings.ACTION_HOME_SETTINGS)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+            intent.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS)
             context.startActivity(intent)
 
             gotoSetting = true
