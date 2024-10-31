@@ -59,4 +59,39 @@ object NetStateUtil {
             }
         }
     }
+
+    fun isWifiConnected(context: Context?): Boolean {
+        if (context != null) {
+            val mConnectivityManager = context
+                .getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val mWiFiNetworkInfo = mConnectivityManager
+                .getNetworkInfo(ConnectivityManager.TYPE_WIFI)
+            if (mWiFiNetworkInfo != null) {
+                return mWiFiNetworkInfo.state == NetworkInfo.State.CONNECTED || mWiFiNetworkInfo.state == NetworkInfo.State.CONNECTING
+            }
+        }
+        return false
+    }
+
+
+    fun isMobileConnected(context: Context?): Boolean {
+        if (context != null) {
+            val mConnectivityManager = context
+                .getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val mMobileNetworkInfo = mConnectivityManager
+                .getNetworkInfo(ConnectivityManager.TYPE_MOBILE)
+            if (mMobileNetworkInfo != null) {
+                return (mMobileNetworkInfo.state == NetworkInfo.State.CONNECTED
+                        || mMobileNetworkInfo.state == NetworkInfo.State.CONNECTING
+                        || isWifiConnected(context))
+                        && isHaveSIMCard(context)
+            }
+        }
+        return false
+    }
+
+    fun isHaveSIMCard(context: Context): Boolean {
+        val tm = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+        return tm.simState == TelephonyManager.SIM_STATE_READY
+    }
 }

@@ -7,6 +7,7 @@ import android.view.View
 import com.ironsource.tr
 import com.theme.lambda.launcher.ad.AdName
 import com.theme.lambda.launcher.ad.AdUtil
+import com.theme.lambda.launcher.appwidget.WidgetManager
 import com.theme.lambda.launcher.data.model.ManifestBean
 import com.theme.lambda.launcher.statistics.EventName
 import com.theme.lambda.launcher.statistics.EventUtil.logEvent
@@ -38,7 +39,7 @@ class ThemeManager {
 
     private var themeId = "" // 当前的主题id
     var previewThemeId = "" // 预览的主题id 可能为空
-    private var showThemeId = "" // 当前展示主题id，可能是预览
+    var showThemeId = "" // 当前展示主题id，可能是预览
 
     private var curManifestId = "" // 当前配置文件的主题id
     private var manifestBean: ManifestBean? = null
@@ -332,6 +333,8 @@ class ThemeManager {
         } else {
             wallpaperView?.gone()
         }
+        // 更新相关组件
+        WidgetManager.upData()
     }
 
     fun getCurManifest(): ManifestBean? {
