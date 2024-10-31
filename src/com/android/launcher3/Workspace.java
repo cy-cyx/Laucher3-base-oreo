@@ -652,7 +652,7 @@ public class Workspace extends PagedView
                     firstPage, false);
         }
 
-        CellLayout.LayoutParams lp = new CellLayout.LayoutParams(0, 0, firstPage.getCountX(), 1);
+        CellLayout.LayoutParams lp = new CellLayout.LayoutParams(0, 0, firstPage.getCountX(), 2);
         lp.canReorder = false;
         if (!firstPage.addViewToCellLayout(qsb, 0, getEmbeddedQsbId(), lp, true)) {
             Log.e(TAG, "Failed to add to item at (0, 0) to CellLayout");

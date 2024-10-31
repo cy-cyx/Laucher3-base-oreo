@@ -17,7 +17,7 @@
 <profiles xmlns:InvariantDeviceProfile="http://schemas.android.com/apk/res-auto">
 
     <profile
-        InvariantDeviceProfile:defaultLayoutId="@xml/default_workspace_4x4"
+        InvariantDeviceProfile:defaultLayoutId="@xml/default_workspace_4x5"
         InvariantDeviceProfile:hotseatIconSize="48"
         InvariantDeviceProfile:iconSizeF="48"
         InvariantDeviceProfile:iconTextSize="13.0"
@@ -29,10 +29,10 @@
         InvariantDeviceProfile:numFolderColumns="4"
         InvariantDeviceProfile:numFolderRows="4"
         InvariantDeviceProfile:numHotseatIcons="4"
-        InvariantDeviceProfile:numRows="4" />
+        InvariantDeviceProfile:numRows="5" />
 
     <profile
-        InvariantDeviceProfile:defaultLayoutId="@xml/default_workspace_4x4"
+        InvariantDeviceProfile:defaultLayoutId="@xml/default_workspace_4x5"
         InvariantDeviceProfile:hotseatIconSize="56"
         InvariantDeviceProfile:iconSizeF="60"
         InvariantDeviceProfile:iconTextSize="13.0"
@@ -44,7 +44,7 @@
         InvariantDeviceProfile:numFolderColumns="4"
         InvariantDeviceProfile:numFolderRows="4"
         InvariantDeviceProfile:numHotseatIcons="4"
-        InvariantDeviceProfile:numRows="4" />
+        InvariantDeviceProfile:numRows="5" />
 
     <profile
         InvariantDeviceProfile:defaultLayoutId="@xml/default_workspace_table"
