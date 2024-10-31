@@ -58,6 +58,11 @@ public class InfoDropTarget extends UninstallDropTarget {
         startDetailsActivityForInfo(d.dragInfo, mLauncher, callback);
     }
 
+    @Override
+    public void setTextBasedOnDragSource(Boolean isUninstall) {
+        // nodo
+    }
+
     /**
      * @return Whether the activity was started.
      */
@@ -105,6 +110,9 @@ public class InfoDropTarget extends UninstallDropTarget {
         if (info.title == "Theme")
             return false;
         if (info.getIntent() != null && info.getIntent().getAction() != null && info.getIntent().getAction().contains(RecommendAppManager.getActionHost())) {
+            return false;
+        }
+        if (info instanceof LauncherAppWidgetInfo && ((LauncherAppWidgetInfo) info).providerName != null && ((LauncherAppWidgetInfo) info).providerName.getPackageName().equals(CommonUtil.getAppContext().getPackageName())) {
             return false;
         }
 
