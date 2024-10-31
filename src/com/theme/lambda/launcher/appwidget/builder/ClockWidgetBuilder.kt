@@ -12,11 +12,11 @@ class ClockWidgetBuilder : BaseBuilder {
     override suspend fun buildSmallWidget(
         context: Context,
         id: String,
-        widgetsBean: WidgetsBean
-    ): RemoteViews {
+        widgetsBean: WidgetsBean?
+    ): RemoteViews? {
         val view = RemoteViews(context.packageName, R.layout.widget_clock_s)
-        val bean = widgetsBean.widgetResSmall
-        val bgResBean = bean.find { it.name == "bg" }
+        val bean = widgetsBean?.widgetResSmall
+        val bgResBean = bean?.find { it.name == "bg" }
         bgResBean?.let {
             val filesDir = CommonUtil.appContext!!.filesDir.path
             val url = "$filesDir/wallpaper/${id}/${it.pic}"
@@ -35,7 +35,7 @@ class ClockWidgetBuilder : BaseBuilder {
 //        view.setOnClickPendingIntent(R.id.bgIv, pendingIntent)
 
 
-        val styleResBean = bean.find { it.name == "clock_style" }
+        val styleResBean = bean?.find { it.name == "clock_style" }
         when (styleResBean?.clockStyle) {
             "arabic" -> view.setViewVisibility(R.id.clock1Ac, View.VISIBLE)
             "roman" -> view.setViewVisibility(R.id.clock2Ac, View.VISIBLE)
@@ -48,7 +48,7 @@ class ClockWidgetBuilder : BaseBuilder {
     override suspend fun buildMediumWidget(
         context: Context,
         id: String,
-        widgetsBean: WidgetsBean
+        widgetsBean: WidgetsBean?
     ): RemoteViews? {
        return null
     }
@@ -56,7 +56,7 @@ class ClockWidgetBuilder : BaseBuilder {
     override suspend fun buildLargeWidget(
         context: Context,
         id: String,
-        widgetsBean: WidgetsBean
+        widgetsBean: WidgetsBean?
     ): RemoteViews? {
         return null
     }

@@ -9,19 +9,19 @@ interface BaseBuilder {
     suspend fun buildSmallWidget(
         context: Context,
         id: String,
-        widgetsBean: WidgetsBean
+        widgetsBean: WidgetsBean?
     ): RemoteViews?
 
     suspend fun buildMediumWidget(
         context: Context,
         id: String,
-        widgetsBean: WidgetsBean
+        widgetsBean: WidgetsBean?
     ): RemoteViews?
 
     suspend fun buildLargeWidget(
         context: Context,
         id: String,
-        widgetsBean: WidgetsBean
+        widgetsBean: WidgetsBean?
     ): RemoteViews?
 
 }

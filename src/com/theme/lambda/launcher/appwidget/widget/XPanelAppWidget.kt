@@ -8,6 +8,7 @@ import com.google.gson.reflect.TypeToken
 import com.theme.lambda.launcher.appwidget.WidgetManager
 import com.theme.lambda.launcher.appwidget.WidgetType
 import com.theme.lambda.launcher.appwidget.builder.XPanelWidgetBuilder
+import com.theme.lambda.launcher.data.model.WidgetsBean
 import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.utils.GsonUtil
 import com.theme.lambda.launcher.utils.SpKey
@@ -76,17 +77,19 @@ class XPanelAppWidget : AppWidgetProvider() {
 
         ioScope.launch {
             for (appWidgetId in appWidgetIds) {
+                var bean: WidgetsBean? = null
                 ThemeManager.getThemeManagerIfExist()?.getCurManifest()?.widgets?.forEach {
                     if (it.widgetType == WidgetType.XPanel.type) {
-                        val view = XPanelWidgetBuilder().buildMediumWidget(
-                            context,
-                            ThemeManager.getThemeManagerIfExist()?.showThemeId ?: "",
-                            it
-                        )
-                        view?.let { v ->
-                            appWidgetManager.updateAppWidget(appWidgetId, v)
-                        }
+                        bean = it
                     }
+                }
+                val view = XPanelWidgetBuilder().buildMediumWidget(
+                    context,
+                    ThemeManager.getThemeManagerIfExist()?.showThemeId ?: "",
+                    bean
+                )
+                view?.let { v ->
+                    appWidgetManager.updateAppWidget(appWidgetId, v)
                 }
                 addXPanelId(appWidgetId)
             }
