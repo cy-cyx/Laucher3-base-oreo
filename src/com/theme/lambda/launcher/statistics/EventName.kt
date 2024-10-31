@@ -53,4 +53,5 @@ object EventName {
     val iconPageView = "iconPageView"
     val getAllClick = "getAllClick"
     val LOfferClick = "LOfferClick"
+    val LOfferExists = "LOfferExists"
 }

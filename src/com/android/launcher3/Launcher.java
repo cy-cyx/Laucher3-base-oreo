@@ -2663,7 +2663,8 @@ public class Launcher extends BaseActivity
             });
             Bundle bundle = new Bundle();
             bundle.putString("pn", packageName);
-            EventUtil.INSTANCE.logEvent(EventName.INSTANCE.LAppOpen, bundle);
+            bundle.putLong("start", System.currentTimeMillis() - (SpUtil.INSTANCE.getLong(SpKey.install_time, 0L)));
+            EventUtil.INSTANCE.logEvent(EventName.LAppOpen, bundle);
             NewInstallationManager.INSTANCE.clickApp(packageName);
         }
     }
