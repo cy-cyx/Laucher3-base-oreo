@@ -50,7 +50,7 @@ class ClockAppWidget : AppWidgetProvider() {
             ioScope.launch {
                 xClockAppIds.forEach { id ->
                     ThemeManager.getThemeManagerIfExist()?.getCurManifest()?.widgets?.forEach {
-                        if (it.widgetType == WidgetType.XPanel.type) {
+                        if (it.widgetType == WidgetType.Clocks.type) {
                             val view = ClockWidgetBuilder().buildSmallWidget(
                                 CommonUtil.appContext!!,
                                 ThemeManager.getThemeManagerIfExist()?.showThemeId ?: "",
