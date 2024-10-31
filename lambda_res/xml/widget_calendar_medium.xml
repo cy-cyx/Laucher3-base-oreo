@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:initialLayout="@layout/widget_calendar_m"
+    android:minWidth="320.0dip"
+    android:minHeight="110.0dip"
+    android:minResizeWidth="320.0dip"
+    android:minResizeHeight="50.0dip"
+    android:previewImage="@drawable/widget_calendar_mid_preview"
+    android:resizeMode="vertical"
+    android:widgetCategory="home_screen" />

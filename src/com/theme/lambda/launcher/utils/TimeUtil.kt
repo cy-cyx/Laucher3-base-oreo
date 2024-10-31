@@ -34,6 +34,10 @@ object TimeUtil {
         return calendar.get(Calendar.DAY_OF_WEEK).toWeek()
     }
 
+    fun getMouth(): String {
+        val calendar = Calendar.getInstance()
+        return (calendar.get(Calendar.MONTH) + 1).toMouth()
+    }
 
     fun Int.toMouth() = when (this) {
         2 -> CommonUtil.getString(R.string.february)
@@ -60,4 +64,21 @@ object TimeUtil {
         else -> CommonUtil.getString(R.string.sunday)
     }
 
+    fun getCurrentMonthLastDay(): Int {
+        val a = Calendar.getInstance()
+        a[Calendar.DATE] = 1 //把日期设置为当月第一天
+        a.roll(Calendar.DATE, -1) //日期回滚一天，也就是最后一天
+        return a[Calendar.DATE]
+    }
+
+    fun getCurrentMonthStartWeek(): Int {
+        val a = Calendar.getInstance()
+        a[Calendar.DATE] = 1 //把日期设置为当月第一天
+        return a[Calendar.DAY_OF_WEEK]
+    }
+
+    fun getCurrentDate(): Int {
+        val a = Calendar.getInstance()
+        return a[Calendar.DATE]
+    }
 }

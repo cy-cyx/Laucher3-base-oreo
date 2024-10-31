@@ -105,4 +105,5 @@
 
     <string name="xpanel">X Plane</string>
     <string name="clock">Clock</string>
+    <string name="calendar">Calendar</string>
 </resources>

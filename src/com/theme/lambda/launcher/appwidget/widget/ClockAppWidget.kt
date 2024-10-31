@@ -95,6 +95,10 @@ class ClockAppWidget : AppWidgetProvider() {
         }
     }
 
+    override fun onDeleted(context: Context?, appWidgetIds: IntArray?) {
+        super.onDeleted(context, appWidgetIds)
+    }
+
     override fun onEnabled(context: Context?) {
         super.onEnabled(context)
     }

@@ -7,7 +7,7 @@ import com.android.launcher3.ThemeManager
 import com.google.gson.reflect.TypeToken
 import com.theme.lambda.launcher.appwidget.WidgetManager
 import com.theme.lambda.launcher.appwidget.WidgetType
-import com.theme.lambda.launcher.appwidget.builder.XPanelWidgetBuilder
+import com.theme.lambda.launcher.appwidget.builder.CalendarWidgetBuilder
 import com.theme.lambda.launcher.data.model.WidgetsBean
 import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.utils.GsonUtil
@@ -19,15 +19,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 
-class XPanelAppWidget : AppWidgetProvider() {
+class CalendarAppWidget : AppWidgetProvider() {
 
     companion object {
         private val ioScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
-        private val xPanelAppIds: ArrayList<Int> by lazy {
+        private val xCalendarAppIds: ArrayList<Int> by lazy {
             val result = ArrayList<Int>()
             try {
-                val keyRemoveOfferIdsSp = SpKey.xpanelWidgetIds.getSpString()
+                val keyRemoveOfferIdsSp = SpKey.calendarWidgetIds.getSpString()
                 val typeToken = object : TypeToken<List<Int>>() {}
                 result.addAll(ArrayList(GsonUtil.gson.fromJson(keyRemoveOfferIdsSp, typeToken)))
             } catch (e: Exception) {
@@ -35,10 +35,10 @@ class XPanelAppWidget : AppWidgetProvider() {
             result
         }
 
-        private fun addXPanelId(id: Int) {
-            if (!xPanelAppIds.contains(id)) {
-                xPanelAppIds.add(id)
-                SpKey.xpanelWidgetIds.putSpString(GsonUtil.gson.toJson(xPanelAppIds))
+        private fun addCalendarId(id: Int) {
+            if (!xCalendarAppIds.contains(id)) {
+                xCalendarAppIds.add(id)
+                SpKey.calendarWidgetIds.putSpString(GsonUtil.gson.toJson(xCalendarAppIds))
             }
         }
 
@@ -49,10 +49,10 @@ class XPanelAppWidget : AppWidgetProvider() {
             lastUpDataTime = System.currentTimeMillis()
 
             ioScope.launch {
-                xPanelAppIds.forEach { id ->
+                xCalendarAppIds.forEach { id ->
                     ThemeManager.getThemeManagerIfExist()?.getCurManifest()?.widgets?.forEach {
-                        if (it.widgetType == WidgetType.XPanel.type) {
-                            val view = XPanelWidgetBuilder().buildMediumWidget(
+                        if (it.widgetType == WidgetType.Calendar.type) {
+                            val view = CalendarWidgetBuilder().buildMediumWidget(
                                 CommonUtil.appContext!!,
                                 ThemeManager.getThemeManagerIfExist()?.showThemeId ?: "",
                                 it
@@ -74,16 +74,15 @@ class XPanelAppWidget : AppWidgetProvider() {
         appWidgetIds: IntArray
     ) {
         super.onUpdate(context, appWidgetManager, appWidgetIds)
-
         ioScope.launch {
             for (appWidgetId in appWidgetIds) {
                 var bean: WidgetsBean? = null
                 ThemeManager.getThemeManagerIfExist()?.getCurManifest()?.widgets?.forEach {
-                    if (it.widgetType == WidgetType.XPanel.type) {
+                    if (it.widgetType == WidgetType.Calendar.type) {
                         bean = it
                     }
                 }
-                val view = XPanelWidgetBuilder().buildMediumWidget(
+                val view = CalendarWidgetBuilder().buildMediumWidget(
                     context,
                     ThemeManager.getThemeManagerIfExist()?.showThemeId ?: "",
                     bean
@@ -91,21 +90,21 @@ class XPanelAppWidget : AppWidgetProvider() {
                 view?.let { v ->
                     appWidgetManager.updateAppWidget(appWidgetId, v)
                 }
-                addXPanelId(appWidgetId)
+                addCalendarId(appWidgetId)
             }
         }
     }
 
     override fun onDeleted(context: Context?, appWidgetIds: IntArray?) {
         super.onDeleted(context, appWidgetIds)
-        
+
     }
 
-    override fun onEnabled(context: Context) {
-        super.onEnabled(context)
-    }
-
-    override fun onDisabled(context: Context) {
+    override fun onDisabled(context: Context?) {
         super.onDisabled(context)
+    }
+
+    override fun onEnabled(context: Context?) {
+        super.onEnabled(context)
     }
 }

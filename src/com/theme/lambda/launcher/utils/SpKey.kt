@@ -28,4 +28,5 @@ object SpKey {
 
     const val xpanelWidgetIds = "xpanelWidgetIds"
     const val clockWidgetIds = "clockWidgetIds"
+    const val calendarWidgetIds = "calendarWidgetIds"
 }

@@ -1,6 +1,7 @@
 package com.theme.lambda.launcher.appwidget
 
 import android.appwidget.AppWidgetManager
+import com.theme.lambda.launcher.appwidget.widget.CalendarAppWidget
 import com.theme.lambda.launcher.appwidget.widget.ClockAppWidget
 import com.theme.lambda.launcher.appwidget.widget.XPanelAppWidget
 import com.theme.lambda.launcher.utils.CommonUtil
@@ -12,5 +13,6 @@ object WidgetManager {
     fun upData() {
         XPanelAppWidget.upData()
         ClockAppWidget.upData()
+        CalendarAppWidget.upData()
     }
 }

@@ -24,17 +24,6 @@ class ClockWidgetBuilder : BaseBuilder {
             view.setImageViewBitmap(R.id.bgIv, bitmap)
         }
 
-//        val intent = Intent(CommonUtil.appContext, SplashActivity::class.java)
-//        val pendingIntent =
-//            PendingIntent.getActivity(
-//                CommonUtil.appContext,
-//                UUID.randomUUID().hashCode(),
-//                intent,
-//                PendingIntent.FLAG_IMMUTABLE
-//            )
-//        view.setOnClickPendingIntent(R.id.bgIv, pendingIntent)
-
-
         val styleResBean = bean?.find { it.name == "clock_style" }
         when (styleResBean?.clockStyle) {
             "arabic" -> view.setViewVisibility(R.id.clock1Ac, View.VISIBLE)
