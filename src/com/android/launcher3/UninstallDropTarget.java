@@ -10,11 +10,15 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.Toast;
 
 import com.android.launcher3.compat.LauncherAppsCompat;
+import com.android.launcher3.dragndrop.DragOptions;
 import com.theme.lambda.launcher.utils.CommonUtil;
+
+import java.util.ArrayList;
 
 public class UninstallDropTarget extends ButtonDropTarget {
 
@@ -33,6 +37,28 @@ public class UninstallDropTarget extends ButtonDropTarget {
         mHoverColor = getResources().getColor(R.color.uninstall_target_hover_tint);
 
         setDrawable(R.drawable.ic_uninstall_launcher);
+    }
+
+    @Override
+    public void onDragStart(DragObject dragObject, DragOptions options) {
+        super.onDragStart(dragObject, options);
+        // 推荐移除逻辑
+        if (dragObject.dragInfo != null) {
+            if (dragObject.dragInfo instanceof AppInfo info) {
+                if (info.intent != null && info.intent.getAction() != null && info.intent.getAction().contains(RecommendAppManager.getActionHost())) {
+                    setTextBasedOnDragSource(false);
+                    return;
+                }
+            }
+        }
+        setTextBasedOnDragSource(true);
+    }
+
+    public void setTextBasedOnDragSource(Boolean isUninstall) {
+        if (!TextUtils.isEmpty(getText())) {
+            setText(isUninstall ? R.string.uninstall_drop_target_label
+                    : R.string.remove_drop_target_label);
+        }
     }
 
     @Override
@@ -71,6 +97,16 @@ public class UninstallDropTarget extends ButtonDropTarget {
             }
         }
         if (intent != null) {
+
+            // 推荐移除逻辑
+            if (intent.getAction() != null && intent.getAction().contains(RecommendAppManager.getActionHost())) {
+                if (RecommendAppManager.isCanRemove(intent.getAction())) {
+                    return intent.getComponent();
+                } else {
+                    return null;
+                }
+            }
+
             LauncherActivityInfo info = LauncherAppsCompat.getInstance(context)
                     .resolveActivity(intent, user);
 
@@ -100,6 +136,18 @@ public class UninstallDropTarget extends ButtonDropTarget {
     public void completeDrop(final DragObject d) {
         DropTargetResultCallback callback = d.dragSource instanceof DropTargetResultCallback
                 ? (DropTargetResultCallback) d.dragSource : null;
+
+        // 推荐移除逻辑
+        if (d.dragInfo instanceof AppInfo appInfo) {
+            if (appInfo.intent != null && appInfo.intent.getAction() != null && appInfo.intent.getAction().contains(RecommendAppManager.getActionHost())) {
+                ArrayList<AppInfo> appInfos = new ArrayList<>();
+                appInfos.add(appInfo);
+                mLauncher.removeAppInfoFormAppView(appInfos);
+                RecommendAppManager.remove(appInfo);
+                return;
+            }
+        }
+
         startUninstallActivity(mLauncher, d.dragInfo, callback);
     }
 

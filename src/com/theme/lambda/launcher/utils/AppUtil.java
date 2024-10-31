@@ -1,9 +1,11 @@
 package com.theme.lambda.launcher.utils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.text.TextUtils;
 
 public class AppUtil {
@@ -30,5 +32,18 @@ public class AppUtil {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public static void openAppByName(Context context, String appPackAge) {
+        Intent shortcutInfoIntent = context.getPackageManager().getLaunchIntentForPackage(appPackAge);
+        try {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+                shortcutInfoIntent.setAction(Intent.ACTION_VIEW);
+                shortcutInfoIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            }
+            context.startActivity(shortcutInfoIntent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -30,4 +30,10 @@ class Offers {
 
     @SerializedName("click_url")
     var clickUrl: String = ""
+
+    @SerializedName("pn")
+    var pn: String = ""
+
+    @SerializedName("is_removable")
+    var isRemovable: Boolean = true
 }

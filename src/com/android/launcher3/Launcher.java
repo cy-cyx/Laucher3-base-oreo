@@ -4396,4 +4396,11 @@ public class Launcher extends BaseActivity
         }
         mainHander.removeCallbacks(loadingTimeOutRunnable);
     }
+
+    public void removeAppInfoFormAppView(ArrayList<AppInfo> appInfos) {
+        if (mAppsView != null) {
+            mAppsView.removeApps(appInfos);
+            tryAndUpdatePredictedApps();
+        }
+    }
 }

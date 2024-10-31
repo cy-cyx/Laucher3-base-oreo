@@ -24,4 +24,5 @@ object SpKey {
     const val keyNewInstallAppList = "keyNewInstallAppList"
 
     const val keyOfferConfig = "keyOfferConfig"
+    const val keyRemoveOfferId = "keyRemoveOfferId"
 }
