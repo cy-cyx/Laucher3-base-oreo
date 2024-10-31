@@ -27,4 +27,5 @@ object SpKey {
     const val keyRemoveOfferId = "keyRemoveOfferId"
 
     const val xpanelWidgetIds = "xpanelWidgetIds"
+    const val clockWidgetIds = "clockWidgetIds"
 }

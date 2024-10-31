@@ -1,0 +1,50 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:layout_width="220dp">
+
+    <ImageView
+        android:id="@+id/bgIv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:adjustViewBounds="true"
+        android:src="@drawable/widget_clock_small_bg" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/bgIv"
+        android:layout_alignBottom="@id/bgIv"
+        android:orientation="vertical">
+
+        <AnalogClock
+            android:id="@+id/clock1Ac"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:dial="@drawable/bg_clock_1"
+            android:hand_hour="@drawable/ic_clock_h_1"
+            android:hand_minute="@drawable/ic_clock_m_1" />
+
+        <AnalogClock
+            android:id="@+id/clock2Ac"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:dial="@drawable/bg_clock_2"
+            android:hand_hour="@drawable/ic_clock_h_2"
+            android:hand_minute="@drawable/ic_clock_m_2" />
+
+        <AnalogClock
+            android:id="@+id/clock3Ac"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:dial="@drawable/bg_clock_2"
+            android:hand_hour="@drawable/ic_clock_h_3"
+            android:hand_minute="@drawable/ic_clock_m_3" />
+
+    </FrameLayout>
+</RelativeLayout>
