@@ -1,10 +1,12 @@
-package com.theme.lambda.launcher.appwidget
+package com.theme.lambda.launcher.appwidget.widget
 
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
 import com.android.launcher3.ThemeManager
 import com.google.gson.reflect.TypeToken
+import com.theme.lambda.launcher.appwidget.WidgetManager
+import com.theme.lambda.launcher.appwidget.WidgetType
 import com.theme.lambda.launcher.appwidget.builder.XPanelWidgetBuilder
 import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.utils.GsonUtil
@@ -21,7 +23,7 @@ class XPanelAppWidget : AppWidgetProvider() {
     companion object {
         private val ioScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
-        val xpanelAppIds: ArrayList<Int> by lazy {
+        private val xPanelAppIds: ArrayList<Int> by lazy {
             val result = ArrayList<Int>()
             try {
                 val keyRemoveOfferIdsSp = SpKey.xpanelWidgetIds.getSpString()
@@ -32,16 +34,21 @@ class XPanelAppWidget : AppWidgetProvider() {
             result
         }
 
-        fun addXpanelId(id: Int) {
-            if (!xpanelAppIds.contains(id)) {
-                xpanelAppIds.add(id)
-                SpKey.xpanelWidgetIds.putSpString(GsonUtil.gson.toJson(xpanelAppIds))
+        private fun addXPanelId(id: Int) {
+            if (!xPanelAppIds.contains(id)) {
+                xPanelAppIds.add(id)
+                SpKey.xpanelWidgetIds.putSpString(GsonUtil.gson.toJson(xPanelAppIds))
             }
         }
 
+        private var lastUpDataTime = 0L
+
         fun upData() {
+            if (System.currentTimeMillis() - lastUpDataTime < 10000) return
+            lastUpDataTime = System.currentTimeMillis()
+
             ioScope.launch {
-                xpanelAppIds.forEach { id ->
+                xPanelAppIds.forEach { id ->
                     ThemeManager.getThemeManagerIfExist()?.getCurManifest()?.widgets?.forEach {
                         if (it.widgetType == WidgetType.XPanel.type) {
                             val view = XPanelWidgetBuilder().buildMediumWidget(
@@ -81,7 +88,7 @@ class XPanelAppWidget : AppWidgetProvider() {
                         }
                     }
                 }
-                addXpanelId(appWidgetId)
+                addXPanelId(appWidgetId)
             }
         }
     }
@@ -93,6 +100,4 @@ class XPanelAppWidget : AppWidgetProvider() {
     override fun onDisabled(context: Context) {
         super.onDisabled(context)
     }
-
-
 }

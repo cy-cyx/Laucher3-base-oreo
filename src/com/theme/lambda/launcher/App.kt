@@ -3,7 +3,6 @@ package com.theme.lambda.launcher
 import android.app.Application
 import android.content.Context
 import android.os.Build
-import android.os.Handler
 import android.os.Looper
 import android.text.TextUtils
 import android.util.Log
@@ -16,6 +15,7 @@ import com.theme.lambda.launcher.netstate.NetStateChangeReceiver
 import com.theme.lambda.launcher.service.FirebaseService
 import com.theme.lambda.launcher.statistics.EventUtil
 import com.theme.lambda.launcher.statistics.FirebaseAnalyticsUtil
+import com.theme.lambda.launcher.utils.BluetoothUtil
 import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.utils.FirebaseConfigUtil
 import com.theme.lambda.launcher.utils.OsUtil
@@ -59,6 +59,7 @@ class App : Application() {
                     FirebaseService.subscribe()
                     NetStateChangeReceiver.registerReceiver(this)
                     AppInfoCache.init(this)
+                    BluetoothUtil.init(this)
                     false
                 }
             }

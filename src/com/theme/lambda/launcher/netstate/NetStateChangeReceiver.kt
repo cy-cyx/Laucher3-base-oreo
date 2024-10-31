@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
 import com.theme.lambda.launcher.ad.AdUtil
+import com.theme.lambda.launcher.appwidget.widget.XPanelAppWidget
 import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.utils.LogUtil
 
@@ -38,5 +39,6 @@ class NetStateChangeReceiver : BroadcastReceiver() {
             }
         }
         curNetWorkType = networkType
+        XPanelAppWidget.upData()
     }
 }

@@ -7,9 +7,12 @@ import android.net.NetworkInfo
 import android.provider.Settings
 import android.telephony.TelephonyManager
 
-
 object NetStateUtil {
+    var init = false
+
     fun init(context: Context) {
+        if (init) return
+        init = true
         NetStateChangeReceiver.registerReceiver(context)
     }
 
@@ -51,10 +54,10 @@ object NetStateUtil {
     fun openNetSettingUI(context: Context) {
         try {
             context.startActivity(Intent(Settings.ACTION_WIFI_SETTINGS))
-        }catch (e:Exception){
+        } catch (e: Exception) {
             try {
                 context.startActivity(Intent(Settings.ACTION_SETTINGS))
-            }catch (e:Exception){
+            } catch (e: Exception) {
 
             }
         }

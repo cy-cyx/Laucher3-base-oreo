@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import com.theme.lambda.launcher.appwidget.widget.XPanelAppWidget
 
 object BluetoothUtil : BroadcastReceiver() {
 
@@ -12,7 +13,11 @@ object BluetoothUtil : BroadcastReceiver() {
         BluetoothAdapter.getDefaultAdapter()
     }
 
+    var init = false
+
     fun init(context: Context?) {
+        if (init) return
+        init = true
         var intentFilter = IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
         context?.registerReceiver(this, intentFilter);
     }
@@ -26,5 +31,6 @@ object BluetoothUtil : BroadcastReceiver() {
     }
 
     override fun onReceive(p0: Context?, p1: Intent?) {
+        XPanelAppWidget.upData()
     }
 }
