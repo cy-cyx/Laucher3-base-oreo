@@ -1177,6 +1177,7 @@ public class Launcher extends BaseActivity
         if (AdUtil.getWapActivity() != null) {
             AdUtil.loadAdOpenAppOnly(AdUtil.getWapActivity());
         }
+        AdUtil.reloadOpenAdIfNeed();
     }
 
     /**
