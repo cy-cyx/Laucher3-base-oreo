@@ -1,8 +1,11 @@
 package com.theme.lambda.launcher.data.api
 
 import com.theme.lambda.launcher.data.model.BaseResult
+import com.theme.lambda.launcher.data.model.ForestDayWeather
+import com.theme.lambda.launcher.data.model.ForestWeather
 import com.theme.lambda.launcher.data.model.NewResult
 import com.theme.lambda.launcher.data.model.ResResult
+import com.theme.lambda.launcher.data.model.Weather
 import retrofit2.http.GET
 import retrofit2.http.Query
 import retrofit2.http.QueryMap
@@ -25,4 +28,23 @@ interface AppApi {
     suspend fun getResource(
         @QueryMap map: Map<String, String>
     ): BaseResult<ResResult>
+
+    @GET("/api/v1/open_weather_map?path=/data/2.5/weather&")
+    suspend fun weather(
+        @Query("lat") lat: String?,
+        @Query("lon") lon: String?,
+        @Query("lang") lang: String?,
+    ): Weather
+
+    @GET("/api/v1/open_weather_map?path=/data/2.5/forecast&")
+    suspend fun forecastWeather(
+        @Query("lat") lat: String?,
+        @Query("lon") lon: String?,
+        @Query("lang") lang: String?,
+    ): ForestWeather
+
+    @GET("/api/v1/open_weather_map?path=/data/2.5/forecast/daily")
+    suspend fun forecastDay7Weather(
+        @QueryMap map: Map<String, String>
+    ): ForestDayWeather
 }

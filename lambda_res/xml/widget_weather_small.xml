@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
-    android:initialLayout="@layout/widget_weather_m"
-    android:minWidth="320.0dip"
+    android:initialLayout="@layout/widget_weather_s"
+    android:minWidth="110.0dip"
     android:minHeight="110.0dip"
-    android:minResizeWidth="320.0dip"
+    android:minResizeWidth="110.0dip"
     android:minResizeHeight="50.0dip"
-    android:previewImage="@drawable/widget_weather_mid_preview"
+    android:previewImage="@drawable/widget_weather_small_preview"
     android:resizeMode="vertical"
     android:widgetCategory="home_screen" />

@@ -1,10 +1,12 @@
 package com.theme.lambda.launcher.utils
 
+import android.text.TextUtils
 import com.android.launcher3.R
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
+import java.util.Locale
 
 object TimeUtil {
 
@@ -80,5 +82,17 @@ object TimeUtil {
     fun getCurrentDate(): Int {
         val a = Calendar.getInstance()
         return a[Calendar.DATE]
+    }
+
+    fun getDateToString(timeStamp: Long, format: String): String {
+        var fm: String = format
+        if (TextUtils.isEmpty(fm)) {
+            fm = "yyyy-MM-dd HH:mm"
+        }
+        val calendar = Calendar.getInstance()
+        calendar.timeInMillis = timeStamp
+        val sf = SimpleDateFormat(fm, Locale.getDefault())
+        val date = sf.format(calendar.time)
+        return date
     }
 }

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:layout_width="220dp">
+
+    <ImageView
+        android:id="@+id/bgIv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:adjustViewBounds="true"
+        android:src="@drawable/widget_weather_small_bg" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/bgIv"
+        android:layout_alignBottom="@id/bgIv"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="14dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/cityTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NULL"
+                android:textColor="#ffffff"
+                android:textSize="18dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/temperatureTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="#ffffff"
+                    android:textSize="36dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/duTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:text="°C"
+                    android:textColor="#ffffff"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="16dp"
+            android:orientation="vertical"
+            android:layout_marginBottom="14dp">
+
+
+            <ImageView
+                android:id="@+id/weatherIconIv"
+                android:layout_width="20dp"
+                android:src="@drawable/ic_01d"
+                android:layout_height="20dp"/>
+
+            <TextView
+                android:id="@+id/weatherDesTv"
+                android:text="NULL"
+                android:textSize="14dp"
+                android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/temperatureHLTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="H:0° L:0°"
+                android:textColor="#ffffff"
+                android:textSize="14dp" />
+
+        </LinearLayout>
+    </FrameLayout>
+
+</RelativeLayout>

@@ -29,4 +29,8 @@ object SpKey {
     const val xpanelWidgetIds = "xpanelWidgetIds"
     const val clockWidgetIds = "clockWidgetIds"
     const val calendarWidgetIds = "calendarWidgetIds"
+    const val weatherWidgetIds = "weatherWidgetIds"
+
+    val keyLastLat = "key_last_lat"
+    val keyLastLon = "key_last_lon"
 }

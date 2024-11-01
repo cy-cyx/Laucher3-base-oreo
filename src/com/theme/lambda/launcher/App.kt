@@ -11,6 +11,7 @@ import com.android.launcher3.CycleTimer
 import com.lambdaweather.LambdaWeather
 import com.theme.lambda.launcher.ad.AdUtil
 import com.theme.lambda.launcher.appinfo.AppInfoCache
+import com.theme.lambda.launcher.appwidget.utils.WeatherManager
 import com.theme.lambda.launcher.data.di.allModules
 import com.theme.lambda.launcher.netstate.NetStateChangeReceiver
 import com.theme.lambda.launcher.service.FirebaseService
@@ -62,6 +63,7 @@ class App : Application() {
                     NetStateChangeReceiver.registerReceiver(this)
                     AppInfoCache.init(this)
                     BluetoothUtil.init(this)
+                    WeatherManager.init()
                     false
                 }
             }
