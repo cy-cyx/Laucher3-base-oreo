@@ -81,6 +81,10 @@
     <string name="select_apps_to_icons">Select apps to icons</string>
     <string name="join_premium_plan">Join Premium Plan</string>
     <string name="watch_ad_to_unlock_all">Watch (%s/3) Ads to Unlock ALL</string>
+    <string name="how_to_set_widget">How to set widget?</string>
+    <string name="how_to_set_widget_tip1">Long press the desktop and click on the “widgets”.</string>
+    <string name="how_to_set_widget_tip2">Scroll down to find the widget bar,hold and drag it to the desktop.</string>
+    <string name="next">Next</string>
 
     <string name="monday">Mon</string>
     <string name="tuesday">Tue</string>
