@@ -161,9 +161,6 @@ object RecommendAppManager {
 
     private fun isCanAdd(offer: Offers): Boolean {
         if (AppUtil.checkAppInstalled(CommonUtil.appContext, offer.pn)) {
-            EventUtil.logEvent(EventName.LOfferExists, Bundle().apply {
-                putString("id", offer.id)
-            })
             return false
         }
         if (removeOfferIds.contains(offer.id)) {
@@ -255,6 +252,9 @@ object RecommendAppManager {
             appInfo?.let { info ->
                 launcher.removeAppInfoFormAppView(arrayListOf(info))
                 remove(info)
+                EventUtil.logEvent(EventName.LOfferExists, Bundle().apply {
+                    putString("id", offer.id)
+                })
             }
         }
     }
