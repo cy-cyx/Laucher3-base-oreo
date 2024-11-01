@@ -1177,6 +1177,7 @@ public class Launcher extends BaseActivity
         if (AdUtil.getWapActivity() != null) {
             AdUtil.loadAdOpenAppOnly(AdUtil.getWapActivity());
         }
+        AdUtil.reloadOpenAdIfNeed();
     }
 
     /**
@@ -3533,6 +3534,11 @@ public class Launcher extends BaseActivity
 
         if (addedApps != null && mAppsView != null) {
             mAppsView.addApps(addedApps);
+
+            // 移除一下推荐,如果需要(且仅安装时)
+            if (addedApps.size() == 1) {
+                RecommendAppManager.dealRemoveRecomAppOnReallyInstall(this, addedApps.get(0), mAppsView.getApps().getApps());
+            }
         }
     }
 

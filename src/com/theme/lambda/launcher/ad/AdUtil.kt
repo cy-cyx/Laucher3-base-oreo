@@ -431,6 +431,16 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
         }
     }
 
+    @JvmStatic
+    fun reloadOpenAdIfNeed() {
+        val adapter = lAdMultipleAdapters[AdName.app_open]
+        adapter?.let {
+            if (it.isReady()) {
+                it.loadInterstitial(true)
+            }
+        }
+    }
+
     // 该方法用于网络重连时调，其实sdk里面加载失败也会超时重试，如果该方法仅仅只是加快重试的时机而已
     fun reLoadIfNeed() {
         LogUtil.d("Launcher", "reLoadIfNeed !! ------>>> ${Thread.currentThread().id}")

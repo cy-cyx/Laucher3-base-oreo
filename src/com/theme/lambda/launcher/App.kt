@@ -7,9 +7,11 @@ import android.os.Looper
 import android.text.TextUtils
 import android.util.Log
 import android.webkit.WebView
+import com.android.launcher3.CycleTimer
 import com.lambdaweather.LambdaWeather
 import com.theme.lambda.launcher.ad.AdUtil
 import com.theme.lambda.launcher.appinfo.AppInfoCache
+import com.theme.lambda.launcher.appwidget.utils.WeatherManager
 import com.theme.lambda.launcher.data.di.allModules
 import com.theme.lambda.launcher.netstate.NetStateChangeReceiver
 import com.theme.lambda.launcher.service.FirebaseService
@@ -56,10 +58,12 @@ class App : Application() {
                 Log.d(TAG, "init 6 : ${System.currentTimeMillis() - start}")
 
                 Looper.myQueue().addIdleHandler {
+                    CycleTimer.init()
                     FirebaseService.subscribe()
                     NetStateChangeReceiver.registerReceiver(this)
                     AppInfoCache.init(this)
                     BluetoothUtil.init(this)
+                    WeatherManager.init()
                     false
                 }
             }

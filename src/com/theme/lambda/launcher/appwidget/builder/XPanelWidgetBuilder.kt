@@ -27,7 +27,7 @@ class XPanelWidgetBuilder : BaseBuilder {
     override suspend fun buildSmallWidget(
         context: Context,
         id: String,
-        widgetsBean: WidgetsBean
+        widgetsBean: WidgetsBean?
     ): RemoteViews? {
         return null
     }
@@ -35,30 +35,30 @@ class XPanelWidgetBuilder : BaseBuilder {
     override suspend fun buildMediumWidget(
         context: Context,
         id: String,
-        widgetsBean: WidgetsBean
+        widgetsBean: WidgetsBean?
     ): RemoteViews? {
         val view = RemoteViews(context.packageName, R.layout.widget_x_panel_m)
 
         val filesDir = CommonUtil.appContext!!.filesDir.path
         var bean = widgetsBean
 
-        val widgetResBean = bean.widgetResMid.find { it.name == "bg" }
+        val widgetResBean = bean?.widgetResMid?.find { it.name == "bg" }
         widgetResBean?.let {
             val url = "$filesDir/wallpaper/${id}/${it.pic}"
             var bitmap = GlideUtil.loadBitmap(CommonUtil.appContext!!, url, 10f)
             view.setImageViewBitmap(R.id.bgIv, bitmap)
         }
 
-        val colorResBean = bean.widgetResMid.find { it.name == "font_color" }
+        val colorResBean = bean?.widgetResMid?.find { it.name == "font_color" }
         var color = Color.parseColor("#ffffffff")
         try {
             color = Color.parseColor(colorResBean?.color)
         } catch (e: Exception) {
         }
 
-        val maskAlphaResBean = bean.widgetResSmall.find { it.name == "mask_alpha" }
+        val maskAlphaResBean = bean?.widgetResSmall?.find { it.name == "mask_alpha" }
         var maskAlpha = maskAlphaResBean?.maskAlpha ?: 0.4f
-        val maskColorResBean = bean.widgetResSmall.find { it.name == "mask_color" }
+        val maskColorResBean = bean?.widgetResSmall?.find { it.name == "mask_color" }
         var maskColor = Color.parseColor("#00000000")
         try {
             maskColor = Color.parseColor(maskColorResBean?.maskColor)
@@ -104,7 +104,7 @@ class XPanelWidgetBuilder : BaseBuilder {
         view.setTextColor(R.id.powerTv, color)
 
         val batteryResBean =
-            bean.widgetResMid.find { it.name == batteryCharging.toBatteryChargingKey() }
+            bean?.widgetResMid?.find { it.name == batteryCharging.toBatteryChargingKey() }
         if (batteryResBean?.pic != null) {
             val url = "$filesDir/wallpaper/${id}/${batteryResBean.pic}"
             var bitmap = GlideUtil.loadBitmap(CommonUtil.appContext!!, url, w = 100, h = 100)
@@ -126,7 +126,7 @@ class XPanelWidgetBuilder : BaseBuilder {
         // 蓝牙
         var isBlueToothOpen = BluetoothUtil.isEnabled()
         if (isBlueToothOpen) {
-            val bluetoothBean = bean.widgetResMid.find { it.name == "bluetooth_on" }
+            val bluetoothBean = bean?.widgetResMid?.find { it.name == "bluetooth_on" }
             if (bluetoothBean?.pic != null) {
                 val url = "$filesDir/wallpaper/${id}/${bluetoothBean.pic}"
                 var bitmap = GlideUtil.loadBitmap(CommonUtil.appContext!!, url, w = 100, h = 100)
@@ -135,7 +135,7 @@ class XPanelWidgetBuilder : BaseBuilder {
                 view.setImageViewResource(R.id.bluetoothIv, R.drawable.ic_panel_bluetooth)
             }
         } else {
-            val bluetoothBean = bean.widgetResMid.find { it.name == "bluetooth_off" }
+            val bluetoothBean = bean?.widgetResMid?.find { it.name == "bluetooth_off" }
             if (bluetoothBean?.pic != null) {
                 val url = "$filesDir/wallpaper/${id}/${bluetoothBean.pic}"
                 var bitmap = GlideUtil.loadBitmap(CommonUtil.appContext!!, url, w = 100, h = 100)
@@ -155,7 +155,7 @@ class XPanelWidgetBuilder : BaseBuilder {
         // wifi
         var isWifiOpen = NetStateUtil.isWifiConnected(CommonUtil.appContext)
         if (isWifiOpen) {
-            val wifiBean = bean.widgetResMid.find { it.name == "wifi_on" }
+            val wifiBean = bean?.widgetResMid?.find { it.name == "wifi_on" }
             if (wifiBean?.pic != null) {
                 val url = "$filesDir/wallpaper/${id}/${wifiBean.pic}"
                 var bitmap = GlideUtil.loadBitmap(CommonUtil.appContext!!, url, w = 100, h = 100)
@@ -164,7 +164,7 @@ class XPanelWidgetBuilder : BaseBuilder {
                 view.setImageViewResource(R.id.wifiIv, R.drawable.ic_panel_wifi)
             }
         } else {
-            val wifiBean = bean.widgetResMid.find { it.name == "wifi_off" }
+            val wifiBean = bean?.widgetResMid?.find { it.name == "wifi_off" }
             if (wifiBean?.pic != null) {
                 val url = "$filesDir/wallpaper/${id}/${wifiBean.pic}"
                 var bitmap = GlideUtil.loadBitmap(CommonUtil.appContext!!, url, w = 100, h = 100)
@@ -184,7 +184,7 @@ class XPanelWidgetBuilder : BaseBuilder {
         // cellular
         var isCellularOpen = NetStateUtil.isMobileConnected(CommonUtil.appContext)
         if (isCellularOpen) {
-            val networkBean = bean.widgetResMid.find { it.name == "network_on" }
+            val networkBean = bean?.widgetResMid?.find { it.name == "network_on" }
             if (networkBean?.pic != null) {
                 val url = "$filesDir/wallpaper/${id}/${networkBean.pic}"
                 var bitmap = GlideUtil.loadBitmap(CommonUtil.appContext!!, url, w = 100, h = 100)
@@ -193,7 +193,7 @@ class XPanelWidgetBuilder : BaseBuilder {
                 view.setImageViewResource(R.id.cellularIv, R.drawable.ic_panel_cellular)
             }
         } else {
-            val networkBean = bean.widgetResMid.find { it.name == "network_off" }
+            val networkBean = bean?.widgetResMid?.find { it.name == "network_off" }
             if (networkBean?.pic != null) {
                 val url = "$filesDir/wallpaper/${id}/${networkBean.pic}"
                 var bitmap = GlideUtil.loadBitmap(CommonUtil.appContext!!, url, w = 100, h = 100)
@@ -206,7 +206,7 @@ class XPanelWidgetBuilder : BaseBuilder {
             R.id.cellularFl,
             PendingIntent.getActivity(
                 context, 0,
-                SystemIntentUtil.getCellularSetPageIntent(), FLAG_IMMUTABLE
+                SystemIntentUtil.getSetIntent(), FLAG_IMMUTABLE
             )
         )
 
@@ -215,7 +215,7 @@ class XPanelWidgetBuilder : BaseBuilder {
         view.setTextViewText(R.id.lightTv, "$lightRate%")
         view.setTextColor(R.id.lightTv, color)
 
-        val lightResBean = bean.widgetResMid.find { it.name == "light" }
+        val lightResBean = bean?.widgetResMid?.find { it.name == "light" }
         if (lightResBean?.pic != null) {
             val url = "$filesDir/wallpaper/${id}/${lightResBean.pic}"
             var bitmap = GlideUtil.loadBitmap(CommonUtil.appContext!!, url, w = 100, h = 100)
@@ -237,7 +237,7 @@ class XPanelWidgetBuilder : BaseBuilder {
         view.setTextColor(R.id.romTv, color)
         view.setTextColor(R.id.ronTitleTv, color)
 
-        val romResBean = bean.widgetResMid.find { it.name == emoryRate.toRomKey() }
+        val romResBean = bean?.widgetResMid?.find { it.name == emoryRate.toRomKey() }
         if (romResBean?.pic != null) {
             val url = "$filesDir/wallpaper/${id}/${romResBean.pic}"
             var bitmap = GlideUtil.loadBitmap(CommonUtil.appContext!!, url, w = 100, h = 100)
@@ -260,7 +260,7 @@ class XPanelWidgetBuilder : BaseBuilder {
     override suspend fun buildLargeWidget(
         context: Context,
         id: String,
-        widgetsBean: WidgetsBean
+        widgetsBean: WidgetsBean?
     ): RemoteViews? {
         return null
     }

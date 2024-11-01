@@ -5,8 +5,10 @@ import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
+import com.android.launcher3.Launcher
 import com.android.launcher3.R
 import com.android.launcher3.databinding.DialogStoreRatingDialogBinding
+import com.theme.lambda.launcher.base.BaseDialog
 import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.utils.RateUtil
 import com.theme.lambda.launcher.utils.SpKey
@@ -15,12 +17,16 @@ import com.theme.lambda.launcher.utils.gone
 import com.theme.lambda.launcher.utils.putSpBool
 import com.theme.lambda.launcher.utils.visible
 
-class StoreRatingsDialog(context: Context) : Dialog(context, R.style.Theme_translucentDialog) {
+class StoreRatingsDialog(context: Context) : BaseDialog(context, R.style.Theme_translucentDialog) {
 
     companion object {
         fun show(context: Context) {
             if (SpKey.hasStoreRatings.getSpBool()) return
-            StoreRatingsDialog(context).show()
+            if (context is Launcher) {
+                context.showDialogOnQueue(StoreRatingsDialog(context))
+            } else {
+                StoreRatingsDialog(context).show()
+            }
         }
     }
 

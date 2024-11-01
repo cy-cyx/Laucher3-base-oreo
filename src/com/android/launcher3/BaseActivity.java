@@ -24,11 +24,15 @@ import android.view.View.AccessibilityDelegate;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.launcher3.logging.UserEventDispatcher;
+import com.theme.lambda.launcher.base.BaseDialog;
+import com.theme.lambda.launcher.base.DialogManager;
 
 public abstract class BaseActivity extends FragmentActivity {
 
     protected DeviceProfile mDeviceProfile;
     protected UserEventDispatcher mUserEventDispatcher;
+
+    private DialogManager dialogManager = new DialogManager();
 
     public DeviceProfile getDeviceProfile() {
         return mDeviceProfile;
@@ -55,5 +59,9 @@ public abstract class BaseActivity extends FragmentActivity {
             return (BaseActivity) context;
         }
         return ((BaseActivity) ((ContextWrapper) context).getBaseContext());
+    }
+
+    public void showDialogOnQueue(BaseDialog dialog) {
+        dialogManager.showDialogOnQueue(dialog);
     }
 }

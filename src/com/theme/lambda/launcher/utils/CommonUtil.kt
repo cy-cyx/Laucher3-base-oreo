@@ -17,6 +17,7 @@ import java.util.Locale
 
 object CommonUtil {
 
+    @JvmStatic
     var appContext: Application? = null
 
     fun dp2px(dpVal: Float): Int {

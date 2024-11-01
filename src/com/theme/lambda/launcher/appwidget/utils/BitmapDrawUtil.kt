@@ -1,5 +1,6 @@
 package com.theme.lambda.launcher.appwidget.utils
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Paint
@@ -8,8 +9,19 @@ import android.graphics.Rect
 import android.graphics.RectF
 import android.graphics.Typeface
 import android.util.TypedValue
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.View.MeasureSpec
+import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.android.launcher3.databinding.ItemCalendarBinding
 import com.theme.lambda.launcher.utils.CommonUtil
+import com.theme.lambda.launcher.utils.TimeUtil
 
 
 object BitmapDrawUtil {
@@ -55,5 +67,98 @@ object BitmapDrawUtil {
             CommonUtil.dp2px(radius).toFloat(), paint
         )
         return bitmap
+    }
+
+    fun buildCalendarViewBitmap(
+        w: Int,
+        h: Int,
+        fontSize: Int,
+        color: Int,
+        selectColor: Int
+    ): Bitmap {
+        val calendarView = CalendarView(CommonUtil.appContext!!, w, h, fontSize, color, selectColor)
+        calendarView.measure(
+            MeasureSpec.makeMeasureSpec(CommonUtil.dp2px(w.toFloat()), MeasureSpec.EXACTLY),
+            MeasureSpec.makeMeasureSpec(CommonUtil.dp2px(h.toFloat()), MeasureSpec.EXACTLY)
+        )
+        calendarView.layout(0, 0, CommonUtil.dp2px(w.toFloat()), CommonUtil.dp2px(h.toFloat()))
+        calendarView.isDrawingCacheEnabled = true
+        calendarView.buildDrawingCache()
+        val bitmap = Bitmap.createBitmap(calendarView.drawingCache)
+        calendarView.destroyDrawingCache()
+        return bitmap
+    }
+
+    class CalendarView(
+        context: Context,
+        w: Int,
+        h: Int,
+        fontSize: Int,
+        color: Int,
+        selectColor: Int
+    ) :
+        FrameLayout(context) {
+
+        var data = ArrayList<String>()
+
+        init {
+            // 测试数据
+            data.addAll(arrayListOf("S", "M", "T", "W", "T", "F", "S"))
+            for (i in 1 until TimeUtil.getCurrentMonthStartWeek()) {
+                data.add("")
+            }
+            for (i in 1..TimeUtil.getCurrentMonthLastDay()) {
+                data.add(i.toString())
+            }
+            addView(RecyclerView(context).apply {
+                layoutManager = GridLayoutManager(context, 7)
+                adapter = CalendarAdapter(w, h, fontSize, color, selectColor, data)
+            })
+        }
+
+        class CalendarAdapter(
+            var w: Int,
+            var h: Int,
+            var fontSize: Int,
+            var color: Int,
+            var selectColor: Int,
+            var data: ArrayList<String>
+        ) :
+            RecyclerView.Adapter<ViewHolder>() {
+            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+                val view = ItemCalendarBinding.inflate(LayoutInflater.from(parent.context))
+                view.textTv.setTextColor(color)
+                view.textTv.gravity = Gravity.CENTER
+                view.textTv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, fontSize.toFloat())
+                var i = data.size / 7
+                if (data.size % 7 > 1) {
+                    i++
+                }
+                view.root.layoutParams =
+                    LayoutParams(
+                        LayoutParams.MATCH_PARENT,
+                        CommonUtil.dp2px(h / i.toFloat())
+                    )
+                return CalendarViewHolder(view.root)
+            }
+
+            override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+                if (holder is CalendarViewHolder) {
+                    val bind = ItemCalendarBinding.bind(holder.view)
+
+                    bind.textTv.setText(data[position])
+                    if (data[position] == TimeUtil.getCurrentDate().toString()) {
+                        bind.maskCm.visibility = View.VISIBLE
+                        bind.maskCm.setColor(selectColor)
+                    }
+                }
+            }
+
+            override fun getItemCount(): Int {
+                return data.size
+            }
+
+            class CalendarViewHolder(var view: View) : ViewHolder(view)
+        }
     }
 }

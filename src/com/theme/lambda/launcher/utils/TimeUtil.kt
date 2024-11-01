@@ -1,10 +1,12 @@
 package com.theme.lambda.launcher.utils
 
+import android.text.TextUtils
 import com.android.launcher3.R
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
+import java.util.Locale
 
 object TimeUtil {
 
@@ -34,6 +36,10 @@ object TimeUtil {
         return calendar.get(Calendar.DAY_OF_WEEK).toWeek()
     }
 
+    fun getMouth(): String {
+        val calendar = Calendar.getInstance()
+        return (calendar.get(Calendar.MONTH) + 1).toMouth()
+    }
 
     fun Int.toMouth() = when (this) {
         2 -> CommonUtil.getString(R.string.february)
@@ -60,4 +66,33 @@ object TimeUtil {
         else -> CommonUtil.getString(R.string.sunday)
     }
 
+    fun getCurrentMonthLastDay(): Int {
+        val a = Calendar.getInstance()
+        a[Calendar.DATE] = 1 //把日期设置为当月第一天
+        a.roll(Calendar.DATE, -1) //日期回滚一天，也就是最后一天
+        return a[Calendar.DATE]
+    }
+
+    fun getCurrentMonthStartWeek(): Int {
+        val a = Calendar.getInstance()
+        a[Calendar.DATE] = 1 //把日期设置为当月第一天
+        return a[Calendar.DAY_OF_WEEK]
+    }
+
+    fun getCurrentDate(): Int {
+        val a = Calendar.getInstance()
+        return a[Calendar.DATE]
+    }
+
+    fun getDateToString(timeStamp: Long, format: String): String {
+        var fm: String = format
+        if (TextUtils.isEmpty(fm)) {
+            fm = "yyyy-MM-dd HH:mm"
+        }
+        val calendar = Calendar.getInstance()
+        calendar.timeInMillis = timeStamp
+        val sf = SimpleDateFormat(fm, Locale.getDefault())
+        val date = sf.format(calendar.time)
+        return date
+    }
 }

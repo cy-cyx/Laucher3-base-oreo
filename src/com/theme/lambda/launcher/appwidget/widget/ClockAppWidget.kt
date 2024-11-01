@@ -3,11 +3,13 @@ package com.theme.lambda.launcher.appwidget.widget
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
+import android.widget.RemoteViews
 import com.android.launcher3.ThemeManager
 import com.google.gson.reflect.TypeToken
 import com.theme.lambda.launcher.appwidget.WidgetManager
 import com.theme.lambda.launcher.appwidget.WidgetType
 import com.theme.lambda.launcher.appwidget.builder.ClockWidgetBuilder
+import com.theme.lambda.launcher.data.model.WidgetsBean
 import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.utils.GsonUtil
 import com.theme.lambda.launcher.utils.SpKey
@@ -74,21 +76,27 @@ class ClockAppWidget : AppWidgetProvider() {
         super.onUpdate(context, appWidgetManager, appWidgetIds)
         ioScope.launch {
             for (appWidgetId in appWidgetIds) {
+                var bean: WidgetsBean? = null
                 ThemeManager.getThemeManagerIfExist()?.getCurManifest()?.widgets?.forEach {
                     if (it.widgetType == WidgetType.Clocks.type) {
-                        val view = ClockWidgetBuilder().buildSmallWidget(
-                            context,
-                            ThemeManager.getThemeManagerIfExist()?.showThemeId ?: "",
-                            it
-                        )
-                        view?.let { v ->
-                            appWidgetManager.updateAppWidget(appWidgetId, v)
-                        }
+                        bean = it
                     }
+                }
+                val view = ClockWidgetBuilder().buildSmallWidget(
+                    context,
+                    ThemeManager.getThemeManagerIfExist()?.showThemeId ?: "",
+                    bean
+                )
+                view?.let { v ->
+                    appWidgetManager.updateAppWidget(appWidgetId, v)
                 }
                 addClockId(appWidgetId)
             }
         }
+    }
+
+    override fun onDeleted(context: Context?, appWidgetIds: IntArray?) {
+        super.onDeleted(context, appWidgetIds)
     }
 
     override fun onEnabled(context: Context?) {

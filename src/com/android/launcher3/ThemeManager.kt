@@ -32,6 +32,7 @@ import com.theme.lambda.launcher.widget.dialog.ApplyLauncherPermissionDialog
 import com.theme.lambda.launcher.widget.dialog.QuitPreviewSureDialog
 import com.theme.lambda.launcher.widget.dialog.SetDefaultFailedDialog
 import com.theme.lambda.launcher.widget.dialog.StoreRatingsDialog
+import com.theme.lambda.launcher.widget.dialog.WidgetGuideDialog
 import java.io.File
 import java.lang.ref.WeakReference
 
@@ -250,6 +251,7 @@ class ThemeManager {
                 if (LauncherUtil.isDefaultLauncher(it)) {
                     // 设置回来成功
                     StoreRatingsDialog.show(it)
+                    WidgetGuideDialog.show(it)
 
                     logEvent(EventName.permissionGrant, Bundle().apply {
                         putString("scene", "detail")

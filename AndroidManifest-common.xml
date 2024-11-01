@@ -222,8 +222,8 @@
 
         <receiver
             android:name="com.theme.lambda.launcher.appwidget.widget.XPanelAppWidget"
-            android:label="@string/xpanel"
-            android:exported="false">
+            android:exported="false"
+            android:label="@string/xpanel">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -235,8 +235,8 @@
 
         <receiver
             android:name="com.theme.lambda.launcher.appwidget.widget.ClockAppWidget"
-            android:label="@string/clock"
-            android:exported="false">
+            android:exported="false"
+            android:label="@string/clock">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -244,6 +244,31 @@
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_clock_small" />
+        </receiver>
+
+        <receiver
+            android:name="com.theme.lambda.launcher.appwidget.widget.CalendarAppWidget"
+            android:exported="false"
+            android:label="@string/calendar">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_calendar_medium" />
+        </receiver>
+        <receiver
+            android:name="com.theme.lambda.launcher.appwidget.widget.WeatherAppWidget"
+            android:exported="false"
+            android:label="@string/weather">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_weather_small" />
         </receiver>
     </application>
 </manifest>

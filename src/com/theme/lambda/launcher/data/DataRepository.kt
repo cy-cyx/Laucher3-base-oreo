@@ -1,14 +1,19 @@
 package com.theme.lambda.launcher.data
 
+import android.util.Log
 import androidx.room.Room
 import com.lambda.common.http.RequestParam
 import com.theme.lambda.launcher.Constants
 import com.theme.lambda.launcher.data.api.AppApi
 import com.theme.lambda.launcher.data.http.RetrofitUtil
+import com.theme.lambda.launcher.data.model.ForestDayWeather
+import com.theme.lambda.launcher.data.model.ForestWeather
 import com.theme.lambda.launcher.data.model.NewResult
 import com.theme.lambda.launcher.data.model.ResResult
 import com.theme.lambda.launcher.data.model.ThemeRes
+import com.theme.lambda.launcher.data.model.Weather
 import com.theme.lambda.launcher.utils.CommonUtil
+import com.theme.lambda.launcher.utils.LocalUtil
 import com.theme.lambda.launcher.utils.TimeUtil
 import java.util.Locale
 
@@ -69,5 +74,48 @@ object DataRepository {
 
     fun getDownLoadThemeRecord(): List<ThemeRes> {
         return db.themeResDao().getDownLoadThemeResList()
+    }
+
+    suspend fun getWeather(): Weather? {
+        try {
+            return service.weather(
+                LocalUtil.lat.toString(),
+                LocalUtil.lon.toString(),
+                Locale.getDefault().language
+            )
+        } catch (e: Exception) {
+            Log.d("xxxxxxx", "$e")
+        }
+        return null
+    }
+
+    suspend fun getForestWeather(): ForestWeather? {
+        try {
+            return service.forecastWeather(
+                LocalUtil.lat.toString(),
+                LocalUtil.lon.toString(),
+                Locale.getDefault().language
+            )
+        } catch (e: Exception) {
+
+        }
+        return null
+    }
+
+    suspend fun getForestDayWeather(): ForestDayWeather? {
+        try {
+            val map = mapOf(
+                "lat" to LocalUtil.lat.toString(),
+                "lon" to LocalUtil.lon.toString(),
+                "lang" to Locale.getDefault().language,
+                "cnt" to "7",
+                "host" to "api.openweathermap.org"
+            )
+            return service.forecastDay7Weather(
+                map
+            )
+        } catch (e: Exception) {
+        }
+        return null
     }
 }
