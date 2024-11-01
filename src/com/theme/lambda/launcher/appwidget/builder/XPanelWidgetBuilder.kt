@@ -206,7 +206,7 @@ class XPanelWidgetBuilder : BaseBuilder {
             R.id.cellularFl,
             PendingIntent.getActivity(
                 context, 0,
-                SystemIntentUtil.getCellularSetPageIntent(), FLAG_IMMUTABLE
+                SystemIntentUtil.getSetIntent(), FLAG_IMMUTABLE
             )
         )
 

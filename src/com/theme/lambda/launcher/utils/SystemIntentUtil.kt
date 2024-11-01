@@ -13,5 +13,6 @@ object SystemIntentUtil {
     fun getLightSetPageIntent() = Intent(Settings.ACTION_DISPLAY_SETTINGS)
     fun getRomSetPageIntent() = Intent(Settings.ACTION_INTERNAL_STORAGE_SETTINGS)
     fun getLocalSetPageIntent() = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+    fun getSetIntent() = Intent(Settings.ACTION_SETTINGS)
 }
 
