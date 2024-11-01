@@ -239,4 +239,23 @@ object RecommendAppManager {
             SpKey.keyRemoveOfferId.putSpString(GsonUtil.gson.toJson(removeOfferIds))
         }
     }
+
+    @JvmStatic
+    fun dealRemoveRecomAppOnReallyInstall(
+        launcher: Launcher,
+        installApp: AppInfo,
+        allApps: List<AppInfo>
+    ) {
+        val offerConfig = getOfferConfig() ?: return
+        val packageName = installApp.componentName?.packageName ?: ""
+        val offer = offerConfig.offers.find { it.pn.equals(packageName) }
+        offer?.let { offer ->
+            val appInfo =
+                allApps.find { it.componentName?.packageName?.equals("${actionHost}${offer.id}") ?: false }
+            appInfo?.let { info ->
+                launcher.removeAppInfoFormAppView(arrayListOf(info))
+                remove(info)
+            }
+        }
+    }
 }

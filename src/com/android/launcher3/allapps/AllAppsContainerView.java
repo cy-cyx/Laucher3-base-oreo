@@ -245,6 +245,10 @@ public class AllAppsContainerView extends BaseContainerView implements DragSourc
         mAppsRecyclerView.reset();
     }
 
+    public AlphabeticalAppsList getApps() {
+        return mApps;
+    }
+
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
