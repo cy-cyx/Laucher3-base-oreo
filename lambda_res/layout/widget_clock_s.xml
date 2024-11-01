@@ -39,7 +39,6 @@
 
         <AnalogClock
             android:id="@+id/clock3Ac"
-            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:dial="@drawable/bg_clock_2"

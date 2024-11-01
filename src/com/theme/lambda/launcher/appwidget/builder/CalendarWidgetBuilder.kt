@@ -37,7 +37,7 @@ class CalendarWidgetBuilder : BaseBuilder {
         }
 
         val colorResBean = bean?.widgetResSmall?.find { it.name == "font_color" }
-        var color = Color.parseColor("#ff000000")
+        var color = Color.parseColor("#ffffffff")
         try {
             color = Color.parseColor(colorResBean?.color)
         } catch (e: Exception) {

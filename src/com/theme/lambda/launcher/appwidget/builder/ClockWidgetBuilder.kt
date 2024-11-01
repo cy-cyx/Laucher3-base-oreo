@@ -25,6 +25,7 @@ class ClockWidgetBuilder : BaseBuilder {
         }
 
         val styleResBean = bean?.find { it.name == "clock_style" }
+        view.setViewVisibility(R.id.clock3Ac, View.GONE)
         when (styleResBean?.clockStyle) {
             "arabic" -> view.setViewVisibility(R.id.clock1Ac, View.VISIBLE)
             "roman" -> view.setViewVisibility(R.id.clock2Ac, View.VISIBLE)
