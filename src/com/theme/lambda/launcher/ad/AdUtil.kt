@@ -301,7 +301,8 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
 
     private val priorityLoadIntAndRawIds = listOf(
         AdName.splash,
-        AdName.interleaving
+        AdName.interleaving,
+        AdName.app_open
     )
 
     private val intAndRawIds = listOf(
@@ -578,10 +579,8 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
         if (adActivity == null) {
-            loadAd(activity, true)
-        }
-        if (activity is BaseActivity<*>) {
             adActivity = activity
+            loadAd(activity, true)
         }
     }
 

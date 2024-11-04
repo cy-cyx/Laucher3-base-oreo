@@ -186,9 +186,7 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
         requestNotificationPermission()
 
         // 进入首页加载所有广告
-        AdUtil.getWapActivity()?.let {
-            AdUtil.loadAd(it, false)
-        }
+        AdUtil.loadAd(this, false)
 
         RecommendAppManager.init(this)
     }
