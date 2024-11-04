@@ -330,6 +330,12 @@ public class LauncherModel extends BroadcastReceiver
             if (modelItem instanceof ShortcutInfo && item instanceof ShortcutInfo) {
                 ShortcutInfo modelShortcut = (ShortcutInfo) modelItem;
                 ShortcutInfo shortcut = (ShortcutInfo) item;
+                if (modelShortcut.title == null){
+                    modelShortcut.title = "";
+                }
+                if (modelItem.title == null){
+                    modelItem.title = "";
+                }
                 if (modelShortcut.title.toString().equals(shortcut.title.toString()) &&
                         modelShortcut.intent.filterEquals(shortcut.intent) &&
                         modelShortcut.id == shortcut.id &&
