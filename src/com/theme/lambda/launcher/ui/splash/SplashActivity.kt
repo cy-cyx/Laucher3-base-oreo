@@ -9,7 +9,6 @@ import android.view.View
 import androidx.lifecycle.lifecycleScope
 import com.android.launcher3.databinding.ActivitySplashBinding
 import com.lambda.adlib.LambdaAd
-import com.lambda.common.utils.utilcode.util.LogUtils
 import com.theme.lambda.launcher.Constants
 import com.theme.lambda.launcher.ad.AdName
 import com.theme.lambda.launcher.ad.AdUtil
@@ -21,12 +20,12 @@ import com.theme.lambda.launcher.statistics.EventName
 import com.theme.lambda.launcher.statistics.EventUtil
 import com.theme.lambda.launcher.ui.theme.ThemeActivity
 import com.theme.lambda.launcher.utils.CommonUtil
+import com.theme.lambda.launcher.utils.LauncherUtil
 import com.theme.lambda.launcher.utils.StatusBarUtil
 import com.theme.lambda.launcher.utils.visible
 import com.theme.lambda.launcher.vip.VipManager
 import com.theme.lambda.launcher.widget.dialog.LoadingDialog
 import com.theme.lambda.launcher.widget.dialog.NetErrorDialog
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -75,16 +74,21 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
     override fun onResume() {
         super.onResume()
-        startLoadingCheckNet()
-        // 保底ad没有回调返回
-        if (isShowAd) {
-            gotoNext()
-        }
-        // 处理重连网络
-        if (hasClickConnectNow) {
-            hasClickConnectNow = false
-            cacheBlock?.let {
-                checkNetState(it)
+        // 应该是主屏幕就保证不会再进入闪屏页
+        if (LauncherUtil.isDefaultLauncher(this)){
+            finish()
+        }else{
+            startLoadingCheckNet()
+            // 保底ad没有回调返回
+            if (isShowAd) {
+                gotoNext()
+            }
+            // 处理重连网络
+            if (hasClickConnectNow) {
+                hasClickConnectNow = false
+                cacheBlock?.let {
+                    checkNetState(it)
+                }
             }
         }
     }
