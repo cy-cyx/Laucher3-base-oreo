@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2012 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2012 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -28,54 +27,46 @@
             launcher:className="com.android.launcher3.Launcher"
             launcher:packageName="com.theme.lambda.launcher" />
     </resolve>
-    <resolve
+    <folder
         launcher:screen="0"
+        launcher:title="@string/store"
         launcher:x="1"
-        launcher:y="-2">
-        <favorite launcher:uri="#Intent;action=STORE;end" />
-    </resolve>
-    <resolve
+        launcher:y="-2"></folder>
+    <folder
         launcher:screen="0"
+        launcher:title="@string/games"
         launcher:x="2"
-        launcher:y="-2">
-        <favorite launcher:uri="#Intent;action=GAMES;end" />
-    </resolve>
-    <resolve
+        launcher:y="-2"></folder>
+    <folder
         launcher:screen="0"
+        launcher:title="@string/utilities"
         launcher:x="3"
-        launcher:y="-2">
-        <favorite launcher:uri="#Intent;action=UTILITIES;end" />
-    </resolve>
+        launcher:y="-2"></folder>
 
-    <resolve
+    <folder
         launcher:screen="0"
+        launcher:title="@string/art_design"
         launcher:x="0"
-        launcher:y="-1">
-        <favorite launcher:uri="#Intent;action=ART_DESIGN;end" />
-    </resolve>
-    <resolve
+        launcher:y="-1"></folder>
+    <folder
         launcher:screen="0"
+        launcher:title="@string/health"
         launcher:x="1"
-        launcher:y="-1">
-        <favorite launcher:uri="#Intent;action=HEALTH;end" />
-    </resolve>
-    <resolve
+        launcher:y="-1"></folder>
+    <folder
         launcher:screen="0"
+        launcher:title="@string/social"
         launcher:x="2"
-        launcher:y="-1">
-        <favorite launcher:uri="#Intent;action=SOCIAL;end" />
-    </resolve>
-    <resolve
+        launcher:y="-1"></folder>
+    <folder
         launcher:screen="0"
+        launcher:title="@string/shopping"
         launcher:x="3"
-        launcher:y="-1">
-        <favorite launcher:uri="#Intent;action=SHOPPING;end" />
-    </resolve>
-    <resolve
+        launcher:y="-1"></folder>
+    <folder
         launcher:screen="0"
+        launcher:title="@string/music_video"
         launcher:x="4"
-        launcher:y="-1">
-        <favorite launcher:uri="#Intent;action=MUSIC_VIDEO;end" />
-    </resolve>
+        launcher:y="-1"></folder>
 
 </favorites>

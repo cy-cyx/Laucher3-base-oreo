@@ -26,7 +26,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.LauncherActivityInfo;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Handler;
@@ -36,13 +35,12 @@ import android.os.Process;
 import android.os.SystemClock;
 import android.os.Trace;
 import android.os.UserHandle;
-
-import androidx.annotation.Nullable;
-
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.LongSparseArray;
 import android.util.MutableInt;
+
+import androidx.annotation.Nullable;
 
 import com.android.launcher3.compat.AppWidgetManagerCompat;
 import com.android.launcher3.compat.LauncherAppsCompat;
@@ -84,11 +82,8 @@ import com.android.launcher3.util.Preconditions;
 import com.android.launcher3.util.Provider;
 import com.android.launcher3.util.Thunk;
 import com.android.launcher3.util.ViewOnDrawExecutor;
-import com.lambda.common.utils.utilcode.util.AppUtils;
-import com.lambda.common.utils.utilcode.util.ConvertUtils;
 import com.lambda.common.utils.utilcode.util.Utils;
 import com.theme.lambda.launcher.Constants;
-import com.theme.lambda.launcher.utils.AppCategoryFilter;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -330,10 +325,10 @@ public class LauncherModel extends BroadcastReceiver
             if (modelItem instanceof ShortcutInfo && item instanceof ShortcutInfo) {
                 ShortcutInfo modelShortcut = (ShortcutInfo) modelItem;
                 ShortcutInfo shortcut = (ShortcutInfo) item;
-                if (modelShortcut.title == null){
+                if (modelShortcut.title == null) {
                     modelShortcut.title = "";
                 }
-                if (modelItem.title == null){
+                if (modelItem.title == null) {
                     modelItem.title = "";
                 }
                 if (modelShortcut.title.toString().equals(shortcut.title.toString()) &&
@@ -1202,32 +1197,11 @@ public class LauncherModel extends BroadcastReceiver
                                     folderInfo.spanX = 1;
                                     folderInfo.spanY = 1;
                                     folderInfo.options = c.getInt(optionsIndex);
-                                    // 同类型app收拢成文件夹展示逻辑
-                                    if (AppCategoryFilter.customFoldersName.contains(folderInfo.title.toString())) {
-                                        final List<UserHandle> profiles = mUserManager.getUserProfiles();
-                                        for (AppInfo appInfo : AppCategoryFilter.getAppInfoList(mLauncherApps, profiles, mUserManager)) {
-                                            String packageName = appInfo.componentName.getPackageName();
-                                            if (AppCategoryFilter.filter(packageName, folderInfo.title)) {
-                                                ShortcutInfo shortcutInfo = new ShortcutInfo(appInfo);
-                                                if (packageName != null) {
-                                                    shortcutInfo.iconBitmap = ConvertUtils.drawable2Bitmap(AppUtils.getAppIcon(packageName));
-                                                    Bitmap themeBitmap = ThemeIconMapping.getThemeBitmap(Utils.getApp(), packageName, "");
-                                                    if (themeBitmap != null) {
-                                                        shortcutInfo.iconBitmap = themeBitmap;
-                                                    }
-                                                }
-                                                shortcutInfo.title = appInfo.title;
-                                                shortcutInfo.contentDescription = "";
-                                                folderInfo.add(shortcutInfo, false);
-                                            }
-                                        }
-                                    }
 
-                                    // 推荐文件夹
+                                    // 推荐文件夹需要动态分类
                                     if (RecommendAppManager.isFeaturedFolder(folderInfo.title.toString())) {
                                         RecommendAppManager.addOfferIntoFeaturedFolder(folderInfo);
                                     }
-
 
                                     // no special handling required for restored folders
                                     c.markRestored();

@@ -3439,7 +3439,6 @@ public class Launcher extends BaseActivity
      */
     public void startBinding() {
         if (LOGD) Log.d(TAG, "startBinding <<-----------(Launcher:" + this.hashCode() + ")");
-        hideLoading();
         if (LauncherAppState.PROFILE_STARTUP) {
             Trace.beginSection("Starting page bind");
         }

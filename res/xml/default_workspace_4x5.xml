@@ -19,12 +19,11 @@
     <include launcher:workspace="@xml/dw_phone_hotseat" />
 
     <!-- Bottom row -->
-    <resolve
+    <folder
         launcher:screen="0"
+        launcher:title="@string/music_video"
         launcher:x="0"
-        launcher:y="-3">
-        <favorite launcher:uri="#Intent;action=MUSIC_VIDEO;end" />
-    </resolve>
+        launcher:y="-3"></folder>
     <resolve
         launcher:screen="0"
         launcher:x="1"
@@ -40,48 +39,41 @@
             launcher:className="com.android.launcher3.Launcher"
             launcher:packageName="com.theme.lambda.launcher" />
     </resolve>
-    <resolve
+    <folder
         launcher:screen="0"
+        launcher:title="@string/store"
         launcher:x="1"
-        launcher:y="-2">
-        <favorite launcher:uri="#Intent;action=STORE;end" />
-    </resolve>
-    <resolve
+        launcher:y="-2"></folder>
+    <folder
         launcher:screen="0"
+        launcher:title="@string/games"
         launcher:x="2"
-        launcher:y="-2">
-        <favorite launcher:uri="#Intent;action=GAMES;end" />
-    </resolve>
-    <resolve
+        launcher:y="-2"></folder>
+    <folder
         launcher:screen="0"
+        launcher:title="@string/utilities"
         launcher:x="3"
-        launcher:y="-2">
-        <favorite launcher:uri="#Intent;action=UTILITIES;end" />
-    </resolve>
+        launcher:y="-2"></folder>
 
-    <resolve
+    <folder
         launcher:screen="0"
+        launcher:title="@string/art_design"
         launcher:x="0"
-        launcher:y="-1">
-        <favorite launcher:uri="#Intent;action=ART_DESIGN;end" />
-    </resolve>
-    <resolve
+        launcher:y="-1"></folder>
+    <folder
         launcher:screen="0"
+        launcher:title="@string/health"
         launcher:x="1"
-        launcher:y="-1">
-        <favorite launcher:uri="#Intent;action=HEALTH;end" />
-    </resolve>
-    <resolve
+        launcher:y="-1"></folder>
+    <folder
         launcher:screen="0"
+        launcher:title="@string/social"
         launcher:x="2"
-        launcher:y="-1">
-        <favorite launcher:uri="#Intent;action=SOCIAL;end" />
-    </resolve>
-    <resolve
+        launcher:y="-1"></folder>
+    <folder
         launcher:screen="0"
+        launcher:title="@string/shopping"
         launcher:x="3"
-        launcher:y="-1">
-        <favorite launcher:uri="#Intent;action=SHOPPING;end" />
-    </resolve>
+        launcher:y="-1"></folder>
 
 </favorites>
