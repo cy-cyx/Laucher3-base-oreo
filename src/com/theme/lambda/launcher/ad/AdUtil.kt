@@ -314,13 +314,10 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
         AdName.icon_unlock
     )
 
-    private val priorityNetIds = listOf(
-        AdName.theme_new_nat
-    )
+    private val priorityNetIds = arrayListOf<String>()
 
     private val netIds = listOf(
-        AdName.download_nat,
-        AdName.theme_new_nat
+        AdName.download_nat
     )
 
     /**
@@ -434,54 +431,12 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
             }
             LogUtil.d("Launcher", "loadInterstitial:${i} ------>>> ${Thread.currentThread().id}")
         }
-        for (i in arrayListOf(AdName.theme_new_nat)) {
-            if (lAdMultipleAdapters[i] != null) {
-                continue
-            }
-            LAdMultipleAdapter(activity,
-                i,
-                object : LambdaAdAdapter.OnAdapterClose<LAdMultipleAdapter>() {}).apply {
-                lAdMultipleAdapters[i] = this
-                loadNative()
-                LogUtil.d("Launcher", "loadNative:${i} ------>>> ${Thread.currentThread().id}")
-                onAdapterClose = object : LambdaAdAdapter.OnAdapterClose<LAdMultipleAdapter>() {
-                    override fun onLoad(adapter: LAdMultipleAdapter, status: Int) {
-                        super.onLoad(adapter, status)
-                        // 如果不切到主线程回调 可能出现异步问题
-                        scope.launch {
-                            nativeAdapterCloseMap[i]?.let {
-                                val temp = ArrayList(it)
-                                temp.forEach { close ->
-                                    close.onLoad(adapter, status)
-                                }
-                            }
-                        }
-                    }
-
-                    override fun onClose(adapter: LAdMultipleAdapter, status: Int) {
-                        super.onClose(adapter, status)
-                        nativeAdapterCloseMap[i]?.let {
-                            val temp = ArrayList(it)
-                            temp.forEach { close ->
-                                close.onClose(adapter, status)
-                            }
-                        }
-                    }
-                }
-            }
-        }
     }
 
     @JvmStatic
     fun reloadOpenAdIfNeed() {
         val intAndRewAdapter = lAdMultipleAdapters[AdName.app_open]
         intAndRewAdapter?.let {
-            if (it.isReady()) {
-                it.loadInterstitial(true)
-            }
-        }
-        val netAdapter = lAdMultipleAdapters[AdName.theme_new_nat]
-        netAdapter?.let {
             if (it.isReady()) {
                 it.loadInterstitial(true)
             }

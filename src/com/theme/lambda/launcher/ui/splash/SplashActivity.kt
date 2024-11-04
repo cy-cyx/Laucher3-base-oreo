@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.lifecycle.lifecycleScope
+import com.android.launcher3.Launcher
 import com.android.launcher3.databinding.ActivitySplashBinding
 import com.lambda.adlib.LambdaAd
 import com.theme.lambda.launcher.Constants
@@ -70,14 +71,16 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
                     or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
         )
         EventUtil.logEvent(EventName.splashPageView, Bundle())
+        // 主要解决升级重装后 拉起入口activity 保证是主屏幕就保证不会再进入闪屏页
+        if (LauncherUtil.isDefaultLauncher(this)) {
+            startActivity(Intent(this, Launcher::class.java))
+            finish()
+        }
     }
 
     override fun onResume() {
         super.onResume()
-        // 应该是主屏幕就保证不会再进入闪屏页
-        if (LauncherUtil.isDefaultLauncher(this)){
-            finish()
-        }else{
+        if (!LauncherUtil.isDefaultLauncher(this)) {
             startLoadingCheckNet()
             // 保底ad没有回调返回
             if (isShowAd) {

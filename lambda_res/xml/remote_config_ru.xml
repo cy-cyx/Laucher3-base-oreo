@@ -170,6 +170,20 @@
             "ecpm": 0
             }
             ]
+            },
+            {
+            "auid": "mrec_group",
+            "strategy": 2,
+            "params": [
+            {
+            "adid": "76b102c5767ff939",
+            "order": 0,
+            "per": 0,
+            "plat": 2,
+            "type": 7,
+            "ecpm": 0
+            }
+            ]
             }
             ],
             "scenes": [
@@ -226,7 +240,7 @@
             },
             {
             "asid": "",
-            "name": "download_nat, theme_new_nat",
+            "name": "download_nat,theme_new_nat",
             "ctrl": {
             "closeCountDown": 0,
             "closeDelay": 0,
@@ -274,11 +288,29 @@
             },
             "unit": "open_group, int_group",
             "disabled": 0
+            },
+            {
+            "asid": "",
+            "name": "theme_new_mrec",
+            "ctrl": {
+            "closeCountDown": 0,
+            "closeDelay": 0,
+            "closeTrick": 0,
+            "impCapacity": 0,
+            "impInterval": 0,
+            "impTime": 0,
+            "startInterval": 0,
+            "startTime": 0,
+            "adShowingAlready": 0
+            },
+            "unit": "mrec_group",
+            "disabled": 0
             }
             ],
             "keys": [
             {
-            "key": "ziaXswlqLx7LCqxNXg6SewP_fz_BasfGL82KxU0kcTQZ7WRsacmw0FWHwn7zwemJHWomTSWyDKxgnK63EmyOaa",
+            "key":
+            "ziaXswlqLx7LCqxNXg6SewP_fz_BasfGL82KxU0kcTQZ7WRsacmw0FWHwn7zwemJHWomTSWyDKxgnK63EmyOaa",
             "plat": 2,
             "appId": ""
             },
