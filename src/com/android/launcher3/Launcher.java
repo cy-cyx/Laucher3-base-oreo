@@ -388,8 +388,6 @@ public class Launcher extends BaseActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (LOGD) Log.d(TAG, "onCreate");
-        // todo 尝试修复线上奔溃
-        APPWIDGET_HOST_ID++;
         onCreateStartTime = System.currentTimeMillis();
         if (DEBUG_STRICT_MODE) {
             StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
@@ -1011,7 +1009,10 @@ public class Launcher extends BaseActivity
         }
 
         if (Utilities.ATLEAST_NOUGAT_MR1) {
-            mAppWidgetHost.stopListening();
+            try {
+                mAppWidgetHost.stopListening();
+            }catch (Exception e){
+            }
         }
 
         NotificationListener.removeNotificationsChangedListener();
