@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hint_search">Local Apps/Web</string>
+    <string name="hint_search">Smart Search Everything</string>
     <string name="search_history">Search History</string>
     <string name="recent_apps">Recent apps</string>
     <string name="local_apps">Local apps</string>
