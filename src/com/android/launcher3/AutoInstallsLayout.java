@@ -44,7 +44,6 @@ import com.android.launcher3.graphics.LauncherIcons;
 import com.android.launcher3.util.Thunk;
 import com.theme.lambda.launcher.data.model.OfferConfig;
 import com.theme.lambda.launcher.data.model.Offers;
-import com.theme.lambda.launcher.utils.AppCategoryFilter;
 import com.theme.lambda.launcher.utils.CommonUtil;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -617,13 +616,11 @@ public class AutoInstallsLayout {
                                 .setComponent(cn)
                                 .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
                                         Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-
-                        long id = addShortcut(appInfo.title.toString(),
-                                intent, Favorites.ITEM_TYPE_APPLICATION);
                         mValues.clear();
                         mValues.put(Favorites.CONTAINER, folderId);
                         mValues.put(Favorites.RANK, rank);
-
+                        long id = addShortcut(appInfo.title.toString(),
+                                intent, Favorites.ITEM_TYPE_APPLICATION);
                         if (id >= 0) {
                             folderItems.add(id);
                             rank++;
@@ -639,13 +636,11 @@ public class AutoInstallsLayout {
                         if (RecommendAppManager.isCanAdd(offer)) {
                             Intent intent = new Intent(RecommendAppManager.getActionHost() + offer.getId());
                             intent.setComponent(new ComponentName(RecommendAppManager.getActionHost() + offer.getId(), offer.getLocalIconUrl()));
-
-                            long id = addShortcut(offer.getName(),
-                                    intent, Favorites.ITEM_TYPE_APPLICATION);
                             mValues.clear();
                             mValues.put(Favorites.CONTAINER, folderId);
                             mValues.put(Favorites.RANK, rank);
-
+                            long id = addShortcut(offer.getName(),
+                                    intent, Favorites.ITEM_TYPE_APPLICATION);
                             if (id >= 0) {
                                 folderItems.add(id);
                                 rank++;

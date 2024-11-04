@@ -1,11 +1,9 @@
-package com.theme.lambda.launcher.utils
+package com.android.launcher3
 
 import android.content.pm.ApplicationInfo
 import android.content.pm.LauncherActivityInfo
 import android.os.Build
 import android.os.UserHandle
-import com.android.launcher3.AppInfo
-import com.android.launcher3.R
 import com.android.launcher3.compat.LauncherAppsCompat
 import com.android.launcher3.compat.UserManagerCompat
 import com.lambda.common.utils.utilcode.util.GsonUtils
