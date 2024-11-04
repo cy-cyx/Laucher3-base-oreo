@@ -42,6 +42,12 @@
         launcher:title="@string/utilities"
         launcher:x="3"
         launcher:y="-2"></folder>
+    <folder
+        launcher:screen="0"
+        launcher:title="@string/featured"
+        launcher:x="4"
+        launcher:y="-2"></folder>
+
 
     <folder
         launcher:screen="0"

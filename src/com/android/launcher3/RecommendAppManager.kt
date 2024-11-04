@@ -46,6 +46,7 @@ object RecommendAppManager {
 
     private var _offerConfig: OfferConfig? = null
 
+    @JvmStatic
     fun getOfferConfig(): OfferConfig? {
         if (_offerConfig == null) {
             val offerConfigSp = SpKey.keyOfferConfig.getSpString()
@@ -104,39 +105,6 @@ object RecommendAppManager {
     }
 
     @JvmStatic
-    fun isFeaturedFolder(folder: String): Boolean {
-        return Utils.getApp().getString(R.string.featured).contentEquals(folder)
-    }
-
-    @JvmStatic
-    fun addOfferIntoFeaturedFolder(folderInfo: FolderInfo) {
-        val offerConfig = getOfferConfig() ?: return
-        try {
-            offerConfig.offers.forEach {
-                if (isCanAdd(it)) {
-                    val shortcutInfo = ShortcutInfo(AppInfo().apply {
-                        intent = Intent(actionHost + it.id).apply {
-                            // todo 为了偷鸡class名改成放图片的
-                            setComponent(ComponentName(actionHost + it.id, it.localIconUrl))
-                        }
-                        title = it.name
-                    })
-                    shortcutInfo.iconBitmap =
-                        ThemeIconMapping.getThemeBitmap(
-                            Utils.getApp(),
-                            actionHost + it.id,
-                            it.localIconUrl
-                        );
-                    shortcutInfo.contentDescription = ""
-                    folderInfo.add(shortcutInfo, false)
-                }
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
-
-    @JvmStatic
     fun addInfoAllAppsList(allAppsList: AllAppsList) {
         val offerConfig = getOfferConfig() ?: return
         try {
@@ -159,7 +127,8 @@ object RecommendAppManager {
         }
     }
 
-    private fun isCanAdd(offer: Offers): Boolean {
+    @JvmStatic
+    fun isCanAdd(offer: Offers): Boolean {
         if (AppUtil.checkAppInstalled(CommonUtil.appContext, offer.pn)) {
             return false
         }

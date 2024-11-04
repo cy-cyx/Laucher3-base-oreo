@@ -1198,11 +1198,6 @@ public class LauncherModel extends BroadcastReceiver
                                     folderInfo.spanY = 1;
                                     folderInfo.options = c.getInt(optionsIndex);
 
-                                    // 推荐文件夹需要动态分类
-                                    if (RecommendAppManager.isFeaturedFolder(folderInfo.title.toString())) {
-                                        RecommendAppManager.addOfferIntoFeaturedFolder(folderInfo);
-                                    }
-
                                     // no special handling required for restored folders
                                     c.markRestored();
 

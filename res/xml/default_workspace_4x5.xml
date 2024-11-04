@@ -24,12 +24,11 @@
         launcher:title="@string/music_video"
         launcher:x="0"
         launcher:y="-3"></folder>
-    <resolve
+    <folder
         launcher:screen="0"
+        launcher:title="@string/featured"
         launcher:x="1"
-        launcher:y="-3">
-        <favorite launcher:uri="#Intent;action=FEATURED;end" />
-    </resolve>
+        launcher:y="-3"></folder>
 
     <resolve
         launcher:screen="0"

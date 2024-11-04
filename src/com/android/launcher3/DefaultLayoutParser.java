@@ -104,24 +104,6 @@ public class DefaultLayoutParser extends AutoInstallsLayout {
             }
             if ("#Intent;action=All_APPS;end".equals(uri)) {
                 return addShortcut(Utils.getApp().getString(R.string.all_apps), new Intent("ALL_APPS"), Favorites.ITEM_TYPE_APPLICATION);
-            } else if ("#Intent;action=STORE;end".equals(uri)) {
-                return addShortcut(Utils.getApp().getString(R.string.store), new Intent("STORE"), Favorites.ITEM_TYPE_FOLDER);
-            } else if ("#Intent;action=GAMES;end".equals(uri)) {
-                return addShortcut(Utils.getApp().getString(R.string.games), new Intent("GAMES"), Favorites.ITEM_TYPE_FOLDER);
-            } else if ("#Intent;action=UTILITIES;end".equals(uri)) {
-                return addShortcut(Utils.getApp().getString(R.string.utilities), new Intent("UTILITIES"), Favorites.ITEM_TYPE_FOLDER);
-            } else if ("#Intent;action=ART_DESIGN;end".equals(uri)) {
-                return addShortcut(Utils.getApp().getString(R.string.art_design), new Intent("ART_DESIGN"), Favorites.ITEM_TYPE_FOLDER);
-            } else if ("#Intent;action=HEALTH;end".equals(uri)) {
-                return addShortcut(Utils.getApp().getString(R.string.health), new Intent("HEALTH"), Favorites.ITEM_TYPE_FOLDER);
-            } else if ("#Intent;action=SOCIAL;end".equals(uri)) {
-                return addShortcut(Utils.getApp().getString(R.string.social), new Intent("SOCIAL"), Favorites.ITEM_TYPE_FOLDER);
-            } else if ("#Intent;action=SHOPPING;end".equals(uri)) {
-                return addShortcut(Utils.getApp().getString(R.string.shopping), new Intent("SHOPPING"), Favorites.ITEM_TYPE_FOLDER);
-            } else if ("#Intent;action=MUSIC_VIDEO;end".equals(uri)) {
-                return addShortcut(Utils.getApp().getString(R.string.music_video), new Intent("MUSIC_VIDEO"), Favorites.ITEM_TYPE_FOLDER);
-            } else if ("#Intent;action=FEATURED;end".equals(uri)) {
-                return addShortcut(Utils.getApp().getString(R.string.featured), new Intent("FEATURED"), Favorites.ITEM_TYPE_FOLDER);
             }
 
             final Intent metaIntent;
