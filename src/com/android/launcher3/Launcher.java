@@ -174,7 +174,7 @@ public class Launcher extends BaseActivity
 
     static final boolean DEBUG_WIDGETS = false;
     static final boolean DEBUG_STRICT_MODE = false;
-    static final boolean DEBUG_RESUME_TIME = false;
+    static final boolean DEBUG_RESUME_TIME = true;
 
     private static final int REQUEST_CREATE_SHORTCUT = 1;
     private static final int REQUEST_CREATE_APPWIDGET = 5;
@@ -387,7 +387,7 @@ public class Launcher extends BaseActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (LOGD) Log.d(TAG, "onCreate");
+        if (LOGD) Log.d(TAG, "onCreate <<<----------------------");
         onCreateStartTime = System.currentTimeMillis();
         if (DEBUG_STRICT_MODE) {
             StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
@@ -1011,7 +1011,7 @@ public class Launcher extends BaseActivity
         if (Utilities.ATLEAST_NOUGAT_MR1) {
             try {
                 mAppWidgetHost.stopListening();
-            }catch (Exception e){
+            } catch (Exception e) {
             }
         }
 
@@ -1044,10 +1044,9 @@ public class Launcher extends BaseActivity
     protected void onResume() {
         long startTime = 0;
         if (LOGD)
-            Log.d(TAG, "onResume,(Launcher:" + this.hashCode() + ",DataModel:" + LauncherModel.sBgDataModel.hashCode() + ")");
+            Log.d(TAG, "onResume,(Launcher:" + this.hashCode() + ",DataModel:" + LauncherModel.sBgDataModel.hashCode() + ") -------->>>");
         if (DEBUG_RESUME_TIME) {
             startTime = System.currentTimeMillis();
-            Log.v(TAG, "Launcher.onResume()");
         }
 
         if (mLauncherCallbacks != null) {
@@ -1117,10 +1116,6 @@ public class Launcher extends BaseActivity
             getWorkspace().reinflateWidgetsIfNecessary();
         }
 
-        if (DEBUG_RESUME_TIME) {
-            Log.d(TAG, "Time spent in onResume: " + (System.currentTimeMillis() - startTime));
-        }
-
         // We want to suppress callbacks about CustomContent being shown if we have just received
         // onNewIntent while the user was present within launcher. In that case, we post a call
         // to move the user to the main screen (which will occur after onResume). We don't want to
@@ -1179,6 +1174,10 @@ public class Launcher extends BaseActivity
             AdUtil.loadAdOpenAppOnly(AdUtil.getWapActivity());
         }
         AdUtil.reloadOpenAdIfNeed();
+
+        if (DEBUG_RESUME_TIME) {
+            Log.d(TAG, "Time spent in onResume: " + (System.currentTimeMillis() - startTime));
+        }
     }
 
     /**
@@ -4350,6 +4349,7 @@ public class Launcher extends BaseActivity
         setWorkspaceLoading(true);
         mModel.mModelLoaded = !force;
         mModel.startLoader(getCurrentWorkspaceScreen());
+        showLoading(60000);
     }
 
     public void closeAllAppLayoutIfNeed() {

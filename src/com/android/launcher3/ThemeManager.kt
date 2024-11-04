@@ -185,14 +185,6 @@ class ThemeManager {
         themeId = SpUtil.getString(sKeyThemeId)
         showThemeId = themeId
 
-        // 更新壁纸默认壁纸
-        val manifest = getCurManifest()
-        if (manifest != null) {
-            val wallpaper = getManifestResRootPath() + manifest.background
-            wallpaperView?.setPic(wallpaper)
-            wallpaperView?.visible()
-        }
-
         // 首次启动在onResume设置，避免二次加载
         if (enterPreviewId != "") {
             previewThemeId = enterPreviewId
@@ -240,6 +232,14 @@ class ThemeManager {
             // 可能打开着all app需要关闭
             launcher?.closeAllAppLayoutIfNeed()
             setCurShowThemeById(previewThemeId)
+        }else{
+            // 如果不是预览就保证设置正确的壁纸
+            val manifest = getCurManifest()
+            if (manifest != null) {
+                val wallpaper = getManifestResRootPath() + manifest.background
+                wallpaperView?.setPic(wallpaper)
+                wallpaperView?.visible()
+            }
         }
 
         launcher?.let {

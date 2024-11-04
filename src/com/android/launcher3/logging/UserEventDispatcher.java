@@ -244,7 +244,7 @@ public class UserEventDispatcher {
         ItemInfo info = (ItemInfo) icon.getTag();
         LauncherEvent event = newLauncherEvent(newTouchAction(Action.Touch.LONGPRESS),
                 newItemTarget(info), newTarget(Target.Type.CONTAINER));
-        provider.fillInLogContainerData(icon, info, event.srcTarget[0], event.srcTarget[1]);
+//        provider.fillInLogContainerData(icon, info, event.srcTarget[0], event.srcTarget[1]);
         dispatchUserEvent(event, null);
 
         resetElapsedContainerMillis();
