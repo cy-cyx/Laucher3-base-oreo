@@ -176,8 +176,24 @@
             "strategy": 2,
             "params": [
             {
-            "adid": "76b102c5767ff939",
+            "adid": "R-M-12398626-13",
             "order": 0,
+            "per": 0,
+            "plat": 7,
+            "type": 7,
+            "ecpm": 0
+            },
+            {
+            "adid": "10961146-10891411",
+            "order": 1,
+            "per": 0,
+            "plat": 4,
+            "type": 7,
+            "ecpm": 0
+            },
+            {
+            "adid": "76b102c5767ff939",
+            "order": 2,
             "per": 0,
             "plat": 2,
             "type": 7,
@@ -309,8 +325,7 @@
             ],
             "keys": [
             {
-            "key":
-            "ziaXswlqLx7LCqxNXg6SewP_fz_BasfGL82KxU0kcTQZ7WRsacmw0FWHwn7zwemJHWomTSWyDKxgnK63EmyOaa",
+            "key": "ziaXswlqLx7LCqxNXg6SewP_fz_BasfGL82KxU0kcTQZ7WRsacmw0FWHwn7zwemJHWomTSWyDKxgnK63EmyOaa",
             "plat": 2,
             "appId": ""
             },
