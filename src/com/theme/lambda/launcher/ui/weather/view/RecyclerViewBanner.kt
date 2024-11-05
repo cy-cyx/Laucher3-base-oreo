@@ -318,7 +318,7 @@ class RecyclerViewBanner @JvmOverloads constructor(
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
             val img = AppCompatImageView(parent.context)
             val params = RecyclerView.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
+                CommonUtil.getScreenWidth() - CommonUtil.dp2px(20f),
                 ViewGroup.LayoutParams.MATCH_PARENT
             )
             img.layoutParams = params

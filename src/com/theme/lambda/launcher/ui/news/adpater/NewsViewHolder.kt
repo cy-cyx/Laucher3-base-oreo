@@ -3,6 +3,7 @@ package com.theme.lambda.launcher.ui.news.adpater
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.android.launcher3.R
 import com.android.launcher3.ThemeManager
 import com.android.launcher3.databinding.ItemNewsBinding
 import com.theme.lambda.launcher.data.model.News
@@ -22,6 +23,7 @@ class NewsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
                 it,
                 1000,
                 1000,
+                placeholder = R.drawable.ic_news_ph
             )
         }
         viewBinding.titleTv.text = data.title

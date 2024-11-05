@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import com.android.launcher3.R
 import com.android.launcher3.databinding.ActivityNewDetailBinding
 import com.theme.lambda.launcher.base.BaseActivity
 import com.theme.lambda.launcher.data.model.News
@@ -58,6 +59,7 @@ class NewDetailsActivity : BaseActivity<ActivityNewDetailBinding>() {
                 GlideUtil.load(
                     viewBinding.logoIv,
                     it,
+                    placeholder = R.drawable.ic_news_ph
                 )
             }
             viewBinding.contentTv.text = it.text.replace("\n", "\n\n")
