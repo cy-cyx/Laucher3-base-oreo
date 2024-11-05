@@ -103,7 +103,7 @@ class AppRepository(
             emit(
                 appRemoteRemoteData.getNews(
                     mapOf(
-                        "countries" to country.lowercase(),
+                        "countries" to LocalUtils.getCountry(),
                         "page" to (page).toInt().toString(),
                         "page_size" to "25",
                         "publish_date_from" to "${TimeUtil.getOldDate(-365)}",

@@ -98,10 +98,7 @@ class AppService(retrofit: Retrofit) : AppApi {
 
     override suspend fun news(map: Map<String, String>): NewsModel {
         return appApi.news(map.apply {
-            this.toMutableMap().put(
-                "hour",
-                TimeUtils.getDateToString(TimeUtils.getCurrentTimeMillis(), "yyyymmddhh")
-            )
+            this.toMutableMap()
         })
     }
 
