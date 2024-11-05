@@ -146,7 +146,7 @@ class HomeUiAdapter(val fragment: WeatherFragment) :
                     )?.let { it1 ->
                         GlideUtil.loadUrlImage(
                             fragment,
-                            it1, it, ph = R.drawable.ic_news_ph
+                            it1, it, ph = R.drawable.ic_news_ph, radius = 0
                         )
                     }
                     binding.includedLayoutHomeNew.tvTitle.text =
@@ -158,6 +158,11 @@ class HomeUiAdapter(val fragment: WeatherFragment) :
                             )?.title!!,
                             HtmlCompat.FROM_HTML_MODE_COMPACT
                         ).toString()
+                    binding.includedLayoutHomeNew.timeTv.text = model.d.news.get(
+                        if (position >= model.d.news.size) Random().nextInt(
+                            model.d.news.size
+                        ) else position
+                    ).publishDate
                 }
             }
         })

@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.android.launcher3.R
+import com.theme.lambda.launcher.utils.CommonUtil
 
 class RecyclerViewBanner @JvmOverloads constructor(
     context: Context,
@@ -136,7 +137,7 @@ class RecyclerViewBanner @JvmOverloads constructor(
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
         linearLayoutParams.gravity = Gravity.BOTTOM or gravity
-        linearLayoutParams.setMargins(margin, margin, margin, margin)
+        linearLayoutParams.setMargins(margin, margin, margin, margin + CommonUtil.dp2px(40f))
         addView(recyclerView, vpLayoutParams)
         addView(mLinearLayout, linearLayoutParams)
 
@@ -266,6 +267,7 @@ class RecyclerViewBanner @JvmOverloads constructor(
                 startY = ev.y.toInt()
                 parent.requestDisallowInterceptTouchEvent(true)
             }
+
             MotionEvent.ACTION_MOVE -> {
                 val moveX = ev.x.toInt()
                 val moveY = ev.y.toInt()
@@ -277,10 +279,12 @@ class RecyclerViewBanner @JvmOverloads constructor(
                     setPlaying(false)
                 }
             }
+
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> if (!isPlaying) {
                 isTouched = true
                 setPlaying(true)
             }
+
             else -> {}
         }
         return super.dispatchTouchEvent(ev)

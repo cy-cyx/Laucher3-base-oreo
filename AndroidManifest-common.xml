@@ -205,10 +205,6 @@
             android:excludeFromRecents="true"
             android:theme="@style/Translucent" />
         <activity
-            android:name="com.lambdaweather.ui.news.NewsDetailsActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
-        <activity
             android:name="com.lambdaweather.ui.news.NewsListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />

@@ -21,12 +21,9 @@ import com.lambdaweather.AppViewModel
 import com.lambdaweather.adapter.HomeUiAdapter
 import com.lambdaweather.data.model.ForestWeatherModel
 import com.lambdaweather.data.model.HomeUiModel
-import com.lambdaweather.data.model.NewsModel
 import com.lambdaweather.data.model.WeatherModel
-import com.lambdaweather.ui.news.NewsDetailsActivity
 import com.lambdaweather.ui.news.NewsListActivity
 import com.lambdaweather.utils.GlideUtil
-import com.lambdaweather.utils.GsonUtil
 import com.lambdaweather.utils.LocalUtils
 import com.lambdaweather.utils.LocationManagerHelper
 import com.lambdaweather.utils.ScaleUpAnimator
@@ -221,12 +218,6 @@ class WeatherFragment : BaseFragment<FragmentWeather2Binding>() {
 
     fun intentToNews() {
         startActivity(Intent(requireContext(), NewsListActivity::class.java))
-    }
-
-    fun intentToNew(news: NewsModel.NewsDTO) {
-        startActivity(Intent(requireContext(), NewsDetailsActivity::class.java).apply {
-            putExtra("params", GsonUtil.toJson(news))
-        })
     }
 
     private fun initLocalNew() {

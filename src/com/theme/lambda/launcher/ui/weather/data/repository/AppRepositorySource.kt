@@ -39,7 +39,6 @@ interface AppRepositorySource {
         country: String, page: String
     ): Flow<Resource<NewsModel>>
 
-
     suspend fun getAlert(
         lat: String, lon: String
     ): Flow<Resource<OneCallModel>>

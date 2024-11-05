@@ -13,16 +13,18 @@ import com.lambdaweather.data.remote.AppRemoteData
 import com.lambdaweather.utils.LocalUtils
 import com.lambdaweather.utils.TimeUtils
 import com.lambdaweather.utils.toCustomInt
+import com.theme.lambda.launcher.utils.TimeUtil
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlin.coroutines.CoroutineContext
 
-class AppRepository(private val appRemoteRemoteData: AppRemoteData,
-                    private val ioDispatcher: CoroutineContext
-): AppRepositorySource {
+class AppRepository(
+    private val appRemoteRemoteData: AppRemoteData,
+    private val ioDispatcher: CoroutineContext
+) : AppRepositorySource {
 
-    override suspend fun getWeather(lat : String,lon : String): Flow<Resource<WeatherModel>> {
+    override suspend fun getWeather(lat: String, lon: String): Flow<Resource<WeatherModel>> {
         return flow {
             emit(
                 appRemoteRemoteData.getWeather(
@@ -104,8 +106,10 @@ class AppRepository(private val appRemoteRemoteData: AppRemoteData,
                         "countries" to country.lowercase(),
                         "page" to (page).toInt().toString(),
                         "page_size" to "25",
+                        "publish_date_from" to "${TimeUtil.getOldDate(-365)}",
                         "sort" to "publish_date,desc",
-                        //"language" to LocalUtils.getCurrentLanguage()
+                        "language" to LocalUtils.getCurrentLanguage(),
+                        "fallback" to "true"
                     )
                 )
             )
