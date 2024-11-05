@@ -138,19 +138,19 @@
             android:screenOrientation="portrait"
             android:theme="@style/LauncherTheme" />
         <activity
-            android:name="com.theme.lambda.launcher.ui.weather.WeatherActivity"
+            android:name="com.theme.lambda.launcher.ui.weather.ui.WeatherActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
-            android:name="com.theme.lambda.launcher.ui.weather.WeatherSettingsActivity"
+            android:name="com.theme.lambda.launcher.ui.weather.ui.WeatherSettingsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
-            android:name="com.theme.lambda.launcher.ui.weather.WeatherLocationActivity"
+            android:name="com.theme.lambda.launcher.ui.weather.ui.WeatherLocationActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
-            android:name="com.theme.lambda.launcher.ui.weather.TemperatureUnitActivity"
+            android:name="com.theme.lambda.launcher.ui.weather.ui.TemperatureUnitActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
@@ -204,6 +204,14 @@
             android:name="com.theme.lambda.launcher.ad.OpenAppAdActivity"
             android:excludeFromRecents="true"
             android:theme="@style/Translucent" />
+        <activity
+            android:name="com.lambdaweather.ui.news.NewsDetailsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity
+            android:name="com.lambdaweather.ui.news.NewsListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
 
         <service
             android:name="com.theme.lambda.launcher.service.FirebaseService"

@@ -5,7 +5,7 @@
     android:clipToPadding="false">
 
     <fragment
-        android:name="com.theme.lambda.launcher.ui.weather.WeatherFragment"
+        android:name="com.theme.lambda.launcher.ui.weather.ui.WeatherFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/weatherFragment"

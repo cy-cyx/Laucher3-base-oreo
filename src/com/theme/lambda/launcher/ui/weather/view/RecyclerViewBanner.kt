@@ -1,0 +1,445 @@
+package com.lambdaweather.view
+
+import android.content.Context
+import android.content.res.Resources
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.GradientDrawable
+import android.os.Handler
+import android.util.AttributeSet
+import android.util.TypedValue
+import android.view.Gravity
+import android.view.MotionEvent
+import android.view.View
+import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.LinearLayout
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.view.GravityCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.RecyclerView
+import com.android.launcher3.R
+
+class RecyclerViewBanner @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : FrameLayout(context, attrs, defStyleAttr) {
+    private var mInterval: Int = 15 * 1000
+    private var isShowIndicator: Boolean = false
+    private var mSelectedDrawable: Drawable? = null
+    private var mUnselectedDrawable: Drawable? = null
+    private val mSize: Int
+    private val mSpace: Int
+
+    /**
+     * 获取RecyclerView实例，便于满足自定义[RecyclerView.ItemAnimator]或者[RecyclerView.Adapter]的需求
+     *
+     * @return RecyclerView实例
+     */
+    lateinit var recyclerView: RecyclerView
+    private val mLinearLayout: LinearLayout?
+    private val adapter: RecyclerAdapter?
+    private var onRvBannerClickListener: OnRvBannerClickListener? = null
+    private var onSwitchRvBannerListener: OnSwitchRvBannerListener? = null
+    private val mData: MutableList<Any> = ArrayList()
+    private var startX = 0
+    private var startY = 0
+    private var currentIndex = 0
+    private var isPlaying = false
+    private val handler = Handler()
+    private var isTouched = false
+    private var isAutoPlaying = true
+    private val playTask: Runnable = object : Runnable {
+        override fun run() {
+            recyclerView.smoothScrollToPosition(++currentIndex)
+            if (isShowIndicator) {
+                switchIndicator()
+            }
+            handler.postDelayed(this, mInterval.toLong())
+        }
+    }
+
+    init {
+        val a = context.obtainStyledAttributes(attrs, R.styleable.RecyclerViewBanner)
+        mInterval = a.getInt(R.styleable.RecyclerViewBanner_rvb_interval, 10000)
+        isShowIndicator = a.getBoolean(R.styleable.RecyclerViewBanner_rvb_showIndicator, true)
+        isAutoPlaying = a.getBoolean(R.styleable.RecyclerViewBanner_rvb_autoPlaying, true)
+        val sd = a.getDrawable(R.styleable.RecyclerViewBanner_rvb_indicatorSelectedSrc)
+        val usd = a.getDrawable(R.styleable.RecyclerViewBanner_rvb_indicatorUnselectedSrc)
+        mSelectedDrawable = if (sd == null) {
+            generateDefaultDrawable(DEFAULT_SELECTED_COLOR)
+        } else {
+            if (sd is ColorDrawable) {
+                generateDefaultDrawable(sd.color)
+            } else {
+                sd
+            }
+        }
+        mUnselectedDrawable = if (usd == null) {
+            generateDefaultDrawable(DEFAULT_UNSELECTED_COLOR)
+        } else {
+            if (usd is ColorDrawable) {
+                generateDefaultDrawable(usd.color)
+            } else {
+                usd
+            }
+        }
+        mSize = a.getDimensionPixelSize(R.styleable.RecyclerViewBanner_rvb_indicatorSize, 0)
+        mSpace =
+            a.getDimensionPixelSize(R.styleable.RecyclerViewBanner_rvb_indicatorSpace, dp2px(4))
+        val margin =
+            a.getDimensionPixelSize(R.styleable.RecyclerViewBanner_rvb_indicatorMargin, dp2px(8))
+        val g = a.getInt(R.styleable.RecyclerViewBanner_rvb_indicatorGravity, 1)
+        val gravity: Int
+        gravity = if (g == 0) {
+            GravityCompat.START
+        } else if (g == 2) {
+            GravityCompat.END
+        } else {
+            Gravity.CENTER
+        }
+        a.recycle()
+        recyclerView = RecyclerView(context)
+        mLinearLayout = LinearLayout(context)
+        PagerSnapHelper().attachToRecyclerView(
+            recyclerView
+        )
+        recyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        adapter = RecyclerAdapter()
+        recyclerView.adapter = adapter
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val next =
+                    (recyclerView.layoutManager as LinearLayoutManager?)!!.findLastVisibleItemPosition()
+                if (next != currentIndex) {
+                    currentIndex = next
+                    if (isShowIndicator && isTouched) {
+                        isTouched = false
+                        switchIndicator()
+                    }
+                }
+            }
+        })
+        mLinearLayout.orientation = LinearLayout.HORIZONTAL
+        mLinearLayout.gravity = Gravity.CENTER
+        val vpLayoutParams = LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            dp2px(200)
+        )
+        val linearLayoutParams = LayoutParams(
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+        linearLayoutParams.gravity = Gravity.BOTTOM or gravity
+        linearLayoutParams.setMargins(margin, margin, margin, margin)
+        addView(recyclerView, vpLayoutParams)
+        addView(mLinearLayout, linearLayoutParams)
+
+        // 便于在xml中编辑时观察，运行时不执行
+        if (isInEditMode) {
+            for (i in 0..2) {
+                mData!!.add("")
+            }
+            createIndicators()
+        }
+    }
+
+    /**
+     * 默认指示器是一系列直径为6dp的小圆点
+     */
+    private fun generateDefaultDrawable(color: Int): GradientDrawable {
+        val gradientDrawable = GradientDrawable()
+        gradientDrawable.setSize(dp2px(6), dp2px(6))
+        gradientDrawable.cornerRadius = dp2px(6).toFloat()
+        gradientDrawable.setColor(color)
+        return gradientDrawable
+    }
+
+    /**
+     * 设置是否显示指示器导航点
+     *
+     * @param show 显示
+     */
+    fun isShowIndicator(show: Boolean) {
+        isShowIndicator = show
+    }
+
+    /**
+     * 设置轮播间隔时间
+     *
+     * @param millisecond 时间毫秒
+     */
+    fun setIndicatorInterval(millisecond: Int) {
+        mInterval = millisecond
+    }
+
+    /**
+     * 设置是否自动播放（上锁）
+     *
+     * @param playing 开始播放
+     */
+    @Synchronized
+    private fun setPlaying(playing: Boolean) {
+        if (isAutoPlaying) {
+            if (!isPlaying && playing && adapter != null && adapter.itemCount > 2) {
+                handler.postDelayed(playTask, mInterval.toLong())
+                isPlaying = true
+            } else if (isPlaying && !playing) {
+                handler.removeCallbacksAndMessages(null)
+                isPlaying = false
+            }
+        }
+    }
+
+    /**
+     * 设置是否禁止滚动播放
+     *
+     * @param isAutoPlaying true  是自动滚动播放,false 是禁止自动滚动
+     */
+    fun setRvAutoPlaying(isAutoPlaying: Boolean) {
+        this.isAutoPlaying = isAutoPlaying
+    }
+
+    /**
+     * 设置轮播数据集
+     *
+     * @param data Banner对象列表
+     */
+    fun setRvBannerData(data: List<Any>?) {
+        setPlaying(false)
+        mData!!.clear()
+        if (data != null) {
+            mData.addAll(data)
+        }
+        if (mData.size > 1) {
+            adapter!!.notifyDataSetChanged()
+            currentIndex = Int.MAX_VALUE / 2 - Int.MAX_VALUE / 2 % mData.size
+            // 将起始点设为最靠近的 MAX_VALUE/2 的，且为mData.size()整数倍的位置
+            recyclerView.scrollToPosition(currentIndex)
+            if (isShowIndicator) {
+                createIndicators()
+            }
+            setPlaying(true)
+        } else {
+            currentIndex = 0
+            adapter!!.notifyDataSetChanged()
+        }
+    }
+
+    /**
+     * 指示器整体由数据列表容量数量的AppCompatImageView均匀分布在一个横向的LinearLayout中构成
+     * 使用AppCompatImageView的好处是在Fragment中也使用Compat相关属性
+     */
+    private fun createIndicators() {
+        mLinearLayout!!.removeAllViews()
+        for (i in mData!!.indices) {
+            val img = AppCompatImageView(context)
+            val lp = LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+            lp.leftMargin = mSpace / 2
+            lp.rightMargin = mSpace / 2
+            if (mSize >= dp2px(4)) { // 设置了indicatorSize属性
+                lp.height = mSize
+                lp.width = lp.height
+            } else {
+                // 如果设置的resource.xml没有明确的宽高，默认最小2dp，否则太小看不清
+                img.minimumWidth = dp2px(2)
+                img.minimumHeight = dp2px(2)
+            }
+            img.setImageDrawable(if (i == 0) mSelectedDrawable else mUnselectedDrawable)
+            mLinearLayout.addView(img, lp)
+        }
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+        //手动触摸的时候，停止自动播放，根据手势变换
+        when (ev.action) {
+            MotionEvent.ACTION_DOWN -> {
+                startX = ev.x.toInt()
+                startY = ev.y.toInt()
+                parent.requestDisallowInterceptTouchEvent(true)
+            }
+            MotionEvent.ACTION_MOVE -> {
+                val moveX = ev.x.toInt()
+                val moveY = ev.y.toInt()
+                val disX = moveX - startX
+                val disY = moveY - startY
+                val hasMoved = 2 * Math.abs(disX) > Math.abs(disY)
+                parent.requestDisallowInterceptTouchEvent(hasMoved)
+                if (hasMoved) {
+                    setPlaying(false)
+                }
+            }
+            MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> if (!isPlaying) {
+                isTouched = true
+                setPlaying(true)
+            }
+            else -> {}
+        }
+        return super.dispatchTouchEvent(ev)
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        setPlaying(true)
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        setPlaying(false)
+    }
+
+    override fun onWindowVisibilityChanged(visibility: Int) {
+        if (visibility == GONE || visibility == INVISIBLE) {
+            // 停止轮播
+            setPlaying(false)
+        } else if (visibility == VISIBLE) {
+            // 开始轮播
+            setPlaying(true)
+        }
+        super.onWindowVisibilityChanged(visibility)
+    }
+
+    /**
+     * RecyclerView适配器
+     */
+    private inner class RecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+            val img = AppCompatImageView(parent.context)
+            val params = RecyclerView.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+            )
+            img.layoutParams = params
+            img.id = R.id.rvb_banner_image_view_id
+            img.scaleType = ImageView.ScaleType.FIT_XY
+            img.setOnClickListener {
+                if (onRvBannerClickListener != null) {
+                    onRvBannerClickListener!!.onClick(currentIndex % mData!!.size)
+                }
+            }
+            when (viewType) {
+                AD_TYPE -> {
+                    val fl = FrameLayout(parent.context)
+                    val params2 = RecyclerView.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.MATCH_PARENT
+                    )
+                    fl.layoutParams = params2
+                    fl.id = R.id.rvb_banner_fl_view_id
+                    fl.addView(img)
+                    return object : RecyclerView.ViewHolder(fl) {}
+                }
+
+                else -> {
+
+                }
+            }
+
+            return object : RecyclerView.ViewHolder(img) {}
+        }
+
+        override fun getItemViewType(position: Int): Int {
+            return if (position % mData!!.size % 2 == 0) return AD_TYPE else 0
+        }
+
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+            when (getItemViewType(position)) {
+                AD_TYPE -> {
+                    val img =
+                        holder.itemView.findViewById<View>(R.id.rvb_banner_image_view_id) as AppCompatImageView?
+                    if (onSwitchRvBannerListener != null) {
+                        onSwitchRvBannerListener!!.switchBanner(
+                            position % mData!!.size, img,
+                            holder.itemView.findViewById<View>(R.id.rvb_banner_fl_view_id) as FrameLayout
+                        )
+                    }
+                }
+
+                else -> {
+                    val img =
+                        holder.itemView.findViewById<View>(R.id.rvb_banner_image_view_id) as AppCompatImageView
+                    if (onSwitchRvBannerListener != null) {
+                        onSwitchRvBannerListener!!.switchBanner(position % mData!!.size, img, null)
+                    }
+                }
+            }
+
+        }
+
+        override fun getItemCount(): Int {
+            return if (mData == null) 0 else if (mData.size < 2) mData.size else Int.MAX_VALUE
+        }
+    }
+
+    private inner class PagerSnapHelper : LinearSnapHelper() {
+        override fun findTargetSnapPosition(
+            layoutManager: RecyclerView.LayoutManager,
+            velocityX: Int,
+            velocityY: Int
+        ): Int {
+            var targetPos = super.findTargetSnapPosition(layoutManager, velocityX, velocityY)
+            val currentView = findSnapView(layoutManager)
+            if (targetPos != RecyclerView.NO_POSITION && currentView != null) {
+                var currentPos = layoutManager.getPosition(currentView)
+                val first = (layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+                val last = layoutManager.findLastVisibleItemPosition()
+                currentPos =
+                    if (targetPos < currentPos) last else if (targetPos > currentPos) first else currentPos
+                targetPos =
+                    if (targetPos < currentPos) currentPos - 1 else if (targetPos > currentPos) currentPos + 1 else currentPos
+            }
+            return targetPos
+        }
+    }
+
+    /**
+     * 改变导航的指示点
+     */
+    private fun switchIndicator() {
+        if (mLinearLayout != null && mLinearLayout.childCount > 0) {
+            for (i in 0 until mLinearLayout.childCount) {
+                (mLinearLayout.getChildAt(i) as AppCompatImageView).setImageDrawable(
+                    if (i == currentIndex % mData!!.size) mSelectedDrawable else mUnselectedDrawable
+                )
+            }
+        }
+    }
+
+    private fun dp2px(dp: Int): Int {
+        return TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(),
+            Resources.getSystem().displayMetrics
+        ).toInt()
+    }
+
+    interface OnSwitchRvBannerListener {
+        fun switchBanner(position: Int, bannerView: AppCompatImageView?, fl: FrameLayout?)
+    }
+
+    fun setOnSwitchRvBannerListener(listener: OnSwitchRvBannerListener?) {
+        onSwitchRvBannerListener = listener
+    }
+
+    interface OnRvBannerClickListener {
+        fun onClick(position: Int)
+    }
+
+    fun setOnRvBannerClickListener(onRvBannerClickListener: OnRvBannerClickListener?) {
+        this.onRvBannerClickListener = onRvBannerClickListener
+    }
+
+    companion object {
+        private const val DEFAULT_SELECTED_COLOR = -0x1
+        private const val DEFAULT_UNSELECTED_COLOR = 0x50ffffff
+
+        val AD_TYPE = 1
+    }
+}

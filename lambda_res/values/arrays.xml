@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="recommend_city_name">
+        <item>@string/city_name_1</item>
+        <item>@string/city_name_2</item>
+        <item>@string/city_name_3</item>
+        <item>@string/city_name_4</item>
+        <item>@string/city_name_5</item>
+        <item>@string/city_name_6</item>
+        <item>@string/city_name_7</item>
+        <item>@string/city_name_8</item>
+        <item>@string/city_name_9</item>
+    </array>
+
+    <string-array name="recommend_city_lat">
+        <item>38.8950368</item>
+        <item>40.7127281</item>
+        <item>42.3554334</item>
+        <item>37.7790262</item>
+        <item>34.0536909</item>
+        <item>41.8755616</item>
+        <item>33.7489924</item>
+        <item>39.9527237</item>
+        <item>33.7270797</item>
+    </string-array>
+
+    <string-array name="recommend_city_lon">
+        <item>-77.0365427</item>
+        <item>-74.0060152</item>
+        <item>-71.060511</item>
+        <item>-122.419906</item>
+        <item>-118.242766</item>
+        <item>-87.6244212</item>
+        <item>-84.3902644</item>
+        <item>-75.1635262</item>
+        <item>-84.4017997</item>
+    </string-array>
+
+    <array name="recommend_city_state">
+        <item>Columbia</item>
+        <item>New York</item>
+        <item>Massachusetts</item>
+        <item>California</item>
+        <item>California</item>
+        <item>Illinois</item>
+        <item>Georgia</item>
+        <item>Pennsylvania</item>
+        <item>Pennsylvania</item>
+    </array>
+
+
+    <array name="popular_city_name">
+        <item>@string/popular_city_name_1</item>
+        <item>@string/popular_city_name_2</item>
+        <item>@string/popular_city_name_3</item>
+        <item>@string/popular_city_name_4</item>
+        <item>@string/popular_city_name_5</item>
+        <item>@string/popular_city_name_6</item>
+        <item>@string/popular_city_name_7</item>
+        <item>@string/popular_city_name_8</item>
+        <item>@string/popular_city_name_9</item>
+    </array>
+
+    <string-array name="popular_city_lat">
+        <item>55.7504461</item>
+        <item>51.5073219</item>
+        <item>45.4208777</item>
+        <item>-35.2975906</item>
+        <item>41.8933203</item>
+        <item>38.7077507</item>
+        <item>40.4167047</item>
+        <item>-15.7934036</item>
+        <item>19.4326296</item>
+    </string-array>
+
+    <string-array name="popular_city_lon">
+        <item>37.6174943</item>
+        <item>-0.1276474</item>
+        <item>-75.6901106</item>
+        <item>149.1012676</item>
+        <item>12.4829321</item>
+        <item>-9.1365919</item>
+        <item>-3.7035825</item>
+        <item>-47.8823172</item>
+        <item>-99.1331785</item>
+    </string-array>
+
+    <array name="popular_city_state">
+        <item>RU</item>
+        <item>England/GB</item>
+        <item>Ontario/CA</item>
+        <item>Australian Capital Territory/AU</item>
+        <item>IT</item>
+        <item>PT</item>
+        <item>ES</item>
+        <item>BR</item>
+        <item>MX</item>
+    </array>
+
+    <array name="air_quality_list">
+        <item>@string/air_quality_1</item>
+        <item>@string/air_quality_2</item>
+        <item>@string/air_quality_3</item>
+        <item>@string/air_quality_4</item>
+        <item>@string/air_quality_5</item>
+    </array>
+
+    <array name="notification_hint_sunny">
+        <item>@string/recall_des_sunny_1</item>
+        <item>@string/recall_des_sunny_2</item>
+        <item>@string/recall_des_sunny_3</item>
+        <item>@string/recall_des_sunny_4</item>
+    </array>
+    <array name="notification_hint_rain">
+        <item>@string/recall_des_rain_1</item>
+        <item>@string/recall_des_rain_2</item>
+        <item>@string/recall_des_rain_3</item>
+        <item>@string/recall_des_rain_4</item>
+    </array>
+    <array name="notification_hint_lower">
+        <item>@string/recall_des_lower_1</item>
+        <item>@string/recall_des_lower_2</item>
+        <item>@string/recall_des_lower_3</item>
+        <item>@string/recall_des_lower_4</item>
+    </array>
+    <array name="notification_hint_up">
+        <item>@string/recall_des_up_1</item>
+        <item>@string/recall_des_up_2</item>
+        <item>@string/recall_des_up_3</item>
+        <item>@string/recall_des_up_4</item>
+    </array>
+
+    <array name="notification_hint_title">
+        <item>@string/recall_title_1</item>
+        <item>@string/recall_title_2</item>
+        <item>@string/recall_title_3</item>
+        <item>@string/recall_title_4</item>
+        <item>@string/recall_title_5</item>
+        <item>@string/recall_title_6</item>
+        <item>@string/recall_title_7</item>
+        <item>@string/recall_title_8</item>
+        <item>@string/recall_title_9</item>
+        <item>@string/recall_title_10</item>
+        <item>@string/recall_title_11</item>
+        <item>@string/recall_title_12</item>
+        <item>@string/recall_title_13</item>
+        <item>@string/recall_title_14</item>
+        <item>@string/recall_title_15</item>
+        <item>@string/recall_title_16</item>
+    </array>
+
+    <array name="notification_hint_des">
+        <item>@string/recall_des_1</item>
+        <item>@string/recall_des_2</item>
+        <item>@string/recall_des_3</item>
+        <item>@string/recall_des_4</item>
+        <item>@string/recall_des_5</item>
+        <item>@string/recall_des_6</item>
+        <item>@string/recall_des_7</item>
+        <item>@string/recall_des_8</item>
+        <item>@string/recall_des_9</item>
+        <item>@string/recall_des_10</item>
+        <item>@string/recall_des_11</item>
+        <item>@string/recall_des_12</item>
+        <item>@string/recall_des_13</item>
+        <item>@string/recall_des_14</item>
+        <item>@string/recall_des_15</item>
+        <item>@string/recall_des_16</item>
+    </array>
+
+    <array name="recommend_weather_icon">
+        <item>"01d"</item>
+        <item>"02d"</item>
+        <item>"03d"</item>
+        <item>"04d"</item>
+        <item>"09d"</item>
+        <item>"10d"</item>
+        <item>"11d"</item>
+        <item>"13d"</item>
+        <item>"50d"</item>
+    </array>
+
+    <array name="recommend_weather_weather">
+        <item>Clear</item>
+        <item>Clouds</item>
+        <item>Clouds</item>
+        <item>Overcast</item>
+        <item>Rain</item>
+        <item>Rain</item>
+        <item>Thunderstorm</item>
+        <item>Snow</item>
+        <item>Fog</item>
+    </array>
+</resources>

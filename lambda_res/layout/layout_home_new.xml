@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:id="@+id/cl_all"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/iv_local_new"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/ic_local_new"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        style="@style/title_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="@string/local_news"
+        android:textColor="#ff111723"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_local_new"
+        app:layout_constraintStart_toEndOf="@+id/iv_local_new"
+        app:layout_constraintTop_toTopOf="@+id/iv_local_new" />
+
+
+    <TextView
+        style="@style/title_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:drawableEnd="@drawable/ic_read_more"
+        android:drawablePadding="5dp"
+        android:gravity="center"
+        android:text="@string/read_more"
+        android:textColor="#ff000000"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_local_new"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/iv_local_new" />
+
+    <com.lambdaweather.view.RecyclerViewBanner
+        android:id="@+id/rv_banner"
+        android:layout_width="0dp"
+        android:layout_height="240dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_local_new"
+        app:rvb_indicatorSelectedSrc="#1C99F1"
+        app:rvb_indicatorSpace="10dp"
+        app:rvb_indicatorUnselectedSrc="#B5B5B5" />
+
+    <ImageView
+        android:id="@+id/iv_text_bg"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="40dp"
+        android:src="@drawable/shape_home_news_bg"
+        app:layout_constraintBottom_toBottomOf="@+id/rv_banner"
+        app:layout_constraintEnd_toEndOf="@+id/rv_banner"
+        app:layout_constraintStart_toStartOf="@+id/rv_banner" />
+
+    <LinearLayout
+        android:id="@+id/lly_news_bottom"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="60dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/rv_banner"
+        app:layout_constraintEnd_toEndOf="@+id/rv_banner"
+        app:layout_constraintStart_toStartOf="@+id/rv_banner">
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/title_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:lines="2"
+            android:text="Nearly 120 milion people in US
+exposed to unhealthy levels..."
+            android:textColor="#ffffffff"
+            android:textSize="14sp" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

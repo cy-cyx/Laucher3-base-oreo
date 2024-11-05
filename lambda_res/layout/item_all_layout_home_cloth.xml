@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:background="@drawable/shape_home_content_bg">
+
+    <ImageView
+        android:id="@+id/iv_cloth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_cloth_index"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        style="@style/title_style"
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:text="@string/clothing_index"
+        android:textColor="#ff111115"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_cloth"
+        app:layout_constraintStart_toEndOf="@+id/iv_cloth"
+        app:layout_constraintTop_toTopOf="@+id/iv_cloth" />
+
+    <TextView
+        android:id="@+id/tv_cloth_index"
+        style="@style/title_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hot"
+        android:textColor="#1C99F1"
+        android:drawableStart="@drawable/ic_start_cloth"
+        android:drawablePadding="5dp"
+        android:layout_marginEnd="18dp"
+        android:background="@drawable/shape_cloth_index_home_text_bg"
+        android:gravity="center"
+        android:paddingStart="17dp"
+        android:paddingEnd="17dp"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_title"
+        app:layout_constraintTop_toTopOf="@+id/tv_title" />
+
+    <TextView
+        android:id="@+id/tv_des"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/shape_clothing_index_text_bg"
+        android:paddingHorizontal="25dp"
+        android:gravity="center"
+        android:paddingVertical="11dp"
+        android:text="Moderate chance of catching a cold in
+thisweather. Remember to take precautions."
+        android:textColor="#ff111115"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_cloth_index" />
+</androidx.constraintlayout.widget.ConstraintLayout>
