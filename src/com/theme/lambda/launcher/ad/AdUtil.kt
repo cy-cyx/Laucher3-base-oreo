@@ -7,6 +7,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import com.android.launcher3.BuildConfig
+import com.android.launcher3.Launcher
 import com.android.launcher3.R
 import com.android.launcher3.databinding.LayoutNativeAdAdmob1Binding
 import com.android.launcher3.databinding.LayoutNativeAdAdmob2Binding
@@ -105,7 +106,7 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
 
         app.registerActivityLifecycleCallbacks(this)
         LambdaAdSdk.registerLife(app)
-
+        LambdaAdSdk.initAdmobConsent(false)
         LambdaAdSdk.init(
             Constants.BASE_URL, Constants.SECRET_KEY, object : LambdaAd.LogAdEvent {
                 override fun onLog(step: Int, logParam: LambdaAd.LogAdEvent.LogParam?, ad: Any?) {
@@ -301,7 +302,6 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
 
     private val priorityLoadIntAndRawIds = listOf(
         AdName.splash,
-        AdName.interleaving,
         AdName.app_open
     )
 
@@ -332,6 +332,11 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
         val loadIntAndRawIds = arrayListOf<String>()
         if (priority) {
             loadIntAndRawIds.addAll(priorityLoadIntAndRawIds)
+            // 不能用Laucher的context初始化，不然跳转会有问题
+            if (activity !is Launcher){
+                loadIntAndRawIds.add(AdName.interleaving)
+            }
+
         } else {
             loadIntAndRawIds.addAll(intAndRawIds)
         }

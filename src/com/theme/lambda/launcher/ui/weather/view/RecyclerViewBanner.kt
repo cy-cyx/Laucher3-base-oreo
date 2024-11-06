@@ -323,7 +323,7 @@ class RecyclerViewBanner @JvmOverloads constructor(
             )
             img.layoutParams = params
             img.id = R.id.rvb_banner_image_view_id
-            img.scaleType = ImageView.ScaleType.FIT_XY
+            img.scaleType = ImageView.ScaleType.CENTER_CROP
             img.setOnClickListener {
                 if (onRvBannerClickListener != null) {
                     onRvBannerClickListener!!.onClick(currentIndex % mData!!.size)

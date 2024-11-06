@@ -480,9 +480,13 @@ public class Launcher extends BaseActivity
             mDragLayer.setAlpha(0);
         } else {
             // Pages bound synchronously.
+            // 如果是重建，负一屏回第一页
+            if (currentScreen == 0){
+                currentScreen = 1;
+            }
             mWorkspace.setCurrentPage(currentScreen);
-
-            setWorkspaceLoading(true);
+            // 由于异步导致！！！Laucher自带bug？？
+//            setWorkspaceLoading(true);
         }
 
         // For handling default keys
@@ -1414,6 +1418,7 @@ public class Launcher extends BaseActivity
         if (savedState == null) {
             return;
         }
+        Log.d(TAG, "restoreState" + savedState);
 
         int stateOrdinal = savedState.getInt(RUNTIME_STATE, State.WORKSPACE.ordinal());
         State[] stateValues = State.values();
@@ -1971,8 +1976,8 @@ public class Launcher extends BaseActivity
     protected void onSaveInstanceState(Bundle outState) {
         if (mWorkspace.getChildCount() > 0) {
             outState.putInt(RUNTIME_STATE_CURRENT_SCREEN,
-                    mWorkspace.getCurrentPageOffsetFromCustomContent());
-
+                    mWorkspace.getCurrentPage());
+            Log.d(TAG, "onSaveInstanceState : last custom" + mWorkspace.getCurrentPage());
         }
         super.onSaveInstanceState(outState);
 
@@ -3889,6 +3894,7 @@ public class Launcher extends BaseActivity
         }
         mWorkspace.restoreInstanceStateForRemainingPages();
 
+        Log.d(TAG, "finishBindingItems--->");
         setWorkspaceLoading(false);
         // 保证一定能关闭
         hideLoading();

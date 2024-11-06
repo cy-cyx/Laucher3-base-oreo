@@ -30,9 +30,13 @@ public class ThemeIconMapping {
     private static float whiteFrame = CommonUtil.INSTANCE.dp2px(3f);
     private static float roundedCorners = CommonUtil.INSTANCE.dp2px(10f);
 
+    private static Bitmap generalFrameBm;
+    private static Bitmap defaultFrameBm;
+
     static HashMap<String, Bitmap> cacheBitmap = new HashMap();
 
     public static void cleanThemeIconCache() {
+        generalFrameBm = null;
         cacheBitmap.clear();
     }
 
@@ -97,9 +101,11 @@ public class ThemeIconMapping {
                 for (IconBean iconBean : icons) {
                     if (iconBean.getPn().equals("general_background")) {
                         try {
-                            String iconPath = themeManager.getManifestResRootPath() + iconBean.getIcon();
-                            Bitmap frameBmTemp = BitmapFactory.decodeFile(iconPath);
-                            Bitmap frameBm = frameBmTemp.copy(Bitmap.Config.ARGB_8888, true);
+                            if (generalFrameBm == null) {
+                                String iconPath = themeManager.getManifestResRootPath() + iconBean.getIcon();
+                                generalFrameBm = BitmapFactory.decodeFile(iconPath);
+                            }
+                            Bitmap frameBm = generalFrameBm.copy(Bitmap.Config.ARGB_8888, true);
 
                             Bitmap appBitmap;
                             if (result != null) {
@@ -107,7 +113,11 @@ public class ThemeIconMapping {
                             } else {
                                 appBitmap = ConvertUtils.drawable2Bitmap(AppUtils.getAppIcon(packageName));
                             }
-                            result = addFrameIcon(frameBm, appBitmap);
+                            if (frameBm == null) {
+                                result = appBitmap;
+                            } else {
+                                result = addFrameIcon(frameBm, appBitmap);
+                            }
 
                             cacheBitmap.put(packageName, result);
                             return result;
@@ -120,8 +130,10 @@ public class ThemeIconMapping {
         }
 
         // 都没有套一层默认的
-        Bitmap temp = BitmapFactory.decodeResource(context.getResources(),R.drawable.bg_default_icon);
-        Bitmap frameBm = temp.copy(Bitmap.Config.ARGB_8888, true);
+        if (defaultFrameBm == null) {
+            defaultFrameBm = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg_default_icon);
+        }
+        Bitmap frameBm = defaultFrameBm.copy(Bitmap.Config.ARGB_8888, true);
         Bitmap appBitmap;
         if (result != null) {
             appBitmap = result;
