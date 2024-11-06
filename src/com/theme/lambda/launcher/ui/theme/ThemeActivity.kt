@@ -7,6 +7,8 @@ import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.lifecycle.Observer
+import com.adjust.sdk.Adjust
+import com.adjust.sdk.AdjustEvent
 import com.android.launcher3.RecommendAppManager
 import com.android.launcher3.databinding.ActivityThemeBinding
 import com.google.android.material.tabs.TabLayout
@@ -225,6 +227,7 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
             viewBinding.applyTv.gone()
             EventUtil.logEvent(EventName.activate, Bundle())
             FirebaseAnalyticsUtil.logEvent(EventName.activate, Bundle())
+            Adjust.trackEvent(AdjustEvent("wbnbw3"))
         }
         if (LauncherUtil.gotoSetting) {
             if (LauncherUtil.isDefaultLauncher(this)) {

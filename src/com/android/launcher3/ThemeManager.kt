@@ -4,6 +4,8 @@ import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import com.adjust.sdk.Adjust
+import com.adjust.sdk.AdjustEvent
 import com.ironsource.tr
 import com.theme.lambda.launcher.ad.AdName
 import com.theme.lambda.launcher.ad.AdUtil
@@ -246,6 +248,7 @@ class ThemeManager {
             if (LauncherUtil.isDefaultLauncher(it)) {
                 logEvent(EventName.activate, Bundle())
                 FirebaseAnalyticsUtil.logEvent(EventName.activate, Bundle())
+                Adjust.trackEvent(AdjustEvent("wbnbw3"))
             }
             if (LauncherUtil.gotoSetting) {
                 if (LauncherUtil.isDefaultLauncher(it)) {
