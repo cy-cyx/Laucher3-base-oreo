@@ -15,7 +15,6 @@ import com.theme.lambda.launcher.data.model.ResResult
 import com.theme.lambda.launcher.data.model.ThemeRes
 import com.theme.lambda.launcher.data.model.Weather
 import com.theme.lambda.launcher.utils.CommonUtil
-import com.theme.lambda.launcher.utils.LocalUtil
 import com.theme.lambda.launcher.utils.TimeUtil
 import java.util.Locale
 
@@ -82,8 +81,8 @@ object DataRepository {
         try {
             val locationModel = WeatherUtils.getSelectLocation()
             return service.weather(
-                locationModel?.lat?.toCustomInt() ?: LocalUtil.lat.toString(),
-                locationModel?.lon?.toCustomInt() ?: LocalUtil.lon.toString(),
+                locationModel?.lat?.toCustomInt() ?: "40.6643",
+                locationModel?.lon?.toCustomInt() ?: "-73.9385",
                 Locale.getDefault().language
             )
         } catch (e: Exception) {
@@ -95,8 +94,8 @@ object DataRepository {
         try {
             val locationModel = WeatherUtils.getSelectLocation()
             return service.forecastWeather(
-                locationModel?.lat?.toCustomInt() ?: LocalUtil.lat.toString(),
-                locationModel?.lon?.toCustomInt() ?: LocalUtil.lon.toString(),
+                locationModel?.lat?.toCustomInt() ?: "40.6643",
+                locationModel?.lon?.toCustomInt() ?: "-73.9385",
                 Locale.getDefault().language
             )
         } catch (e: Exception) {
@@ -107,9 +106,10 @@ object DataRepository {
 
     suspend fun getForestDayWeather(): ForestDayWeather? {
         try {
+            val locationModel = WeatherUtils.getSelectLocation()
             val map = mapOf(
-                "lat" to LocalUtil.lat.toString(),
-                "lon" to LocalUtil.lon.toString(),
+                "lat" to (locationModel?.lat?.toCustomInt() ?: "40.6643"),
+                "lon" to (locationModel?.lon?.toCustomInt() ?: "-73.9385"),
                 "lang" to Locale.getDefault().language,
                 "cnt" to "7",
                 "host" to "api.openweathermap.org"

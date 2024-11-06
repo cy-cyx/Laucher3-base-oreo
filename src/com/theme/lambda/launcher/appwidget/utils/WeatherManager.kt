@@ -7,7 +7,6 @@ import com.theme.lambda.launcher.data.DataRepository
 import com.theme.lambda.launcher.data.model.ForestDayWeather
 import com.theme.lambda.launcher.data.model.ForestWeather
 import com.theme.lambda.launcher.data.model.Weather
-import com.theme.lambda.launcher.utils.LocalUtil
 import com.theme.lambda.launcher.utils.TimeUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -31,9 +30,7 @@ object WeatherManager {
     }
 
     fun init() {
-        LocalUtil.getLocal { _, _ ->
-            initWeatherData()
-        }
+        initWeatherData()
     }
 
     private fun initWeatherData() {
