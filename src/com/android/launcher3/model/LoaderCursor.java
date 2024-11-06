@@ -38,6 +38,7 @@ import com.android.launcher3.ItemInfo;
 import com.android.launcher3.LauncherAppState;
 import com.android.launcher3.LauncherSettings;
 import com.android.launcher3.ShortcutInfo;
+import com.android.launcher3.ThemeIconMapping;
 import com.android.launcher3.Utilities;
 import com.android.launcher3.Workspace;
 import com.android.launcher3.compat.LauncherAppsCompat;
@@ -49,6 +50,7 @@ import com.android.launcher3.util.ContentWriter;
 import com.android.launcher3.util.GridOccupancy;
 import com.android.launcher3.util.LongArrayMap;
 import com.android.launcher3.util.PackageManagerHelper;
+import com.theme.lambda.launcher.utils.CommonUtil;
 
 import java.net.URISyntaxException;
 import java.security.InvalidParameterException;
@@ -264,10 +266,14 @@ public class LoaderCursor extends CursorWrapper {
         info.user = user;
         info.intent = newIntent;
 
-        mIconCache.getTitleAndIcon(info, lai, useLowResIcon);
-        if (mIconCache.isDefaultIcon(info.iconBitmap, user)) {
-            Bitmap icon = loadIcon(info);
-            info.iconBitmap = icon != null ? icon : info.iconBitmap;
+        // todo 由于icon都主题化其实没有必要解析数据库里的，但是由于这里逻辑太复杂先这样写，还有缓存那一步没改，后续有时间再改没也影响不大
+        info.iconBitmap = ThemeIconMapping.getThemeBitmap(CommonUtil.getAppContext(),componentName.getPackageName(),componentName.getClassName());
+        if (info.iconBitmap == null){
+            mIconCache.getTitleAndIcon(info, lai, useLowResIcon);
+            if (mIconCache.isDefaultIcon(info.iconBitmap, user)) {
+                Bitmap icon = loadIcon(info);
+                info.iconBitmap = icon != null ? icon : info.iconBitmap;
+            }
         }
 
         if (lai != null && PackageManagerHelper.isAppSuspended(lai.getApplicationInfo())) {
