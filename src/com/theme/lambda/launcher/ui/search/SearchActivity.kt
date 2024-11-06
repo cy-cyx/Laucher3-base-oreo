@@ -1,5 +1,7 @@
 package com.theme.lambda.launcher.ui.search
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.LayoutInflater
@@ -29,12 +31,47 @@ import com.theme.lambda.launcher.utils.visible
 import okhttp3.internal.cache.DiskLruCache
 
 class SearchActivity : BaseActivity<ActivitySearchBinding>() {
+
+    companion object {
+
+        fun start(context: Context) {
+            context.startActivity(Intent(context, SearchActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            })
+        }
+
+        var recentApps by Preference("recent_apps", "")
+
+        @JvmStatic
+        fun addRecentApps(packageName: String): List<String> {
+            var list = if (recentApps.isNotEmpty()) {
+                GsonUtils.fromJson<MutableList<String>>(
+                    recentApps,
+                    GsonUtils.getListType(String::class.java)
+                )
+            } else {
+                mutableListOf()
+            }
+            if (packageName == Utils.getApp().packageName) {
+                return list
+            }
+            list.remove(packageName)
+            list.add(0, packageName)
+            if (list.size > 10) {
+                list = list.subList(0, 10)
+            }
+            recentApps = GsonUtils.toJson(list)
+            return list
+        }
+    }
+
     private val searchHistoryAdapter: SearchHistoryAdapter by lazy {
         SearchHistoryAdapter()
     }
     private val recentAppsAdapter: RecentAppsAdapter by lazy {
         RecentAppsAdapter()
     }
+
     private val localAppsAdapter: LocalAppsAdapter by lazy {
         LocalAppsAdapter()
     }
@@ -51,15 +88,6 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         StatusBarUtil.transparencyBar(this)
         StatusBarUtil.setStatusBarLightMode(this.window)
         viewBinding.containerLl.marginStatusBarHeight()
-
-        window.decorView.setSystemUiVisibility(
-            View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                    or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                    or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
-                    or View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
-                    or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-        )
         initView()
         initData()
     }
@@ -161,31 +189,5 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         })
 
         viewModel.initData()
-    }
-
-    companion object {
-        var recentApps by Preference("recent_apps", "")
-
-        @JvmStatic
-        fun addRecentApps(packageName: String): List<String> {
-            var list = if (recentApps.isNotEmpty()) {
-                GsonUtils.fromJson<MutableList<String>>(
-                    recentApps,
-                    GsonUtils.getListType(String::class.java)
-                )
-            } else {
-                mutableListOf()
-            }
-            if (packageName == Utils.getApp().packageName) {
-                return list
-            }
-            list.remove(packageName)
-            list.add(0, packageName)
-            if (list.size > 10) {
-                list = list.subList(0, 10)
-            }
-            recentApps = GsonUtils.toJson(list)
-            return list
-        }
     }
 }

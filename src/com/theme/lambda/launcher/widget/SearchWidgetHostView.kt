@@ -51,12 +51,7 @@ class SearchWidgetHostView constructor(private val context: Context) : AppWidget
                 .inflate(R.layout.view_widget_search, parent, false)
             v.setOnClickListener {
                 if (ThemeManager.getThemeManagerIfExist()?.isPreviewMode == true) return@setOnClickListener
-                parent.context.startActivity(Intent(
-                    parent.context,
-                    SearchActivity::class.java
-                ).apply {
-                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                })
+                SearchActivity.start(parent.context)
             }
             return v
         }

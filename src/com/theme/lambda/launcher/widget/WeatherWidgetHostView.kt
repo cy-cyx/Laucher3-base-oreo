@@ -80,14 +80,7 @@ class WeatherWidgetHostView constructor(private val context: Context) : AppWidge
             }
             v.findViewById<LinearLayout>(R.id.ll2).setOnClickListener {
                 if (ThemeManager.getThemeManagerIfExist()?.isPreviewMode == true) return@setOnClickListener
-                parent.context.startActivity(
-                    Intent(
-                        parent.context,
-                        WeatherActivity::class.java
-                    ).apply {
-                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                    }
-                )
+                WeatherActivity.start(parent.context)
                 EventUtil.logEvent(EventName.LWeather, Bundle().apply {
                     putString("type", "click")
                 })

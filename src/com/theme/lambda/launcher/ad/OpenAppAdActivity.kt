@@ -17,6 +17,7 @@ class OpenAppAdActivity : FragmentActivity() {
             adId = id
             runnable = r
             context.startActivity(Intent(context, OpenAppAdActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             })
         }

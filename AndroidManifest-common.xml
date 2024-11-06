@@ -57,6 +57,7 @@
         android:largeHeap="@bool/config_largeHeap"
         android:restoreAnyVersion="true"
         android:supportsRtl="true"
+        android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
         <!-- Intent received used to install shortcuts from other applications -->
@@ -114,7 +115,6 @@
 
         <activity
             android:name="com.android.launcher3.dragndrop.AddItemActivity"
-            android:autoRemoveFromRecents="true"
             android:excludeFromRecents="true"
             android:exported="true"
             android:label="@string/action_add_to_workspace"
@@ -135,64 +135,64 @@
 
         <activity
             android:name="com.theme.lambda.launcher.ui.search.SearchActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/LauncherTheme" />
+            android:excludeFromRecents="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.theme.lambda.launcher.ui.weather.ui.WeatherActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:excludeFromRecents="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.theme.lambda.launcher.ui.weather.ui.WeatherSettingsActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:excludeFromRecents="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.theme.lambda.launcher.ui.weather.ui.WeatherLocationActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:excludeFromRecents="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.theme.lambda.launcher.ui.weather.ui.TemperatureUnitActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:excludeFromRecents="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.theme.lambda.launcher.ui.news.NewDetailsActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:excludeFromRecents="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.theme.lambda.launcher.ui.theme.ThemeActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.theme.lambda.launcher.ui.themepreview.ThemePreviewActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.theme.lambda.launcher.ui.me.MeActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.theme.lambda.launcher.ui.permissionguide.HomeLauncherSetGuideActivity"
+            android:excludeFromRecents="true"
+            android:noHistory="true"
             android:theme="@style/TransDialog" />
         <activity
             android:name="com.theme.lambda.launcher.ui.vivosetting.VivoSettingActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.theme.lambda.launcher.ui.iap.VipActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:excludeFromRecents="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.theme.lambda.launcher.ui.timeoutrecall.TimeoutRecallActivity"
+            android:excludeFromRecents="true"
+            android:noHistory="true"
             android:theme="@style/Translucent" />
         <activity
             android:name="com.theme.lambda.launcher.ui.web.WebViewActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:excludeFromRecents="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.theme.lambda.launcher.ui.seticon.SetIconActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:excludeFromRecents="true"
+            android:noHistory="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.theme.lambda.launcher.shortcut.IntentGuideActivity"
             android:excludeFromRecents="true"
@@ -203,11 +203,12 @@
         <activity
             android:name="com.theme.lambda.launcher.ad.OpenAppAdActivity"
             android:excludeFromRecents="true"
+            android:noHistory="true"
             android:theme="@style/Translucent" />
         <activity
             android:name="com.lambdaweather.ui.news.NewsListActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:excludeFromRecents="true"
+            android:screenOrientation="portrait" />
 
         <service
             android:name="com.theme.lambda.launcher.service.FirebaseService"

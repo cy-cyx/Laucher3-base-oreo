@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import com.android.launcher3.Launcher
 import com.android.launcher3.R
 import com.android.launcher3.databinding.ActivityNewDetailBinding
 import com.theme.lambda.launcher.base.BaseActivity
@@ -23,6 +24,9 @@ class NewDetailsActivity : BaseActivity<ActivityNewDetailBinding>() {
             val data = GsonUtil.gson.toJson(new)
             context.startActivity(Intent(context, NewDetailsActivity::class.java).apply {
                 putExtra(sKeyNewDetail, data)
+                if (context is Launcher) {
+                    addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                }
             })
         }
     }
@@ -38,7 +42,6 @@ class NewDetailsActivity : BaseActivity<ActivityNewDetailBinding>() {
         StatusBarUtil.transparencyBar(this)
         StatusBarUtil.setStatusBarLightMode(this.window)
         viewBinding.containerLl.marginStatusBarHeight()
-
 
         intent.getStringExtra(sKeyNewDetail)?.let {
             if (it.isNotBlank()) {
