@@ -1,6 +1,7 @@
 package com.theme.lambda.launcher.appwidget.utils
 
 import com.android.launcher3.R
+import com.lambdaweather.utils.WeatherUtils
 import com.theme.lambda.launcher.appwidget.widget.WeatherAppWidget
 import com.theme.lambda.launcher.data.DataRepository
 import com.theme.lambda.launcher.data.model.ForestDayWeather
@@ -46,7 +47,8 @@ object WeatherManager {
     }
 
     fun getCountry(): String {
-        return forestWeather?.city?.name ?: "NULL"
+        val locationModel = WeatherUtils.getSelectLocation()
+        return locationModel?.getLocalName() ?: "NULL"
     }
 
     fun getTemperature(): String {
