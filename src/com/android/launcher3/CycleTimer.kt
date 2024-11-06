@@ -40,7 +40,6 @@ object CycleTimer {
     private fun onTime() {
         AdUtil.reloadOpenAdIfNeed()
         WidgetManager.upData()
-        WeatherManager.upDataByTiming()
     }
 
     interface CycleTimerCallback {

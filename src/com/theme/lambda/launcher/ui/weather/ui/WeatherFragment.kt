@@ -29,6 +29,7 @@ import com.lambdaweather.utils.LocationManagerHelper
 import com.lambdaweather.utils.ScaleUpAnimator
 import com.lambdaweather.utils.TimeUtils
 import com.lambdaweather.utils.WeatherUtils
+import com.theme.lambda.launcher.appwidget.utils.WeatherManager
 import com.theme.lambda.launcher.base.BaseFragment
 import com.theme.lambda.launcher.utils.TimerUtils
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
@@ -117,6 +118,7 @@ class WeatherFragment : BaseFragment<FragmentWeather2Binding>() {
 
     private fun initHome() {
         TimerUtils.getIpLocation()
+        WeatherManager.init()
         viewModel.weather.observe(this.viewLifecycleOwner) {
             viewBinding.srl.isRefreshing = false
             if (it.data?.dt == null) {

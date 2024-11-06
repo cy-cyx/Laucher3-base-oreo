@@ -1,6 +1,7 @@
 package com.theme.lambda.launcher.appwidget.utils
 
 import com.android.launcher3.R
+import com.theme.lambda.launcher.appwidget.widget.WeatherAppWidget
 import com.theme.lambda.launcher.data.DataRepository
 import com.theme.lambda.launcher.data.model.ForestDayWeather
 import com.theme.lambda.launcher.data.model.ForestWeather
@@ -39,16 +40,9 @@ object WeatherManager {
             weather = DataRepository.getWeather()
             forestWeather = DataRepository.getForestWeather()
             forestDayWeather = DataRepository.getForestDayWeather()
+            WeatherAppWidget.upData()
         }
         lastUpDataTimeStamp = System.currentTimeMillis()
-    }
-
-    fun upDataByTiming() {
-        if (System.currentTimeMillis() - lastUpDataTimeStamp > 1000 * 60 * 10) {
-            mainScope.launch {
-                init()
-            }
-        }
     }
 
     fun getCountry(): String {

@@ -3,6 +3,8 @@ package com.theme.lambda.launcher.data
 import android.util.Log
 import androidx.room.Room
 import com.lambda.common.http.RequestParam
+import com.lambdaweather.utils.WeatherUtils
+import com.lambdaweather.utils.toCustomInt
 import com.theme.lambda.launcher.Constants
 import com.theme.lambda.launcher.data.api.AppApi
 import com.theme.lambda.launcher.data.http.RetrofitUtil
@@ -78,22 +80,23 @@ object DataRepository {
 
     suspend fun getWeather(): Weather? {
         try {
+            val locationModel = WeatherUtils.getSelectLocation()
             return service.weather(
-                LocalUtil.lat.toString(),
-                LocalUtil.lon.toString(),
+                locationModel?.lat?.toCustomInt() ?: LocalUtil.lat.toString(),
+                locationModel?.lon?.toCustomInt() ?: LocalUtil.lon.toString(),
                 Locale.getDefault().language
             )
         } catch (e: Exception) {
-            Log.d("xxxxxxx", "$e")
         }
         return null
     }
 
     suspend fun getForestWeather(): ForestWeather? {
         try {
+            val locationModel = WeatherUtils.getSelectLocation()
             return service.forecastWeather(
-                LocalUtil.lat.toString(),
-                LocalUtil.lon.toString(),
+                locationModel?.lat?.toCustomInt() ?: LocalUtil.lat.toString(),
+                locationModel?.lon?.toCustomInt() ?: LocalUtil.lon.toString(),
                 Locale.getDefault().language
             )
         } catch (e: Exception) {
