@@ -18,7 +18,7 @@ import com.android.launcher3.ThemeManager
 import com.theme.lambda.launcher.statistics.EventName
 import com.theme.lambda.launcher.statistics.EventUtil
 import com.theme.lambda.launcher.ui.weather.ui.WeatherActivity
-import com.theme.lambda.launcher.utils.TimerUtils
+import com.theme.lambda.launcher.utils.WeatherTimerUtils
 
 class WeatherWidgetHostView constructor(private val context: Context) : AppWidgetHostView(context) {
     @ExportedProperty(category = "launcher")
@@ -93,7 +93,7 @@ class WeatherWidgetHostView constructor(private val context: Context) : AppWidge
                 })
             }
             v.findViewById<ImageView>(R.id.iv_refresh).setOnClickListener {
-                TimerUtils.getIpLocation()
+                WeatherTimerUtils.getIpLocation()
                 EventUtil.logEvent(EventName.LWeather, Bundle().apply {
                     putString("type", "refresh")
                 })

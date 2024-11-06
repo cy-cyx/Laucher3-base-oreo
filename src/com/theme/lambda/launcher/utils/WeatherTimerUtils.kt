@@ -1,7 +1,6 @@
 package com.theme.lambda.launcher.utils
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -21,7 +20,10 @@ import java.util.Timer
 import java.util.TimerTask
 import kotlin.math.roundToInt
 
-object TimerUtils {
+/**
+ * 用于刷新天气组件的工具类
+ */
+object WeatherTimerUtils {
     private var mTimer: Timer? = null
     private var mCallback: ((String, WeatherModel) -> Unit)? = null
 

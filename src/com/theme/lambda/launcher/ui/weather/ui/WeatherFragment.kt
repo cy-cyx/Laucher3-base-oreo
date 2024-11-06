@@ -31,7 +31,7 @@ import com.lambdaweather.utils.TimeUtils
 import com.lambdaweather.utils.WeatherUtils
 import com.theme.lambda.launcher.appwidget.utils.WeatherManager
 import com.theme.lambda.launcher.base.BaseFragment
-import com.theme.lambda.launcher.utils.TimerUtils
+import com.theme.lambda.launcher.utils.WeatherTimerUtils
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.math.roundToInt
@@ -117,7 +117,7 @@ class WeatherFragment : BaseFragment<FragmentWeather2Binding>() {
     }
 
     private fun initHome() {
-        TimerUtils.getIpLocation()
+        WeatherTimerUtils.getIpLocation()
         WeatherManager.init()
         viewModel.weather.observe(this.viewLifecycleOwner) {
             viewBinding.srl.isRefreshing = false

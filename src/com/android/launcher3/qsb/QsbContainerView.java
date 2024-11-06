@@ -44,7 +44,7 @@ import com.android.launcher3.R;
 import com.android.launcher3.Utilities;
 import com.android.launcher3.compat.AppWidgetManagerCompat;
 import com.android.launcher3.config.FeatureFlags;
-import com.theme.lambda.launcher.utils.TimerUtils;
+import com.theme.lambda.launcher.utils.WeatherTimerUtils;
 import com.theme.lambda.launcher.widget.SearchWidgetHostView;
 import com.theme.lambda.launcher.widget.WeatherWidgetHostView;
 
@@ -240,13 +240,13 @@ public class QsbContainerView extends FrameLayout {
             params.topMargin = Utilities.pxFromDp(20, getActivity().getResources().getDisplayMetrics());
             linearLayout.addView(createWeather(mWrapper), params);
             mWrapper.addView(linearLayout);
-            TimerUtils.schedule((s, weatherModel) -> {
+            WeatherTimerUtils.schedule((s, weatherModel) -> {
                 if (mWeather != null) {
                    Handler mainHandler = new Handler(Looper.getMainLooper());
                    mainHandler.post(new Runnable() {
                        @Override
                        public void run() {
-                           TimerUtils.update(mWeather, s, weatherModel);
+                           WeatherTimerUtils.update(mWeather, s, weatherModel);
                        }
                    });
                 }
