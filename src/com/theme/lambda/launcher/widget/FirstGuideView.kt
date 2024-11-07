@@ -64,6 +64,14 @@ class FirstGuideView @JvmOverloads constructor(
     private fun showSecondStep() {
         binding.step2Fl.visible()
         binding.step2Fl.setOnClickListener {
+            binding.step2Fl.gone()
+            showThirdStep()
+        }
+    }
+
+    private fun showThirdStep() {
+        binding.step3Fl.visible()
+        binding.step3Fl.setOnClickListener {
             gone()
         }
     }
