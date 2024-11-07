@@ -132,7 +132,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
                     // 再处理文件请求
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                         if (!Environment.isExternalStorageManager()) {
-                            PermissionUtil.gotoFillAccessPage(this@SearchActivity)
+//                            PermissionUtil.gotoFillAccessPage(this@SearchActivity)
                         } else {
                             FileSearchLib.loadData()
                         }
