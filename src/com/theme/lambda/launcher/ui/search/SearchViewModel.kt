@@ -20,6 +20,7 @@ import com.theme.lambda.launcher.statistics.EventName
 import com.theme.lambda.launcher.statistics.EventUtil
 import com.theme.lambda.launcher.ui.search.SearchActivity.Companion.addRecentApps
 import com.theme.lambda.launcher.ui.search.SearchActivity.Companion.recentApps
+import com.theme.lambda.launcher.ui.search.searchlib.FileSearchLib
 import com.theme.lambda.launcher.ui.search.searchlib.NetSearchLib
 import com.theme.lambda.launcher.ui.search.searchlib.PicSearchLib
 import com.theme.lambda.launcher.ui.web.WebViewActivity
@@ -41,6 +42,7 @@ class SearchViewModel : BaseViewModel() {
     val searchModeLiveData = MutableLiveData<Boolean>(false)
     val netUrlLiveData = MutableLiveData<ArrayList<String>>(arrayListOf())
     val imageLiveData = MutableLiveData<ArrayList<FileInfo>>(arrayListOf())
+    val fileLiveData = MutableLiveData<ArrayList<FileInfo>>(arrayListOf())
 
     private val searchInfo: SearchInfo by lazy {
         val string =
@@ -115,6 +117,15 @@ class SearchViewModel : BaseViewModel() {
             imageLiveData.postValue(PicSearchLib.findImages(string))
         }
     }
+
+    private var searchFileJob: Job? = null
+    fun searchFile(string: String) {
+        if (string.isEmpty()) return
+        searchFileJob = viewModelScope.launch(Dispatchers.IO) {
+            fileLiveData.postValue(FileSearchLib.findFiles(string))
+        }
+    }
+
 
     fun search(context: Context, string: String) {
         startGlobalSearch(context, string)

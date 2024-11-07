@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +24,7 @@ import com.lambda.common.http.Preference
 import com.lambda.common.utils.utilcode.util.GsonUtils
 import com.lambda.common.utils.utilcode.util.Utils
 import com.theme.lambda.launcher.base.BaseActivity
+import com.theme.lambda.launcher.ui.search.adapter.FileAdapter
 import com.theme.lambda.launcher.ui.search.adapter.ImageAdapter
 import com.theme.lambda.launcher.ui.search.adapter.LocalAppsAdapter
 import com.theme.lambda.launcher.ui.search.adapter.NetUrlAdapter
@@ -89,6 +91,9 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
     private val imageAdapter: ImageAdapter by lazy {
         ImageAdapter()
     }
+    private val fileAdapter: FileAdapter by lazy {
+        FileAdapter()
+    }
 
     override fun initViewBinding(layoutInflater: LayoutInflater): ActivitySearchBinding {
         return ActivitySearchBinding.inflate(layoutInflater)
@@ -105,6 +110,11 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         initView()
         initData()
 
+        // 图片和文件需要请求权限
+        requestPermissionAndLoadData()
+    }
+
+    private fun requestPermissionAndLoadData() {
         val permissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             arrayOf(
                 Manifest.permission.READ_MEDIA_IMAGES
@@ -118,7 +128,18 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             object : PermissionUtil.IPermissionCallback {
                 override fun nextStep() {
                     PicSearchLib.loadData()
-                    FileSearchLib.loadData()
+
+                    // 再处理文件请求
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                        if (!Environment.isExternalStorageManager()) {
+                            PermissionUtil.gotoFillAccessPage(this@SearchActivity)
+                        } else {
+                            FileSearchLib.loadData()
+                        }
+
+                    } else {
+                        FileSearchLib.loadData()
+                    }
                 }
 
                 override fun noPermission() {
@@ -132,6 +153,13 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             force = false,
             showGotoSetDialog = false
         )
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && Environment.isExternalStorageManager()) {
+            FileSearchLib.loadData()
+        }
     }
 
     private fun initView() {
@@ -174,6 +202,10 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         viewBinding.imageRv.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
+        viewBinding.fileRv.adapter = fileAdapter
+        viewBinding.fileRv.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
         viewBinding.et.addTextChangedListener {
             if (it.isNullOrEmpty()) {
                 viewBinding.ivClear.visibility = View.GONE
@@ -188,6 +220,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             viewModel.searchLocalApp(it.toString())
             viewModel.searchNetUrl(it.toString())
             viewModel.searchImage(it.toString())
+            viewModel.searchFile(it.toString())
         }
         viewBinding.et.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
             viewBinding.clSearchHistory.visibility =
@@ -254,6 +287,10 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         viewModel.imageLiveData.observe(this, Observer {
             viewBinding.picLl.visibility = if (it.isEmpty()) View.GONE else View.VISIBLE
             imageAdapter.setList(it)
+        })
+        viewModel.fileLiveData.observe(this, Observer {
+            viewBinding.fileLl.visibility = if (it.isEmpty()) View.GONE else View.VISIBLE
+            fileAdapter.setList(it)
         })
 
         viewModel.initData()

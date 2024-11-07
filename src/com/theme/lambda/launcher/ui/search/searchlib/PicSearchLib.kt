@@ -65,28 +65,22 @@ object PicSearchLib {
                 // 更改时间
                 val columnDateModified =
                     c.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.DATE_MODIFIED)
+                val columnDateTitle =
+                    c.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.TITLE)
 
                 while (c.moveToNext()) {
                     val id = c.getString(columnID)
                     val path = c.getString(columnData);
                     val minType = c.getString(columnMimeType);
-                    val positionDo = path.lastIndexOf(".");
-                    if (positionDo == -1) {
-                        continue
-                    }
-                    val positionX = path.lastIndexOf(File.separator);
-                    if (positionX == -1) {
-                        continue
-                    }
-                    val displayName = path.substring(positionX + 1, path.length);
                     val size = c.getLong(columnSize);
+                    val name = c.getString(columnDateTitle);
                     c.getLong(columnDateModified);
                     val file = File(path);
                     val time =
                         SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Date(file.lastModified()));
                     val info = FileInfo()
                     info.minType = minType
-                    info.name = displayName
+                    info.name = name
                     info.path = path
                     info.size = size
                     info.id = id

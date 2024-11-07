@@ -12,6 +12,7 @@ import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.io.FileReader
 import java.io.IOException
+import java.text.DecimalFormat
 import java.util.Locale
 
 
@@ -115,6 +116,22 @@ object FileUtil {
             }
         }
         return type
+    }
+
+    fun fileSizeToB(size: Long): String {
+        val oneGb = 1024 * 1024 * 1024  //定义GB的计算常量
+        val oneMb = 1024 * 1024         //定义MB的计算常量
+        val oneKb = 1024                //定义KB的计算常量
+        val df = DecimalFormat("0.00")
+        return if (size / oneGb >= 1) {
+            df.format(size / oneGb.toFloat()) + "GB";
+        } else if (size / oneMb >= 1) {
+            df.format(size / oneMb.toFloat()) + "MB";
+        } else if (size / oneKb >= 1) {
+            df.format(size / oneKb.toFloat()) + "KB";
+        } else {
+            "${size}B"
+        }
     }
 }
 

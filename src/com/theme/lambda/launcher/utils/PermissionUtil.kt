@@ -7,10 +7,13 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
+import android.os.Environment
 import android.provider.Settings
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.android.launcher3.BuildConfig
 import com.android.launcher3.R
 
 object PermissionUtil {
@@ -196,6 +199,21 @@ object PermissionUtil {
             val i = Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM, uri)
             context.startActivity(i)
         }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.R)
+    fun gotoFillAccessPage(context: Context) {
+        if (Environment.isExternalStorageManager()) return
+        try {
+            val uri = Uri.parse("package:" + BuildConfig.APPLICATION_ID)
+            val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION, uri)
+            context.startActivity(intent)
+        } catch (ex: Exception) {
+            val intent = Intent()
+            intent.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION)
+            context.startActivity(intent)
+        }
+
     }
 
     interface IPermissionCallback {
