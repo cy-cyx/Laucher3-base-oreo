@@ -19,6 +19,7 @@ import com.theme.lambda.launcher.statistics.EventName
 import com.theme.lambda.launcher.statistics.EventUtil
 import com.theme.lambda.launcher.ui.search.SearchActivity.Companion.addRecentApps
 import com.theme.lambda.launcher.ui.search.SearchActivity.Companion.recentApps
+import com.theme.lambda.launcher.ui.search.searchlib.NetSearchLib
 import com.theme.lambda.launcher.ui.web.WebViewActivity
 import com.theme.lambda.launcher.utils.AppUtil
 import com.theme.lambda.launcher.utils.CommonUtil
@@ -35,6 +36,8 @@ class SearchViewModel : BaseViewModel() {
     val recentAppLiveData = MutableLiveData<ArrayList<String>>(arrayListOf())
     val searchHistoryLiveData = MutableLiveData<ArrayList<String>>(arrayListOf())
     val localAppLiveData = MutableLiveData<ArrayList<String>>(arrayListOf())
+    val searchModeLiveData = MutableLiveData<Boolean>(false)
+    val netUrlLiveData = MutableLiveData<ArrayList<String>>(arrayListOf())
 
     private val searchInfo: SearchInfo by lazy {
         val string =
@@ -73,12 +76,12 @@ class SearchViewModel : BaseViewModel() {
         }
     }
 
-    private var searchJob: Job? = null
+    private var searchLocolAppJob: Job? = null
 
     fun searchLocalApp(string: String) {
         if (string.isEmpty()) return
-        searchJob?.cancel()
-        searchJob = viewModelScope.launch(Dispatchers.IO) {
+        searchLocolAppJob?.cancel()
+        searchLocolAppJob = viewModelScope.launch(Dispatchers.IO) {
             val list = appsInfo.filter { appInfo ->
                 ActivityUtils.getLauncherActivity(appInfo.packageName)
                     .isNotEmpty() && appInfo.name.contains(
@@ -89,6 +92,16 @@ class SearchViewModel : BaseViewModel() {
                 appInfo.packageName
             }
             localAppLiveData.postValue(list as ArrayList<String>)
+        }
+    }
+
+    private var searchNetUrlJob: Job? = null
+
+    fun netUrl(string: String) {
+        if (string.isEmpty()) return
+        searchNetUrlJob?.cancel()
+        searchNetUrlJob = viewModelScope.launch(Dispatchers.IO) {
+            netUrlLiveData.postValue(NetSearchLib.findNetUrl(string))
         }
     }
 

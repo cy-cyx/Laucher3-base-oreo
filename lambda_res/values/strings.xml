@@ -382,4 +382,6 @@
     <string name="new_notification_hint">Turn on notification authorization to more conveniently notify you of daily weather changes.</string>
     <string name="warning">Warning</string>
     <string name="warning_hint">Unhealthy air quality</string>
+    <string name="search_on_the_internet">Search on the internet</string>
+    <string name="webs">Webs</string>
 </resources>

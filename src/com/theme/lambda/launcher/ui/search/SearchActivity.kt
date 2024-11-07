@@ -22,6 +22,7 @@ import com.lambda.common.utils.utilcode.util.GsonUtils
 import com.lambda.common.utils.utilcode.util.Utils
 import com.theme.lambda.launcher.base.BaseActivity
 import com.theme.lambda.launcher.ui.search.adapter.LocalAppsAdapter
+import com.theme.lambda.launcher.ui.search.adapter.NetUrlAdapter
 import com.theme.lambda.launcher.ui.search.adapter.RecentAppsAdapter
 import com.theme.lambda.launcher.ui.search.adapter.SearchHistoryAdapter
 import com.theme.lambda.launcher.utils.StatusBarUtil
@@ -76,6 +77,10 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         LocalAppsAdapter()
     }
 
+    private val netUrlAdapter: NetUrlAdapter by lazy {
+        NetUrlAdapter()
+    }
+
     override fun initViewBinding(layoutInflater: LayoutInflater): ActivitySearchBinding {
         return ActivitySearchBinding.inflate(layoutInflater)
     }
@@ -102,55 +107,9 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             viewBinding.wallpaperView.visible()
         }
 
-        viewBinding.et.addTextChangedListener {
-            if (it.isNullOrEmpty()) {
-                viewBinding.ivClear.visibility = View.GONE
-                viewBinding.ivSearch.visibility = View.GONE
-            } else {
-                viewBinding.ivClear.visibility = View.VISIBLE
-                viewBinding.ivSearch.visibility = View.VISIBLE
-            }
-            viewBinding.clRecentApps.visibility =
-                if (it.isNullOrEmpty() && recentAppsAdapter.data.isNotEmpty()) View.VISIBLE else View.GONE
-            viewBinding.clLocalApps.visibility =
-                if (it.isNullOrEmpty() || localAppsAdapter.data.isEmpty()) View.GONE else View.VISIBLE
-
-            viewModel.searchLocalApp(it.toString())
-        }
-        viewBinding.et.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
-            viewBinding.clSearchHistory.visibility =
-                if (hasFocus && searchHistoryAdapter.data.isNotEmpty()) View.VISIBLE else View.GONE
-        }
-        viewBinding.et.setOnEditorActionListener(object : OnEditorActionListener {
-            override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    viewBinding.et.clearFocus()
-                    viewModel.search(this@SearchActivity, viewBinding.et.text.toString())
-                }
-                return true
-            }
-        })
-        viewBinding.ivClear.setOnClickListener {
-            viewBinding.et.setText("")
-            viewBinding.et.clearFocus()
-        }
-        viewBinding.ivSearch.setOnClickListener {
-            viewBinding.et.clearFocus()
-            viewModel.search(this, viewBinding.et.text.toString())
-        }
-        viewBinding.ivDelete.setOnClickListener {
-            viewModel.cleanSearchHistory()
-            viewBinding.clSearchHistory.visibility = View.GONE
-        }
-
         viewBinding.rvSearchHistory.adapter = searchHistoryAdapter
         viewBinding.rvSearchHistory.layoutManager =
             GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false)
-
-        searchHistoryAdapter.setOnItemClickListener { _, _, position ->
-            viewBinding.et.setText(searchHistoryAdapter.data[position])
-            viewBinding.et.setSelection(searchHistoryAdapter.data[position].length)
-        }
 
         viewBinding.rvRecentApps.adapter = recentAppsAdapter
         viewBinding.rvRecentApps.layoutManager =
@@ -169,9 +128,72 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             viewBinding.et.setText("")
             viewModel.clickApp(localAppsAdapter.data[position])
         }
+
+        viewBinding.netUrlRv.adapter = netUrlAdapter
+        viewBinding.netUrlRv.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+        viewBinding.et.addTextChangedListener {
+            if (it.isNullOrEmpty()) {
+                viewBinding.ivClear.visibility = View.GONE
+                viewBinding.ivSearch.visibility = View.GONE
+                viewBinding.searchOnNetFl.gone()
+            } else {
+                viewBinding.ivClear.visibility = View.VISIBLE
+                viewBinding.ivSearch.visibility = View.VISIBLE
+                viewBinding.searchOnNetFl.visible()
+            }
+            viewModel.searchModeLiveData.value = it?.isNotEmpty() ?: false
+            viewModel.searchLocalApp(it.toString())
+            viewModel.netUrl(it.toString())
+        }
+        viewBinding.et.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
+            viewBinding.clSearchHistory.visibility =
+                if (hasFocus && searchHistoryAdapter.data.isNotEmpty()) View.VISIBLE else View.GONE
+        }
+        viewBinding.et.setOnEditorActionListener(object : OnEditorActionListener {
+            override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    viewBinding.et.clearFocus()
+                    viewModel.search(this@SearchActivity, viewBinding.et.text.toString())
+                }
+                return true
+            }
+        })
+
+        viewBinding.ivClear.setOnClickListener {
+            viewBinding.et.setText("")
+            viewBinding.et.clearFocus()
+        }
+        viewBinding.ivSearch.setOnClickListener {
+            viewBinding.et.clearFocus()
+            viewModel.search(this, viewBinding.et.text.toString())
+        }
+        viewBinding.ivDelete.setOnClickListener {
+            viewModel.cleanSearchHistory()
+            viewBinding.clSearchHistory.visibility = View.GONE
+        }
+        searchHistoryAdapter.setOnItemClickListener { _, _, position ->
+            viewBinding.et.setText(searchHistoryAdapter.data[position])
+            viewBinding.et.setSelection(searchHistoryAdapter.data[position].length)
+        }
+        viewBinding.searchOnNetFl.setOnClickListener {
+            viewBinding.et.clearFocus()
+            viewModel.search(this, viewBinding.et.text.toString())
+        }
     }
 
     private fun initData() {
+        viewModel.searchModeLiveData.observe(this, Observer {
+            if (it) {
+                viewBinding.inSearchModeSv.visible()
+                viewBinding.noInSearchModeSv.gone()
+            } else {
+                viewBinding.inSearchModeSv.gone()
+                viewBinding.noInSearchModeSv.visible()
+            }
+        })
+
         viewModel.recentAppLiveData.observe(this, Observer {
             viewBinding.clRecentApps.visibility = if (it.isEmpty()) View.GONE else View.VISIBLE
             recentAppsAdapter.setList(it)
@@ -180,12 +202,12 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             searchHistoryAdapter.setList(it)
         })
         viewModel.localAppLiveData.observe(this, Observer {
+            viewBinding.clLocalApps.visibility = if (it.isEmpty()) View.GONE else View.VISIBLE
             localAppsAdapter.setList(it)
-            if (viewBinding.et.text.isNotEmpty() && it.isNotEmpty()) {
-                viewBinding.clLocalApps.visible()
-            } else {
-                viewBinding.clLocalApps.gone()
-            }
+        })
+        viewModel.netUrlLiveData.observe(this, Observer {
+            viewBinding.netUrlLl.visibility = if (it.isEmpty()) View.GONE else View.VISIBLE
+            netUrlAdapter.setList(it)
         })
 
         viewModel.initData()
