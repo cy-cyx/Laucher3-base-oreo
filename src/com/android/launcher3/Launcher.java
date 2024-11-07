@@ -481,7 +481,7 @@ public class Launcher extends BaseActivity
         } else {
             // Pages bound synchronously.
             // 如果是重建，负一屏回第一页
-            if (currentScreen == 0){
+            if (currentScreen == 0) {
                 currentScreen = 1;
             }
             mWorkspace.setCurrentPage(currentScreen);
@@ -1157,12 +1157,12 @@ public class Launcher extends BaseActivity
         themeManager.onResume();
 
         // 第一次需要,如果已经授权就不展示了
-//        if (!SpUtil.INSTANCE.getBool(SpKey.first_guide, false) && !LauncherUtil.INSTANCE.isDefaultLauncher(this)) {
+        if (!SpUtil.INSTANCE.getBool(SpKey.first_guide, false) && !LauncherUtil.INSTANCE.isDefaultLauncher(this)) {
             firstGuideView.setVisibility(View.VISIBLE);
             firstGuideView.startGuide();
 
-//            SpUtil.INSTANCE.putBool(SpKey.first_guide, true);
-//        }
+            SpUtil.INSTANCE.putBool(SpKey.first_guide, true);
+        }
 
         if (isWorkspaceLoading()) {
             showLoading(60000);
