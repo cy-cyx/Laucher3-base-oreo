@@ -384,4 +384,6 @@
     <string name="warning_hint">Unhealthy air quality</string>
     <string name="search_on_the_internet">Search on the internet</string>
     <string name="webs">Webs</string>
+    <string name="documents">Documents</string>
+    <string name="photos">Photos</string>
 </resources>

@@ -40,11 +40,17 @@
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
     <uses-permission android:name="android.permission.SET_WALLPAPER_HINTS" />
     <uses-permission android:name="android.permission.BIND_APPWIDGET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
     <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 
     <application
         android:name="com.theme.lambda.launcher.App"
@@ -275,5 +281,15 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_weather_small" />
         </receiver>
+
+        <provider
+            android:name="com.theme.lambda.launcher.utils.MyFileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
     </application>
 </manifest>

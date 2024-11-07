@@ -14,12 +14,14 @@ import com.lambda.common.utils.utilcode.util.AppUtils
 import com.lambda.common.utils.utilcode.util.GsonUtils
 import com.lambda.remoteconfig.LambdaRemoteConfig
 import com.theme.lambda.launcher.base.BaseViewModel
+import com.theme.lambda.launcher.data.model.FileInfo
 import com.theme.lambda.launcher.data.model.SearchInfo
 import com.theme.lambda.launcher.statistics.EventName
 import com.theme.lambda.launcher.statistics.EventUtil
 import com.theme.lambda.launcher.ui.search.SearchActivity.Companion.addRecentApps
 import com.theme.lambda.launcher.ui.search.SearchActivity.Companion.recentApps
 import com.theme.lambda.launcher.ui.search.searchlib.NetSearchLib
+import com.theme.lambda.launcher.ui.search.searchlib.PicSearchLib
 import com.theme.lambda.launcher.ui.web.WebViewActivity
 import com.theme.lambda.launcher.utils.AppUtil
 import com.theme.lambda.launcher.utils.CommonUtil
@@ -38,6 +40,7 @@ class SearchViewModel : BaseViewModel() {
     val localAppLiveData = MutableLiveData<ArrayList<String>>(arrayListOf())
     val searchModeLiveData = MutableLiveData<Boolean>(false)
     val netUrlLiveData = MutableLiveData<ArrayList<String>>(arrayListOf())
+    val imageLiveData = MutableLiveData<ArrayList<FileInfo>>(arrayListOf())
 
     private val searchInfo: SearchInfo by lazy {
         val string =
@@ -97,11 +100,19 @@ class SearchViewModel : BaseViewModel() {
 
     private var searchNetUrlJob: Job? = null
 
-    fun netUrl(string: String) {
+    fun searchNetUrl(string: String) {
         if (string.isEmpty()) return
         searchNetUrlJob?.cancel()
         searchNetUrlJob = viewModelScope.launch(Dispatchers.IO) {
             netUrlLiveData.postValue(NetSearchLib.findNetUrl(string))
+        }
+    }
+
+    private var searchImageJob: Job? = null
+    fun searchImage(string: String) {
+        if (string.isEmpty()) return
+        searchImageJob = viewModelScope.launch(Dispatchers.IO) {
+            imageLiveData.postValue(PicSearchLib.findImages(string))
         }
     }
 

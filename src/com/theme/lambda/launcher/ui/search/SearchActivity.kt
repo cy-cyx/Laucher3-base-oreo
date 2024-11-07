@@ -1,7 +1,9 @@
 package com.theme.lambda.launcher.ui.search
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.LayoutInflater
@@ -21,15 +23,18 @@ import com.lambda.common.http.Preference
 import com.lambda.common.utils.utilcode.util.GsonUtils
 import com.lambda.common.utils.utilcode.util.Utils
 import com.theme.lambda.launcher.base.BaseActivity
+import com.theme.lambda.launcher.ui.search.adapter.ImageAdapter
 import com.theme.lambda.launcher.ui.search.adapter.LocalAppsAdapter
 import com.theme.lambda.launcher.ui.search.adapter.NetUrlAdapter
 import com.theme.lambda.launcher.ui.search.adapter.RecentAppsAdapter
 import com.theme.lambda.launcher.ui.search.adapter.SearchHistoryAdapter
+import com.theme.lambda.launcher.ui.search.searchlib.FileSearchLib
+import com.theme.lambda.launcher.ui.search.searchlib.PicSearchLib
+import com.theme.lambda.launcher.utils.PermissionUtil
 import com.theme.lambda.launcher.utils.StatusBarUtil
 import com.theme.lambda.launcher.utils.gone
 import com.theme.lambda.launcher.utils.marginStatusBarHeight
 import com.theme.lambda.launcher.utils.visible
-import okhttp3.internal.cache.DiskLruCache
 
 class SearchActivity : BaseActivity<ActivitySearchBinding>() {
 
@@ -81,6 +86,10 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         NetUrlAdapter()
     }
 
+    private val imageAdapter: ImageAdapter by lazy {
+        ImageAdapter()
+    }
+
     override fun initViewBinding(layoutInflater: LayoutInflater): ActivitySearchBinding {
         return ActivitySearchBinding.inflate(layoutInflater)
     }
@@ -95,6 +104,34 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         viewBinding.containerLl.marginStatusBarHeight()
         initView()
         initData()
+
+        val permissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            arrayOf(
+                Manifest.permission.READ_MEDIA_IMAGES
+            )
+        } else {
+            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
+        }
+        PermissionUtil.requestRuntimePermissions(
+            this,
+            permissions,
+            object : PermissionUtil.IPermissionCallback {
+                override fun nextStep() {
+                    PicSearchLib.loadData()
+                    FileSearchLib.loadData()
+                }
+
+                override fun noPermission() {
+
+                }
+
+                override fun gotoSet(internal: Boolean) {
+
+                }
+            },
+            force = false,
+            showGotoSetDialog = false
+        )
     }
 
     private fun initView() {
@@ -133,6 +170,10 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         viewBinding.netUrlRv.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
+        viewBinding.imageRv.adapter = imageAdapter
+        viewBinding.imageRv.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+
         viewBinding.et.addTextChangedListener {
             if (it.isNullOrEmpty()) {
                 viewBinding.ivClear.visibility = View.GONE
@@ -145,7 +186,8 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             }
             viewModel.searchModeLiveData.value = it?.isNotEmpty() ?: false
             viewModel.searchLocalApp(it.toString())
-            viewModel.netUrl(it.toString())
+            viewModel.searchNetUrl(it.toString())
+            viewModel.searchImage(it.toString())
         }
         viewBinding.et.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
             viewBinding.clSearchHistory.visibility =
@@ -208,6 +250,10 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         viewModel.netUrlLiveData.observe(this, Observer {
             viewBinding.netUrlLl.visibility = if (it.isEmpty()) View.GONE else View.VISIBLE
             netUrlAdapter.setList(it)
+        })
+        viewModel.imageLiveData.observe(this, Observer {
+            viewBinding.picLl.visibility = if (it.isEmpty()) View.GONE else View.VISIBLE
+            imageAdapter.setList(it)
         })
 
         viewModel.initData()
