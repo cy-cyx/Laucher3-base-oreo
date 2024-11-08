@@ -244,15 +244,13 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             viewBinding.clSearchHistory.visibility =
                 if (hasFocus && searchHistoryAdapter.data.isNotEmpty()) View.VISIBLE else View.GONE
         }
-        viewBinding.et.setOnEditorActionListener(object : OnEditorActionListener {
-            override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    viewBinding.et.clearFocus()
-                    viewModel.search(this@SearchActivity, viewBinding.et.text.toString())
-                }
-                return true
+        viewBinding.et.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                viewBinding.et.clearFocus()
+                viewModel.search(this@SearchActivity, viewBinding.et.text.toString())
             }
-        })
+            true
+        }
 
         viewBinding.ivClear.setOnClickListener {
             viewBinding.et.setText("")
