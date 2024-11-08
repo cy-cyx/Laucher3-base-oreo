@@ -31,6 +31,5 @@ object SpKey {
     const val calendarWidgetIds = "calendarWidgetIds"
     const val weatherWidgetIds = "weatherWidgetIds"
 
-    val keyLastLat = "key_last_lat"
-    val keyLastLon = "key_last_lon"
+    const val requestDocPermissionTime = "requestDocPermissionTime"
 }

@@ -33,10 +33,16 @@ import com.theme.lambda.launcher.ui.search.adapter.SearchHistoryAdapter
 import com.theme.lambda.launcher.ui.search.searchlib.FileSearchLib
 import com.theme.lambda.launcher.ui.search.searchlib.PicSearchLib
 import com.theme.lambda.launcher.utils.PermissionUtil
+import com.theme.lambda.launcher.utils.SpKey
 import com.theme.lambda.launcher.utils.StatusBarUtil
+import com.theme.lambda.launcher.utils.getSpInt
+import com.theme.lambda.launcher.utils.getSpLong
 import com.theme.lambda.launcher.utils.gone
 import com.theme.lambda.launcher.utils.marginStatusBarHeight
+import com.theme.lambda.launcher.utils.putSpInt
+import com.theme.lambda.launcher.utils.putSpLong
 import com.theme.lambda.launcher.utils.visible
+import com.theme.lambda.launcher.widget.dialog.ApplyDocumentPermissionDialog
 
 class SearchActivity : BaseActivity<ActivitySearchBinding>() {
 
@@ -131,8 +137,20 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
 
                     // 再处理文件请求
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                        if (!Environment.isExternalStorageManager()) {
-                            PermissionUtil.gotoFillAccessPage(this@SearchActivity)
+                        val i = SpKey.requestDocPermissionTime.getSpInt(0)
+                        if (!Environment.isExternalStorageManager() &&
+                            /*事不过三*/i < 3
+                        ) {
+                            SpKey.requestDocPermissionTime.putSpInt(i + 1)
+                            ApplyDocumentPermissionDialog(this@SearchActivity).apply {
+                                clickApplyListen = {
+                                    dismiss()
+                                    PermissionUtil.gotoFillAccessPage(this@SearchActivity)
+                                }
+                                clickNotNowListen = {
+                                    dismiss()
+                                }
+                            }.show()
                         } else {
                             FileSearchLib.loadData()
                         }
