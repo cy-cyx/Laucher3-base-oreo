@@ -137,7 +137,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
 //                            ApplyDocumentPermissionDialog(this@SearchActivity).apply {
 //                                clickApplyListen = {
 //                                    dismiss()
-//                                    PermissionUtil.gotoFillAccessPage(this@SearchActivity)
+//                                    PermissionUtil.gotoFileAccessPage(this@SearchActivity)
 //                                }
 //                                clickNotNowListen = {
 //                                    dismiss()

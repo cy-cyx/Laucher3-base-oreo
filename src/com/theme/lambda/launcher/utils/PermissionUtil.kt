@@ -202,7 +202,7 @@ object PermissionUtil {
     }
 
     @RequiresApi(Build.VERSION_CODES.R)
-    fun gotoFillAccessPage(context: Context) {
+    fun gotoFileAccessPage(context: Context) {
         if (Environment.isExternalStorageManager()) return
         try {
             val uri = Uri.parse("package:" + BuildConfig.APPLICATION_ID)
