@@ -6,13 +6,10 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnFocusChangeListener
 import android.view.inputmethod.EditorInfo
-import android.widget.TextView
-import android.widget.TextView.OnEditorActionListener
 import androidx.activity.viewModels
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
@@ -36,11 +33,9 @@ import com.theme.lambda.launcher.utils.PermissionUtil
 import com.theme.lambda.launcher.utils.SpKey
 import com.theme.lambda.launcher.utils.StatusBarUtil
 import com.theme.lambda.launcher.utils.getSpInt
-import com.theme.lambda.launcher.utils.getSpLong
 import com.theme.lambda.launcher.utils.gone
 import com.theme.lambda.launcher.utils.marginStatusBarHeight
 import com.theme.lambda.launcher.utils.putSpInt
-import com.theme.lambda.launcher.utils.putSpLong
 import com.theme.lambda.launcher.utils.visible
 import com.theme.lambda.launcher.widget.dialog.ApplyDocumentPermissionDialog
 
@@ -122,9 +117,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
 
     private fun requestPermissionAndLoadData() {
         val permissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            arrayOf(
-                Manifest.permission.READ_MEDIA_IMAGES
-            )
+            arrayOf(Manifest.permission.READ_MEDIA_IMAGES)
         } else {
             arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
         }
@@ -134,30 +127,28 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             object : PermissionUtil.IPermissionCallback {
                 override fun nextStep() {
                     PicSearchLib.loadData()
-
                     // 再处理文件请求
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                        val i = SpKey.requestDocPermissionTime.getSpInt(0)
-                        if (!Environment.isExternalStorageManager() &&
-                            /*事不过三*/i < 3
-                        ) {
-                            SpKey.requestDocPermissionTime.putSpInt(i + 1)
-                            ApplyDocumentPermissionDialog(this@SearchActivity).apply {
-                                clickApplyListen = {
-                                    dismiss()
-                                    PermissionUtil.gotoFillAccessPage(this@SearchActivity)
-                                }
-                                clickNotNowListen = {
-                                    dismiss()
-                                }
-                            }.show()
-                        } else {
-                            FileSearchLib.loadData()
-                        }
-
-                    } else {
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+//                        val i = SpKey.requestDocPermissionTime.getSpInt(0)
+//                        if (!Environment.isExternalStorageManager() &&
+//                            /*事不过三*/i < 3
+//                        ) {
+//                            SpKey.requestDocPermissionTime.putSpInt(i + 1)
+//                            ApplyDocumentPermissionDialog(this@SearchActivity).apply {
+//                                clickApplyListen = {
+//                                    dismiss()
+//                                    PermissionUtil.gotoFillAccessPage(this@SearchActivity)
+//                                }
+//                                clickNotNowListen = {
+//                                    dismiss()
+//                                }
+//                            }.show()
+//                        } else {
+//                            FileSearchLib.loadData()
+//                        }
+//                    } else {
                         FileSearchLib.loadData()
-                    }
+//                    }
                 }
 
                 override fun noPermission() {
