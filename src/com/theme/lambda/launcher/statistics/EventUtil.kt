@@ -40,9 +40,9 @@ object EventUtil {
         logInstallEvent()
     }
 
-    fun logEvent(eventName: String, bundle: Bundle) {
+    fun logEvent(eventName: String, bundle: Bundle, immediately: Boolean = false) {
         LogUtil.d(TAG, "${eventName} : ${bundle}")
-        Event.logEvent(eventName, bundle)
+        Event.logEvent(eventName, bundle, immediately)
     }
 
     private fun logInstallEvent() {

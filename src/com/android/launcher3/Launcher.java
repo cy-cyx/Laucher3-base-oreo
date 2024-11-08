@@ -2654,6 +2654,11 @@ public class Launcher extends BaseActivity
         }
         if (AppUtil.isSystemApplication(this, packageName) || packageName.equals(getPackageName())) {
             startActivity(v, intent, item);
+            Bundle bundle = new Bundle();
+            bundle.putString("pn", packageName);
+            bundle.putBoolean("isSys", false);
+            bundle.putLong("start", System.currentTimeMillis() - (SpUtil.INSTANCE.getLong(SpKey.install_time, 0L)));
+            EventUtil.INSTANCE.logEvent(EventName.LAppOpen, bundle, false);
         } else {
             AdUtil.INSTANCE.showOpenAppAdNeed(this, new Runnable() {
                 @Override
@@ -2667,8 +2672,9 @@ public class Launcher extends BaseActivity
             });
             Bundle bundle = new Bundle();
             bundle.putString("pn", packageName);
+            bundle.putBoolean("isSys", true);
             bundle.putLong("start", System.currentTimeMillis() - (SpUtil.INSTANCE.getLong(SpKey.install_time, 0L)));
-            EventUtil.INSTANCE.logEvent(EventName.LAppOpen, bundle);
+            EventUtil.INSTANCE.logEvent(EventName.LAppOpen, bundle, false);
             NewInstallationManager.INSTANCE.clickApp(packageName);
         }
     }
