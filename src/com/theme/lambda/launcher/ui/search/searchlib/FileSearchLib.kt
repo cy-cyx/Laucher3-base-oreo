@@ -61,14 +61,22 @@ object FileSearchLib {
                         + " or " + MediaStore.Files.FileColumns.MIME_TYPE + " = ? "
                         + " or " + MediaStore.Files.FileColumns.MIME_TYPE + " = ? "
                         + " or " + MediaStore.Files.FileColumns.MIME_TYPE + " = ? "
+                        + " or " + MediaStore.Files.FileColumns.MIME_TYPE + " = ? "
+                        + " or " + MediaStore.Files.FileColumns.MIME_TYPE + " = ? "
+                        + " or " + MediaStore.Files.FileColumns.MIME_TYPE + " = ? "
+                        + " or " + MediaStore.Files.FileColumns.MIME_TYPE + " = ? "
                         + " or " + MediaStore.Files.FileColumns.MIME_TYPE + " = ? ")
 
                 val selectionArgs = arrayOf(
-                    "text/plain",
-                    "application/msword",
-                    "application/pdf",
-                    "application/vnd.ms-powerpoint",
-                    "application/vnd.ms-excel"
+                    "text/plain", // .txt
+                    "text/csv",// .csv
+                    "application/msword", // .doc
+                    "application/vnd.openxmlformats-officedocument.wordprocessingml.document", //.docx
+                    "application/pdf", // pdf
+                    "application/vnd.ms-powerpoint", // ppt
+                    "application/vnd.openxmlformats-officedocument.presentationml.presentation", // .pptx
+                    "application/vnd.ms-excel", // xls
+                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", // .xlsx
                 )
                 c = mContentResolver?.query(
                     MediaStore.Files.getContentUri("external"),
