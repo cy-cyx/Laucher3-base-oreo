@@ -269,7 +269,7 @@ public class AllAppsContainerView extends BaseContainerView implements DragSourc
         findViewById(R.id.themeIv).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                ThemeActivity.Companion.start(mLauncher, ThemeActivity.Companion.getSFromTheme());
+                ThemeActivity.start(mLauncher, ThemeActivity.sFromTheme);
             }
         });
         mSearchInput = (ExtendedEditText) findViewById(R.id.search_box_input);

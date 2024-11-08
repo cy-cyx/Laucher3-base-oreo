@@ -39,14 +39,17 @@ import java.lang.ref.WeakReference
 class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
 
     companion object {
-
+        @JvmField
         var sFromSplash = "splash"
+
+        @JvmField
         var sFromTheme = "theme"
 
         var sKeyFrom = "key_from"
 
         var themeActivity: WeakReference<ThemeActivity>? = null
 
+        @JvmStatic
         fun start(context: Context, from: String) {
             context.startActivity(Intent(context, ThemeActivity::class.java).apply {
                 putExtra(sKeyFrom, from)
