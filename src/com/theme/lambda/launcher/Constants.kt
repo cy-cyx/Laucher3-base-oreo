@@ -10,7 +10,7 @@ object Constants {
     const val adjustToken = "zsckz2n5xcsg"
 
     val sThemeTag =
-        arrayListOf("Hot", "Glittery", "Anime", "Aesthetic", "Cool", "Pink", "Color", "Neon")
+        arrayListOf("Hot", "Glittery", "iOS", "Anime", "Aesthetic", "Cool", "Pink", "Color", "Neon")
 
     @JvmField
     val sAllppAction = "ALL_APPS"
