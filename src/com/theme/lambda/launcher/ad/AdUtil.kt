@@ -333,7 +333,7 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
         if (priority) {
             loadIntAndRawIds.addAll(priorityLoadIntAndRawIds)
             // 不能用Laucher的context初始化，不然跳转会有问题
-            if (activity !is Launcher){
+            if (activity !is Launcher) {
                 loadIntAndRawIds.add(AdName.interleaving)
             }
 
@@ -440,10 +440,12 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
 
     @JvmStatic
     fun reloadOpenAdIfNeed() {
-        val intAndRewAdapter = lAdMultipleAdapters[AdName.app_open]
-        intAndRewAdapter?.let {
-            if (it.isReady()) {
-                it.loadInterstitial(true)
+        scope.launch(Dispatchers.Main) {
+            val intAndRewAdapter = lAdMultipleAdapters[AdName.app_open]
+            intAndRewAdapter?.let {
+                if (!it.isReady()) {
+                    it.loadInterstitial(true)
+                }
             }
         }
     }
