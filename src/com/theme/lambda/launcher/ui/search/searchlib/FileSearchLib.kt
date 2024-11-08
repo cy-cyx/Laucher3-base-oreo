@@ -22,7 +22,7 @@ object FileSearchLib {
         val result = ArrayList<FileInfo>()
         val finalImage = files
         for (it in finalImage) {
-            if (it.name.contains(s)) {
+            if (it.name.contains(s, true)) {
                 result.add(it)
                 if (result.size >= 5) {
                     return result

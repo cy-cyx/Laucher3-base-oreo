@@ -7,7 +7,7 @@ object NetSearchLib {
     fun findNetUrl(s: String): ArrayList<String> {
         val result = ArrayList<String>()
         for (it in netUrls) {
-            if (it.contains(s)) {
+            if (it.contains(s, true)) {
                 result.add(it)
                 if (result.size >= 5) {
                     return result

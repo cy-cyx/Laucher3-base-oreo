@@ -21,7 +21,7 @@ object PicSearchLib {
         val result = ArrayList<FileInfo>()
         val finalImage = images
         for (it in finalImage) {
-            if (it.name.contains(s)) {
+            if (it.name.contains(s, true)) {
                 result.add(it)
                 if (result.size >= 30) {
                     return result
