@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.View
 import com.adjust.sdk.Adjust
 import com.adjust.sdk.AdjustEvent
-import com.ironsource.tr
 import com.theme.lambda.launcher.ad.AdName
 import com.theme.lambda.launcher.ad.AdUtil
 import com.theme.lambda.launcher.appwidget.WidgetManager
