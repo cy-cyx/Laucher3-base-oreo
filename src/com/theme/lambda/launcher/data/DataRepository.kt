@@ -1,11 +1,10 @@
 package com.theme.lambda.launcher.data
 
-import android.util.Log
 import androidx.room.Room
+import com.android.launcher3.BuildConfig
 import com.lambda.common.http.RequestParam
 import com.lambdaweather.utils.WeatherUtils
 import com.lambdaweather.utils.toCustomInt
-import com.theme.lambda.launcher.Constants
 import com.theme.lambda.launcher.data.api.AppApi
 import com.theme.lambda.launcher.data.http.RetrofitUtil
 import com.theme.lambda.launcher.data.model.ForestDayWeather
@@ -62,7 +61,7 @@ object DataRepository {
                     "r_types" to "1"
                 )
             return service.getResource(
-                RequestParam.Builder().build().buildParam(params, Constants.SECRET_KEY, false)
+                RequestParam.Builder().build().buildParam(params, BuildConfig.SECRET_KEY, false)
             ).d
         } catch (e: Exception) {
         }

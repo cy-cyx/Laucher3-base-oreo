@@ -28,6 +28,8 @@ android {
         targetSdkVersion 34
         versionCode 28
         versionName "0.2.8"
+        applicationId 'com.theme.lambda.launcher'
+        testApplicationId 'com.theme.lambda.launcher.tests'
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -68,8 +70,13 @@ android {
     productFlavors {
         aosp {
             dimension "default"
-            applicationId 'com.theme.lambda.launcher'
-            testApplicationId 'com.theme.lambda.launcher.tests'
+            buildConfigField "String", "SECRET_KEY", "\"3b3ffe856169d39c\""
+            buildConfigField "String", "Suffix", "\"\""
+        }
+        samsung {
+            dimension "default"
+            buildConfigField "String", "SECRET_KEY", "\"8aefebdc770a1a5d\""
+            buildConfigField "String", "Suffix", "\".samsung\""
         }
     }
     sourceSets {
@@ -77,10 +84,6 @@ android {
             res.srcDirs = ['res', 'lambda_res']
             java.srcDirs = ['src', 'src_config']
             assets.srcDirs = ['assets']
-            manifest.srcFile 'AndroidManifest-common.xml'
-        }
-
-        aosp {
             manifest.srcFile "AndroidManifest.xml"
         }
     }
@@ -150,7 +153,7 @@ dependencies {
     implementation "com.adjust.sdk:adjust-android:4.38.3"
 
     implementation("com.lambda.common:http:1.0.1.26")
-    implementation("com.lambda.common:event:1.2.0.63-separate-adjust"){
+    implementation("com.lambda.common:event:1.2.0.63-separate-adjust") {
         exclude group: 'com.lambda.common', module: 'http'
     }
     implementation "com.lambda.common:remoteconfig:0.1.5"

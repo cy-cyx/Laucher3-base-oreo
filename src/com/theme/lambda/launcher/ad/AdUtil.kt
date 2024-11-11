@@ -108,7 +108,7 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
         LambdaAdSdk.registerLife(app)
         LambdaAdSdk.initAdmobConsent(false)
         LambdaAdSdk.init(
-            Constants.BASE_URL, Constants.SECRET_KEY, object : LambdaAd.LogAdEvent {
+            Constants.BASE_URL, BuildConfig.SECRET_KEY, object : LambdaAd.LogAdEvent {
                 override fun onLog(step: Int, logParam: LambdaAd.LogAdEvent.LogParam?, ad: Any?) {
                     LogUtil.d(TAG, "step: $step, logParam: $logParam, ad: $ad")
                     when (step) {
@@ -288,11 +288,19 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
             .initRemoteConfig(
                 when (CommonUtil.getRegion()) {
                     "RU" -> {
-                        R.xml.remote_config_ru
+                        when (BuildConfig.FLAVOR) {
+                            "samsung" -> R.xml.remote_config_ru_samsung
+                            else -> R.xml.remote_config_ru
+                        }
+
                     }
 
                     else -> {
-                        R.xml.remote_config_defaults
+                        when (BuildConfig.FLAVOR) {
+                            "samsung" -> R.xml.remote_config_default_samsung
+                            else -> R.xml.remote_config_defaults
+                        }
+
                     }
                 },
                 listOf("AdConfig", "SearchConfig", "OfferConfig"),

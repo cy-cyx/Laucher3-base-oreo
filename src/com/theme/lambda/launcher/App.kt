@@ -7,7 +7,9 @@ import android.os.Looper
 import android.text.TextUtils
 import android.util.Log
 import android.webkit.WebView
+import com.android.launcher3.BuildConfig
 import com.android.launcher3.CycleTimer
+import com.lambda.common.http.Global
 import com.lambdaweather.LambdaWeather
 import com.theme.lambda.launcher.ad.AdUtil
 import com.theme.lambda.launcher.appinfo.AppInfoCache
@@ -44,6 +46,7 @@ class App : Application() {
         if (!TextUtils.isEmpty(processName)) {
             val defaultProcess = processName == packageName
             if (defaultProcess) {
+                Global.packageNamesSuffix = BuildConfig.Suffix
                 initWeather()
                 Log.d(TAG, "init 1 : ${System.currentTimeMillis() - start}")
                 FirebaseAnalyticsUtil.init(this)

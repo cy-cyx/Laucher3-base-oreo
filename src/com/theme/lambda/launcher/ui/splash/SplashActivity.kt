@@ -59,7 +59,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
         viewBinding.termsOfServiceTv.paint.flags = Paint.UNDERLINE_TEXT_FLAG
         viewBinding.termsOfServiceTv.setOnClickListener {
-            CommonUtil.openWebView(this@SplashActivity, Constants.SECRET_KEY)
+            CommonUtil.openWebView(this@SplashActivity, Constants.TERMS_OF_SERVICE)
         }
 
         window.decorView.setSystemUiVisibility(
