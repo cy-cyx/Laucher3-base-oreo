@@ -4,6 +4,7 @@ import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 
 import android.animation.TimeInterpolator;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
@@ -404,8 +405,10 @@ public class TransitionEffect {
                 if (v.getVisibility() != VISIBLE) {
                     v.setVisibility(VISIBLE);
                 }
+                v.setAlpha(1.0f);
             } else {
                 v.setVisibility(View.INVISIBLE);
+                v.setAlpha(0f);
             }
 
 
