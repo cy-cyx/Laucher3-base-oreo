@@ -157,7 +157,7 @@ dependencies {
         exclude group: 'com.lambda.common', module: 'http'
     }
     implementation "com.lambda.common:remoteconfig:0.1.5"
-    implementation "com.lambda.common:lambdaad:1170"
+    implementation "com.lambda.common:lambdaad:1171"
     implementation 'com.lambda.common:billing-google:0.0.0.10'
 
     implementation 'com.facebook.infer.annotation:infer-annotation:0.18.0'

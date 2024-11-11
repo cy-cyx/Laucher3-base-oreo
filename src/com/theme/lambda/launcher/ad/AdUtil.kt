@@ -483,6 +483,10 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
         return getADAdapter(scenes)?.isReady(network, format) ?: false
     }
 
+    fun isEnable(scenes: String): Boolean {
+        return getADAdapter(scenes)?.isEnable() ?: true
+    }
+
     fun showAd(scenes: String, callback: IAdCallBack? = null) {
         if (VipManager.isVip.value == true) {
             callback?.onAdClose(LambdaAd.AD_CLOSE)
