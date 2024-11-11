@@ -18,6 +18,8 @@ import com.android.launcher3.Workspace;
 
 /**
  * 滑动特效
+ * <p>
+ * todo 存在问题就是非桌面模式下效果是有问题的！！后续有这样的需求再处理把
  */
 public class TransitionEffect {
 
@@ -70,6 +72,12 @@ public class TransitionEffect {
     }
 
     public void screenScrollByTransitionEffect(int screenScroll, int screenEffectNum) {
+        // 非桌面模式统一基础风格
+        if (mWorkspace.getState() != Workspace.State.NORMAL) {
+            screenScrollByTransitionEffectStandard(screenScroll);
+            return;
+        }
+
         switch (screenEffectNum) {
             case TRANSITION_EFFECT_NONE:// 0
                 screenScrollByTransitionEffectStandard(screenScroll);
@@ -186,8 +194,10 @@ public class TransitionEffect {
                 v.setRotation(0);
                 v.setRotationX(0);
                 v.setRotationY(0);
-                v.setScaleX(scale);
-                v.setScaleY(scale);
+//                v.setScaleX(scale);
+//                v.setScaleY(scale);
+                v.setScaleX(1);
+                v.setScaleY(1);
                 v.setTranslationX(0f);
                 v.setTranslationY(0f);
                 v.setVisibility(View.VISIBLE);
@@ -575,7 +585,7 @@ public class TransitionEffect {
     }
 
     private boolean isLauncherNormal() {
-        return mLauncher.getCurState() == Launcher.State.WORKSPACE;
+        return mWorkspace.getState() == Workspace.State.NORMAL;
     }
 }
 

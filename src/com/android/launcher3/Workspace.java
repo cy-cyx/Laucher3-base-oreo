@@ -88,7 +88,7 @@ import com.android.launcher3.util.WallpaperOffsetInterpolator;
 import com.android.launcher3.widget.PendingAddShortcutInfo;
 import com.android.launcher3.widget.PendingAddWidgetInfo;
 import com.theme.lambda.launcher.effect.TransitionEffect;
-import com.theme.lambda.launcher.utils.CommonUtil;
+import com.theme.lambda.launcher.utils.LogUtil;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -2106,6 +2106,8 @@ public class Workspace extends PagedView
 
         // Update the current state
         mState = toState;
+        getTransitionEffect().clearTransitionEffect();
+        LogUtil.d(Launcher.TAG, "cur launcher state:" + mState);
 
         // Create the animation to the new state
         AnimatorSet workspaceAnim = mStateTransitionAnimation.getAnimationToState(fromState,
