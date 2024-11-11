@@ -218,6 +218,10 @@
             android:name="com.lambdaweather.ui.news.NewsListActivity"
             android:excludeFromRecents="true"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.theme.lambda.launcher.ui.effect.EffectActivity"
+            android:excludeFromRecents="true"
+            android:screenOrientation="portrait" />
 
         <service
             android:name="com.theme.lambda.launcher.service.FirebaseService"

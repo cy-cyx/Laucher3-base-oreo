@@ -139,6 +139,7 @@ import com.theme.lambda.launcher.Constants;
 import com.theme.lambda.launcher.ad.AdUtil;
 import com.theme.lambda.launcher.statistics.EventName;
 import com.theme.lambda.launcher.statistics.EventUtil;
+import com.theme.lambda.launcher.ui.effect.EffectActivity;
 import com.theme.lambda.launcher.ui.search.SearchActivity;
 import com.theme.lambda.launcher.ui.theme.ThemeActivity;
 import com.theme.lambda.launcher.utils.AppUtil;
@@ -218,13 +219,18 @@ public class Launcher extends BaseActivity
     /**
      * The different states that Launcher can be in.
      */
-    enum State {
+    public enum State {
         NONE, WORKSPACE, WORKSPACE_SPRING_LOADED, APPS, APPS_SPRING_LOADED,
         WIDGETS, WIDGETS_SPRING_LOADED
     }
 
     @Thunk
     State mState = State.WORKSPACE;
+
+    public State getCurState() {
+        return mState;
+    }
+
     @Thunk
     LauncherStateTransitionAnimation mStateTransitionAnimation;
 
@@ -1512,7 +1518,9 @@ public class Launcher extends BaseActivity
         new OverviewButtonClickListener(ControlType.WALLPAPER_BUTTON) {
             @Override
             public void handleViewClick(View view) {
-                onClickWallpaperPicker(view);
+//                onClickWallpaperPicker(view);
+                EffectActivity.Companion.setCacheLauncher(Launcher.this);
+                EffectActivity.start(Launcher.this);
             }
         }.attachTo(wallpaperButton);
         wallpaperButton.setOnTouchListener(getHapticFeedbackTouchListener());
@@ -4419,5 +4427,11 @@ public class Launcher extends BaseActivity
             mAppsView.removeApps(appInfos);
             tryAndUpdatePredictedApps();
         }
+    }
+
+
+    public void setEffect(int id) {
+        mWorkspace.getTransitionEffect().clearTransitionEffect();
+        mWorkspace.curEffect = id;
     }
 }

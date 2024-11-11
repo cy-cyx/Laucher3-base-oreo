@@ -87,6 +87,7 @@ import com.android.launcher3.util.VerticalFlingDetector;
 import com.android.launcher3.util.WallpaperOffsetInterpolator;
 import com.android.launcher3.widget.PendingAddShortcutInfo;
 import com.android.launcher3.widget.PendingAddWidgetInfo;
+import com.theme.lambda.launcher.effect.TransitionEffect;
 import com.theme.lambda.launcher.utils.CommonUtil;
 
 import java.util.ArrayList;
@@ -347,6 +348,14 @@ public class Workspace extends PagedView
 
     private int screenWidth = 0;
 
+    public static int curEffect = TransitionEffect.TRANSITION_EFFECT_NONE;
+
+    private TransitionEffect mTransitionEffect;
+
+    public TransitionEffect getTransitionEffect() {
+        return mTransitionEffect;
+    }
+
     /**
      * Used to inflate the Workspace from XML.
      *
@@ -387,6 +396,9 @@ public class Workspace extends PagedView
         setMotionEventSplittingEnabled(true);
 
         screenWidth = context.getResources().getDisplayMetrics().widthPixels;
+
+        mTransitionEffect = new TransitionEffect(mLauncher);
+        mTransitionEffect.setWorkspace(this);
     }
 
     @Override
@@ -1460,6 +1472,9 @@ public class Workspace extends PagedView
         updatePageAlphaValues();
         updateStateForCustomContent();
         enableHwLayersOnVisiblePages();
+
+        mTransitionEffect.clearRotation();
+        startScrollWithAnim(getScrollX());
     }
 
     private void showPageIndicatorAtCurrentScroll() {
@@ -2040,7 +2055,7 @@ public class Workspace extends PagedView
         mStateTransitionAnimation.snapToPageFromOverView(whichPage);
     }
 
-    int getOverviewModeTranslationY() {
+    public int getOverviewModeTranslationY() {
         DeviceProfile grid = mLauncher.getDeviceProfile();
         int overviewButtonBarHeight = grid.getOverviewModeButtonBarHeight();
 
@@ -4225,6 +4240,10 @@ public class Workspace extends PagedView
             Log.w(TAG, "enableFreeScroll called but not in overview: state=" + getState());
             return false;
         }
+    }
+
+    private void startScrollWithAnim(int screenScroll) {
+        mTransitionEffect.screenScrollByTransitionEffect(screenScroll, curEffect);
     }
 
     /**
