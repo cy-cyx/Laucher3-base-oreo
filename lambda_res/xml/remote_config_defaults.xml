@@ -56,18 +56,18 @@
             "ecpm": 0
             },
             {
-            "adid": "b89sr0nsgf5k9ds9",
-            "order": 0,
-            "per": 0,
-            "plat": 8,
-            "type": 4,
-            "ecpm": 0
-            },
-            {
             "adid": "10961146-10794783",
             "order": 0,
             "per": 0,
             "plat": 4,
+            "type": 4,
+            "ecpm": 0
+            },
+            {
+            "adid": "3db6560c4b1d5bb6",
+            "order": 0,
+            "per": 0,
+            "plat": 2,
             "type": 4,
             "ecpm": 0
             }

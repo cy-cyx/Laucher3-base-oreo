@@ -61,13 +61,29 @@
             "per": 0,
             "plat": 7,
             "type": 4,
-            "ecpm": 0
+            "ecpm": 2
             },
             {
             "adid": "10961146-10894488",
             "order": 0,
             "per": 0,
             "plat": 4,
+            "type": 4,
+            "ecpm": 0
+            },
+            {
+            "adid": "R-M-12398626-16",
+            "order": 0,
+            "per": 0,
+            "plat": 7,
+            "type": 4,
+            "ecpm": 3
+            },
+            {
+            "adid": "c2eb89c2fee3cf58",
+            "order": 0,
+            "per": 0,
+            "plat": 2,
             "type": 4,
             "ecpm": 0
             }
