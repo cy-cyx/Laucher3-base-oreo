@@ -3,6 +3,8 @@ package com.theme.lambda.launcher.base
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 import com.theme.lambda.launcher.utils.CommonUtil
@@ -34,5 +36,13 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         PermissionUtil.onRequestPermissionsResult(this, requestCode, permissions, grantResults)
+    }
+
+    fun showKeyBoard(view: View) {
+        view.requestFocus()
+        (getSystemService(INPUT_METHOD_SERVICE) as? InputMethodManager)?.showSoftInput(
+            view,
+            0
+        )
     }
 }

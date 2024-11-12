@@ -38,6 +38,7 @@ import com.theme.lambda.launcher.utils.marginStatusBarHeight
 import com.theme.lambda.launcher.utils.putSpInt
 import com.theme.lambda.launcher.utils.visible
 import com.theme.lambda.launcher.widget.dialog.ApplyDocumentPermissionDialog
+import org.koin.androidx.scope.scope
 
 class SearchActivity : BaseActivity<ActivitySearchBinding>() {
 
@@ -147,8 +148,11 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
 //                            FileSearchLib.loadData()
 //                        }
 //                    } else {
-                        FileSearchLib.loadData()
+                    FileSearchLib.loadData()
 //                    }
+                    viewBinding.root.postDelayed({
+                        showKeyBoard(viewBinding.et)
+                    }, 1000)
                 }
 
                 override fun noPermission() {
