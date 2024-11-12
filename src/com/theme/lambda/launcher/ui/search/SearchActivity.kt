@@ -33,6 +33,7 @@ import com.theme.lambda.launcher.utils.PermissionUtil
 import com.theme.lambda.launcher.utils.SpKey
 import com.theme.lambda.launcher.utils.StatusBarUtil
 import com.theme.lambda.launcher.utils.getSpInt
+import com.theme.lambda.launcher.utils.getSpString
 import com.theme.lambda.launcher.utils.gone
 import com.theme.lambda.launcher.utils.marginStatusBarHeight
 import com.theme.lambda.launcher.utils.putSpInt
@@ -181,8 +182,10 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         curManifest?.let {
             val wallpaper =
                 ThemeManager.getThemeManagerIfExist()?.getManifestResRootPath() + it.background
-            viewBinding.wallpaperView.setPic(wallpaper)
-            viewBinding.wallpaperView.visible()
+            if (SpKey.curUserWallpaperId.getSpString() != ThemeManager.getThemeManagerIfExist()?.themeId){
+                viewBinding.wallpaperView.setPic(wallpaper)
+                viewBinding.wallpaperView.visible()
+            }
         }
 
         viewBinding.rvSearchHistory.adapter = searchHistoryAdapter
