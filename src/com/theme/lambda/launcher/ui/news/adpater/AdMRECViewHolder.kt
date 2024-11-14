@@ -13,7 +13,7 @@ class AdMRECViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
     companion object {
         val mrecAdBanner: MRECBanner by lazy {
             MRECBanner(AdUtil.getWapActivity()!!).apply {
-                scenesName = AdName.theme_new_mrec
+                scenesName = AdName.news_list_mrec
                 loadAd()
             }
         }
