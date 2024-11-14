@@ -40,7 +40,7 @@ class NewDetailsActivity : BaseActivity<ActivityNewDetailBinding>() {
         return ActivityNewDetailBinding.inflate(layoutInflater)
     }
 
-    private var new: News? = null
+    private var news: News? = null
     private val newDetailsAdapter: NewDetailsAdapter by lazy { NewDetailsAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,7 +53,7 @@ class NewDetailsActivity : BaseActivity<ActivityNewDetailBinding>() {
         intent.getStringExtra(sKeyNewDetail)?.let {
             if (it.isNotBlank()) {
                 try {
-                    new = GsonUtil.gson.fromJson(it, News::class.java)
+                    news = GsonUtil.gson.fromJson(it, News::class.java)
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
@@ -61,7 +61,7 @@ class NewDetailsActivity : BaseActivity<ActivityNewDetailBinding>() {
         }
 
         viewBinding.netIv.setOnClickListener {
-            new?.url?.let {
+            news?.url?.let {
                 CommonUtil.openWebView(this, it)
             }
         }
@@ -75,10 +75,8 @@ class NewDetailsActivity : BaseActivity<ActivityNewDetailBinding>() {
             adapter = newDetailsAdapter
         }
 
-        // 3个换行塞一个广告
-        var interval = 3
-
-        new?.let {
+        var interval = 1
+        news?.let {
             viewBinding.netTv.text = it.url
 
             val text = it.text.replace("\n", "\n\n")
@@ -89,7 +87,7 @@ class NewDetailsActivity : BaseActivity<ActivityNewDetailBinding>() {
             data.add(NewDetailsTopItem(it))
             for (s in stringList) {
                 data.add(NewDetailsItem(s))
-                if (interval % 3 == 0) {
+                if (interval % 10 == 0) {
                     data.add(NewDetailsAdItem())
                 }
                 interval++

@@ -15,7 +15,7 @@ class NewDetailsAdViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
     fun bind(item: NewDetailsAdItem) {
         if (item.mrecBanner == null) {
             item.mrecBanner = MRECBanner(viewBinding.root.context)
-            item.mrecBanner?.scenesName = AdName.theme_new_mrec
+            item.mrecBanner?.scenesName = AdName.news_detail_mrec
             item.mrecBanner?.bindLifecycle(viewBinding.root.context)
         }
 

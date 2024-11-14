@@ -30,8 +30,7 @@ class NewDetailsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun getItemViewType(position: Int): Int {
-        val baseItem = data[position]
-        when (baseItem) {
+        when (data[position]) {
             is NewDetailsItem -> {
                 return viewTypeNewDetails
             }
