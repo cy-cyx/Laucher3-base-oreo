@@ -1,5 +1,6 @@
 package com.lambdaweather.view
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.drawable.ColorDrawable
@@ -9,26 +10,35 @@ import android.os.Handler
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.text.HtmlCompat
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.android.launcher3.R
+import com.android.launcher3.databinding.ItemWeatherNewBinding
+import com.lambdaweather.data.model.NewsModel.NewsDTO
+import com.theme.lambda.launcher.ad.AdName
+import com.theme.lambda.launcher.ad.view.MRECBanner
 import com.theme.lambda.launcher.utils.CommonUtil
+import com.theme.lambda.launcher.utils.GlideUtil
+import com.theme.lambda.launcher.utils.gone
+import com.theme.lambda.launcher.utils.visible
+import java.util.Random
 
-class RecyclerViewBanner @JvmOverloads constructor(
+class WeatherNewBanner @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
-    private var mInterval: Int = 15 * 1000
+    private var mInterval: Int = 5 * 1000
     private var isShowIndicator: Boolean = false
     private var mSelectedDrawable: Drawable? = null
     private var mUnselectedDrawable: Drawable? = null
@@ -44,8 +54,7 @@ class RecyclerViewBanner @JvmOverloads constructor(
     private val mLinearLayout: LinearLayout?
     private val adapter: RecyclerAdapter?
     private var onRvBannerClickListener: OnRvBannerClickListener? = null
-    private var onSwitchRvBannerListener: OnSwitchRvBannerListener? = null
-    private val mData: MutableList<Any> = ArrayList()
+    private val mData: MutableList<NewsDTO> = ArrayList()
     private var startX = 0
     private var startY = 0
     private var currentIndex = 0
@@ -62,10 +71,11 @@ class RecyclerViewBanner @JvmOverloads constructor(
             handler.postDelayed(this, mInterval.toLong())
         }
     }
+    private var mrecBanner: MRECBanner? = null
 
     init {
         val a = context.obtainStyledAttributes(attrs, R.styleable.RecyclerViewBanner)
-        mInterval = a.getInt(R.styleable.RecyclerViewBanner_rvb_interval, 10000)
+        mInterval = a.getInt(R.styleable.RecyclerViewBanner_rvb_interval, 5000)
         isShowIndicator = a.getBoolean(R.styleable.RecyclerViewBanner_rvb_showIndicator, true)
         isAutoPlaying = a.getBoolean(R.styleable.RecyclerViewBanner_rvb_autoPlaying, true)
         val sd = a.getDrawable(R.styleable.RecyclerViewBanner_rvb_indicatorSelectedSrc)
@@ -130,24 +140,21 @@ class RecyclerViewBanner @JvmOverloads constructor(
         mLinearLayout.gravity = Gravity.CENTER
         val vpLayoutParams = LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
-            dp2px(200)
+            dp2px(260)
         )
         val linearLayoutParams = LayoutParams(
             ViewGroup.LayoutParams.WRAP_CONTENT,
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
         linearLayoutParams.gravity = Gravity.BOTTOM or gravity
-        linearLayoutParams.setMargins(margin, margin, margin, margin + CommonUtil.dp2px(40f))
+        linearLayoutParams.setMargins(margin, margin, margin, margin + CommonUtil.dp2px(60f))
         addView(recyclerView, vpLayoutParams)
         addView(mLinearLayout, linearLayoutParams)
 
-        // 便于在xml中编辑时观察，运行时不执行
-        if (isInEditMode) {
-            for (i in 0..2) {
-                mData!!.add("")
-            }
-            createIndicators()
-        }
+        mrecBanner = MRECBanner(context)
+        mrecBanner?.scenesName = AdName.weather_mrec
+        mrecBanner?.bindLifecycle(context)
+        mrecBanner?.preLoad()
     }
 
     /**
@@ -211,9 +218,10 @@ class RecyclerViewBanner @JvmOverloads constructor(
      *
      * @param data Banner对象列表
      */
-    fun setRvBannerData(data: List<Any>?) {
+    @SuppressLint("NotifyDataSetChanged")
+    fun setRvBannerData(data: List<NewsDTO>?) {
         setPlaying(false)
-        mData!!.clear()
+        mData.clear()
         if (data != null) {
             mData.addAll(data)
         }
@@ -238,7 +246,7 @@ class RecyclerViewBanner @JvmOverloads constructor(
      */
     private fun createIndicators() {
         mLinearLayout!!.removeAllViews()
-        for (i in mData!!.indices) {
+        for (i in 0 until mData.size + 1) {
             val img = AppCompatImageView(context)
             val lp = LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -315,15 +323,19 @@ class RecyclerViewBanner @JvmOverloads constructor(
      * RecyclerView适配器
      */
     private inner class RecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+        override fun getItemViewType(position: Int): Int {
+            return if ((position % (mData.size + 1) == 4) && mrecBanner?.isReady() == true) return AD_TYPE else 0
+        }
+
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-            val img = AppCompatImageView(parent.context)
+            val img = ItemWeatherNewBinding.inflate(LayoutInflater.from(parent.context)).root
             val params = RecyclerView.LayoutParams(
                 CommonUtil.getScreenWidth() - CommonUtil.dp2px(20f),
                 ViewGroup.LayoutParams.MATCH_PARENT
             )
             img.layoutParams = params
             img.id = R.id.rvb_banner_image_view_id
-            img.scaleType = ImageView.ScaleType.CENTER_CROP
             img.setOnClickListener {
                 if (onRvBannerClickListener != null) {
                     onRvBannerClickListener!!.onClick(currentIndex % mData!!.size)
@@ -331,6 +343,10 @@ class RecyclerViewBanner @JvmOverloads constructor(
             }
             when (viewType) {
                 AD_TYPE -> {
+                    if (null != mrecBanner?.parent) {
+                        (mrecBanner?.parent as ViewGroup).removeAllViews()
+                    }
+
                     val fl = FrameLayout(parent.context)
                     val params2 = RecyclerView.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
@@ -338,7 +354,7 @@ class RecyclerViewBanner @JvmOverloads constructor(
                     )
                     fl.layoutParams = params2
                     fl.id = R.id.rvb_banner_fl_view_id
-                    fl.addView(img)
+                    fl.addView(mrecBanner)
                     return object : RecyclerView.ViewHolder(fl) {}
                 }
 
@@ -350,36 +366,43 @@ class RecyclerViewBanner @JvmOverloads constructor(
             return object : RecyclerView.ViewHolder(img) {}
         }
 
-        override fun getItemViewType(position: Int): Int {
-            return if (position % mData!!.size % 2 == 0) return AD_TYPE else 0
-        }
-
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
             when (getItemViewType(position)) {
                 AD_TYPE -> {
-                    val img =
-                        holder.itemView.findViewById<View>(R.id.rvb_banner_image_view_id) as AppCompatImageView?
-                    if (onSwitchRvBannerListener != null) {
-                        onSwitchRvBannerListener!!.switchBanner(
-                            position % mData!!.size, img,
-                            holder.itemView.findViewById<View>(R.id.rvb_banner_fl_view_id) as FrameLayout
-                        )
-                    }
+                    mrecBanner?.loadAd()
                 }
 
                 else -> {
-                    val img =
-                        holder.itemView.findViewById<View>(R.id.rvb_banner_image_view_id) as AppCompatImageView
-                    if (onSwitchRvBannerListener != null) {
-                        onSwitchRvBannerListener!!.switchBanner(position % mData!!.size, img, null)
-                    }
+                    switchBanner(
+                        position % mData.size,
+                        holder.itemView
+                    )
                 }
             }
+        }
 
+        private fun switchBanner(position: Int, bannerView: View) {
+            val viewBinding = ItemWeatherNewBinding.bind(bannerView)
+
+            mData[if (position >= mData.size) Random().nextInt(mData.size) else position].image_urls?.get(
+                0
+            )?.let { it1 ->
+                GlideUtil.load(
+                    viewBinding.iconIv, it1, placeholder = R.drawable.ic_news_ph
+                )
+            }
+            viewBinding.tvTitle.text =
+                HtmlCompat.fromHtml(
+                    mData[if (position >= mData.size) Random().nextInt(mData.size) else position].title!!,
+                    HtmlCompat.FROM_HTML_MODE_COMPACT
+                ).toString()
+            viewBinding.timeTv.text = mData.get(
+                if (position >= mData.size) Random().nextInt(mData.size) else position
+            ).publishDate
         }
 
         override fun getItemCount(): Int {
-            return if (mData == null) 0 else if (mData.size < 2) mData.size else Int.MAX_VALUE
+            return if (mData.size < 2) mData.size else Int.MAX_VALUE
         }
     }
 
@@ -411,9 +434,14 @@ class RecyclerViewBanner @JvmOverloads constructor(
         if (mLinearLayout != null && mLinearLayout.childCount > 0) {
             for (i in 0 until mLinearLayout.childCount) {
                 (mLinearLayout.getChildAt(i) as AppCompatImageView).setImageDrawable(
-                    if (i == currentIndex % mData!!.size) mSelectedDrawable else mUnselectedDrawable
+                    if (i == currentIndex % (mData.size + 1)) mSelectedDrawable else mUnselectedDrawable
                 )
             }
+        }
+        if (currentIndex % (mData.size + 1) == 4 && (mrecBanner?.isReady() == true)) {
+            mLinearLayout?.gone()
+        } else {
+            mLinearLayout?.visible()
         }
     }
 
@@ -422,14 +450,6 @@ class RecyclerViewBanner @JvmOverloads constructor(
             TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(),
             Resources.getSystem().displayMetrics
         ).toInt()
-    }
-
-    interface OnSwitchRvBannerListener {
-        fun switchBanner(position: Int, bannerView: AppCompatImageView?, fl: FrameLayout?)
-    }
-
-    fun setOnSwitchRvBannerListener(listener: OnSwitchRvBannerListener?) {
-        onSwitchRvBannerListener = listener
     }
 
     interface OnRvBannerClickListener {
@@ -444,6 +464,6 @@ class RecyclerViewBanner @JvmOverloads constructor(
         private const val DEFAULT_SELECTED_COLOR = -0x1
         private const val DEFAULT_UNSELECTED_COLOR = 0x50ffffff
 
-        val AD_TYPE = 1
+        const val AD_TYPE = 1
     }
 }

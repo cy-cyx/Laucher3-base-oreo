@@ -26,7 +26,7 @@ class MRECBanner @JvmOverloads constructor(
         (context as? FragmentActivity)?.lifecycle?.addObserver(this)
     }
 
-    fun loadAd() {
+    private fun initAdapter() {
         if (mMRECBanner == null) {
             mMRECBanner = LAdMultipleAdapter(this.context as Activity,
                 scenesName,
@@ -34,21 +34,50 @@ class MRECBanner @JvmOverloads constructor(
 
                     override fun onLoad(adapter: LAdMultipleAdapter, status: Int) {
                         super.onLoad(adapter, status)
-                        if (status == LambdaAd.AD_FILL) {
-                            mMRECBanner?.showBanner(this@MRECBanner, isLoadShow = false)
-
-                        }
                     }
 
                     override fun onClose(adapter: LAdMultipleAdapter, status: Int) {
                         super.onClose(adapter, status)
-                        if (status == LambdaAd.AD_SHOWING) {
-
-                        }
                     }
                 })
         }
+    }
+
+    private val listen = object : LambdaAdAdapter.OnAdapterClose<LAdMultipleAdapter>() {
+
+        override fun onLoad(adapter: LAdMultipleAdapter, status: Int) {
+            super.onLoad(adapter, status)
+            if (status == LambdaAd.AD_FILL) {
+                mMRECBanner?.showBanner(this@MRECBanner, isLoadShow = false)
+
+            }
+        }
+
+        override fun onClose(adapter: LAdMultipleAdapter, status: Int) {
+            super.onClose(adapter, status)
+            if (status == LambdaAd.AD_SHOWING) {
+
+            }
+        }
+    }
+
+    fun loadAd() {
+        initAdapter()
+        mMRECBanner?.onAdapterClose = listen
+        if (mMRECBanner?.isReady() == true) {
+            mMRECBanner?.showBanner(this@MRECBanner, isLoadShow = false)
+        } else {
+            mMRECBanner?.loadBanner(false)
+        }
+    }
+
+    fun preLoad() {
+        initAdapter()
         mMRECBanner?.loadBanner(false)
+    }
+
+    fun isReady(): Boolean {
+        return mMRECBanner?.isReady() ?: false
     }
 
     private fun destroy() {

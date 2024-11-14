@@ -9,6 +9,7 @@ import com.android.launcher3.R
 import com.android.launcher3.databinding.ActivityNewDetailBinding
 import com.theme.lambda.launcher.base.BaseActivity
 import com.theme.lambda.launcher.data.model.News
+import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.utils.GlideUtil
 import com.theme.lambda.launcher.utils.GsonUtil
 import com.theme.lambda.launcher.utils.StatusBarUtil
@@ -53,6 +54,14 @@ class NewDetailsActivity : BaseActivity<ActivityNewDetailBinding>() {
             }
         }
 
+        viewBinding.netIv.setOnClickListener {
+            new?.url?.let {
+                CommonUtil.openWebView(this, it)
+            }
+        }
+
+        viewBinding.backIv.setOnClickListener { finish() }
+
         new?.let {
             viewBinding.authorTv.text = it.author
             viewBinding.netTv.text = it.url
@@ -68,7 +77,6 @@ class NewDetailsActivity : BaseActivity<ActivityNewDetailBinding>() {
             viewBinding.contentTv.text = it.text.replace("\n", "\n\n")
         }
 
-        viewBinding.backIv.setOnClickListener { finish() }
 
     }
 }
