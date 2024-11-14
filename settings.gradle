@@ -10,7 +10,7 @@ dependencyResolutionManagement {
             credentials(HttpHeaderCredentials) {
                 name = "Private-Token"
 //                value = gitLabPrivateToken // the variable resides in ~/.gradle/gradle.properties
-                value = "iQmPyMKtkc1yrzxhSx4z"
+                value = "GdGhWR7nWc8WJzmTodJt"
                 // the variable resides in ~/.gradle/gradle.properties
             }
             authentication {
