@@ -7,7 +7,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/containerCv"
         android:layout_width="match_parent"
-        android:layout_height="240dp"
+        android:layout_height="270dp"
         android:layout_marginHorizontal="15dp"
         android:layout_marginVertical="5dp"
         app:cardCornerRadius="10dp"
@@ -16,7 +16,7 @@
         <ImageView
             android:id="@+id/iconIv"
             android:layout_width="match_parent"
-            android:layout_height="170dp"
+            android:layout_height="200dp"
             android:scaleType="centerCrop" />
 
         <TextView

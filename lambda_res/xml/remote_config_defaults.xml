@@ -299,7 +299,7 @@
             },
             {
             "asid": "",
-            "name": "theme_new_mrec",
+            "name": "theme_new_mrec, news_detail_mrec, weather_mrec",
             "ctrl": {
             "closeCountDown": 0,
             "closeDelay": 0,

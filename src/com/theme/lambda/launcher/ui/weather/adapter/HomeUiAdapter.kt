@@ -37,6 +37,8 @@ import com.lambdaweather.utils.gone
 import com.lambdaweather.utils.visible
 import com.lambdaweather.view.RecyclerViewBanner
 import com.lambdaweather.view.dynamicweather.BaseDrawer
+import com.theme.lambda.launcher.ad.AdName
+import com.theme.lambda.launcher.ad.view.MRECBanner
 import com.theme.lambda.launcher.ui.weather.ui.WeatherFragment
 import java.util.Random
 import kotlin.math.roundToInt
@@ -90,7 +92,14 @@ class HomeUiAdapter(val fragment: WeatherFragment) :
                 val layoutP = binding.root.layoutParams
                 layoutP.height = ViewGroup.LayoutParams.WRAP_CONTENT
                 binding.root.layoutParams = layoutP
-                LambdaWeather.showNativeAd(holder.getView(R.id.fl_list_ad))
+                if (item.mrecBanner == null) {
+                    item.mrecBanner = MRECBanner(holder.itemView.context).apply {
+                        scenesName = AdName.weather_mrec
+                        bindLifecycle(holder.itemView.context)
+                    }
+                    holder.getView<FrameLayout>(R.id.fl_list_ad).addView(item.mrecBanner)
+                }
+                item.mrecBanner?.loadAd()
             }
         }
     }

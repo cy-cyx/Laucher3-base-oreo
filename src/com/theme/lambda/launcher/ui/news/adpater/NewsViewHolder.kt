@@ -21,8 +21,6 @@ class NewsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             GlideUtil.load(
                 viewBinding.iconIv,
                 it,
-                1000,
-                1000,
                 placeholder = R.drawable.ic_news_ph
             )
         }
