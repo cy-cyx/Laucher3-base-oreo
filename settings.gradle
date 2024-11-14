@@ -30,7 +30,3 @@ dependencyResolutionManagement {
         maven { url 'https://developer.huawei.com/repo/' }
     }
 }
-
-
-//include ':billing'
-//project(':billing').projectDir = file("E:/billing/billing")
