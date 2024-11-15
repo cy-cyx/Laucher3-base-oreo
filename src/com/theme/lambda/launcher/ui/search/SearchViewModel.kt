@@ -15,6 +15,10 @@ import com.lambda.common.utils.utilcode.util.ActivityUtils
 import com.lambda.common.utils.utilcode.util.AppUtils
 import com.lambda.common.utils.utilcode.util.GsonUtils
 import com.lambda.remoteconfig.LambdaRemoteConfig
+import com.lambdaweather.data.Resource
+import com.lambdaweather.data.model.NewsModel
+import com.lambdaweather.factory.RetrofitFactory.appRepositorySource
+import com.lambdaweather.utils.LocalUtils
 import com.theme.lambda.launcher.base.BaseViewModel
 import com.theme.lambda.launcher.data.model.FileInfo
 import com.theme.lambda.launcher.data.model.Offers
@@ -52,6 +56,7 @@ class SearchViewModel : BaseViewModel() {
     val fileLiveData = MutableLiveData<ArrayList<FileInfo>>(arrayListOf())
     val shortcutLiveData = MutableLiveData<ArrayList<ShortCut>>(arrayListOf())
     val yourMayLikeLiveData = MutableLiveData<ArrayList<Offers>>(arrayListOf())
+    val newList = MutableLiveData<Resource<NewsModel>>()
 
     private val searchInfo: SearchInfo by lazy {
         val string =
@@ -106,6 +111,19 @@ class SearchViewModel : BaseViewModel() {
 
         viewModelScope.launch(Dispatchers.IO) {
             yourMayLikeLiveData.postValue(RecommendAppManager.getYourMayLikeOffers())
+        }
+
+        getNews()
+    }
+
+    private fun getNews() {
+        viewModelScope.launch {
+            appRepositorySource.getNews(
+                LocalUtils.getCountry(),
+                "1"
+            ).collect {
+                newList.value = it
+            }
         }
     }
 

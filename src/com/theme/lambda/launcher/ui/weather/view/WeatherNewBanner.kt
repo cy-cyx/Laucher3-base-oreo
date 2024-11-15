@@ -3,6 +3,7 @@ package com.lambdaweather.view
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
+import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
@@ -72,6 +73,8 @@ class WeatherNewBanner @JvmOverloads constructor(
         }
     }
     private var mrecBanner: MRECBanner? = null
+
+    var from = fromWeather
 
     init {
         val a = context.obtainStyledAttributes(attrs, R.styleable.RecyclerViewBanner)
@@ -388,7 +391,9 @@ class WeatherNewBanner @JvmOverloads constructor(
                 0
             )?.let { it1 ->
                 GlideUtil.load(
-                    viewBinding.iconIv, it1, placeholder = R.drawable.ic_news_ph
+                    viewBinding.iconIv,
+                    it1,
+                    placeholder = R.drawable.ic_news_ph
                 )
             }
             viewBinding.tvTitle.text =
@@ -399,6 +404,11 @@ class WeatherNewBanner @JvmOverloads constructor(
             viewBinding.timeTv.text = mData.get(
                 if (position >= mData.size) Random().nextInt(mData.size) else position
             ).publishDate
+
+            if (from == fromSearch) {
+                viewBinding.tvTitle.setTextColor(Color.WHITE)
+                viewBinding.iconCv.radius = CommonUtil.dp2px(15f).toFloat()
+            }
         }
 
         override fun getItemCount(): Int {
@@ -465,5 +475,8 @@ class WeatherNewBanner @JvmOverloads constructor(
         private const val DEFAULT_UNSELECTED_COLOR = 0x50ffffff
 
         const val AD_TYPE = 1
+
+        const val fromWeather = 1
+        const val fromSearch = 2
     }
 }

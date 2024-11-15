@@ -21,6 +21,8 @@ import com.android.launcher3.databinding.ActivitySearchBinding
 import com.lambda.common.http.Preference
 import com.lambda.common.utils.utilcode.util.GsonUtils
 import com.lambda.common.utils.utilcode.util.Utils
+import com.lambdaweather.view.WeatherNewBanner
+import com.theme.lambda.launcher.ad.AdName
 import com.theme.lambda.launcher.base.BaseActivity
 import com.theme.lambda.launcher.ui.search.adapter.FileAdapter
 import com.theme.lambda.launcher.ui.search.adapter.ImageAdapter
@@ -330,6 +332,11 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             layoutManager = GridLayoutManager(this@SearchActivity, 5)
             adapter = yourMayLikeAdapter
         }
+
+        viewBinding.rvBanner.from = WeatherNewBanner.fromSearch
+
+        viewBinding.mrecBanner.scenesName = AdName.weather_mrec
+        viewBinding.mrecBanner.loadAd()
     }
 
     private fun initData() {
@@ -374,7 +381,15 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             viewBinding.clYourMayLike.visibility = if (it.isEmpty()) View.GONE else View.VISIBLE
             yourMayLikeAdapter.setList(it)
         })
+        viewModel.newList.observe(this, Observer {
+            if ((it.data?.d?.news?.size ?: 0) > 4) {
+                viewBinding.clWeather.visibility = View.VISIBLE
 
+                viewBinding.rvBanner.setRvBannerData(
+                    it.data?.d?.news?.subList(0, 4)
+                )
+            }
+        })
         viewModel.initData()
     }
 
