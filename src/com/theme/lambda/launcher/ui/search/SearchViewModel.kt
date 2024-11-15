@@ -9,6 +9,7 @@ import android.text.TextUtils
 import androidx.appcompat.app.AppCompatActivity.SEARCH_SERVICE
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.android.launcher3.RecommendAppManager
 import com.lambda.common.http.Preference
 import com.lambda.common.utils.utilcode.util.ActivityUtils
 import com.lambda.common.utils.utilcode.util.AppUtils
@@ -16,6 +17,7 @@ import com.lambda.common.utils.utilcode.util.GsonUtils
 import com.lambda.remoteconfig.LambdaRemoteConfig
 import com.theme.lambda.launcher.base.BaseViewModel
 import com.theme.lambda.launcher.data.model.FileInfo
+import com.theme.lambda.launcher.data.model.Offers
 import com.theme.lambda.launcher.data.model.SearchInfo
 import com.theme.lambda.launcher.data.model.ShortCut
 import com.theme.lambda.launcher.statistics.EventName
@@ -49,6 +51,7 @@ class SearchViewModel : BaseViewModel() {
     val imageLiveData = MutableLiveData<ArrayList<FileInfo>>(arrayListOf())
     val fileLiveData = MutableLiveData<ArrayList<FileInfo>>(arrayListOf())
     val shortcutLiveData = MutableLiveData<ArrayList<ShortCut>>(arrayListOf())
+    val yourMayLikeLiveData = MutableLiveData<ArrayList<Offers>>(arrayListOf())
 
     private val searchInfo: SearchInfo by lazy {
         val string =
@@ -99,6 +102,10 @@ class SearchViewModel : BaseViewModel() {
                 it.isEdit = false
             }
             shortcutLiveData.postValue(shortCuts)
+        }
+
+        viewModelScope.launch(Dispatchers.IO) {
+            yourMayLikeLiveData.postValue(RecommendAppManager.getYourMayLikeOffers())
         }
     }
 
@@ -289,12 +296,12 @@ class SearchViewModel : BaseViewModel() {
         } else {
             if (from > to) {
                 var temp = from
-                while (temp > to){
+                while (temp > to) {
                     Collections.swap(shortCuts, temp, temp - 1)
-                    temp --
+                    temp--
                 }
             } else {
-                for (i in from until  to){
+                for (i in from until to) {
                     Collections.swap(shortCuts, i, i - 1)
                 }
             }

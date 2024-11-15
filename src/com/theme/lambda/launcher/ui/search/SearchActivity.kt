@@ -30,6 +30,7 @@ import com.theme.lambda.launcher.ui.search.adapter.NetUrlAdapter
 import com.theme.lambda.launcher.ui.search.adapter.RecentAppsAdapter
 import com.theme.lambda.launcher.ui.search.adapter.SearchHistoryAdapter
 import com.theme.lambda.launcher.ui.search.adapter.UrlShortcutAdapter
+import com.theme.lambda.launcher.ui.search.adapter.YourMayLikeAdapter
 import com.theme.lambda.launcher.ui.search.searchlib.FileSearchLib
 import com.theme.lambda.launcher.ui.search.searchlib.PicSearchLib
 import com.theme.lambda.launcher.utils.PermissionUtil
@@ -107,6 +108,10 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
 
     private val itemTouchHelperCallback: ItemTouchHelperCallback by lazy {
         ItemTouchHelperCallback()
+    }
+
+    private val yourMayLikeAdapter: YourMayLikeAdapter by lazy {
+        YourMayLikeAdapter()
     }
 
     override fun initViewBinding(layoutInflater: LayoutInflater): ActivitySearchBinding {
@@ -320,6 +325,11 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         }
         val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
         itemTouchHelper.attachToRecyclerView(viewBinding.rvUrlShortcut)
+
+        viewBinding.rvYourMayLike.apply {
+            layoutManager = GridLayoutManager(this@SearchActivity, 5)
+            adapter = yourMayLikeAdapter
+        }
     }
 
     private fun initData() {
@@ -358,6 +368,11 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         })
         viewModel.shortcutLiveData.observe(this, Observer {
             shortCutAdapter.setList(it)
+            viewBinding.clUrlShortcut.visible()
+        })
+        viewModel.yourMayLikeLiveData.observe(this, Observer {
+            viewBinding.clYourMayLike.visibility = if (it.isEmpty()) View.GONE else View.VISIBLE
+            yourMayLikeAdapter.setList(it)
         })
 
         viewModel.initData()

@@ -389,4 +389,5 @@
     <string name="search_any_things">Search Local Docs, Photos, Apps or Web</string>
     <string name="doc_permission_tip">To accurately search for files, we need to obtain your storage permissions</string>
     <string name="quick_tools">Quick Tools</string>
+    <string name="your_may_like">Your may like</string>
 </resources>

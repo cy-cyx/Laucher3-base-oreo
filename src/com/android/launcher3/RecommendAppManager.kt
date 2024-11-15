@@ -167,7 +167,7 @@ object RecommendAppManager {
         clickRecommendApp(offer)
     }
 
-    private fun clickRecommendApp(offer: Offers?) {
+    fun clickRecommendApp(offer: Offers?) {
         offer?.let {
             // 如果安装了直接打开
             if (AppUtil.checkAppInstalled(CommonUtil.appContext!!, offer.pn)) {
@@ -217,7 +217,9 @@ object RecommendAppManager {
         val offer = offerConfig.offers.find { it.pn.equals(packageName) }
         offer?.let { offer ->
             val appInfo =
-                allApps.find { it.componentName?.packageName?.equals("${actionHost}${offer.id}") ?: false }
+                allApps.find {
+                    it.componentName?.packageName?.equals("${actionHost}${offer.id}") ?: false
+                }
             appInfo?.let { info ->
                 launcher.removeAppInfoFormAppView(arrayListOf(info))
                 remove(info)
@@ -226,5 +228,17 @@ object RecommendAppManager {
                 })
             }
         }
+    }
+
+    fun getYourMayLikeOffers(): ArrayList<Offers> {
+        val result = ArrayList<Offers>()
+        val offerConfig = getOfferConfig()
+        offerConfig?.offers?.forEach {
+            // 判断是否已经安装
+            if (!AppUtil.checkAppInstalled(CommonUtil.appContext, it.pn)) {
+                result.add(it)
+            }
+        }
+        return result
     }
 }
