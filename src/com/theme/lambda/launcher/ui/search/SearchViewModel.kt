@@ -283,6 +283,22 @@ class SearchViewModel : BaseViewModel() {
 
     fun swapShortCut(from: Int, to: Int) {
         val shortCuts = shortcutLiveData.value!!
-        Collections.swap(shortCuts, from, to)
+
+        if (Math.abs(to - from) == 1) {
+            Collections.swap(shortCuts, from, to)
+        } else {
+            if (from > to) {
+                var temp = from
+                while (temp > to){
+                    Collections.swap(shortCuts, temp, temp - 1)
+                    temp --
+                }
+            } else {
+                for (i in from until  to){
+                    Collections.swap(shortCuts, i, i - 1)
+                }
+            }
+        }
+
     }
 }

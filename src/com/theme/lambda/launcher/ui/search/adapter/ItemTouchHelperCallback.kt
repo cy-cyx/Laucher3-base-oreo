@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class ItemTouchHelperCallback : ItemTouchHelper.Callback() {
 
-    var onSwapListen: ((Int, Int) -> Unit)? = null
+    var onSwapListen: ((Int, Int) -> Boolean)? = null
 
     override fun getMovementFlags(
         recyclerView: RecyclerView,
@@ -27,8 +27,7 @@ class ItemTouchHelperCallback : ItemTouchHelper.Callback() {
     ): Boolean {
         val from = viewHolder.adapterPosition
         val to = target.adapterPosition
-        onSwapListen?.invoke(from, to)
-        return true;
+        return onSwapListen?.invoke(from, to) ?: false
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {

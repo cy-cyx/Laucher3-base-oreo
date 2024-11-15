@@ -310,9 +310,12 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         }
 
         itemTouchHelperCallback.onSwapListen = { it1, it2 ->
-            if (it2  < shortCutAdapter.data.size - 1 ){
+            if (it2 < shortCutAdapter.data.size - 1) {
+                viewModel.swapShortCut(it1, it2)
                 shortCutAdapter.notifyItemMoved(it1, it2)
-                viewModel.swapShortCut(it1,it2)
+                true
+            } else {
+                false
             }
         }
         val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
