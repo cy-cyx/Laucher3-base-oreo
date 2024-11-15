@@ -153,11 +153,6 @@ class WeatherNewBanner @JvmOverloads constructor(
         linearLayoutParams.setMargins(margin, margin, margin, margin + CommonUtil.dp2px(60f))
         addView(recyclerView, vpLayoutParams)
         addView(mLinearLayout, linearLayoutParams)
-
-        mrecBanner = MRECBanner(context)
-        mrecBanner?.scenesName = AdName.weather_mrec
-        mrecBanner?.bindLifecycle(context)
-        mrecBanner?.preLoad()
     }
 
     /**
@@ -223,6 +218,7 @@ class WeatherNewBanner @JvmOverloads constructor(
      */
     @SuppressLint("NotifyDataSetChanged")
     fun setRvBannerData(data: List<NewsDTO>?) {
+        initAd()
         setPlaying(false)
         mData.clear()
         if (data != null) {
@@ -240,6 +236,16 @@ class WeatherNewBanner @JvmOverloads constructor(
         } else {
             currentIndex = 0
             adapter!!.notifyDataSetChanged()
+        }
+    }
+
+    private fun initAd() {
+        if (mrecBanner == null) {
+            mrecBanner = MRECBanner(context)
+            mrecBanner?.scenesName =
+                if (from == fromSearch) AdName.search_mrec else AdName.weather_mrec
+            mrecBanner?.bindLifecycle(context)
+            mrecBanner?.preLoad()
         }
     }
 

@@ -14,6 +14,7 @@ object AdName {
     val news_list_mrec = "news_list_mrec"
     val news_detail_mrec = "news_detail_mrec"
     val weather_mrec = "weather_mrec"
+    val search_mrec = "search_mrec"
 
     val home_ban = "home_ban"
 }

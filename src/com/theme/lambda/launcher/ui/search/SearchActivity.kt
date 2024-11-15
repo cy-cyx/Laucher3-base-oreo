@@ -335,7 +335,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
 
         viewBinding.rvBanner.from = WeatherNewBanner.fromSearch
 
-        viewBinding.mrecBanner.scenesName = AdName.weather_mrec
+        viewBinding.mrecBanner.scenesName = AdName.search_mrec
         viewBinding.mrecBanner.loadAd()
     }
 

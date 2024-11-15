@@ -627,13 +627,13 @@
             },
             {
             "name": "Healthline",
-            "icon_url": "https://i0.wp.com/post.healthline.com/wp-content/uploads/2023/05/HG-Logos__circle-icon_100w-1.png",
+            "icon_url": "https://d218bwdbonjwkx.cloudfront.net/resources/20241115-164223.png",
             "click_url": "https://www.healthline.com/",
             "is_default": false
             },
             {
             "name": "Drugs",
-            "icon_url": "https://www.drugs.com/img/logo/drugscom-logo-mark.svg",
+            "icon_url": "https://d218bwdbonjwkx.cloudfront.net/resources/20241115-164218.png",
             "click_url": "https://www.drugs.com/",
             "is_default": false
             },

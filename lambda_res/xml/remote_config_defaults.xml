@@ -18,10 +18,18 @@
             "ecpm": 0
             },
             {
-            "adid": "ca-app-pub-3912577259305392/8633147067",
+            "adid": "28e105b9ded57f54",
             "order": 0,
             "per": 0,
-            "plat": 1,
+            "plat": 2,
+            "type": 5,
+            "ecpm": 0
+            },
+            {
+            "adid": "10961146-10988845",
+            "order": 0,
+            "per": 0,
+            "plat": 4,
             "type": 5,
             "ecpm": 0
             }
@@ -33,14 +41,6 @@
             "params": [
             {
             "adid": "ca-app-pub-3912577259305392/5077045434",
-            "order": 0,
-            "per": 0,
-            "plat": 1,
-            "type": 4,
-            "ecpm": 0
-            },
-            {
-            "adid": "ca-app-pub-3912577259305392/8157971517",
             "order": 0,
             "per": 0,
             "plat": 1,
@@ -64,10 +64,10 @@
             "ecpm": 0
             },
             {
-            "adid": "3db6560c4b1d5bb6",
+            "adid": "b89sr0nsgf5k9ds9",
             "order": 0,
             "per": 0,
-            "plat": 2,
+            "plat": 8,
             "type": 4,
             "ecpm": 0
             }
@@ -100,6 +100,22 @@
             "plat": 2,
             "type": 3,
             "ecpm": 0
+            },
+            {
+            "adid": "e5bukdxqqen0gp6x",
+            "order": 0,
+            "per": 0,
+            "plat": 8,
+            "type": 3,
+            "ecpm": 0
+            },
+            {
+            "adid": "10961146-10650174",
+            "order": 0,
+            "per": 0,
+            "plat": 4,
+            "type": 3,
+            "ecpm": 0
             }
             ]
             },
@@ -116,16 +132,8 @@
             "ecpm": 0
             },
             {
-            "adid": "ca-app-pub-3912577259305392/2067738717",
-            "order": 1,
-            "per": 0,
-            "plat": 1,
-            "type": 2,
-            "ecpm": 0
-            },
-            {
             "adid": "6c3302fceadc2041",
-            "order": 2,
+            "order": 1,
             "per": 0,
             "plat": 2,
             "type": 2,
@@ -146,16 +154,8 @@
             "ecpm": 0
             },
             {
-            "adid": "ca-app-pub-3912577259305392/7788535926",
-            "order": 1,
-            "per": 0,
-            "plat": 1,
-            "type": 1,
-            "ecpm": 0
-            },
-            {
             "adid": "d98752b20bdeba5d",
-            "order": 2,
+            "order": 1,
             "per": 0,
             "plat": 2,
             "type": 1,
@@ -176,16 +176,8 @@
             "ecpm": 0
             },
             {
-            "adid": "ca-app-pub-3912577259305392/2257090767",
-            "order": 1,
-            "per": 0,
-            "plat": 1,
-            "type": 7,
-            "ecpm": 0
-            },
-            {
             "adid": "b8108d6eab869fa1",
-            "order": 2,
+            "order": 1,
             "per": 0,
             "plat": 2,
             "type": 7,
@@ -248,7 +240,7 @@
             },
             {
             "asid": "",
-            "name": "download_nat,theme_new_nat",
+            "name": "download_nat, theme_new_nat",
             "ctrl": {
             "closeCountDown": 0,
             "closeDelay": 0,
@@ -299,7 +291,7 @@
             },
             {
             "asid": "",
-            "name": "theme_new_mrec, news_list_mrec, news_detail_mrec, weather_mrec",
+            "name": "theme_new_mrec, news_list_mrec, news_detail_mrec, weather_mrec, search_mrec",
             "ctrl": {
             "closeCountDown": 0,
             "closeDelay": 0,
@@ -603,13 +595,13 @@
             },
             {
             "name": "Healthline",
-            "icon_url": "https://i0.wp.com/post.healthline.com/wp-content/uploads/2023/05/HG-Logos__circle-icon_100w-1.png",
+            "icon_url": "https://d218bwdbonjwkx.cloudfront.net/resources/20241115-164223.png",
             "click_url": "https://www.healthline.com/",
             "is_default": false
             },
             {
             "name": "Drugs",
-            "icon_url": "https://www.drugs.com/img/logo/drugscom-logo-mark.svg",
+            "icon_url": "https://d218bwdbonjwkx.cloudfront.net/resources/20241115-164218.png",
             "click_url": "https://www.drugs.com/",
             "is_default": false
             },

@@ -24,6 +24,14 @@
             "plat": 4,
             "type": 5,
             "ecpm": 0
+            },
+            {
+            "adid": "43c807cacc69de1a",
+            "order": 0,
+            "per": 0,
+            "plat": 2,
+            "type": 5,
+            "ecpm": 0
             }
             ]
             },
@@ -56,12 +64,12 @@
             "ecpm": 0
             },
             {
-            "adid": "c2eb89c2fee3cf58",
+            "adid": "R-M-12398626-16",
             "order": 0,
             "per": 0,
-            "plat": 2,
+            "plat": 7,
             "type": 4,
-            "ecpm": 0
+            "ecpm": 3
             }
             ]
             },
@@ -109,17 +117,9 @@
             "params": [
             {
             "adid": "394af0a6b69f6129",
-            "order": 1,
+            "order": 0,
             "per": 0,
             "plat": 2,
-            "type": 2,
-            "ecpm": 0
-            },
-            {
-            "adid": "10961146-10909383",
-            "order": 2,
-            "per": 0,
-            "plat": 4,
             "type": 2,
             "ecpm": 0
             }
@@ -130,34 +130,10 @@
             "strategy": 2,
             "params": [
             {
-            "adid": "R-M-12398626-12",
-            "order": 0,
-            "per": 0,
-            "plat": 7,
-            "type": 1,
-            "ecpm": 0.1
-            },
-            {
             "adid": "92dc9072856dcce3",
             "order": 1,
             "per": 0,
             "plat": 2,
-            "type": 1,
-            "ecpm": 0
-            },
-            {
-            "adid": "10961146-10624797",
-            "order": 2,
-            "per": 0,
-            "plat": 4,
-            "type": 1,
-            "ecpm": 0
-            },
-            {
-            "adid": "13z2pyyfh795p395",
-            "order": 3,
-            "per": 0,
-            "plat": 8,
             "type": 1,
             "ecpm": 0
             }
@@ -307,7 +283,7 @@
             },
             {
             "asid": "",
-            "name": "theme_new_mrec, news_list_mrec, news_detail_mrec, weather_mrec",
+            "name": "theme_new_mrec, news_list_mrec, news_detail_mrec, weather_mrec, search_mrec",
             "ctrl": {
             "closeCountDown": 0,
             "closeDelay": 0,
@@ -611,13 +587,13 @@
             },
             {
             "name": "Healthline",
-            "icon_url": "https://i0.wp.com/post.healthline.com/wp-content/uploads/2023/05/HG-Logos__circle-icon_100w-1.png",
+            "icon_url": "https://d218bwdbonjwkx.cloudfront.net/resources/20241115-164223.png",
             "click_url": "https://www.healthline.com/",
             "is_default": false
             },
             {
             "name": "Drugs",
-            "icon_url": "https://www.drugs.com/img/logo/drugscom-logo-mark.svg",
+            "icon_url": "https://d218bwdbonjwkx.cloudfront.net/resources/20241115-164218.png",
             "click_url": "https://www.drugs.com/",
             "is_default": false
             },
