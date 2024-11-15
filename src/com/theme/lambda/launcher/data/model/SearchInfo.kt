@@ -8,4 +8,7 @@ class SearchInfo {
 
     @SerializedName("is_open_in_webview")
     var isOpenInWebView = true
+
+    @SerializedName("shortcut_categories")
+    var shortcut_categories = ArrayList<ShortCuts>()
 }

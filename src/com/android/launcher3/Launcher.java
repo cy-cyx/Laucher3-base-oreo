@@ -151,6 +151,7 @@ import com.theme.lambda.launcher.widget.PreviewControlView;
 import com.theme.lambda.launcher.widget.WallpaperView;
 import com.theme.lambda.launcher.widget.dialog.LoadingDialog;
 import com.theme.lambda.launcher.widget.dialog.StoreRatingsDialog;
+import com.theme.lambda.launcher.widget.dialog.UrlShortcutSelectDialog;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
