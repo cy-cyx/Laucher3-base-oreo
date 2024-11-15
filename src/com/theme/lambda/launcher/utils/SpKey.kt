@@ -32,4 +32,6 @@ object SpKey {
     const val weatherWidgetIds = "weatherWidgetIds"
 
     const val requestDocPermissionTime = "requestDocPermissionTime"
+
+    const val keyCurUrlShortCur = "keyCurUrlShortCur"
 }

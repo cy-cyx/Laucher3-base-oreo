@@ -30,10 +30,16 @@ class ShortCut(
     var clickUrl: String = "",
 
     @SerializedName("is_default")
-    var isDefault: Boolean = false,
-
-    var isSelect: Boolean = false
+    var isDefault: Boolean = false
 ) {
+    // 是否是选择
+    var isSelect: Boolean = false
+
+    // 是否是加号
+    var isAdd: Boolean = false
+
+    var isEdit:Boolean = false
+
     fun copy(): ShortCut {
         return ShortCut(name, iconUrl, clickUrl, isDefault)
     }

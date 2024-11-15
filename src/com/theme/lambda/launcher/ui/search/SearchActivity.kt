@@ -27,6 +27,7 @@ import com.theme.lambda.launcher.ui.search.adapter.LocalAppsAdapter
 import com.theme.lambda.launcher.ui.search.adapter.NetUrlAdapter
 import com.theme.lambda.launcher.ui.search.adapter.RecentAppsAdapter
 import com.theme.lambda.launcher.ui.search.adapter.SearchHistoryAdapter
+import com.theme.lambda.launcher.ui.search.adapter.UrlShortcutAdapter
 import com.theme.lambda.launcher.ui.search.searchlib.FileSearchLib
 import com.theme.lambda.launcher.ui.search.searchlib.PicSearchLib
 import com.theme.lambda.launcher.utils.PermissionUtil
@@ -96,6 +97,10 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
     }
     private val fileAdapter: FileAdapter by lazy {
         FileAdapter()
+    }
+
+    private val shortCutAdapter: UrlShortcutAdapter by lazy {
+        UrlShortcutAdapter()
     }
 
     override fun initViewBinding(layoutInflater: LayoutInflater): ActivitySearchBinding {
@@ -182,7 +187,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         curManifest?.let {
             val wallpaper =
                 ThemeManager.getThemeManagerIfExist()?.getManifestResRootPath() + it.background
-            if (SpKey.curUserWallpaperId.getSpString() != ThemeManager.getThemeManagerIfExist()?.themeId){
+            if (SpKey.curUserWallpaperId.getSpString() != ThemeManager.getThemeManagerIfExist()?.themeId) {
                 viewBinding.wallpaperView.setPic(wallpaper)
                 viewBinding.wallpaperView.visible()
             }
@@ -270,6 +275,32 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             viewBinding.et.clearFocus()
             viewModel.search(this, viewBinding.et.text.toString())
         }
+
+        viewBinding.rvUrlShortcut.apply {
+            layoutManager = GridLayoutManager(context, 5)
+            adapter = shortCutAdapter
+        }
+        shortCutAdapter.longClickListen = {
+            if (!it.isAdd) {
+                viewModel.enterShortCutEdit()
+            }
+        }
+
+        shortCutAdapter.clickListen = {
+            if (it.isEdit) {
+                if (it.isAdd) {
+                    // 不存在
+                } else {
+                    viewModel.deleteShortCut(it)
+                }
+            } else {
+                if (it.isAdd) {
+                    viewModel.clickAddShortCut(this)
+                } else {
+                    viewModel.clickShortCut(it)
+                }
+            }
+        }
     }
 
     private fun initData() {
@@ -306,7 +337,19 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             viewBinding.fileLl.visibility = if (it.isEmpty()) View.GONE else View.VISIBLE
             fileAdapter.setList(it)
         })
+        viewModel.shortcutLiveData.observe(this, Observer {
+            shortCutAdapter.setList(it)
+        })
 
         viewModel.initData()
+    }
+
+    override fun onBackPressed() {
+        if (viewModel.isShortCutEdit) {
+            viewModel.quitShortCutEdit()
+            return
+        }
+
+        super.onBackPressed()
     }
 }

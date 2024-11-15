@@ -3,6 +3,7 @@ package com.theme.lambda.launcher.ui.search
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ShortcutManager
 import android.os.Bundle
 import android.text.TextUtils
 import androidx.appcompat.app.AppCompatActivity.SEARCH_SERVICE
@@ -16,6 +17,7 @@ import com.lambda.remoteconfig.LambdaRemoteConfig
 import com.theme.lambda.launcher.base.BaseViewModel
 import com.theme.lambda.launcher.data.model.FileInfo
 import com.theme.lambda.launcher.data.model.SearchInfo
+import com.theme.lambda.launcher.data.model.ShortCut
 import com.theme.lambda.launcher.statistics.EventName
 import com.theme.lambda.launcher.statistics.EventUtil
 import com.theme.lambda.launcher.ui.search.SearchActivity.Companion.addRecentApps
@@ -24,9 +26,11 @@ import com.theme.lambda.launcher.ui.search.searchlib.FileSearchLib
 import com.theme.lambda.launcher.ui.search.searchlib.NetSearchLib
 import com.theme.lambda.launcher.ui.search.searchlib.PicSearchLib
 import com.theme.lambda.launcher.ui.web.WebViewActivity
+import com.theme.lambda.launcher.urlshortcut.UrlShortcutManager
 import com.theme.lambda.launcher.utils.AppUtil
 import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.utils.GsonUtil
+import com.theme.lambda.launcher.widget.dialog.UrlShortcutSelectDialog
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -43,12 +47,15 @@ class SearchViewModel : BaseViewModel() {
     val netUrlLiveData = MutableLiveData<ArrayList<String>>(arrayListOf())
     val imageLiveData = MutableLiveData<ArrayList<FileInfo>>(arrayListOf())
     val fileLiveData = MutableLiveData<ArrayList<FileInfo>>(arrayListOf())
+    val shortcutLiveData = MutableLiveData<ArrayList<ShortCut>>(arrayListOf())
 
     private val searchInfo: SearchInfo by lazy {
         val string =
             LambdaRemoteConfig.getInstance(CommonUtil.appContext!!).getString("SearchConfig")
         GsonUtil.gson.fromJson(string, SearchInfo::class.java)
     }
+
+    var isShortCutEdit = false
 
     fun initData() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -78,6 +85,19 @@ class SearchViewModel : BaseViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             // 这样预加载，不然首次查找巨久
             appsInfo = AppUtils.getAppsInfo().toMutableList() as ArrayList<AppUtils.AppInfo>
+        }
+
+        viewModelScope.launch(Dispatchers.IO) {
+
+            val shortCuts = ArrayList(UrlShortcutManager.getCurShortCut())
+            shortCuts.add(ShortCut().apply {
+                isAdd = true
+                name = "Add"
+            })
+            shortCuts.forEach {
+                it.isEdit = false
+            }
+            shortcutLiveData.postValue(shortCuts)
         }
     }
 
@@ -184,5 +204,78 @@ class SearchViewModel : BaseViewModel() {
                 )
             }.toMutableList() as ArrayList)
         }
+    }
+
+    fun enterShortCutEdit() {
+        isShortCutEdit = true
+        val shortCuts = shortcutLiveData.value!!
+        shortCuts.forEach {
+            if (!it.isAdd) {
+                it.isEdit = true
+            }
+        }
+        shortcutLiveData.value = shortCuts
+    }
+
+    fun quitShortCutEdit() {
+        isShortCutEdit = false
+        val shortCuts = shortcutLiveData.value!!
+        shortCuts.forEach {
+            if (!it.isAdd) {
+                it.isEdit = false
+            }
+        }
+        shortcutLiveData.value = shortCuts
+    }
+
+    fun deleteShortCut(shortCut: ShortCut) {
+        val shortCuts = shortcutLiveData.value!!
+        shortCuts.remove(shortCut)
+        shortcutLiveData.value = shortCuts
+
+        val temp = ArrayList(shortCuts)
+        temp.removeIf { it.isAdd }
+        UrlShortcutManager.upDataCurShortCut(temp)
+    }
+
+    fun clickShortCut(shortCut: ShortCut) {
+        CommonUtil.openWebView(CommonUtil.appContext!!, shortCut.clickUrl)
+    }
+
+    fun clickAddShortCut(context: Context) {
+        val shortCuts = shortcutLiveData.value!!
+        val temp = ArrayList(shortCuts)
+        temp.removeIf { it.isAdd }
+
+        UrlShortcutSelectDialog(context).apply {
+            setData(temp)
+            onDismissListener = {
+                // 合并数据
+                val newData = it.distinctBy { it.name }
+                val addData = ArrayList<ShortCut>()
+
+                newData.forEach { d ->
+                    if (temp.find { it.name == d.name } == null) {
+                        addData.add(d)
+                    }
+                }
+
+                temp.removeIf { d ->
+                    newData.find { it.name == d.name } == null
+                }
+                temp.addAll(addData)
+                UrlShortcutManager.upDataCurShortCut(temp)
+
+               val result = ArrayList(temp)
+                result.add(ShortCut().apply {
+                    isAdd = true
+                    name = "Add"
+                })
+                result.forEach {
+                    it.isEdit = false
+                }
+                shortcutLiveData.postValue(result)
+            }
+        }.show()
     }
 }

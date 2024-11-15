@@ -1,11 +1,16 @@
 package com.theme.lambda.launcher.urlshortcut
 
 import com.android.launcher3.R
+import com.google.gson.reflect.TypeToken
 import com.lambda.remoteconfig.LambdaRemoteConfig
 import com.theme.lambda.launcher.data.model.SearchInfo
+import com.theme.lambda.launcher.data.model.ShortCut
 import com.theme.lambda.launcher.data.model.ShortCuts
 import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.utils.GsonUtil
+import com.theme.lambda.launcher.utils.SpKey
+import com.theme.lambda.launcher.utils.getSpString
+import com.theme.lambda.launcher.utils.putSpString
 
 object UrlShortcutManager {
 
@@ -50,5 +55,43 @@ object UrlShortcutManager {
             temp.add(it.copy())
         }
         return temp
+    }
+
+    private var curShortCut = ArrayList<ShortCut>()
+
+    fun getCurShortCut(): ArrayList<ShortCut> {
+
+        if (curShortCut.isNotEmpty()) {
+            return curShortCut
+        }
+
+        if (SpKey.keyCurUrlShortCur.getSpString().isNotEmpty()) {
+            val sShortCut = SpKey.keyCurUrlShortCur.getSpString()
+            val typeToken = object : TypeToken<List<ShortCut>>() {}
+            curShortCut.addAll(GsonUtil.gson.fromJson(sShortCut, typeToken).toMutableList())
+        } else {
+            val string =
+                LambdaRemoteConfig.getInstance(CommonUtil.appContext!!).getString("SearchConfig")
+            val json = GsonUtil.gson.fromJson(string, SearchInfo::class.java)
+
+            val temp = ArrayList<ShortCut>()
+            json.shortcut_categories.forEach { d ->
+                d.shortcuts.forEach { shortcut ->
+                    if (shortcut.isDefault) {
+                        temp.add(shortcut)
+                    }
+                }
+            }
+            curShortCut.addAll(temp)
+
+            // 存一份本地
+            SpKey.keyCurUrlShortCur.putSpString(GsonUtil.gson.toJson(curShortCut))
+        }
+        return curShortCut
+    }
+
+    fun upDataCurShortCut(data:ArrayList<ShortCut>){
+        curShortCut = data
+        SpKey.keyCurUrlShortCur.putSpString(GsonUtil.gson.toJson(curShortCut))
     }
 }
