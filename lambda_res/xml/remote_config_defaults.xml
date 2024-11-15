@@ -347,7 +347,8 @@
             {
             "name": "Facebook",
             "icon_url": "https://img.icons8.com/fluency/150/facebook.png",
-            "click_url": "https://facebook.com/"
+            "click_url": "https://facebook.com/",
+            "is_default": false
             },
             {
             "name": "Instagram",
@@ -359,7 +360,7 @@
             "name": "Twitter",
             "icon_url": "https://img.icons8.com/ios-filled/150/twitterx--v1.png",
             "click_url": "https://x.com/",
-            "is_default": true
+            "is_default": false
             },
             {
             "name": "Pinterest",
@@ -393,7 +394,7 @@
             {
             "name": "Amazon",
             "icon_url": "https://img.icons8.com/color/150/amazon.png",
-            "click_url": "https://amazon.com/",
+            "click_url": "https://amzn.to/3Z61RrQ",
             "is_default": true
             },
             {
@@ -406,7 +407,7 @@
             "name": "Ebay",
             "icon_url": "https://img.icons8.com/color/150/ebay.png",
             "click_url": "https://www.ebay.com/",
-            "is_default": true
+            "is_default": false
             },
             {
             "name": "Shopee",
@@ -493,7 +494,7 @@
             "name": "Wikipedia",
             "icon_url": "https://img.icons8.com/color/150/wikipedia--v3.png",
             "click_url": "https://www.wikipedia.org/",
-            "is_default": true
+            "is_default": false
             },
             {
             "name": "Yahoo",
@@ -552,17 +553,10 @@
             {
             "category": "Sports",
             "shortcuts": [
-
             {
             "name": "WWE",
             "icon_url": "https://img.icons8.com/cute-clipart/150/wwe.png",
             "click_url": "https://www.flashscore.com/",
-            "is_default": false
-            },
-            {
-            "name": "Amazon",
-            "icon_url": "https://img.icons8.com/color/150/amazon.png",
-            "click_url": "https://amazon.com/",
             "is_default": false
             }
             ]
@@ -591,17 +585,17 @@
             "name": "WHO",
             "icon_url": "https://img.icons8.com/color/150/world-health-organization.png",
             "click_url": "https://www.who.int/",
-            "is_default": true
+            "is_default": false
             },
             {
             "name": "Healthline",
-            "icon_url": "https://d218bwdbonjwkx.cloudfront.net/resources/20241115-164223.png",
+            "icon_url": "https://i0.wp.com/post.healthline.com/wp-content/uploads/2023/05/HG-Logos__circle-icon_100w-1.png",
             "click_url": "https://www.healthline.com/",
             "is_default": false
             },
             {
             "name": "Drugs",
-            "icon_url": "https://d218bwdbonjwkx.cloudfront.net/resources/20241115-164218.png",
+            "icon_url": "https://www.drugs.com/img/logo/drugscom-logo-mark.svg",
             "click_url": "https://www.drugs.com/",
             "is_default": false
             },
