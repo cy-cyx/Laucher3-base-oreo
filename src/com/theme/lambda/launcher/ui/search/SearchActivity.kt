@@ -14,6 +14,7 @@ import androidx.activity.viewModels
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.launcher3.ThemeManager
 import com.android.launcher3.databinding.ActivitySearchBinding
@@ -23,6 +24,7 @@ import com.lambda.common.utils.utilcode.util.Utils
 import com.theme.lambda.launcher.base.BaseActivity
 import com.theme.lambda.launcher.ui.search.adapter.FileAdapter
 import com.theme.lambda.launcher.ui.search.adapter.ImageAdapter
+import com.theme.lambda.launcher.ui.search.adapter.ItemTouchHelperCallback
 import com.theme.lambda.launcher.ui.search.adapter.LocalAppsAdapter
 import com.theme.lambda.launcher.ui.search.adapter.NetUrlAdapter
 import com.theme.lambda.launcher.ui.search.adapter.RecentAppsAdapter
@@ -101,6 +103,10 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
 
     private val shortCutAdapter: UrlShortcutAdapter by lazy {
         UrlShortcutAdapter()
+    }
+
+    private val itemTouchHelperCallback: ItemTouchHelperCallback by lazy {
+        ItemTouchHelperCallback()
     }
 
     override fun initViewBinding(layoutInflater: LayoutInflater): ActivitySearchBinding {
@@ -283,6 +289,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         shortCutAdapter.longClickListen = {
             if (!it.isAdd) {
                 viewModel.enterShortCutEdit()
+                !viewModel.isShortCutEdit
             }
         }
 
@@ -301,6 +308,15 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
                 }
             }
         }
+
+        itemTouchHelperCallback.onSwapListen = { it1, it2 ->
+            if (it2  < shortCutAdapter.data.size - 1 ){
+                shortCutAdapter.notifyItemMoved(it1, it2)
+                viewModel.swapShortCut(it1,it2)
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
+        itemTouchHelper.attachToRecyclerView(viewBinding.rvUrlShortcut)
     }
 
     private fun initData() {

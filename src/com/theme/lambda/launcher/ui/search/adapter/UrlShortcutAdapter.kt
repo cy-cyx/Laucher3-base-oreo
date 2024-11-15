@@ -32,10 +32,16 @@ class UrlShortcutAdapter : BaseQuickAdapter<ShortCut, BaseViewHolder>(R.layout.i
                 clickListen?.invoke(item)
             }
 
-            root.setOnLongClickListener {
-                longClickListen?.invoke(item)
-                true
+            if (item.isEdit) {
+                root.setOnLongClickListener(null)
+            } else {
+                root.setOnLongClickListener {
+                    longClickListen?.invoke(item)
+                    true
+                }
             }
+
+            holder.itemView.tag = !item.isAdd && item.isEdit
         }
     }
 }

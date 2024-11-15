@@ -35,6 +35,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.net.URLEncoder
+import java.util.Collections
 
 class SearchViewModel : BaseViewModel() {
     private var searchHistory by Preference("search_history", "")
@@ -226,16 +227,17 @@ class SearchViewModel : BaseViewModel() {
             }
         }
         shortcutLiveData.value = shortCuts
+
+        // 保存一份
+        val temp = ArrayList(shortCuts)
+        temp.removeIf { it.isAdd }
+        UrlShortcutManager.upDataCurShortCut(temp)
     }
 
     fun deleteShortCut(shortCut: ShortCut) {
         val shortCuts = shortcutLiveData.value!!
         shortCuts.remove(shortCut)
         shortcutLiveData.value = shortCuts
-
-        val temp = ArrayList(shortCuts)
-        temp.removeIf { it.isAdd }
-        UrlShortcutManager.upDataCurShortCut(temp)
     }
 
     fun clickShortCut(shortCut: ShortCut) {
@@ -266,7 +268,7 @@ class SearchViewModel : BaseViewModel() {
                 temp.addAll(addData)
                 UrlShortcutManager.upDataCurShortCut(temp)
 
-               val result = ArrayList(temp)
+                val result = ArrayList(temp)
                 result.add(ShortCut().apply {
                     isAdd = true
                     name = "Add"
@@ -277,5 +279,10 @@ class SearchViewModel : BaseViewModel() {
                 shortcutLiveData.postValue(result)
             }
         }.show()
+    }
+
+    fun swapShortCut(from: Int, to: Int) {
+        val shortCuts = shortcutLiveData.value!!
+        Collections.swap(shortCuts, from, to)
     }
 }

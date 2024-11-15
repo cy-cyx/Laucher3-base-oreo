@@ -11,6 +11,9 @@ import com.theme.lambda.launcher.utils.GsonUtil
 import com.theme.lambda.launcher.utils.SpKey
 import com.theme.lambda.launcher.utils.getSpString
 import com.theme.lambda.launcher.utils.putSpString
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 object UrlShortcutManager {
 
@@ -90,8 +93,10 @@ object UrlShortcutManager {
         return curShortCut
     }
 
-    fun upDataCurShortCut(data:ArrayList<ShortCut>){
+    fun upDataCurShortCut(data: ArrayList<ShortCut>) {
         curShortCut = data
-        SpKey.keyCurUrlShortCur.putSpString(GsonUtil.gson.toJson(curShortCut))
+        GlobalScope.launch(Dispatchers.IO) {
+            SpKey.keyCurUrlShortCur.putSpString(GsonUtil.gson.toJson(curShortCut))
+        }
     }
 }
