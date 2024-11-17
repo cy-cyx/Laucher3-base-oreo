@@ -368,7 +368,6 @@ object RecommendAppManager {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        SpKey.keyFolderId.putSpLong(folderInfo.id)
     }
 
     @JvmStatic

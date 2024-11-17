@@ -61,6 +61,7 @@ import com.android.launcher3.LogDecelerateInterpolator;
 import com.android.launcher3.OnAlarmListener;
 import com.android.launcher3.PagedView;
 import com.android.launcher3.R;
+import com.android.launcher3.RecommendAppManager;
 import com.android.launcher3.ShortcutInfo;
 import com.android.launcher3.UninstallDropTarget.DropTargetSource;
 import com.android.launcher3.Utilities;
@@ -288,7 +289,7 @@ public class Folder extends AbstractFloatingView implements DragSource, View.OnC
 
         if (v.getTag() instanceof ShortcutInfo) {
             ShortcutInfo info = (ShortcutInfo) v.getTag();
-            if (SpUtil.getLong(SpKey.keyFolderId, 0) == info.container) {
+            if (RecommendAppManager.isRecommendApp(info)) {
                 return true;
             }
         }
