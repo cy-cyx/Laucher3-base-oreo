@@ -65,23 +65,11 @@ public class FolderInfo extends ItemInfo {
      * @param item
      */
     public void add(ShortcutInfo item, boolean animate) {
-        if (isRepeat(item)) {
-            return;
-        }
         contents.add(item);
         for (int i = 0; i < listeners.size(); i++) {
             listeners.get(i).onAdd(item);
         }
         itemsChanged(animate);
-    }
-
-    public boolean isRepeat(ShortcutInfo item) {
-        for (ShortcutInfo content : contents) {
-            if (content.title == item.title && content.iconBitmap == item.iconBitmap) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /**

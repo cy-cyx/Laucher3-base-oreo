@@ -26,6 +26,7 @@ import com.android.launcher3.InstallShortcutReceiver;
 import com.android.launcher3.ItemInfo;
 import com.android.launcher3.LauncherAppWidgetInfo;
 import com.android.launcher3.LauncherSettings;
+import com.android.launcher3.RecommendAppManager;
 import com.android.launcher3.ShortcutInfo;
 import com.android.launcher3.config.ProviderConfig;
 import com.android.launcher3.logging.LoggerUtils;
@@ -110,8 +111,8 @@ public class BgDataModel {
         deepShortcutMap.clear();
     }
 
-     public synchronized void dump(String prefix, FileDescriptor fd, PrintWriter writer,
-             String[] args) {
+    public synchronized void dump(String prefix, FileDescriptor fd, PrintWriter writer,
+                                  String[] args) {
         if (args.length > 0 && TextUtils.equals(args[0], "--proto")) {
             dumpProto(prefix, fd, writer, args);
             return;
@@ -131,11 +132,11 @@ public class BgDataModel {
             writer.println(prefix + '\t' + appWidgets.get(i).toString());
         }
         writer.println(prefix + " ---- folder items ");
-        for (int i = 0; i< folders.size(); i++) {
+        for (int i = 0; i < folders.size(); i++) {
             writer.println(prefix + '\t' + folders.valueAt(i).toString());
         }
         writer.println(prefix + " ---- items id map ");
-        for (int i = 0; i< itemsIdMap.size(); i++) {
+        for (int i = 0; i < itemsIdMap.size(); i++) {
             writer.println(prefix + '\t' + itemsIdMap.valueAt(i).toString());
         }
 
@@ -152,7 +153,7 @@ public class BgDataModel {
     }
 
     private synchronized void dumpProto(String prefix, FileDescriptor fd, PrintWriter writer,
-            String[] args) {
+                                        String[] args) {
 
         // Add top parent nodes. (L1)
         DumpTargetWrapper hotseat = new DumpTargetWrapper(ContainerType.HOTSEAT, 0);
@@ -167,7 +168,7 @@ public class BgDataModel {
             FolderInfo fInfo = folders.valueAt(i);
             dtw = new DumpTargetWrapper(ContainerType.FOLDER, folders.size());
             dtw.writeToDumpTarget(fInfo);
-            for(ShortcutInfo sInfo: fInfo.contents) {
+            for (ShortcutInfo sInfo : fInfo.contents) {
                 DumpTargetWrapper child = new DumpTargetWrapper(sInfo);
                 child.writeToDumpTarget(sInfo);
                 dtw.add(child);
@@ -261,7 +262,7 @@ public class BgDataModel {
                     MutableInt count = pinnedShortcutCounts.get(pinnedShortcut);
                     if ((count == null || --count.value == 0)
                             && !InstallShortcutReceiver.getPendingShortcuts(context)
-                                .contains(pinnedShortcut)) {
+                            .contains(pinnedShortcut)) {
                         DeepShortcutManager.getInstance(context).unpinShortcut(pinnedShortcut);
                     }
                     // Fall through.
@@ -317,9 +318,12 @@ public class BgDataModel {
                             Log.e(TAG, msg);
                         }
                     } else {
+                        // 兼容旧版本推荐
+                        if (RecommendAppManager.isRecommendApp((ShortcutInfo) item)) {
+                            return;
+                        }
                         findOrMakeFolder(item.container).add((ShortcutInfo) item, false);
                     }
-
                 }
                 break;
             case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
