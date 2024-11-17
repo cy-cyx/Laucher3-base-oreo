@@ -49,6 +49,9 @@ object RecommendAppManager {
 
     private var _offerConfig: OfferConfig? = null
 
+    // 在下次Launcher OnResume时判断是否需要更新桌面
+    private var needUpDataRecommend = false
+
     @JvmStatic
     fun getOfferConfig(): OfferConfig? {
         if (_offerConfig == null) {
@@ -106,13 +109,14 @@ object RecommendAppManager {
                 val config =
                     GsonUtil.gson.fromJson<OfferConfig>(offerConfigString, OfferConfig::class.java)
 
+                // 需要先把图标下载到本地
                 config.offers.forEach {
                     it.localIconUrl = GlideUtil.download(context, it.iconUrl, iconDownloadFolder)
-                    NewInstallationManager.addNewInstallAppPackName(actionHost + it.id)
                 }
-
+                // 新安装红点
                 config.offers.forEach {
                     if (!newIdsList.contains(it.id)) {
+                        NewInstallationManager.addNewInstallAppPackName(actionHost + it.id)
                         newIdsList.add(it.id)
                     }
                 }
@@ -128,7 +132,6 @@ object RecommendAppManager {
 
     // 1个小时检查一次
     private var lastUpDataTime = 0L
-    var needUpDataRecommend = false
 
     @JvmStatic
     fun upDataRecommendAppManagerIfNeed(): Boolean {
@@ -146,7 +149,7 @@ object RecommendAppManager {
         }
     }
 
-    private fun checkNeedUpData(){
+    private fun checkNeedUpData() {
         scope.launch {
             val offerConfigString =
                 LambdaRemoteConfig.getInstance(CommonUtil.appContext!!).getString("OfferConfig")
@@ -162,16 +165,20 @@ object RecommendAppManager {
                         it.iconUrl,
                         iconDownloadFolder
                     )
+                }
+
+                config.offers.forEach {
                     // 处理红点
                     if (!newIdsList.contains(it.id)) {
                         NewInstallationManager.addNewInstallAppPackName(actionHost + it.id)
                         newIdsList.add(it.id)
                     }
-
                 }
-                SpKey.keyOfferConfig.putSpString(GsonUtil.gson.toJson(config))
                 SpKey.keyRecommendNewIds.putSpString(GsonUtil.gson.toJson(newIdsList))
+                SpKey.keyOfferConfig.putSpString(GsonUtil.gson.toJson(config))
+
                 _offerConfig = config
+                SpKey.keyRecommendHashcode.putSpInt(config.hashCode())
 
                 // 设置下次更新标识位
                 needUpDataRecommend = true
@@ -259,6 +266,24 @@ object RecommendAppManager {
                 putString("id", it.id)
                 putString("placement", "app_list_icon")
             })
+
+            // 判断是否超过最大点击
+            if (offer.maxClick > 0 && !removeOfferIds.contains(offer.id)) {
+                val key = "${SpKey.keyOfferClickTime}${offer.id}"
+                var time = key.getSpInt(0)
+                time++
+                key.putSpInt(time)
+
+                if (time >= offer.maxClick) {
+                    needUpDataRecommend = true
+
+                    // 当作它已经移除
+                    if (!removeOfferIds.contains(offer.id)) {
+                        removeOfferIds.add(offer.id)
+                        SpKey.keyRemoveOfferId.putSpString(GsonUtil.gson.toJson(removeOfferIds))
+                    }
+                }
+            }
         }
     }
 

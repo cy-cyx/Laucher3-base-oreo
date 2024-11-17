@@ -13,7 +13,7 @@ object NewInstallationManager {
     private val newInstallAppList: ArrayList<String> by lazy {
         val result = ArrayList<String>()
         val appListString = SpUtil.getString(SpKey.keyNewInstallAppList)
-        if (appListString.isNotBlank()){
+        if (appListString.isNotBlank()) {
             val typeToken = object : TypeToken<List<String>>() {}
             result.addAll(GsonUtil.gson.fromJson(appListString, typeToken).toMutableList())
         }
@@ -21,8 +21,10 @@ object NewInstallationManager {
     }
 
     fun addNewInstallAppPackName(appPackName: String) {
-        newInstallAppList.add(appPackName)
-        SpUtil.putString(SpKey.keyNewInstallAppList, GsonUtil.gson.toJson(newInstallAppList))
+        if (!newInstallAppList.contains(appPackName)){
+            newInstallAppList.add(appPackName)
+            SpUtil.putString(SpKey.keyNewInstallAppList, GsonUtil.gson.toJson(newInstallAppList))
+        }
     }
 
     fun isNewInstallApp(info: ItemInfo): Boolean {
@@ -32,6 +34,7 @@ object NewInstallationManager {
 
     fun bindListen(listen: NewInstallationClickUpDataListen) {
         listens.add(WeakReference(listen))
+        removeListenIsRelease()
     }
 
     fun clickApp(appPackName: String) {
@@ -43,6 +46,10 @@ object NewInstallationManager {
                 it.get()?.onUpData()
             }
         }
+    }
+
+    private fun removeListenIsRelease() {
+        listens.removeIf { it.get() == null }
     }
 
     interface NewInstallationClickUpDataListen {

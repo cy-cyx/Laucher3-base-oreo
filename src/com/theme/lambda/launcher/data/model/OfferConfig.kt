@@ -57,9 +57,13 @@ class Offers {
     @SerializedName("is_removable")
     var isRemovable: Boolean = true
 
+    @SerializedName("max_click")
+    var maxClick: Int = 0
+
     override fun hashCode(): Int {
-        return id.length * 1 + name.length * 2 + iconUrl.length * 3 /*+ localIconUrl.length * 4 */+
-                impUrl.length * 5 + clickUrl.length * 6 + pn.length * 7 + isRemovable.toString().length * 8
+        return id.length * 1 + name.length * 2 + iconUrl.length * 3 /*+ localIconUrl.length * 4 */ +
+                impUrl.length * 5 + clickUrl.length * 6 + pn.length * 7 + isRemovable.toString().length * 8 +
+                maxClick * 9
     }
 
     override fun equals(other: Any?): Boolean {
