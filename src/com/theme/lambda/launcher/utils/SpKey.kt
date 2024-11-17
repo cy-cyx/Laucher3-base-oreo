@@ -35,4 +35,7 @@ object SpKey {
 
     const val keyCurUrlShortCur = "keyCurUrlShortCur"
     const val keyFolderId = "keyFolderId"
+
+    const val keyRecommendNewIds = "keyDataRecommendNewIds"
+    const val keyRecommendHashcode = "keyRecommendHashcode"
 }

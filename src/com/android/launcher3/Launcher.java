@@ -1177,6 +1177,13 @@ public class Launcher extends BaseActivity
         fillMultiLauncherBug();
         AdUtil.loadAdOpenAppOnly(this);
         AdUtil.reloadOpenAdIfNeed();
+        // 判断是否需要更新offer配置
+        if (!isWorkspaceLoading()) {
+            if (RecommendAppManager.upDataRecommendAppManagerIfNeed()) {
+                reload(true);
+                showLoading(60000);
+            }
+        }
 
         if (DEBUG_RESUME_TIME) {
             Log.d(TAG, "Time spent in onResume: " + (System.currentTimeMillis() - startTime));

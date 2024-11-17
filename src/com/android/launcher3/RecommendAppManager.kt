@@ -18,7 +18,9 @@ import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.utils.GlideUtil
 import com.theme.lambda.launcher.utils.GsonUtil
 import com.theme.lambda.launcher.utils.SpKey
+import com.theme.lambda.launcher.utils.getSpInt
 import com.theme.lambda.launcher.utils.getSpString
+import com.theme.lambda.launcher.utils.putSpInt
 import com.theme.lambda.launcher.utils.putSpLong
 import com.theme.lambda.launcher.utils.putSpString
 import kotlinx.coroutines.CoroutineScope
@@ -71,6 +73,17 @@ object RecommendAppManager {
         result
     }
 
+    // 记录已经红点更新的推荐ids 避免重复提醒
+    private val newIdsList: ArrayList<String> by lazy {
+        val result = ArrayList<String>()
+        val newIds = SpKey.keyRecommendNewIds.getSpString()
+        if (newIds.isNotBlank()) {
+            val typeToken = object : TypeToken<List<String>>() {}
+            result.addAll(GsonUtil.gson.fromJson(newIds, typeToken).toMutableList())
+        }
+        result
+    }
+
     // 主要是将配置下载成本地方便使用
     fun init(context: Context) {
         Log.d(TAG, "init")
@@ -97,10 +110,71 @@ object RecommendAppManager {
                     it.localIconUrl = GlideUtil.download(context, it.iconUrl, iconDownloadFolder)
                     NewInstallationManager.addNewInstallAppPackName(actionHost + it.id)
                 }
+
+                config.offers.forEach {
+                    if (!newIdsList.contains(it.id)) {
+                        newIdsList.add(it.id)
+                    }
+                }
+                SpKey.keyRecommendNewIds.putSpString(GsonUtil.gson.toJson(newIdsList))
                 SpKey.keyOfferConfig.putSpString(GsonUtil.gson.toJson(config))
                 _offerConfig = config
+                SpKey.keyRecommendHashcode.putSpInt(config.hashCode())
             } catch (e: Exception) {
 
+            }
+        }
+    }
+
+    // 1个小时检查一次
+    private var lastUpDataTime = 0L
+    var needUpDataRecommend = false
+
+    @JvmStatic
+    fun upDataRecommendAppManagerIfNeed(): Boolean {
+        // 判断是否异步去判断,下次onResume刷新
+        if (System.currentTimeMillis() - lastUpDataTime > 24 * 60 * 60 * 1000) {
+            checkNeedUpData()
+        }
+
+        // 通过标志位
+        if (needUpDataRecommend) {
+            needUpDataRecommend = false
+            return true
+        } else {
+            return false
+        }
+    }
+
+    private fun checkNeedUpData(){
+        scope.launch {
+            val offerConfigString =
+                LambdaRemoteConfig.getInstance(CommonUtil.appContext!!).getString("OfferConfig")
+            val config =
+                GsonUtil.gson.fromJson<OfferConfig>(offerConfigString, OfferConfig::class.java)
+
+            // 判断json hashcode
+            if (SpKey.keyRecommendHashcode.getSpInt() != config.hashCode()) {
+
+                config.offers.forEach {
+                    it.localIconUrl = GlideUtil.download(
+                        CommonUtil.appContext!!,
+                        it.iconUrl,
+                        iconDownloadFolder
+                    )
+                    // 处理红点
+                    if (!newIdsList.contains(it.id)) {
+                        NewInstallationManager.addNewInstallAppPackName(actionHost + it.id)
+                        newIdsList.add(it.id)
+                    }
+
+                }
+                SpKey.keyOfferConfig.putSpString(GsonUtil.gson.toJson(config))
+                SpKey.keyRecommendNewIds.putSpString(GsonUtil.gson.toJson(newIdsList))
+                _offerConfig = config
+
+                // 设置下次更新标识位
+                needUpDataRecommend = true
             }
         }
     }
@@ -112,7 +186,7 @@ object RecommendAppManager {
             offerConfig.offers.forEach {
 
                 // 判断是否已经安装，或者已被移除
-                if (isCanAdd(it)) {
+                if (isCanAdd(it, true)) {
                     allAppsList.add(AppInfo().apply {
                         intent = Intent(actionHost + it.id).apply {
                             // todo 为了偷鸡class名改成放图片的
@@ -129,11 +203,11 @@ object RecommendAppManager {
     }
 
     @JvmStatic
-    fun isCanAdd(offer: Offers): Boolean {
+    fun isCanAdd(offer: Offers, filterRemove: Boolean): Boolean {
         if (AppUtil.checkAppInstalled(CommonUtil.appContext, offer.pn)) {
             return false
         }
-        if (removeOfferIds.contains(offer.id)) {
+        if (removeOfferIds.contains(offer.id) && filterRemove) {
             return false
         }
         return true
@@ -248,7 +322,7 @@ object RecommendAppManager {
         val offerConfig = getOfferConfig() ?: return
         try {
             offerConfig.offers.forEach {
-                if (isCanAdd(it)) {
+                if (isCanAdd(it, false)) {
                     val shortcutInfo = ShortcutInfo(AppInfo().apply {
                         intent = Intent(actionHost + it.id).apply {
                             // todo 为了偷鸡class名改成放图片的
