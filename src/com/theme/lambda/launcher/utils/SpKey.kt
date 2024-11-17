@@ -34,4 +34,5 @@ object SpKey {
     const val requestDocPermissionTime = "requestDocPermissionTime"
 
     const val keyCurUrlShortCur = "keyCurUrlShortCur"
+    const val keyFolderId = "keyFolderId"
 }

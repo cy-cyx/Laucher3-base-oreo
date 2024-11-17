@@ -65,11 +65,23 @@ public class FolderInfo extends ItemInfo {
      * @param item
      */
     public void add(ShortcutInfo item, boolean animate) {
+        if (isRepeat(item)) {
+            return;
+        }
         contents.add(item);
         for (int i = 0; i < listeners.size(); i++) {
             listeners.get(i).onAdd(item);
         }
         itemsChanged(animate);
+    }
+
+    public boolean isRepeat(ShortcutInfo item) {
+        for (ShortcutInfo content : contents) {
+            if (content.title == item.title && content.iconBitmap == item.iconBitmap) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -122,9 +134,13 @@ public class FolderInfo extends ItemInfo {
 
     public interface FolderListener {
         public void onAdd(ShortcutInfo item);
+
         public void onRemove(ShortcutInfo item);
+
         public void onTitleChanged(CharSequence title);
+
         public void onItemsChanged(boolean animate);
+
         public void prepareAutoUpdate();
     }
 
@@ -133,9 +149,9 @@ public class FolderInfo extends ItemInfo {
     }
 
     /**
-     * @param option flag to set or clear
+     * @param option    flag to set or clear
      * @param isEnabled whether to set or clear the flag
-     * @param writer if not null, save changes to the db.
+     * @param writer    if not null, save changes to the db.
      */
     public void setOption(int option, boolean isEnabled, ModelWriter writer) {
         int oldOptions = options;

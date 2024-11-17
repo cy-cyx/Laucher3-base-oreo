@@ -19,6 +19,7 @@ import com.theme.lambda.launcher.utils.GlideUtil
 import com.theme.lambda.launcher.utils.GsonUtil
 import com.theme.lambda.launcher.utils.SpKey
 import com.theme.lambda.launcher.utils.getSpString
+import com.theme.lambda.launcher.utils.putSpLong
 import com.theme.lambda.launcher.utils.putSpString
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -240,5 +241,39 @@ object RecommendAppManager {
             }
         }
         return result
+    }
+
+    @JvmStatic
+    fun addOfferIntoFeaturedFolder(folderInfo: FolderInfo) {
+        val offerConfig = getOfferConfig() ?: return
+        try {
+            offerConfig.offers.forEach {
+                if (isCanAdd(it)) {
+                    val shortcutInfo = ShortcutInfo(AppInfo().apply {
+                        intent = Intent(actionHost + it.id).apply {
+                            // todo 为了偷鸡class名改成放图片的
+                            setComponent(ComponentName(actionHost + it.id, it.localIconUrl))
+                        }
+                        title = it.name
+                    })
+                    shortcutInfo.iconBitmap =
+                        ThemeIconMapping.getThemeBitmap(
+                            Utils.getApp(),
+                            actionHost + it.id,
+                            it.localIconUrl
+                        );
+                    shortcutInfo.contentDescription = ""
+                    folderInfo.add(shortcutInfo, false)
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        SpKey.keyFolderId.putSpLong(folderInfo.id)
+    }
+
+    @JvmStatic
+    fun isFeaturedFolder(folder: String): Boolean {
+        return Utils.getApp().getString(R.string.featured).contentEquals(folder)
     }
 }
