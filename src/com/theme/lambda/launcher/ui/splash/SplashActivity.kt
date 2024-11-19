@@ -240,34 +240,41 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
     }
 
     private var curLogLiveTime = 0
+    private var logEventLast = 0L
     private fun logLiveEvent() {
         if (!isResume) return
-        if (showTryAdTimestamp > 30 && curLogLiveTime < 30) {
+        // 500 毫秒尝试统计，避免循环带来无用代码调用
+        if (System.currentTimeMillis() - logEventLast < 500) {
+            return
+        }
+        logEventLast = System.currentTimeMillis()
+
+        if (System.currentTimeMillis() - showTryAdTimestamp > 30000 && curLogLiveTime < 30) {
             EventUtil.logEvent(EventName.splashPageView, Bundle().apply {
                 putInt("duration_s", 30)
             })
             curLogLiveTime = 30
-        } else if (showTryAdTimestamp > 25 && curLogLiveTime < 25) {
+        } else if (System.currentTimeMillis() - showTryAdTimestamp > 25000 && curLogLiveTime < 25) {
             EventUtil.logEvent(EventName.splashPageView, Bundle().apply {
                 putInt("duration_s", 25)
             })
             curLogLiveTime = 25
-        } else if (showTryAdTimestamp > 20 && curLogLiveTime < 20) {
+        } else if (System.currentTimeMillis() - showTryAdTimestamp > 20000 && curLogLiveTime < 20) {
             EventUtil.logEvent(EventName.splashPageView, Bundle().apply {
                 putInt("duration_s", 20)
             })
             curLogLiveTime = 20
-        } else if (showTryAdTimestamp > 15 && curLogLiveTime < 15) {
+        } else if (System.currentTimeMillis() - showTryAdTimestamp > 15000 && curLogLiveTime < 15) {
             EventUtil.logEvent(EventName.splashPageView, Bundle().apply {
                 putInt("duration_s", 15)
             })
             curLogLiveTime = 15
-        } else if (showTryAdTimestamp > 10 && curLogLiveTime < 10) {
+        } else if (System.currentTimeMillis() - showTryAdTimestamp > 10000 && curLogLiveTime < 10) {
             EventUtil.logEvent(EventName.splashPageView, Bundle().apply {
                 putInt("duration_s", 10)
             })
             curLogLiveTime = 10
-        } else if (showTryAdTimestamp > 5 && curLogLiveTime < 5) {
+        } else if (System.currentTimeMillis() - showTryAdTimestamp > 5000 && curLogLiveTime < 5) {
             EventUtil.logEvent(EventName.splashPageView, Bundle().apply {
                 putInt("duration_s", 5)
             })
