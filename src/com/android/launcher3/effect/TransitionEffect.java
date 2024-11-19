@@ -1,10 +1,9 @@
-package com.theme.lambda.launcher.effect;
+package com.android.launcher3.effect;
 
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 
 import android.animation.TimeInterpolator;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;

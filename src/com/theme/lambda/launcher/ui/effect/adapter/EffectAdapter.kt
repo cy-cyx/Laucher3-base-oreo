@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.android.launcher3.databinding.ItemEffectBinding
-import com.theme.lambda.launcher.effect.TransitionEffect
+import com.android.launcher3.effect.TransitionEffect
 import com.theme.lambda.launcher.utils.CommonUtil
 
 class EffectAdapter : RecyclerView.Adapter<ViewHolder>() {
