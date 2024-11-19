@@ -83,6 +83,9 @@ class UrlShortcutSelectDialog(context: Context) :
                 }
             }
         })
+        viewBinding.closeIv.setOnClickListener {
+            dismiss()
+        }
 
         setOnDismissListener {
             // 关闭即修改

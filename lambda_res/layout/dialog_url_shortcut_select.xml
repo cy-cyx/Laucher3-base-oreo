@@ -33,6 +33,7 @@
                 android:textStyle="bold" />
 
             <ImageView
+                android:id="@+id/closeIv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|end"
