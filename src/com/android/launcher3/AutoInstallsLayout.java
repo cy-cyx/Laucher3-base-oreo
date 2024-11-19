@@ -628,28 +628,6 @@ public class AutoInstallsLayout {
                     }
                 }
             }
-            // 推荐文件夹
-            if (title.equals(CommonUtil.INSTANCE.getString(R.string.featured))) {
-                OfferConfig offerConfig = RecommendAppManager.getOfferConfig();
-                if (offerConfig != null && !offerConfig.getOffers().isEmpty()) {
-                    for (Offers offer : offerConfig.getOffers()) {
-                        if (RecommendAppManager.isCanAdd(offer)) {
-                            Intent intent = new Intent(RecommendAppManager.getActionHost() + offer.getId());
-                            intent.setComponent(new ComponentName(RecommendAppManager.getActionHost() + offer.getId(), offer.getLocalIconUrl()));
-                            mValues.clear();
-                            mValues.put(Favorites.CONTAINER, folderId);
-                            mValues.put(Favorites.RANK, rank);
-                            long id = addShortcut(offer.getName(),
-                                    intent, Favorites.ITEM_TYPE_APPLICATION);
-                            if (id >= 0) {
-                                folderItems.add(id);
-                                rank++;
-                            }
-                        }
-                    }
-                }
-            }
-
             long addedId = folderId;
 
             // We can only have folders with >= 2 items, so we need to remove the

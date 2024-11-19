@@ -388,4 +388,6 @@
     <string name="photos">Fotos</string>
     <string name="search_any_things">Buscar localmente en documentos, fotos, aplicaciones o en la web</string>
     <string name="doc_permission_tip">Para realizar búsquedas en archivos de manera precisa, necesitamos obtener tu permiso de almacenamiento</string>
+    <string name="quick_tools">Herramientas rápidas</string>
+    <string name="your_may_like">Te puede interesar</string>
 </resources>

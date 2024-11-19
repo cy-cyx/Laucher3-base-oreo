@@ -1,5 +1,7 @@
 package com.lambdaweather.ui.news
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import com.android.launcher3.R
@@ -10,6 +12,13 @@ import com.theme.lambda.launcher.utils.StatusBarUtil
 import com.theme.lambda.launcher.utils.marginStatusBarHeight
 
 class NewsListActivity : BaseActivity<ActivityNewListBinding>() {
+
+    companion object{
+        fun start(context: Context){
+            context.startActivity(Intent(context, NewsListActivity::class.java))
+        }
+    }
+
     override fun initViewBinding(layoutInflater: LayoutInflater): ActivityNewListBinding {
         return ActivityNewListBinding.inflate(layoutInflater)
     }

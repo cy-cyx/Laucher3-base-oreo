@@ -45,6 +45,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
     private val adWaitingTime = if (VipManager.isVip.value == true) 3000L else 15000L
     private var showTryAdTimestamp = 0L
+    private var isResume = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,6 +81,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
     override fun onResume() {
         super.onResume()
+        isResume = true
         if (!LauncherUtil.isDefaultLauncher(this)) {
             startLoadingCheckNet()
             // 保底ad没有回调返回
@@ -94,6 +96,11 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
                 }
             }
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        isResume = false
     }
 
     private var isLoading = false
@@ -113,6 +120,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
         viewBinding.progressPv.startProgress(adWaitingTime) {
             tryToShowAd()
+            logLiveEvent()
         }
         showTryAdTimestamp = System.currentTimeMillis()
 
@@ -140,18 +148,33 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
         var isWantedAdReady: Boolean
         var region = CommonUtil.getRegion()
-        if (System.currentTimeMillis() - showTryAdTimestamp > adWaitingTime / 2 || region == "RU") {
-            // 等待超过一半时间 此时都不用等admob，meta等加载
+        if (System.currentTimeMillis() - showTryAdTimestamp > adWaitingTime / 2) {
+            // 等待超过一半时间 此时都不用等优先级高的广告的加载
             isWantedAdReady = AdUtil.isReady(AdName.splash)
         } else {
-            val isWantedIntReady = AdUtil.AdmobAdSources.any {
-                AdUtil.isReady(AdName.splash, it, LambdaAd.LambdaAdType.TYPE_INTERSTITIAL)
+            when (region) {
+                "RU" -> {
+                    val isWantedIntReady = AdUtil.AdPriorityAdSourcesRu.any {
+                        AdUtil.isReady(AdName.splash, it, LambdaAd.LambdaAdType.TYPE_INTERSTITIAL)
+                    }
+                    val isWantedOpenReady = AdUtil.AdPriorityAdSourcesRu.any {
+                        AdUtil.isReady(AdName.splash, it, LambdaAd.LambdaAdType.TYPE_OPEN)
+                    }
+                    // 让int和open充分竞争
+                    isWantedAdReady = isWantedIntReady && isWantedOpenReady
+                }
+
+                else -> {
+                    val isWantedIntReady = AdUtil.AdPriorityAdSources.any {
+                        AdUtil.isReady(AdName.splash, it, LambdaAd.LambdaAdType.TYPE_INTERSTITIAL)
+                    }
+                    val isWantedOpenReady = AdUtil.AdPriorityAdSources.any {
+                        AdUtil.isReady(AdName.splash, it, LambdaAd.LambdaAdType.TYPE_OPEN)
+                    }
+                    // 让int和open充分竞争
+                    isWantedAdReady = isWantedIntReady && isWantedOpenReady
+                }
             }
-            val isWantedOpenReady = AdUtil.AdmobAdSources.any {
-                AdUtil.isReady(AdName.splash, it, LambdaAd.LambdaAdType.TYPE_OPEN)
-            }
-            // 让int和open充分竞争
-            isWantedAdReady = isWantedIntReady && isWantedOpenReady
         }
         if (isWantedAdReady) {
             isShowAd = true
@@ -214,5 +237,49 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
                 }
             }.show()
         }
+    }
+
+    private var curLogLiveTime = 0
+    private var logEventLast = 0L
+    private fun logLiveEvent() {
+        if (!isResume) return
+        // 500 毫秒尝试统计，避免循环带来无用代码调用
+        if (System.currentTimeMillis() - logEventLast < 500) {
+            return
+        }
+        logEventLast = System.currentTimeMillis()
+
+        if (System.currentTimeMillis() - showTryAdTimestamp > 30000 && curLogLiveTime < 30) {
+            EventUtil.logEvent(EventName.splashPageView, Bundle().apply {
+                putInt("duration_s", 30)
+            })
+            curLogLiveTime = 30
+        } else if (System.currentTimeMillis() - showTryAdTimestamp > 25000 && curLogLiveTime < 25) {
+            EventUtil.logEvent(EventName.splashPageView, Bundle().apply {
+                putInt("duration_s", 25)
+            })
+            curLogLiveTime = 25
+        } else if (System.currentTimeMillis() - showTryAdTimestamp > 20000 && curLogLiveTime < 20) {
+            EventUtil.logEvent(EventName.splashPageView, Bundle().apply {
+                putInt("duration_s", 20)
+            })
+            curLogLiveTime = 20
+        } else if (System.currentTimeMillis() - showTryAdTimestamp > 15000 && curLogLiveTime < 15) {
+            EventUtil.logEvent(EventName.splashPageView, Bundle().apply {
+                putInt("duration_s", 15)
+            })
+            curLogLiveTime = 15
+        } else if (System.currentTimeMillis() - showTryAdTimestamp > 10000 && curLogLiveTime < 10) {
+            EventUtil.logEvent(EventName.splashPageView, Bundle().apply {
+                putInt("duration_s", 10)
+            })
+            curLogLiveTime = 10
+        } else if (System.currentTimeMillis() - showTryAdTimestamp > 5000 && curLogLiveTime < 5) {
+            EventUtil.logEvent(EventName.splashPageView, Bundle().apply {
+                putInt("duration_s", 5)
+            })
+            curLogLiveTime = 5
+        }
+
     }
 }

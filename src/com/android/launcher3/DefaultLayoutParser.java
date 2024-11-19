@@ -104,6 +104,8 @@ public class DefaultLayoutParser extends AutoInstallsLayout {
             }
             if ("#Intent;action=All_APPS;end".equals(uri)) {
                 return addShortcut(Utils.getApp().getString(R.string.all_apps), new Intent("ALL_APPS"), Favorites.ITEM_TYPE_APPLICATION);
+            }else if ("#Intent;action=FEATURED;end".equals(uri)) {
+                return addShortcut(Utils.getApp().getString(R.string.featured), new Intent("FEATURED"), Favorites.ITEM_TYPE_FOLDER);
             }
 
             final Intent metaIntent;

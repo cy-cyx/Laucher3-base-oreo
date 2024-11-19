@@ -2,6 +2,7 @@ package com.lambdaweather.data.model
 
 import com.chad.library.adapter.base.entity.MultiItemEntity
 import com.google.gson.annotations.SerializedName
+import com.theme.lambda.launcher.data.model.News
 
 class NewsModel {
 
@@ -64,5 +65,19 @@ class NewsModel {
         @SerializedName("language")
         val language: String? = null
 
+        fun toNews(): News {
+            val new = News()
+            new.let {
+                it.id = id ?: ""
+                it.title = title ?: ""
+                it.publishDate = publishDate ?: ""
+                it.url = link ?: ""
+                it.image = (image_urls ?: arrayListOf<String>()) as ArrayList<String>
+                it.author = author ?: ""
+                it.text = content ?: ""
+                it.language = language ?: ""
+            }
+            return new
+        }
     }
 }

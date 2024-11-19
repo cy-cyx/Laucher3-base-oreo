@@ -18,7 +18,10 @@ import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.utils.GlideUtil
 import com.theme.lambda.launcher.utils.GsonUtil
 import com.theme.lambda.launcher.utils.SpKey
+import com.theme.lambda.launcher.utils.getSpInt
 import com.theme.lambda.launcher.utils.getSpString
+import com.theme.lambda.launcher.utils.putSpInt
+import com.theme.lambda.launcher.utils.putSpLong
 import com.theme.lambda.launcher.utils.putSpString
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -46,6 +49,9 @@ object RecommendAppManager {
 
     private var _offerConfig: OfferConfig? = null
 
+    // 在下次Launcher OnResume时判断是否需要更新桌面
+    private var needUpDataRecommend = false
+
     @JvmStatic
     fun getOfferConfig(): OfferConfig? {
         if (_offerConfig == null) {
@@ -66,6 +72,17 @@ object RecommendAppManager {
             val typeToken = object : TypeToken<List<String>>() {}
             result.addAll(ArrayList(GsonUtil.gson.fromJson(keyRemoveOfferIdsSp, typeToken)))
         } catch (e: Exception) {
+        }
+        result
+    }
+
+    // 记录已经红点更新的推荐ids 避免重复提醒
+    private val newIdsList: ArrayList<String> by lazy {
+        val result = ArrayList<String>()
+        val newIds = SpKey.keyRecommendNewIds.getSpString()
+        if (newIds.isNotBlank()) {
+            val typeToken = object : TypeToken<List<String>>() {}
+            result.addAll(GsonUtil.gson.fromJson(newIds, typeToken).toMutableList())
         }
         result
     }
@@ -92,14 +109,83 @@ object RecommendAppManager {
                 val config =
                     GsonUtil.gson.fromJson<OfferConfig>(offerConfigString, OfferConfig::class.java)
 
+                // 需要先把图标下载到本地
                 config.offers.forEach {
                     it.localIconUrl = GlideUtil.download(context, it.iconUrl, iconDownloadFolder)
-                    NewInstallationManager.addNewInstallAppPackName(actionHost + it.id)
                 }
+                // 新安装红点
+                config.offers.forEach {
+                    if (!newIdsList.contains(it.id)) {
+                        NewInstallationManager.addNewInstallAppPackName(actionHost + it.id)
+                        newIdsList.add(it.id)
+                    }
+                }
+                SpKey.keyRecommendNewIds.putSpString(GsonUtil.gson.toJson(newIdsList))
                 SpKey.keyOfferConfig.putSpString(GsonUtil.gson.toJson(config))
                 _offerConfig = config
+                SpKey.keyRecommendHashcode.putSpInt(config.hashCode())
             } catch (e: Exception) {
 
+            }
+        }
+    }
+
+    // 1个小时检查一次
+    private var lastUpDataTime = 0L
+    private var upDataInterval = if (BuildConfig.isDebug) 60 * 1000 else 24 * 60 * 60 * 1000
+
+    @JvmStatic
+    fun upDataRecommendAppManagerIfNeed(): Boolean {
+        // 判断是否异步去判断,下次onResume刷新
+        if (System.currentTimeMillis() - lastUpDataTime > upDataInterval) {
+            checkNeedUpData()
+        }
+
+        // 通过标志位
+        if (needUpDataRecommend) {
+            needUpDataRecommend = false
+            return true
+        } else {
+            return false
+        }
+    }
+
+    private fun checkNeedUpData() {
+        scope.launch {
+            try {
+                val offerConfigString =
+                    LambdaRemoteConfig.getInstance(CommonUtil.appContext!!).getString("OfferConfig")
+                val config =
+                    GsonUtil.gson.fromJson<OfferConfig>(offerConfigString, OfferConfig::class.java)
+
+                // 判断json hashcode
+                if (SpKey.keyRecommendHashcode.getSpInt() != config.hashCode()) {
+
+                    config.offers.forEach {
+                        it.localIconUrl = GlideUtil.download(
+                            CommonUtil.appContext!!,
+                            it.iconUrl,
+                            iconDownloadFolder
+                        )
+                    }
+
+                    config.offers.forEach {
+                        // 处理红点
+                        if (!newIdsList.contains(it.id)) {
+                            NewInstallationManager.addNewInstallAppPackName(actionHost + it.id)
+                            newIdsList.add(it.id)
+                        }
+                    }
+                    SpKey.keyRecommendNewIds.putSpString(GsonUtil.gson.toJson(newIdsList))
+                    SpKey.keyOfferConfig.putSpString(GsonUtil.gson.toJson(config))
+
+                    _offerConfig = config
+                    SpKey.keyRecommendHashcode.putSpInt(config.hashCode())
+
+                    // 设置下次更新标识位
+                    needUpDataRecommend = true
+                }
+            } catch (e: Exception) {
             }
         }
     }
@@ -111,7 +197,7 @@ object RecommendAppManager {
             offerConfig.offers.forEach {
 
                 // 判断是否已经安装，或者已被移除
-                if (isCanAdd(it)) {
+                if (isCanAdd(it, true)) {
                     allAppsList.add(AppInfo().apply {
                         intent = Intent(actionHost + it.id).apply {
                             // todo 为了偷鸡class名改成放图片的
@@ -128,11 +214,11 @@ object RecommendAppManager {
     }
 
     @JvmStatic
-    fun isCanAdd(offer: Offers): Boolean {
+    fun isCanAdd(offer: Offers, filterRemove: Boolean): Boolean {
         if (AppUtil.checkAppInstalled(CommonUtil.appContext, offer.pn)) {
             return false
         }
-        if (removeOfferIds.contains(offer.id)) {
+        if (removeOfferIds.contains(offer.id) && filterRemove) {
             return false
         }
         return true
@@ -167,7 +253,7 @@ object RecommendAppManager {
         clickRecommendApp(offer)
     }
 
-    private fun clickRecommendApp(offer: Offers?) {
+    fun clickRecommendApp(offer: Offers?) {
         offer?.let {
             // 如果安装了直接打开
             if (AppUtil.checkAppInstalled(CommonUtil.appContext!!, offer.pn)) {
@@ -184,6 +270,24 @@ object RecommendAppManager {
                 putString("id", it.id)
                 putString("placement", "app_list_icon")
             })
+
+            // 判断是否超过最大点击
+            if (offer.maxClick > 0 && !removeOfferIds.contains(offer.id)) {
+                val key = "${SpKey.keyOfferClickTime}${offer.id}"
+                var time = key.getSpInt(0)
+                time++
+                key.putSpInt(time)
+
+                if (time >= offer.maxClick) {
+                    needUpDataRecommend = true
+
+                    // 当作它已经移除
+                    if (!removeOfferIds.contains(offer.id)) {
+                        removeOfferIds.add(offer.id)
+                        SpKey.keyRemoveOfferId.putSpString(GsonUtil.gson.toJson(removeOfferIds))
+                    }
+                }
+            }
         }
     }
 
@@ -217,7 +321,9 @@ object RecommendAppManager {
         val offer = offerConfig.offers.find { it.pn.equals(packageName) }
         offer?.let { offer ->
             val appInfo =
-                allApps.find { it.componentName?.packageName?.equals("${actionHost}${offer.id}") ?: false }
+                allApps.find {
+                    it.componentName?.packageName?.equals("${actionHost}${offer.id}") ?: false
+                }
             appInfo?.let { info ->
                 launcher.removeAppInfoFormAppView(arrayListOf(info))
                 remove(info)
@@ -226,5 +332,50 @@ object RecommendAppManager {
                 })
             }
         }
+    }
+
+    fun getYourMayLikeOffers(): ArrayList<Offers> {
+        val result = ArrayList<Offers>()
+        val offerConfig = getOfferConfig()
+        offerConfig?.offers?.forEach {
+            // 判断是否已经安装
+            if (!AppUtil.checkAppInstalled(CommonUtil.appContext, it.pn)) {
+                result.add(it)
+            }
+        }
+        return result
+    }
+
+    @JvmStatic
+    fun addOfferIntoFeaturedFolder(folderInfo: FolderInfo) {
+        val offerConfig = getOfferConfig() ?: return
+        try {
+            offerConfig.offers.forEach {
+                if (isCanAdd(it, false)) {
+                    val shortcutInfo = ShortcutInfo(AppInfo().apply {
+                        intent = Intent(actionHost + it.id).apply {
+                            // todo 为了偷鸡class名改成放图片的
+                            setComponent(ComponentName(actionHost + it.id, it.localIconUrl))
+                        }
+                        title = it.name
+                    })
+                    shortcutInfo.iconBitmap =
+                        ThemeIconMapping.getThemeBitmap(
+                            Utils.getApp(),
+                            actionHost + it.id,
+                            it.localIconUrl
+                        );
+                    shortcutInfo.contentDescription = ""
+                    folderInfo.add(shortcutInfo, false)
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    @JvmStatic
+    fun isFeaturedFolder(folder: String): Boolean {
+        return Utils.getApp().getString(R.string.featured).contentEquals(folder)
     }
 }

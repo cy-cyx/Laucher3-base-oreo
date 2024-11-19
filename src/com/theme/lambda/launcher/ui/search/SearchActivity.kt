@@ -14,30 +14,42 @@ import androidx.activity.viewModels
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.launcher3.ThemeManager
 import com.android.launcher3.databinding.ActivitySearchBinding
 import com.lambda.common.http.Preference
 import com.lambda.common.utils.utilcode.util.GsonUtils
 import com.lambda.common.utils.utilcode.util.Utils
+import com.lambdaweather.data.model.NewsModel
+import com.lambdaweather.ui.news.NewsListActivity
+import com.lambdaweather.view.WeatherNewBanner
+import com.lambdaweather.view.WeatherNewBanner.OnRvBannerClickListener
+import com.theme.lambda.launcher.ad.AdName
 import com.theme.lambda.launcher.base.BaseActivity
+import com.theme.lambda.launcher.ui.news.NewDetailsActivity
 import com.theme.lambda.launcher.ui.search.adapter.FileAdapter
 import com.theme.lambda.launcher.ui.search.adapter.ImageAdapter
+import com.theme.lambda.launcher.ui.search.adapter.ItemTouchHelperCallback
 import com.theme.lambda.launcher.ui.search.adapter.LocalAppsAdapter
 import com.theme.lambda.launcher.ui.search.adapter.NetUrlAdapter
 import com.theme.lambda.launcher.ui.search.adapter.RecentAppsAdapter
 import com.theme.lambda.launcher.ui.search.adapter.SearchHistoryAdapter
+import com.theme.lambda.launcher.ui.search.adapter.UrlShortcutAdapter
+import com.theme.lambda.launcher.ui.search.adapter.YourMayLikeAdapter
 import com.theme.lambda.launcher.ui.search.searchlib.FileSearchLib
 import com.theme.lambda.launcher.ui.search.searchlib.PicSearchLib
 import com.theme.lambda.launcher.utils.PermissionUtil
 import com.theme.lambda.launcher.utils.SpKey
 import com.theme.lambda.launcher.utils.StatusBarUtil
 import com.theme.lambda.launcher.utils.getSpInt
+import com.theme.lambda.launcher.utils.getSpString
 import com.theme.lambda.launcher.utils.gone
 import com.theme.lambda.launcher.utils.marginStatusBarHeight
 import com.theme.lambda.launcher.utils.putSpInt
 import com.theme.lambda.launcher.utils.visible
 import com.theme.lambda.launcher.widget.dialog.ApplyDocumentPermissionDialog
+import org.koin.androidx.scope.scope
 
 class SearchActivity : BaseActivity<ActivitySearchBinding>() {
 
@@ -55,8 +67,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         fun addRecentApps(packageName: String): List<String> {
             var list = if (recentApps.isNotEmpty()) {
                 GsonUtils.fromJson<MutableList<String>>(
-                    recentApps,
-                    GsonUtils.getListType(String::class.java)
+                    recentApps, GsonUtils.getListType(String::class.java)
                 )
             } else {
                 mutableListOf()
@@ -96,6 +107,18 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         FileAdapter()
     }
 
+    private val shortCutAdapter: UrlShortcutAdapter by lazy {
+        UrlShortcutAdapter()
+    }
+
+    private val itemTouchHelperCallback: ItemTouchHelperCallback by lazy {
+        ItemTouchHelperCallback()
+    }
+
+    private val yourMayLikeAdapter: YourMayLikeAdapter by lazy {
+        YourMayLikeAdapter()
+    }
+
     override fun initViewBinding(layoutInflater: LayoutInflater): ActivitySearchBinding {
         return ActivitySearchBinding.inflate(layoutInflater)
     }
@@ -122,9 +145,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
         }
         PermissionUtil.requestRuntimePermissions(
-            this,
-            permissions,
-            object : PermissionUtil.IPermissionCallback {
+            this, permissions, object : PermissionUtil.IPermissionCallback {
                 override fun nextStep() {
                     PicSearchLib.loadData()
                     // 再处理文件请求
@@ -147,8 +168,11 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
 //                            FileSearchLib.loadData()
 //                        }
 //                    } else {
-                        FileSearchLib.loadData()
+                    FileSearchLib.loadData()
 //                    }
+                    viewBinding.root.postDelayed({
+                        showKeyBoard(viewBinding.et)
+                    }, 1000)
                 }
 
                 override fun noPermission() {
@@ -158,9 +182,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
                 override fun gotoSet(internal: Boolean) {
 
                 }
-            },
-            force = false,
-            showGotoSetDialog = false
+            }, force = false, showGotoSetDialog = false
         )
     }
 
@@ -177,8 +199,10 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         curManifest?.let {
             val wallpaper =
                 ThemeManager.getThemeManagerIfExist()?.getManifestResRootPath() + it.background
-            viewBinding.wallpaperView.setPic(wallpaper)
-            viewBinding.wallpaperView.visible()
+            if (SpKey.curUserWallpaperId.getSpString() != ThemeManager.getThemeManagerIfExist()?.themeId) {
+                viewBinding.wallpaperView.setPic(wallpaper)
+                viewBinding.wallpaperView.visible()
+            }
         }
 
         viewBinding.rvSearchHistory.adapter = searchHistoryAdapter
@@ -263,6 +287,65 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             viewBinding.et.clearFocus()
             viewModel.search(this, viewBinding.et.text.toString())
         }
+
+        viewBinding.rvUrlShortcut.apply {
+            layoutManager = GridLayoutManager(context, 5)
+            adapter = shortCutAdapter
+        }
+        shortCutAdapter.longClickListen = {
+            if (!it.isAdd && !it.isPlaceholder) {
+                viewModel.enterShortCutEdit()
+                !viewModel.isShortCutEdit
+            }
+        }
+
+        shortCutAdapter.clickListen = {
+            if (it.isEdit) {
+                if (it.isAdd) {
+                    // 不存在
+                } else {
+                    viewModel.deleteShortCut(it)
+                }
+            } else if (it.isPlaceholder) {
+                viewModel.quitShortCutEdit()
+            } else {
+                if (it.isAdd) {
+                    viewModel.clickAddShortCut(this)
+                } else {
+                    viewModel.clickShortCut(it)
+                }
+            }
+        }
+
+        itemTouchHelperCallback.onSwapListen = { it1, it2 ->
+            if (it2 < shortCutAdapter.data.size - 1) {
+                viewModel.swapShortCut(it1, it2)
+                shortCutAdapter.notifyItemMoved(it1, it2)
+                true
+            } else {
+                false
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
+        itemTouchHelper.attachToRecyclerView(viewBinding.rvUrlShortcut)
+        viewBinding.clWeather.setOnClickListener {
+            NewsListActivity.start(this)
+        }
+        viewBinding.rvBanner.setOnRvBannerClickListener(object : OnRvBannerClickListener {
+            override fun onClick(date: NewsModel.NewsDTO) {
+                NewDetailsActivity.start(this@SearchActivity, date.toNews())
+            }
+        })
+
+        viewBinding.rvYourMayLike.apply {
+            layoutManager = GridLayoutManager(this@SearchActivity, 5)
+            adapter = yourMayLikeAdapter
+        }
+
+        viewBinding.rvBanner.from = WeatherNewBanner.fromSearch
+
+        viewBinding.mrecBanner.scenesName = AdName.search_mrec
+        viewBinding.mrecBanner.loadAd()
     }
 
     private fun initData() {
@@ -299,7 +382,32 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             viewBinding.fileLl.visibility = if (it.isEmpty()) View.GONE else View.VISIBLE
             fileAdapter.setList(it)
         })
+        viewModel.shortcutLiveData.observe(this, Observer {
+            shortCutAdapter.setList(it)
+            viewBinding.clUrlShortcut.visible()
+        })
+        viewModel.yourMayLikeLiveData.observe(this, Observer {
+            viewBinding.clYourMayLike.visibility = if (it.isEmpty()) View.GONE else View.VISIBLE
+            yourMayLikeAdapter.setList(it)
+        })
+        viewModel.newList.observe(this, Observer {
+            if ((it.data?.d?.news?.size ?: 0) > 4) {
+                viewBinding.clWeather.visibility = View.VISIBLE
 
+                viewBinding.rvBanner.setRvBannerData(
+                    it.data?.d?.news?.subList(0, 4)
+                )
+            }
+        })
         viewModel.initData()
+    }
+
+    override fun onBackPressed() {
+        if (viewModel.isShortCutEdit) {
+            viewModel.quitShortCutEdit()
+            return
+        }
+
+        super.onBackPressed()
     }
 }

@@ -43,12 +43,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/iv_local_new" />
 
-    <com.lambdaweather.view.RecyclerViewBanner
+    <com.lambdaweather.view.WeatherNewBanner
         android:id="@+id/rv_banner"
         android:layout_width="0dp"
-        android:layout_height="240dp"
+        android:layout_height="260dp"
         android:layout_marginTop="15dp"
-        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,44 +56,4 @@
         app:rvb_indicatorSize="7dp"
         app:rvb_indicatorSpace="10dp"
         app:rvb_indicatorUnselectedSrc="#B5B5B5" />
-
-    <TextView
-        android:id="@+id/timeTv"
-        android:layout_width="wrap_content"
-        android:layout_height="24dp"
-        android:layout_gravity="end"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/shape_99ffffff_radius_12"
-        android:gravity="center_vertical"
-        android:paddingHorizontal="11dp"
-        android:textColor="#000000"
-        android:textSize="13dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/rv_banner" />
-
-    <LinearLayout
-        android:id="@+id/lly_news_bottom"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/rv_banner"
-        app:layout_constraintStart_toStartOf="@+id/rv_banner">
-
-        <TextView
-            android:id="@+id/tv_title"
-            style="@style/title_style"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ellipsize="end"
-            android:lines="2"
-            android:text="Nearly 120 milion people in USexposed to unhealthy levels..."
-            android:textColor="#FF000000"
-            android:textSize="14sp" />
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

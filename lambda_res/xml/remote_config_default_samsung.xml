@@ -347,7 +347,281 @@
             "search_urls": [
             "https://google.com/search?q={query_string}"
             ],
-            "is_open_in_webview": false
+            "is_open_in_webview": true,
+            "shortcut_categories": [
+            {
+            "category": "Social",
+            "shortcuts": [
+            {
+            "name": "Facebook",
+            "icon_url": "https://img.icons8.com/fluency/150/facebook.png",
+            "click_url": "https://facebook.com/"
+            },
+            {
+            "name": "Instagram",
+            "icon_url": "https://img.icons8.com/fluency/150/instagram-new.png",
+            "click_url": "https://www.instagram.com/",
+            "is_default": false
+            },
+            {
+            "name": "Twitter",
+            "icon_url": "https://img.icons8.com/ios-filled/150/twitterx--v1.png",
+            "click_url": "https://x.com/",
+            "is_default": true
+            },
+            {
+            "name": "Pinterest",
+            "icon_url": "https://img.icons8.com/color/150/pinterest.png",
+            "click_url": "https://www.pinterest.com/",
+            "is_default": false
+            },
+            {
+            "name": "Reddit",
+            "icon_url": "https://img.icons8.com/nolan/150/reddit.png",
+            "click_url": "https://www.reddit.com/",
+            "is_default": false
+            },
+            {
+            "name": "Whatsapp",
+            "icon_url": "https://img.icons8.com/color/150/whatsapp--v1.png",
+            "click_url": "https://www.whatsapp.com/",
+            "is_default": false
+            },
+            {
+            "name": "Snapchat",
+            "icon_url": "https://img.icons8.com/parakeet/150/snapchat.png",
+            "click_url": "https://www.snapchat.com/",
+            "is_default": false
+            }
+            ]
+            },
+            {
+            "category": "Ecommerce",
+            "shortcuts": [
+            {
+            "name": "Amazon",
+            "icon_url": "https://img.icons8.com/color/150/amazon.png",
+            "click_url": "https://amazon.com/",
+            "is_default": true
+            },
+            {
+            "name": "Temu",
+            "icon_url": "https://img.icons8.com/ios-filled/150/temu.png",
+            "click_url": "https://temu.com/",
+            "is_default": false
+            },
+            {
+            "name": "Ebay",
+            "icon_url": "https://img.icons8.com/color/150/ebay.png",
+            "click_url": "https://www.ebay.com/",
+            "is_default": true
+            },
+            {
+            "name": "Shopee",
+            "icon_url": "https://img.icons8.com/color/150/shopee.png",
+            "click_url": "https://shopee.com/",
+            "is_default": false
+            }
+            ]
+            },
+            {
+            "category": "Video",
+            "shortcuts": [
+            {
+            "name": "Netflix",
+            "icon_url": "https://img.icons8.com/color/150/netflix-desktop-app--v1.png",
+            "click_url": "https://www.netflix.com/",
+            "is_default": false
+            },
+            {
+            "name": "Youtube",
+            "icon_url": "https://img.icons8.com/color/150/youtube-play.png",
+            "click_url": "https://www.youtube.com/",
+            "is_default": true
+            },
+            {
+            "name": "Vimeo",
+            "icon_url": "https://img.icons8.com/color/150/vimeo.png",
+            "click_url": "https://vimeo.com/",
+            "is_default": false
+            }
+            ]
+            },
+            {
+            "category": "News",
+            "shortcuts": [
+            {
+            "name": "CNN",
+            "icon_url": "https://img.icons8.com/color/150/cnn.png",
+            "click_url": "https://edition.cnn.com/",
+            "is_default": false
+            },
+            {
+            "name": "Fox News",
+            "icon_url": "https://img.icons8.com/wired/150/fox-news.png",
+            "click_url": "https://www.foxnews.com/",
+            "is_default": false
+            },
+            {
+            "name": "Nytimes",
+            "icon_url": "https://img.icons8.com/ios-filled/150/new-york-times--v1.png",
+            "click_url": "https://www.nytimes.com/",
+            "is_default": false
+            },
+            {
+            "name": "NBC News",
+            "icon_url": "https://img.icons8.com/color/150/NBC.png",
+            "click_url": "https://www.nbcnews.com/",
+            "is_default": false
+            },
+            {
+            "name": "ESPN",
+            "icon_url": "https://img.icons8.com/color/150/espn.png",
+            "click_url": "https://www.espn.com/",
+            "is_default": false
+            }
+            ]
+            },
+            {
+            "category": "Tools",
+            "shortcuts": [
+            {
+            "name": "ChatGPT",
+            "icon_url": "https://img.icons8.com/fluency/150/chatgpt--v2.png",
+            "click_url": "https://openai.com/chatgpt/overview/",
+            "is_default": true
+            },
+            {
+            "name": "Bing",
+            "icon_url": "https://img.icons8.com/fluency/150/bing--v1.png",
+            "click_url": "https://www.bing.com/",
+            "is_default": false
+            },
+            {
+            "name": "Wikipedia",
+            "icon_url": "https://img.icons8.com/color/150/wikipedia--v3.png",
+            "click_url": "https://www.wikipedia.org/",
+            "is_default": true
+            },
+            {
+            "name": "Yahoo",
+            "icon_url": "https://img.icons8.com/doodle/150/yahoo.png",
+            "click_url": "https://www.yahoo.com/",
+            "is_default": false
+            },
+            {
+            "name": "Linkedin",
+            "icon_url": "https://img.icons8.com/fluency/150/linkedin.png",
+            "click_url": "https://www.linkedin.com/",
+            "is_default": false
+            }
+            ]
+            },
+            {
+            "category": "Entertainment",
+            "shortcuts": [
+            {
+            "name": "Hulu",
+            "icon_url": "https://img.icons8.com/color/150/hulu.png",
+            "click_url": "https://www.hulu.com/",
+            "is_default": false
+            },
+            {
+            "name": "Twitch",
+            "icon_url": "https://img.icons8.com/color/150/twitch.png",
+            "click_url": "https://www.twitch.tv/",
+            "is_default": false
+            },
+            {
+            "name": "Tumblr",
+            "icon_url": "https://img.icons8.com/color/150/tumblr.png",
+            "click_url": "https://www.tumblr.com/",
+            "is_default": false
+            },
+            {
+            "name": "Tiktok",
+            "icon_url": "https://img.icons8.com/color/150/tiktok.png",
+            "click_url": "https://tiktok.com/",
+            "is_default": true
+            }
+            ]
+            },
+            {
+            "category": "Music",
+            "shortcuts": [
+            {
+            "name": "Spotify",
+            "icon_url": "https://img.icons8.com/fluency/150/spotify.png",
+            "click_url": "https://www.vevo.com/",
+            "is_default": false
+            }
+            ]
+            },
+            {
+            "category": "Sports",
+            "shortcuts": [
+
+            {
+            "name": "WWE",
+            "icon_url": "https://img.icons8.com/cute-clipart/150/wwe.png",
+            "click_url": "https://www.flashscore.com/",
+            "is_default": false
+            },
+            {
+            "name": "Amazon",
+            "icon_url": "https://img.icons8.com/color/150/amazon.png",
+            "click_url": "https://amazon.com/",
+            "is_default": false
+            }
+            ]
+            },
+            {
+            "category": "Travel",
+            "shortcuts": [
+            {
+            "name": "Airbnb",
+            "icon_url": "https://img.icons8.com/color/150/amazon.png",
+            "click_url": "https://www.airbnb.cn/",
+            "is_default": false
+            },
+            {
+            "name": "Tripadvisor",
+            "icon_url": "https://img.icons8.com/ios-filled/150/tripadvisor.png",
+            "click_url": "https://cn.tripadvisor.com/",
+            "is_default": false
+            }
+            ]
+            },
+            {
+            "category": "Health",
+            "shortcuts": [
+            {
+            "name": "WHO",
+            "icon_url": "https://img.icons8.com/color/150/world-health-organization.png",
+            "click_url": "https://www.who.int/",
+            "is_default": true
+            },
+            {
+            "name": "Healthline",
+            "icon_url": "https://d218bwdbonjwkx.cloudfront.net/resources/20241115-164223.png",
+            "click_url": "https://www.healthline.com/",
+            "is_default": false
+            },
+            {
+            "name": "Drugs",
+            "icon_url": "https://d218bwdbonjwkx.cloudfront.net/resources/20241115-164218.png",
+            "click_url": "https://www.drugs.com/",
+            "is_default": false
+            },
+            {
+            "name": "T Nation",
+            "icon_url": "https://global.discourse-cdn.com/tnation/original/4X/1/2/3/1235accdf867de3ed7049e6f1f44143c316c8fcf.jpeg",
+            "click_url": "https://t-nation.com/",
+            "is_default": false
+            }
+            ]
+            }
+            ]
             }
         </value>
     </entry>

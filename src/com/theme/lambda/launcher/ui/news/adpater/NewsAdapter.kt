@@ -59,7 +59,7 @@ class NewsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     layoutParams =
                         ViewGroup.LayoutParams(
                             ViewGroup.LayoutParams.MATCH_PARENT,
-                            CommonUtil.dp2px(250f)
+                            CommonUtil.dp2px(280f)
                         )
                 })
             }

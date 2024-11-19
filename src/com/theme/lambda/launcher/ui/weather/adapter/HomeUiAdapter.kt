@@ -3,9 +3,7 @@ package com.lambdaweather.adapter
 import android.annotation.SuppressLint
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import androidx.appcompat.widget.AppCompatImageView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.launcher3.R
@@ -20,7 +18,6 @@ import com.android.launcher3.databinding.ItemAllLayoutHomeSunsetBinding
 import com.android.launcher3.databinding.ItemAllLayoutHomeTravelBinding
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
-import com.lambdaweather.LambdaWeather
 import com.lambdaweather.data.model.AdvModel
 import com.lambdaweather.data.model.AirModel
 import com.lambdaweather.data.model.ForestDayWeatherModel
@@ -29,16 +26,17 @@ import com.lambdaweather.data.model.HomeUiModel
 import com.lambdaweather.data.model.NewsModel
 import com.lambdaweather.data.model.WeatherModel
 import com.lambdaweather.utils.AqiUtil
-import com.lambdaweather.utils.GlideUtil
 import com.lambdaweather.utils.ScreenUtils
 import com.lambdaweather.utils.TimeUtils
 import com.lambdaweather.utils.WeatherUtils
 import com.lambdaweather.utils.gone
 import com.lambdaweather.utils.visible
-import com.lambdaweather.view.RecyclerViewBanner
+import com.lambdaweather.view.WeatherNewBanner
 import com.lambdaweather.view.dynamicweather.BaseDrawer
+import com.theme.lambda.launcher.ad.AdName
+import com.theme.lambda.launcher.ad.view.MRECBanner
+import com.theme.lambda.launcher.ui.news.NewDetailsActivity
 import com.theme.lambda.launcher.ui.weather.ui.WeatherFragment
-import java.util.Random
 import kotlin.math.roundToInt
 
 class HomeUiAdapter(val fragment: WeatherFragment) :
@@ -90,7 +88,14 @@ class HomeUiAdapter(val fragment: WeatherFragment) :
                 val layoutP = binding.root.layoutParams
                 layoutP.height = ViewGroup.LayoutParams.WRAP_CONTENT
                 binding.root.layoutParams = layoutP
-                LambdaWeather.showNativeAd(holder.getView(R.id.fl_list_ad))
+                if (item.mrecBanner == null) {
+                    item.mrecBanner = MRECBanner(holder.itemView.context).apply {
+                        scenesName = AdName.weather_mrec
+                        bindLifecycle(holder.itemView.context)
+                    }
+                    holder.getView<FrameLayout>(R.id.fl_list_ad).addView(item.mrecBanner)
+                }
+                item.mrecBanner?.loadAd()
             }
         }
     }
@@ -133,47 +138,14 @@ class HomeUiAdapter(val fragment: WeatherFragment) :
             }
             binding.includedLayoutHomeNew.rvBanner.setRvBannerData(temp)
         }
-        binding.includedLayoutHomeNew.rvBanner.setOnSwitchRvBannerListener(object :
-            RecyclerViewBanner.OnSwitchRvBannerListener {
-            override fun switchBanner(
-                position: Int,
-                bannerView: AppCompatImageView?,
-                fl: FrameLayout?
-            ) {
-                bannerView?.let {
-                    model.d?.news?.get(if (position >= model.d.news.size) Random().nextInt(model.d.news.size) else position)?.image_urls?.get(
-                        0
-                    )?.let { it1 ->
-                        GlideUtil.loadUrlImage(
-                            fragment,
-                            it1, it, ph = R.drawable.ic_news_ph, radius = 0
-                        )
-                    }
-                    binding.includedLayoutHomeNew.tvTitle.text =
-                        HtmlCompat.fromHtml(
-                            model.d?.news?.get(
-                                if (position >= model.d.news.size) Random().nextInt(
-                                    model.d.news.size
-                                ) else position
-                            )?.title!!,
-                            HtmlCompat.FROM_HTML_MODE_COMPACT
-                        ).toString()
-                    binding.includedLayoutHomeNew.timeTv.text = model.d.news.get(
-                        if (position >= model.d.news.size) Random().nextInt(
-                            model.d.news.size
-                        ) else position
-                    ).publishDate
-                }
-            }
-        })
         binding.includedLayoutHomeNew.clAll.setOnClickListener {
             fragment.intentToNews()
         }
 
         binding.includedLayoutHomeNew.rvBanner.setOnRvBannerClickListener(object :
-            RecyclerViewBanner.OnRvBannerClickListener {
-            override fun onClick(position: Int) {
-                fragment.intentToNews()
+            WeatherNewBanner.OnRvBannerClickListener {
+            override fun onClick(date: NewsModel.NewsDTO) {
+                NewDetailsActivity.start(context, date.toNews())
             }
         })
 

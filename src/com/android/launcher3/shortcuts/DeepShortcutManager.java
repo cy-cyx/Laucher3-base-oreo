@@ -203,9 +203,6 @@ public class DeepShortcutManager {
     @TargetApi(25)
     private List<ShortcutInfoCompat> query(int flags, String packageName,
                                            ComponentName activity, List<String> shortcutIds, UserHandle user) {
-        // todo 涉及权限暂时隐藏
-        if (true) return new ArrayList<>();
-
         if (Utilities.ATLEAST_NOUGAT_MR1) {
             ShortcutQuery q = new ShortcutQuery();
             q.setQueryFlags(flags);

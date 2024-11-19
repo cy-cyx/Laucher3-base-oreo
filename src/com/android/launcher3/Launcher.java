@@ -151,6 +151,7 @@ import com.theme.lambda.launcher.widget.PreviewControlView;
 import com.theme.lambda.launcher.widget.WallpaperView;
 import com.theme.lambda.launcher.widget.dialog.LoadingDialog;
 import com.theme.lambda.launcher.widget.dialog.StoreRatingsDialog;
+import com.theme.lambda.launcher.widget.dialog.UrlShortcutSelectDialog;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -1176,6 +1177,13 @@ public class Launcher extends BaseActivity
         fillMultiLauncherBug();
         AdUtil.loadAdOpenAppOnly(this);
         AdUtil.reloadOpenAdIfNeed();
+        // 判断是否需要更新offer配置
+        if (!isWorkspaceLoading()) {
+            if (RecommendAppManager.upDataRecommendAppManagerIfNeed()) {
+                reload(true);
+                showLoading(60000);
+            }
+        }
 
         if (DEBUG_RESUME_TIME) {
             Log.d(TAG, "Time spent in onResume: " + (System.currentTimeMillis() - startTime));
