@@ -38,7 +38,9 @@ class ShortCut(
     // 是否是加号
     var isAdd: Boolean = false
 
-    var isEdit:Boolean = false
+    var isEdit: Boolean = false
+
+    var isPlaceholder: Boolean = false
 
     fun copy(): ShortCut {
         return ShortCut(name, iconUrl, clickUrl, isDefault)

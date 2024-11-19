@@ -21,6 +21,9 @@ class UrlShortcutAdapter : BaseQuickAdapter<ShortCut, BaseViewHolder>(R.layout.i
             if (item.isAdd) {
                 logoIv.gone()
                 addIV.visible()
+            } else if (item.isPlaceholder) {
+                logoIv.gone()
+                addIV.gone()
             } else {
                 addIV.gone()
                 logoIv.visible()
@@ -32,7 +35,7 @@ class UrlShortcutAdapter : BaseQuickAdapter<ShortCut, BaseViewHolder>(R.layout.i
                 clickListen?.invoke(item)
             }
 
-            if (item.isEdit) {
+            if (item.isEdit || item.isAdd || item.isPlaceholder) {
                 root.setOnLongClickListener(null)
             } else {
                 root.setOnLongClickListener {
@@ -41,7 +44,7 @@ class UrlShortcutAdapter : BaseQuickAdapter<ShortCut, BaseViewHolder>(R.layout.i
                 }
             }
 
-            holder.itemView.tag = !item.isAdd && item.isEdit
+            holder.itemView.tag = !item.isAdd && !item.isPlaceholder && item.isEdit
         }
     }
 }

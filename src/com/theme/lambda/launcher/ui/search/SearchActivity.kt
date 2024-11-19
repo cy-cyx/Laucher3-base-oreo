@@ -293,7 +293,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             adapter = shortCutAdapter
         }
         shortCutAdapter.longClickListen = {
-            if (!it.isAdd) {
+            if (!it.isAdd && !it.isPlaceholder) {
                 viewModel.enterShortCutEdit()
                 !viewModel.isShortCutEdit
             }
@@ -306,6 +306,8 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
                 } else {
                     viewModel.deleteShortCut(it)
                 }
+            } else if (it.isPlaceholder) {
+                viewModel.quitShortCutEdit()
             } else {
                 if (it.isAdd) {
                     viewModel.clickAddShortCut(this)

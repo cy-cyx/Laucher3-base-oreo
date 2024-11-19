@@ -57,6 +57,7 @@ class SearchViewModel : BaseViewModel() {
     val shortcutLiveData = MutableLiveData<ArrayList<ShortCut>>(arrayListOf())
     val yourMayLikeLiveData = MutableLiveData<ArrayList<Offers>>(arrayListOf())
     val newList = MutableLiveData<Resource<NewsModel>>()
+    var urlShortcutSize = 0
 
     private val searchInfo: SearchInfo by lazy {
         val string =
@@ -99,14 +100,10 @@ class SearchViewModel : BaseViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
 
             val shortCuts = ArrayList(UrlShortcutManager.getCurShortCut())
-            shortCuts.add(ShortCut().apply {
-                isAdd = true
-                name = "Add"
-            })
             shortCuts.forEach {
                 it.isEdit = false
             }
-            shortcutLiveData.postValue(shortCuts)
+            shortcutLiveData.postValue(urlShortcutAddPlaceholder(shortCuts))
         }
 
         viewModelScope.launch(Dispatchers.IO) {
@@ -236,7 +233,7 @@ class SearchViewModel : BaseViewModel() {
         isShortCutEdit = true
         val shortCuts = shortcutLiveData.value!!
         shortCuts.forEach {
-            if (!it.isAdd) {
+            if (!it.isAdd && !it.isPlaceholder) {
                 it.isEdit = true
             }
         }
@@ -244,25 +241,25 @@ class SearchViewModel : BaseViewModel() {
     }
 
     fun quitShortCutEdit() {
+        if (!isShortCutEdit) return
         isShortCutEdit = false
         val shortCuts = shortcutLiveData.value!!
         shortCuts.forEach {
-            if (!it.isAdd) {
-                it.isEdit = false
-            }
+            it.isEdit = false
         }
         shortcutLiveData.value = shortCuts
 
         // 保存一份
         val temp = ArrayList(shortCuts)
         temp.removeIf { it.isAdd }
+        temp.removeIf { it.isPlaceholder }
         UrlShortcutManager.upDataCurShortCut(temp)
     }
 
     fun deleteShortCut(shortCut: ShortCut) {
         val shortCuts = shortcutLiveData.value!!
         shortCuts.remove(shortCut)
-        shortcutLiveData.value = shortCuts
+        shortcutLiveData.value = urlShortcutAddPlaceholder(shortCuts)
     }
 
     fun clickShortCut(shortCut: ShortCut) {
@@ -294,14 +291,10 @@ class SearchViewModel : BaseViewModel() {
                 UrlShortcutManager.upDataCurShortCut(temp)
 
                 val result = ArrayList(temp)
-                result.add(ShortCut().apply {
-                    isAdd = true
-                    name = "Add"
-                })
                 result.forEach {
                     it.isEdit = false
                 }
-                shortcutLiveData.postValue(result)
+                shortcutLiveData.postValue(urlShortcutAddPlaceholder(result))
             }
         }.show()
     }
@@ -325,5 +318,30 @@ class SearchViewModel : BaseViewModel() {
             }
         }
 
+    }
+
+    // 通过尾部加个空白的来处理点击相应问题
+    private fun urlShortcutAddPlaceholder(list: ArrayList<ShortCut>): ArrayList<ShortCut> {
+        list.removeIf { it.isAdd }
+        list.removeIf { it.isPlaceholder }
+
+        urlShortcutSize = list.size
+        list.add(ShortCut().apply {
+            isAdd = true
+            name = "Add"
+        })
+
+        val size = list.size
+        var needAdPlaceholder = 5 - size % 5
+        if (needAdPlaceholder == 5) {
+            needAdPlaceholder = 0
+        }
+
+        for (i in 0 until needAdPlaceholder) {
+            list.add(ShortCut().apply {
+                isPlaceholder = true
+            })
+        }
+        return list
     }
 }
