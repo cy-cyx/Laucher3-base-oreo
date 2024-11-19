@@ -303,7 +303,7 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
 
                     }
                 },
-                listOf("AdConfig", "SearchConfig", "OfferConfig"),
+                Constants.configKeys,
                 "AdConfig"
             )
     }

@@ -132,11 +132,12 @@ object RecommendAppManager {
 
     // 1个小时检查一次
     private var lastUpDataTime = 0L
+    private var upDataInterval = if (BuildConfig.isDebug) 60 * 1000 else 24 * 60 * 60 * 1000
 
     @JvmStatic
     fun upDataRecommendAppManagerIfNeed(): Boolean {
         // 判断是否异步去判断,下次onResume刷新
-        if (System.currentTimeMillis() - lastUpDataTime > 24 * 60 * 60 * 1000) {
+        if (System.currentTimeMillis() - lastUpDataTime > upDataInterval) {
             checkNeedUpData()
         }
 

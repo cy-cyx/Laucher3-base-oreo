@@ -1,6 +1,7 @@
 package com.android.launcher3
 
 import com.lambda.remoteconfig.LambdaRemoteConfig
+import com.theme.lambda.launcher.Constants
 import com.theme.lambda.launcher.ad.AdUtil
 import com.theme.lambda.launcher.appwidget.WidgetManager
 import com.theme.lambda.launcher.utils.CommonUtil
@@ -41,7 +42,7 @@ object CycleTimer {
     private fun onTime() {
         AdUtil.reloadOpenAdIfNeed()
         WidgetManager.upData()
-        LambdaRemoteConfig.getInstance(CommonUtil.appContext!!).fetchAndActivate(listOf("AdConfig", "SearchConfig", "OfferConfig"))
+        LambdaRemoteConfig.getInstance(CommonUtil.appContext!!).fetchAndActivate(Constants.configKeys)
     }
 
     interface CycleTimerCallback {

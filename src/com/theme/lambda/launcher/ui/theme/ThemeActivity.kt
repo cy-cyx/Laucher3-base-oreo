@@ -9,9 +9,11 @@ import android.view.LayoutInflater
 import androidx.lifecycle.Observer
 import com.adjust.sdk.Adjust
 import com.adjust.sdk.AdjustEvent
+import com.android.launcher3.BuildConfig
 import com.android.launcher3.RecommendAppManager
 import com.android.launcher3.databinding.ActivityThemeBinding
 import com.google.android.material.tabs.TabLayout
+import com.lambda.remoteconfig.LambdaRemoteConfig
 import com.theme.lambda.launcher.Constants
 import com.theme.lambda.launcher.ad.AdName
 import com.theme.lambda.launcher.ad.AdUtil
@@ -21,6 +23,7 @@ import com.theme.lambda.launcher.statistics.EventUtil
 import com.theme.lambda.launcher.statistics.FirebaseAnalyticsUtil
 import com.theme.lambda.launcher.ui.iap.VipActivity
 import com.theme.lambda.launcher.ui.me.MeActivity
+import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.utils.LauncherUtil
 import com.theme.lambda.launcher.utils.NotificationUtil
 import com.theme.lambda.launcher.utils.PermissionUtil
@@ -60,6 +63,10 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
                 // 设置成功返回可能会存在异常（可能会回到旧的launcher上），故如此处理
                 addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
             })
+            // 测试模式下，点击主题刷新一下配置
+            if (BuildConfig.isDebug && from == sFromTheme) {
+                LambdaRemoteConfig.getInstance(CommonUtil.appContext!!).fetchAndActivate(Constants.configKeys)
+            }
         }
 
         // 预览不能通过栈顶出，故先用此方法
