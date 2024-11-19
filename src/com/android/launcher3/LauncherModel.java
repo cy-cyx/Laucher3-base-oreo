@@ -1098,12 +1098,7 @@ public class LauncherModel extends BroadcastReceiver
                                         info = new ShortcutInfo();
                                         Intent tempIntent = new Intent(cn.getPackageName());
                                         tempIntent.setComponent(cn);
-                                        info.iconBitmap =
-                                                ThemeIconMapping.getThemeBitmap(
-                                                        Utils.getApp(),
-                                                        cn.getPackageName(),
-                                                        cn.getClassName()
-                                                );
+                                        info.iconBitmap = ThemeIconMappingV2.getIconBitmap(cn.getPackageName(), cn.getClassName());
                                         info.title = c.getTitle();
                                         info.contentDescription = "";
                                     } else if (Constants.sAllppAction.equals(intent.getAction())) {

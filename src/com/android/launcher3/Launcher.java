@@ -2664,7 +2664,7 @@ public class Launcher extends BaseActivity
             startActivity(v, intent, item);
             Bundle bundle = new Bundle();
             bundle.putString("pn", packageName);
-            bundle.putBoolean("isSys", false);
+            bundle.putBoolean("isSys", true);
             bundle.putLong("start", System.currentTimeMillis() - (SpUtil.INSTANCE.getLong(SpKey.install_time, 0L)));
             EventUtil.INSTANCE.logEvent(EventName.LAppOpen, bundle, false);
         } else {
@@ -2680,7 +2680,7 @@ public class Launcher extends BaseActivity
             });
             Bundle bundle = new Bundle();
             bundle.putString("pn", packageName);
-            bundle.putBoolean("isSys", true);
+            bundle.putBoolean("isSys", false);
             bundle.putLong("start", System.currentTimeMillis() - (SpUtil.INSTANCE.getLong(SpKey.install_time, 0L)));
             EventUtil.INSTANCE.logEvent(EventName.LAppOpen, bundle, false);
             NewInstallationManager.INSTANCE.clickApp(packageName);

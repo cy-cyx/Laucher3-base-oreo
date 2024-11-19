@@ -360,11 +360,10 @@ object RecommendAppManager {
                         title = it.name
                     })
                     shortcutInfo.iconBitmap =
-                        ThemeIconMapping.getThemeBitmap(
-                            Utils.getApp(),
+                        ThemeIconMappingV2.getIconBitmap(
                             actionHost + it.id,
                             it.localIconUrl
-                        );
+                        )
                     shortcutInfo.contentDescription = ""
                     folderInfo.add(shortcutInfo, false)
                 }

@@ -316,7 +316,7 @@ class ThemeManager {
     private fun setCurShowThemeById(id: String, reload: Boolean = true) {
         if (showThemeId == id) return
         showThemeId = id
-        ThemeIconMapping.cleanThemeIconCache()
+        ThemeIconMappingV2.cleanThemeIconCache()
         // 更新桌面
         if (reload) {
             launcher?.reload(true)
