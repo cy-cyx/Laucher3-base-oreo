@@ -219,7 +219,7 @@ class WeatherFragment : BaseFragment<FragmentWeather2Binding>() {
     }
 
     fun intentToNews() {
-        startActivity(Intent(requireContext(), NewsListActivity::class.java))
+        NewsListActivity.start(requireContext())
     }
 
     private fun initLocalNew() {

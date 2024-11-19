@@ -345,11 +345,6 @@ class WeatherNewBanner @JvmOverloads constructor(
             )
             img.layoutParams = params
             img.id = R.id.rvb_banner_image_view_id
-            img.setOnClickListener {
-                if (onRvBannerClickListener != null) {
-                    onRvBannerClickListener!!.onClick(currentIndex % mData!!.size)
-                }
-            }
             when (viewType) {
                 AD_TYPE -> {
                     if (null != mrecBanner?.parent) {
@@ -410,6 +405,15 @@ class WeatherNewBanner @JvmOverloads constructor(
             viewBinding.timeTv.text = mData.get(
                 if (position >= mData.size) Random().nextInt(mData.size) else position
             ).publishDate
+            viewBinding.root.setOnClickListener {
+                if (onRvBannerClickListener != null) {
+                    onRvBannerClickListener!!.onClick(
+                        mData[if (position >= mData.size) Random().nextInt(
+                            mData.size
+                        ) else position]
+                    )
+                }
+            }
 
             if (from == fromSearch) {
                 viewBinding.tvTitle.setTextColor(Color.WHITE)
@@ -469,7 +473,7 @@ class WeatherNewBanner @JvmOverloads constructor(
     }
 
     interface OnRvBannerClickListener {
-        fun onClick(position: Int)
+        fun onClick(date: NewsDTO)
     }
 
     fun setOnRvBannerClickListener(onRvBannerClickListener: OnRvBannerClickListener?) {

@@ -35,6 +35,7 @@ import com.lambdaweather.view.WeatherNewBanner
 import com.lambdaweather.view.dynamicweather.BaseDrawer
 import com.theme.lambda.launcher.ad.AdName
 import com.theme.lambda.launcher.ad.view.MRECBanner
+import com.theme.lambda.launcher.ui.news.NewDetailsActivity
 import com.theme.lambda.launcher.ui.weather.ui.WeatherFragment
 import kotlin.math.roundToInt
 
@@ -143,8 +144,8 @@ class HomeUiAdapter(val fragment: WeatherFragment) :
 
         binding.includedLayoutHomeNew.rvBanner.setOnRvBannerClickListener(object :
             WeatherNewBanner.OnRvBannerClickListener {
-            override fun onClick(position: Int) {
-                fragment.intentToNews()
+            override fun onClick(date: NewsModel.NewsDTO) {
+                NewDetailsActivity.start(context, date.toNews())
             }
         })
 

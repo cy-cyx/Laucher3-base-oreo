@@ -21,9 +21,13 @@ import com.android.launcher3.databinding.ActivitySearchBinding
 import com.lambda.common.http.Preference
 import com.lambda.common.utils.utilcode.util.GsonUtils
 import com.lambda.common.utils.utilcode.util.Utils
+import com.lambdaweather.data.model.NewsModel
+import com.lambdaweather.ui.news.NewsListActivity
 import com.lambdaweather.view.WeatherNewBanner
+import com.lambdaweather.view.WeatherNewBanner.OnRvBannerClickListener
 import com.theme.lambda.launcher.ad.AdName
 import com.theme.lambda.launcher.base.BaseActivity
+import com.theme.lambda.launcher.ui.news.NewDetailsActivity
 import com.theme.lambda.launcher.ui.search.adapter.FileAdapter
 import com.theme.lambda.launcher.ui.search.adapter.ImageAdapter
 import com.theme.lambda.launcher.ui.search.adapter.ItemTouchHelperCallback
@@ -63,8 +67,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         fun addRecentApps(packageName: String): List<String> {
             var list = if (recentApps.isNotEmpty()) {
                 GsonUtils.fromJson<MutableList<String>>(
-                    recentApps,
-                    GsonUtils.getListType(String::class.java)
+                    recentApps, GsonUtils.getListType(String::class.java)
                 )
             } else {
                 mutableListOf()
@@ -142,9 +145,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
         }
         PermissionUtil.requestRuntimePermissions(
-            this,
-            permissions,
-            object : PermissionUtil.IPermissionCallback {
+            this, permissions, object : PermissionUtil.IPermissionCallback {
                 override fun nextStep() {
                     PicSearchLib.loadData()
                     // 再处理文件请求
@@ -181,9 +182,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
                 override fun gotoSet(internal: Boolean) {
 
                 }
-            },
-            force = false,
-            showGotoSetDialog = false
+            }, force = false, showGotoSetDialog = false
         )
     }
 
@@ -327,6 +326,14 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         }
         val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
         itemTouchHelper.attachToRecyclerView(viewBinding.rvUrlShortcut)
+        viewBinding.clWeather.setOnClickListener {
+            NewsListActivity.start(this)
+        }
+        viewBinding.rvBanner.setOnRvBannerClickListener(object : OnRvBannerClickListener {
+            override fun onClick(date: NewsModel.NewsDTO) {
+                NewDetailsActivity.start(this@SearchActivity, date.toNews())
+            }
+        })
 
         viewBinding.rvYourMayLike.apply {
             layoutManager = GridLayoutManager(this@SearchActivity, 5)
