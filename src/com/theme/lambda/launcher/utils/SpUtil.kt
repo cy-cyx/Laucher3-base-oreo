@@ -56,6 +56,7 @@ object SpUtil {
         editor.apply()
     }
 
+    @JvmStatic
     fun getLong(key: String, default: Long = 0L): Long {
         return sp?.getLong(key, default) ?: default
     }

@@ -25,7 +25,6 @@ import com.lambda.adlib.LambdaAdSdk
 import com.lambda.adlib.adapter.LAdMultipleAdapter
 import com.lambda.common.utils.utilcode.util.ActivityUtils
 import com.theme.lambda.launcher.Constants
-import com.theme.lambda.launcher.base.BaseActivity
 import com.theme.lambda.launcher.recall.RecallManager
 import com.theme.lambda.launcher.statistics.ADEventName
 import com.theme.lambda.launcher.statistics.EventUtil
@@ -72,8 +71,12 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
     private const val adSourceMAXFacebook = "Facebook" // max聚合里facebook的ad_source
     private const val adSourceAdMobAdMob = "AdMob Network" // admob聚合里admob的ad_source
     private const val adSourceTestAdMob = "Reservation campaign" // admob测试广告
-    val AdmobAdSources =
+    private const val adSourceYandex = "yandex bidding" // yandex广告
+    private const val adSourceMaxYandex = "Yandex" // max聚合里yandex广告
+    val AdPriorityAdSources =
         listOf(adSourceAdMobAdMob, adSourceMAXAdMob, adSourceMAXFacebook, adSourceTestAdMob)
+    val AdPriorityAdSourcesRu =
+        listOf(adSourceYandex, adSourceMaxYandex)
 
     @Synchronized
     fun addNativeAdapterClose(
@@ -108,7 +111,7 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
         LambdaAdSdk.registerLife(app)
         LambdaAdSdk.initAdmobConsent(false)
         LambdaAdSdk.init(
-            Constants.BASE_URL, Constants.SECRET_KEY, object : LambdaAd.LogAdEvent {
+            Constants.BASE_URL, BuildConfig.SECRET_KEY, object : LambdaAd.LogAdEvent {
                 override fun onLog(step: Int, logParam: LambdaAd.LogAdEvent.LogParam?, ad: Any?) {
                     LogUtil.d(TAG, "step: $step, logParam: $logParam, ad: $ad")
                     when (step) {
@@ -288,14 +291,22 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
             .initRemoteConfig(
                 when (CommonUtil.getRegion()) {
                     "RU" -> {
-                        R.xml.remote_config_ru
+                        when (BuildConfig.FLAVOR) {
+                            "samsung" -> R.xml.remote_config_ru_samsung
+                            else -> R.xml.remote_config_ru
+                        }
+
                     }
 
                     else -> {
-                        R.xml.remote_config_defaults
+                        when (BuildConfig.FLAVOR) {
+                            "samsung" -> R.xml.remote_config_default_samsung
+                            else -> R.xml.remote_config_defaults
+                        }
+
                     }
                 },
-                listOf("AdConfig", "SearchConfig", "OfferConfig"),
+                Constants.configKeys,
                 "AdConfig"
             )
     }
@@ -473,6 +484,10 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
 
     fun isReady(scenes: String, network: String, format: Int): Boolean {
         return getADAdapter(scenes)?.isReady(network, format) ?: false
+    }
+
+    fun isEnable(scenes: String): Boolean {
+        return getADAdapter(scenes)?.isEnable() ?: true
     }
 
     fun showAd(scenes: String, callback: IAdCallBack? = null) {

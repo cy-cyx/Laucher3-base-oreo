@@ -49,7 +49,9 @@ public class DeleteDropTarget extends ButtonDropTarget {
         setTextBasedOnDragSource(dragObject.dragSource);
     }
 
-    /** @return true for items that should have a "Remove" action in accessibility. */
+    /**
+     * @return true for items that should have a "Remove" action in accessibility.
+     */
     public static boolean supportsAccessibleDrop(ItemInfo info) {
         return (info instanceof ShortcutInfo)
                 || (info instanceof LauncherAppWidgetInfo)
@@ -58,6 +60,9 @@ public class DeleteDropTarget extends ButtonDropTarget {
 
     @Override
     protected boolean supportsDrop(DragSource source, ItemInfo info) {
+        if (info != null && info instanceof FolderInfo && info.title != null) {
+            return !RecommendAppManager.isFeaturedFolder(info.title.toString());
+        }
         return true;
     }
 

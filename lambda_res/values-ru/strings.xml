@@ -388,4 +388,6 @@
     <string name="photos">Фотографии</string>
     <string name="search_any_things">Ищите документы, фотографии, приложения или веб-страницы</string>
     <string name="doc_permission_tip">Для точного поиска файлов необходимо предоставить разрешения на доступ к хранилищу</string>
+    <string name="quick_tools">Быстрые инструменты</string>
+    <string name="your_may_like">Вам может понравиться</string>
 </resources>

@@ -16,6 +16,7 @@ import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
 import com.theme.lambda.launcher.utils.FileUtil.copy
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.suspendCancellableCoroutine
 import java.io.File
 import kotlin.coroutines.resume
@@ -63,7 +64,9 @@ object GlideUtil {
                     target: Target<File>,
                     isFirstResource: Boolean
                 ): Boolean {
-                    it.resumeWithException(RuntimeException())
+                    if (it.context.isActive) {
+                        it.resumeWithException(RuntimeException())
+                    }
                     return false
                 }
 
@@ -78,7 +81,9 @@ object GlideUtil {
                     val result = File(folder + appName)
                     File(FileUtil.getFolder(result.path)).mkdirs()
                     copy(resource, result)
-                    it.resume(result.absolutePath)
+                    if (it.context.isActive) {
+                        it.resume(result.absolutePath)
+                    }
                     return false
                 }
             })

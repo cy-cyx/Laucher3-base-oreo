@@ -112,6 +112,8 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver, 
 
     private String label = "";
 
+    private ItemInfo itemInfo;
+
     private static final Property<BubbleTextView, Float> BADGE_SCALE_PROPERTY
             = new Property<BubbleTextView, Float>(Float.TYPE, "badgeScale") {
         @Override
@@ -229,12 +231,13 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver, 
     }
 
     private void applyIconAndLabel(Bitmap icon, ItemInfo info) {
+        itemInfo = info;
         Bitmap showIcon = icon;
         if (info.getIntent() != null && info.getIntent().getComponent() != null) {
             String pkg = info.getIntent().getComponent().getPackageName();
 
             // 把自己伪装成主题
-            if (pkg.equals(CommonUtil.INSTANCE.getAppContext().getPackageName())) {
+            if (pkg.equals(CommonUtil.getAppContext().getPackageName())) {
                 info.title = "Theme";
             }
 
@@ -245,15 +248,9 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver, 
             }
 
             // 是否存在替换图标
-            Bitmap themeIcon = ThemeIconMapping.getThemeBitmap(CommonUtil.INSTANCE.getAppContext(), pkg, url);
-            if (themeIcon != null) {
-                showIcon = themeIcon;
-            }
+            showIcon = ThemeIconMappingV2.getIconBitmapIfNeedAsyn(this, pkg, url);
         } else if (info.getIntent() != null && info.getIntent().getAction() != null && info.getIntent().getAction().equals(Constants.sAllppAction)) {
-            Bitmap themeIcon = ThemeIconMapping.getThemeBitmap(CommonUtil.INSTANCE.getAppContext(), Constants.sAllppAction, "");
-            if (themeIcon != null) {
-                showIcon = themeIcon;
-            }
+            showIcon = ThemeIconMappingV2.getIconBitmapIfNeedAsyn(this, Constants.sAllppAction, "");
         }
         FastBitmapDrawable iconDrawable = DrawableFactory.get(getContext()).newIcon(showIcon, info);
         iconDrawable.setIsDisabled(info.isDisabled());
@@ -664,6 +661,14 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver, 
      */
     private void setIcon(Drawable icon) {
         mIcon = icon;
+        mIcon.setBounds(0, 0, mIconSize, mIconSize);
+        applyCompoundDrawables(mIcon);
+    }
+
+    void setIcon(Bitmap icon) {
+        FastBitmapDrawable iconDrawable = DrawableFactory.get(getContext()).newIcon(icon, itemInfo);
+        iconDrawable.setIsDisabled(itemInfo.isDisabled());
+        mIcon = iconDrawable;
         mIcon.setBounds(0, 0, mIconSize, mIconSize);
         applyCompoundDrawables(mIcon);
     }

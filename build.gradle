@@ -26,8 +26,10 @@ android {
     defaultConfig {
         minSdkVersion 24
         targetSdkVersion 34
-        versionCode 24
-        versionName "0.2.4"
+        versionCode 35
+        versionName "0.3.5"
+        applicationId 'com.theme.lambda.launcher'
+        testApplicationId 'com.theme.lambda.launcher.tests'
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -68,8 +70,13 @@ android {
     productFlavors {
         aosp {
             dimension "default"
-            applicationId 'com.theme.lambda.launcher'
-            testApplicationId 'com.theme.lambda.launcher.tests'
+            buildConfigField "String", "SECRET_KEY", "\"3b3ffe856169d39c\""
+            buildConfigField "String", "Suffix", "\"\""
+        }
+        samsung {
+            dimension "default"
+            buildConfigField "String", "SECRET_KEY", "\"8aefebdc770a1a5d\""
+            buildConfigField "String", "Suffix", "\".samsung\""
         }
     }
     sourceSets {
@@ -77,10 +84,6 @@ android {
             res.srcDirs = ['res', 'lambda_res']
             java.srcDirs = ['src', 'src_config']
             assets.srcDirs = ['assets']
-            manifest.srcFile 'AndroidManifest-common.xml'
-        }
-
-        aosp {
             manifest.srcFile "AndroidManifest.xml"
         }
     }
@@ -113,7 +116,7 @@ dependencies {
     implementation 'com.android.support:support-annotations:28.0.0'
     implementation 'androidx.palette:palette-ktx:1.0.0'
     implementation 'androidx.activity:activity-ktx:1.9.3'
-    implementation 'androidx.fragment:fragment-ktx:1.8.4'
+    implementation 'androidx.fragment:fragment-ktx:1.8.5'
     implementation "androidx.cardview:cardview:1.0.0"
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     implementation 'io.github.scwang90:refresh-layout-kernel:2.1.0'      //核心必须依赖
@@ -150,39 +153,43 @@ dependencies {
     implementation "com.adjust.sdk:adjust-android:4.38.3"
 
     implementation("com.lambda.common:http:1.0.1.26")
-    implementation("com.lambda.common:event:1.2.0.62-separate-adjust"){
+    implementation("com.lambda.common:event:1.2.0.63-separate-adjust") {
         exclude group: 'com.lambda.common', module: 'http'
     }
     implementation "com.lambda.common:remoteconfig:0.1.5"
-    implementation "com.lambda.common:lambdaad:1169"
+    implementation "com.lambda.common:lambdaad:1177"
     implementation 'com.lambda.common:billing-google:0.0.0.10'
 
     implementation 'com.facebook.infer.annotation:infer-annotation:0.18.0'
-    implementation 'com.applovin:applovin-sdk:12.5.0'
-    implementation 'com.applovin.mediation:google-adapter:23.2.0.0'
-    implementation 'com.applovin.mediation:facebook-adapter:6.17.0.0'
-    implementation 'com.applovin.mediation:bytedance-adapter:6.1.0.6.0'
-    implementation 'com.applovin.mediation:mintegral-adapter:16.7.81.0'
-    implementation 'com.applovin.mediation:vungle-adapter:7.4.0.0'
-    implementation 'com.applovin.mediation:unityads-adapter:4.12.1.0'
-    implementation 'com.applovin.mediation:ironsource-adapter:8.1.0.0.0'
-    implementation "com.applovin.mediation:yandex-adapter:7.0.1.0"
-    implementation 'com.applovin.mediation:mytarget-adapter:5.21.0.0'
-    implementation 'com.applovin.mediation:bidmachine-adapter:2.6.0.1'
-    implementation 'com.applovin.mediation:line-adapter:2024.2.14.0'
+    implementation 'com.applovin:applovin-sdk:13.0.1'
+    implementation 'com.applovin.mediation:bidmachine-adapter:3.1.0.0'
+    implementation 'com.applovin.mediation:bigoads-adapter:4.9.1.0'
+    implementation 'com.applovin.mediation:chartboost-adapter:9.8.0.1'
+    implementation 'com.google.android.gms:play-services-base:18.5.0'
+    implementation 'com.applovin.mediation:fyber-adapter:8.3.3.0'
+    implementation 'com.applovin.mediation:google-adapter:23.5.0.0'
+    implementation 'com.applovin.mediation:inmobi-adapter:10.7.8.1'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'androidx.recyclerview:recyclerview:1.3.2'
+    implementation 'com.applovin.mediation:ironsource-adapter:8.4.0.0.1'
+    implementation 'com.applovin.mediation:vungle-adapter:7.4.2.1'
+    implementation 'com.applovin.mediation:facebook-adapter:6.18.0.1'
+    implementation 'com.applovin.mediation:mintegral-adapter:16.8.81.0'
+    implementation 'com.applovin.mediation:bytedance-adapter:6.3.0.4.0'
+    implementation 'com.applovin.mediation:pubmatic-adapter:4.1.0.0'
+    implementation 'com.applovin.mediation:unityads-adapter:4.12.4.0'
+    implementation 'com.applovin.mediation:verve-adapter:3.2.0.0'
+    implementation 'com.applovin.mediation:mytarget-adapter:5.23.0.0'
+    implementation 'com.applovin.mediation:yandex-adapter:7.6.0.1'
 
     implementation 'com.google.android.gms:play-services-ads:23.5.0'
-    implementation("com.google.android.ump:user-messaging-platform:3.1.0")
-//    implementation 'com.google.ads.mediation:facebook:6.17.0.0'
-//    implementation 'com.google.ads.mediation:pangle:6.0.0.7.0'
+    implementation 'com.google.android.ump:user-messaging-platform:3.1.0'
 
-    implementation("com.bigossp:bigo-ads:4.9.1")
-    implementation 'com.yandex.android:mobileads:7.6.0'
+    implementation 'com.bigossp:bigo-ads:4.9.1'
+    implementation 'com.yandex.android:mobileads:7.7.0'
     implementation 'com.yandex.ads.mediation:mobileads-mytarget:5.20.1.1'
 
-    implementation 'com.ironsource.sdk:mediationsdk:8.2.1'
+    implementation 'com.ironsource.sdk:mediationsdk:8.4.0'
     implementation 'com.ironsource.adapters:unityadsadapter:4.3.42'
-    implementation 'com.unity3d.ads:unity-ads:4.12.2'
+    implementation 'com.unity3d.ads:unity-ads:4.12.4'
 }

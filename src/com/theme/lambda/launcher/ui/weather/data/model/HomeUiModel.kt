@@ -1,6 +1,7 @@
 package com.lambdaweather.data.model
 
 import com.chad.library.adapter.base.entity.MultiItemEntity
+import com.theme.lambda.launcher.ad.view.MRECBanner
 
 data class HomeUiModel(
     override val itemType: Int,
@@ -10,7 +11,8 @@ data class HomeUiModel(
     var forestWeatherDay7Model: ForestDayWeatherModel? = null,
     var airModel: AirModel? = null,
     var isHide: Boolean? = null,
-    var redCircle: Boolean? = null
+    var redCircle: Boolean? = null,
+    var mrecBanner: MRECBanner? = null
 ) : MultiItemEntity {
     enum class HomeWidget(val type: Int) {
         NEWS(0),
@@ -19,7 +21,9 @@ data class HomeUiModel(
         AD(3),
         TRAVEL(4),
         INDEX(5),
-        AIR(6),
-        SUN(7),
+
+        // AD(6) 小心有陷阱
+        AIR(7),
+        SUN(8),
     }
 }

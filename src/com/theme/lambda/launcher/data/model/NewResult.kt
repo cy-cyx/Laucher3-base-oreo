@@ -16,32 +16,32 @@ class NewResult {
 class News {
 
     @SerializedName("id")
-    val id: String = ""
+    var id: String = ""
 
     @SerializedName("title")
-    val title: String = ""
+    var title: String = ""
 
     @SerializedName("content")
-    val text: String = ""
+    var text: String = ""
 
     @SerializedName("link")
-    val url: String = ""
+    var url: String = ""
 
     @SerializedName("image_urls")
-    val image: ArrayList<String> = arrayListOf()
+    var image: ArrayList<String> = arrayListOf()
 
     @SerializedName("publish_date")
-    val publishDate: String = ""
+    var publishDate: String = ""
 
     @SerializedName("author")
-    val author: String = ""
+    var author: String = ""
 
     @SerializedName("language")
-    val language: String = ""
+    var language: String = ""
 
     @SerializedName("country")
-    val sourceCountry = ""
+    var sourceCountry = ""
 
     @SerializedName("description")
-    val sentiment = ""
+    var sentiment = ""
 }

@@ -82,6 +82,11 @@ class ThemePreviewActivity : BaseActivity<ActivityThemePreviewBinding>() {
             }
 
             if (AdUtil.isReady(AdName.unlock)) {
+                if (!AdUtil.isEnable(AdName.unlock)){
+                    viewModel.download(this@ThemePreviewActivity)
+                    return@setOnClickListener
+                }
+
                 AdUtil.showAd(AdName.unlock, object : IAdCallBack {
                     override fun onNoReady() {
 

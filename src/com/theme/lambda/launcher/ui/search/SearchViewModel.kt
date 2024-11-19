@@ -3,19 +3,27 @@ package com.theme.lambda.launcher.ui.search
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ShortcutManager
 import android.os.Bundle
 import android.text.TextUtils
 import androidx.appcompat.app.AppCompatActivity.SEARCH_SERVICE
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.android.launcher3.RecommendAppManager
 import com.lambda.common.http.Preference
 import com.lambda.common.utils.utilcode.util.ActivityUtils
 import com.lambda.common.utils.utilcode.util.AppUtils
 import com.lambda.common.utils.utilcode.util.GsonUtils
 import com.lambda.remoteconfig.LambdaRemoteConfig
+import com.lambdaweather.data.Resource
+import com.lambdaweather.data.model.NewsModel
+import com.lambdaweather.factory.RetrofitFactory.appRepositorySource
+import com.lambdaweather.utils.LocalUtils
 import com.theme.lambda.launcher.base.BaseViewModel
 import com.theme.lambda.launcher.data.model.FileInfo
+import com.theme.lambda.launcher.data.model.Offers
 import com.theme.lambda.launcher.data.model.SearchInfo
+import com.theme.lambda.launcher.data.model.ShortCut
 import com.theme.lambda.launcher.statistics.EventName
 import com.theme.lambda.launcher.statistics.EventUtil
 import com.theme.lambda.launcher.ui.search.SearchActivity.Companion.addRecentApps
@@ -24,13 +32,16 @@ import com.theme.lambda.launcher.ui.search.searchlib.FileSearchLib
 import com.theme.lambda.launcher.ui.search.searchlib.NetSearchLib
 import com.theme.lambda.launcher.ui.search.searchlib.PicSearchLib
 import com.theme.lambda.launcher.ui.web.WebViewActivity
+import com.theme.lambda.launcher.urlshortcut.UrlShortcutManager
 import com.theme.lambda.launcher.utils.AppUtil
 import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.utils.GsonUtil
+import com.theme.lambda.launcher.widget.dialog.UrlShortcutSelectDialog
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.net.URLEncoder
+import java.util.Collections
 
 class SearchViewModel : BaseViewModel() {
     private var searchHistory by Preference("search_history", "")
@@ -43,12 +54,18 @@ class SearchViewModel : BaseViewModel() {
     val netUrlLiveData = MutableLiveData<ArrayList<String>>(arrayListOf())
     val imageLiveData = MutableLiveData<ArrayList<FileInfo>>(arrayListOf())
     val fileLiveData = MutableLiveData<ArrayList<FileInfo>>(arrayListOf())
+    val shortcutLiveData = MutableLiveData<ArrayList<ShortCut>>(arrayListOf())
+    val yourMayLikeLiveData = MutableLiveData<ArrayList<Offers>>(arrayListOf())
+    val newList = MutableLiveData<Resource<NewsModel>>()
+    var urlShortcutSize = 0
 
     private val searchInfo: SearchInfo by lazy {
         val string =
             LambdaRemoteConfig.getInstance(CommonUtil.appContext!!).getString("SearchConfig")
         GsonUtil.gson.fromJson(string, SearchInfo::class.java)
     }
+
+    var isShortCutEdit = false
 
     fun initData() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -78,6 +95,32 @@ class SearchViewModel : BaseViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             // 这样预加载，不然首次查找巨久
             appsInfo = AppUtils.getAppsInfo().toMutableList() as ArrayList<AppUtils.AppInfo>
+        }
+
+        viewModelScope.launch(Dispatchers.IO) {
+
+            val shortCuts = ArrayList(UrlShortcutManager.getCurShortCut())
+            shortCuts.forEach {
+                it.isEdit = false
+            }
+            shortcutLiveData.postValue(urlShortcutAddPlaceholder(shortCuts))
+        }
+
+        viewModelScope.launch(Dispatchers.IO) {
+            yourMayLikeLiveData.postValue(RecommendAppManager.getYourMayLikeOffers())
+        }
+
+        getNews()
+    }
+
+    private fun getNews() {
+        viewModelScope.launch {
+            appRepositorySource.getNews(
+                LocalUtils.getCountry(),
+                "1"
+            ).collect {
+                newList.value = it
+            }
         }
     }
 
@@ -184,5 +227,121 @@ class SearchViewModel : BaseViewModel() {
                 )
             }.toMutableList() as ArrayList)
         }
+    }
+
+    fun enterShortCutEdit() {
+        isShortCutEdit = true
+        val shortCuts = shortcutLiveData.value!!
+        shortCuts.forEach {
+            if (!it.isAdd && !it.isPlaceholder) {
+                it.isEdit = true
+            }
+        }
+        shortcutLiveData.value = shortCuts
+    }
+
+    fun quitShortCutEdit() {
+        if (!isShortCutEdit) return
+        isShortCutEdit = false
+        val shortCuts = shortcutLiveData.value!!
+        shortCuts.forEach {
+            it.isEdit = false
+        }
+        shortcutLiveData.value = shortCuts
+
+        // 保存一份
+        val temp = ArrayList(shortCuts)
+        temp.removeIf { it.isAdd }
+        temp.removeIf { it.isPlaceholder }
+        UrlShortcutManager.upDataCurShortCut(temp)
+    }
+
+    fun deleteShortCut(shortCut: ShortCut) {
+        val shortCuts = shortcutLiveData.value!!
+        shortCuts.remove(shortCut)
+        shortcutLiveData.value = urlShortcutAddPlaceholder(shortCuts)
+    }
+
+    fun clickShortCut(shortCut: ShortCut) {
+        CommonUtil.openWebView(CommonUtil.appContext!!, shortCut.clickUrl)
+    }
+
+    fun clickAddShortCut(context: Context) {
+        val shortCuts = shortcutLiveData.value!!
+        val temp = ArrayList(shortCuts)
+        temp.removeIf { it.isAdd }
+
+        UrlShortcutSelectDialog(context).apply {
+            setData(temp)
+            onDismissListener = {
+                // 合并数据
+                val newData = it.distinctBy { it.name }
+                val addData = ArrayList<ShortCut>()
+
+                newData.forEach { d ->
+                    if (temp.find { it.name == d.name } == null) {
+                        addData.add(d)
+                    }
+                }
+
+                temp.removeIf { d ->
+                    newData.find { it.name == d.name } == null
+                }
+                temp.addAll(addData)
+                UrlShortcutManager.upDataCurShortCut(temp)
+
+                val result = ArrayList(temp)
+                result.forEach {
+                    it.isEdit = false
+                }
+                shortcutLiveData.postValue(urlShortcutAddPlaceholder(result))
+            }
+        }.show()
+    }
+
+    fun swapShortCut(from: Int, to: Int) {
+        val shortCuts = shortcutLiveData.value!!
+
+        if (Math.abs(to - from) == 1) {
+            Collections.swap(shortCuts, from, to)
+        } else {
+            if (from > to) {
+                var temp = from
+                while (temp > to) {
+                    Collections.swap(shortCuts, temp, temp - 1)
+                    temp--
+                }
+            } else {
+                for (i in from until to) {
+                    Collections.swap(shortCuts, i, i - 1)
+                }
+            }
+        }
+
+    }
+
+    // 通过尾部加个空白的来处理点击相应问题
+    private fun urlShortcutAddPlaceholder(list: ArrayList<ShortCut>): ArrayList<ShortCut> {
+        list.removeIf { it.isAdd }
+        list.removeIf { it.isPlaceholder }
+
+        urlShortcutSize = list.size
+        list.add(ShortCut().apply {
+            isAdd = true
+            name = "Add"
+        })
+
+        val size = list.size
+        var needAdPlaceholder = 5 - size % 5
+        if (needAdPlaceholder == 5) {
+            needAdPlaceholder = 0
+        }
+
+        for (i in 0 until needAdPlaceholder) {
+            list.add(ShortCut().apply {
+                isPlaceholder = true
+            })
+        }
+        return list
     }
 }

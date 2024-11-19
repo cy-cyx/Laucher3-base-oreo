@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.View
 import com.adjust.sdk.Adjust
 import com.adjust.sdk.AdjustEvent
-import com.ironsource.tr
 import com.theme.lambda.launcher.ad.AdName
 import com.theme.lambda.launcher.ad.AdUtil
 import com.theme.lambda.launcher.appwidget.WidgetManager
@@ -40,7 +39,7 @@ import java.lang.ref.WeakReference
 
 class ThemeManager {
 
-    private var themeId = "" // 当前的主题id
+    var themeId = "" // 当前的主题id
     var previewThemeId = "" // 预览的主题id 可能为空
     var showThemeId = "" // 当前展示主题id，可能是预览
 
@@ -187,12 +186,12 @@ class ThemeManager {
         themeId = SpUtil.getString(sKeyThemeId)
         showThemeId = themeId
 
-        // 首次启动在onResume设置，避免二次加载
+        // 判断一下是否要进入预览
         if (enterPreviewId != "") {
             previewThemeId = enterPreviewId
             enterPreview()
             enterPreviewId = ""
-
+            // 首次启动 onResume走加载逻辑，这里就无需手动加载 避免二次加载
             setCurShowThemeById(previewThemeId, reload = false)
         }
 
@@ -205,17 +204,13 @@ class ThemeManager {
         }
     }
 
+    // 多Laucher下的重建问题
     fun reLoad() {
         themeId = SpUtil.getString(sKeyThemeId)
         showThemeId = themeId
 
         // 更新壁纸默认壁纸
-        val manifest = getCurManifest()
-        if (manifest != null) {
-            val wallpaper = getManifestResRootPath() + manifest.background
-            wallpaperView?.setPic(wallpaper)
-            wallpaperView?.visible()
-        }
+        setWallpaper()
     }
 
     fun onStart() {
@@ -234,14 +229,9 @@ class ThemeManager {
             // 可能打开着all app需要关闭
             launcher?.closeAllAppLayoutIfNeed()
             setCurShowThemeById(previewThemeId)
-        }else{
+        } else {
             // 如果不是预览就保证设置正确的壁纸
-            val manifest = getCurManifest()
-            if (manifest != null) {
-                val wallpaper = getManifestResRootPath() + manifest.background
-                wallpaperView?.setPic(wallpaper)
-                wallpaperView?.visible()
-            }
+            setWallpaper()
         }
 
         launcher?.let {
@@ -287,7 +277,9 @@ class ThemeManager {
             if (isPreviewMode) return
             if (LauncherUtil.isDefaultLauncher(it)) {
                 // 华为安卓8 会报设置线程没有内存权限
-                if (SystemUtil.getDeviceBrand() == SystemUtil.PHONE_HUAWEI && Build.VERSION.SDK_INT < Build.VERSION_CODES.P) return
+                if (SystemUtil.getDeviceBrand()
+                        .equals(SystemUtil.PHONE_HUAWEI) && Build.VERSION.SDK_INT < Build.VERSION_CODES.P
+                ) return
                 if (SpKey.curUserWallpaperId.getSpString() != themeId) {
                     val manifest = getCurManifest()
                     if (manifest != null) {
@@ -324,22 +316,48 @@ class ThemeManager {
     private fun setCurShowThemeById(id: String, reload: Boolean = true) {
         if (showThemeId == id) return
         showThemeId = id
-        ThemeIconMapping.cleanThemeIconCache()
+        ThemeIconMappingV2.cleanThemeIconCache()
         // 更新桌面
         if (reload) {
             launcher?.reload(true)
         }
         // 更新壁纸
-        val manifest = getCurManifest()
-        if (manifest != null) {
-            val wallpaper = getManifestResRootPath() + manifest.background
-            wallpaperView?.setPic(wallpaper)
-            wallpaperView?.visible()
-        } else {
-            wallpaperView?.gone()
-        }
+        setWallpaper()
+
         // 更新相关组件
         WidgetManager.upData()
+    }
+
+    /**
+     * 由于部分机型设置壁纸会重构launcher导致启动卡顿，故使用真假壁纸交替使用
+     */
+    private fun setWallpaper() {
+        launcher?.let {
+            if (isPreviewMode || !LauncherUtil.isDefaultLauncher(it)) {
+                val manifest = getCurManifest()
+                if (manifest != null) {
+                    val wallpaper = getManifestResRootPath() + manifest.background
+                    wallpaperView?.setPic(wallpaper)
+                    wallpaperView?.visible()
+                } else {
+                    wallpaperView?.gone()
+                }
+            } else {
+                // 如果已经找机会设置真壁纸了，就不用再显示假壁纸，这样用户想换也能换了
+                if (SpKey.curUserWallpaperId.getSpString() == themeId) {
+                    wallpaperView?.gone()
+                } else {
+                    val manifest = getCurManifest()
+                    if (manifest != null) {
+                        val wallpaper = getManifestResRootPath() + manifest.background
+                        wallpaperView?.setPic(wallpaper)
+                        wallpaperView?.visible()
+                    } else {
+                        wallpaperView?.gone()
+                    }
+                }
+            }
+        }
     }
 
     fun getCurManifest(): ManifestBean? {

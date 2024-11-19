@@ -39,7 +39,7 @@ object VipManager {
         // 延迟请求网络有坑，归因问题
         GlobalScope.launch {
             delay(3000)
-            Billing.init(InitParam.Builder(Constants.BASE_URL, Constants.SECRET_KEY).build())
+            Billing.init(InitParam.Builder(Constants.BASE_URL, BuildConfig.SECRET_KEY).build())
             upDataFreeAdUntil()
         }
     }

@@ -219,7 +219,7 @@ class WeatherFragment : BaseFragment<FragmentWeather2Binding>() {
     }
 
     fun intentToNews() {
-        startActivity(Intent(requireContext(), NewsListActivity::class.java))
+        NewsListActivity.start(requireContext())
     }
 
     private fun initLocalNew() {
@@ -292,6 +292,7 @@ class WeatherFragment : BaseFragment<FragmentWeather2Binding>() {
                 new.copy(itemType = HomeUiModel.HomeWidget.AD.type),
                 new.copy(itemType = HomeUiModel.HomeWidget.TRAVEL.type),
                 new.copy(itemType = HomeUiModel.HomeWidget.INDEX.type),
+                new.copy(itemType = HomeUiModel.HomeWidget.AD.type),
                 new.copy(itemType = HomeUiModel.HomeWidget.AIR.type),
                 new.copy(itemType = HomeUiModel.HomeWidget.SUN.type),
             )

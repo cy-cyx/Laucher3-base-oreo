@@ -152,6 +152,7 @@ import com.theme.lambda.launcher.widget.PreviewControlView;
 import com.theme.lambda.launcher.widget.WallpaperView;
 import com.theme.lambda.launcher.widget.dialog.LoadingDialog;
 import com.theme.lambda.launcher.widget.dialog.StoreRatingsDialog;
+import com.theme.lambda.launcher.widget.dialog.UrlShortcutSelectDialog;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -1182,6 +1183,13 @@ public class Launcher extends BaseActivity
         fillMultiLauncherBug();
         AdUtil.loadAdOpenAppOnly(this);
         AdUtil.reloadOpenAdIfNeed();
+        // 判断是否需要更新offer配置
+        if (!isWorkspaceLoading()) {
+            if (RecommendAppManager.upDataRecommendAppManagerIfNeed()) {
+                reload(true);
+                showLoading(60000);
+            }
+        }
 
         if (DEBUG_RESUME_TIME) {
             Log.d(TAG, "Time spent in onResume: " + (System.currentTimeMillis() - startTime));
@@ -1980,31 +1988,32 @@ public class Launcher extends BaseActivity
         }
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        if (mWorkspace.getChildCount() > 0) {
-            outState.putInt(RUNTIME_STATE_CURRENT_SCREEN,
-                    mWorkspace.getCurrentPage());
-            Log.d(TAG, "onSaveInstanceState : last custom" + mWorkspace.getCurrentPage());
-        }
-        super.onSaveInstanceState(outState);
-
-        outState.putInt(RUNTIME_STATE, mState.ordinal());
-        // We close any open folders and shortcut containers since they will not be re-opened,
-        // and we need to make sure this state is reflected.
-        AbstractFloatingView.closeAllOpenViews(this, false);
-
-        if (mPendingRequestArgs != null) {
-            outState.putParcelable(RUNTIME_STATE_PENDING_REQUEST_ARGS, mPendingRequestArgs);
-        }
-        if (mPendingActivityResult != null) {
-            outState.putParcelable(RUNTIME_STATE_PENDING_ACTIVITY_RESULT, mPendingActivityResult);
-        }
-
-        if (mLauncherCallbacks != null) {
-            mLauncherCallbacks.onSaveInstanceState(outState);
-        }
-    }
+// 不要重建，导致很多麻烦问题
+//    @Override
+//    protected void onSaveInstanceState(Bundle outState) {
+//        if (mWorkspace.getChildCount() > 0) {
+//            outState.putInt(RUNTIME_STATE_CURRENT_SCREEN,
+//                    mWorkspace.getCurrentPage());
+//            Log.d(TAG, "onSaveInstanceState : last custom" + mWorkspace.getCurrentPage());
+//        }
+//        super.onSaveInstanceState(outState);
+//
+//        outState.putInt(RUNTIME_STATE, mState.ordinal());
+//        // We close any open folders and shortcut containers since they will not be re-opened,
+//        // and we need to make sure this state is reflected.
+//        AbstractFloatingView.closeAllOpenViews(this, false);
+//
+//        if (mPendingRequestArgs != null) {
+//            outState.putParcelable(RUNTIME_STATE_PENDING_REQUEST_ARGS, mPendingRequestArgs);
+//        }
+//        if (mPendingActivityResult != null) {
+//            outState.putParcelable(RUNTIME_STATE_PENDING_ACTIVITY_RESULT, mPendingActivityResult);
+//        }
+//
+//        if (mLauncherCallbacks != null) {
+//            mLauncherCallbacks.onSaveInstanceState(outState);
+//        }
+//    }
 
     @Override
     public void onDestroy() {
@@ -2664,7 +2673,7 @@ public class Launcher extends BaseActivity
             startActivity(v, intent, item);
             Bundle bundle = new Bundle();
             bundle.putString("pn", packageName);
-            bundle.putBoolean("isSys", false);
+            bundle.putBoolean("isSys", true);
             bundle.putLong("start", System.currentTimeMillis() - (SpUtil.INSTANCE.getLong(SpKey.install_time, 0L)));
             EventUtil.INSTANCE.logEvent(EventName.LAppOpen, bundle, false);
         } else {
@@ -2680,7 +2689,7 @@ public class Launcher extends BaseActivity
             });
             Bundle bundle = new Bundle();
             bundle.putString("pn", packageName);
-            bundle.putBoolean("isSys", true);
+            bundle.putBoolean("isSys", false);
             bundle.putLong("start", System.currentTimeMillis() - (SpUtil.INSTANCE.getLong(SpKey.install_time, 0L)));
             EventUtil.INSTANCE.logEvent(EventName.LAppOpen, bundle, false);
             NewInstallationManager.INSTANCE.clickApp(packageName);

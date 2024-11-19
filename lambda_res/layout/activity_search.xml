@@ -222,6 +222,125 @@
                                 app:layout_constraintTop_toTopOf="parent" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
+                        <LinearLayout
+                            android:id="@+id/cl_url_shortcut"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:background="#66000000"
+                            android:clipChildren="false"
+                            android:orientation="vertical"
+                            android:visibility="gone">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="17dp"
+                                android:layout_marginTop="15.67dp"
+                                android:fontFamily="@font/medium"
+                                android:includeFontPadding="false"
+                                android:text="@string/quick_tools"
+                                android:textColor="@color/white"
+                                android:textSize="14sp" />
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rv_url_shortcut"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="20dp" />
+                        </LinearLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/cl_weather"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:background="#66000000"
+                            android:visibility="gone">
+
+                            <ImageView
+                                android:id="@+id/iv_local_new"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="15dp"
+                                android:src="@drawable/ic_local_new"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                style="@style/title_style"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:text="@string/local_news"
+                                android:textColor="#ffffff"
+                                android:textSize="15sp"
+                                app:layout_constraintBottom_toBottomOf="@+id/iv_local_new"
+                                app:layout_constraintStart_toEndOf="@+id/iv_local_new"
+                                app:layout_constraintTop_toTopOf="@+id/iv_local_new" />
+
+
+                            <TextView
+                                style="@style/title_style"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="10dp"
+                                android:drawableEnd="@drawable/ic_read_more_white"
+                                android:drawablePadding="5dp"
+                                android:gravity="center"
+                                android:text="@string/read_more"
+                                android:textColor="#ffffff"
+                                android:textSize="13sp"
+                                app:layout_constraintBottom_toBottomOf="@+id/iv_local_new"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="@+id/iv_local_new" />
+
+                            <com.lambdaweather.view.WeatherNewBanner
+                                android:id="@+id/rv_banner"
+                                android:layout_width="0dp"
+                                android:layout_height="260dp"
+                                android:layout_marginHorizontal="10dp"
+                                android:layout_marginTop="15dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/iv_local_new"
+                                app:rvb_indicatorSelectedSrc="#1C99F1"
+                                app:rvb_indicatorSize="7dp"
+                                app:rvb_indicatorSpace="10dp"
+                                app:rvb_indicatorUnselectedSrc="#B5B5B5" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <LinearLayout
+                            android:id="@+id/cl_your_may_like"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:background="#66000000"
+                            android:orientation="vertical"
+                            android:visibility="gone">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="17dp"
+                                android:layout_marginTop="15.67dp"
+                                android:fontFamily="@font/medium"
+                                android:includeFontPadding="false"
+                                android:text="@string/your_may_like"
+                                android:textColor="@color/white"
+                                android:textSize="14sp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rv_your_may_like"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="20dp" />
+                        </LinearLayout>
+
                     </LinearLayout>
 
                     <LinearLayout
@@ -386,12 +505,25 @@
                                 android:layout_marginEnd="16dp"
                                 android:src="@drawable/ic_go" />
                         </FrameLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp" />
                     </LinearLayout>
                 </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="#66000000">
+
+                    <com.theme.lambda.launcher.ad.view.MRECBanner
+                        android:id="@+id/mrecBanner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center" />
+                </FrameLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp" />
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

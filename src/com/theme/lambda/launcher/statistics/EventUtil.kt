@@ -31,6 +31,7 @@ object EventUtil {
         Event.init(InitParam.Builder(Constants.BASE_URL, "").apply {
             adOrigin(true)
         }.build())
+        Event.isDebug = BuildConfig.isDebug
 
         AdjustHelper.setDebug(BuildConfig.isDebug)
         AdjustHelper.setAttributionListener {

@@ -82,8 +82,10 @@ import com.android.launcher3.util.Preconditions;
 import com.android.launcher3.util.Provider;
 import com.android.launcher3.util.Thunk;
 import com.android.launcher3.util.ViewOnDrawExecutor;
+import com.lambda.common.http.Global;
 import com.lambda.common.utils.utilcode.util.Utils;
 import com.theme.lambda.launcher.Constants;
+import com.theme.lambda.launcher.utils.SpKey;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -1096,12 +1098,7 @@ public class LauncherModel extends BroadcastReceiver
                                         info = new ShortcutInfo();
                                         Intent tempIntent = new Intent(cn.getPackageName());
                                         tempIntent.setComponent(cn);
-                                        info.iconBitmap =
-                                                ThemeIconMapping.getThemeBitmap(
-                                                        Utils.getApp(),
-                                                        cn.getPackageName(),
-                                                        cn.getClassName()
-                                                );
+                                        info.iconBitmap = ThemeIconMappingV2.getIconBitmap(cn.getPackageName(), cn.getClassName());
                                         info.title = c.getTitle();
                                         info.contentDescription = "";
                                     } else if (Constants.sAllppAction.equals(intent.getAction())) {
@@ -1197,6 +1194,11 @@ public class LauncherModel extends BroadcastReceiver
                                     folderInfo.spanX = 1;
                                     folderInfo.spanY = 1;
                                     folderInfo.options = c.getInt(optionsIndex);
+
+                                    // 推荐文件夹需要动态分类
+                                    if (RecommendAppManager.isFeaturedFolder(folderInfo.title.toString())) {
+                                        RecommendAppManager.addOfferIntoFeaturedFolder(folderInfo);
+                                    }
 
                                     // no special handling required for restored folders
                                     c.markRestored();
