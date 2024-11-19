@@ -152,37 +152,40 @@ object RecommendAppManager {
 
     private fun checkNeedUpData() {
         scope.launch {
-            val offerConfigString =
-                LambdaRemoteConfig.getInstance(CommonUtil.appContext!!).getString("OfferConfig")
-            val config =
-                GsonUtil.gson.fromJson<OfferConfig>(offerConfigString, OfferConfig::class.java)
+            try {
+                val offerConfigString =
+                    LambdaRemoteConfig.getInstance(CommonUtil.appContext!!).getString("OfferConfig")
+                val config =
+                    GsonUtil.gson.fromJson<OfferConfig>(offerConfigString, OfferConfig::class.java)
 
-            // 判断json hashcode
-            if (SpKey.keyRecommendHashcode.getSpInt() != config.hashCode()) {
+                // 判断json hashcode
+                if (SpKey.keyRecommendHashcode.getSpInt() != config.hashCode()) {
 
-                config.offers.forEach {
-                    it.localIconUrl = GlideUtil.download(
-                        CommonUtil.appContext!!,
-                        it.iconUrl,
-                        iconDownloadFolder
-                    )
-                }
-
-                config.offers.forEach {
-                    // 处理红点
-                    if (!newIdsList.contains(it.id)) {
-                        NewInstallationManager.addNewInstallAppPackName(actionHost + it.id)
-                        newIdsList.add(it.id)
+                    config.offers.forEach {
+                        it.localIconUrl = GlideUtil.download(
+                            CommonUtil.appContext!!,
+                            it.iconUrl,
+                            iconDownloadFolder
+                        )
                     }
+
+                    config.offers.forEach {
+                        // 处理红点
+                        if (!newIdsList.contains(it.id)) {
+                            NewInstallationManager.addNewInstallAppPackName(actionHost + it.id)
+                            newIdsList.add(it.id)
+                        }
+                    }
+                    SpKey.keyRecommendNewIds.putSpString(GsonUtil.gson.toJson(newIdsList))
+                    SpKey.keyOfferConfig.putSpString(GsonUtil.gson.toJson(config))
+
+                    _offerConfig = config
+                    SpKey.keyRecommendHashcode.putSpInt(config.hashCode())
+
+                    // 设置下次更新标识位
+                    needUpDataRecommend = true
                 }
-                SpKey.keyRecommendNewIds.putSpString(GsonUtil.gson.toJson(newIdsList))
-                SpKey.keyOfferConfig.putSpString(GsonUtil.gson.toJson(config))
-
-                _offerConfig = config
-                SpKey.keyRecommendHashcode.putSpInt(config.hashCode())
-
-                // 设置下次更新标识位
-                needUpDataRecommend = true
+            } catch (e: Exception) {
             }
         }
     }
