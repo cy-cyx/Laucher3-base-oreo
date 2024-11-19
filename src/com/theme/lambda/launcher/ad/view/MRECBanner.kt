@@ -64,16 +64,24 @@ class MRECBanner @JvmOverloads constructor(
     fun loadAd() {
         initAdapter()
         mMRECBanner?.onAdapterClose = listen
-        if (mMRECBanner?.isReady() == true) {
-            mMRECBanner?.showBanner(this@MRECBanner, isLoadShow = false)
-        } else {
+        if (hasPreload){
+            if (mMRECBanner?.isReady() == true) {
+                mMRECBanner?.showBanner(this@MRECBanner, isLoadShow = false)
+            } else {
+                mMRECBanner?.loadBanner(false)
+            }
+            hasPreload = false
+        }else{
             mMRECBanner?.loadBanner(false)
         }
     }
 
+    private var hasPreload = false
+
     fun preLoad() {
         initAdapter()
         mMRECBanner?.loadBanner(false)
+        hasPreload = true
     }
 
     fun isReady(): Boolean {
