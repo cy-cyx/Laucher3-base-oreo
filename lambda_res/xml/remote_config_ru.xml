@@ -329,7 +329,7 @@
         <key>SearchConfig</key>
         <value>{
             "search_urls": [
-            "https://yandex.com/search?text={query_string}"
+            "https://google.com/search?q={query_string}"
             ],
             "is_open_in_webview": true,
             "shortcut_categories": [
@@ -339,8 +339,7 @@
             {
             "name": "Facebook",
             "icon_url": "https://img.icons8.com/fluency/150/facebook.png",
-            "click_url": "https://facebook.com/",
-            "is_default": false
+            "click_url": "https://facebook.com/"
             },
             {
             "name": "Instagram",
@@ -350,9 +349,9 @@
             },
             {
             "name": "Twitter",
-            "icon_url": "https://img.icons8.com/ios-filled/150/twitterx--v1.png",
+            "icon_url": "https://d218bwdbonjwkx.cloudfront.net/resources/web_icon/Twitte.icon.png",
             "click_url": "https://x.com/",
-            "is_default": false
+            "is_default": true
             },
             {
             "name": "Pinterest",
@@ -362,7 +361,7 @@
             },
             {
             "name": "Reddit",
-            "icon_url": "https://img.icons8.com/nolan/150/reddit.png",
+            "icon_url": "https://d218bwdbonjwkx.cloudfront.net/resources/web_icon/Reddit.icon.png",
             "click_url": "https://www.reddit.com/",
             "is_default": false
             },
@@ -384,28 +383,22 @@
             "category": "Ecommerce",
             "shortcuts": [
             {
-            "name": "Ozon",
-            "icon_url": "https://img.icons8.com/color/144/ozon.png",
-            "click_url": "https://www.ozon.ru/",
+            "name": "Amazon",
+            "icon_url": "https://d218bwdbonjwkx.cloudfront.net/resources/web_icon/amazon.icon.png",
+            "click_url": "https://amazon.com/",
             "is_default": true
             },
             {
-            "name": "Amazon",
-            "icon_url": "https://img.icons8.com/color/150/amazon.png",
-            "click_url": "https://amzn.to/3Z61RrQ",
-            "is_default": false
-            },
-            {
             "name": "Temu",
-            "icon_url": "https://img.icons8.com/ios-filled/150/temu.png",
+            "icon_url": "https://d218bwdbonjwkx.cloudfront.net/resources/web_icon/temu.icon.png",
             "click_url": "https://temu.com/",
             "is_default": false
             },
             {
             "name": "Ebay",
-            "icon_url": "https://img.icons8.com/color/150/ebay.png",
+            "icon_url": "https://d218bwdbonjwkx.cloudfront.net/resources/web_icon/ebay.icon.png",
             "click_url": "https://www.ebay.com/",
-            "is_default": false
+            "is_default": true
             },
             {
             "name": "Shopee",
@@ -426,13 +419,13 @@
             },
             {
             "name": "Youtube",
-            "icon_url": "https://img.icons8.com/color/150/youtube-play.png",
+            "icon_url": "https://d218bwdbonjwkx.cloudfront.net/resources/web_icon/youtube.icon.png",
             "click_url": "https://www.youtube.com/",
-            "is_default": false
+            "is_default": true
             },
             {
             "name": "Vimeo",
-            "icon_url": "https://img.icons8.com/color/150/vimeo.png",
+            "icon_url": "https://d218bwdbonjwkx.cloudfront.net/resources/web_icon/Vimeo.icon.png",
             "click_url": "https://vimeo.com/",
             "is_default": false
             }
@@ -449,25 +442,25 @@
             },
             {
             "name": "Fox News",
-            "icon_url": "https://img.icons8.com/wired/150/fox-news.png",
+            "icon_url": "https://d218bwdbonjwkx.cloudfront.net/resources/web_icon/Fox news.icon.png",
             "click_url": "https://www.foxnews.com/",
             "is_default": false
             },
             {
             "name": "Nytimes",
-            "icon_url": "https://img.icons8.com/ios-filled/150/new-york-times--v1.png",
+            "icon_url": "https://d218bwdbonjwkx.cloudfront.net/resources/web_icon/Nytimes.icon.png",
             "click_url": "https://www.nytimes.com/",
             "is_default": false
             },
             {
             "name": "NBC News",
-            "icon_url": "https://img.icons8.com/color/150/NBC.png",
+            "icon_url": "https://d218bwdbonjwkx.cloudfront.net/resources/web_icon/NBC News.icon.png",
             "click_url": "https://www.nbcnews.com/",
             "is_default": false
             },
             {
             "name": "ESPN",
-            "icon_url": "https://img.icons8.com/color/150/espn.png",
+            "icon_url": "https://d218bwdbonjwkx.cloudfront.net/resources/web_icon/ESPn.icon.png",
             "click_url": "https://www.espn.com/",
             "is_default": false
             }
@@ -478,25 +471,25 @@
             "shortcuts": [
             {
             "name": "ChatGPT",
-            "icon_url": "https://img.icons8.com/fluency/150/chatgpt--v2.png",
+            "icon_url": "https://d218bwdbonjwkx.cloudfront.net/resources/web_icon/chatgpt.icon.png",
             "click_url": "https://openai.com/chatgpt/overview/",
             "is_default": true
             },
             {
             "name": "Bing",
-            "icon_url": "https://img.icons8.com/fluency/150/bing--v1.png",
+            "icon_url": "https://d218bwdbonjwkx.cloudfront.net/resources/web_icon/Bing.icon.png",
             "click_url": "https://www.bing.com/",
             "is_default": false
             },
             {
             "name": "Wikipedia",
-            "icon_url": "https://img.icons8.com/color/150/wikipedia--v3.png",
+            "icon_url": "https://d218bwdbonjwkx.cloudfront.net/resources/web_icon/wikipedia.icon.png",
             "click_url": "https://www.wikipedia.org/",
-            "is_default": false
+            "is_default": true
             },
             {
             "name": "Yahoo",
-            "icon_url": "https://img.icons8.com/doodle/150/yahoo.png",
+            "icon_url": "https://d218bwdbonjwkx.cloudfront.net/resources/web_icon/yahoo.icon.png",
             "click_url": "https://www.yahoo.com/",
             "is_default": false
             },
@@ -513,13 +506,13 @@
             "shortcuts": [
             {
             "name": "Hulu",
-            "icon_url": "https://img.icons8.com/color/150/hulu.png",
+            "icon_url": "https://d218bwdbonjwkx.cloudfront.net/resources/web_icon/hulu.icon.png",
             "click_url": "https://www.hulu.com/",
             "is_default": false
             },
             {
             "name": "Twitch",
-            "icon_url": "https://img.icons8.com/color/150/twitch.png",
+            "icon_url": "https://d218bwdbonjwkx.cloudfront.net/resources/web_icon/Twitch.icon.png",
             "click_url": "https://www.twitch.tv/",
             "is_default": false
             },
@@ -533,7 +526,7 @@
             "name": "Tiktok",
             "icon_url": "https://img.icons8.com/color/150/tiktok.png",
             "click_url": "https://tiktok.com/",
-            "is_default": false
+            "is_default": true
             }
             ]
             },
@@ -542,7 +535,7 @@
             "shortcuts": [
             {
             "name": "Spotify",
-            "icon_url": "https://img.icons8.com/fluency/150/spotify.png",
+            "icon_url": "https://d218bwdbonjwkx.cloudfront.net/resources/web_icon/Spotify.icon.png",
             "click_url": "https://www.vevo.com/",
             "is_default": false
             }
@@ -555,12 +548,6 @@
             "name": "WWE",
             "icon_url": "https://img.icons8.com/cute-clipart/150/wwe.png",
             "click_url": "https://www.flashscore.com/",
-            "is_default": false
-            },
-            {
-            "name": "Amazon",
-            "icon_url": "https://img.icons8.com/color/150/amazon.png",
-            "click_url": "https://amazon.com/",
             "is_default": false
             }
             ]
@@ -576,7 +563,7 @@
             },
             {
             "name": "Tripadvisor",
-            "icon_url": "https://img.icons8.com/ios-filled/150/tripadvisor.png",
+            "icon_url": "https://d218bwdbonjwkx.cloudfront.net/resources/web_icon/tripadvisor.icon.png",
             "click_url": "https://cn.tripadvisor.com/",
             "is_default": false
             }
@@ -587,9 +574,9 @@
             "shortcuts": [
             {
             "name": "WHO",
-            "icon_url": "https://img.icons8.com/color/150/world-health-organization.png",
+            "icon_url": "https://d218bwdbonjwkx.cloudfront.net/resources/web_icon/WHO.icon.png",
             "click_url": "https://www.who.int/",
-            "is_default": false
+            "is_default": true
             },
             {
             "name": "Healthline",
@@ -599,7 +586,7 @@
             },
             {
             "name": "Drugs",
-            "icon_url": "https://www.drugs.com/img/logo/drugscom-logo-mark.svg",
+            "icon_url": "https://d218bwdbonjwkx.cloudfront.net/resources/web_icon/Drugs.icon.png",
             "click_url": "https://www.drugs.com/",
             "is_default": false
             },
