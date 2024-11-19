@@ -26,8 +26,8 @@ android {
     defaultConfig {
         minSdkVersion 24
         targetSdkVersion 34
-        versionCode 33
-        versionName "0.3.3"
+        versionCode 34
+        versionName "0.3.4"
         applicationId 'com.theme.lambda.launcher'
         testApplicationId 'com.theme.lambda.launcher.tests'
 
@@ -157,7 +157,7 @@ dependencies {
         exclude group: 'com.lambda.common', module: 'http'
     }
     implementation "com.lambda.common:remoteconfig:0.1.5"
-    implementation "com.lambda.common:lambdaad:1176"
+    implementation "com.lambda.common:lambdaad:1177"
     implementation 'com.lambda.common:billing-google:0.0.0.10'
 
     implementation 'com.facebook.infer.annotation:infer-annotation:0.18.0'
@@ -186,7 +186,7 @@ dependencies {
     implementation 'com.google.android.ump:user-messaging-platform:3.1.0'
 
     implementation 'com.bigossp:bigo-ads:4.9.1'
-    implementation 'com.yandex.android:mobileads:7.6.0'
+    implementation 'com.yandex.android:mobileads:7.7.0'
     implementation 'com.yandex.ads.mediation:mobileads-mytarget:5.20.1.1'
 
     implementation 'com.ironsource.sdk:mediationsdk:8.4.0'
