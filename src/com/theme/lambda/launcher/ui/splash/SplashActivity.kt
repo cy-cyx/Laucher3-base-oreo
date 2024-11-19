@@ -140,18 +140,33 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
         var isWantedAdReady: Boolean
         var region = CommonUtil.getRegion()
-        if (System.currentTimeMillis() - showTryAdTimestamp > adWaitingTime / 2 || region == "RU") {
-            // 等待超过一半时间 此时都不用等admob，meta等加载
+        if (System.currentTimeMillis() - showTryAdTimestamp > adWaitingTime / 2) {
+            // 等待超过一半时间 此时都不用等优先级高的广告的加载
             isWantedAdReady = AdUtil.isReady(AdName.splash)
         } else {
-            val isWantedIntReady = AdUtil.AdmobAdSources.any {
-                AdUtil.isReady(AdName.splash, it, LambdaAd.LambdaAdType.TYPE_INTERSTITIAL)
+            when (region) {
+                "RU" -> {
+                    val isWantedIntReady = AdUtil.AdPriorityAdSourcesRu.any {
+                        AdUtil.isReady(AdName.splash, it, LambdaAd.LambdaAdType.TYPE_INTERSTITIAL)
+                    }
+                    val isWantedOpenReady = AdUtil.AdPriorityAdSourcesRu.any {
+                        AdUtil.isReady(AdName.splash, it, LambdaAd.LambdaAdType.TYPE_OPEN)
+                    }
+                    // 让int和open充分竞争
+                    isWantedAdReady = isWantedIntReady && isWantedOpenReady
+                }
+
+                else -> {
+                    val isWantedIntReady = AdUtil.AdPriorityAdSources.any {
+                        AdUtil.isReady(AdName.splash, it, LambdaAd.LambdaAdType.TYPE_INTERSTITIAL)
+                    }
+                    val isWantedOpenReady = AdUtil.AdPriorityAdSources.any {
+                        AdUtil.isReady(AdName.splash, it, LambdaAd.LambdaAdType.TYPE_OPEN)
+                    }
+                    // 让int和open充分竞争
+                    isWantedAdReady = isWantedIntReady && isWantedOpenReady
+                }
             }
-            val isWantedOpenReady = AdUtil.AdmobAdSources.any {
-                AdUtil.isReady(AdName.splash, it, LambdaAd.LambdaAdType.TYPE_OPEN)
-            }
-            // 让int和open充分竞争
-            isWantedAdReady = isWantedIntReady && isWantedOpenReady
         }
         if (isWantedAdReady) {
             isShowAd = true
