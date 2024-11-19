@@ -2,6 +2,7 @@ package com.theme.lambda.launcher.ad.view
 
 import android.app.Activity
 import android.content.Context
+import android.os.Looper
 import android.util.AttributeSet
 import android.widget.FrameLayout
 import androidx.fragment.app.FragmentActivity
@@ -36,7 +37,10 @@ class AdBanner2 @JvmOverloads constructor(
         when (event) {
             Lifecycle.Event.ON_RESUME -> {
                 isResume = true
-                showBannerAd()
+                Looper.myQueue().addIdleHandler {
+                    showBannerAd()
+                    false
+                }
             }
 
             Lifecycle.Event.ON_PAUSE -> {

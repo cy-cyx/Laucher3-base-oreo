@@ -31,7 +31,7 @@ object ThemeIconMappingV2 {
     private var roundedCorners: Float = dp2px(10f).toFloat()
 
     private val threadPoolExecutor =
-        ThreadPoolExecutor(3, 50, 1, TimeUnit.SECONDS, LinkedBlockingQueue<Runnable>(10))
+        ThreadPoolExecutor(3, 50, 1, TimeUnit.SECONDS, LinkedBlockingQueue<Runnable>(400))
 
     private val uiScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
 
