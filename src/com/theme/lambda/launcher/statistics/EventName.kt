@@ -56,4 +56,5 @@ object EventName {
     val LOfferExists = "LOfferExists"
     val LNews = "LNews"
     val LNewsClick = "LNewsClick"
+    val LWeb = "LWeb"
 }
