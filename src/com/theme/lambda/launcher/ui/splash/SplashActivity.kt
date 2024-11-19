@@ -242,36 +242,36 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
     private var curLogLiveTime = 0
     private fun logLiveEvent() {
         if (!isResume) return
-        if (showTryAdTimestamp > 5 && curLogLiveTime < 5) {
+        if (showTryAdTimestamp > 30 && curLogLiveTime < 30) {
             EventUtil.logEvent(EventName.splashPageView, Bundle().apply {
-                putInt("duration_s", 5)
+                putInt("duration_s", 30)
             })
-            curLogLiveTime = 5
-        } else if (showTryAdTimestamp > 10 && curLogLiveTime < 10) {
-            EventUtil.logEvent(EventName.splashPageView, Bundle().apply {
-                putInt("duration_s", 10)
-            })
-            curLogLiveTime = 10
-        } else if (showTryAdTimestamp > 15 && curLogLiveTime < 15) {
-            EventUtil.logEvent(EventName.splashPageView, Bundle().apply {
-                putInt("duration_s", 15)
-            })
-            curLogLiveTime = 15
-        } else if (showTryAdTimestamp > 20 && curLogLiveTime < 20) {
-            EventUtil.logEvent(EventName.splashPageView, Bundle().apply {
-                putInt("duration_s", 20)
-            })
-            curLogLiveTime = 20
+            curLogLiveTime = 30
         } else if (showTryAdTimestamp > 25 && curLogLiveTime < 25) {
             EventUtil.logEvent(EventName.splashPageView, Bundle().apply {
                 putInt("duration_s", 25)
             })
             curLogLiveTime = 25
-        } else if (showTryAdTimestamp > 30 && curLogLiveTime < 30) {
+        } else if (showTryAdTimestamp > 20 && curLogLiveTime < 20) {
             EventUtil.logEvent(EventName.splashPageView, Bundle().apply {
-                putInt("duration_s", 30)
+                putInt("duration_s", 20)
             })
-            curLogLiveTime = 30
+            curLogLiveTime = 20
+        } else if (showTryAdTimestamp > 15 && curLogLiveTime < 15) {
+            EventUtil.logEvent(EventName.splashPageView, Bundle().apply {
+                putInt("duration_s", 15)
+            })
+            curLogLiveTime = 15
+        } else if (showTryAdTimestamp > 10 && curLogLiveTime < 10) {
+            EventUtil.logEvent(EventName.splashPageView, Bundle().apply {
+                putInt("duration_s", 10)
+            })
+            curLogLiveTime = 10
+        } else if (showTryAdTimestamp > 5 && curLogLiveTime < 5) {
+            EventUtil.logEvent(EventName.splashPageView, Bundle().apply {
+                putInt("duration_s", 5)
+            })
+            curLogLiveTime = 5
         }
 
     }
