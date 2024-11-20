@@ -1588,7 +1588,6 @@ public class Launcher extends BaseActivity
     public View createShortcut(ViewGroup parent, ShortcutInfo info) {
         BubbleTextView favorite = (BubbleTextView) getLayoutInflater().inflate(R.layout.app_icon,
                 parent, false);
-        favorite.noUseLoadBitmapSync = false;
         favorite.applyFromShortcutInfo(info);
         favorite.setCompoundDrawablePadding(mDeviceProfile.iconDrawablePaddingPx);
         favorite.setOnClickListener(this);
@@ -1981,31 +1980,32 @@ public class Launcher extends BaseActivity
         }
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        if (mWorkspace.getChildCount() > 0) {
-            outState.putInt(RUNTIME_STATE_CURRENT_SCREEN,
-                    mWorkspace.getCurrentPage());
-            Log.d(TAG, "onSaveInstanceState : last custom" + mWorkspace.getCurrentPage());
-        }
-        super.onSaveInstanceState(outState);
-
-        outState.putInt(RUNTIME_STATE, mState.ordinal());
-        // We close any open folders and shortcut containers since they will not be re-opened,
-        // and we need to make sure this state is reflected.
-        AbstractFloatingView.closeAllOpenViews(this, false);
-
-        if (mPendingRequestArgs != null) {
-            outState.putParcelable(RUNTIME_STATE_PENDING_REQUEST_ARGS, mPendingRequestArgs);
-        }
-        if (mPendingActivityResult != null) {
-            outState.putParcelable(RUNTIME_STATE_PENDING_ACTIVITY_RESULT, mPendingActivityResult);
-        }
-
-        if (mLauncherCallbacks != null) {
-            mLauncherCallbacks.onSaveInstanceState(outState);
-        }
-    }
+// 不要重建，导致很多麻烦问题
+//    @Override
+//    protected void onSaveInstanceState(Bundle outState) {
+//        if (mWorkspace.getChildCount() > 0) {
+//            outState.putInt(RUNTIME_STATE_CURRENT_SCREEN,
+//                    mWorkspace.getCurrentPage());
+//            Log.d(TAG, "onSaveInstanceState : last custom" + mWorkspace.getCurrentPage());
+//        }
+//        super.onSaveInstanceState(outState);
+//
+//        outState.putInt(RUNTIME_STATE, mState.ordinal());
+//        // We close any open folders and shortcut containers since they will not be re-opened,
+//        // and we need to make sure this state is reflected.
+//        AbstractFloatingView.closeAllOpenViews(this, false);
+//
+//        if (mPendingRequestArgs != null) {
+//            outState.putParcelable(RUNTIME_STATE_PENDING_REQUEST_ARGS, mPendingRequestArgs);
+//        }
+//        if (mPendingActivityResult != null) {
+//            outState.putParcelable(RUNTIME_STATE_PENDING_ACTIVITY_RESULT, mPendingActivityResult);
+//        }
+//
+//        if (mLauncherCallbacks != null) {
+//            mLauncherCallbacks.onSaveInstanceState(outState);
+//        }
+//    }
 
     @Override
     public void onDestroy() {

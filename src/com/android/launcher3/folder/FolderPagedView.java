@@ -229,7 +229,6 @@ public class FolderPagedView extends PagedView {
     public View createNewView(ShortcutInfo item) {
         final BubbleTextView textView = (BubbleTextView) mInflater.inflate(
                 R.layout.folder_application, null, false);
-        textView.noUseLoadBitmapSync = false;
         textView.applyFromShortcutInfo(item);
         textView.setOnClickListener(mFolder);
         textView.setOnLongClickListener(mFolder);

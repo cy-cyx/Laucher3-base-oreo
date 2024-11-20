@@ -114,9 +114,6 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver, 
 
     private ItemInfo itemInfo;
 
-    // 某些情况（文件夹）下不使用异步加载(后期还得改改)
-    public boolean noUseLoadBitmapSync = true;
-
     private static final Property<BubbleTextView, Float> BADGE_SCALE_PROPERTY
             = new Property<BubbleTextView, Float>(Float.TYPE, "badgeScale") {
         @Override
@@ -251,17 +248,9 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver, 
             }
 
             // 是否存在替换图标
-            if (noUseLoadBitmapSync) {
-                showIcon = ThemeIconMappingV2.getIconBitmapIfNeedAsyn(this, pkg, url);
-            } else {
-                showIcon = ThemeIconMappingV2.getIconBitmap(pkg, url);
-            }
+            showIcon = ThemeIconMappingV2.getIconBitmapIfNeedAsyn(this, pkg, url);
         } else if (info.getIntent() != null && info.getIntent().getAction() != null && info.getIntent().getAction().equals(Constants.sAllppAction)) {
-            if (noUseLoadBitmapSync) {
-                showIcon = ThemeIconMappingV2.getIconBitmapIfNeedAsyn(this, Constants.sAllppAction, "");
-            } else {
-                showIcon = ThemeIconMappingV2.getIconBitmap(Constants.sAllppAction, "");
-            }
+            showIcon = ThemeIconMappingV2.getIconBitmapIfNeedAsyn(this, Constants.sAllppAction, "");
         }
         FastBitmapDrawable iconDrawable = DrawableFactory.get(getContext()).newIcon(showIcon, info);
         iconDrawable.setIsDisabled(info.isDisabled());
