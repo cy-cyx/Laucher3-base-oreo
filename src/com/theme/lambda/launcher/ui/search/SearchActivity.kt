@@ -27,6 +27,8 @@ import com.lambdaweather.view.WeatherNewBanner
 import com.lambdaweather.view.WeatherNewBanner.OnRvBannerClickListener
 import com.theme.lambda.launcher.ad.AdName
 import com.theme.lambda.launcher.base.BaseActivity
+import com.theme.lambda.launcher.statistics.EventName
+import com.theme.lambda.launcher.statistics.EventUtil
 import com.theme.lambda.launcher.ui.news.NewDetailsActivity
 import com.theme.lambda.launcher.ui.search.adapter.FileAdapter
 import com.theme.lambda.launcher.ui.search.adapter.ImageAdapter
@@ -136,6 +138,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
 
         // 图片和文件需要请求权限
         requestPermissionAndLoadData()
+        EventUtil.logEvent(EventName.LWeb, Bundle())
     }
 
     private fun requestPermissionAndLoadData() {
