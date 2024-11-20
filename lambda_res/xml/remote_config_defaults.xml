@@ -26,10 +26,10 @@
             "ecpm": 0
             },
             {
-            "adid": "10961146-10988845",
+            "adid": "e9fa20bc78283ef3",
             "order": 0,
             "per": 0,
-            "plat": 4,
+            "plat": 2,
             "type": 5,
             "ecpm": 0
             }
@@ -40,7 +40,7 @@
             "strategy": 1,
             "params": [
             {
-            "adid": "ca-app-pub-3912577259305392/5077045434",
+            "adid": "ca-app-pub-3912577259305392/7836638358",
             "order": 0,
             "per": 0,
             "plat": 1,
@@ -56,18 +56,10 @@
             "ecpm": 0
             },
             {
-            "adid": "10961146-10794783",
+            "adid": "3db6560c4b1d5bb6",
             "order": 0,
             "per": 0,
-            "plat": 4,
-            "type": 4,
-            "ecpm": 0
-            },
-            {
-            "adid": "b89sr0nsgf5k9ds9",
-            "order": 0,
-            "per": 0,
-            "plat": 8,
+            "plat": 2,
             "type": 4,
             "ecpm": 0
             }
@@ -86,7 +78,7 @@
             "ecpm": 0
             },
             {
-            "adid": "ca-app-pub-3912577259305392/9538660896",
+            "adid": "ca-app-pub-3912577259305392/8702163317",
             "order": 0,
             "per": 0,
             "plat": 1,
@@ -98,22 +90,6 @@
             "order": 0,
             "per": 0,
             "plat": 2,
-            "type": 3,
-            "ecpm": 0
-            },
-            {
-            "adid": "e5bukdxqqen0gp6x",
-            "order": 0,
-            "per": 0,
-            "plat": 8,
-            "type": 3,
-            "ecpm": 0
-            },
-            {
-            "adid": "10961146-10650174",
-            "order": 0,
-            "per": 0,
-            "plat": 4,
             "type": 3,
             "ecpm": 0
             }
@@ -180,6 +156,14 @@
             "order": 1,
             "per": 0,
             "plat": 2,
+            "type": 7,
+            "ecpm": 0
+            },
+            {
+            "adid": "ca-app-pub-3912577259305392/2257090767",
+            "order": 2,
+            "per": 0,
+            "plat": 1,
             "type": 7,
             "ecpm": 0
             }
@@ -316,16 +300,6 @@
             {
             "key": "ziaXswlqLx7LCqxNXg6SewP_fz_BasfGL82KxU0kcTQZ7WRsacmw0FWHwn7zwemJHWomTSWyDKxgnK63EmyOaa",
             "plat": 2,
-            "appId": ""
-            },
-            {
-            "key": "1fdccf76d",
-            "plat": 8,
-            "appId": ""
-            },
-            {
-            "key": "10961146",
-            "plat": 4,
             "appId": ""
             }
             ],
