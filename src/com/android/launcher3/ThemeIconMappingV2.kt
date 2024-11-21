@@ -239,7 +239,7 @@ object ThemeIconMappingV2 {
             tempCanvas.drawBitmap(temp, null, Rect(0, 0, target.width, target.height), null)
             return target
         } else {
-            return ConvertUtils.drawable2Bitmap(AppUtils.getAppIcon(pm))
+            return ConvertUtils.drawable2Bitmap(AppUtils.getAppIcon(pm)) ?: getDefaultIcon()
         }
     }
 

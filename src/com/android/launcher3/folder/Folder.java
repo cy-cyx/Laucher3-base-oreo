@@ -1387,7 +1387,7 @@ public class Folder extends AbstractFloatingView implements DragSource, View.OnC
 
     public void showItem(ShortcutInfo info) {
         View v = getViewForInfo(info);
-        v.setVisibility(VISIBLE);
+        if (v != null) v.setVisibility(VISIBLE);
     }
 
     @Override
