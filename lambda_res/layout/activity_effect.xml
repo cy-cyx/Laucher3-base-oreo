@@ -4,10 +4,16 @@
     android:layout_height="match_parent"
     android:background="#ffffff">
 
-    <LinearLayout
+    <View
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="match_parent">
+        android:layout_height="80dp"
+        android:background="@drawable/shape_top_bg" />
+
+    <LinearLayout
+        android:id="@+id/containerLl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -17,7 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/my_themes"
+                android:text="@string/effect"
                 android:textColor="#FF000000"
                 android:textSize="20dp"
                 android:textStyle="bold" />
@@ -27,13 +33,37 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginStart="17dp"
+                android:layout_marginStart="7dp"
+                android:padding="10dp"
                 android:src="@drawable/ic_back3" />
+
+            <ImageView
+                android:id="@+id/okIv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="12dp"
+                android:padding="10dp"
+                android:src="@drawable/ic_ok" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="165dp">
+
+            <ImageView
+                android:id="@+id/previewIv"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center" />
+
         </FrameLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/effectRv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="50dp" />
     </LinearLayout>
 </FrameLayout>

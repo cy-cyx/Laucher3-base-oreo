@@ -390,4 +390,23 @@
     <string name="doc_permission_tip">To accurately search for files, we need to obtain your storage permissions</string>
     <string name="quick_tools">Quick Tools</string>
     <string name="your_may_like">Your may like</string>
+    <string name="text_default">Default</string>
+    <string name="zoom_in">Zoom in</string>
+    <string name="zoom_out">Zoom out</string>
+    <string name="rotate_up">Rotate up</string>
+    <string name="rotate_down">Rotate Down</string>
+    <string name="cube_in">Cube in</string>
+    <string name="cube_out">Cube out</string>
+    <string name="stack">Stack</string>
+    <string name="accordion">Accordion</string>
+    <string name="flip">Flip</string>
+    <string name="cylinder_in">Cylinder in</string>
+    <string name="cylinder_out">Cylinder out</string>
+    <string name="cross_fade">Cross fade</string>
+    <string name="overview">Overview</string>
+    <string name="overview_scale">Overview scale</string>
+    <string name="page">Page</string>
+    <string name="windmill_up">Windmill up</string>
+    <string name="windmill_down">Windmill down</string>
+    <string name="effect">Effect</string>
 </resources>

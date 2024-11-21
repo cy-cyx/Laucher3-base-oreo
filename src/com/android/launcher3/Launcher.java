@@ -1196,10 +1196,20 @@ public class Launcher extends BaseActivity
         }
     }
 
+    // 更新一些调整配置
     private void upDataAdjustIfNeed() {
         if (mWorkspace.curEffect != AdjustConfig.getEffectId()) {
             mWorkspace.getTransitionEffect().clearTransitionEffect();
             mWorkspace.curEffect = AdjustConfig.getEffectId();
+            quitOverview();
+        }
+    }
+
+    private void quitOverview(){
+        if (mWorkspace.isInOverviewMode()) {
+            UserEventDispatcher ued = getUserEventDispatcher();
+            ued.logActionCommand(Action.Command.BACK, ContainerType.OVERVIEW);
+            showWorkspace(true);
         }
     }
 

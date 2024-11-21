@@ -10,6 +10,8 @@ import com.android.launcher3.AdjustConfig
 import com.android.launcher3.databinding.ActivityEffectBinding
 import com.theme.lambda.launcher.base.BaseActivity
 import com.theme.lambda.launcher.ui.effect.adapter.EffectAdapter
+import com.theme.lambda.launcher.utils.StatusBarUtil
+import com.theme.lambda.launcher.utils.marginStatusBarHeight
 
 class EffectActivity : BaseActivity<ActivityEffectBinding>() {
 
@@ -30,6 +32,18 @@ class EffectActivity : BaseActivity<ActivityEffectBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        StatusBarUtil.transparencyBar(this)
+        StatusBarUtil.setStatusBarLightMode(this.window)
+        viewBinding.containerLl.marginStatusBarHeight()
+
+        viewBinding.backIv.setOnClickListener {
+            finish()
+        }
+        viewBinding.okIv.setOnClickListener {
+            AdjustConfig.setEffectId(effectAdapter.effectId)
+            finish()
+        }
+
         viewBinding.effectRv.apply {
             layoutManager = LinearLayoutManager(this@EffectActivity).apply {
                 orientation = LinearLayoutManager.VERTICAL
@@ -38,9 +52,13 @@ class EffectActivity : BaseActivity<ActivityEffectBinding>() {
         }
 
         effectAdapter.clickEffectListen = {
-            AdjustConfig.setEffectId(it.effectId)
-            Toast.makeText(this, "别怀疑你已经换了效果，退回到首页滑动看看", Toast.LENGTH_SHORT)
-                .show()
+            effectAdapter.setCurSelectEffectId(it.effectId)
+            viewBinding.previewIv.setImageResource(it.res)
+        }
+
+        effectAdapter.setCurSelectEffectId(AdjustConfig.getEffectId())
+        effectAdapter.effectInfos.find { it.effectId == AdjustConfig.getEffectId() }?.let {
+            viewBinding.previewIv.setImageResource(it.res)
         }
     }
 }

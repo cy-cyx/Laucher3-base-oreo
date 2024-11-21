@@ -390,4 +390,23 @@
     <string name="doc_permission_tip">Для точного поиска файлов необходимо предоставить разрешения на доступ к хранилищу</string>
     <string name="quick_tools">Быстрые инструменты</string>
     <string name="your_may_like">Вам может понравиться</string>
+    <string name="text_default">По умолчанию</string>
+    <string name="zoom_in">Увеличить</string>
+    <string name="zoom_out">Уменьшить</string>
+    <string name="rotate_up">Повернуть вверх</string>
+    <string name="rotate_down">Повернуть вниз</string>
+    <string name="cube_in">Куб внутрь</string>
+    <string name="cube_out">Куб наружу</string>
+    <string name="stack">Стек</string>
+    <string name="accordion">Аккордеон</string>
+    <string name="flip">Переворот</string>
+    <string name="cylinder_in">Цилиндр внутрь</string>
+    <string name="cylinder_out">Цилиндр наружу</string>
+    <string name="cross_fade">Перекрёстное исчезновение</string>
+    <string name="overview">Обзор</string>
+    <string name="overview_scale">Масштаб обзора</string>
+    <string name="page">Страница</string>
+    <string name="windmill_up">Ветряная мельница вверх</string>
+    <string name="windmill_down">Ветряная мельница вниз</string>
+    <string name="effect">эффект</string>
 </resources>
