@@ -609,6 +609,8 @@ public class LauncherModel extends BroadcastReceiver
                 mLoaderTask = new LoaderTask(mApp.getContext(), synchronousBindPage);
                 if (synchronousBindPage != PagedView.INVALID_RESTORE_PAGE
                         && mModelLoaded && !mIsLoaderTaskRunning) {
+                    // 基本不会走这里，因为我去掉了launcher的重建 直接看下面哪个就行
+
                     mLoaderTask.runBindSynchronousPage(synchronousBindPage);
                     return true;
                 } else {
@@ -754,6 +756,14 @@ public class LauncherModel extends BroadcastReceiver
 
             try {
                 long start = System.currentTimeMillis();
+
+                // 当桌面布局发生时，整理数据数据
+                if (DEBUG_LOADERS) Log.d(TAG, "step 0.1: Organize the database");
+//                organizeTheDatabase();
+                if (DEBUG_LOADERS)
+                    Log.d(TAG, "step 0.1: Organize the database finish time:" + (System.currentTimeMillis() - start));
+                verifyNotStopped();
+
                 if (DEBUG_LOADERS) Log.d(TAG, "step 1.1: loading workspace");
                 // Set to false in bindWorkspace()
                 mIsLoadingAndBindingWorkspace = true;
@@ -856,6 +866,118 @@ public class LauncherModel extends BroadcastReceiver
                 }
 
                 return callbacks;
+            }
+        }
+
+        private void organizeTheDatabase() {
+            LauncherAppState app = LauncherAppState.getInstance(mContext);
+            int columns = app.getInvariantDeviceProfile().numColumns;
+            int rows = app.getInvariantDeviceProfile().numRows;
+            Log.w(TAG, "organizeTheDatabase => numColumns:" + columns + "numRows:" + rows);
+
+            int textColum = 3;
+            int textRow = 4;
+
+            final Context context = mContext;
+            final ContentResolver contentResolver = context.getContentResolver();
+
+            long lastScreen = 0;
+            int lastCellX = 0;
+            int lastCellY = 0;
+
+            ArrayList<ItemInfo> needAdjustItemInfo = new ArrayList<>();
+
+            synchronized (sBgDataModel) {
+                final LoaderCursor c = new LoaderCursor(contentResolver.query(
+                        LauncherSettings.Favorites.CONTENT_URI, null, null, null, null), mApp);
+                try {
+                    final int indexId = c.getColumnIndexOrThrow(LauncherSettings.Favorites._ID);
+                    final int indexScreen = c.getColumnIndexOrThrow(LauncherSettings.Favorites.SCREEN);
+                    final int indexContainer = c.getColumnIndexOrThrow(LauncherSettings.Favorites.CONTAINER);
+                    final int indexItemType = c.getColumnIndexOrThrow(LauncherSettings.Favorites.ITEM_TYPE);
+                    final int indexCellX = c.getColumnIndexOrThrow(LauncherSettings.Favorites.CELLX);
+                    final int indexCellY = c.getColumnIndexOrThrow(LauncherSettings.Favorites.CELLY);
+                    final int indexSpanX = c.getColumnIndexOrThrow(LauncherSettings.Favorites.SPANX);
+                    final int indexSpanY = c.getColumnIndexOrThrow(LauncherSettings.Favorites.SPANY);
+
+                    while (!mStopped && c.moveToNext()) {
+                        int container = c.getInt(indexContainer);
+                        int id = c.getInt(indexId);
+                        // 在主屏幕上需要处理的
+                        if (container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
+                            Log.i(TAG, "organizeTheDatabase -> need deal:" + id);
+
+                            int itemType = c.getInt(indexItemType);
+                            int screen = c.getInt(indexScreen);
+                            int cellX = c.getInt(indexCellX);
+                            int cellY = c.getInt(indexCellY);
+                            int spanX = c.getInt(indexSpanX);
+                            int spanY = c.getInt(indexSpanY);
+
+                            if (itemType == LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT ||
+                                    itemType == LauncherSettings.Favorites.ITEM_TYPE_FOLDER ||
+                                    itemType == LauncherSettings.Favorites.ITEM_TYPE_DEEP_SHORTCUT ||
+                                    itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {
+
+                                // 出界的
+                                if (cellX > textColum - 1 || cellY > textRow - 1) {
+                                    ItemInfo info = new ItemInfo();
+                                    info.id = id;
+                                    info.itemType = itemType;
+                                    info.cellX = cellX;
+                                    info.cellY = cellY;
+                                    info.spanX = spanX;
+                                    info.spanY = spanY;
+                                    needAdjustItemInfo.add(info);
+                                } else {
+                                    // 不出界就找排序到了最后的
+                                    if (screen > lastScreen) {
+                                        lastScreen = screen;
+                                    }
+                                    if (cellX > lastCellX) {
+                                        lastCellX = cellX;
+                                    }
+                                    if (cellY > lastCellY) {
+                                        lastCellY = cellY;
+                                    }
+                                }
+                            } else if (itemType == LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET ||
+                                    itemType == LauncherSettings.Favorites.ITEM_TYPE_CUSTOM_APPWIDGET) {
+
+                            }
+
+                        }
+                    }
+
+                    // 开始调整
+                    for (ItemInfo info : needAdjustItemInfo) {
+                        // 找到正确位置去放
+
+                        // 1.先尝试x轴平移
+                        lastCellX++;
+                        // 2.如果越界，尝试y轴
+                        if (lastCellX > textColum - 1) {
+                            lastCellX = 0;
+
+                            lastCellY++;
+                            // 3.尝试后如果y轴也越界，那就新开一页
+                            if (lastCellY > textRow - 1) {
+                                lastCellY = 0;
+
+                                // 新开一页
+                                lastScreen++;
+                            }
+                        }
+
+                        ContentValues values = new ContentValues();
+                        values.put(LauncherSettings.Favorites.SCREEN, lastScreen);
+                        values.put(LauncherSettings.Favorites.CELLX, lastCellX);
+                        values.put(LauncherSettings.Favorites.CELLY, lastCellY);
+                        contentResolver.update(LauncherSettings.Favorites.getContentUri(info.id), values, null, null);
+                    }
+                } catch (Exception e) {
+
+                }
             }
         }
 
