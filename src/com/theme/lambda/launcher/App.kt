@@ -47,7 +47,7 @@ class App : Application() {
             val defaultProcess = processName == packageName
             if (defaultProcess) {
                 Global.packageNamesSuffix = BuildConfig.Suffix
-                initWeather()
+                LambdaWeather.init(this, Constants.BASE_URL)
                 Log.d(TAG, "init 1 : ${System.currentTimeMillis() - start}")
                 FirebaseAnalyticsUtil.init(this)
                 Log.d(TAG, "init 2 : ${System.currentTimeMillis() - start}")
@@ -78,14 +78,5 @@ class App : Application() {
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
         CommonUtil.appContext = this
-    }
-
-    private fun initWeather() {
-        startKoin {
-            androidLogger()
-            androidContext(this@App)
-            modules(allModules)
-        }
-        LambdaWeather.init(this, Constants.BASE_URL)
     }
 }
