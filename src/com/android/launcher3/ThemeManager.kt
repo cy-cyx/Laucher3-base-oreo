@@ -296,6 +296,13 @@ class ThemeManager {
 
     }
 
+    // 处理重建返回状态不见了的问题
+    fun onSaveInstanceState() {
+        if (!LauncherUtil.gotoSetting && isPreviewMode) {
+            enterPreviewId = showThemeId
+        }
+    }
+
     private fun enterPreview() {
         isPreviewMode = true
         launcher?.runOnUiThread {

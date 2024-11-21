@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.android.launcher3.Launcher
+import com.android.launcher3.AdjustConfig
 import com.android.launcher3.databinding.ActivityEffectBinding
 import com.theme.lambda.launcher.base.BaseActivity
 import com.theme.lambda.launcher.ui.effect.adapter.EffectAdapter
@@ -14,8 +14,6 @@ import com.theme.lambda.launcher.ui.effect.adapter.EffectAdapter
 class EffectActivity : BaseActivity<ActivityEffectBinding>() {
 
     companion object {
-
-        var cacheLauncher: Launcher? = null
 
         @JvmStatic
         fun start(context: Context) {
@@ -27,7 +25,7 @@ class EffectActivity : BaseActivity<ActivityEffectBinding>() {
         return ActivityEffectBinding.inflate(layoutInflater)
     }
 
-    var effectAdapter = EffectAdapter()
+    private var effectAdapter = EffectAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +38,7 @@ class EffectActivity : BaseActivity<ActivityEffectBinding>() {
         }
 
         effectAdapter.clickEffectListen = {
-            cacheLauncher?.setEffect(it.effectId)
+            AdjustConfig.setEffectId(it.effectId)
             Toast.makeText(this, "别怀疑你已经换了效果，退回到首页滑动看看", Toast.LENGTH_SHORT)
                 .show()
         }

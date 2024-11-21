@@ -152,7 +152,6 @@ import com.theme.lambda.launcher.widget.PreviewControlView;
 import com.theme.lambda.launcher.widget.WallpaperView;
 import com.theme.lambda.launcher.widget.dialog.LoadingDialog;
 import com.theme.lambda.launcher.widget.dialog.StoreRatingsDialog;
-import com.theme.lambda.launcher.widget.dialog.UrlShortcutSelectDialog;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -1191,8 +1190,16 @@ public class Launcher extends BaseActivity
             }
         }
 
+        upDataAdjustIfNeed();
         if (DEBUG_RESUME_TIME) {
             Log.d(TAG, "Time spent in onResume: " + (System.currentTimeMillis() - startTime));
+        }
+    }
+
+    private void upDataAdjustIfNeed() {
+        if (mWorkspace.curEffect != AdjustConfig.getEffectId()) {
+            mWorkspace.getTransitionEffect().clearTransitionEffect();
+            mWorkspace.curEffect = AdjustConfig.getEffectId();
         }
     }
 
@@ -1522,12 +1529,10 @@ public class Launcher extends BaseActivity
         mOverviewPanel = (ViewGroup) findViewById(R.id.overview_panel);
 
         // Bind wallpaper button actions
-        View wallpaperButton = findViewById(R.id.wallpaper_button);
-        new OverviewButtonClickListener(ControlType.WALLPAPER_BUTTON) {
+        View wallpaperButton = findViewById(R.id.effect_button);
+        new OverviewButtonClickListener(ControlType.EFFECT_BUTTON) {
             @Override
             public void handleViewClick(View view) {
-//                onClickWallpaperPicker(view);
-                EffectActivity.Companion.setCacheLauncher(Launcher.this);
                 EffectActivity.start(Launcher.this);
             }
         }.attachTo(wallpaperButton);
@@ -1988,9 +1993,9 @@ public class Launcher extends BaseActivity
         }
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
 // 不要重建，导致很多麻烦问题
-//    @Override
-//    protected void onSaveInstanceState(Bundle outState) {
 //        if (mWorkspace.getChildCount() > 0) {
 //            outState.putInt(RUNTIME_STATE_CURRENT_SCREEN,
 //                    mWorkspace.getCurrentPage());
@@ -2013,7 +2018,10 @@ public class Launcher extends BaseActivity
 //        if (mLauncherCallbacks != null) {
 //            mLauncherCallbacks.onSaveInstanceState(outState);
 //        }
-//    }
+
+        super.onSaveInstanceState(outState);
+        themeManager.onSaveInstanceState();
+    }
 
     @Override
     public void onDestroy() {
@@ -4436,11 +4444,5 @@ public class Launcher extends BaseActivity
             mAppsView.removeApps(appInfos);
             tryAndUpdatePredictedApps();
         }
-    }
-
-
-    public void setEffect(int id) {
-        mWorkspace.getTransitionEffect().clearTransitionEffect();
-        mWorkspace.curEffect = id;
     }
 }

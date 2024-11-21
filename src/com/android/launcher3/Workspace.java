@@ -348,7 +348,7 @@ public class Workspace extends PagedView
 
     private int screenWidth = 0;
 
-    public static int curEffect = TransitionEffect.TRANSITION_EFFECT_NONE;
+    public int curEffect = TransitionEffect.TRANSITION_EFFECT_NONE;
 
     private TransitionEffect mTransitionEffect;
 

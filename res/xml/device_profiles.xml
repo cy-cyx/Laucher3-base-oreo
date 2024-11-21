@@ -16,20 +16,20 @@
 
 <profiles xmlns:InvariantDeviceProfile="http://schemas.android.com/apk/res-auto">
 
-    <profile
-        InvariantDeviceProfile:defaultLayoutId="@xml/default_workspace_4x5"
-        InvariantDeviceProfile:hotseatIconSize="48"
-        InvariantDeviceProfile:iconSizeF="48"
-        InvariantDeviceProfile:iconTextSize="13.0"
-        InvariantDeviceProfile:minAllAppsPredictionColumns="4"
-        InvariantDeviceProfile:minHeightDps="491.33"
-        InvariantDeviceProfile:minWidthDps="296"
-        InvariantDeviceProfile:name="Nexus S"
-        InvariantDeviceProfile:numColumns="4"
-        InvariantDeviceProfile:numFolderColumns="4"
-        InvariantDeviceProfile:numFolderRows="4"
-        InvariantDeviceProfile:numHotseatIcons="4"
-        InvariantDeviceProfile:numRows="5" />
+<!--    <profile-->
+<!--        InvariantDeviceProfile:defaultLayoutId="@xml/default_workspace_4x5"-->
+<!--        InvariantDeviceProfile:hotseatIconSize="48"-->
+<!--        InvariantDeviceProfile:iconSizeF="48"-->
+<!--        InvariantDeviceProfile:iconTextSize="13.0"-->
+<!--        InvariantDeviceProfile:minAllAppsPredictionColumns="4"-->
+<!--        InvariantDeviceProfile:minHeightDps="491.33"-->
+<!--        InvariantDeviceProfile:minWidthDps="296"-->
+<!--        InvariantDeviceProfile:name="Nexus S"-->
+<!--        InvariantDeviceProfile:numColumns="4"-->
+<!--        InvariantDeviceProfile:numFolderColumns="4"-->
+<!--        InvariantDeviceProfile:numFolderRows="4"-->
+<!--        InvariantDeviceProfile:numHotseatIcons="4"-->
+<!--        InvariantDeviceProfile:numRows="5" />-->
 
     <profile
         InvariantDeviceProfile:defaultLayoutId="@xml/default_workspace_4x5"
@@ -46,19 +46,19 @@
         InvariantDeviceProfile:numHotseatIcons="4"
         InvariantDeviceProfile:numRows="5" />
 
-    <profile
-        InvariantDeviceProfile:defaultLayoutId="@xml/default_workspace_table"
-        InvariantDeviceProfile:hotseatIconSize="72"
-        InvariantDeviceProfile:iconSizeF="100"
-        InvariantDeviceProfile:iconTextSize="20.0"
-        InvariantDeviceProfile:minAllAppsPredictionColumns="4"
-        InvariantDeviceProfile:minHeightDps="727"
-        InvariantDeviceProfile:minWidthDps="1207"
-        InvariantDeviceProfile:name="20-inch Tablet"
-        InvariantDeviceProfile:numColumns="5"
-        InvariantDeviceProfile:numFolderColumns="6"
-        InvariantDeviceProfile:numFolderRows="6"
-        InvariantDeviceProfile:numHotseatIcons="5"
-        InvariantDeviceProfile:numRows="6" />
+<!--    <profile-->
+<!--        InvariantDeviceProfile:defaultLayoutId="@xml/default_workspace_table"-->
+<!--        InvariantDeviceProfile:hotseatIconSize="72"-->
+<!--        InvariantDeviceProfile:iconSizeF="100"-->
+<!--        InvariantDeviceProfile:iconTextSize="20.0"-->
+<!--        InvariantDeviceProfile:minAllAppsPredictionColumns="4"-->
+<!--        InvariantDeviceProfile:minHeightDps="727"-->
+<!--        InvariantDeviceProfile:minWidthDps="1207"-->
+<!--        InvariantDeviceProfile:name="20-inch Tablet"-->
+<!--        InvariantDeviceProfile:numColumns="5"-->
+<!--        InvariantDeviceProfile:numFolderColumns="6"-->
+<!--        InvariantDeviceProfile:numFolderRows="6"-->
+<!--        InvariantDeviceProfile:numHotseatIcons="5"-->
+<!--        InvariantDeviceProfile:numRows="6" />-->
 
 </profiles>

@@ -13,27 +13,27 @@ class EffectAdapter : RecyclerView.Adapter<ViewHolder>() {
 
     var effectInfos = arrayListOf(
         EffectInfo(0, TransitionEffect.TRANSITION_EFFECT_NONE, "no effect"),
-        EffectInfo(0, TransitionEffect.TRANSITION_EFFECT_ZOOM_IN, "effect 1 (zoom in)"),
-        EffectInfo(0, TransitionEffect.TRANSITION_EFFECT_ZOOM_OUT, "effect2 (zoom out)"),
-        EffectInfo(0, TransitionEffect.TRANSITION_EFFECT_ROTATE_UP, "effect3 (rotate up)"),
-        EffectInfo(0, TransitionEffect.TRANSITION_EFFECT_ROTATE_DOWN, "effect4 (rotate down)"),
-        EffectInfo(0, TransitionEffect.TRANSITION_EFFECT_CUBE_IN, "effect5 (cube in)"),
-        EffectInfo(0, TransitionEffect.TRANSITION_EFFECT_CUBE_OUT, "effect6 (cube out)"),
-        EffectInfo(0, TransitionEffect.TRANSITION_EFFECT_STACK, "effect7 (stack)"),
-        EffectInfo(0, TransitionEffect.TRANSITION_EFFECT_ACCORDION, "effect8 (accordion)"),
-        EffectInfo(0, TransitionEffect.TRANSITION_EFFECT_FLIP, "effect9 (flip)"),
-        EffectInfo(0, TransitionEffect.TRANSITION_EFFECT_CYLINDER_IN, "effect10 (cylinder in)"),
-        EffectInfo(0, TransitionEffect.TRANSITION_EFFECT_CYLINDER_OUT, "effect11 (cylinder out)"),
-        EffectInfo(0, TransitionEffect.TRANSITION_EFFECT_CROSS_FADE, "effect12 (cross fade)"),
-        EffectInfo(0, TransitionEffect.TRANSITION_EFFECT_OVERVIEW, "effect13 (overview)"),
+        EffectInfo(1, TransitionEffect.TRANSITION_EFFECT_ZOOM_IN, "effect 1 (zoom in)"),
+        EffectInfo(2, TransitionEffect.TRANSITION_EFFECT_ZOOM_OUT, "effect2 (zoom out)"),
+        EffectInfo(3, TransitionEffect.TRANSITION_EFFECT_ROTATE_UP, "effect3 (rotate up)"),
+        EffectInfo(4, TransitionEffect.TRANSITION_EFFECT_ROTATE_DOWN, "effect4 (rotate down)"),
+        EffectInfo(5, TransitionEffect.TRANSITION_EFFECT_CUBE_IN, "effect5 (cube in)"),
+        EffectInfo(6, TransitionEffect.TRANSITION_EFFECT_CUBE_OUT, "effect6 (cube out)"),
+        EffectInfo(7, TransitionEffect.TRANSITION_EFFECT_STACK, "effect7 (stack)"),
+        EffectInfo(8, TransitionEffect.TRANSITION_EFFECT_ACCORDION, "effect8 (accordion)"),
+        EffectInfo(9, TransitionEffect.TRANSITION_EFFECT_FLIP, "effect9 (flip)"),
+        EffectInfo(10, TransitionEffect.TRANSITION_EFFECT_CYLINDER_IN, "effect10 (cylinder in)"),
+        EffectInfo(11, TransitionEffect.TRANSITION_EFFECT_CYLINDER_OUT, "effect11 (cylinder out)"),
+        EffectInfo(12, TransitionEffect.TRANSITION_EFFECT_CROSS_FADE, "effect12 (cross fade)"),
+        EffectInfo(13, TransitionEffect.TRANSITION_EFFECT_OVERVIEW, "effect13 (overview)"),
         EffectInfo(
-            0,
+            14,
             TransitionEffect.TRANSITION_EFFECT_OVERVIEW_SCALE,
             "effect14 (overview scale)"
         ),
-        EffectInfo(0, TransitionEffect.TRANSITION_EFFECT_PAGE, "effect15 (page)"),
-        EffectInfo(0, TransitionEffect.TRANSITION_EFFECT_WINDMILL_UP, "effect16 (windmill up)"),
-        EffectInfo(0, TransitionEffect.TRANSITION_EFFECT_WINDMILL_DOWN, "effect17 (windmill down)")
+        EffectInfo(15, TransitionEffect.TRANSITION_EFFECT_PAGE, "effect15 (page)"),
+        EffectInfo(16, TransitionEffect.TRANSITION_EFFECT_WINDMILL_UP, "effect16 (windmill up)"),
+        EffectInfo(17, TransitionEffect.TRANSITION_EFFECT_WINDMILL_DOWN, "effect17 (windmill down)")
     )
 
     var clickEffectListen: ((EffectInfo) -> Unit)? = null
