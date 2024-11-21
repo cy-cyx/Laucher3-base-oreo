@@ -242,10 +242,6 @@ class ThemeManager {
             }
             if (LauncherUtil.gotoSetting) {
                 if (LauncherUtil.isDefaultLauncher(it)) {
-                    // 设置回来成功
-                    StoreRatingsDialog.show(it)
-                    WidgetGuideDialog.show(it)
-
                     logEvent(EventName.permissionGrant, Bundle().apply {
                         putString("scene", "detail")
                         putString("permission", "launcher")
