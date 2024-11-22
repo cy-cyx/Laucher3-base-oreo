@@ -2,9 +2,9 @@ package com.theme.lambda.launcher.task
 
 import com.theme.lambda.launcher.data.model.Resources
 import com.theme.lambda.launcher.utils.CommonUtil
+import com.theme.lambda.launcher.utils.Zip4jUtil
 import com.theme.lambda.launcher.utils.HttpDownloader
 import com.theme.lambda.launcher.utils.SpUtil
-import com.theme.lambda.launcher.utils.ZipUtils
 import com.theme.lambda.launcher.utils.withHost
 import java.io.File
 
@@ -33,7 +33,7 @@ class DownloadZipTask(private var resBean: Resources) : IBaseTask {
 
             val downLoad = HttpDownloader.downFile(resBean.zipUrl.withHost(), zipPath)
             if (downLoad) {
-                ZipUtils.UnZipFolder(zipPath, upZipPath)
+                Zip4jUtil.uncompress(zipPath, upZipPath, "")
                 SpUtil.putBool("$sKeyIsDownload${resBean.id}", true)
                 return true
             } else {
