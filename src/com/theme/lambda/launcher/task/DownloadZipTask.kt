@@ -33,9 +33,13 @@ class DownloadZipTask(private var resBean: Resources) : IBaseTask {
 
             val downLoad = HttpDownloader.downFile(resBean.zipUrl.withHost(), zipPath)
             if (downLoad) {
-                Zip4jUtil.uncompress(zipPath, upZipPath, "")
-                SpUtil.putBool("$sKeyIsDownload${resBean.id}", true)
-                return true
+                val success = Zip4jUtil.uncompress(zipPath, upZipPath, "")
+                if (success == 0) {
+                    SpUtil.putBool("$sKeyIsDownload${resBean.id}", true)
+                    return true
+                } else {
+                    return false
+                }
             } else {
                 return false
             }
