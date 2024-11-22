@@ -39,4 +39,6 @@ object SpKey {
     const val keyRecommendHashcode = "keyRecommendHashcode"
 
     const val keyOfferClickTime = "keyOfferClickTime_"
+
+    const val keyEffectId = "keyEffectId"
 }

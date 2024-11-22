@@ -26,8 +26,8 @@ android {
     defaultConfig {
         minSdkVersion 24
         targetSdkVersion 34
-        versionCode 35
-        versionName "0.3.5"
+        versionCode 36
+        versionName "0.3.6"
         applicationId 'com.theme.lambda.launcher'
         testApplicationId 'com.theme.lambda.launcher.tests'
 
@@ -154,7 +154,7 @@ dependencies {
     implementation "com.adjust.sdk:adjust-android:4.38.3"
 
     implementation("com.lambda.common:http:1.0.1.26")
-    implementation("com.lambda.common:event:1.2.0.63-separate-adjust") {
+    implementation("com.lambda.common:event:1.2.0.64-separate-adjust") {
         exclude group: 'com.lambda.common', module: 'http'
     }
     implementation "com.lambda.common:remoteconfig:0.1.5"

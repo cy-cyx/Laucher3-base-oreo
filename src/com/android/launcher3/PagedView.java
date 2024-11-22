@@ -187,6 +187,8 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
     private final LauncherEdgeEffect mEdgeGlowLeft = new LauncherEdgeEffect();
     private final LauncherEdgeEffect mEdgeGlowRight = new LauncherEdgeEffect();
 
+    public static float density;
+
     public PagedView(Context context) {
         this(context, null);
     }
@@ -220,7 +222,7 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
         mTouchSlop = configuration.getScaledPagingTouchSlop();
         mMaximumVelocity = configuration.getScaledMaximumFlingVelocity();
 
-        float density = getResources().getDisplayMetrics().density;
+        density = getResources().getDisplayMetrics().density;
         mFlingThresholdVelocity = (int) (FLING_THRESHOLD_VELOCITY * density);
         mMinFlingVelocity = (int) (MIN_FLING_VELOCITY * density);
         mMinSnapVelocity = (int) (MIN_SNAP_VELOCITY * density);
@@ -295,7 +297,7 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
 
     // Convenience methods to get the actual width/height of the PagedView (since it is measured
     // to be larger to account for the minimum possible scale)
-    int getViewportWidth() {
+    public int getViewportWidth() {
         return mViewport.width();
     }
     public int getViewportHeight() {
@@ -1302,7 +1304,7 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
         }
     }
 
-    protected float getScrollProgress(int screenCenter, View v, int page) {
+    public float getScrollProgress(int screenCenter, View v, int page) {
         final int halfScreenSize = getViewportWidth() / 2;
 
         int delta = screenCenter - (getScrollForPage(page) + halfScreenSize);

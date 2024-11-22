@@ -87,7 +87,8 @@ import com.android.launcher3.util.VerticalFlingDetector;
 import com.android.launcher3.util.WallpaperOffsetInterpolator;
 import com.android.launcher3.widget.PendingAddShortcutInfo;
 import com.android.launcher3.widget.PendingAddWidgetInfo;
-import com.theme.lambda.launcher.utils.CommonUtil;
+import com.android.launcher3.effect.TransitionEffect;
+import com.theme.lambda.launcher.utils.LogUtil;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -347,6 +348,14 @@ public class Workspace extends PagedView
 
     private int screenWidth = 0;
 
+    public int curEffect = TransitionEffect.TRANSITION_EFFECT_NONE;
+
+    private TransitionEffect mTransitionEffect;
+
+    public TransitionEffect getTransitionEffect() {
+        return mTransitionEffect;
+    }
+
     /**
      * Used to inflate the Workspace from XML.
      *
@@ -387,6 +396,9 @@ public class Workspace extends PagedView
         setMotionEventSplittingEnabled(true);
 
         screenWidth = context.getResources().getDisplayMetrics().widthPixels;
+
+        mTransitionEffect = new TransitionEffect(mLauncher);
+        mTransitionEffect.setWorkspace(this);
     }
 
     @Override
@@ -1460,6 +1472,9 @@ public class Workspace extends PagedView
         updatePageAlphaValues();
         updateStateForCustomContent();
         enableHwLayersOnVisiblePages();
+
+        mTransitionEffect.clearRotation();
+        startScrollWithAnim(getScrollX());
     }
 
     private void showPageIndicatorAtCurrentScroll() {
@@ -2040,7 +2055,7 @@ public class Workspace extends PagedView
         mStateTransitionAnimation.snapToPageFromOverView(whichPage);
     }
 
-    int getOverviewModeTranslationY() {
+    public int getOverviewModeTranslationY() {
         DeviceProfile grid = mLauncher.getDeviceProfile();
         int overviewButtonBarHeight = grid.getOverviewModeButtonBarHeight();
 
@@ -2091,6 +2106,8 @@ public class Workspace extends PagedView
 
         // Update the current state
         mState = toState;
+        getTransitionEffect().clearTransitionEffect();
+        LogUtil.d(Launcher.TAG, "cur launcher state:" + mState);
 
         // Create the animation to the new state
         AnimatorSet workspaceAnim = mStateTransitionAnimation.getAnimationToState(fromState,
@@ -4225,6 +4242,10 @@ public class Workspace extends PagedView
             Log.w(TAG, "enableFreeScroll called but not in overview: state=" + getState());
             return false;
         }
+    }
+
+    private void startScrollWithAnim(int screenScroll) {
+        mTransitionEffect.screenScrollByTransitionEffect(screenScroll, curEffect);
     }
 
     /**

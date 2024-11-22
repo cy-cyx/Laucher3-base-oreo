@@ -23,20 +23,19 @@
     launcher:layout_ignoreInsets="true">
 
     <TextView
-        android:id="@+id/wallpaper_button"
+        android:id="@+id/effect_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:drawableTop="@drawable/ic_long_wallpaper"
+        android:drawableTop="@drawable/ic_effects"
         android:drawablePadding="4dp"
         android:fontFamily="sans-serif-condensed"
         android:gravity="center_horizontal"
         android:stateListAnimator="@animator/overview_button_anim"
-        android:text="@string/wallpaper_button_text"
+        android:text="Effect"
         android:textAllCaps="true"
         android:textColor="@android:color/white"
-        android:textSize="12sp"
-        android:visibility="gone" />
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/widget_button"

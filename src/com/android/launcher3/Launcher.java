@@ -139,6 +139,7 @@ import com.theme.lambda.launcher.Constants;
 import com.theme.lambda.launcher.ad.AdUtil;
 import com.theme.lambda.launcher.statistics.EventName;
 import com.theme.lambda.launcher.statistics.EventUtil;
+import com.theme.lambda.launcher.ui.effect.EffectActivity;
 import com.theme.lambda.launcher.ui.search.SearchActivity;
 import com.theme.lambda.launcher.ui.theme.ThemeActivity;
 import com.theme.lambda.launcher.utils.AppUtil;
@@ -151,7 +152,7 @@ import com.theme.lambda.launcher.widget.PreviewControlView;
 import com.theme.lambda.launcher.widget.WallpaperView;
 import com.theme.lambda.launcher.widget.dialog.LoadingDialog;
 import com.theme.lambda.launcher.widget.dialog.StoreRatingsDialog;
-import com.theme.lambda.launcher.widget.dialog.UrlShortcutSelectDialog;
+import com.theme.lambda.launcher.widget.dialog.WidgetGuideDialog;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -161,6 +162,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function0;
 
 /**
  * Default launcher application.
@@ -219,13 +223,18 @@ public class Launcher extends BaseActivity
     /**
      * The different states that Launcher can be in.
      */
-    enum State {
+    public enum State {
         NONE, WORKSPACE, WORKSPACE_SPRING_LOADED, APPS, APPS_SPRING_LOADED,
         WIDGETS, WIDGETS_SPRING_LOADED
     }
 
     @Thunk
     State mState = State.WORKSPACE;
+
+    public State getCurState() {
+        return mState;
+    }
+
     @Thunk
     LauncherStateTransitionAnimation mStateTransitionAnimation;
 
@@ -1158,8 +1167,17 @@ public class Launcher extends BaseActivity
         themeManager.onResume();
 
         // 第一次需要,如果已经授权就不展示了
-        if (!SpUtil.INSTANCE.getBool(SpKey.first_guide, false) && !LauncherUtil.INSTANCE.isDefaultLauncher(this)) {
+        if (!SpUtil.INSTANCE.getBool(SpKey.first_guide, false) && LauncherUtil.INSTANCE.isDefaultLauncher(this)) {
             firstGuideView.setVisibility(View.VISIBLE);
+            firstGuideView.setGuideFinishCallback(new Function0<Unit>() {
+                @Override
+                public Unit invoke() {
+                    // 引导结束再出widget引导和评分引导
+                    WidgetGuideDialog.show(Launcher.this);
+                    StoreRatingsDialog.show(Launcher.this);
+                    return null;
+                }
+            });
             firstGuideView.startGuide();
 
             SpUtil.INSTANCE.putBool(SpKey.first_guide, true);
@@ -1185,8 +1203,26 @@ public class Launcher extends BaseActivity
             }
         }
 
+        upDataAdjustIfNeed();
         if (DEBUG_RESUME_TIME) {
             Log.d(TAG, "Time spent in onResume: " + (System.currentTimeMillis() - startTime));
+        }
+    }
+
+    // 更新一些调整配置
+    private void upDataAdjustIfNeed() {
+        if (mWorkspace.curEffect != AdjustConfig.getEffectId()) {
+            mWorkspace.getTransitionEffect().clearTransitionEffect();
+            mWorkspace.curEffect = AdjustConfig.getEffectId();
+            quitOverview();
+        }
+    }
+
+    private void quitOverview() {
+        if (mWorkspace.isInOverviewMode()) {
+            UserEventDispatcher ued = getUserEventDispatcher();
+            ued.logActionCommand(Action.Command.BACK, ContainerType.OVERVIEW);
+            showWorkspace(true);
         }
     }
 
@@ -1516,11 +1552,11 @@ public class Launcher extends BaseActivity
         mOverviewPanel = (ViewGroup) findViewById(R.id.overview_panel);
 
         // Bind wallpaper button actions
-        View wallpaperButton = findViewById(R.id.wallpaper_button);
-        new OverviewButtonClickListener(ControlType.WALLPAPER_BUTTON) {
+        View wallpaperButton = findViewById(R.id.effect_button);
+        new OverviewButtonClickListener(ControlType.EFFECT_BUTTON) {
             @Override
             public void handleViewClick(View view) {
-                onClickWallpaperPicker(view);
+                EffectActivity.start(Launcher.this);
             }
         }.attachTo(wallpaperButton);
         wallpaperButton.setOnTouchListener(getHapticFeedbackTouchListener());
@@ -1980,9 +2016,9 @@ public class Launcher extends BaseActivity
         }
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
 // 不要重建，导致很多麻烦问题
-//    @Override
-//    protected void onSaveInstanceState(Bundle outState) {
 //        if (mWorkspace.getChildCount() > 0) {
 //            outState.putInt(RUNTIME_STATE_CURRENT_SCREEN,
 //                    mWorkspace.getCurrentPage());
@@ -2005,7 +2041,10 @@ public class Launcher extends BaseActivity
 //        if (mLauncherCallbacks != null) {
 //            mLauncherCallbacks.onSaveInstanceState(outState);
 //        }
-//    }
+
+        super.onSaveInstanceState(outState);
+        themeManager.onSaveInstanceState();
+    }
 
     @Override
     public void onDestroy() {

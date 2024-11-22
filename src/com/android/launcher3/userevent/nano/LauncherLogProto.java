@@ -38,7 +38,7 @@ public interface LauncherLogProto {
     public static final int DEFAULT_CONTROLTYPE = 0;
     public static final int ALL_APPS_BUTTON = 1;
     public static final int WIDGETS_BUTTON = 2;
-    public static final int WALLPAPER_BUTTON = 3;
+    public static final int EFFECT_BUTTON = 3;
     public static final int SETTINGS_BUTTON = 4;
     public static final int REMOVE_TARGET = 5;
     public static final int UNINSTALL_TARGET = 6;
@@ -332,7 +332,7 @@ public interface LauncherLogProto {
               case ControlType.DEFAULT_CONTROLTYPE:
               case ControlType.ALL_APPS_BUTTON:
               case ControlType.WIDGETS_BUTTON:
-              case ControlType.WALLPAPER_BUTTON:
+              case ControlType.EFFECT_BUTTON:
               case ControlType.SETTINGS_BUTTON:
               case ControlType.REMOVE_TARGET:
               case ControlType.UNINSTALL_TARGET:

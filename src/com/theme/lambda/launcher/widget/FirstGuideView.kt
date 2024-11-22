@@ -24,6 +24,7 @@ class FirstGuideView @JvmOverloads constructor(
 ) : FrameLayout(context, attrs) {
 
     private val binding = ViewFirstGuideBinding.inflate(LayoutInflater.from(context), this, true)
+    var guideFinishCallback: (() -> Unit)? = null
 
     init {
         setOnClickListener {
@@ -57,7 +58,7 @@ class FirstGuideView @JvmOverloads constructor(
         binding.guideTextLl.requestLayout()
         binding.step1Fl.setOnClickListener {
             binding.step1Fl.gone()
-            showSecondStep()
+            showThirdStep()
         }
     }
 
@@ -73,6 +74,7 @@ class FirstGuideView @JvmOverloads constructor(
         binding.step3Fl.visible()
         binding.step3Fl.setOnClickListener {
             gone()
+            guideFinishCallback?.invoke()
         }
     }
 }

@@ -242,10 +242,6 @@ class ThemeManager {
             }
             if (LauncherUtil.gotoSetting) {
                 if (LauncherUtil.isDefaultLauncher(it)) {
-                    // 设置回来成功
-                    StoreRatingsDialog.show(it)
-                    WidgetGuideDialog.show(it)
-
                     logEvent(EventName.permissionGrant, Bundle().apply {
                         putString("scene", "detail")
                         putString("permission", "launcher")
@@ -294,6 +290,13 @@ class ThemeManager {
 
     fun onDestroy() {
 
+    }
+
+    // 处理重建返回状态不见了的问题
+    fun onSaveInstanceState() {
+        if (!LauncherUtil.gotoSetting && isPreviewMode) {
+            enterPreviewId = showThemeId
+        }
     }
 
     private fun enterPreview() {

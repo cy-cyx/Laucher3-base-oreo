@@ -390,4 +390,23 @@
     <string name="doc_permission_tip">Aby dokładnie wyszukiwać pliki, musimy uzyskać dostęp do Twoich uprawnień do przechowywania</string>
     <string name="quick_tools">Szybkie narzędzia</string>
     <string name="your_may_like">Może Ci się spodobać</string>
+    <string name="text_default">Domyślnie</string>
+    <string name="zoom_in">Powiększ</string>
+    <string name="zoom_out">Pomniejsz</string>
+    <string name="rotate_up">Obróć w górę</string>
+    <string name="rotate_down">Obróć w dół</string>
+    <string name="cube_in">Sześcian do środka</string>
+    <string name="cube_out">Sześcian na zewnątrz</string>
+    <string name="stack">Stos</string>
+    <string name="accordion">Akordeon</string>
+    <string name="flip">Przewróć</string>
+    <string name="cylinder_in">Cylinder do środka</string>
+    <string name="cylinder_out">Cylinder na zewnątrz</string>
+    <string name="cross_fade">Przenikanie</string>
+    <string name="overview">Podgląd</string>
+    <string name="overview_scale">Skala podglądu</string>
+    <string name="page">Strona</string>
+    <string name="windmill_up">Młyn wiatrakowy w górę</string>
+    <string name="windmill_down">Młyn wiatrakowy w dół</string>
+    <string name="effect">efekt</string>
 </resources>

@@ -244,9 +244,6 @@ class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
         }
         if (LauncherUtil.gotoSetting) {
             if (LauncherUtil.isDefaultLauncher(this)) {
-                // 设置回来成功
-                StoreRatingsDialog.show(this)
-
                 EventUtil.logEvent(EventName.permissionGrant, Bundle().apply {
                     putString("scene", "home")
                     putString("permission", "launcher")

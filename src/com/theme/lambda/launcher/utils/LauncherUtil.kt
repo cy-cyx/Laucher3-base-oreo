@@ -9,6 +9,7 @@ import com.theme.lambda.launcher.ui.vivosetting.VivoSettingActivity
 
 object LauncherUtil {
 
+    // 去launcher开启权限的标志位
     var gotoSetting = false
 
     fun gotoSetLauncher(context: Context) {

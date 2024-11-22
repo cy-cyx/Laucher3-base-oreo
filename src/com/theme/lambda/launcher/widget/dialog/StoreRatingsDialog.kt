@@ -20,6 +20,7 @@ import com.theme.lambda.launcher.utils.visible
 class StoreRatingsDialog(context: Context) : BaseDialog(context, R.style.Theme_translucentDialog) {
 
     companion object {
+        @JvmStatic
         fun show(context: Context) {
             if (SpKey.hasStoreRatings.getSpBool()) return
             if (context is Launcher) {
