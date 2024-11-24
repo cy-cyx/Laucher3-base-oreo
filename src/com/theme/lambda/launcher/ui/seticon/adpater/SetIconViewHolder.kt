@@ -7,6 +7,7 @@ import com.android.launcher3.databinding.ItemSetIconBinding
 import com.theme.lambda.launcher.data.model.IconBean
 import com.theme.lambda.launcher.utils.GlideUtil
 import com.theme.lambda.launcher.utils.gone
+import com.theme.lambda.launcher.utils.noDoubleClick
 import com.theme.lambda.launcher.utils.visible
 
 class SetIconViewHolder(view: View) : ViewHolder(view) {
@@ -52,16 +53,16 @@ class SetIconViewHolder(view: View) : ViewHolder(view) {
             viewBinding.adBnIv.gone()
         }
 
-        viewBinding.radioIv.setOnClickListener {
+        viewBinding.radioIv.noDoubleClick {
             onClickRadioBnListen?.invoke(icon)
         }
-        viewBinding.appIv.setOnClickListener {
+        viewBinding.appIv.noDoubleClick {
             onClickAppIconListen?.invoke(icon)
         }
-        viewBinding.downloadFl.setOnClickListener {
+        viewBinding.downloadFl.noDoubleClick {
             onClickDownLoadOrUnLockListen?.invoke(icon)
         }
-        viewBinding.adBnIv.setOnClickListener {
+        viewBinding.adBnIv.noDoubleClick {
             onClickDownLoadOrUnLockListen?.invoke(icon)
         }
     }
