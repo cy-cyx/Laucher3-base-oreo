@@ -43,7 +43,8 @@ class PreviewControlView @JvmOverloads constructor(
 
         // 处理兼容性问题 已经知道华为安卓10以上
         if (!LauncherUtil.isDefaultLauncher(context)
-            && SystemUtil.getDeviceBrand().equals(SystemUtil.PHONE_HUAWEI)
+            && (SystemUtil.getDeviceBrand().equals(SystemUtil.PHONE_HUAWEI)
+                    || SystemUtil.getDeviceBrand().equals(SystemUtil.PHONE_HONOR))
             && Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
         ) {
             layoutPreviewControlBinding?.setTv?.gone()
