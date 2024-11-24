@@ -757,9 +757,9 @@ public class LauncherModel extends BroadcastReceiver
             try {
                 long start = System.currentTimeMillis();
 
-                // 当桌面布局发生时，整理数据数据
+                // 当桌面布局行列数发生变换时时，需要重新整理数据
                 if (DEBUG_LOADERS) Log.d(TAG, "step 0.1: Organize the database");
-//                organizeTheDatabase();
+                organizeTheDatabase();
                 if (DEBUG_LOADERS)
                     Log.d(TAG, "step 0.1: Organize the database finish time:" + (System.currentTimeMillis() - start));
                 verifyNotStopped();
@@ -875,9 +875,6 @@ public class LauncherModel extends BroadcastReceiver
             int rows = app.getInvariantDeviceProfile().numRows;
             Log.w(TAG, "organizeTheDatabase => numColumns:" + columns + "numRows:" + rows);
 
-            int textColum = 3;
-            int textRow = 4;
-
             final Context context = mContext;
             final ContentResolver contentResolver = context.getContentResolver();
 
@@ -885,7 +882,14 @@ public class LauncherModel extends BroadcastReceiver
             int lastCellX = 0;
             int lastCellY = 0;
 
-            ArrayList<ItemInfo> needAdjustItemInfo = new ArrayList<>();
+            // 需要调整位置的icon和widget
+            ArrayList<ItemInfo> needAdjustItemInfos = new ArrayList<>();
+            ArrayList<ItemInfo> needAdjustIconItemInfos = new ArrayList<>();
+            ArrayList<ItemInfo> needAdjustWidgetItemInfos = new ArrayList<>();
+
+            // 当前页面屏幕页面的排序,并找出最后一页
+            ArrayList<Long> screenS = loadWorkspaceScreensDb(mContext);
+            lastScreen = screenS.get(screenS.size() - 1);
 
             synchronized (sBgDataModel) {
                 final LoaderCursor c = new LoaderCursor(contentResolver.query(
@@ -914,13 +918,14 @@ public class LauncherModel extends BroadcastReceiver
                             int spanX = c.getInt(indexSpanX);
                             int spanY = c.getInt(indexSpanY);
 
+                            // icon部分
                             if (itemType == LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT ||
                                     itemType == LauncherSettings.Favorites.ITEM_TYPE_FOLDER ||
                                     itemType == LauncherSettings.Favorites.ITEM_TYPE_DEEP_SHORTCUT ||
                                     itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {
 
                                 // 出界的
-                                if (cellX > textColum - 1 || cellY > textRow - 1) {
+                                if (cellX > columns - 1 || cellY > rows - 1) {
                                     ItemInfo info = new ItemInfo();
                                     info.id = id;
                                     info.itemType = itemType;
@@ -928,52 +933,182 @@ public class LauncherModel extends BroadcastReceiver
                                     info.cellY = cellY;
                                     info.spanX = spanX;
                                     info.spanY = spanY;
-                                    needAdjustItemInfo.add(info);
+                                    needAdjustIconItemInfos.add(info);
+                                    Log.e("organizeTheDatabase", "Crossing the line(icon):id:" + id + "screen:" + screen + "cellX:" + cellX + "cellY:" + cellY);
                                 } else {
-                                    // 不出界就找排序到了最后的
-                                    if (screen > lastScreen) {
-                                        lastScreen = screen;
-                                    }
-                                    if (cellX > lastCellX) {
-                                        lastCellX = cellX;
-                                    }
-                                    if (cellY > lastCellY) {
-                                        lastCellY = cellY;
+                                    // 顺便找一下最后一页排到了哪
+                                    if (screen == lastScreen) {
+                                        if (cellX > lastCellX) {
+                                            lastCellX = cellX;
+                                        }
+                                        if (cellY > lastCellY) {
+                                            lastCellY = cellY;
+                                        }
                                     }
                                 }
                             } else if (itemType == LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET ||
                                     itemType == LauncherSettings.Favorites.ITEM_TYPE_CUSTOM_APPWIDGET) {
+                                // widget整个出界了
+                                if (cellX + spanX - 1 > columns - 1 || cellY + spanY - 1 > rows - 1) {
+                                    ItemInfo info = new ItemInfo();
+                                    info.id = id;
+                                    info.itemType = itemType;
+                                    info.cellX = cellX;
+                                    info.cellY = cellY;
+                                    info.spanX = spanX;
+                                    info.spanY = spanY;
+                                    needAdjustWidgetItemInfos.add(info);
+                                    Log.e("organizeTheDatabase", "Crossing the line(widget):id:" + id + "screen:" + screen + "cellX:" + cellX + "cellY:" + cellY);
+                                } else {
+                                    // 顺便找一下最后一页排到了哪
+                                    if (screen == lastScreen) {
+                                        if (cellX + spanX - 1 > lastCellX) {
+                                            lastCellX = cellX + spanX - 1;
+                                        }
+                                        if (cellY + spanY - 1 > lastCellY) {
+                                            lastCellY = cellY + spanY - 1;
+                                        }
+                                    }
+                                }
 
                             }
-
                         }
                     }
 
-                    // 开始调整
-                    for (ItemInfo info : needAdjustItemInfo) {
-                        // 找到正确位置去放
+                    // 优先处理icon的
+                    needAdjustItemInfos.addAll(needAdjustIconItemInfos);
+                    needAdjustItemInfos.addAll(needAdjustWidgetItemInfos);
 
-                        // 1.先尝试x轴平移
-                        lastCellX++;
-                        // 2.如果越界，尝试y轴
-                        if (lastCellX > textColum - 1) {
+                    // 开始调整
+                    for (ItemInfo info : needAdjustItemInfos) {
+                        // 找到正确位置去放
+                        if (info.itemType == LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT ||
+                                info.itemType == LauncherSettings.Favorites.ITEM_TYPE_FOLDER ||
+                                info.itemType == LauncherSettings.Favorites.ITEM_TYPE_DEEP_SHORTCUT ||
+                                info.itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {
+                            // 1.先尝试x轴平移
+                            lastCellX++;
+                            // 2.如果越界，尝试y轴
+                            if (lastCellX > columns - 1) {
+                                lastCellX = 0;
+
+                                lastCellY++;
+                                // 3.尝试后如果y轴也越界，那就新开一页
+                                if (lastCellY > rows - 1) {
+                                    lastCellY = 0;
+
+                                    // 新开一页
+                                    // 先找出最大的id
+
+                                    long id = 0;
+                                    for (long screen : screenS) {
+                                        if (screen > id) {
+                                            id = screen;
+                                        }
+                                    }
+
+                                    id++;
+                                    ContentValues v = new ContentValues();
+                                    v.put(LauncherSettings.WorkspaceScreens._ID, id);
+                                    v.put(LauncherSettings.WorkspaceScreens.SCREEN_RANK, screenS.size());
+                                    contentResolver.insert(LauncherSettings.WorkspaceScreens.CONTENT_URI, v);
+                                    Log.e("organizeTheDatabase", "new screen :" + id);
+
+                                    screenS.add(id);
+                                    lastScreen = id;
+                                }
+                            }
+
+                            ContentValues values = new ContentValues();
+                            values.put(LauncherSettings.Favorites.SCREEN, lastScreen);
+                            values.put(LauncherSettings.Favorites.CELLX, lastCellX);
+                            values.put(LauncherSettings.Favorites.CELLY, lastCellY);
+                            contentResolver.update(LauncherSettings.Favorites.getContentUri(info.id), values, null, null);
+                            Log.d("organizeTheDatabase", "change icon id:" + info.id + "screen:" + lastScreen + "cellX:" + lastCellX + "cellY:" + lastCellY);
+                        } else if (info.itemType == LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET ||
+                                info.itemType == LauncherSettings.Favorites.ITEM_TYPE_CUSTOM_APPWIDGET) {
+
+                            // 为了方便直接排位置 每个widget都单独一行
                             lastCellX = 0;
 
+                            // 去看剩下的行数够吗
                             lastCellY++;
-                            // 3.尝试后如果y轴也越界，那就新开一页
-                            if (lastCellY > textRow - 1) {
+                            // 不够一页了，新开一页
+                            if (lastCellY > rows - 1) {
                                 lastCellY = 0;
 
                                 // 新开一页
-                                lastScreen++;
-                            }
-                        }
+                                // 先找出最大的id
 
-                        ContentValues values = new ContentValues();
-                        values.put(LauncherSettings.Favorites.SCREEN, lastScreen);
-                        values.put(LauncherSettings.Favorites.CELLX, lastCellX);
-                        values.put(LauncherSettings.Favorites.CELLY, lastCellY);
-                        contentResolver.update(LauncherSettings.Favorites.getContentUri(info.id), values, null, null);
+                                long id = 0;
+                                for (long screen : screenS) {
+                                    if (screen > id) {
+                                        id = screen;
+                                    }
+                                }
+
+                                id++;
+                                ContentValues v = new ContentValues();
+                                v.put(LauncherSettings.WorkspaceScreens._ID, id);
+                                v.put(LauncherSettings.WorkspaceScreens.SCREEN_RANK, screenS.size());
+                                contentResolver.insert(LauncherSettings.WorkspaceScreens.CONTENT_URI, v);
+                                Log.e("organizeTheDatabase", "new screen :" + id);
+
+                                screenS.add(id);
+                                lastScreen = id;
+                            } else {
+                                // 够一页的看看，剩下的够不够，不够也是得单开一页
+
+                                int temSpan = rows - 1 - lastCellY + 1;
+                                // 剩下位置不够，新开吧
+                                if (info.spanY > temSpan) {
+                                    lastCellY = 0;
+
+                                    // 新开一页
+                                    // 先找出最大的id
+
+                                    long id = 0;
+                                    for (long screen : screenS) {
+                                        if (screen > id) {
+                                            id = screen;
+                                        }
+                                    }
+
+                                    id++;
+                                    ContentValues v = new ContentValues();
+                                    v.put(LauncherSettings.WorkspaceScreens._ID, id);
+                                    v.put(LauncherSettings.WorkspaceScreens.SCREEN_RANK, screenS.size());
+                                    contentResolver.insert(LauncherSettings.WorkspaceScreens.CONTENT_URI, v);
+                                    Log.e("organizeTheDatabase", "new screen :" + id);
+
+                                    screenS.add(id);
+                                    lastScreen = id;
+                                }
+                            }
+
+                            // 调整(如果超过最大X的，缩小到最大x的)
+                            int tempSpanX = info.spanX;
+                            if (tempSpanX > columns) {
+                                tempSpanX = columns;
+                            }
+                            // 调整(如果超过最大y的，缩小到最大y的)
+                            int tempSpanY = info.spanY;
+                            if (tempSpanY > rows) {
+                                tempSpanY = rows;
+                            }
+                            ContentValues values = new ContentValues();
+                            values.put(LauncherSettings.Favorites.SCREEN, lastScreen);
+                            values.put(LauncherSettings.Favorites.CELLX, lastCellX);
+                            values.put(LauncherSettings.Favorites.CELLY, lastCellY);
+                            values.put(LauncherSettings.Favorites.SPANX, tempSpanX);
+                            values.put(LauncherSettings.Favorites.SPANY, tempSpanY);
+                            contentResolver.update(LauncherSettings.Favorites.getContentUri(info.id), values, null, null);
+                            Log.d("organizeTheDatabase", "change widget id:" + info.id + "screen:" + lastScreen + "cellX:" + lastCellX + "cellY:" + lastCellY);
+
+                            // 标一下现在放到那了
+                            lastCellX = lastCellX + tempSpanX - 1;
+                            lastCellY = lastCellY + tempSpanY - 1;
+                        }
                     }
                 } catch (Exception e) {
 
