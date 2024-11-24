@@ -48,6 +48,9 @@ public class PreviewImageView extends ImageView {
     public void copy(View view) {
         final int width = view.getMeasuredWidth();
         final int height = view.getMeasuredHeight();
+        if (width == 0 || height == 0) {
+            return;
+        }
 
         if (mBitmap == null || mBitmap.getWidth() != width || mBitmap.getHeight() != height) {
             mBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
