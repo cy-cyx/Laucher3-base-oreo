@@ -145,6 +145,8 @@ public class InvariantDeviceProfile {
                 invDistWeightedInterpolate(minWidthDps, minHeightDps, closestProfiles);
 
         InvariantDeviceProfile closestProfile = closestProfiles.get(0);
+        // todo 在这里处理修改行列数
+
         numRows = closestProfile.numRows;
         numColumns = closestProfile.numColumns;
         numHotseatIcons = closestProfile.numHotseatIcons;

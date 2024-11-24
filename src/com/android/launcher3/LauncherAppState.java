@@ -61,12 +61,17 @@ public class LauncherAppState {
                             return LauncherAppState.getInstance(context);
                         }
                     }).get();
-                } catch (InterruptedException|ExecutionException e) {
+                } catch (InterruptedException | ExecutionException e) {
                     throw new RuntimeException(e);
                 }
             }
         }
         return INSTANCE;
+    }
+
+    // 当修改布局，重置配置
+    public static void reset() {
+        INSTANCE = null;
     }
 
     public static LauncherAppState getInstanceNoCreate() {
