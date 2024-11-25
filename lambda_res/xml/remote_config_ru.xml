@@ -10,14 +10,6 @@
             "strategy": 1,
             "params": [
             {
-            "adid": "R-M-12398626-9",
-            "order": 0,
-            "per": 0,
-            "plat": 7,
-            "type": 5,
-            "ecpm": 1.5
-            },
-            {
             "adid": "10961146-10988845",
             "order": 0,
             "per": 0,
@@ -27,6 +19,14 @@
             },
             {
             "adid": "43c807cacc69de1a",
+            "order": 0,
+            "per": 0,
+            "plat": 2,
+            "type": 5,
+            "ecpm": 0
+            },
+            {
+            "adid": "64abd990c1050987",
             "order": 0,
             "per": 0,
             "plat": 2,

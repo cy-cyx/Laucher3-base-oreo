@@ -18,6 +18,14 @@
             "ecpm": 0
             },
             {
+            "adid": "ca-app-pub-3912577259305392/9632732492",
+            "order": 0,
+            "per": 0,
+            "plat": 1,
+            "type": 5,
+            "ecpm": 0
+            },
+            {
             "adid": "28e105b9ded57f54",
             "order": 0,
             "per": 0,
@@ -41,6 +49,14 @@
             "params": [
             {
             "adid": "ca-app-pub-3912577259305392/7836638358",
+            "order": 0,
+            "per": 0,
+            "plat": 1,
+            "type": 4,
+            "ecpm": 0
+            },
+            {
+            "adid": "ca-app-pub-3912577259305392/5790797623",
             "order": 0,
             "per": 0,
             "plat": 1,
