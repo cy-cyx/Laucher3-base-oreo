@@ -47,4 +47,8 @@ object SpKey {
 
     const val keyColumn = "KeyColumn"
     const val keyRow = "KeyRow"
+
+    const val keyHomeScreenIconSize = "keyHomeScreenIconSize"
+    const val keyAppDrawerIconSize = "keyAppDrawerIconSize"
+    const val keyFolderIconSize = "keyFolderIconSize"
 }

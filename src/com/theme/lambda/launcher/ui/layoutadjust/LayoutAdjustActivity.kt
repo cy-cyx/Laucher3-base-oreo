@@ -10,6 +10,7 @@ import com.android.launcher3.LauncherAppState
 import com.android.launcher3.R
 import com.android.launcher3.databinding.ActivityLayoutAdjustBinding
 import com.theme.lambda.launcher.base.BaseActivity
+import com.theme.lambda.launcher.ui.iconsetting.IconSettingActivity
 import com.theme.lambda.launcher.utils.StatusBarUtil
 import com.theme.lambda.launcher.utils.gone
 import com.theme.lambda.launcher.utils.marginStatusBarHeight
@@ -40,6 +41,10 @@ class LayoutAdjustActivity : BaseActivity<ActivityLayoutAdjustBinding>() {
 
         viewBinding.backIv.setOnClickListener {
             finish()
+        }
+
+        viewBinding.IconSetFl.setOnClickListener {
+            IconSettingActivity.start(this)
         }
 
         initHomeScreen()

@@ -1217,6 +1217,13 @@ public class Launcher extends BaseActivity
                 mWorkspace.getTransitionEffect().clearTransitionEffect();
                 mWorkspace.curEffect = AdjustConfig.getEffectId();
             }
+
+            // 需要重新load数据刷新
+            if (AdjustConfig.needReLoadLauncher){
+                AdjustConfig.needReLoadLauncher = false;
+
+                reload(true);
+            }
         }
     }
 

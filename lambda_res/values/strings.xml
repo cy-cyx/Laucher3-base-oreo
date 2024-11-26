@@ -411,4 +411,9 @@
     <string name="effect">Effect</string>
     <string name="layout">Layout</string>
     <string name="text_home_screen">Home screen</string>
+    <string name="icon_setting">Icon Setting</string>
+    <string name="icon_setting_tip">Set icon style,label size and more</string>
+    <string name="icon_size">Icon size</string>
+    <string name="app_drawer">App drawer</string>
+    <string name="folders">Folders</string>
 </resources>

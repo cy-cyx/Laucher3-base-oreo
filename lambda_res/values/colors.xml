@@ -32,4 +32,7 @@
     <color name="color_btn_text">#611C0B</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="color_666666">#FF666666</color>
+    <color name="color_e2e2e2">#FFe2e2e2</color>
+    <color name="color_208af4">#FF208AF4</color>
 </resources>

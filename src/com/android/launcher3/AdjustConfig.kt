@@ -3,7 +3,9 @@ package com.android.launcher3
 import com.android.launcher3.effect.TransitionEffect
 import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.utils.SpKey
+import com.theme.lambda.launcher.utils.getSpFloat
 import com.theme.lambda.launcher.utils.getSpInt
+import com.theme.lambda.launcher.utils.putSpFloat
 import com.theme.lambda.launcher.utils.putSpInt
 
 // 相关调整参数
@@ -56,6 +58,7 @@ object AdjustConfig {
         return SpKey.keyRow.getSpInt(-1)
     }
 
+    // 不同行列下对应的icon大小
     @JvmStatic
     fun getIconSizeByColumn(column: Int): Int {
         return when (column) {
@@ -68,6 +71,7 @@ object AdjustConfig {
         }
     }
 
+    // 不同行列下对应的字体大小
     @JvmStatic
     fun getTextSizeByColumn(column: Int): Float {
         return when (column) {
@@ -78,5 +82,59 @@ object AdjustConfig {
             6 -> 11.0f
             else -> 13.0f
         }
+    }
+
+    // icon size
+
+    // 进度条和实际百分对应关系  0 ~ 1 80% ~ 150%
+    @JvmStatic
+    fun progressToPercent(progress: Float): Float {
+        if (progress <= 0.5f) {
+            return (0.8 + (0.2 * progress / 0.5f)).toFloat()
+        } else {
+            return (1f + (0.5 * (progress - 0.5f) / 0.5f)).toFloat()
+        }
+    }
+
+    @JvmStatic
+    fun percentToProgress(progress: Float): Float {
+        if (progress <= 1f) {
+            return 0.5f - 0.5f * (1f - progress) / 0.2f
+        } else {
+            return 0.5f + 0.5f * (progress - 1f) / 0.5f
+        }
+    }
+
+    @JvmStatic
+    fun setHomeScreenIconSize(size: Float) {
+        SpKey.keyHomeScreenIconSize.putSpFloat(size)
+        needReLoadLauncher = true
+    }
+
+    @JvmStatic
+    fun getHomeScreenIconSize(): Float {
+        return SpKey.keyHomeScreenIconSize.getSpFloat(1f)
+    }
+
+    @JvmStatic
+    fun setAppDrawerIconSize(size: Float) {
+        SpKey.keyAppDrawerIconSize.putSpFloat(size)
+        needReLoadLauncher = true
+    }
+
+    @JvmStatic
+    fun getAppDrawerIconSize(): Float {
+        return SpKey.keyAppDrawerIconSize.getSpFloat(1f)
+    }
+
+    @JvmStatic
+    fun setFolderIconSize(size: Float) {
+        SpKey.keyFolderIconSize.putSpFloat(size)
+        needReLoadLauncher = true
+    }
+
+    @JvmStatic
+    fun getFolderIconSize(): Float {
+        return SpKey.keyFolderIconSize.getSpFloat(1f)
     }
 }
