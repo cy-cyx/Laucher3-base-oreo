@@ -51,9 +51,6 @@ class ThemeManager {
     var isPreviewMode = false
         private set
 
-    // 有些场景onPause不需要出退出询问
-    private var ignoreQuitReq = false
-
     private var wallpaperView: WallpaperView? = null
 
     fun bindWallpaperView(view: WallpaperView) {
@@ -80,7 +77,6 @@ class ThemeManager {
             override fun setIcon() {
                 launcher?.let {
                     SetIconActivity.start(it, previewThemeId)
-                    ignoreQuitReq = true
                 }
             }
         }
@@ -144,7 +140,6 @@ class ThemeManager {
                         })
                         // 避免重建回来所选主题丢失
                         SpUtil.putString(sKeyThemeId, previewThemeId)
-                        ignoreQuitReq = true
                         dismiss()
 
                         clickSet = true
@@ -256,15 +251,6 @@ class ThemeManager {
     }
 
     fun onPause() {
-        // 如果是默认的launcher的情况下
-        if (!ignoreQuitReq) {
-            launcher?.let {
-                if (LauncherUtil.isDefaultLauncher(it) && isPreviewMode) {
-                    applyQuitPreviewMode(it)
-                }
-            }
-        }
-        ignoreQuitReq = false
     }
 
     fun onStop() {
