@@ -115,10 +115,6 @@ class ThemePreviewActivity : BaseActivity<ActivityThemePreviewBinding>() {
             }
         })
 
-
-        var intoThemeNum = SpKey.intoThemeNum.getSpInt() ?: 0
-        SpKey.intoThemeNum.putSpInt(++intoThemeNum)
-
         logEvent(EventName.previewPageView, Bundle().apply {
             putString("id", viewModel.resources?.id ?: "")
         })

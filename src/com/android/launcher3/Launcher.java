@@ -389,8 +389,6 @@ public class Launcher extends BaseActivity
 
     private LoadingDialog loadingDialog;
 
-    private boolean needShowRate = false;
-
     Handler mainHander = new Handler(Looper.getMainLooper());
 
     private long onCreateStartTime = System.currentTimeMillis();
@@ -1185,11 +1183,6 @@ public class Launcher extends BaseActivity
 
         if (isWorkspaceLoading()) {
             showLoading(60000);
-        }
-
-        if (needShowRate) {
-            StoreRatingsDialog.Companion.show(this);
-            needShowRate = false;
         }
 
         fillMultiLauncherBug();
@@ -2712,10 +2705,6 @@ public class Launcher extends BaseActivity
                 @Override
                 public void run() {
                     startActivity(v, intent, item);
-                    // 浏览过三次以上的主题，点击icon出评分弹窗
-                    if (SpUtil.INSTANCE.getInt(SpKey.intoThemeNum, 0) >= 3) {
-                        needShowRate = true;
-                    }
                 }
             });
             Bundle bundle = new Bundle();
