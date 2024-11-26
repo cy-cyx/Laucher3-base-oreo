@@ -42,7 +42,7 @@ class PreviewControlView @JvmOverloads constructor(
         layoutPreviewControlBinding?.setIconTv?.setOnClickListener {
             controlListen?.setIcon()
         }
-        layoutPreviewControlBinding?.setLayoutIv?.setOnClickListener {
+        layoutPreviewControlBinding?.setEffectIv?.setOnClickListener {
             EffectActivity.start(context)
         }
         layoutPreviewControlBinding?.setLayoutIv?.setOnClickListener {
