@@ -1200,14 +1200,21 @@ public class Launcher extends BaseActivity
 
     // 更新一些调整配置
     private void upDataAdjustIfNeed() {
-        if (mWorkspace.curEffect != AdjustConfig.getEffectId()) {
-            mWorkspace.getTransitionEffect().clearTransitionEffect();
-            mWorkspace.curEffect = AdjustConfig.getEffectId();
-            quitOverview();
+        // 行列数变了 直接重建
+        if (AdjustConfig.needRebuildLauncher) {
+            AdjustConfig.needRebuildLauncher = false;
+
+            LauncherAppState.reset();
+            recreate();
+        } else {
+            if (mWorkspace.curEffect != AdjustConfig.getEffectId()) {
+                mWorkspace.getTransitionEffect().clearTransitionEffect();
+                mWorkspace.curEffect = AdjustConfig.getEffectId();
+            }
         }
     }
 
-    private void quitOverview(){
+    private void quitOverview() {
         if (mWorkspace.isInOverviewMode()) {
             UserEventDispatcher ued = getUserEventDispatcher();
             ued.logActionCommand(Action.Command.BACK, ContainerType.OVERVIEW);
@@ -1546,6 +1553,7 @@ public class Launcher extends BaseActivity
             @Override
             public void handleViewClick(View view) {
                 EffectActivity.start(Launcher.this);
+                quitOverview();
             }
         }.attachTo(wallpaperButton);
         wallpaperButton.setOnTouchListener(getHapticFeedbackTouchListener());
@@ -1560,11 +1568,12 @@ public class Launcher extends BaseActivity
         }.attachTo(mWidgetsButton);
         mWidgetsButton.setOnTouchListener(getHapticFeedbackTouchListener());
 
-        mLayoutButton= findViewById(R.id.layout_button);
+        mLayoutButton = findViewById(R.id.layout_button);
         new OverviewButtonClickListener(ControlType.Layout_BUTTON) {
             @Override
             public void handleViewClick(View view) {
                 LayoutAdjustActivity.start(Launcher.this);
+                quitOverview();
             }
         }.attachTo(mLayoutButton);
         mLayoutButton.setOnTouchListener(getHapticFeedbackTouchListener());

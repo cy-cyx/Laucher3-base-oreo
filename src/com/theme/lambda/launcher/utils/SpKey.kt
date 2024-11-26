@@ -44,4 +44,7 @@ object SpKey {
 
     const val keyLastOrganizeColumns = "keyLastOrganizeColumns"
     const val keyLastOrganizeRows = "keyLastOrganizeRows"
+
+    const val keyColumn = "KeyColumn"
+    const val keyRow = "KeyRow"
 }

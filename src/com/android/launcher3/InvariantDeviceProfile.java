@@ -145,19 +145,25 @@ public class InvariantDeviceProfile {
                 invDistWeightedInterpolate(minWidthDps, minHeightDps, closestProfiles);
 
         InvariantDeviceProfile closestProfile = closestProfiles.get(0);
-        // todo 在这里处理修改行列数
-
-        numRows = 3;
-        numColumns = 3;
+        // 在这里处理修改行列数和初始字体大小
+        numRows = AdjustConfig.getRow();
+        if (numRows == -1) {
+            numRows = closestProfile.numRows;
+        }
+        numColumns = AdjustConfig.getColumn();
+        if (numColumns == -1) {
+            numColumns = closestProfile.numColumns;
+        }
         numHotseatIcons = closestProfile.numHotseatIcons;
         defaultLayoutId = closestProfile.defaultLayoutId;
         numFolderRows = closestProfile.numFolderRows;
         numFolderColumns = closestProfile.numFolderColumns;
         minAllAppsPredictionColumns = closestProfile.minAllAppsPredictionColumns;
 
-        iconSize = interpolatedDeviceProfileOut.iconSize;
+        // 不同行，icon初始大小不一致
+        iconSize = AdjustConfig.getIconSizeByColumn(numColumns);
         iconBitmapSize = Utilities.pxFromDp(iconSize, dm);
-        iconTextSize = interpolatedDeviceProfileOut.iconTextSize;
+        iconTextSize = AdjustConfig.getTextSizeByColumn(numColumns);
         hotseatIconSize = interpolatedDeviceProfileOut.hotseatIconSize;
         fillResIconDpi = getLauncherIconDensity(iconBitmapSize);
 

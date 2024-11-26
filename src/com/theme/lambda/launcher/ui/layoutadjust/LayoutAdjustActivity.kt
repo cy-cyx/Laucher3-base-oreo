@@ -4,10 +4,17 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
+import com.android.launcher3.AdjustConfig
+import com.android.launcher3.R
 import com.android.launcher3.databinding.ActivityLayoutAdjustBinding
 import com.theme.lambda.launcher.base.BaseActivity
 import com.theme.lambda.launcher.utils.StatusBarUtil
+import com.theme.lambda.launcher.utils.gone
 import com.theme.lambda.launcher.utils.marginStatusBarHeight
+import com.theme.lambda.launcher.utils.visible
+import com.theme.lambda.launcher.widget.pickview.ScrollPickerView
+import com.theme.lambda.launcher.widget.pickview.ScrollPickerView.OnSelectedListener
 
 class LayoutAdjustActivity : BaseActivity<ActivityLayoutAdjustBinding>() {
 
@@ -34,6 +41,51 @@ class LayoutAdjustActivity : BaseActivity<ActivityLayoutAdjustBinding>() {
             finish()
         }
 
+        initHomeScreen()
+    }
 
+    private var columnData = arrayListOf("2", "3", "4", "5", "6")
+    private var rowData = arrayListOf("2", "3", "4", "5", "6")
+
+    private var curColumn = 4
+    private var curRow = 5
+
+    private fun initHomeScreen() {
+        viewBinding.homeScreenFl.setOnClickListener {
+            if (viewBinding.homeScreenLl.visibility == View.VISIBLE) {
+                viewBinding.homeScreenLl.gone()
+                viewBinding.homeScreenNextIv.setImageResource(R.drawable.ic_next)
+            } else {
+                viewBinding.homeScreenLl.visible()
+                viewBinding.homeScreenNextIv.setImageResource(R.drawable.ic_up)
+            }
+        }
+
+        viewBinding.columnPicker.data = columnData as List<CharSequence>?
+        viewBinding.columnPicker.isIsCirculation = false
+        viewBinding.columnPicker.setOnSelectedListener(object : OnSelectedListener {
+            override fun onSelected(scrollPickerView: ScrollPickerView<*>?, position: Int) {
+                curColumn = columnData.getOrNull(position)?.toIntOrNull() ?: 4
+
+                viewBinding.layoutPreviewLpv.setData(curColumn, curRow)
+                viewBinding.gridNumTv.setText("Grid $curColumn*$curRow")
+            }
+        })
+
+        viewBinding.rowPicker.data = rowData as List<CharSequence>?
+        viewBinding.rowPicker.isIsCirculation = false
+        viewBinding.rowPicker.setOnSelectedListener(object : OnSelectedListener {
+            override fun onSelected(scrollPickerView: ScrollPickerView<*>?, position: Int) {
+                curRow = rowData.getOrNull(position)?.toIntOrNull() ?: 5
+
+                viewBinding.layoutPreviewLpv.setData(curColumn, curRow)
+                viewBinding.gridNumTv.setText("Grid $curColumn*$curRow")
+            }
+        })
+
+        viewBinding.homeScreenApplyTv.setOnClickListener {
+            AdjustConfig.setColumn(curColumn)
+            AdjustConfig.setRow(curRow)
+        }
     }
 }
