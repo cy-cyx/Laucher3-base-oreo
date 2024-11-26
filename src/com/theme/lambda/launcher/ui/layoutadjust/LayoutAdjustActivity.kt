@@ -45,8 +45,8 @@ class LayoutAdjustActivity : BaseActivity<ActivityLayoutAdjustBinding>() {
         initHomeScreen()
     }
 
-    private var columnData = arrayListOf("2", "3", "4", "5", "6")
-    private var rowData = arrayListOf("2", "3", "4", "5", "6")
+    private var columnData = arrayListOf("3", "4", "5", "6")
+    private var rowData = arrayListOf("3", "4", "5", "6")
 
     private var curColumn = 4
     private var curRow = 5

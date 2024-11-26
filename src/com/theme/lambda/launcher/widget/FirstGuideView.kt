@@ -47,15 +47,6 @@ class FirstGuideView @JvmOverloads constructor(
 
     private fun showFirstStep() {
         binding.step1Fl.visible()
-
-        val layoutParams = binding.guideTextLl.layoutParams as FrameLayout.LayoutParams
-        var row = LauncherAppState.getInstanceNoCreate().getInvariantDeviceProfile().numRows
-        var column = LauncherAppState.getInstanceNoCreate().getInvariantDeviceProfile().numColumns
-
-        val guideTopMargin =
-            (CommonUtil.getScreenHeight() - CommonUtil.dp2px(88f) - CommonUtil.dp2px(28f) - CommonUtil.getStatusBarHeight()) / row * (row - 1) + CommonUtil.getStatusBarHeight()
-        layoutParams.topMargin = guideTopMargin.toInt()
-        binding.guideTextLl.requestLayout()
         binding.step1Fl.setOnClickListener {
             binding.step1Fl.gone()
             showThirdStep()
