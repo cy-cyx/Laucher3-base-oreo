@@ -50,6 +50,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.android.launcher3.AdjustConfig;
 import com.android.launcher3.Alarm;
 import com.android.launcher3.AppInfo;
 import com.android.launcher3.BubbleTextView;
@@ -87,10 +88,13 @@ import java.util.List;
  * An icon that can appear on in the workspace representing an {@link Folder}.
  */
 public class FolderIcon extends FrameLayout implements FolderListener {
-    @Thunk Launcher mLauncher;
-    @Thunk Folder mFolder;
+    @Thunk
+    Launcher mLauncher;
+    @Thunk
+    Folder mFolder;
     private FolderInfo mInfo;
-    @Thunk static boolean sStaticValuesDirty = true;
+    @Thunk
+    static boolean sStaticValuesDirty = true;
 
     public static final int NUM_ITEMS_IN_PREVIEW = FeatureFlags.LAUNCHER3_LEGACY_FOLDER_ICON ?
             StackFolderIconLayoutRule.MAX_NUM_ITEMS_IN_PREVIEW :
@@ -111,7 +115,8 @@ public class FolderIcon extends FrameLayout implements FolderListener {
     // Delay when drag enters until the folder opens, in miliseconds.
     private static final int ON_OPEN_DELAY = 800;
 
-    @Thunk BubbleTextView mFolderName;
+    @Thunk
+    BubbleTextView mFolderName;
 
     // These variables are all associated with the drawing of the preview; they are stored
     // as member variables for shared usage and to avoid computation on each frame
@@ -175,7 +180,7 @@ public class FolderIcon extends FrameLayout implements FolderListener {
     }
 
     public static FolderIcon fromXml(int resId, Launcher launcher, ViewGroup group,
-            FolderInfo folderInfo) {
+                                     FolderInfo folderInfo) {
         @SuppressWarnings("all") // suppress dead code warning
         final boolean error = INITIAL_ITEM_ANIMATION_DURATION >= DROP_IN_ANIMATION_DURATION;
         if (error) {
@@ -192,7 +197,7 @@ public class FolderIcon extends FrameLayout implements FolderListener {
         icon.mFolderName.setText(folderInfo.title);
         icon.mFolderName.setCompoundDrawablePadding(0);
         FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) icon.mFolderName.getLayoutParams();
-        lp.topMargin = grid.iconSizePx + grid.iconDrawablePaddingPx;
+        lp.topMargin = (int) (grid.iconSizePx * AdjustConfig.getHomeScreenIconSize() + grid.iconDrawablePaddingPx);
 
         icon.setTag(folderInfo);
         icon.setOnClickListener(launcher);
@@ -277,8 +282,8 @@ public class FolderIcon extends FrameLayout implements FolderListener {
     }
 
     public void performCreateAnimation(final ShortcutInfo destInfo, final View destView,
-            final ShortcutInfo srcInfo, final DragView srcView, Rect dstRect,
-            float scaleRelativeToDragLayer, Runnable postAnimationRunnable) {
+                                       final ShortcutInfo srcInfo, final DragView srcView, Rect dstRect,
+                                       float scaleRelativeToDragLayer, Runnable postAnimationRunnable) {
 
         // These correspond two the drawable and view that the icon was dropped _onto_
         Drawable animateDrawable = prepareCreate(destView);
@@ -311,7 +316,7 @@ public class FolderIcon extends FrameLayout implements FolderListener {
     }
 
     private void onDrop(final ShortcutInfo item, DragView animateView, Rect finalRect,
-            float scaleRelativeToDragLayer, int index, Runnable postAnimationRunnable) {
+                        float scaleRelativeToDragLayer, int index, Runnable postAnimationRunnable) {
         item.cellX = -1;
         item.cellY = -1;
 
@@ -345,7 +350,7 @@ public class FolderIcon extends FrameLayout implements FolderListener {
             center[1] = (int) Math.round(scaleRelativeToDragLayer * center[1]);
 
             to.offset(center[0] - animateView.getMeasuredWidth() / 2,
-                      center[1] - animateView.getMeasuredHeight() / 2);
+                    center[1] - animateView.getMeasuredHeight() / 2);
 
             float finalAlpha = index < mPreviewLayoutRule.maxNumItems() ? 0.5f : 0f;
 
@@ -474,7 +479,7 @@ public class FolderIcon extends FrameLayout implements FolderListener {
     }
 
     private PreviewItemDrawingParams computePreviewItemDrawingParams(int index, int curNumItems,
-            PreviewItemDrawingParams params) {
+                                                                     PreviewItemDrawingParams params) {
         // We use an index of -1 to represent an icon on the workspace for the destroy and
         // create animations
         if (index == -1) {
@@ -528,8 +533,8 @@ public class FolderIcon extends FrameLayout implements FolderListener {
         // transparent. To achieve this, we keep the gradient to black for the range [0, 1) and
         // just at the edge quickly change it to transparent.
         private final RadialGradient mClipShader = new RadialGradient(0, 0, 1,
-                new int[] {Color.BLACK, Color.BLACK, Color.TRANSPARENT },
-                new float[] {0, 0.999f, 1},
+                new int[]{Color.BLACK, Color.BLACK, Color.TRANSPARENT},
+                new float[]{0, 0.999f, 1},
                 Shader.TileMode.CLAMP);
 
         private final PorterDuffXfermode mShadowPorterDuffXfermode
@@ -571,10 +576,10 @@ public class FolderIcon extends FrameLayout implements FolderListener {
         ValueAnimator mScaleAnimator;
 
         public void setup(DisplayMetrics dm, DeviceProfile grid, View invalidateDelegate,
-                   int availableSpace, int topPadding) {
+                          int availableSpace, int topPadding) {
             mInvalidateDelegate = invalidateDelegate;
 
-            final int previewSize = grid.folderIconSizePx;
+            final int previewSize = (int) (grid.folderIconSizePx * AdjustConfig.getHomeScreenIconSize());
             final int previewPadding = grid.folderIconPreviewPadding;
 
             this.previewSize = (previewSize - 2 * previewPadding);
@@ -589,8 +594,8 @@ public class FolderIcon extends FrameLayout implements FolderListener {
             float shadowRadius = radius + mStrokeWidth;
             int shadowColor = Color.argb(SHADOW_OPACITY, 0, 0, 0);
             mShadowShader = new RadialGradient(0, 0, 1,
-                    new int[] {shadowColor, Color.TRANSPARENT},
-                    new float[] {radius / shadowRadius, 1},
+                    new int[]{shadowColor, Color.TRANSPARENT},
+                    new float[]{radius / shadowRadius, 1},
                     Shader.TileMode.CLAMP);
 
             invalidate();
@@ -685,7 +690,7 @@ public class FolderIcon extends FrameLayout implements FolderListener {
             mPaint.setStyle(Paint.Style.STROKE);
             mPaint.setStrokeWidth(mStrokeWidth);
 //            drawCircle(canvas, 1 /* deltaRadius */);
-            canvas.drawPath(getRoundedCorners(),mPaint);
+            canvas.drawPath(getRoundedCorners(), mPaint);
         }
 
         public void drawLeaveBehind(Canvas canvas) {
@@ -699,7 +704,7 @@ public class FolderIcon extends FrameLayout implements FolderListener {
             mScale = originalScale;
         }
 
-        private void drawCircle(Canvas canvas,float deltaRadius) {
+        private void drawCircle(Canvas canvas, float deltaRadius) {
             float radius = getScaledRadius();
             canvas.drawCircle(radius + getOffsetX(), radius + getOffsetY(),
                     radius - deltaRadius, mPaint);
@@ -762,7 +767,7 @@ public class FolderIcon extends FrameLayout implements FolderListener {
         }
 
         private void animateScale(float finalScale, float finalMultiplier,
-                final Runnable onStart, final Runnable onEnd) {
+                                  final Runnable onStart, final Runnable onEnd) {
             final float scale0 = mScale;
             final float scale1 = finalScale;
 
@@ -914,17 +919,16 @@ public class FolderIcon extends FrameLayout implements FolderListener {
         float finalTransY;
 
         /**
-         *
-         * @param params layout params to animate
-         * @param index0 original index of the item to be animated
-         * @param nItems0 original number of items in the preview
-         * @param index1 new index of the item to be animated
-         * @param nItems1 new number of items in the preview
-         * @param duration duration in ms of the animation
+         * @param params             layout params to animate
+         * @param index0             original index of the item to be animated
+         * @param nItems0            original number of items in the preview
+         * @param index1             new index of the item to be animated
+         * @param nItems1            new number of items in the preview
+         * @param duration           duration in ms of the animation
          * @param onCompleteRunnable runnable to execute upon animation completion
          */
         public FolderPreviewItemAnim(final PreviewItemDrawingParams params, int index0, int nItems0,
-                int index1, int nItems1, int duration, final Runnable onCompleteRunnable) {
+                                     int index1, int nItems1, int duration, final Runnable onCompleteRunnable) {
 
             computePreviewItemDrawingParams(index1, nItems1, mTmpParams);
 
@@ -939,7 +943,7 @@ public class FolderIcon extends FrameLayout implements FolderListener {
             final float transY0 = mTmpParams.transY;
 
             mValueAnimator = LauncherAnimUtils.ofFloat(0f, 1.0f);
-            mValueAnimator.addUpdateListener(new AnimatorUpdateListener(){
+            mValueAnimator.addUpdateListener(new AnimatorUpdateListener() {
                 public void onAnimationUpdate(ValueAnimator animation) {
                     float progress = animation.getAnimatedFraction();
 
@@ -982,7 +986,7 @@ public class FolderIcon extends FrameLayout implements FolderListener {
     }
 
     private void animateFirstItem(final Drawable d, int duration, final boolean reverse,
-            final Runnable onCompleteRunnable) {
+                                  final Runnable onCompleteRunnable) {
 
         FolderPreviewItemAnim anim;
         if (!reverse) {
@@ -1189,11 +1193,16 @@ public class FolderIcon extends FrameLayout implements FolderListener {
 
     public interface PreviewLayoutRule {
         PreviewItemDrawingParams computePreviewItemDrawingParams(int index, int curNumItems,
-            PreviewItemDrawingParams params);
+                                                                 PreviewItemDrawingParams params);
+
         void init(int availableSpace, int intrinsicIconSize, boolean rtl);
+
         float scaleForItem(int index, int totalNumItems);
+
         int maxNumItems();
+
         boolean clipToBackground();
+
         List<View> getItemsToDisplay(Folder folder);
     }
 }

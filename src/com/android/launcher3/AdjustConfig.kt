@@ -86,13 +86,13 @@ object AdjustConfig {
 
     // icon size
 
-    // 进度条和实际百分对应关系  0 ~ 1 80% ~ 150%
+    // 进度条和实际百分对应关系  0 ~ 1 80% ~ 120%
     @JvmStatic
     fun progressToPercent(progress: Float): Float {
         if (progress <= 0.5f) {
             return (0.8 + (0.2 * progress / 0.5f)).toFloat()
         } else {
-            return (1f + (0.5 * (progress - 0.5f) / 0.5f)).toFloat()
+            return (1f + (0.2 * (progress - 0.5f) / 0.5f)).toFloat()
         }
     }
 
@@ -101,7 +101,7 @@ object AdjustConfig {
         if (progress <= 1f) {
             return 0.5f - 0.5f * (1f - progress) / 0.2f
         } else {
-            return 0.5f + 0.5f * (progress - 1f) / 0.5f
+            return 0.5f + 0.5f * (progress - 1f) / 0.2f
         }
     }
 
@@ -119,7 +119,7 @@ object AdjustConfig {
     @JvmStatic
     fun setAppDrawerIconSize(size: Float) {
         SpKey.keyAppDrawerIconSize.putSpFloat(size)
-        needReLoadLauncher = true
+        needRebuildLauncher = true
     }
 
     @JvmStatic

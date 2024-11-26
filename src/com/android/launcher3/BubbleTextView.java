@@ -57,6 +57,7 @@ import com.android.launcher3.graphics.PreloadIconDrawable;
 import com.android.launcher3.model.PackageItemInfo;
 import com.theme.lambda.launcher.Constants;
 import com.theme.lambda.launcher.utils.CommonUtil;
+import com.vungle.ads.Ad;
 
 import java.text.NumberFormat;
 
@@ -98,7 +99,7 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver, 
     private final boolean mDeferShadowGenerationOnTouch;
     private final boolean mCustomShadowsEnabled;
     private final boolean mLayoutHorizontal;
-    private final int mIconSize;
+    private int mIconSize;
     @ViewDebug.ExportedProperty(category = "launcher")
     private int mTextColor;
 
@@ -164,11 +165,11 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver, 
         } else if (display == DISPLAY_ALL_APPS) {
             setTextSize(TypedValue.COMPLEX_UNIT_PX, grid.allAppsIconTextSizePx);
             setCompoundDrawablePadding(grid.allAppsIconDrawablePaddingPx);
-            defaultIconSize = grid.allAppsIconSizePx;
+            defaultIconSize = (int) (grid.allAppsIconSizePx * AdjustConfig.getAppDrawerIconSize());
         } else if (display == DISPLAY_FOLDER) {
             setTextSize(TypedValue.COMPLEX_UNIT_PX, grid.folderChildTextSizePx);
             setCompoundDrawablePadding(grid.folderChildDrawablePaddingPx);
-            defaultIconSize = grid.folderChildIconSizePx;
+            defaultIconSize = (int) (grid.folderChildIconSizePx * AdjustConfig.getFolderIconSize());
         }
         mCenterVertically = a.getBoolean(R.styleable.BubbleTextView_centerVertically, false);
 
@@ -193,6 +194,10 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver, 
 
         mOutlineHelper = HolographicOutlineHelper.getInstance(getContext());
         setAccessibilityDelegate(mLauncher.getAccessibilityDelegate());
+    }
+
+    public void setIconSize(int iconSize){
+        mIconSize = iconSize;
     }
 
     public void applyFromShortcutInfo(ShortcutInfo info) {

@@ -27,6 +27,7 @@ import android.view.View;
 import android.view.ViewDebug;
 import android.view.animation.DecelerateInterpolator;
 
+import com.android.launcher3.AdjustConfig;
 import com.android.launcher3.BubbleTextView;
 import com.android.launcher3.CellLayout;
 import com.android.launcher3.DeviceProfile;
@@ -252,7 +253,7 @@ public class FolderPagedView extends PagedView {
     private CellLayout createAndAddNewPage() {
         DeviceProfile grid = Launcher.getLauncher(getContext()).getDeviceProfile();
         CellLayout page = (CellLayout) mInflater.inflate(R.layout.folder_page, this, false);
-        page.setCellDimensions(grid.folderCellWidthPx, grid.folderCellHeightPx);
+        page.setCellDimensions((int) (grid.folderCellWidthPx * AdjustConfig.getFolderIconSize()), (int) (grid.folderCellHeightPx * AdjustConfig.getFolderIconSize()));
         page.getShortcutsAndWidgets().setMotionEventSplittingEnabled(false);
         page.setInvertIfRtl(true);
         page.setGridSize(mGridCountX, mGridCountY);

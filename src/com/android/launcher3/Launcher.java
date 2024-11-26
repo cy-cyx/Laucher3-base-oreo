@@ -1219,7 +1219,7 @@ public class Launcher extends BaseActivity
             }
 
             // 需要重新load数据刷新
-            if (AdjustConfig.needReLoadLauncher){
+            if (AdjustConfig.needReLoadLauncher) {
                 AdjustConfig.needReLoadLauncher = false;
 
                 reload(true);
@@ -1644,6 +1644,10 @@ public class Launcher extends BaseActivity
     public View createShortcut(ViewGroup parent, ShortcutInfo info) {
         BubbleTextView favorite = (BubbleTextView) getLayoutInflater().inflate(R.layout.app_icon,
                 parent, false);
+        // 桌面应用需要动态调一下大小
+        if (info.container == Favorites.CONTAINER_DESKTOP || info.container == -1) {
+            favorite.setIconSize((int) (Launcher.getLauncher(parent.getContext()).getDeviceProfile().iconSizePx  * AdjustConfig.getHomeScreenIconSize()));
+        }
         favorite.applyFromShortcutInfo(info);
         favorite.setCompoundDrawablePadding(mDeviceProfile.iconDrawablePaddingPx);
         favorite.setOnClickListener(this);
