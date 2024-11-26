@@ -409,4 +409,5 @@
     <string name="windmill_up">Windmill up</string>
     <string name="windmill_down">Windmill down</string>
     <string name="effect">Effect</string>
+    <string name="layout">Layout</string>
 </resources>

@@ -41,4 +41,7 @@ object SpKey {
     const val keyOfferClickTime = "keyOfferClickTime_"
 
     const val keyEffectId = "keyEffectId"
+
+    const val keyLastOrganizeColumns = "keyLastOrganizeColumns"
+    const val keyLastOrganizeRows = "keyLastOrganizeRows"
 }

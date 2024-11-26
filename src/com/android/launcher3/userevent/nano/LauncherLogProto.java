@@ -47,6 +47,7 @@ public interface LauncherLogProto {
     public static final int VERTICAL_SCROLL = 9;
     public static final int HOME_INTENT = 10;
     public static final int BACK_BUTTON = 11;
+    public static final int Layout_BUTTON = 12;
   }
 
   public static final class Target extends

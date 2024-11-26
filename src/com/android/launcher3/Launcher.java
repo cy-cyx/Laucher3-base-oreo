@@ -140,6 +140,7 @@ import com.theme.lambda.launcher.ad.AdUtil;
 import com.theme.lambda.launcher.statistics.EventName;
 import com.theme.lambda.launcher.statistics.EventUtil;
 import com.theme.lambda.launcher.ui.effect.EffectActivity;
+import com.theme.lambda.launcher.ui.layoutadjust.LayoutAdjustActivity;
 import com.theme.lambda.launcher.ui.search.SearchActivity;
 import com.theme.lambda.launcher.ui.theme.ThemeActivity;
 import com.theme.lambda.launcher.utils.AppUtil;
@@ -268,6 +269,7 @@ public class Launcher extends BaseActivity
 
     private View mAllAppsButton;
     private View mWidgetsButton;
+    private View mLayoutButton;
 
     private DropTargetBar mDropTargetBar;
 
@@ -1557,6 +1559,15 @@ public class Launcher extends BaseActivity
             }
         }.attachTo(mWidgetsButton);
         mWidgetsButton.setOnTouchListener(getHapticFeedbackTouchListener());
+
+        mLayoutButton= findViewById(R.id.layout_button);
+        new OverviewButtonClickListener(ControlType.Layout_BUTTON) {
+            @Override
+            public void handleViewClick(View view) {
+                LayoutAdjustActivity.start(Launcher.this);
+            }
+        }.attachTo(mLayoutButton);
+        mLayoutButton.setOnTouchListener(getHapticFeedbackTouchListener());
 
         // Bind settings actions
         View settingsButton = findViewById(R.id.settings_button);

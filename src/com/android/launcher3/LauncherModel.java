@@ -86,6 +86,7 @@ import com.lambda.common.http.Global;
 import com.lambda.common.utils.utilcode.util.Utils;
 import com.theme.lambda.launcher.Constants;
 import com.theme.lambda.launcher.utils.SpKey;
+import com.theme.lambda.launcher.utils.SpUtil;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -869,10 +870,32 @@ public class LauncherModel extends BroadcastReceiver
             }
         }
 
+        /**
+         * 当行列数变化时自动调整位置
+         * <p>
+         * 思路：
+         * (1)icon 当小布局往大布局 变化时不处理 大布局往小布局 变化时 多出来的往后排
+         * (2)widget 当小布局往大布局 变化时不处理（会出现显示不完整的问题） 大布局往小布局 变化 需要判断整个是否够放 不然就到最后直接开一行放置
+         */
         private void organizeTheDatabase() {
             LauncherAppState app = LauncherAppState.getInstance(mContext);
             int columns = app.getInvariantDeviceProfile().numColumns;
             int rows = app.getInvariantDeviceProfile().numRows;
+
+            int lastColumns = SpUtil.getInt(SpKey.keyLastOrganizeColumns, -1);
+            int lastRows = SpUtil.getInt(SpKey.keyLastOrganizeRows, -1);
+
+            // 首次不处理
+            if (lastColumns == -1 && lastRows == -1) {
+                SpUtil.putInt(SpKey.keyLastOrganizeColumns, columns);
+                SpUtil.putInt(SpKey.keyLastOrganizeRows, rows);
+                return;
+            }
+
+            if (columns == lastColumns && rows == lastRows) {
+                return;
+            }
+
             Log.w(TAG, "organizeTheDatabase => numColumns:" + columns + "numRows:" + rows);
 
             final Context context = mContext;
@@ -887,11 +910,15 @@ public class LauncherModel extends BroadcastReceiver
             ArrayList<ItemInfo> needAdjustIconItemInfos = new ArrayList<>();
             ArrayList<ItemInfo> needAdjustWidgetItemInfos = new ArrayList<>();
 
-            // 当前页面屏幕页面的排序,并找出最后一页
-            ArrayList<Long> screenS = loadWorkspaceScreensDb(mContext);
-            lastScreen = screenS.get(screenS.size() - 1);
-
             synchronized (sBgDataModel) {
+                // 当前页面屏幕页面的排序,并找出最后一页
+                ArrayList<Long> screenS = loadWorkspaceScreensDb(mContext);
+                // 如果一页都没有就不管了
+                if (screenS.isEmpty()) {
+                    return;
+                }
+                lastScreen = screenS.get(screenS.size() - 1);
+
                 final LoaderCursor c = new LoaderCursor(contentResolver.query(
                         LauncherSettings.Favorites.CONTENT_URI, null, null, null, null), mApp);
                 try {
@@ -934,7 +961,7 @@ public class LauncherModel extends BroadcastReceiver
                                     info.spanX = spanX;
                                     info.spanY = spanY;
                                     needAdjustIconItemInfos.add(info);
-                                    Log.e("organizeTheDatabase", "Crossing the line(icon):id:" + id + "screen:" + screen + "cellX:" + cellX + "cellY:" + cellY);
+                                    Log.e(TAG, "Crossing the line(icon):id:" + id + "screen:" + screen + "cellX:" + cellX + "cellY:" + cellY);
                                 } else {
                                     // 顺便找一下最后一页排到了哪
                                     if (screen == lastScreen) {
@@ -943,6 +970,7 @@ public class LauncherModel extends BroadcastReceiver
                                         }
                                         if (cellY > lastCellY) {
                                             lastCellY = cellY;
+                                            lastCellX = cellX;
                                         }
                                     }
                                 }
@@ -958,7 +986,7 @@ public class LauncherModel extends BroadcastReceiver
                                     info.spanX = spanX;
                                     info.spanY = spanY;
                                     needAdjustWidgetItemInfos.add(info);
-                                    Log.e("organizeTheDatabase", "Crossing the line(widget):id:" + id + "screen:" + screen + "cellX:" + cellX + "cellY:" + cellY);
+                                    Log.e(TAG, "Crossing the line(widget):id:" + id + "screen:" + screen + "cellX:" + cellX + "cellY:" + cellY);
                                 } else {
                                     // 顺便找一下最后一页排到了哪
                                     if (screen == lastScreen) {
@@ -967,6 +995,7 @@ public class LauncherModel extends BroadcastReceiver
                                         }
                                         if (cellY + spanY - 1 > lastCellY) {
                                             lastCellY = cellY + spanY - 1;
+                                            lastCellX = cellX + spanX - 1;
                                         }
                                     }
                                 }
@@ -1012,7 +1041,7 @@ public class LauncherModel extends BroadcastReceiver
                                     v.put(LauncherSettings.WorkspaceScreens._ID, id);
                                     v.put(LauncherSettings.WorkspaceScreens.SCREEN_RANK, screenS.size());
                                     contentResolver.insert(LauncherSettings.WorkspaceScreens.CONTENT_URI, v);
-                                    Log.e("organizeTheDatabase", "new screen :" + id);
+                                    Log.e(TAG, "new screen :" + id);
 
                                     screenS.add(id);
                                     lastScreen = id;
@@ -1024,7 +1053,7 @@ public class LauncherModel extends BroadcastReceiver
                             values.put(LauncherSettings.Favorites.CELLX, lastCellX);
                             values.put(LauncherSettings.Favorites.CELLY, lastCellY);
                             contentResolver.update(LauncherSettings.Favorites.getContentUri(info.id), values, null, null);
-                            Log.d("organizeTheDatabase", "change icon id:" + info.id + "screen:" + lastScreen + "cellX:" + lastCellX + "cellY:" + lastCellY);
+                            Log.d(TAG, "change icon id:" + info.id + "screen:" + lastScreen + "cellX:" + lastCellX + "cellY:" + lastCellY);
                         } else if (info.itemType == LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET ||
                                 info.itemType == LauncherSettings.Favorites.ITEM_TYPE_CUSTOM_APPWIDGET) {
 
@@ -1033,7 +1062,7 @@ public class LauncherModel extends BroadcastReceiver
 
                             // 去看剩下的行数够吗
                             lastCellY++;
-                            // 不够一页了，新开一页
+                            // 已经是当前页最后一行的，新开一页
                             if (lastCellY > rows - 1) {
                                 lastCellY = 0;
 
@@ -1052,13 +1081,12 @@ public class LauncherModel extends BroadcastReceiver
                                 v.put(LauncherSettings.WorkspaceScreens._ID, id);
                                 v.put(LauncherSettings.WorkspaceScreens.SCREEN_RANK, screenS.size());
                                 contentResolver.insert(LauncherSettings.WorkspaceScreens.CONTENT_URI, v);
-                                Log.e("organizeTheDatabase", "new screen :" + id);
+                                Log.e(TAG, "new screen :" + id);
 
                                 screenS.add(id);
                                 lastScreen = id;
                             } else {
-                                // 够一页的看看，剩下的够不够，不够也是得单开一页
-
+                                // 够一页的看看，剩下位置的够不够，不够也是得单开一页
                                 int temSpan = rows - 1 - lastCellY + 1;
                                 // 剩下位置不够，新开吧
                                 if (info.spanY > temSpan) {
@@ -1079,7 +1107,7 @@ public class LauncherModel extends BroadcastReceiver
                                     v.put(LauncherSettings.WorkspaceScreens._ID, id);
                                     v.put(LauncherSettings.WorkspaceScreens.SCREEN_RANK, screenS.size());
                                     contentResolver.insert(LauncherSettings.WorkspaceScreens.CONTENT_URI, v);
-                                    Log.e("organizeTheDatabase", "new screen :" + id);
+                                    Log.e(TAG, "new screen :" + id);
 
                                     screenS.add(id);
                                     lastScreen = id;
@@ -1103,7 +1131,7 @@ public class LauncherModel extends BroadcastReceiver
                             values.put(LauncherSettings.Favorites.SPANX, tempSpanX);
                             values.put(LauncherSettings.Favorites.SPANY, tempSpanY);
                             contentResolver.update(LauncherSettings.Favorites.getContentUri(info.id), values, null, null);
-                            Log.d("organizeTheDatabase", "change widget id:" + info.id + "screen:" + lastScreen + "cellX:" + lastCellX + "cellY:" + lastCellY);
+                            Log.d(TAG, "change widget id:" + info.id + "screen:" + lastScreen + "cellX:" + lastCellX + "cellY:" + lastCellY);
 
                             // 标一下现在放到那了
                             lastCellX = lastCellX + tempSpanX - 1;
@@ -1113,6 +1141,10 @@ public class LauncherModel extends BroadcastReceiver
                 } catch (Exception e) {
 
                 }
+
+                // 处理完成标记以下
+                SpUtil.putInt(SpKey.keyLastOrganizeColumns, columns);
+                SpUtil.putInt(SpKey.keyLastOrganizeRows, rows);
             }
         }
 
