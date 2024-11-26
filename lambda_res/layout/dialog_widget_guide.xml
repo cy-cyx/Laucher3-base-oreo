@@ -17,6 +17,8 @@
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="18dp"
         android:layout_marginBottom="18dp"
+        android:paddingTop="10dp"
+        android:paddingStart="10dp"
         android:text="@string/next"
         android:textColor="#FF208AF4"
         android:textSize="16dp"
