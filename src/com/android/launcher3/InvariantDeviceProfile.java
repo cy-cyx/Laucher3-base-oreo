@@ -141,29 +141,35 @@ public class InvariantDeviceProfile {
 
         ArrayList<InvariantDeviceProfile> closestProfiles = findClosestDeviceProfiles(
                 minWidthDps, minHeightDps, getPredefinedDeviceProfiles(context));
+
+        // start 由于只有,在这里处理修改行列数和初始字体大小
+        InvariantDeviceProfile invariantDeviceProfile = closestProfiles.get(0);
+        if (AdjustConfig.getRow() != -1) {
+            invariantDeviceProfile.numRows = AdjustConfig.getRow();
+        }
+        if (AdjustConfig.getColumn() != -1) {
+            invariantDeviceProfile.numColumns = AdjustConfig.getColumn();
+        }
+        invariantDeviceProfile.iconSize = AdjustConfig.getIconSizeByColumn(invariantDeviceProfile.numColumns);
+        invariantDeviceProfile.iconTextSize = AdjustConfig.getTextSizeByColumn(invariantDeviceProfile.numColumns);
+        // end
+
         InvariantDeviceProfile interpolatedDeviceProfileOut =
                 invDistWeightedInterpolate(minWidthDps, minHeightDps, closestProfiles);
 
-        InvariantDeviceProfile closestProfile = closestProfiles.get(0);
-        // 在这里处理修改行列数和初始字体大小
-        numRows = AdjustConfig.getRow();
-        if (numRows == -1) {
-            numRows = closestProfile.numRows;
-        }
-        numColumns = AdjustConfig.getColumn();
-        if (numColumns == -1) {
-            numColumns = closestProfile.numColumns;
-        }
+        InvariantDeviceProfile closestProfile = invariantDeviceProfile;
+
+        numRows = closestProfile.numRows;
+        numColumns = closestProfile.numColumns;
         numHotseatIcons = closestProfile.numHotseatIcons;
         defaultLayoutId = closestProfile.defaultLayoutId;
         numFolderRows = closestProfile.numFolderRows;
         numFolderColumns = closestProfile.numFolderColumns;
         minAllAppsPredictionColumns = closestProfile.minAllAppsPredictionColumns;
 
-        // 不同行，icon初始大小不一致
-        iconSize = AdjustConfig.getIconSizeByColumn(numColumns);
+        iconSize = closestProfile.iconSize;
         iconBitmapSize = Utilities.pxFromDp(iconSize, dm);
-        iconTextSize = AdjustConfig.getTextSizeByColumn(numColumns);
+        iconTextSize = closestProfile.iconTextSize;
         hotseatIconSize = interpolatedDeviceProfileOut.hotseatIconSize;
         fillResIconDpi = getLauncherIconDensity(iconBitmapSize);
 
