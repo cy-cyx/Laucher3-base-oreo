@@ -876,6 +876,8 @@ public class LauncherModel extends BroadcastReceiver
          * 思路：
          * (1)icon 当小布局往大布局 变化时不处理 大布局往小布局 变化时 多出来的往后排
          * (2)widget 当小布局往大布局 变化时不处理（会出现显示不完整的问题） 大布局往小布局 变化 需要判断整个是否够放 不然就到最后直接开一行放置
+         *
+         * 特殊某个布局可能需要处理和时间天气控件抢占的问题
          */
         private void organizeTheDatabase() {
             LauncherAppState app = LauncherAppState.getInstance(mContext);
@@ -963,14 +965,40 @@ public class LauncherModel extends BroadcastReceiver
                                     needAdjustIconItemInfos.add(info);
                                     Log.e(TAG, "Crossing the line(icon):id:" + id + "screen:" + screen + "cellX:" + cellX + "cellY:" + cellY);
                                 } else {
-                                    // 顺便找一下最后一页排到了哪
-                                    if (screen == lastScreen) {
-                                        if (cellX > lastCellX) {
-                                            lastCellX = cellX;
+                                    // 可能会被时间 天气控件占用
+                                    if (screen == 0 && rows > 4){
+                                        if (cellY == 1){
+                                            ItemInfo info = new ItemInfo();
+                                            info.id = id;
+                                            info.itemType = itemType;
+                                            info.cellX = cellX;
+                                            info.cellY = cellY;
+                                            info.spanX = spanX;
+                                            info.spanY = spanY;
+                                            needAdjustIconItemInfos.add(info);
+                                            Log.e(TAG, "time occupancy (icon):id:" + id + "screen:" + screen + "cellX:" + cellX + "cellY:" + cellY);
+                                        }else {
+                                            // 顺便找一下最后一页排到了哪
+                                            if (screen == lastScreen) {
+                                                if (cellX > lastCellX) {
+                                                    lastCellX = cellX;
+                                                }
+                                                if (cellY > lastCellY) {
+                                                    lastCellY = cellY;
+                                                    lastCellX = cellX;
+                                                }
+                                            }
                                         }
-                                        if (cellY > lastCellY) {
-                                            lastCellY = cellY;
-                                            lastCellX = cellX;
+                                    }else {
+                                        // 顺便找一下最后一页排到了哪
+                                        if (screen == lastScreen) {
+                                            if (cellX > lastCellX) {
+                                                lastCellX = cellX;
+                                            }
+                                            if (cellY > lastCellY) {
+                                                lastCellY = cellY;
+                                                lastCellX = cellX;
+                                            }
                                         }
                                     }
                                 }
@@ -988,14 +1016,40 @@ public class LauncherModel extends BroadcastReceiver
                                     needAdjustWidgetItemInfos.add(info);
                                     Log.e(TAG, "Crossing the line(widget):id:" + id + "screen:" + screen + "cellX:" + cellX + "cellY:" + cellY);
                                 } else {
-                                    // 顺便找一下最后一页排到了哪
-                                    if (screen == lastScreen) {
-                                        if (cellX + spanX - 1 > lastCellX) {
-                                            lastCellX = cellX + spanX - 1;
+                                    // 可能会被时间 天气控件占用
+                                    if (screen == 0 && rows > 4){
+                                        if (cellY == 1){
+                                            ItemInfo info = new ItemInfo();
+                                            info.id = id;
+                                            info.itemType = itemType;
+                                            info.cellX = cellX;
+                                            info.cellY = cellY;
+                                            info.spanX = spanX;
+                                            info.spanY = spanY;
+                                            needAdjustIconItemInfos.add(info);
+                                            Log.e(TAG, "time occupancy (widget):id:" + id + "screen:" + screen + "cellX:" + cellX + "cellY:" + cellY);
+                                        }else {
+                                            // 顺便找一下最后一页排到了哪
+                                            if (screen == lastScreen) {
+                                                if (cellX + spanX - 1 > lastCellX) {
+                                                    lastCellX = cellX + spanX - 1;
+                                                }
+                                                if (cellY + spanY - 1 > lastCellY) {
+                                                    lastCellY = cellY + spanY - 1;
+                                                    lastCellX = cellX + spanX - 1;
+                                                }
+                                            }
                                         }
-                                        if (cellY + spanY - 1 > lastCellY) {
-                                            lastCellY = cellY + spanY - 1;
-                                            lastCellX = cellX + spanX - 1;
+                                    }else {
+                                        // 顺便找一下最后一页排到了哪
+                                        if (screen == lastScreen) {
+                                            if (cellX + spanX - 1 > lastCellX) {
+                                                lastCellX = cellX + spanX - 1;
+                                            }
+                                            if (cellY + spanY - 1 > lastCellY) {
+                                                lastCellY = cellY + spanY - 1;
+                                                lastCellX = cellX + spanX - 1;
+                                            }
                                         }
                                     }
                                 }

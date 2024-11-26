@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import com.android.launcher3.AdjustConfig
+import com.android.launcher3.LauncherAppState
 import com.android.launcher3.R
 import com.android.launcher3.databinding.ActivityLayoutAdjustBinding
 import com.theme.lambda.launcher.base.BaseActivity
@@ -56,6 +57,7 @@ class LayoutAdjustActivity : BaseActivity<ActivityLayoutAdjustBinding>() {
                 viewBinding.homeScreenLl.gone()
                 viewBinding.homeScreenNextIv.setImageResource(R.drawable.ic_next)
             } else {
+                initHomeScreenData()
                 viewBinding.homeScreenLl.visible()
                 viewBinding.homeScreenNextIv.setImageResource(R.drawable.ic_up)
             }
@@ -86,6 +88,23 @@ class LayoutAdjustActivity : BaseActivity<ActivityLayoutAdjustBinding>() {
         viewBinding.homeScreenApplyTv.setOnClickListener {
             AdjustConfig.setColumn(curColumn)
             AdjustConfig.setRow(curRow)
+
+            finish()
         }
+        initHomeScreenData()
+    }
+
+    private fun initHomeScreenData() {
+        curColumn = AdjustConfig.getColumn()
+        if (curColumn == -1) {
+            curColumn = LauncherAppState.getInstance(this).invariantDeviceProfile.numColumns
+        }
+        curRow = AdjustConfig.getRow()
+        if (curRow == -1) {
+            curRow = LauncherAppState.getInstance(this).invariantDeviceProfile.numRows
+        }
+
+        viewBinding.columnPicker.setSelectedPosition(columnData.indexOf(curColumn.toString()))
+        viewBinding.rowPicker.setSelectedPosition(rowData.indexOf(curRow.toString()))
     }
 }
