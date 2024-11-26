@@ -246,7 +246,7 @@ public class DragLayer extends InsettableFrameLayout {
             return true;
         }
 
-        if (FeatureFlags.LAUNCHER3_ALL_APPS_PULL_UP && mAllAppsController.onControllerInterceptTouchEvent(ev)) {
+        if (!mLauncher.getWorkspace().isInCustomContent() && FeatureFlags.LAUNCHER3_ALL_APPS_PULL_UP && mAllAppsController.onControllerInterceptTouchEvent(ev)) {
             mActiveController = mAllAppsController;
             return true;
         }
