@@ -25,6 +25,7 @@ import com.theme.lambda.launcher.utils.GsonUtil
 import com.theme.lambda.launcher.utils.SpKey
 import com.theme.lambda.launcher.utils.StatusBarUtil
 import com.theme.lambda.launcher.utils.getSpInt
+import com.theme.lambda.launcher.utils.noDoubleClick
 import com.theme.lambda.launcher.utils.putSpInt
 import com.theme.lambda.launcher.utils.withHost
 import com.theme.lambda.launcher.vip.VipManager
@@ -74,17 +75,17 @@ class ThemePreviewActivity : BaseActivity<ActivityThemePreviewBinding>() {
             finish()
             AdUtil.showAd(AdName.interleaving)
         }
-        viewBinding.setTv.setOnClickListener {
+        viewBinding.setTv.noDoubleClick {
 
             if (VipManager.isVip.value == true) {
                 viewModel.download(this@ThemePreviewActivity)
-                return@setOnClickListener
+                return@noDoubleClick
             }
 
             if (AdUtil.isReady(AdName.unlock)) {
                 if (!AdUtil.isEnable(AdName.unlock)){
                     viewModel.download(this@ThemePreviewActivity)
-                    return@setOnClickListener
+                    return@noDoubleClick
                 }
 
                 AdUtil.showAd(AdName.unlock, object : IAdCallBack {
@@ -113,10 +114,6 @@ class ThemePreviewActivity : BaseActivity<ActivityThemePreviewBinding>() {
                 loadDialog.dismiss()
             }
         })
-
-
-        var intoThemeNum = SpKey.intoThemeNum.getSpInt() ?: 0
-        SpKey.intoThemeNum.putSpInt(++intoThemeNum)
 
         logEvent(EventName.previewPageView, Bundle().apply {
             putString("id", viewModel.resources?.id ?: "")

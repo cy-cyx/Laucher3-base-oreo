@@ -26,8 +26,8 @@ android {
     defaultConfig {
         minSdkVersion 24
         targetSdkVersion 34
-        versionCode 35
-        versionName "0.3.5"
+        versionCode 38
+        versionName "0.3.8"
         applicationId 'com.theme.lambda.launcher'
         testApplicationId 'com.theme.lambda.launcher.tests'
 
@@ -140,6 +140,7 @@ dependencies {
     implementation "androidx.room:room-runtime:2.6.1"
     implementation "androidx.room:room-ktx:2.6.1"
     implementation 'me.relex:circleindicator:2.1.6'
+    implementation 'net.lingala.zip4j:zip4j:2.11.5'
 
     // firebase
     implementation(platform("com.google.firebase:firebase-bom:32.2.2"))
@@ -153,7 +154,7 @@ dependencies {
     implementation "com.adjust.sdk:adjust-android:4.38.3"
 
     implementation("com.lambda.common:http:1.0.1.26")
-    implementation("com.lambda.common:event:1.2.0.63-separate-adjust") {
+    implementation("com.lambda.common:event:1.2.0.64-separate-adjust") {
         exclude group: 'com.lambda.common', module: 'http'
     }
     implementation "com.lambda.common:remoteconfig:0.1.5"

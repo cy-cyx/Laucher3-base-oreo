@@ -118,11 +118,11 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         viewBinding.loadingTv.visible()
         viewBinding.progressPv.visible()
 
+        showTryAdTimestamp = System.currentTimeMillis()
         viewBinding.progressPv.startProgress(adWaitingTime) {
             tryToShowAd()
             logLiveEvent()
         }
-        showTryAdTimestamp = System.currentTimeMillis()
 
         lifecycleScope.launch {
             delay(adWaitingTime)

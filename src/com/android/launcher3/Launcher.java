@@ -153,6 +153,7 @@ import com.theme.lambda.launcher.widget.PreviewControlView;
 import com.theme.lambda.launcher.widget.WallpaperView;
 import com.theme.lambda.launcher.widget.dialog.LoadingDialog;
 import com.theme.lambda.launcher.widget.dialog.StoreRatingsDialog;
+import com.theme.lambda.launcher.widget.dialog.WidgetGuideDialog;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -162,6 +163,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function0;
 
 /**
  * Default launcher application.
@@ -386,8 +390,6 @@ public class Launcher extends BaseActivity
     private FirstGuideView firstGuideView;
 
     private LoadingDialog loadingDialog;
-
-    private boolean needShowRate = false;
 
     Handler mainHander = new Handler(Looper.getMainLooper());
 
@@ -1165,8 +1167,17 @@ public class Launcher extends BaseActivity
         themeManager.onResume();
 
         // 第一次需要,如果已经授权就不展示了
-        if (!SpUtil.INSTANCE.getBool(SpKey.first_guide, false) && !LauncherUtil.INSTANCE.isDefaultLauncher(this)) {
+        if (!SpUtil.INSTANCE.getBool(SpKey.first_guide, false) && LauncherUtil.INSTANCE.isDefaultLauncher(this)) {
             firstGuideView.setVisibility(View.VISIBLE);
+            firstGuideView.setGuideFinishCallback(new Function0<Unit>() {
+                @Override
+                public Unit invoke() {
+                    // 引导结束再出widget引导和评分引导
+                    WidgetGuideDialog.show(Launcher.this);
+                    StoreRatingsDialog.show(Launcher.this);
+                    return null;
+                }
+            });
             firstGuideView.startGuide();
 
             SpUtil.INSTANCE.putBool(SpKey.first_guide, true);
@@ -1174,11 +1185,6 @@ public class Launcher extends BaseActivity
 
         if (isWorkspaceLoading()) {
             showLoading(60000);
-        }
-
-        if (needShowRate) {
-            StoreRatingsDialog.Companion.show(this);
-            needShowRate = false;
         }
 
         fillMultiLauncherBug();
@@ -2719,10 +2725,6 @@ public class Launcher extends BaseActivity
                 @Override
                 public void run() {
                     startActivity(v, intent, item);
-                    // 浏览过三次以上的主题，点击icon出评分弹窗
-                    if (SpUtil.INSTANCE.getInt(SpKey.intoThemeNum, 0) >= 3) {
-                        needShowRate = true;
-                    }
                 }
             });
             Bundle bundle = new Bundle();

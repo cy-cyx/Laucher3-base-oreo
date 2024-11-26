@@ -61,14 +61,19 @@ object WallPaperUtil {
             CommonUtil.appContext?.getSystemService(Context.WALLPAPER_SERVICE) as? WallpaperManager
         val bitmap = BitmapFactory.decodeFile(file)
 
-        if (Build.VERSION.SDK_INT >= 24) {
-            manager?.setBitmap(
-                bitmap,
-                Rect(0, 0, bitmap.width, bitmap.height),
-                false
-            )
-        } else {
-            manager?.setBitmap(bitmap)
+        try {
+            if (Build.VERSION.SDK_INT >= 24) {
+                manager?.setBitmap(
+                    bitmap,
+                    Rect(0, 0, bitmap.width, bitmap.height),
+                    false
+                )
+            } else {
+                manager?.setBitmap(bitmap)
+            }
+        } catch (e: Exception) {
+            // nodo
         }
+
     }
 }
