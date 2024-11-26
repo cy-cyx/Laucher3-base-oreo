@@ -2525,6 +2525,9 @@ public class Launcher extends BaseActivity
                 (v == mAllAppsButton && mAllAppsButton != null)) {
             onClickAllAppsButton(v);
         } else if (tag instanceof AppInfo) {
+            if (themeManager.isPreviewMode()) {
+                return;
+            }
             if (RecommendAppManager.isRecommendApp((AppInfo) tag)) {
                 RecommendAppManager.clickRecommendApp((AppInfo) tag);
                 return;
@@ -2644,6 +2647,9 @@ public class Launcher extends BaseActivity
      * @param v The view that was clicked. Must be a tagged with a {@link ShortcutInfo}.
      */
     protected void onClickAppShortcut(final View v) {
+        if (themeManager.isPreviewMode()) {
+            return;
+        }
         if (LOGD) Log.d(TAG, "onClickAppShortcut");
         Object tag = v.getTag();
         if (!(tag instanceof ShortcutInfo)) {
@@ -2699,6 +2705,7 @@ public class Launcher extends BaseActivity
     }
 
     private void startAppShortcutOrInfoActivity(View v) {
+        // 编辑模式不相应点击
         ItemInfo item = (ItemInfo) v.getTag();
         Intent intent = item.getIntent();
         if (intent == null) {
@@ -3027,7 +3034,6 @@ public class Launcher extends BaseActivity
 
     @Override
     public boolean onLongClick(View v) {
-        if (themeManager.isPreviewMode()) return false;
         if (!isDraggingEnabled()) return false;
         if (isWorkspaceLocked()) return false;
         if (mState != State.WORKSPACE) return false;

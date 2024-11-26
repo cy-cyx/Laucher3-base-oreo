@@ -349,11 +349,6 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver, 
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        // 编辑模式不相应点击
-        if (mLauncher.getThemeManager().isPreviewMode()) {
-            return false;
-        }
-
         // Call the superclass onTouchEvent first, because sometimes it changes the state to
         // isPressed() on an ACTION_UP
         boolean result = super.onTouchEvent(event);

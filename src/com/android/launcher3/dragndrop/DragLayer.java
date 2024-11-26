@@ -233,7 +233,7 @@ public class DragLayer extends InsettableFrameLayout {
         }
         mActiveController = null;
 
-        if (!mLauncher.getThemeManager().isPreviewMode() && mCurrentResizeFrame != null
+        if (mCurrentResizeFrame != null
                 && mCurrentResizeFrame.onControllerInterceptTouchEvent(ev)) {
             mActiveController = mCurrentResizeFrame;
             return true;
@@ -241,23 +241,23 @@ public class DragLayer extends InsettableFrameLayout {
             clearResizeFrame();
         }
 
-        if (!mLauncher.getThemeManager().isPreviewMode() && mDragController.onControllerInterceptTouchEvent(ev)) {
+        if (mDragController.onControllerInterceptTouchEvent(ev)) {
             mActiveController = mDragController;
             return true;
         }
 
-        if (!mLauncher.getWorkspace().isInCustomContent() && FeatureFlags.LAUNCHER3_ALL_APPS_PULL_UP && mAllAppsController.onControllerInterceptTouchEvent(ev)) {
+        if (FeatureFlags.LAUNCHER3_ALL_APPS_PULL_UP && mAllAppsController.onControllerInterceptTouchEvent(ev)) {
             mActiveController = mAllAppsController;
             return true;
         }
 
         WidgetsBottomSheet widgetsBottomSheet = WidgetsBottomSheet.getOpen(mLauncher);
-        if (!mLauncher.getThemeManager().isPreviewMode() && widgetsBottomSheet != null && widgetsBottomSheet.onControllerInterceptTouchEvent(ev)) {
+        if (widgetsBottomSheet != null && widgetsBottomSheet.onControllerInterceptTouchEvent(ev)) {
             mActiveController = widgetsBottomSheet;
             return true;
         }
 
-        if (!mLauncher.getThemeManager().isPreviewMode() && mPinchListener != null && mPinchListener.onControllerInterceptTouchEvent(ev)) {
+        if (mPinchListener != null && mPinchListener.onControllerInterceptTouchEvent(ev)) {
             // Stop listening for scrolling etc. (onTouchEvent() handles the rest of the pinch.)
             mActiveController = mPinchListener;
             return true;
