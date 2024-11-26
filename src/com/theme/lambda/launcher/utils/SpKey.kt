@@ -51,4 +51,8 @@ object SpKey {
     const val keyHomeScreenIconSize = "keyHomeScreenIconSize"
     const val keyAppDrawerIconSize = "keyAppDrawerIconSize"
     const val keyFolderIconSize = "keyFolderIconSize"
+
+    const val keyHomeScreenTextSize = "keyHomeScreenTextSize"
+    const val keyAppDrawerTextSize = "keyAppDrawerTextSize"
+    const val keyFolderTextSize = "keyFolderTextSize"
 }

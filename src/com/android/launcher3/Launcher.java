@@ -60,6 +60,7 @@ import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.method.TextKeyListener;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Display;
 import android.view.HapticFeedbackConstants;
 import android.view.KeyEvent;
@@ -1646,7 +1647,8 @@ public class Launcher extends BaseActivity
                 parent, false);
         // 桌面应用需要动态调一下大小
         if (info.container == Favorites.CONTAINER_DESKTOP || info.container == -1) {
-            favorite.setIconSize((int) (Launcher.getLauncher(parent.getContext()).getDeviceProfile().iconSizePx  * AdjustConfig.getHomeScreenIconSize()));
+            favorite.setIconSize((int) (Launcher.getLauncher(parent.getContext()).getDeviceProfile().iconSizePx * AdjustConfig.getHomeScreenIconSizePer()));
+            favorite.setTextSize(TypedValue.COMPLEX_UNIT_PX, Launcher.getLauncher(parent.getContext()).getDeviceProfile().folderChildTextSizePx * AdjustConfig.getHomeScreenTextSizePer());
         }
         favorite.applyFromShortcutInfo(info);
         favorite.setCompoundDrawablePadding(mDeviceProfile.iconDrawablePaddingPx);

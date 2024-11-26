@@ -106,35 +106,68 @@ object AdjustConfig {
     }
 
     @JvmStatic
-    fun setHomeScreenIconSize(size: Float) {
+    fun setHomeScreenIconSizePer(size: Float) {
         SpKey.keyHomeScreenIconSize.putSpFloat(size)
         needReLoadLauncher = true
     }
 
     @JvmStatic
-    fun getHomeScreenIconSize(): Float {
+    fun getHomeScreenIconSizePer(): Float {
         return SpKey.keyHomeScreenIconSize.getSpFloat(1f)
     }
 
     @JvmStatic
-    fun setAppDrawerIconSize(size: Float) {
+    fun setAppDrawerIconSizePer(size: Float) {
         SpKey.keyAppDrawerIconSize.putSpFloat(size)
         needRebuildLauncher = true
     }
 
     @JvmStatic
-    fun getAppDrawerIconSize(): Float {
+    fun getAppDrawerIconSizePer(): Float {
         return SpKey.keyAppDrawerIconSize.getSpFloat(1f)
     }
 
     @JvmStatic
-    fun setFolderIconSize(size: Float) {
+    fun setFolderIconSizePer(size: Float) {
         SpKey.keyFolderIconSize.putSpFloat(size)
         needReLoadLauncher = true
     }
 
     @JvmStatic
-    fun getFolderIconSize(): Float {
+    fun getFolderIconSizePer(): Float {
         return SpKey.keyFolderIconSize.getSpFloat(1f)
+    }
+
+    @JvmStatic
+    fun setHomeScreenTextSizePer(size: Float) {
+        SpKey.keyHomeScreenTextSize.putSpFloat(size)
+        needReLoadLauncher = true
+    }
+
+    @JvmStatic
+    fun getHomeScreenTextSizePer(): Float {
+        return SpKey.keyHomeScreenTextSize.getSpFloat(1f)
+    }
+
+    @JvmStatic
+    fun setAppDrawerTextSizePer(size: Float) {
+        SpKey.keyAppDrawerTextSize.putSpFloat(size)
+        needRebuildLauncher = true
+    }
+
+    @JvmStatic
+    fun getAppDrawerTextSizePer(): Float {
+        return SpKey.keyAppDrawerTextSize.getSpFloat(1f)
+    }
+
+    @JvmStatic
+    fun setFolderTextSizePer(size: Float) {
+        SpKey.keyFolderTextSize.putSpFloat(size)
+        needReLoadLauncher = true
+    }
+
+    @JvmStatic
+    fun getFolderTextSizePer(): Float {
+        return SpKey.keyFolderTextSize.getSpFloat(1f)
     }
 }

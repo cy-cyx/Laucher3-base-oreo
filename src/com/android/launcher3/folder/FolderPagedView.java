@@ -36,14 +36,12 @@ import com.android.launcher3.InvariantDeviceProfile;
 import com.android.launcher3.ItemInfo;
 import com.android.launcher3.Launcher;
 import com.android.launcher3.LauncherAppState;
-import com.android.launcher3.LauncherModel;
 import com.android.launcher3.PagedView;
 import com.android.launcher3.R;
 import com.android.launcher3.ShortcutAndWidgetContainer;
 import com.android.launcher3.ShortcutInfo;
 import com.android.launcher3.Utilities;
 import com.android.launcher3.Workspace.ItemOperator;
-import com.android.launcher3.dragndrop.DragController;
 import com.android.launcher3.keyboard.ViewGroupFocusHelper;
 import com.android.launcher3.pageindicators.PageIndicator;
 import com.android.launcher3.util.Themes;
@@ -253,7 +251,7 @@ public class FolderPagedView extends PagedView {
     private CellLayout createAndAddNewPage() {
         DeviceProfile grid = Launcher.getLauncher(getContext()).getDeviceProfile();
         CellLayout page = (CellLayout) mInflater.inflate(R.layout.folder_page, this, false);
-        page.setCellDimensions((int) (grid.folderCellWidthPx * AdjustConfig.getFolderIconSize()), (int) (grid.folderCellHeightPx * AdjustConfig.getFolderIconSize()));
+        page.setCellDimensions((int) (grid.folderCellWidthPx * AdjustConfig.getFolderIconSizePer()), (int) (grid.folderCellHeightPx * AdjustConfig.getFolderIconSizePer()));
         page.getShortcutsAndWidgets().setMotionEventSplittingEnabled(false);
         page.setInvertIfRtl(true);
         page.setGridSize(mGridCountX, mGridCountY);

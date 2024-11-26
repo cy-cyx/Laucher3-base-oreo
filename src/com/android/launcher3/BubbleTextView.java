@@ -22,7 +22,6 @@ import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
@@ -57,7 +56,6 @@ import com.android.launcher3.graphics.PreloadIconDrawable;
 import com.android.launcher3.model.PackageItemInfo;
 import com.theme.lambda.launcher.Constants;
 import com.theme.lambda.launcher.utils.CommonUtil;
-import com.vungle.ads.Ad;
 
 import java.text.NumberFormat;
 
@@ -163,13 +161,13 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver, 
         if (display == DISPLAY_WORKSPACE) {
             setTextSize(TypedValue.COMPLEX_UNIT_PX, grid.iconTextSizePx);
         } else if (display == DISPLAY_ALL_APPS) {
-            setTextSize(TypedValue.COMPLEX_UNIT_PX, grid.allAppsIconTextSizePx);
+            setTextSize(TypedValue.COMPLEX_UNIT_PX, grid.allAppsIconTextSizePx  * AdjustConfig.getAppDrawerTextSizePer());
             setCompoundDrawablePadding(grid.allAppsIconDrawablePaddingPx);
-            defaultIconSize = (int) (grid.allAppsIconSizePx * AdjustConfig.getAppDrawerIconSize());
+            defaultIconSize = (int) (grid.allAppsIconSizePx * AdjustConfig.getAppDrawerIconSizePer());
         } else if (display == DISPLAY_FOLDER) {
-            setTextSize(TypedValue.COMPLEX_UNIT_PX, grid.folderChildTextSizePx);
+            setTextSize(TypedValue.COMPLEX_UNIT_PX, grid.folderChildTextSizePx * AdjustConfig.getFolderTextSizePer());
             setCompoundDrawablePadding(grid.folderChildDrawablePaddingPx);
-            defaultIconSize = (int) (grid.folderChildIconSizePx * AdjustConfig.getFolderIconSize());
+            defaultIconSize = (int) (grid.folderChildIconSizePx * AdjustConfig.getFolderIconSizePer());
         }
         mCenterVertically = a.getBoolean(R.styleable.BubbleTextView_centerVertically, false);
 

@@ -40,6 +40,7 @@ import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Property;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -194,10 +195,11 @@ public class FolderIcon extends FrameLayout implements FolderListener {
 
         icon.setClipToPadding(false);
         icon.mFolderName = (BubbleTextView) icon.findViewById(R.id.folder_icon_name);
+        icon.mFolderName.setTextSize(TypedValue.COMPLEX_UNIT_PX, Launcher.getLauncher(icon.getContext()).getDeviceProfile().folderChildTextSizePx * AdjustConfig.getHomeScreenTextSizePer());
         icon.mFolderName.setText(folderInfo.title);
         icon.mFolderName.setCompoundDrawablePadding(0);
         FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) icon.mFolderName.getLayoutParams();
-        lp.topMargin = (int) (grid.iconSizePx * AdjustConfig.getHomeScreenIconSize() + grid.iconDrawablePaddingPx);
+        lp.topMargin = (int) (grid.iconSizePx * AdjustConfig.getHomeScreenIconSizePer() + grid.iconDrawablePaddingPx);
 
         icon.setTag(folderInfo);
         icon.setOnClickListener(launcher);
@@ -579,7 +581,7 @@ public class FolderIcon extends FrameLayout implements FolderListener {
                           int availableSpace, int topPadding) {
             mInvalidateDelegate = invalidateDelegate;
 
-            final int previewSize = (int) (grid.folderIconSizePx * AdjustConfig.getHomeScreenIconSize());
+            final int previewSize = (int) (grid.folderIconSizePx * AdjustConfig.getHomeScreenIconSizePer());
             final int previewPadding = grid.folderIconPreviewPadding;
 
             this.previewSize = (previewSize - 2 * previewPadding);

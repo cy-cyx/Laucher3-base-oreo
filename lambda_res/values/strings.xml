@@ -416,4 +416,6 @@
     <string name="icon_size">Icon size</string>
     <string name="app_drawer">App drawer</string>
     <string name="folders">Folders</string>
+    <string name="label_size">Label size</string>
+
 </resources>
