@@ -3046,7 +3046,7 @@ public class Launcher extends BaseActivity
 
 
         boolean ignoreLongPressToOverview =
-                mDeviceProfile.shouldIgnoreLongPressToOverview(mLastDispatchTouchEventX);
+                mDeviceProfile.shouldIgnoreLongPressToOverview(mLastDispatchTouchEventX) || themeManager.isPreviewMode();
 
         if (v instanceof Workspace) {
             if (!mWorkspace.isInOverviewMode()) {

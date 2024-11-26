@@ -2332,6 +2332,7 @@ public class Workspace extends PagedView
         }
 
         if (child instanceof BubbleTextView && !dragOptions.isAccessibleDrag &&
+                !mLauncher.getThemeManager().isPreviewMode() &&
                 !(child.getTag() instanceof ShortcutInfo && ((ShortcutInfo) child.getTag()).title == "Theme")
                 && !(child.getTag() instanceof AppInfo && ((AppInfo) child.getTag()).title == "Theme") &&
                 !(child.getTag() instanceof ShortcutInfo && RecommendAppManager.isRecommendApp(((ShortcutInfo) child.getTag())))
