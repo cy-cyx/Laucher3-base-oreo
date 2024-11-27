@@ -417,5 +417,7 @@
     <string name="app_drawer">App drawer</string>
     <string name="folders">Folders</string>
     <string name="label_size">Label size</string>
-
+    <string name="label_color">Label color</string>
+    <string name="set_layout_tip">Customize Layout As You Needed</string>
+    <string name="set_effect_tip">3D Transition Effects Available</string>
 </resources>

@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.FrameLayout
 import com.android.launcher3.ThemeManager
 import com.android.launcher3.databinding.LayoutPreviewControlBinding
@@ -12,9 +13,13 @@ import com.theme.lambda.launcher.statistics.EventName
 import com.theme.lambda.launcher.statistics.EventUtil
 import com.theme.lambda.launcher.ui.effect.EffectActivity
 import com.theme.lambda.launcher.ui.layoutadjust.LayoutAdjustActivity
+import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.utils.LauncherUtil
+import com.theme.lambda.launcher.utils.SpKey
 import com.theme.lambda.launcher.utils.SystemUtil
+import com.theme.lambda.launcher.utils.getSpBool
 import com.theme.lambda.launcher.utils.gone
+import com.theme.lambda.launcher.utils.putSpBool
 import com.theme.lambda.launcher.utils.visible
 
 class PreviewControlView @JvmOverloads constructor(
@@ -63,8 +68,26 @@ class PreviewControlView @JvmOverloads constructor(
         } else {
             layoutPreviewControlBinding?.setLl?.visible()
             layoutPreviewControlBinding?.setNoApplyLl?.gone()
+            startGuide()
         }
 
+    }
+
+    private fun startGuide() {
+        if (SpKey.first_guide_1.getSpBool(false)) return
+        SpKey.first_guide_1.putSpBool(true)
+
+        layoutPreviewControlBinding?.guideVw?.visible()
+        layoutPreviewControlBinding?.setLayoutGuideLl?.visible()
+        layoutPreviewControlBinding?.guideVw?.setOnClickListener {
+            if (layoutPreviewControlBinding?.setLayoutGuideLl?.visibility == View.VISIBLE) {
+                layoutPreviewControlBinding?.setLayoutGuideLl?.gone()
+                layoutPreviewControlBinding?.setEffectGuideLl?.visible()
+            } else {
+                layoutPreviewControlBinding?.setEffectGuideLl?.gone()
+                layoutPreviewControlBinding?.guideVw?.gone()
+            }
+        }
     }
 
 
@@ -75,5 +98,12 @@ class PreviewControlView @JvmOverloads constructor(
         fun onSet()
 
         fun setIcon()
+    }
+
+    fun reLayout() {
+        val lp = this.layoutParams as FrameLayout.LayoutParams
+        lp.topMargin = -CommonUtil.getStatusBarHeight()
+        lp.bottomMargin = -CommonUtil.getActionBarHeight()
+        requestLayout()
     }
 }

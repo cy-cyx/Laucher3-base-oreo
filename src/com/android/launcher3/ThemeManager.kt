@@ -32,8 +32,6 @@ import com.theme.lambda.launcher.widget.WallpaperView
 import com.theme.lambda.launcher.widget.dialog.ApplyLauncherPermissionDialog
 import com.theme.lambda.launcher.widget.dialog.QuitPreviewSureDialog
 import com.theme.lambda.launcher.widget.dialog.SetDefaultFailedDialog
-import com.theme.lambda.launcher.widget.dialog.StoreRatingsDialog
-import com.theme.lambda.launcher.widget.dialog.WidgetGuideDialog
 import java.io.File
 import java.lang.ref.WeakReference
 
@@ -291,6 +289,7 @@ class ThemeManager {
         isPreviewMode = true
         launcher?.runOnUiThread {
             previewControlView?.visibility = View.VISIBLE
+            previewControlView?.reLayout()
         }
         logEvent(EventName.detailPageView, Bundle().apply {
             putString("id", previewThemeId)

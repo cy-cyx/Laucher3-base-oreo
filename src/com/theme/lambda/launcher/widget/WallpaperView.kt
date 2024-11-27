@@ -1,7 +1,6 @@
 package com.theme.lambda.launcher.widget
 
 import android.content.Context
-import android.graphics.BitmapFactory
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
@@ -16,7 +15,7 @@ class WallpaperView @JvmOverloads constructor(
     val view = LayoutWallpaperBinding.inflate(LayoutInflater.from(context), this, true)
 
     fun setPic(path: String) {
-        reset()
+        reLayout()
 
         view.picWallpaperIv.setImageBitmap(
             BitmapUtil.decode(
@@ -27,7 +26,7 @@ class WallpaperView @JvmOverloads constructor(
         )
     }
 
-    private fun reset() {
+    private fun reLayout() {
         val lp = this.layoutParams as FrameLayout.LayoutParams
         lp.topMargin = -CommonUtil.getStatusBarHeight()
         lp.bottomMargin = -CommonUtil.getActionBarHeight()
