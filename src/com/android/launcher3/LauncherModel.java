@@ -963,11 +963,11 @@ public class LauncherModel extends BroadcastReceiver
                                     info.spanX = spanX;
                                     info.spanY = spanY;
                                     needAdjustIconItemInfos.add(info);
-                                    Log.e(TAG, "Crossing the line(icon):id:" + id + "screen:" + screen + "cellX:" + cellX + "cellY:" + cellY);
+                                    Log.e(TAG, "Crossing the line(icon):id:" + id + "screen:" + screen + "cellX:" + cellX + "cellY:" + cellY + "itemType:" + itemType);
                                 } else {
                                     // 可能会被时间 天气控件占用
-                                    if (screen == 0 && rows > 4){
-                                        if (cellY == 1){
+                                    if (screen == 0 && rows > 4) {
+                                        if (cellY == 1) {
                                             ItemInfo info = new ItemInfo();
                                             info.id = id;
                                             info.itemType = itemType;
@@ -976,8 +976,8 @@ public class LauncherModel extends BroadcastReceiver
                                             info.spanX = spanX;
                                             info.spanY = spanY;
                                             needAdjustIconItemInfos.add(info);
-                                            Log.e(TAG, "time occupancy (icon):id:" + id + "screen:" + screen + "cellX:" + cellX + "cellY:" + cellY);
-                                        }else {
+                                            Log.e(TAG, "time occupancy (icon):id:" + id + "screen:" + screen + "cellX:" + cellX + "cellY:" + cellY + "itemType:" + itemType);
+                                        } else {
                                             // 顺便找一下最后一页排到了哪
                                             if (screen == lastScreen) {
                                                 if (cellX > lastCellX) {
@@ -989,7 +989,7 @@ public class LauncherModel extends BroadcastReceiver
                                                 }
                                             }
                                         }
-                                    }else {
+                                    } else {
                                         // 顺便找一下最后一页排到了哪
                                         if (screen == lastScreen) {
                                             if (cellX > lastCellX) {
@@ -1014,11 +1014,11 @@ public class LauncherModel extends BroadcastReceiver
                                     info.spanX = spanX;
                                     info.spanY = spanY;
                                     needAdjustWidgetItemInfos.add(info);
-                                    Log.e(TAG, "Crossing the line(widget):id:" + id + "screen:" + screen + "cellX:" + cellX + "cellY:" + cellY);
+                                    Log.e(TAG, "Crossing the line(widget):id:" + id + "screen:" + screen + "cellX:" + cellX + "cellY:" + cellY + "itemType:" + itemType);
                                 } else {
                                     // 可能会被时间 天气控件占用
-                                    if (screen == 0 && rows > 4){
-                                        if (cellY == 1){
+                                    if (screen == 0 && rows > 4) {
+                                        if (cellY == 1) {
                                             ItemInfo info = new ItemInfo();
                                             info.id = id;
                                             info.itemType = itemType;
@@ -1027,8 +1027,8 @@ public class LauncherModel extends BroadcastReceiver
                                             info.spanX = spanX;
                                             info.spanY = spanY;
                                             needAdjustIconItemInfos.add(info);
-                                            Log.e(TAG, "time occupancy (widget):id:" + id + "screen:" + screen + "cellX:" + cellX + "cellY:" + cellY);
-                                        }else {
+                                            Log.e(TAG, "time occupancy (widget):id:" + id + "screen:" + screen + "cellX:" + cellX + "cellY:" + cellY + "itemType:" + itemType);
+                                        } else {
                                             // 顺便找一下最后一页排到了哪
                                             if (screen == lastScreen) {
                                                 if (cellX + spanX - 1 > lastCellX) {
@@ -1040,7 +1040,7 @@ public class LauncherModel extends BroadcastReceiver
                                                 }
                                             }
                                         }
-                                    }else {
+                                    } else {
                                         // 顺便找一下最后一页排到了哪
                                         if (screen == lastScreen) {
                                             if (cellX + spanX - 1 > lastCellX) {
