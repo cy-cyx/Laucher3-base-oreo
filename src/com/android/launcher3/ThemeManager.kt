@@ -118,8 +118,7 @@ class ThemeManager {
 
             val manifestJson: String = FileUtil.readStringFromFile(manifestFile)
             val manifest: ManifestBean = GsonUtil.gson.fromJson(
-                manifestJson,
-                ManifestBean::class.java
+                manifestJson, ManifestBean::class.java
             )
             return manifest
         }
@@ -257,7 +256,7 @@ class ThemeManager {
             if (isPreviewMode) return
             if (LauncherUtil.isDefaultLauncher(it)) {
                 // 华为安卓8 会报设置线程没有内存权限
-                if (SystemUtil.getDeviceBrand() == SystemUtil.PHONE_HUAWEI
+                if ((SystemUtil.getDeviceBrand() == SystemUtil.PHONE_HUAWEI || SystemUtil.getDeviceBrand() == SystemUtil.PHONE_HONOR)
                     && Build.VERSION.SDK_INT < Build.VERSION_CODES.P
                 ) {
                     return@let

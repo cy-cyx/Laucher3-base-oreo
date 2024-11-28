@@ -3482,6 +3482,9 @@ public class Workspace extends PagedView
 
         int width = MeasureSpec.makeMeasureSpec(unScaledSize[0], MeasureSpec.EXACTLY);
         int height = MeasureSpec.makeMeasureSpec(unScaledSize[1], MeasureSpec.EXACTLY);
+        if (width == 0 || height == 0) {
+            return null;
+        }
         Bitmap b = Bitmap.createBitmap(unScaledSize[0], unScaledSize[1],
                 Bitmap.Config.ARGB_8888);
         mCanvas.setBitmap(b);
