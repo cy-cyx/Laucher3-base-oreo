@@ -7,7 +7,7 @@ import com.lambdaweather.data.remote.api.AppService
 import com.lambdaweather.data.repository.AppRepository
 import com.lambdaweather.data.repository.AppRepositorySource
 import com.lambdaweather.ui.news.NewsViewModel
-import com.theme.lambda.launcher.data.http.RetrofitUtil
+import com.lambda.common.net.RetrofitUtil
 import com.theme.lambda.launcher.ui.weather.ui.SearchViewModel
 import kotlinx.coroutines.Dispatchers
 import org.koin.android.ext.koin.androidContext

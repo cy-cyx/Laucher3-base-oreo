@@ -5,8 +5,8 @@ import com.android.launcher3.databinding.ItemFileBinding
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.theme.lambda.launcher.data.model.FileInfo
-import com.theme.lambda.launcher.utils.CommonUtil
-import com.theme.lambda.launcher.utils.FileUtil
+import com.lambda.common.utils.CommonUtil
+import com.lambda.common.utils.FileUtil
 import java.io.File
 
 class FileAdapter : BaseQuickAdapter<FileInfo, BaseViewHolder>(R.layout.item_file) {

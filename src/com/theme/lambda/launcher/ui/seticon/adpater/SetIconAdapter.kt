@@ -5,11 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.launcher3.databinding.ItemBottomWhiteBinding
 import com.android.launcher3.databinding.ItemSetIconBinding
-import com.theme.lambda.launcher.base.BaseItem
+import com.lambda.common.base.BaseItem
 import com.theme.lambda.launcher.data.model.IconBean
 import com.theme.lambda.launcher.ui.seticon.item.BottomWhiteItem
 import com.theme.lambda.launcher.ui.seticon.item.IconItem
-import com.theme.lambda.launcher.utils.CommonUtil
+import com.lambda.common.utils.CommonUtil
 
 class SetIconAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

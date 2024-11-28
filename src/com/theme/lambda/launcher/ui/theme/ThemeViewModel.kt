@@ -4,17 +4,15 @@ import android.app.Activity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.gson.reflect.TypeToken
-import com.theme.lambda.launcher.ad.AdName
-import com.theme.lambda.launcher.ad.AdUtil
-import com.theme.lambda.launcher.base.BaseViewModel
+import com.lambda.common.ad.AdName
+import com.lambda.common.ad.AdUtil
+import com.lambda.common.base.BaseViewModel
 import com.theme.lambda.launcher.data.DataRepository
 import com.theme.lambda.launcher.data.model.Resources
 import com.theme.lambda.launcher.ui.themepreview.ThemePreviewActivity
-import com.theme.lambda.launcher.utils.GsonUtil
-import com.theme.lambda.launcher.utils.LauncherUtil
-import com.theme.lambda.launcher.utils.SpUtil
+import com.lambda.common.utils.GsonUtil
+import com.lambda.common.utils.SpUtil
 import com.theme.lambda.launcher.utils.requestTag
-import com.theme.lambda.launcher.widget.dialog.ApplyLauncherPermissionDialog
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

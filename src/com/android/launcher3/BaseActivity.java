@@ -16,7 +16,6 @@
 
 package com.android.launcher3;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.view.View.AccessibilityDelegate;
@@ -24,8 +23,9 @@ import android.view.View.AccessibilityDelegate;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.launcher3.logging.UserEventDispatcher;
-import com.theme.lambda.launcher.base.BaseDialog;
-import com.theme.lambda.launcher.base.DialogManager;
+import com.lambda.common.base.BaseDialog;
+import com.lambda.common.base.DialogManager;
+
 
 public abstract class BaseActivity extends FragmentActivity {
 

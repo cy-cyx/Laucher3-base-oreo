@@ -6,9 +6,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import com.android.launcher3.R
 import com.android.launcher3.databinding.DialogApplyLauncherPermissionBinding
-import com.theme.lambda.launcher.statistics.EventName
-import com.theme.lambda.launcher.statistics.EventUtil.logEvent
-import com.theme.lambda.launcher.utils.CommonUtil
+import com.lambda.common.statistics.EventName
+import com.lambda.common.statistics.EventUtil.logEvent
+import com.lambda.common.utils.CommonUtil
 
 class ApplyLauncherPermissionDialog(context: Context) :
     Dialog(context, R.style.Theme_translucentDialog) {

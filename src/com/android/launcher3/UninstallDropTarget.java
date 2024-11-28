@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.android.launcher3.compat.LauncherAppsCompat;
 import com.android.launcher3.dragndrop.DragOptions;
-import com.theme.lambda.launcher.utils.CommonUtil;
+import com.lambda.common.utils.CommonUtil;
 
 import java.util.ArrayList;
 
@@ -111,7 +111,7 @@ public class UninstallDropTarget extends ButtonDropTarget {
                     .resolveActivity(intent, user);
 
             if (info != null &&
-                    info.getComponentName().getPackageName().equals(CommonUtil.INSTANCE.getAppContext().getPackageName())) {
+                    info.getComponentName().getPackageName().equals(CommonUtil.getAppContext().getPackageName())) {
                 return null;
             }
 

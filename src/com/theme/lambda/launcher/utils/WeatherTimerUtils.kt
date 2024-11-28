@@ -92,8 +92,8 @@ object WeatherTimerUtils {
             WeatherUtils.getTemp(model.main?.temp).roundToInt()
                 .toString() + WeatherUtils.getTempUnit()
         view.findViewById<TextView>(R.id.tv_location).text =
-            "$local ${TimeUtils.getDateToString((model.dt ?: 0) * 1000L, "M/d")} ${
-                TimeUtils.getDayOfWeek(
+            "$local ${TimeUtil.getDateToString((model.dt ?: 0) * 1000L, "M/d")} ${
+                TimeUtil.getDayOfWeek(
                     Date(
                         model.dt!! * 1000L
                     )

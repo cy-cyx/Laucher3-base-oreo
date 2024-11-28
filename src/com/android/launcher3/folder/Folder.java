@@ -34,7 +34,6 @@ import android.view.FocusFinder;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewDebug;
 import android.view.accessibility.AccessibilityEvent;
@@ -78,8 +77,6 @@ import com.android.launcher3.userevent.nano.LauncherLogProto.ContainerType;
 import com.android.launcher3.userevent.nano.LauncherLogProto.Target;
 import com.android.launcher3.util.CircleRevealOutlineProvider;
 import com.android.launcher3.util.Thunk;
-import com.theme.lambda.launcher.utils.SpKey;
-import com.theme.lambda.launcher.utils.SpUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;

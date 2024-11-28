@@ -9,11 +9,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.launcher3.R
 import com.android.launcher3.databinding.DialogUrlShortcutSelectBinding
-import com.theme.lambda.launcher.base.BaseDialog
+import com.lambda.common.base.BaseDialog
 import com.theme.lambda.launcher.data.model.ShortCut
 import com.theme.lambda.launcher.data.model.ShortCuts
 import com.theme.lambda.launcher.urlshortcut.UrlShortcutManager
-import com.theme.lambda.launcher.utils.CommonUtil
+import com.lambda.common.utils.CommonUtil
 import com.theme.lambda.launcher.widget.adapter.UrlShortcutAdapter
 import com.theme.lambda.launcher.widget.adapter.UrlShortcutTagAdapter
 

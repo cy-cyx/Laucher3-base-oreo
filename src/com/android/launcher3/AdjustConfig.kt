@@ -2,12 +2,12 @@ package com.android.launcher3
 
 import android.graphics.Color
 import com.android.launcher3.effect.TransitionEffect
-import com.theme.lambda.launcher.utils.CommonUtil
-import com.theme.lambda.launcher.utils.SpKey
-import com.theme.lambda.launcher.utils.getSpFloat
-import com.theme.lambda.launcher.utils.getSpInt
-import com.theme.lambda.launcher.utils.putSpFloat
-import com.theme.lambda.launcher.utils.putSpInt
+import com.lambda.common.utils.CommonUtil
+import com.lambda.common.utils.getSpFloat
+import com.lambda.common.utils.getSpInt
+import com.lambda.common.utils.putSpFloat
+import com.lambda.common.utils.putSpInt
+import com.lambda.common.utils.SpKey
 
 // 相关调整参数
 object AdjustConfig {

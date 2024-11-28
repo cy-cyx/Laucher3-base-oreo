@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.launcher3.databinding.ItemNewDetailsAdBinding
 import com.android.launcher3.databinding.ItemNewDetailsBinding
 import com.android.launcher3.databinding.ItemNewDetailsTopBinding
-import com.theme.lambda.launcher.base.BaseItem
+import com.lambda.common.base.BaseItem
 import com.theme.lambda.launcher.ui.news.item.NewDetailsAdItem
 import com.theme.lambda.launcher.ui.news.item.NewDetailsItem
 import com.theme.lambda.launcher.ui.news.item.NewDetailsTopItem

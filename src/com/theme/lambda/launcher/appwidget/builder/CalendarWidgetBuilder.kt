@@ -6,8 +6,8 @@ import android.widget.RemoteViews
 import com.android.launcher3.R
 import com.theme.lambda.launcher.appwidget.utils.BitmapDrawUtil
 import com.theme.lambda.launcher.data.model.WidgetsBean
-import com.theme.lambda.launcher.utils.CommonUtil
-import com.theme.lambda.launcher.utils.GlideUtil
+import com.lambda.common.utils.CommonUtil
+import com.lambda.common.utils.GlideUtil
 import com.theme.lambda.launcher.utils.TimeUtil
 
 class CalendarWidgetBuilder : BaseBuilder {

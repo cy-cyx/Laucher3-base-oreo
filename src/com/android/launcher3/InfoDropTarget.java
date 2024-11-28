@@ -28,7 +28,7 @@ import android.widget.Toast;
 
 import com.android.launcher3.compat.LauncherAppsCompat;
 import com.android.launcher3.util.Themes;
-import com.theme.lambda.launcher.utils.CommonUtil;
+import com.lambda.common.utils.CommonUtil;
 
 public class InfoDropTarget extends UninstallDropTarget {
 

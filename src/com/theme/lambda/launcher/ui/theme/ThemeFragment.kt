@@ -11,14 +11,14 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_DRAGGING
 import com.android.launcher3.databinding.FragmentThemeBinding
-import com.theme.lambda.launcher.base.BaseFragment
-import com.theme.lambda.launcher.statistics.EventName
-import com.theme.lambda.launcher.statistics.EventUtil
+import com.lambda.common.base.BaseFragment
+import com.lambda.common.statistics.EventName
+import com.lambda.common.statistics.EventUtil
 import com.theme.lambda.launcher.ui.theme.adapter.ThemeAdapter
-import com.theme.lambda.launcher.utils.CommonUtil
-import com.theme.lambda.launcher.utils.gone
-import com.theme.lambda.launcher.utils.visible
-import com.theme.lambda.launcher.widget.dialog.LoadingDialog
+import com.lambda.common.utils.CommonUtil
+import com.lambda.common.utils.gone
+import com.lambda.common.utils.visible
+import com.lambda.common.widget.dialog.LoadingDialog
 
 class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
 

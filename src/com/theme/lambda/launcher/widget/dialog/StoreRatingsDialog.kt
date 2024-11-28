@@ -1,21 +1,20 @@
 package com.theme.lambda.launcher.widget.dialog
 
 import android.animation.Animator
-import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import com.android.launcher3.Launcher
 import com.android.launcher3.R
 import com.android.launcher3.databinding.DialogStoreRatingDialogBinding
-import com.theme.lambda.launcher.base.BaseDialog
-import com.theme.lambda.launcher.utils.CommonUtil
+import com.lambda.common.base.BaseDialog
+import com.lambda.common.utils.CommonUtil
+import com.lambda.common.utils.getSpBool
+import com.lambda.common.utils.gone
+import com.lambda.common.utils.putSpBool
+import com.lambda.common.utils.visible
 import com.theme.lambda.launcher.utils.RateUtil
-import com.theme.lambda.launcher.utils.SpKey
-import com.theme.lambda.launcher.utils.getSpBool
-import com.theme.lambda.launcher.utils.gone
-import com.theme.lambda.launcher.utils.putSpBool
-import com.theme.lambda.launcher.utils.visible
+import com.lambda.common.utils.SpKey
 
 class StoreRatingsDialog(context: Context) : BaseDialog(context, R.style.Theme_translucentDialog) {
 

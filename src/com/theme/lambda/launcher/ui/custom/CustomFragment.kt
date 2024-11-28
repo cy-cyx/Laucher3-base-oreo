@@ -5,10 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
 import com.android.launcher3.databinding.FragmentCustomBinding
-import com.theme.lambda.launcher.base.BaseFragment
+import com.lambda.common.base.BaseFragment
 import com.theme.lambda.launcher.widget.adapter.LauncherFragmentAdapter
 import com.theme.lambda.launcher.ui.news.NewsFragment
-import com.theme.lambda.launcher.utils.CommonUtil
 
 class CustomFragment : BaseFragment<FragmentCustomBinding>() {
 
@@ -20,7 +19,7 @@ class CustomFragment : BaseFragment<FragmentCustomBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         (viewBinding.tabTl.layoutParams as FrameLayout.LayoutParams).topMargin =
-            CommonUtil.getStatusBarHeight() + CommonUtil.dp2px(20f)
+            com.lambda.common.utils.CommonUtil.getStatusBarHeight() + com.lambda.common.utils.CommonUtil.dp2px(20f)
 
         viewBinding.tabTl.apply {
             addTab(viewBinding.tabTl.newTab())

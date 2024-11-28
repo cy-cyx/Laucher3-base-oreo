@@ -2,10 +2,9 @@ package com.theme.lambda.launcher.ui.search.searchlib
 
 import android.annotation.SuppressLint
 import android.database.Cursor
-import android.os.Build
 import android.provider.MediaStore
 import com.theme.lambda.launcher.data.model.FileInfo
-import com.theme.lambda.launcher.utils.CommonUtil
+import com.lambda.common.utils.CommonUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

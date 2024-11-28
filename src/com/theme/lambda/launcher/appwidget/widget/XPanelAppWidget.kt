@@ -9,11 +9,11 @@ import com.theme.lambda.launcher.appwidget.WidgetManager
 import com.theme.lambda.launcher.appwidget.WidgetType
 import com.theme.lambda.launcher.appwidget.builder.XPanelWidgetBuilder
 import com.theme.lambda.launcher.data.model.WidgetsBean
-import com.theme.lambda.launcher.utils.CommonUtil
-import com.theme.lambda.launcher.utils.GsonUtil
-import com.theme.lambda.launcher.utils.SpKey
-import com.theme.lambda.launcher.utils.getSpString
-import com.theme.lambda.launcher.utils.putSpString
+import com.lambda.common.utils.CommonUtil
+import com.lambda.common.utils.getSpString
+import com.lambda.common.utils.putSpString
+import com.lambda.common.utils.GsonUtil
+import com.lambda.common.utils.SpKey
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob

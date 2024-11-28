@@ -33,8 +33,8 @@ import com.lambdaweather.utils.gone
 import com.lambdaweather.utils.visible
 import com.lambdaweather.view.WeatherNewBanner
 import com.lambdaweather.view.dynamicweather.BaseDrawer
-import com.theme.lambda.launcher.ad.AdName
-import com.theme.lambda.launcher.ad.view.MRECBanner
+import com.lambda.common.ad.AdName
+import com.lambda.common.ad.view.MRECBanner
 import com.theme.lambda.launcher.ui.news.NewDetailsActivity
 import com.theme.lambda.launcher.ui.weather.ui.WeatherFragment
 import kotlin.math.roundToInt

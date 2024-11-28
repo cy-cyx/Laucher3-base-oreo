@@ -5,10 +5,10 @@ import com.android.launcher3.R
 import com.android.launcher3.databinding.ItemShortCutBinding
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.lambda.common.utils.gone
+import com.lambda.common.utils.visible
 import com.theme.lambda.launcher.data.model.ShortCut
-import com.theme.lambda.launcher.utils.GlideUtil
-import com.theme.lambda.launcher.utils.gone
-import com.theme.lambda.launcher.utils.visible
+import com.lambda.common.utils.GlideUtil
 
 class UrlShortcutAdapter : BaseQuickAdapter<ShortCut, BaseViewHolder>(R.layout.item_short_cut) {
 

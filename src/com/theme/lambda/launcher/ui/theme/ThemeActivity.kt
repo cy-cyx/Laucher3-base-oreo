@@ -14,32 +14,30 @@ import com.android.launcher3.RecommendAppManager
 import com.android.launcher3.databinding.ActivityThemeBinding
 import com.google.android.material.tabs.TabLayout
 import com.lambda.remoteconfig.LambdaRemoteConfig
-import com.theme.lambda.launcher.Constants
-import com.theme.lambda.launcher.ad.AdName
-import com.theme.lambda.launcher.ad.AdUtil
-import com.theme.lambda.launcher.base.BaseActivity
-import com.theme.lambda.launcher.statistics.EventName
-import com.theme.lambda.launcher.statistics.EventUtil
-import com.theme.lambda.launcher.statistics.FirebaseAnalyticsUtil
+import com.lambda.common.Constants
+import com.lambda.common.ad.AdName
+import com.lambda.common.ad.AdUtil
+import com.lambda.common.statistics.EventName
+import com.lambda.common.statistics.EventUtil
+import com.lambda.common.statistics.FirebaseAnalyticsUtil
 import com.theme.lambda.launcher.ui.iap.VipActivity
 import com.theme.lambda.launcher.ui.me.MeActivity
-import com.theme.lambda.launcher.utils.CommonUtil
+import com.lambda.common.utils.CommonUtil
 import com.theme.lambda.launcher.utils.LauncherUtil
 import com.theme.lambda.launcher.utils.NotificationUtil
-import com.theme.lambda.launcher.utils.PermissionUtil
-import com.theme.lambda.launcher.utils.StatusBarUtil
-import com.theme.lambda.launcher.utils.gone
-import com.theme.lambda.launcher.utils.marginStatusBarHeight
-import com.theme.lambda.launcher.utils.visible
-import com.theme.lambda.launcher.vip.VipManager
+import com.lambda.common.utils.PermissionUtil
+import com.lambda.common.utils.gone
+import com.lambda.common.utils.marginStatusBarHeight
+import com.lambda.common.utils.visible
+import com.lambda.common.utils.StatusBarUtil
+import com.lambda.common.vip.VipManager
 import com.theme.lambda.launcher.widget.adapter.LauncherFragmentAdapter
 import com.theme.lambda.launcher.widget.dialog.ApplyLauncherPermissionDialog
 import com.theme.lambda.launcher.widget.dialog.SetDefaultFailedDialog
-import com.theme.lambda.launcher.widget.dialog.StoreRatingsDialog
 import dalvik.system.ZipPathValidator
 import java.lang.ref.WeakReference
 
-class ThemeActivity : BaseActivity<ActivityThemeBinding>() {
+class ThemeActivity : com.lambda.common.base.BaseActivity<ActivityThemeBinding>() {
 
     companion object {
         @JvmField

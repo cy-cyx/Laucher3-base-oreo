@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import androidx.activity.result.contract.ActivityResultContracts
 import com.android.launcher3.databinding.ActivityWeatherSettingsBinding
 import com.lambda.common.utils.utilcode.util.BarUtils
-import com.theme.lambda.launcher.base.BaseActivity
+import com.lambda.common.base.BaseActivity
 
 class WeatherSettingsActivity : BaseActivity<ActivityWeatherSettingsBinding>() {
     private val weatherLocationContracts =

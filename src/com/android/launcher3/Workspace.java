@@ -88,7 +88,7 @@ import com.android.launcher3.util.WallpaperOffsetInterpolator;
 import com.android.launcher3.widget.PendingAddShortcutInfo;
 import com.android.launcher3.widget.PendingAddWidgetInfo;
 import com.android.launcher3.effect.TransitionEffect;
-import com.theme.lambda.launcher.utils.LogUtil;
+import com.lambda.common.utils.LogUtil;
 
 import java.util.ArrayList;
 import java.util.HashSet;

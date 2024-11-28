@@ -14,7 +14,7 @@
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/loading" />
 
-    <com.theme.lambda.launcher.ad.view.ADNativeDigView
+    <com.lambda.common.ad.view.ADNativeDigView
         android:id="@+id/adView"
         android:layout_width="match_parent"
         android:layout_height="250dp"

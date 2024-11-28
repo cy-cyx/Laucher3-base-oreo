@@ -30,7 +30,7 @@ import com.lambdaweather.utils.ScaleUpAnimator
 import com.lambdaweather.utils.TimeUtils
 import com.lambdaweather.utils.WeatherUtils
 import com.theme.lambda.launcher.appwidget.utils.WeatherManager
-import com.theme.lambda.launcher.base.BaseFragment
+import com.lambda.common.base.BaseFragment
 import com.theme.lambda.launcher.utils.WeatherTimerUtils
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel

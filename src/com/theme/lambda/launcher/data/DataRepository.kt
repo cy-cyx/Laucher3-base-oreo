@@ -6,14 +6,14 @@ import com.lambda.common.http.RequestParam
 import com.lambdaweather.utils.WeatherUtils
 import com.lambdaweather.utils.toCustomInt
 import com.theme.lambda.launcher.data.api.AppApi
-import com.theme.lambda.launcher.data.http.RetrofitUtil
+import com.lambda.common.net.RetrofitUtil
 import com.theme.lambda.launcher.data.model.ForestDayWeather
 import com.theme.lambda.launcher.data.model.ForestWeather
 import com.theme.lambda.launcher.data.model.NewResult
 import com.theme.lambda.launcher.data.model.ResResult
 import com.theme.lambda.launcher.data.model.ThemeRes
 import com.theme.lambda.launcher.data.model.Weather
-import com.theme.lambda.launcher.utils.CommonUtil
+import com.lambda.common.utils.CommonUtil
 import com.theme.lambda.launcher.utils.TimeUtil
 import java.util.Locale
 

@@ -30,7 +30,6 @@ import android.view.WindowManager;
 import com.android.launcher3.config.FeatureFlags;
 import com.android.launcher3.config.ProviderConfig;
 import com.android.launcher3.util.Thunk;
-import com.theme.lambda.launcher.utils.CommonUtil;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;

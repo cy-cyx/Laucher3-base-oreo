@@ -82,11 +82,10 @@ import com.android.launcher3.util.Preconditions;
 import com.android.launcher3.util.Provider;
 import com.android.launcher3.util.Thunk;
 import com.android.launcher3.util.ViewOnDrawExecutor;
-import com.lambda.common.http.Global;
 import com.lambda.common.utils.utilcode.util.Utils;
-import com.theme.lambda.launcher.Constants;
-import com.theme.lambda.launcher.utils.SpKey;
-import com.theme.lambda.launcher.utils.SpUtil;
+import com.lambda.common.Constants;
+import com.lambda.common.utils.SpKey;
+import com.lambda.common.utils.SpUtil;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;

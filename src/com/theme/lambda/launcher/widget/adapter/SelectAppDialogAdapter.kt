@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.android.launcher3.databinding.ItemSelectAppBinding
 import com.theme.lambda.launcher.appinfo.AppInfo
 import com.theme.lambda.launcher.appinfo.AppInfoCache
-import com.theme.lambda.launcher.utils.GlideUtil
+import com.lambda.common.utils.GlideUtil
 
 class SelectAppDialogAdapter : Adapter<ViewHolder>() {
 

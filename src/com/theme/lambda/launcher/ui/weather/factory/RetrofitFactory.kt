@@ -9,7 +9,7 @@ import com.lambdaweather.data.remote.api.AppService
 import com.lambdaweather.data.repository.AppRepository
 import com.lambdaweather.data.repository.AppRepositorySource
 import com.lambdaweather.utils.WeatherUtils
-import com.theme.lambda.launcher.data.http.RetrofitUtil
+import com.lambda.common.net.RetrofitUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

@@ -4,11 +4,11 @@ import android.os.Bundle
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import com.theme.lambda.launcher.statistics.EventName
-import com.theme.lambda.launcher.statistics.EventUtil.logEvent
-import com.theme.lambda.launcher.utils.LogUtil
-import com.theme.lambda.launcher.utils.SpKey
-import com.theme.lambda.launcher.utils.getSpLong
+import com.lambda.common.utils.getSpLong
+import com.lambda.common.statistics.EventName
+import com.lambda.common.statistics.EventUtil.logEvent
+import com.lambda.common.utils.LogUtil
+import com.lambda.common.utils.SpKey
 
 class FirebaseService : FirebaseMessagingService() {
 

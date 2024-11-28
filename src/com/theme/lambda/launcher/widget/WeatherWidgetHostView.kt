@@ -15,8 +15,8 @@ import android.widget.LinearLayout
 import android.widget.RemoteViews
 import com.android.launcher3.R
 import com.android.launcher3.ThemeManager
-import com.theme.lambda.launcher.statistics.EventName
-import com.theme.lambda.launcher.statistics.EventUtil
+import com.lambda.common.statistics.EventName
+import com.lambda.common.statistics.EventUtil
 import com.theme.lambda.launcher.ui.weather.ui.WeatherActivity
 import com.theme.lambda.launcher.utils.WeatherTimerUtils
 

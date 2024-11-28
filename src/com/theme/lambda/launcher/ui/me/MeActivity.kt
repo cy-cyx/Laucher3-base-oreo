@@ -11,13 +11,13 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.launcher3.databinding.ActivityMeBinding
-import com.theme.lambda.launcher.base.BaseActivity
-import com.theme.lambda.launcher.statistics.EventName
-import com.theme.lambda.launcher.statistics.EventUtil
+import com.lambda.common.base.BaseActivity
+import com.lambda.common.statistics.EventName
+import com.lambda.common.statistics.EventUtil
 import com.theme.lambda.launcher.ui.me.adapter.MeThemeAdapter
-import com.theme.lambda.launcher.utils.CommonUtil
-import com.theme.lambda.launcher.utils.StatusBarUtil
-import com.theme.lambda.launcher.utils.marginStatusBarHeight
+import com.lambda.common.utils.CommonUtil
+import com.lambda.common.utils.marginStatusBarHeight
+import com.lambda.common.utils.StatusBarUtil
 
 class MeActivity : BaseActivity<ActivityMeBinding>() {
 

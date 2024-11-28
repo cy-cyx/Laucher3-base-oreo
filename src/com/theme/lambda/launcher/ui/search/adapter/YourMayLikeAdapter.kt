@@ -6,7 +6,7 @@ import com.android.launcher3.databinding.ItemYouMayLikeBinding
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.theme.lambda.launcher.data.model.Offers
-import com.theme.lambda.launcher.utils.GlideUtil
+import com.lambda.common.utils.GlideUtil
 
 class YourMayLikeAdapter :
     BaseQuickAdapter<Offers, BaseViewHolder>(R.layout.item_you_may_like) {

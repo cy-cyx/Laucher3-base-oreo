@@ -19,7 +19,7 @@ import androidx.core.app.NotificationManagerCompat
 import com.android.launcher3.BaseActivity
 import com.android.launcher3.R
 import com.theme.lambda.launcher.ui.timeoutrecall.TimeoutRecallActivity
-import com.theme.lambda.launcher.utils.CommonUtil
+import com.lambda.common.utils.CommonUtil
 import com.theme.lambda.launcher.utils.LauncherUtil.isDefaultLauncher
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
@@ -114,7 +114,7 @@ object RecallManager : Application.ActivityLifecycleCallbacks {
     }
 
     override fun onActivityResumed(activity: Activity) {
-        if (activity is BaseActivity || activity is com.theme.lambda.launcher.base.BaseActivity<*>) {
+        if (activity is BaseActivity || activity is com.lambda.common.base.BaseActivity<*>) {
             stopTimeoutRecall()
         }
     }

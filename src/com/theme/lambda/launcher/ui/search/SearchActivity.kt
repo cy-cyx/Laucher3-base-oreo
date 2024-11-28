@@ -25,10 +25,10 @@ import com.lambdaweather.data.model.NewsModel
 import com.lambdaweather.ui.news.NewsListActivity
 import com.lambdaweather.view.WeatherNewBanner
 import com.lambdaweather.view.WeatherNewBanner.OnRvBannerClickListener
-import com.theme.lambda.launcher.ad.AdName
-import com.theme.lambda.launcher.base.BaseActivity
-import com.theme.lambda.launcher.statistics.EventName
-import com.theme.lambda.launcher.statistics.EventUtil
+import com.lambda.common.ad.AdName
+import com.lambda.common.base.BaseActivity
+import com.lambda.common.statistics.EventName
+import com.lambda.common.statistics.EventUtil
 import com.theme.lambda.launcher.ui.news.NewDetailsActivity
 import com.theme.lambda.launcher.ui.search.adapter.FileAdapter
 import com.theme.lambda.launcher.ui.search.adapter.ImageAdapter
@@ -41,17 +41,13 @@ import com.theme.lambda.launcher.ui.search.adapter.UrlShortcutAdapter
 import com.theme.lambda.launcher.ui.search.adapter.YourMayLikeAdapter
 import com.theme.lambda.launcher.ui.search.searchlib.FileSearchLib
 import com.theme.lambda.launcher.ui.search.searchlib.PicSearchLib
-import com.theme.lambda.launcher.utils.PermissionUtil
-import com.theme.lambda.launcher.utils.SpKey
-import com.theme.lambda.launcher.utils.StatusBarUtil
-import com.theme.lambda.launcher.utils.getSpInt
-import com.theme.lambda.launcher.utils.getSpString
-import com.theme.lambda.launcher.utils.gone
-import com.theme.lambda.launcher.utils.marginStatusBarHeight
-import com.theme.lambda.launcher.utils.putSpInt
-import com.theme.lambda.launcher.utils.visible
-import com.theme.lambda.launcher.widget.dialog.ApplyDocumentPermissionDialog
-import org.koin.androidx.scope.scope
+import com.lambda.common.utils.PermissionUtil
+import com.lambda.common.utils.getSpString
+import com.lambda.common.utils.gone
+import com.lambda.common.utils.marginStatusBarHeight
+import com.lambda.common.utils.visible
+import com.lambda.common.utils.SpKey
+import com.lambda.common.utils.StatusBarUtil
 
 class SearchActivity : BaseActivity<ActivitySearchBinding>() {
 

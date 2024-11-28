@@ -3,6 +3,7 @@ package com.theme.lambda.launcher.utils
 import android.content.Context
 import android.os.BatteryManager
 import com.android.launcher3.R
+import com.lambda.common.utils.CommonUtil
 
 object BatteryChargingUtil {
 

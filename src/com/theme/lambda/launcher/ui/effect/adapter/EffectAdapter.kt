@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.android.launcher3.R
 import com.android.launcher3.databinding.ItemEffectBinding
 import com.android.launcher3.effect.TransitionEffect
-import com.theme.lambda.launcher.utils.CommonUtil
 
 class EffectAdapter : RecyclerView.Adapter<ViewHolder>() {
 
@@ -137,7 +136,7 @@ class EffectAdapter : RecyclerView.Adapter<ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return EffectViewHolder(ItemEffectBinding.inflate(LayoutInflater.from(parent.context)).root.apply {
             layoutParams =
-                ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, CommonUtil.dp2px(60f))
+                ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, com.lambda.common.utils.CommonUtil.dp2px(60f))
         })
     }
 

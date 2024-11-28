@@ -25,13 +25,12 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.android.launcher3.R
 import com.android.launcher3.databinding.ItemWeatherNewBinding
+import com.lambda.common.utils.gone
+import com.lambda.common.utils.visible
 import com.lambdaweather.data.model.NewsModel.NewsDTO
-import com.theme.lambda.launcher.ad.AdName
-import com.theme.lambda.launcher.ad.view.MRECBanner
-import com.theme.lambda.launcher.utils.CommonUtil
-import com.theme.lambda.launcher.utils.GlideUtil
-import com.theme.lambda.launcher.utils.gone
-import com.theme.lambda.launcher.utils.visible
+import com.lambda.common.ad.AdName
+import com.lambda.common.ad.view.MRECBanner
+import com.lambda.common.utils.GlideUtil
 import java.util.Random
 
 class WeatherNewBanner @JvmOverloads constructor(
@@ -150,7 +149,7 @@ class WeatherNewBanner @JvmOverloads constructor(
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
         linearLayoutParams.gravity = Gravity.BOTTOM or gravity
-        linearLayoutParams.setMargins(margin, margin, margin, margin + CommonUtil.dp2px(60f))
+        linearLayoutParams.setMargins(margin, margin, margin, margin + com.lambda.common.utils.CommonUtil.dp2px(60f))
         addView(recyclerView, vpLayoutParams)
         addView(mLinearLayout, linearLayoutParams)
     }
@@ -340,7 +339,7 @@ class WeatherNewBanner @JvmOverloads constructor(
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
             val img = ItemWeatherNewBinding.inflate(LayoutInflater.from(parent.context)).root
             val params = RecyclerView.LayoutParams(
-                CommonUtil.getScreenWidth() - CommonUtil.dp2px(20f),
+                com.lambda.common.utils.CommonUtil.getScreenWidth() - com.lambda.common.utils.CommonUtil.dp2px(20f),
                 ViewGroup.LayoutParams.MATCH_PARENT
             )
             img.layoutParams = params
@@ -417,7 +416,7 @@ class WeatherNewBanner @JvmOverloads constructor(
 
             if (from == fromSearch) {
                 viewBinding.tvTitle.setTextColor(Color.WHITE)
-                viewBinding.iconCv.radius = CommonUtil.dp2px(15f).toFloat()
+                viewBinding.iconCv.radius = com.lambda.common.utils.CommonUtil.dp2px(15f).toFloat()
             }
         }
 

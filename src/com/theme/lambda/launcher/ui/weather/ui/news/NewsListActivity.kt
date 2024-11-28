@@ -6,15 +6,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import com.android.launcher3.R
 import com.android.launcher3.databinding.ActivityNewListBinding
-import com.theme.lambda.launcher.base.BaseActivity
+import com.lambda.common.base.BaseActivity
+import com.lambda.common.utils.marginStatusBarHeight
 import com.theme.lambda.launcher.ui.news.NewsFragment
-import com.theme.lambda.launcher.utils.StatusBarUtil
-import com.theme.lambda.launcher.utils.marginStatusBarHeight
+import com.lambda.common.utils.StatusBarUtil
 
 class NewsListActivity : BaseActivity<ActivityNewListBinding>() {
 
-    companion object{
-        fun start(context: Context){
+    companion object {
+        fun start(context: Context) {
             context.startActivity(Intent(context, NewsListActivity::class.java))
         }
     }

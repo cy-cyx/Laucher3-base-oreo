@@ -4,8 +4,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.launcher3.databinding.ItemNewDetailsAdBinding
-import com.theme.lambda.launcher.ad.AdName
-import com.theme.lambda.launcher.ad.view.MRECBanner
+import com.lambda.common.ad.AdName
+import com.lambda.common.ad.view.MRECBanner
 import com.theme.lambda.launcher.ui.news.item.NewDetailsAdItem
 
 class NewDetailsAdViewHolder(val view: View) : RecyclerView.ViewHolder(view) {

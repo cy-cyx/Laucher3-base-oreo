@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.android.launcher3.Launcher
 import com.android.launcher3.ThemeManager
-import com.theme.lambda.launcher.base.BaseViewModel
+import com.lambda.common.base.BaseViewModel
 import com.theme.lambda.launcher.data.DataRepository
 import com.theme.lambda.launcher.data.model.ThemeRes
 import com.theme.lambda.launcher.ui.theme.ThemeActivity

@@ -5,10 +5,10 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
-import com.theme.lambda.launcher.ad.AdUtil
+import com.lambda.common.ad.AdUtil
 import com.theme.lambda.launcher.appwidget.widget.XPanelAppWidget
-import com.theme.lambda.launcher.utils.CommonUtil
-import com.theme.lambda.launcher.utils.LogUtil
+import com.lambda.common.utils.CommonUtil
+import com.lambda.common.utils.LogUtil
 
 class NetStateChangeReceiver : BroadcastReceiver() {
 

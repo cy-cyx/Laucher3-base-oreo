@@ -136,23 +136,23 @@ import com.android.launcher3.widget.PendingAddWidgetInfo;
 import com.android.launcher3.widget.WidgetAddFlowHandler;
 import com.android.launcher3.widget.WidgetHostViewLoader;
 import com.android.launcher3.widget.WidgetsContainerView;
-import com.theme.lambda.launcher.Constants;
-import com.theme.lambda.launcher.ad.AdUtil;
-import com.theme.lambda.launcher.statistics.EventName;
-import com.theme.lambda.launcher.statistics.EventUtil;
+import com.lambda.common.utils.CommonUtil;
+import com.lambda.common.Constants;
+import com.lambda.common.ad.AdUtil;
+import com.lambda.common.statistics.EventName;
+import com.lambda.common.statistics.EventUtil;
 import com.theme.lambda.launcher.ui.effect.EffectActivity;
 import com.theme.lambda.launcher.ui.layoutadjust.LayoutAdjustActivity;
 import com.theme.lambda.launcher.ui.search.SearchActivity;
 import com.theme.lambda.launcher.ui.theme.ThemeActivity;
 import com.theme.lambda.launcher.utils.AppUtil;
-import com.theme.lambda.launcher.utils.CommonUtil;
 import com.theme.lambda.launcher.utils.LauncherUtil;
-import com.theme.lambda.launcher.utils.SpKey;
-import com.theme.lambda.launcher.utils.SpUtil;
+import com.lambda.common.utils.SpKey;
+import com.lambda.common.utils.SpUtil;
 import com.theme.lambda.launcher.widget.FirstGuideView;
 import com.theme.lambda.launcher.widget.PreviewControlView;
 import com.theme.lambda.launcher.widget.WallpaperView;
-import com.theme.lambda.launcher.widget.dialog.LoadingDialog;
+import com.lambda.common.widget.dialog.LoadingDialog;
 import com.theme.lambda.launcher.widget.dialog.StoreRatingsDialog;
 import com.theme.lambda.launcher.widget.dialog.WidgetGuideDialog;
 
@@ -2994,7 +2994,7 @@ public class Launcher extends BaseActivity
 
     public boolean startActivitySafely(View v, Intent intent, ItemInfo item) {
         // 点击自己去主题页
-        if (item != null && item.getIntent().getComponent().getPackageName().equals(CommonUtil.INSTANCE.getAppContext().getPackageName())) {
+        if (item != null && item.getIntent().getComponent().getPackageName().equals(CommonUtil.getAppContext().getPackageName())) {
             ThemeActivity.start(this, ThemeActivity.sFromTheme);
             return true;
         }

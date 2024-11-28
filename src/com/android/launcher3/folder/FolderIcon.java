@@ -80,7 +80,7 @@ import com.android.launcher3.dragndrop.DragLayer;
 import com.android.launcher3.dragndrop.DragView;
 import com.android.launcher3.graphics.IconPalette;
 import com.android.launcher3.util.Thunk;
-import com.theme.lambda.launcher.utils.CommonUtil;
+import com.lambda.common.utils.CommonUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -145,7 +145,7 @@ public class FolderIcon extends FrameLayout implements FolderListener {
     private float mBadgeScale;
     private Point mTempSpaceForBadgeOffset = new Point();
 
-    private static float roundedCorners = CommonUtil.INSTANCE.dp2px(12f);
+    private static float roundedCorners = CommonUtil.dp2px(12f);
 
     private static final Property<FolderIcon, Float> BADGE_SCALE_PROPERTY
             = new Property<FolderIcon, Float>(Float.TYPE, "badgeScale") {

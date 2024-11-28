@@ -13,7 +13,7 @@ import com.lambda.common.utils.utilcode.util.BarUtils
 import com.lambda.common.utils.utilcode.util.PermissionUtils
 import com.lambdaweather.AppViewModel
 import com.lambdaweather.utils.LocationManagerHelper
-import com.theme.lambda.launcher.base.BaseActivity
+import com.lambda.common.base.BaseActivity
 import com.theme.lambda.launcher.ui.weather.adapter.CityAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

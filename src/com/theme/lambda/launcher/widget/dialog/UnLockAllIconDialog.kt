@@ -7,13 +7,13 @@ import android.view.LayoutInflater
 import android.widget.Toast
 import com.android.launcher3.R
 import com.android.launcher3.databinding.DialogUnlockAllIconBinding
-import com.theme.lambda.launcher.ad.AdName
-import com.theme.lambda.launcher.ad.AdUtil
-import com.theme.lambda.launcher.ad.IAdCallBack
-import com.theme.lambda.launcher.statistics.EventName
-import com.theme.lambda.launcher.statistics.EventUtil
+import com.lambda.common.ad.AdName
+import com.lambda.common.ad.AdUtil
+import com.lambda.common.ad.IAdCallBack
+import com.lambda.common.statistics.EventName
+import com.lambda.common.statistics.EventUtil
 import com.theme.lambda.launcher.ui.iap.VipActivity
-import com.theme.lambda.launcher.utils.CommonUtil
+import com.lambda.common.utils.CommonUtil
 
 class UnLockAllIconDialog(context: Context) : Dialog(context, R.style.Theme_translucentDialog) {
 

@@ -5,10 +5,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import com.android.launcher3.databinding.ActivityVivoSettingBinding
-import com.theme.lambda.launcher.base.BaseActivity
+import com.lambda.common.base.BaseActivity
+import com.lambda.common.utils.marginStatusBarHeight
 import com.theme.lambda.launcher.utils.LauncherUtil
-import com.theme.lambda.launcher.utils.StatusBarUtil
-import com.theme.lambda.launcher.utils.marginStatusBarHeight
+import com.lambda.common.utils.StatusBarUtil
 
 class VivoSettingActivity : BaseActivity<ActivityVivoSettingBinding>() {
 

@@ -8,15 +8,15 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.android.launcher3.R
 import com.android.launcher3.databinding.ActivityVipBinding
-import com.theme.lambda.launcher.ad.AdName
-import com.theme.lambda.launcher.ad.AdUtil
-import com.theme.lambda.launcher.base.BaseActivity
-import com.theme.lambda.launcher.statistics.EventName
-import com.theme.lambda.launcher.statistics.EventUtil
-import com.theme.lambda.launcher.utils.StatusBarUtil
-import com.theme.lambda.launcher.vip.ProductIds
-import com.theme.lambda.launcher.vip.VipManager
-import com.theme.lambda.launcher.widget.dialog.LoadingDialog
+import com.lambda.common.ad.AdName
+import com.lambda.common.ad.AdUtil
+import com.lambda.common.base.BaseActivity
+import com.lambda.common.statistics.EventName
+import com.lambda.common.statistics.EventUtil
+import com.lambda.common.utils.StatusBarUtil
+import com.lambda.common.vip.ProductIds
+import com.lambda.common.vip.VipManager
+import com.lambda.common.widget.dialog.LoadingDialog
 
 class VipActivity : BaseActivity<ActivityVipBinding>() {
 

@@ -1,7 +1,6 @@
 package com.theme.lambda.launcher.widget.adapter
 
 import android.annotation.SuppressLint
-import android.graphics.Rect
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.android.launcher3.databinding.ItemUrlShortcutBinding
 import com.theme.lambda.launcher.data.model.ShortCuts
 import com.theme.lambda.launcher.urlshortcut.UrlShortcutManager
-import com.theme.lambda.launcher.utils.CommonUtil
 
 class UrlShortcutAdapter : RecyclerView.Adapter<ViewHolder>() {
 

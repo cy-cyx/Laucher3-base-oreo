@@ -10,15 +10,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.launcher3.R
 import com.android.launcher3.ThemeManager
 import com.android.launcher3.databinding.ActivitySetIconBinding
-import com.theme.lambda.launcher.base.BaseActivity
-import com.theme.lambda.launcher.statistics.EventName
-import com.theme.lambda.launcher.statistics.EventUtil
+import com.lambda.common.base.BaseActivity
+import com.lambda.common.utils.gone
+import com.lambda.common.utils.marginStatusBarHeight
+import com.lambda.common.utils.visible
+import com.lambda.common.statistics.EventName
+import com.lambda.common.statistics.EventUtil
 import com.theme.lambda.launcher.ui.seticon.adpater.SetIconAdapter
-import com.theme.lambda.launcher.utils.StatusBarUtil
-import com.theme.lambda.launcher.utils.gone
-import com.theme.lambda.launcher.utils.marginStatusBarHeight
-import com.theme.lambda.launcher.utils.visible
-import com.theme.lambda.launcher.vip.VipManager
+import com.lambda.common.utils.StatusBarUtil
+import com.lambda.common.vip.VipManager
 
 class SetIconActivity : BaseActivity<ActivitySetIconBinding>() {
 

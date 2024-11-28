@@ -1,35 +1,27 @@
 package com.theme.lambda.launcher.ui.themepreview
 
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
-import com.android.launcher3.R
 import com.android.launcher3.databinding.ActivityThemePreviewBinding
 import com.lambda.adlib.LambdaAd
-import com.theme.lambda.launcher.ad.AdName
-import com.theme.lambda.launcher.ad.AdUtil
-import com.theme.lambda.launcher.ad.IAdCallBack
-import com.theme.lambda.launcher.base.BaseActivity
+import com.lambda.common.ad.AdName
+import com.lambda.common.ad.AdUtil
+import com.lambda.common.ad.IAdCallBack
+import com.lambda.common.base.BaseActivity
 import com.theme.lambda.launcher.data.model.Resources
-import com.theme.lambda.launcher.statistics.EventName
-import com.theme.lambda.launcher.statistics.EventUtil.logEvent
+import com.lambda.common.statistics.EventName
+import com.lambda.common.statistics.EventUtil.logEvent
 import com.theme.lambda.launcher.ui.iap.VipActivity
-import com.theme.lambda.launcher.utils.CommonUtil
-import com.theme.lambda.launcher.utils.GlideUtil
-import com.theme.lambda.launcher.utils.GsonUtil
-import com.theme.lambda.launcher.utils.SpKey
-import com.theme.lambda.launcher.utils.StatusBarUtil
-import com.theme.lambda.launcher.utils.getSpInt
-import com.theme.lambda.launcher.utils.noDoubleClick
-import com.theme.lambda.launcher.utils.putSpInt
+import com.lambda.common.utils.GlideUtil
+import com.lambda.common.utils.GsonUtil
+import com.lambda.common.utils.StatusBarUtil
+import com.lambda.common.utils.noDoubleClick
 import com.theme.lambda.launcher.utils.withHost
-import com.theme.lambda.launcher.vip.VipManager
-import com.theme.lambda.launcher.widget.dialog.LoadingDialog
+import com.lambda.common.vip.VipManager
 import com.theme.lambda.launcher.widget.dialog.LoadingWithAdDialog
 
 class ThemePreviewActivity : BaseActivity<ActivityThemePreviewBinding>() {

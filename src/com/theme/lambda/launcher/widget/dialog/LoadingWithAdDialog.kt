@@ -7,9 +7,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.android.launcher3.R
 import com.android.launcher3.databinding.DialogLoadingWithAdBinding
-import com.theme.lambda.launcher.ad.AdName
-import com.theme.lambda.launcher.utils.gone
-import com.theme.lambda.launcher.vip.VipManager
+import com.lambda.common.utils.gone
+import com.lambda.common.ad.AdName
+import com.lambda.common.vip.VipManager
 
 class LoadingWithAdDialog(context: Context) : Dialog(context, R.style.Theme_translucentDialog) {
 

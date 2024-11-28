@@ -8,7 +8,7 @@ import com.android.launcher3.R
 import com.android.launcher3.databinding.ActivityTemperatureUnitBinding
 import com.lambda.common.utils.utilcode.util.BarUtils
 import com.lambdaweather.utils.SharedPreferencesManager
-import com.theme.lambda.launcher.base.BaseActivity
+import com.lambda.common.base.BaseActivity
 
 class TemperatureUnitActivity : BaseActivity<ActivityTemperatureUnitBinding>() {
 

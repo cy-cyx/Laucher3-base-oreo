@@ -9,24 +9,24 @@ import android.util.Log
 import android.webkit.WebView
 import com.android.launcher3.BuildConfig
 import com.android.launcher3.CycleTimer
+import com.lambda.common.Constants
 import com.lambda.common.http.Global
 import com.lambdaweather.LambdaWeather
-import com.theme.lambda.launcher.ad.AdUtil
+import com.lambda.common.ad.AdUtil
 import com.theme.lambda.launcher.appinfo.AppInfoCache
 import com.theme.lambda.launcher.appwidget.utils.WeatherManager
-import com.theme.lambda.launcher.data.di.allModules
 import com.theme.lambda.launcher.netstate.NetStateChangeReceiver
 import com.theme.lambda.launcher.service.FirebaseService
-import com.theme.lambda.launcher.statistics.EventUtil
-import com.theme.lambda.launcher.statistics.FirebaseAnalyticsUtil
+import com.lambda.common.statistics.EventUtil
+import com.lambda.common.statistics.FirebaseAnalyticsUtil
 import com.theme.lambda.launcher.utils.BluetoothUtil
-import com.theme.lambda.launcher.utils.CommonUtil
-import com.theme.lambda.launcher.utils.FirebaseConfigUtil
+import com.lambda.common.utils.CommonUtil
+import com.lambda.common.utils.LogUtil
+import com.lambda.common.utils.FirebaseConfigUtil
+import com.lambda.common.utils.utilcode.util.ActivityUtils
 import com.theme.lambda.launcher.utils.OsUtil
-import com.theme.lambda.launcher.vip.VipManager
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
-import org.koin.core.context.startKoin
+import com.lambda.common.vip.VipManager
+import com.theme.lambda.launcher.recall.RecallManager
 
 class App : Application() {
 
@@ -47,15 +47,21 @@ class App : Application() {
             val defaultProcess = processName == packageName
             if (defaultProcess) {
                 Global.packageNamesSuffix = BuildConfig.Suffix
+                LogUtil.init(BuildConfig.isDebug)
                 LambdaWeather.init(this, Constants.BASE_URL)
                 Log.d(TAG, "init 1 : ${System.currentTimeMillis() - start}")
                 FirebaseAnalyticsUtil.init(this)
                 Log.d(TAG, "init 2 : ${System.currentTimeMillis() - start}")
-                EventUtil.init()
+                EventUtil.init(BuildConfig.isDebug)
                 Log.d(TAG, "init 3 : ${System.currentTimeMillis() - start}")
-                AdUtil.initAd(this)
+                AdUtil.initAd(this, BuildConfig.isDebug, BuildConfig.SECRET_KEY, BuildConfig.FLAVOR)
+                AdUtil.clickAdCallback = {
+                    ActivityUtils.getTopActivity()?.let {
+                        RecallManager.startTimeoutRecall(it)
+                    }
+                }
                 Log.d(TAG, "init 4 : ${System.currentTimeMillis() - start}")
-                VipManager.init()
+                VipManager.init(BuildConfig.isDebug, BuildConfig.SECRET_KEY)
                 Log.d(TAG, "init 5 : ${System.currentTimeMillis() - start}")
                 FirebaseConfigUtil.initRemoteConfig()
                 Log.d(TAG, "init 6 : ${System.currentTimeMillis() - start}")

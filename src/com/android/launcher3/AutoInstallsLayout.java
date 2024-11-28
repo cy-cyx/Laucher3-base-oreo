@@ -42,9 +42,7 @@ import com.android.launcher3.compat.UserManagerCompat;
 import com.android.launcher3.config.FeatureFlags;
 import com.android.launcher3.graphics.LauncherIcons;
 import com.android.launcher3.util.Thunk;
-import com.theme.lambda.launcher.data.model.OfferConfig;
-import com.theme.lambda.launcher.data.model.Offers;
-import com.theme.lambda.launcher.utils.CommonUtil;
+import com.lambda.common.utils.CommonUtil;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;

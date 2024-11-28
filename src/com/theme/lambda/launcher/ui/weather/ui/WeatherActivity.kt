@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import com.android.launcher3.databinding.ActivityWeatherBinding
 import com.lambda.common.utils.utilcode.util.BarUtils
-import com.theme.lambda.launcher.base.BaseActivity
+import com.lambda.common.base.BaseActivity
 
 class WeatherActivity : BaseActivity<ActivityWeatherBinding>() {
 

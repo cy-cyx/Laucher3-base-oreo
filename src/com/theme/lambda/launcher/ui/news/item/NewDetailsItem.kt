@@ -1,6 +1,6 @@
 package com.theme.lambda.launcher.ui.news.item
 
-import com.theme.lambda.launcher.base.BaseItem
+import com.lambda.common.base.BaseItem
 
 class NewDetailsItem(val text: String) : BaseItem() {
 }

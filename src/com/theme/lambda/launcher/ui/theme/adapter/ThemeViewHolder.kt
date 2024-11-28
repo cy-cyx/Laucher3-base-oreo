@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.android.launcher3.R
 import com.android.launcher3.databinding.ItemThemeBinding
 import com.theme.lambda.launcher.data.model.Resources
-import com.theme.lambda.launcher.statistics.EventName
-import com.theme.lambda.launcher.statistics.EventUtil
-import com.theme.lambda.launcher.utils.GlideUtil
+import com.lambda.common.statistics.EventName
+import com.lambda.common.statistics.EventUtil
+import com.lambda.common.utils.GlideUtil
 import com.theme.lambda.launcher.utils.withHost
 
 class ThemeViewHolder(view: View) : ViewHolder(view) {

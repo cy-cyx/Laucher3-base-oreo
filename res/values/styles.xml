@@ -29,15 +29,6 @@
 
     <style name="LauncherTheme" parent="@style/BaseLauncherTheme"></style>
 
-    <style name="AppTheme" parent="@style/Theme.AppCompat.DayNight.NoActionBar">
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:colorBackgroundCacheHint">@null</item>
-        <item name="android:windowShowWallpaper">true</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:colorEdgeEffect">#FF757575</item>
-        <item name="colorAccent">#FF208AF4</item>
-    </style>
-
     <style name="LauncherThemeSplash" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowBackground">@drawable/bg_splash</item>
@@ -111,13 +102,4 @@
     </style>
 
     <style name="DropTargetButton" parent="DropTargetButtonBase" />
-
-    <style name="Theme.translucentDialog" parent="@style/Theme.AppCompat.Light.Dialog">
-        <!--透明背景-->
-        <item name="android:background">@android:color/transparent</item>
-        <!--窗口背景透明-->
-        <item name="android:windowBackground">@android:color/transparent</item>
-
-        <item name="android:windowFullscreen">true</item>
-    </style>
 </resources>

@@ -3,7 +3,6 @@ package com.theme.lambda.launcher.ui.search
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
-import android.content.pm.ShortcutManager
 import android.os.Bundle
 import android.text.TextUtils
 import androidx.appcompat.app.AppCompatActivity.SEARCH_SERVICE
@@ -19,13 +18,13 @@ import com.lambdaweather.data.Resource
 import com.lambdaweather.data.model.NewsModel
 import com.lambdaweather.factory.RetrofitFactory.appRepositorySource
 import com.lambdaweather.utils.LocalUtils
-import com.theme.lambda.launcher.base.BaseViewModel
+import com.lambda.common.base.BaseViewModel
 import com.theme.lambda.launcher.data.model.FileInfo
 import com.theme.lambda.launcher.data.model.Offers
 import com.theme.lambda.launcher.data.model.SearchInfo
 import com.theme.lambda.launcher.data.model.ShortCut
-import com.theme.lambda.launcher.statistics.EventName
-import com.theme.lambda.launcher.statistics.EventUtil
+import com.lambda.common.statistics.EventName
+import com.lambda.common.statistics.EventUtil
 import com.theme.lambda.launcher.ui.search.SearchActivity.Companion.addRecentApps
 import com.theme.lambda.launcher.ui.search.SearchActivity.Companion.recentApps
 import com.theme.lambda.launcher.ui.search.searchlib.FileSearchLib
@@ -34,8 +33,8 @@ import com.theme.lambda.launcher.ui.search.searchlib.PicSearchLib
 import com.theme.lambda.launcher.ui.web.WebViewActivity
 import com.theme.lambda.launcher.urlshortcut.UrlShortcutManager
 import com.theme.lambda.launcher.utils.AppUtil
-import com.theme.lambda.launcher.utils.CommonUtil
-import com.theme.lambda.launcher.utils.GsonUtil
+import com.lambda.common.utils.CommonUtil
+import com.lambda.common.utils.GsonUtil
 import com.theme.lambda.launcher.widget.dialog.UrlShortcutSelectDialog
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

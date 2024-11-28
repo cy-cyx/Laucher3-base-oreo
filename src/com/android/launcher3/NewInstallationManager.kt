@@ -1,9 +1,9 @@
 package com.android.launcher3
 
 import com.google.gson.reflect.TypeToken
-import com.theme.lambda.launcher.utils.GsonUtil
-import com.theme.lambda.launcher.utils.SpKey
-import com.theme.lambda.launcher.utils.SpUtil
+import com.lambda.common.utils.GsonUtil
+import com.lambda.common.utils.SpKey
+import com.lambda.common.utils.SpUtil
 import java.lang.ref.WeakReference
 
 object NewInstallationManager {

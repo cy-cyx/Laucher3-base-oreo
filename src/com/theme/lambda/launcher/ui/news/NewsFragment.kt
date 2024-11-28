@@ -9,11 +9,11 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.launcher3.databinding.FragmentNewsBinding
-import com.theme.lambda.launcher.base.BaseFragment
+import com.lambda.common.base.BaseFragment
 import com.theme.lambda.launcher.ui.news.adpater.NewsAdapter
-import com.theme.lambda.launcher.utils.CommonUtil
-import com.theme.lambda.launcher.utils.gone
-import com.theme.lambda.launcher.utils.visible
+import com.lambda.common.utils.CommonUtil
+import com.lambda.common.utils.gone
+import com.lambda.common.utils.visible
 
 class NewsFragment : BaseFragment<FragmentNewsBinding>() {
 

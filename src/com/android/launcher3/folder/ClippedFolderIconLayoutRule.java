@@ -3,7 +3,6 @@ package com.android.launcher3.folder;
 import android.view.View;
 
 import com.android.launcher3.config.FeatureFlags;
-import com.theme.lambda.launcher.utils.CommonUtil;
 
 import java.util.ArrayList;
 import java.util.List;

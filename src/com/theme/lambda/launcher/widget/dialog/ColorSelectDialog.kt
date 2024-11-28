@@ -7,8 +7,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import com.android.launcher3.R
 import com.android.launcher3.databinding.DialogColorSelectBinding
-import com.theme.lambda.launcher.utils.CommonUtil
-import com.theme.lambda.launcher.utils.noDoubleClick
+import com.lambda.common.utils.CommonUtil
+import com.lambda.common.utils.noDoubleClick
 import top.defaults.colorpicker.ColorObserver
 
 class ColorSelectDialog(context: Context) : Dialog(context, R.style.Theme_translucentDialog) {

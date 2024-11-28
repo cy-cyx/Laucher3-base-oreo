@@ -30,7 +30,6 @@ import com.android.launcher3.compat.PackageInstallerCompat;
 import com.android.launcher3.config.FeatureFlags;
 import com.android.launcher3.util.GridOccupancy;
 import com.android.launcher3.util.LongArrayMap;
-import com.theme.lambda.launcher.utils.CommonUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;

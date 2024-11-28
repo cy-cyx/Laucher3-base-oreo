@@ -1,10 +1,10 @@
 package com.android.launcher3
 
 import com.lambda.remoteconfig.LambdaRemoteConfig
-import com.theme.lambda.launcher.Constants
-import com.theme.lambda.launcher.ad.AdUtil
+import com.lambda.common.Constants
+import com.lambda.common.ad.AdUtil
 import com.theme.lambda.launcher.appwidget.WidgetManager
-import com.theme.lambda.launcher.utils.CommonUtil
+import com.lambda.common.utils.CommonUtil
 import java.util.concurrent.CopyOnWriteArrayList
 import kotlin.concurrent.timer
 

@@ -1,7 +1,7 @@
 package com.theme.lambda.launcher.ui.news.item
 
-import com.theme.lambda.launcher.ad.view.MRECBanner
-import com.theme.lambda.launcher.base.BaseItem
+import com.lambda.common.ad.view.MRECBanner
+import com.lambda.common.base.BaseItem
 
 class NewDetailsAdItem : BaseItem() {
     var mrecBanner: MRECBanner? = null

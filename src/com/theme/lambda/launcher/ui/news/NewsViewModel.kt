@@ -2,13 +2,13 @@ package com.theme.lambda.launcher.ui.news
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.theme.lambda.launcher.base.BaseViewModel
+import com.lambda.common.base.BaseViewModel
 import com.theme.lambda.launcher.data.DataRepository
 import com.theme.lambda.launcher.data.model.News
 import com.theme.lambda.launcher.ui.news.item.AdItem
-import com.theme.lambda.launcher.base.BaseItem
+import com.lambda.common.base.BaseItem
 import com.theme.lambda.launcher.ui.news.item.NewsItem
-import com.theme.lambda.launcher.vip.VipManager
+import com.lambda.common.vip.VipManager
 import kotlinx.coroutines.launch
 
 class NewsViewModel : BaseViewModel() {

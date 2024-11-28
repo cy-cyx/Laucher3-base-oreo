@@ -8,11 +8,10 @@ import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.android.launcher3.databinding.ActivityWebviewBinding
-import com.theme.lambda.launcher.base.BaseActivity
-import com.theme.lambda.launcher.utils.StatusBarUtil
-import com.theme.lambda.launcher.utils.gone
-import com.theme.lambda.launcher.utils.marginStatusBarHeight
-import com.theme.lambda.launcher.utils.visible
+import com.lambda.common.base.BaseActivity
+import com.lambda.common.utils.gone
+import com.lambda.common.utils.visible
+import com.lambda.common.utils.StatusBarUtil
 
 class WebViewActivity : BaseActivity<ActivityWebviewBinding>() {
 
@@ -37,7 +36,6 @@ class WebViewActivity : BaseActivity<ActivityWebviewBinding>() {
 
         StatusBarUtil.transparencyBar(this)
         StatusBarUtil.setStatusBarLightMode(this.window)
-        viewBinding.containerLl.marginStatusBarHeight()
 
         val url = intent.getStringExtra(keyUrl) ?: ""
 

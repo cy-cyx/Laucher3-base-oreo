@@ -6,11 +6,11 @@ import com.lambda.remoteconfig.LambdaRemoteConfig
 import com.theme.lambda.launcher.data.model.SearchInfo
 import com.theme.lambda.launcher.data.model.ShortCut
 import com.theme.lambda.launcher.data.model.ShortCuts
-import com.theme.lambda.launcher.utils.CommonUtil
-import com.theme.lambda.launcher.utils.GsonUtil
-import com.theme.lambda.launcher.utils.SpKey
-import com.theme.lambda.launcher.utils.getSpString
-import com.theme.lambda.launcher.utils.putSpString
+import com.lambda.common.utils.CommonUtil
+import com.lambda.common.utils.getSpString
+import com.lambda.common.utils.putSpString
+import com.lambda.common.utils.GsonUtil
+import com.lambda.common.utils.SpKey
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

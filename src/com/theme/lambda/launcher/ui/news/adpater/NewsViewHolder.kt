@@ -7,10 +7,10 @@ import com.android.launcher3.R
 import com.android.launcher3.ThemeManager
 import com.android.launcher3.databinding.ItemNewsBinding
 import com.theme.lambda.launcher.data.model.News
-import com.theme.lambda.launcher.statistics.EventName
-import com.theme.lambda.launcher.statistics.EventUtil
+import com.lambda.common.statistics.EventName
+import com.lambda.common.statistics.EventUtil
 import com.theme.lambda.launcher.ui.news.NewDetailsActivity
-import com.theme.lambda.launcher.utils.GlideUtil
+import com.lambda.common.utils.GlideUtil
 
 class NewsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 

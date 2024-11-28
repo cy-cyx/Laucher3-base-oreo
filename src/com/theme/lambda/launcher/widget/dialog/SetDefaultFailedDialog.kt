@@ -7,9 +7,9 @@ import android.view.LayoutInflater
 import android.widget.Toast
 import com.android.launcher3.R
 import com.android.launcher3.databinding.DialogSetDefaultFailedBinding
-import com.theme.lambda.launcher.statistics.EventName
-import com.theme.lambda.launcher.statistics.EventUtil
-import com.theme.lambda.launcher.utils.CommonUtil
+import com.lambda.common.statistics.EventName
+import com.lambda.common.statistics.EventUtil
+import com.lambda.common.utils.CommonUtil
 import com.theme.lambda.launcher.utils.LauncherUtil
 
 class SetDefaultFailedDialog(context: Context) : Dialog(context, R.style.Theme_translucentDialog) {

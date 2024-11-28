@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import com.android.launcher3.R
 import com.android.launcher3.databinding.DialogNetErrorBinding
-import com.theme.lambda.launcher.utils.CommonUtil
+import com.lambda.common.utils.CommonUtil
 
 class NetErrorDialog(context: Context) : Dialog(context, R.style.Theme_translucentDialog) {
 

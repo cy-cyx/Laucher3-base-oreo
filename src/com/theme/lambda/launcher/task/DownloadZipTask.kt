@@ -1,10 +1,10 @@
 package com.theme.lambda.launcher.task
 
 import com.theme.lambda.launcher.data.model.Resources
-import com.theme.lambda.launcher.utils.CommonUtil
+import com.lambda.common.utils.CommonUtil
 import com.theme.lambda.launcher.utils.Zip4jUtil
 import com.theme.lambda.launcher.utils.HttpDownloader
-import com.theme.lambda.launcher.utils.SpUtil
+import com.lambda.common.utils.SpUtil
 import com.theme.lambda.launcher.utils.withHost
 import java.io.File
 

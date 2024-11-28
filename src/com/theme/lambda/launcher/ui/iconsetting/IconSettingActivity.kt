@@ -6,10 +6,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import com.android.launcher3.AdjustConfig
 import com.android.launcher3.databinding.ActivityIconSettingBinding
-import com.theme.lambda.launcher.base.BaseActivity
-import com.theme.lambda.launcher.utils.StatusBarUtil
-import com.theme.lambda.launcher.utils.marginStatusBarHeight
-import com.theme.lambda.launcher.utils.noDoubleClick
+import com.lambda.common.base.BaseActivity
+import com.lambda.common.utils.marginStatusBarHeight
+import com.lambda.common.utils.StatusBarUtil
+import com.lambda.common.utils.noDoubleClick
 import com.theme.lambda.launcher.widget.dialog.ColorSelectDialog
 
 class IconSettingActivity : BaseActivity<ActivityIconSettingBinding>() {

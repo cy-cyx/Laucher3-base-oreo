@@ -5,8 +5,8 @@ import android.view.View
 import android.widget.RemoteViews
 import com.android.launcher3.R
 import com.theme.lambda.launcher.data.model.WidgetsBean
-import com.theme.lambda.launcher.utils.CommonUtil
-import com.theme.lambda.launcher.utils.GlideUtil
+import com.lambda.common.utils.CommonUtil
+import com.lambda.common.utils.GlideUtil
 
 class ClockWidgetBuilder : BaseBuilder {
     override suspend fun buildSmallWidget(

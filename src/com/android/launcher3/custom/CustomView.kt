@@ -7,8 +7,8 @@ import android.view.LayoutInflater
 import android.widget.FrameLayout
 import com.android.launcher3.Launcher
 import com.android.launcher3.databinding.LayoutCustomViewBinding
-import com.theme.lambda.launcher.statistics.EventName
-import com.theme.lambda.launcher.statistics.EventUtil
+import com.lambda.common.statistics.EventName
+import com.lambda.common.statistics.EventUtil
 
 class CustomView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null

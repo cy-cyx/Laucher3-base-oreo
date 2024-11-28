@@ -4,13 +4,12 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.android.launcher3.databinding.ItemAdBinding
 import com.android.launcher3.databinding.ItemAdMrecBinding
 import com.android.launcher3.databinding.ItemNewsBinding
 import com.theme.lambda.launcher.ui.news.item.AdItem
-import com.theme.lambda.launcher.base.BaseItem
+import com.lambda.common.base.BaseItem
 import com.theme.lambda.launcher.ui.news.item.NewsItem
-import com.theme.lambda.launcher.utils.CommonUtil
+import com.lambda.common.utils.CommonUtil
 
 class NewsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

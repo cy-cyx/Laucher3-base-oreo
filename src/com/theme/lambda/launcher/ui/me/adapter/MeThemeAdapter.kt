@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.launcher3.databinding.ItemThemeBinding
 import com.theme.lambda.launcher.data.model.ThemeRes
-import com.theme.lambda.launcher.utils.CommonUtil
+import com.lambda.common.utils.CommonUtil
 
 class MeThemeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

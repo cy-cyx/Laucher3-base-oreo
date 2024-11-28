@@ -2,7 +2,6 @@ package com.theme.lambda.launcher.widget
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
@@ -15,9 +14,9 @@ import android.view.View
 import android.widget.FrameLayout
 import com.android.launcher3.LauncherAppState
 import com.android.launcher3.databinding.ViewFirstGuideBinding
-import com.theme.lambda.launcher.utils.CommonUtil
-import com.theme.lambda.launcher.utils.gone
-import com.theme.lambda.launcher.utils.visible
+import com.lambda.common.utils.CommonUtil
+import com.lambda.common.utils.gone
+import com.lambda.common.utils.visible
 
 class FirstGuideView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null

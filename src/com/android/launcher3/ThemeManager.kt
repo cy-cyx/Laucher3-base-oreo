@@ -6,27 +6,27 @@ import android.os.Bundle
 import android.view.View
 import com.adjust.sdk.Adjust
 import com.adjust.sdk.AdjustEvent
-import com.theme.lambda.launcher.ad.AdName
-import com.theme.lambda.launcher.ad.AdUtil
+import com.lambda.common.ad.AdName
+import com.lambda.common.ad.AdUtil
 import com.theme.lambda.launcher.appwidget.WidgetManager
 import com.theme.lambda.launcher.data.model.ManifestBean
-import com.theme.lambda.launcher.statistics.EventName
-import com.theme.lambda.launcher.statistics.EventUtil.logEvent
-import com.theme.lambda.launcher.statistics.FirebaseAnalyticsUtil
+import com.lambda.common.statistics.EventName
+import com.lambda.common.statistics.EventUtil.logEvent
+import com.lambda.common.statistics.FirebaseAnalyticsUtil
 import com.theme.lambda.launcher.ui.seticon.SetIconActivity
 import com.theme.lambda.launcher.ui.theme.ThemeActivity
-import com.theme.lambda.launcher.utils.CommonUtil
-import com.theme.lambda.launcher.utils.FileUtil
-import com.theme.lambda.launcher.utils.GsonUtil
+import com.lambda.common.utils.CommonUtil
+import com.lambda.common.utils.FileUtil
+import com.lambda.common.utils.GsonUtil
 import com.theme.lambda.launcher.utils.LauncherUtil
-import com.theme.lambda.launcher.utils.SpKey
-import com.theme.lambda.launcher.utils.SpUtil
+import com.lambda.common.utils.SpKey
+import com.lambda.common.utils.SpUtil
+import com.lambda.common.utils.getSpString
+import com.lambda.common.utils.gone
+import com.lambda.common.utils.putSpString
+import com.lambda.common.utils.visible
 import com.theme.lambda.launcher.utils.SystemUtil
 import com.theme.lambda.launcher.utils.WallPaperUtil
-import com.theme.lambda.launcher.utils.getSpString
-import com.theme.lambda.launcher.utils.gone
-import com.theme.lambda.launcher.utils.putSpString
-import com.theme.lambda.launcher.utils.visible
 import com.theme.lambda.launcher.widget.PreviewControlView
 import com.theme.lambda.launcher.widget.WallpaperView
 import com.theme.lambda.launcher.widget.dialog.ApplyLauncherPermissionDialog
@@ -368,7 +368,7 @@ class ThemeManager {
     }
 
     fun getManifestResRootPath(): String {
-        val filesDir: String = CommonUtil.appContext!!.filesDir.path
+        val filesDir: String = com.lambda.common.utils.CommonUtil.appContext!!.filesDir.path
         return "$filesDir/wallpaper/$curManifestId"
     }
 }

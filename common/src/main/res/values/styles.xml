@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="@style/Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowShowWallpaper">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:colorEdgeEffect">#FF757575</item>
+        <item name="colorAccent">#FF208AF4</item>
+    </style>
+
+    <style name="Theme.translucentDialog" parent="@style/Theme.AppCompat.Light.Dialog">
+        <!--透明背景-->
+        <item name="android:background">@android:color/transparent</item>
+        <!--窗口背景透明-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="Theme.button" parent="@style/Widget.AppCompat.Button.Borderless"/>
+</resources>

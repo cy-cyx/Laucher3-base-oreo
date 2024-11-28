@@ -7,8 +7,8 @@ import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.android.launcher3.Launcher
 import com.android.launcher3.R
 import com.android.launcher3.databinding.DialogWidgetGuideBinding
-import com.theme.lambda.launcher.base.BaseDialog
-import com.theme.lambda.launcher.utils.CommonUtil
+import com.lambda.common.base.BaseDialog
+import com.lambda.common.utils.CommonUtil
 import com.theme.lambda.launcher.widget.adapter.WidgetGuideAdapter
 
 class WidgetGuideDialog(context: Context) : BaseDialog(context, R.style.Theme_translucentDialog) {

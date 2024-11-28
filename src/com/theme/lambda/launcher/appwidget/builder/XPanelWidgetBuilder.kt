@@ -11,9 +11,9 @@ import com.theme.lambda.launcher.data.model.WidgetsBean
 import com.theme.lambda.launcher.netstate.NetStateUtil
 import com.theme.lambda.launcher.utils.BatteryChargingUtil
 import com.theme.lambda.launcher.utils.BluetoothUtil
-import com.theme.lambda.launcher.utils.CommonUtil
+import com.lambda.common.utils.CommonUtil
 import com.theme.lambda.launcher.utils.DisplayUtil
-import com.theme.lambda.launcher.utils.GlideUtil
+import com.lambda.common.utils.GlideUtil
 import com.theme.lambda.launcher.utils.RomUtil
 import com.theme.lambda.launcher.utils.SystemIntentUtil
 import com.theme.lambda.launcher.utils.TimeUtil

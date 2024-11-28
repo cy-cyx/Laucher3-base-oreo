@@ -2,6 +2,7 @@ package com.theme.lambda.launcher.utils
 
 import android.text.TextUtils
 import com.android.launcher3.R
+import com.lambda.common.utils.CommonUtil
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -94,5 +95,11 @@ object TimeUtil {
         val sf = SimpleDateFormat(fm, Locale.getDefault())
         val date = sf.format(calendar.time)
         return date
+    }
+
+    fun getDayOfWeek(date : Date): String? {
+        val dateFm = SimpleDateFormat("EEE")
+        val currSun = dateFm.format(date)
+        return currSun
     }
 }

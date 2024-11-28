@@ -5,9 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import com.android.billingclient.api.ProductDetails
 import com.lambda.common.http.AppException
 import com.lambda.common.http.Callback
-import com.theme.lambda.launcher.base.BaseViewModel
-import com.theme.lambda.launcher.vip.ProductIds
-import com.theme.lambda.launcher.vip.VipManager
+import com.lambda.common.base.BaseViewModel
+import com.lambda.common.vip.ProductIds
+import com.lambda.common.vip.VipManager
 
 class VipViewModel : BaseViewModel() {
 

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.android.launcher3.R
 import com.android.launcher3.databinding.ItemUrlShortcutItemBinding
 import com.theme.lambda.launcher.data.model.ShortCut
-import com.theme.lambda.launcher.utils.GlideUtil
+import com.lambda.common.utils.GlideUtil
 
 class UrlShortcutItemAdapter : RecyclerView.Adapter<ViewHolder>() {
 

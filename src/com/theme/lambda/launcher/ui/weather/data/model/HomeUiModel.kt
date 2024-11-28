@@ -1,7 +1,7 @@
 package com.lambdaweather.data.model
 
 import com.chad.library.adapter.base.entity.MultiItemEntity
-import com.theme.lambda.launcher.ad.view.MRECBanner
+import com.lambda.common.ad.view.MRECBanner
 
 data class HomeUiModel(
     override val itemType: Int,

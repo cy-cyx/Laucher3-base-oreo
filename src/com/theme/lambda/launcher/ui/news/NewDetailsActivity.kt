@@ -7,17 +7,17 @@ import android.view.LayoutInflater
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.launcher3.Launcher
 import com.android.launcher3.databinding.ActivityNewDetailBinding
-import com.theme.lambda.launcher.base.BaseActivity
-import com.theme.lambda.launcher.base.BaseItem
+import com.lambda.common.base.BaseActivity
+import com.lambda.common.base.BaseItem
 import com.theme.lambda.launcher.data.model.News
 import com.theme.lambda.launcher.ui.news.adpater.NewDetailsAdapter
 import com.theme.lambda.launcher.ui.news.item.NewDetailsAdItem
 import com.theme.lambda.launcher.ui.news.item.NewDetailsItem
 import com.theme.lambda.launcher.ui.news.item.NewDetailsTopItem
-import com.theme.lambda.launcher.utils.CommonUtil
-import com.theme.lambda.launcher.utils.GsonUtil
-import com.theme.lambda.launcher.utils.StatusBarUtil
-import com.theme.lambda.launcher.utils.marginStatusBarHeight
+import com.lambda.common.utils.CommonUtil
+import com.lambda.common.utils.marginStatusBarHeight
+import com.lambda.common.utils.GsonUtil
+import com.lambda.common.utils.StatusBarUtil
 
 class NewDetailsActivity : BaseActivity<ActivityNewDetailBinding>() {
 

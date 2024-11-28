@@ -350,7 +350,7 @@
             android:taskAffinity=":remind"
             android:theme="@style/Translucent" />
         <activity
-            android:name="com.theme.lambda.launcher.ad.OpenAppAdActivity"
+            android:name="com.lambda.common.ad.OpenAppAdActivity"
             android:excludeFromRecents="true"
             android:noHistory="true"
             android:theme="@style/Translucent" />
@@ -438,7 +438,7 @@
         </receiver>
 
         <provider
-            android:name="com.theme.lambda.launcher.utils.MyFileProvider"
+            android:name="com.lambda.common.utils.MyFileProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
             android:grantUriPermissions="true">

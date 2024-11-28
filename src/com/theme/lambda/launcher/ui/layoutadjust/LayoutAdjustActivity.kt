@@ -9,12 +9,12 @@ import com.android.launcher3.AdjustConfig
 import com.android.launcher3.LauncherAppState
 import com.android.launcher3.R
 import com.android.launcher3.databinding.ActivityLayoutAdjustBinding
-import com.theme.lambda.launcher.base.BaseActivity
+import com.lambda.common.base.BaseActivity
+import com.lambda.common.utils.gone
+import com.lambda.common.utils.marginStatusBarHeight
+import com.lambda.common.utils.visible
 import com.theme.lambda.launcher.ui.iconsetting.IconSettingActivity
-import com.theme.lambda.launcher.utils.StatusBarUtil
-import com.theme.lambda.launcher.utils.gone
-import com.theme.lambda.launcher.utils.marginStatusBarHeight
-import com.theme.lambda.launcher.utils.visible
+import com.lambda.common.utils.StatusBarUtil
 import com.theme.lambda.launcher.widget.pickview.ScrollPickerView
 import com.theme.lambda.launcher.widget.pickview.ScrollPickerView.OnSelectedListener
 
