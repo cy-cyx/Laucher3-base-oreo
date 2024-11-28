@@ -409,4 +409,17 @@
     <string name="windmill_up">Moulin à vent vers le haut</string>
     <string name="windmill_down">Moulin à vent vers le bas</string>
     <string name="effect">effet</string>
+    <string name="layout">Disposition</string>
+    <string name="text_home_screen">Écran d\'accueil</string>
+    <string name="icon_setting">Paramètres des icônes</string>
+    <string name="icon_setting_tip">Définir le style des icônes, la taille des étiquettes et plus</string>
+    <string name="icon_size">Taille de l\'icône</string>
+    <string name="app_drawer">Tiroir d\'applications</string>
+    <string name="folders">Dossiers</string>
+    <string name="label_size">Taille de l\'étiquette</string>
+    <string name="label_color">Couleur de l\'étiquette</string>
+    <string name="set_layout_tip">Personnalisez la disposition et les icônes selon vos besoins</string>
+    <string name="set_effect_tip">Effets de transition 3D disponibles</string>
+    <string name="choose_color">Choisir la couleur</string>
+    <string name="ok">OK</string>
 </resources>

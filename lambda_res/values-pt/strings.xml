@@ -409,4 +409,17 @@
     <string name="windmill_up">Moinho de vento para cima</string>
     <string name="windmill_down">Moinho de vento para baixo</string>
     <string name="effect">efeito</string>
+    <string name="layout">Layout</string>
+    <string name="text_home_screen">Tela inicial</string>
+    <string name="icon_setting">Configurações do ícone</string>
+    <string name="icon_setting_tip">Defina o estilo do ícone, o tamanho do rótulo e mais</string>
+    <string name="icon_size">Tamanho do ícone</string>
+    <string name="app_drawer">gaveta de aplicativos</string>
+    <string name="folders">Pastas</string>
+    <string name="label_size">Tamanho do rótulo</string>
+    <string name="label_color">Cor do rótulo</string>
+    <string name="set_layout_tip">Personalize o layout e os ícones conforme necessário</string>
+    <string name="set_effect_tip">Efeitos de transição 3D disponíveis</string>
+    <string name="choose_color">Escolha a cor</string>
+    <string name="ok">OK</string>
 </resources>

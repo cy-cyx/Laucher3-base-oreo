@@ -409,4 +409,17 @@
     <string name="windmill_up">Młyn wiatrakowy w górę</string>
     <string name="windmill_down">Młyn wiatrakowy w dół</string>
     <string name="effect">efekt</string>
+    <string name="layout">Układ</string>
+    <string name="text_home_screen">Ekran główny</string>
+    <string name="icon_setting">Ustawienia ikon</string>
+    <string name="icon_setting_tip">Ustaw styl ikon, rozmiar etykiety i inne</string>
+    <string name="icon_size">Rozmiar ikony</string>
+    <string name="app_drawer">Szuflada aplikacji</string>
+    <string name="folders">Foldery</string>
+    <string name="label_size">Rozmiar etykiety</string>
+    <string name="label_color">Kolor etykiety</string>
+    <string name="set_layout_tip">Dostosuj układ i ikony według własnych potrzeb</string>
+    <string name="set_effect_tip">Dostępne efekty przejść 3D</string>
+    <string name="choose_color">Wybierz kolor</string>
+    <string name="ok">OK</string>
 </resources>

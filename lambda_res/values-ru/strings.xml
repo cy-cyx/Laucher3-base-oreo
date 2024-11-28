@@ -409,4 +409,17 @@
     <string name="windmill_up">Ветряная мельница вверх</string>
     <string name="windmill_down">Ветряная мельница вниз</string>
     <string name="effect">эффект</string>
+    <string name="layout">Макет</string>
+    <string name="text_home_screen">Главный экран</string>
+    <string name="icon_setting">Настройки иконок</string>
+    <string name="icon_setting_tip">Настройте стиль иконок, размер метки и другие параметры</string>
+    <string name="icon_size">Размер иконки</string>
+    <string name="app_drawer">Ящик приложений</string>
+    <string name="folders">Папки</string>
+    <string name="label_size">Размер метки</string>
+    <string name="label_color">Цвет метки</string>
+    <string name="set_layout_tip">Настройте макет и иконки по своему усмотрению</string>
+    <string name="set_effect_tip">Доступны 3D эффекты переходов</string>
+    <string name="choose_color">Выберите цвет</string>
+    <string name="ok">ОК</string>
 </resources>
