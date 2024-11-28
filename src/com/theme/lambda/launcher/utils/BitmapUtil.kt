@@ -5,7 +5,7 @@ import android.graphics.BitmapFactory
 
 object BitmapUtil {
 
-    fun decode(path: String, reqWidth: Int = 1500, reqHeight: Int = 1500): Bitmap {
+    fun decode(path: String, reqWidth: Int = 1500, reqHeight: Int = 1500): Bitmap? {
         val options = BitmapFactory.Options()
         options.inJustDecodeBounds = true
         BitmapFactory.decodeFile(path, options)

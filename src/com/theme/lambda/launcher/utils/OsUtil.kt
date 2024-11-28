@@ -23,6 +23,7 @@ object OsUtil {
     fun getCurProcessName(context: Context): String? {
         val pid = Process.myPid()
         val activityManager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        if (activityManager.runningAppProcesses == null) return null
         for (appProcess in activityManager
             .runningAppProcesses) {
             if (appProcess.pid == pid) {

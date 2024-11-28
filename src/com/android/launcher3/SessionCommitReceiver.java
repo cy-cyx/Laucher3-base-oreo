@@ -67,6 +67,8 @@ public class SessionCommitReceiver extends BroadcastReceiver {
         SessionInfo info = intent.getParcelableExtra(PackageInstaller.EXTRA_SESSION);
         UserHandle user = intent.getParcelableExtra(Intent.EXTRA_USER);
 
+        if (info == null) return;
+
         if (TextUtils.isEmpty(info.getAppPackageName()) ||
                 info.getInstallReason() != PackageManager.INSTALL_REASON_USER) {
             return;
