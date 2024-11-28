@@ -12,6 +12,8 @@ import com.android.launcher3.databinding.FragmentNewsBinding
 import com.theme.lambda.launcher.base.BaseFragment
 import com.theme.lambda.launcher.ui.news.adpater.NewsAdapter
 import com.theme.lambda.launcher.utils.CommonUtil
+import com.theme.lambda.launcher.utils.gone
+import com.theme.lambda.launcher.utils.visible
 
 class NewsFragment : BaseFragment<FragmentNewsBinding>() {
 
@@ -51,6 +53,12 @@ class NewsFragment : BaseFragment<FragmentNewsBinding>() {
 
         viewModel.newsLiveData.observe(viewLifecycleOwner, Observer {
             newsAdapter.upData(it)
+
+            if (it.isEmpty()) {
+                viewBinding.emptyFl.visible()
+            } else {
+                viewBinding.emptyFl.gone()
+            }
         })
         viewModel.refreshFinishLiveData.observe(viewLifecycleOwner, Observer {
             viewBinding.swipeRefreshSrl.finishRefresh(500, true, false)
