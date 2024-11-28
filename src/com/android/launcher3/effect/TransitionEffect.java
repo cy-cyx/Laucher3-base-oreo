@@ -186,7 +186,7 @@ public class TransitionEffect {
         final Workspace workspace = mLauncher.getWorkspace();
         final int N = workspace.getChildCount();
         float scale = mLauncher.getCurState() == Launcher.State.WORKSPACE ? 1f : mOverviewModeShrinkFactor;
-        for (int i = 1; i < N; i++) {
+        for (int i = 0; i < N; i++) {
             View v = workspace.getPageAt(i);
             if (v != null) {
                 v.setPivotX(v.getMeasuredWidth() * 0.5f);
@@ -217,7 +217,7 @@ public class TransitionEffect {
     private void screenScrollByTransitionEffectStandard(int screenScroll) {
         int screenCenter = screenScroll + mWorkspace.getViewportWidth() / 2;
         final int N = mWorkspace.getChildCount();
-        for (int i = 0; i < N; i++) {
+        for (int i = 1; i < N; i++) {
             View v = mWorkspace.getPageAt(i);
             float scrollProgress = mWorkspace.getScrollProgress(screenCenter, v, i);
             if (mFadeInAdjacentScreens) {
