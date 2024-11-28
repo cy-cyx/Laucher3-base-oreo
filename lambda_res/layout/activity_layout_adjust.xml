@@ -87,8 +87,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/icon_setting_tip"
                             android:textColor="#aaaaaa"
-                            android:textSize="13dp"
-                            android:textStyle="bold" />
+                            android:textSize="13dp" />
                     </LinearLayout>
 
                     <ImageView
