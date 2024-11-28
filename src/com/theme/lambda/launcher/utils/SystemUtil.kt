@@ -64,7 +64,7 @@ object SystemUtil {
      *
      * @return  语言列表
      */
-    open fun getSystemLanguageList(): Array<Locale?>? {
+    fun getSystemLanguageList(): Array<Locale?>? {
         return Locale.getAvailableLocales()
     }
 
@@ -92,7 +92,7 @@ object SystemUtil {
      * @return  手机厂商
      */
     fun getDeviceBrand(): String? {
-        return Build.BRAND.toLowerCase()
+        return Build.BRAND
     }
 
 }

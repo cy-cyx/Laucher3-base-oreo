@@ -13,7 +13,7 @@ object LauncherUtil {
     var gotoSetting = false
 
     fun gotoSetLauncher(context: Context) {
-        if (SystemUtil.getDeviceBrand() == SystemUtil.PHONE_VIVO) {
+        if (SystemUtil.getDeviceBrand().equals(SystemUtil.PHONE_VIVO, true)) {
             VivoSettingActivity.start(context)
             return
         }

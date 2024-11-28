@@ -256,7 +256,9 @@ class ThemeManager {
             if (isPreviewMode) return
             if (LauncherUtil.isDefaultLauncher(it)) {
                 // 华为安卓8 会报设置线程没有内存权限
-                if ((SystemUtil.getDeviceBrand() == SystemUtil.PHONE_HUAWEI || SystemUtil.getDeviceBrand() == SystemUtil.PHONE_HONOR)
+                if ((SystemUtil.getDeviceBrand().equals(SystemUtil.PHONE_HUAWEI, true)
+                            || SystemUtil.getDeviceBrand().equals(SystemUtil.PHONE_HONOR, true) ||
+                            SystemUtil.getDeviceBrand().equals(SystemUtil.PHONE_NOVA, true))
                     && Build.VERSION.SDK_INT < Build.VERSION_CODES.P
                 ) {
                     return@let
