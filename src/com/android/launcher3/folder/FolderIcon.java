@@ -196,6 +196,7 @@ public class FolderIcon extends FrameLayout implements FolderListener {
         icon.setClipToPadding(false);
         icon.mFolderName = (BubbleTextView) icon.findViewById(R.id.folder_icon_name);
         icon.mFolderName.setTextSize(TypedValue.COMPLEX_UNIT_PX, Launcher.getLauncher(icon.getContext()).getDeviceProfile().folderChildTextSizePx * AdjustConfig.getHomeScreenTextSizePer());
+        icon.mFolderName.setTextColor(AdjustConfig.getHomeScreenTextColor());
         icon.mFolderName.setText(folderInfo.title);
         icon.mFolderName.setCompoundDrawablePadding(0);
         FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) icon.mFolderName.getLayoutParams();

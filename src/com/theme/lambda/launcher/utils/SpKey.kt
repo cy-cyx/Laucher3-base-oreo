@@ -56,4 +56,8 @@ object SpKey {
     const val keyHomeScreenTextSize = "keyHomeScreenTextSize"
     const val keyAppDrawerTextSize = "keyAppDrawerTextSize"
     const val keyFolderTextSize = "keyFolderTextSize"
+
+    const val keyHomeScreenTextColor = "keyHomeScreenTextColor"
+    const val keyAppDrawerTextColor = "keyAppDrawerTextColor"
+    const val keyFolderTextColor = "keyFolderTextColor"
 }

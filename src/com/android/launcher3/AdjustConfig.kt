@@ -1,5 +1,6 @@
 package com.android.launcher3
 
+import android.graphics.Color
 import com.android.launcher3.effect.TransitionEffect
 import com.theme.lambda.launcher.utils.CommonUtil
 import com.theme.lambda.launcher.utils.SpKey
@@ -169,5 +170,39 @@ object AdjustConfig {
     @JvmStatic
     fun getFolderTextSizePer(): Float {
         return SpKey.keyFolderTextSize.getSpFloat(1f)
+    }
+
+    // icon color
+    @JvmStatic
+    fun getHomeScreenTextColor(): Int {
+        return SpKey.keyHomeScreenTextColor.getSpInt(Color.WHITE)
+    }
+
+    @JvmStatic
+    fun setHomeScreenTextColor(color: Int) {
+        SpKey.keyHomeScreenTextColor.putSpInt(color)
+        needReLoadLauncher = true
+    }
+
+    @JvmStatic
+    fun getAppDrawerTextColor(): Int {
+        return SpKey.keyAppDrawerTextColor.getSpInt(Color.WHITE)
+    }
+
+    @JvmStatic
+    fun setAppDrawerTextColor(color: Int) {
+        SpKey.keyAppDrawerTextColor.putSpInt(color)
+        needRebuildLauncher = true
+    }
+
+    @JvmStatic
+    fun getFolderTextColor(): Int {
+        return SpKey.keyFolderTextColor.getSpInt(Color.GRAY)
+    }
+
+    @JvmStatic
+    fun setFolderTextColor(color: Int) {
+        SpKey.keyFolderTextColor.putSpInt(color)
+        needReLoadLauncher = true
     }
 }

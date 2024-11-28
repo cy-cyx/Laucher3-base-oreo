@@ -28,7 +28,7 @@ public class BitmapUtil {
             out = new FileOutputStream(file);
             drawableToBitmap(drawable).compress(format, 100, out);
             out.close();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

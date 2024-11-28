@@ -161,13 +161,14 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver, 
         if (display == DISPLAY_WORKSPACE) {
             setTextSize(TypedValue.COMPLEX_UNIT_PX, grid.iconTextSizePx);
         } else if (display == DISPLAY_ALL_APPS) {
-            setTextSize(TypedValue.COMPLEX_UNIT_PX, grid.allAppsIconTextSizePx  * AdjustConfig.getAppDrawerTextSizePer());
+            setTextSize(TypedValue.COMPLEX_UNIT_PX, grid.allAppsIconTextSizePx * AdjustConfig.getAppDrawerTextSizePer());
             setCompoundDrawablePadding(grid.allAppsIconDrawablePaddingPx);
             defaultIconSize = (int) (grid.allAppsIconSizePx * AdjustConfig.getAppDrawerIconSizePer());
         } else if (display == DISPLAY_FOLDER) {
             setTextSize(TypedValue.COMPLEX_UNIT_PX, grid.folderChildTextSizePx * AdjustConfig.getFolderTextSizePer());
             setCompoundDrawablePadding(grid.folderChildDrawablePaddingPx);
             defaultIconSize = (int) (grid.folderChildIconSizePx * AdjustConfig.getFolderIconSizePer());
+            setTextColor(AdjustConfig.getFolderTextColor());
         }
         mCenterVertically = a.getBoolean(R.styleable.BubbleTextView_centerVertically, false);
 
@@ -194,7 +195,7 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver, 
         setAccessibilityDelegate(mLauncher.getAccessibilityDelegate());
     }
 
-    public void setIconSize(int iconSize){
+    public void setIconSize(int iconSize) {
         mIconSize = iconSize;
     }
 

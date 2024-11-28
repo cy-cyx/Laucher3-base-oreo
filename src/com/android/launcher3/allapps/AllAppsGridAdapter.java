@@ -36,6 +36,7 @@ import androidx.core.view.accessibility.AccessibilityRecordCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.launcher3.AdjustConfig;
 import com.android.launcher3.discovery.AppDiscoveryAppInfo;
 import com.android.launcher3.AppInfo;
 import com.android.launcher3.BubbleTextView;
@@ -340,7 +341,7 @@ public class AllAppsGridAdapter extends RecyclerView.Adapter<AllAppsGridAdapter.
                 BubbleTextView icon = (BubbleTextView) holder.itemView;
                 icon.applyFromApplicationInfo(info);
                 icon.setAccessibilityDelegate(mLauncher.getAccessibilityDelegate());
-                icon.setTextColor(Color.WHITE);
+                icon.setTextColor(AdjustConfig.getAppDrawerTextColor());
                 break;
             case VIEW_TYPE_DISCOVERY_ITEM:
                 AppDiscoveryAppInfo appDiscoveryAppInfo = (AppDiscoveryAppInfo)

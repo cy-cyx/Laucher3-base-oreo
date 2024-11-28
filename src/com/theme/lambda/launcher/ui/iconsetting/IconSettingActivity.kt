@@ -9,6 +9,8 @@ import com.android.launcher3.databinding.ActivityIconSettingBinding
 import com.theme.lambda.launcher.base.BaseActivity
 import com.theme.lambda.launcher.utils.StatusBarUtil
 import com.theme.lambda.launcher.utils.marginStatusBarHeight
+import com.theme.lambda.launcher.utils.noDoubleClick
+import com.theme.lambda.launcher.widget.dialog.ColorSelectDialog
 
 class IconSettingActivity : BaseActivity<ActivityIconSettingBinding>() {
 
@@ -61,5 +63,37 @@ class IconSettingActivity : BaseActivity<ActivityIconSettingBinding>() {
         viewBinding.homeScreenTextSizePv.setProgress(AdjustConfig.percentToProgress(AdjustConfig.getHomeScreenTextSizePer()))
         viewBinding.appDrawerTextSizePv.setProgress(AdjustConfig.percentToProgress(AdjustConfig.getAppDrawerTextSizePer()))
         viewBinding.folderTextSizePv.setProgress(AdjustConfig.percentToProgress(AdjustConfig.getFolderTextSizePer()))
+
+        viewBinding.homeScreenColorCv.setColor(AdjustConfig.getHomeScreenTextColor())
+        viewBinding.appDrawerColorCv.setColor(AdjustConfig.getAppDrawerTextColor())
+        viewBinding.folderColorCv.setColor(AdjustConfig.getFolderTextColor())
+
+        viewBinding.homescreenColorFl.noDoubleClick {
+            ColorSelectDialog(this).apply {
+                setInitColor(AdjustConfig.getHomeScreenTextColor())
+                colorSelectCallback = {
+                    viewBinding.homeScreenColorCv.setColor(it)
+                    AdjustConfig.setHomeScreenTextColor(it)
+                }
+            }.show()
+        }
+        viewBinding.appDrawerColorFl.noDoubleClick {
+            ColorSelectDialog(this).apply {
+                setInitColor(AdjustConfig.getAppDrawerTextColor())
+                colorSelectCallback = {
+                    viewBinding.appDrawerColorCv.setColor(it)
+                    AdjustConfig.setAppDrawerTextColor(it)
+                }
+            }.show()
+        }
+        viewBinding.foldersColorFl.noDoubleClick {
+            ColorSelectDialog(this).apply {
+                setInitColor(AdjustConfig.getFolderTextColor())
+                colorSelectCallback = {
+                    viewBinding.folderColorCv.setColor(it)
+                    AdjustConfig.setFolderTextColor(it)
+                }
+            }.show()
+        }
     }
 }

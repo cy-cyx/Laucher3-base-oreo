@@ -1649,6 +1649,7 @@ public class Launcher extends BaseActivity
         if (info.container == Favorites.CONTAINER_DESKTOP || info.container == -1) {
             favorite.setIconSize((int) (Launcher.getLauncher(parent.getContext()).getDeviceProfile().iconSizePx * AdjustConfig.getHomeScreenIconSizePer()));
             favorite.setTextSize(TypedValue.COMPLEX_UNIT_PX, Launcher.getLauncher(parent.getContext()).getDeviceProfile().folderChildTextSizePx * AdjustConfig.getHomeScreenTextSizePer());
+            favorite.setTextColor(AdjustConfig.getHomeScreenTextColor());
         }
         favorite.applyFromShortcutInfo(info);
         favorite.setCompoundDrawablePadding(mDeviceProfile.iconDrawablePaddingPx);
