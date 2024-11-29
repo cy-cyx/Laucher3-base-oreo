@@ -35,7 +35,7 @@ class NetStateChangeReceiver : BroadcastReceiver() {
         } else {
             if (curNetWorkType == NetworkType.NETWORK_NO) {
                 // 网络恢复
-                AdUtil.reLoadIfNeed()
+                AdUtil.reloadIfNeed()
             }
         }
         curNetWorkType = networkType

@@ -325,9 +325,9 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
         AdName.icon_unlock
     )
 
-    private val priorityNetIds = arrayListOf<String>()
+    private val priorityNatIds = arrayListOf<String>()
 
-    private val netIds = listOf(
+    private val natIds = listOf(
         AdName.download_nat
     )
 
@@ -343,20 +343,19 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
         val loadIntAndRawIds = arrayListOf<String>()
         if (priority) {
             loadIntAndRawIds.addAll(priorityLoadIntAndRawIds)
-            // 不能用Laucher的context初始化，不然跳转会有问题
+            // 不能用Launcher的context初始化，不然跳转会有问题
             if (activity !is Launcher) {
                 loadIntAndRawIds.add(AdName.interleaving)
             }
-
         } else {
             loadIntAndRawIds.addAll(intAndRawIds)
         }
 
-        val loadNetIds = arrayListOf<String>()
+        val loadNatIds = arrayListOf<String>()
         if (priority) {
-            loadNetIds.addAll(priorityNetIds)
+            loadNatIds.addAll(priorityNatIds)
         } else {
-            loadNetIds.addAll(netIds)
+            loadNatIds.addAll(natIds)
         }
 
         // 全屏类
@@ -382,7 +381,7 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
             LogUtil.d("Launcher", "loadInterstitial:${i} ------>>> ${Thread.currentThread().id}")
         }
         // native
-        for (i in loadNetIds) {
+        for (i in loadNatIds) {
             if (lAdMultipleAdapters[i] != null) {
                 continue
             }
@@ -462,12 +461,12 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
     }
 
     // 该方法用于网络重连时调，其实sdk里面加载失败也会超时重试，如果该方法仅仅只是加快重试的时机而已
-    fun reLoadIfNeed() {
+    fun reloadIfNeed() {
         LogUtil.d("Launcher", "reLoadIfNeed !! ------>>> ${Thread.currentThread().id}")
         for (id in intAndRawIds) {
             lAdMultipleAdapters[id]?.loadInterstitial(true)
         }
-        for (id in netIds) {
+        for (id in natIds) {
             lAdMultipleAdapters[id]?.loadNative()
         }
     }
@@ -508,14 +507,12 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
             callback?.onNoReady()
             return
         }
-        val multiAdCallback = callback
-        if (multiAdCallback != null) {
-            lastCallback = multiAdCallback
+        if (callback != null) {
+            lastCallback = callback
         }
         getADAdapter(scenes)?.showInterstitial()
         return
     }
-
 
     fun populateNativeAdViewMax1(context: Context, layoutId: Int): MaxNativeAdView {
         val binding = LayoutNativeAdMax1Binding.bind(
