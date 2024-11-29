@@ -26,8 +26,8 @@ android {
     defaultConfig {
         minSdkVersion 24
         targetSdkVersion 34
-        versionCode 41
-        versionName "0.4.1"
+        versionCode 42
+        versionName "0.4.2"
         applicationId 'com.theme.lambda.launcher'
         testApplicationId 'com.theme.lambda.launcher.tests'
 
@@ -185,6 +185,9 @@ dependencies {
     implementation 'com.applovin.mediation:yandex-adapter:7.6.0.1'
 
     implementation 'com.google.android.gms:play-services-ads:23.5.0'
+    implementation 'com.google.ads.mediation:facebook:6.18.0.0'
+    implementation 'com.google.ads.mediation:pangle:6.3.0.4.0'
+    implementation 'com.google.ads.mediation:applovin:13.0.1.0'
     implementation 'com.google.android.ump:user-messaging-platform:3.1.0'
 
     implementation 'com.bigossp:bigo-ads:4.9.1'

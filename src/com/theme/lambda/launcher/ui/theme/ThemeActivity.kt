@@ -17,7 +17,6 @@ import com.lambda.remoteconfig.LambdaRemoteConfig
 import com.theme.lambda.launcher.Constants
 import com.theme.lambda.launcher.ad.AdName
 import com.theme.lambda.launcher.ad.AdUtil
-import com.theme.lambda.launcher.ad.view.ADBanner
 import com.theme.lambda.launcher.base.BaseActivity
 import com.theme.lambda.launcher.statistics.EventName
 import com.theme.lambda.launcher.statistics.EventUtil
@@ -36,7 +35,6 @@ import com.theme.lambda.launcher.vip.VipManager
 import com.theme.lambda.launcher.widget.adapter.LauncherFragmentAdapter
 import com.theme.lambda.launcher.widget.dialog.ApplyLauncherPermissionDialog
 import com.theme.lambda.launcher.widget.dialog.SetDefaultFailedDialog
-import com.theme.lambda.launcher.widget.dialog.StoreRatingsDialog
 import dalvik.system.ZipPathValidator
 import java.lang.ref.WeakReference
 
