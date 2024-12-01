@@ -1445,7 +1445,7 @@ public class LauncherModel extends BroadcastReceiver
                                         info.contentDescription = "";
                                     } else if (Constants.sAllppAction.equals(intent.getAction())) {
                                         info = new ShortcutInfo();
-                                        info.iconBitmap = BitmapFactory.decodeResource(Utils.getApp().getResources(), R.mipmap.all_apps);
+                                        info.iconBitmap = BitmapFactory.decodeResource(Utils.getApp().getResources(), R.drawable.all_apps);
                                     } else if (c.restoreFlag != 0) {
                                         // Already verified above that user is same as default user
                                         info = c.getRestoredItemInfo(intent);

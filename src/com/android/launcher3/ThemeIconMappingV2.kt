@@ -225,7 +225,7 @@ object ThemeIconMappingV2 {
         } else if (pm == Constants.sAllppAction) {
             return BitmapFactory.decodeResource(
                 CommonUtil.appContext!!.resources,
-                R.mipmap.all_apps
+                R.drawable.all_apps
             )
         } else if (pm.contains(RecommendAppManager.actionHost)) {
             val temp = BitmapFactory.decodeFile(url)

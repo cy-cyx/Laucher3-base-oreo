@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:drawableStart="@mipmap/search"
+        android:drawableStart="@drawable/ic_search3"
         android:drawablePadding="4.33dp"
         android:gravity="center_vertical"
         android:hint="@string/hint_search"
