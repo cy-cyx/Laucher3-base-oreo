@@ -9,6 +9,7 @@ import android.content.res.TypedArray
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.util.TypedValue
+import com.lambda.common.utils.utilcode.util.Utils
 import java.lang.reflect.Field
 import java.lang.reflect.Method
 import java.util.Locale
@@ -107,8 +108,13 @@ object CommonUtil {
             val intent = Intent(Intent.ACTION_VIEW, uri)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             context.startActivity(intent)
-        }catch (e:Exception){
+        } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+
+    fun getDrawableIdByName(name: String): Int {
+        return appContext!!.getResources()
+            .getIdentifier(name, "drawable", Utils.getApp().getPackageName());
     }
 }

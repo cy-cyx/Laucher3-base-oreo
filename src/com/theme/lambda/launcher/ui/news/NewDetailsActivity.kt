@@ -34,6 +34,15 @@ class NewDetailsActivity : BaseActivity<ActivityNewDetailBinding>() {
                 }
             })
         }
+
+        fun start(context: Context, new: String) {
+            context.startActivity(Intent(context, NewDetailsActivity::class.java).apply {
+                putExtra(sKeyNewDetail, data)
+                if (context is Launcher) {
+                    addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                }
+            })
+        }
     }
 
     override fun initViewBinding(layoutInflater: LayoutInflater): ActivityNewDetailBinding {

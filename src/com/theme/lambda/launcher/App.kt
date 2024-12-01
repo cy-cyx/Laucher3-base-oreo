@@ -7,11 +7,11 @@ import android.os.Looper
 import android.text.TextUtils
 import android.util.Log
 import android.webkit.WebView
+import androidx.fragment.app.Fragment
 import com.android.launcher3.BuildConfig
 import com.android.launcher3.CycleTimer
 import com.lambda.common.Constants
 import com.lambda.common.http.Global
-import com.lambdaweather.LambdaWeather
 import com.lambda.common.ad.AdUtil
 import com.theme.lambda.launcher.appinfo.AppInfoCache
 import com.theme.lambda.launcher.appwidget.utils.WeatherManager
@@ -26,7 +26,11 @@ import com.lambda.common.utils.FirebaseConfigUtil
 import com.lambda.common.utils.utilcode.util.ActivityUtils
 import com.theme.lambda.launcher.utils.OsUtil
 import com.lambda.common.vip.VipManager
+import com.lambda.weather.LambdaWeather
 import com.theme.lambda.launcher.recall.RecallManager
+import com.theme.lambda.launcher.ui.news.NewDetailsActivity
+import com.theme.lambda.launcher.ui.news.NewsFragment
+import com.theme.lambda.launcher.utils.WeatherTimerUtils
 
 class App : Application() {
 
@@ -48,7 +52,7 @@ class App : Application() {
             if (defaultProcess) {
                 Global.packageNamesSuffix = BuildConfig.Suffix
                 LogUtil.init(BuildConfig.isDebug)
-                LambdaWeather.init(this, Constants.BASE_URL)
+                initWeather()
                 Log.d(TAG, "init 1 : ${System.currentTimeMillis() - start}")
                 FirebaseAnalyticsUtil.init(this)
                 Log.d(TAG, "init 2 : ${System.currentTimeMillis() - start}")
@@ -79,6 +83,26 @@ class App : Application() {
         }
 
         Log.d(TAG, "init time : ${System.currentTimeMillis() - start}")
+    }
+
+
+    private fun initWeather() {
+        LambdaWeather.init(this)
+        LambdaWeather.lambdaWeatherCallback = object : LambdaWeather.LambdaWeatherCallback {
+            override fun callUpdateAboutWeather() {
+                WeatherTimerUtils.getIpLocation()
+                WeatherManager.init()
+            }
+
+            override fun getNewFragment(): Fragment {
+                return NewsFragment()
+            }
+
+            override fun openNewDetailActivity(context: Context, new: String) {
+                NewDetailsActivity.start(context, new)
+            }
+
+        }
     }
 
     override fun attachBaseContext(base: Context?) {

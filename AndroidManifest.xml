@@ -287,19 +287,19 @@
             android:excludeFromRecents="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.theme.lambda.launcher.ui.weather.ui.WeatherActivity"
+            android:name="com.lambda.weather.ui.WeatherActivity"
             android:excludeFromRecents="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.theme.lambda.launcher.ui.weather.ui.WeatherSettingsActivity"
+            android:name="com.lambda.weather.ui.WeatherSettingsActivity"
             android:excludeFromRecents="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.theme.lambda.launcher.ui.weather.ui.WeatherLocationActivity"
+            android:name="com.lambda.weather.ui.WeatherLocationActivity"
             android:excludeFromRecents="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.theme.lambda.launcher.ui.weather.ui.TemperatureUnitActivity"
+            android:name="com.lambda.weather.ui.TemperatureUnitActivity"
             android:excludeFromRecents="true"
             android:screenOrientation="portrait" />
         <activity

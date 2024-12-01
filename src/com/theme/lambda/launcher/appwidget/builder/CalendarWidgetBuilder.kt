@@ -8,7 +8,7 @@ import com.theme.lambda.launcher.appwidget.utils.BitmapDrawUtil
 import com.theme.lambda.launcher.data.model.WidgetsBean
 import com.lambda.common.utils.CommonUtil
 import com.lambda.common.utils.GlideUtil
-import com.theme.lambda.launcher.utils.TimeUtil
+import com.lambda.common.utils.TimeUtil
 
 class CalendarWidgetBuilder : BaseBuilder {
     override suspend fun buildSmallWidget(

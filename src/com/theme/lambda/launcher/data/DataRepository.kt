@@ -14,7 +14,8 @@ import com.theme.lambda.launcher.data.model.ResResult
 import com.theme.lambda.launcher.data.model.ThemeRes
 import com.theme.lambda.launcher.data.model.Weather
 import com.lambda.common.utils.CommonUtil
-import com.theme.lambda.launcher.utils.TimeUtil
+import com.lambda.common.utils.TimeUtil
+import com.lambda.common.utils.utilcode.util.ResourceUtils
 import java.util.Locale
 
 object DataRepository {

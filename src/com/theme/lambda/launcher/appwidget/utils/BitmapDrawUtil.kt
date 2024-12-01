@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.android.launcher3.databinding.ItemCalendarBinding
 import com.lambda.common.utils.CommonUtil
-import com.theme.lambda.launcher.utils.TimeUtil
+import com.lambda.common.utils.TimeUtil
 
 
 object BitmapDrawUtil {

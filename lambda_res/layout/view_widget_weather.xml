@@ -52,7 +52,7 @@
                     android:id="@+id/tv_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@mipmap/location"
+                    android:drawableStart="@drawable/location"
                     android:drawablePadding="4dp"
                     android:ellipsize="end"
                     android:gravity="center_vertical"
@@ -85,7 +85,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="17dp"
                 android:adjustViewBounds="true"
-                android:src="@mipmap/no_weather" />
+                android:src="@drawable/no_weather" />
 
             <TextView
                 android:id="@+id/tv_temp"
@@ -106,7 +106,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|end"
                 android:layout_marginEnd="15dp"
-                android:src="@mipmap/refresh" />
+                android:src="@drawable/refresh" />
 
         </LinearLayout>
     </LinearLayout>

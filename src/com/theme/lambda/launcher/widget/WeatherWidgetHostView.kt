@@ -17,7 +17,7 @@ import com.android.launcher3.R
 import com.android.launcher3.ThemeManager
 import com.lambda.common.statistics.EventName
 import com.lambda.common.statistics.EventUtil
-import com.theme.lambda.launcher.ui.weather.ui.WeatherActivity
+import com.lambda.weather.ui.WeatherActivity
 import com.theme.lambda.launcher.utils.WeatherTimerUtils
 
 class WeatherWidgetHostView constructor(private val context: Context) : AppWidgetHostView(context) {
@@ -80,7 +80,7 @@ class WeatherWidgetHostView constructor(private val context: Context) : AppWidge
             }
             v.findViewById<LinearLayout>(R.id.ll2).setOnClickListener {
                 if (ThemeManager.getThemeManagerIfExist()?.isPreviewMode == true) return@setOnClickListener
-                WeatherActivity.start(parent.context)
+                com.lambda.weather.ui.WeatherActivity.start(parent.context)
                 EventUtil.logEvent(EventName.LWeather, Bundle().apply {
                     putString("type", "click")
                 })

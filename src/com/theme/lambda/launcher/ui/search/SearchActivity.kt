@@ -23,12 +23,13 @@ import com.lambda.common.utils.utilcode.util.GsonUtils
 import com.lambda.common.utils.utilcode.util.Utils
 import com.lambdaweather.data.model.NewsModel
 import com.lambdaweather.ui.news.NewsListActivity
-import com.lambdaweather.view.WeatherNewBanner
-import com.lambdaweather.view.WeatherNewBanner.OnRvBannerClickListener
+import com.lambda.weather.view.WeatherNewBanner
+import com.lambda.weather.view.WeatherNewBanner.OnRvBannerClickListener
 import com.lambda.common.ad.AdName
 import com.lambda.common.base.BaseActivity
 import com.lambda.common.statistics.EventName
 import com.lambda.common.statistics.EventUtil
+import com.lambda.common.utils.GsonUtil
 import com.theme.lambda.launcher.ui.news.NewDetailsActivity
 import com.theme.lambda.launcher.ui.search.adapter.FileAdapter
 import com.theme.lambda.launcher.ui.search.adapter.ImageAdapter
@@ -332,7 +333,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         }
         viewBinding.rvBanner.setOnRvBannerClickListener(object : OnRvBannerClickListener {
             override fun onClick(date: NewsModel.NewsDTO) {
-                NewDetailsActivity.start(this@SearchActivity, date.toNews())
+                NewDetailsActivity.start(this@SearchActivity, GsonUtil.gson.toJson(date))
             }
         })
 
@@ -341,7 +342,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             adapter = yourMayLikeAdapter
         }
 
-        viewBinding.rvBanner.from = WeatherNewBanner.fromSearch
+        viewBinding.rvBanner.from = com.lambda.weather.view.WeatherNewBanner.fromSearch
 
         viewBinding.mrecBanner.scenesName = AdName.search_mrec
         viewBinding.mrecBanner.loadAd()

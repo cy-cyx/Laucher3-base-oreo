@@ -16,7 +16,7 @@ import com.theme.lambda.launcher.utils.DisplayUtil
 import com.lambda.common.utils.GlideUtil
 import com.theme.lambda.launcher.utils.RomUtil
 import com.theme.lambda.launcher.utils.SystemIntentUtil
-import com.theme.lambda.launcher.utils.TimeUtil
+import com.lambda.common.utils.TimeUtil
 import com.theme.lambda.launcher.utils.toBatteryChargingKey
 import com.theme.lambda.launcher.utils.toBatteryChargingSrc
 import com.theme.lambda.launcher.utils.toRomKey
