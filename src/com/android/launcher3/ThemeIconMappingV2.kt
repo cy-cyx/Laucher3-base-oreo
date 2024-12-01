@@ -227,6 +227,11 @@ object ThemeIconMappingV2 {
                 CommonUtil.appContext!!.resources,
                 R.drawable.all_apps
             )
+        } else if (pm == InnerAppManager.InnerNewsAction) {
+            return BitmapFactory.decodeResource(
+                CommonUtil.appContext!!.resources,
+                R.drawable.ic_launcher_news
+            )
         } else if (pm.contains(RecommendAppManager.actionHost)) {
             val temp = BitmapFactory.decodeFile(url)
             // 配置的图片需要强制控制一下宽高

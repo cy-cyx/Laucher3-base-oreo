@@ -60,4 +60,6 @@ object SpKey {
     const val keyHomeScreenTextColor = "keyHomeScreenTextColor"
     const val keyAppDrawerTextColor = "keyAppDrawerTextColor"
     const val keyFolderTextColor = "keyFolderTextColor"
+
+    const val keyDefaultNewInstall = "keyDefaultNewInstall"
 }

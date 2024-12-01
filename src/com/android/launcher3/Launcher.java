@@ -2546,6 +2546,10 @@ public class Launcher extends BaseActivity
                 RecommendAppManager.clickRecommendApp((AppInfo) tag);
                 return;
             }
+            if (InnerAppManager.isInnerApp((AppInfo) tag)) {
+                InnerAppManager.clickInnerApp(this, (AppInfo) tag);
+                return;
+            }
             startAppShortcutOrInfoActivity(v);
         } else if (tag instanceof LauncherAppWidgetInfo) {
             if (v instanceof PendingAppWidgetHostView) {
@@ -2675,6 +2679,10 @@ public class Launcher extends BaseActivity
 
         if (RecommendAppManager.isRecommendApp(shortcut)) {
             RecommendAppManager.clickRecommendApp(shortcut);
+            return;
+        }
+        if (InnerAppManager.isInnerApp(shortcut)) {
+            InnerAppManager.clickInnerApp(this, shortcut);
             return;
         }
 

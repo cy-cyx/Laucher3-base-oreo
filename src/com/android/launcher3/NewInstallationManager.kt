@@ -4,6 +4,9 @@ import com.google.gson.reflect.TypeToken
 import com.lambda.common.utils.GsonUtil
 import com.lambda.common.utils.SpKey
 import com.lambda.common.utils.SpUtil
+import com.lambda.common.utils.getSpBool
+import com.lambda.common.utils.putSpBool
+import com.lambda.common.utils.putSpString
 import java.lang.ref.WeakReference
 
 object NewInstallationManager {
@@ -17,11 +20,21 @@ object NewInstallationManager {
             val typeToken = object : TypeToken<List<String>>() {}
             result.addAll(GsonUtil.gson.fromJson(appListString, typeToken).toMutableList())
         }
+        // 添加一些默认的(如内置引用)
+        if (!SpKey.keyDefaultNewInstall.getSpBool(false)) {
+            SpKey.keyDefaultNewInstall.putSpBool(true)
+
+            result.add(InnerAppManager.InnerNewsAction)
+
+            SpKey.keyNewInstallAppList.putSpString(GsonUtil.gson.toJson(result))
+        }
+
         result
     }
 
+
     fun addNewInstallAppPackName(appPackName: String) {
-        if (!newInstallAppList.contains(appPackName)){
+        if (!newInstallAppList.contains(appPackName)) {
             newInstallAppList.add(appPackName)
             SpUtil.putString(SpKey.keyNewInstallAppList, GsonUtil.gson.toJson(newInstallAppList))
         }

@@ -114,4 +114,5 @@ dependencies {
     kapt "androidx.room:room-compiler:2.6.1"
     implementation project(':common')
     implementation project(':weather')
+    implementation project(':news')
 }

@@ -82,6 +82,7 @@ import com.android.launcher3.util.Preconditions;
 import com.android.launcher3.util.Provider;
 import com.android.launcher3.util.Thunk;
 import com.android.launcher3.util.ViewOnDrawExecutor;
+import com.lambda.common.utils.CommonUtil;
 import com.lambda.common.utils.utilcode.util.Utils;
 import com.lambda.common.Constants;
 import com.lambda.common.utils.SpKey;
@@ -875,7 +876,7 @@ public class LauncherModel extends BroadcastReceiver
          * 思路：
          * (1)icon 当小布局往大布局 变化时不处理 大布局往小布局 变化时 多出来的往后排
          * (2)widget 当小布局往大布局 变化时不处理（会出现显示不完整的问题） 大布局往小布局 变化 需要判断整个是否够放 不然就到最后直接开一行放置
-         *
+         * <p>
          * 特殊某个布局可能需要处理和时间天气控件抢占的问题
          */
         private void organizeTheDatabase() {
@@ -1351,7 +1352,8 @@ public class LauncherModel extends BroadcastReceiver
                                     boolean validTarget = TextUtils.isEmpty(targetPkg) ||
                                             launcherApps.isPackageEnabledForProfile(targetPkg, c.user) ||
                                             Constants.sAllppAction.equals(intent.getAction()) ||
-                                            cn.getPackageName().contains(RecommendAppManager.getActionHost());
+                                            cn.getPackageName().contains(RecommendAppManager.getActionHost()) ||
+                                            cn.getPackageName().contains(InnerAppManager.getActionHost());
 
                                     if (cn != null && validTarget) {
                                         // If the apk is present and the shortcut points to a specific
@@ -1360,6 +1362,7 @@ public class LauncherModel extends BroadcastReceiver
                                         // If the component is already present
                                         if (Constants.sAllppAction.equals(intent.getAction()) ||
                                                 cn.getPackageName().contains(RecommendAppManager.getActionHost()) ||
+                                                cn.getPackageName().contains(InnerAppManager.getActionHost()) ||
                                                 launcherApps.isActivityEnabledForProfile(cn, c.user)) {
                                             // no special handling necessary for this item
                                             c.markRestored();
@@ -1440,8 +1443,17 @@ public class LauncherModel extends BroadcastReceiver
                                         info = new ShortcutInfo();
                                         Intent tempIntent = new Intent(cn.getPackageName());
                                         tempIntent.setComponent(cn);
+                                        info.intent = tempIntent;
                                         info.iconBitmap = ThemeIconMappingV2.getIconBitmap(cn.getPackageName(), cn.getClassName());
                                         info.title = c.getTitle();
+                                        info.contentDescription = "";
+                                    }else if (cn.getPackageName().equals(InnerAppManager.getInnerNewsAction())){
+                                        info = new ShortcutInfo();
+                                        Intent tempIntent = new Intent(cn.getPackageName());
+                                        tempIntent.setComponent(cn);
+                                        info.intent = tempIntent;
+                                        info.iconBitmap =  BitmapFactory.decodeResource(Utils.getApp().getResources(), R.drawable.ic_launcher_news);
+                                        info.title = CommonUtil.getAppContext().getString(R.string.news);
                                         info.contentDescription = "";
                                     } else if (Constants.sAllppAction.equals(intent.getAction())) {
                                         info = new ShortcutInfo();
@@ -2185,6 +2197,8 @@ public class LauncherModel extends BroadcastReceiver
 
             // 添加推荐
             RecommendAppManager.addInfoAllAppsList(mBgAllAppsList);
+            // 添加内置应用
+            InnerAppManager.addToAllAppsList(mBgAllAppsList);
 
             // Huh? Shouldn't this be inside the Runnable below?
             final ArrayList<AppInfo> added = mBgAllAppsList.added;
