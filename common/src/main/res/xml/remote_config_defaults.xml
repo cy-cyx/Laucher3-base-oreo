@@ -10,7 +10,7 @@
             "strategy": 1,
             "params": [
             {
-            "adid": "ca-app-pub-3912577259305392/8394207408",
+            "adid": "ca-app-pub-3912577259305392/4177105690",
             "order": 0,
             "per": 0,
             "plat": 1,
@@ -18,26 +18,10 @@
             "ecpm": 0
             },
             {
-            "adid": "ca-app-pub-3912577259305392/9632732492",
+            "adid": "ca-app-pub-3912577259305392/2864024020",
             "order": 0,
             "per": 0,
             "plat": 1,
-            "type": 5,
-            "ecpm": 0
-            },
-            {
-            "adid": "28e105b9ded57f54",
-            "order": 0,
-            "per": 0,
-            "plat": 2,
-            "type": 5,
-            "ecpm": 0
-            },
-            {
-            "adid": "e9fa20bc78283ef3",
-            "order": 0,
-            "per": 0,
-            "plat": 2,
             "type": 5,
             "ecpm": 0
             }
@@ -48,7 +32,7 @@
             "strategy": 1,
             "params": [
             {
-            "adid": "ca-app-pub-3912577259305392/7836638358",
+            "adid": "ca-app-pub-3912577259305392/7818363037",
             "order": 0,
             "per": 0,
             "plat": 1,
@@ -56,7 +40,7 @@
             "ecpm": 0
             },
             {
-            "adid": "ca-app-pub-3912577259305392/5790797623",
+            "adid": "ca-app-pub-3912577259305392/1580257740",
             "order": 0,
             "per": 0,
             "plat": 1,
@@ -64,18 +48,10 @@
             "ecpm": 0
             },
             {
-            "adid": "6e9856a238f27ebc",
+            "adid": "ca-app-pub-3912577259305392/3985534004",
             "order": 0,
             "per": 0,
-            "plat": 2,
-            "type": 4,
-            "ecpm": 0
-            },
-            {
-            "adid": "3db6560c4b1d5bb6",
-            "order": 0,
-            "per": 0,
-            "plat": 2,
+            "plat": 1,
             "type": 4,
             "ecpm": 0
             }
@@ -86,7 +62,7 @@
             "strategy": 1,
             "params": [
             {
-            "adid": "ca-app-pub-3912577259305392/4319231022",
+            "adid": "ca-app-pub-3912577259305392/3879118024",
             "order": 0,
             "per": 0,
             "plat": 1,
@@ -94,19 +70,11 @@
             "ecpm": 0
             },
             {
-            "adid": "ca-app-pub-3912577259305392/8702163317",
+            "adid": "ca-app-pub-3912577259305392/3934958348",
             "order": 0,
             "per": 0,
             "plat": 1,
             "type": 6,
-            "ecpm": 0
-            },
-            {
-            "adid": "43d1faae53ed9d52",
-            "order": 0,
-            "per": 0,
-            "plat": 2,
-            "type": 3,
             "ecpm": 0
             }
             ]
@@ -116,7 +84,7 @@
             "strategy": 2,
             "params": [
             {
-            "adid": "ca-app-pub-3912577259305392/3624562654",
+            "adid": "ca-app-pub-3912577259305392/7954094406",
             "order": 0,
             "per": 0,
             "plat": 1,
@@ -124,10 +92,10 @@
             "ecpm": 0
             },
             {
-            "adid": "6c3302fceadc2041",
+            "adid": "ca-app-pub-3912577259305392/1550942358",
             "order": 1,
             "per": 0,
-            "plat": 2,
+            "plat": 1,
             "type": 2,
             "ecpm": 0
             }
@@ -138,7 +106,7 @@
             "strategy": 2,
             "params": [
             {
-            "adid": "ca-app-pub-3912577259305392/9587335775",
+            "adid": "ca-app-pub-3912577259305392/1719960179",
             "order": 0,
             "per": 0,
             "plat": 1,
@@ -146,10 +114,10 @@
             "ecpm": 0
             },
             {
-            "adid": "d98752b20bdeba5d",
+            "adid": "ca-app-pub-3912577259305392/4723900600",
             "order": 1,
             "per": 0,
-            "plat": 2,
+            "plat": 1,
             "type": 1,
             "ecpm": 0
             }
@@ -160,7 +128,7 @@
             "strategy": 2,
             "params": [
             {
-            "adid": "ca-app-pub-3912577259305392/9944009091",
+            "adid": "ca-app-pub-3912577259305392/8939873014",
             "order": 0,
             "per": 0,
             "plat": 1,
@@ -168,16 +136,8 @@
             "ecpm": 0
             },
             {
-            "adid": "b8108d6eab869fa1",
+            "adid": "ca-app-pub-3912577259305392/4014849396",
             "order": 1,
-            "per": 0,
-            "plat": 2,
-            "type": 7,
-            "ecpm": 0
-            },
-            {
-            "adid": "ca-app-pub-3912577259305392/2257090767",
-            "order": 2,
             "per": 0,
             "plat": 1,
             "type": 7,
@@ -189,7 +149,7 @@
             "scenes": [
             {
             "asid": "",
-            "name": "splash",
+            "name": "splash, iap_close, app_open",
             "ctrl": {
             "closeCountDown": 0,
             "closeDelay": 0,
@@ -274,23 +234,6 @@
             },
             {
             "asid": "",
-            "name": "iap_close, app_open",
-            "ctrl": {
-            "closeCountDown": 0,
-            "closeDelay": 0,
-            "closeTrick": 0,
-            "impCapacity": 0,
-            "impInterval": 0,
-            "impTime": 0,
-            "startInterval": 0,
-            "startTime": 0,
-            "adShowingAlready": 0
-            },
-            "unit": "open_group, int_group",
-            "disabled": 0
-            },
-            {
-            "asid": "",
             "name": "theme_new_mrec, news_list_mrec, news_detail_mrec, weather_mrec, search_mrec",
             "ctrl": {
             "closeCountDown": 0,
@@ -311,11 +254,6 @@
             {
             "key": "ca-app-pub-3912577259305392~1546646929",
             "plat": 1,
-            "appId": ""
-            },
-            {
-            "key": "ziaXswlqLx7LCqxNXg6SewP_fz_BasfGL82KxU0kcTQZ7WRsacmw0FWHwn7zwemJHWomTSWyDKxgnK63EmyOaa",
-            "plat": 2,
             "appId": ""
             }
             ],

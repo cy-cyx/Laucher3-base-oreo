@@ -410,17 +410,17 @@
     <string name="windmill_down">Windmill down</string>
     <string name="effect">Effect</string>
     <string name="layout">Layout</string>
-    <string name="text_home_screen">Home screen</string>
+    <string name="text_home_screen">Home Screen</string>
     <string name="icon_setting">Icon Setting</string>
-    <string name="icon_setting_tip">Set icon style,label size and more</string>
-    <string name="icon_size">Icon size</string>
-    <string name="app_drawer">App drawer</string>
+    <string name="icon_setting_tip">Set icon style, label size and more</string>
+    <string name="icon_size">Icon Size</string>
+    <string name="app_drawer">App Drawer</string>
     <string name="folders">Folders</string>
-    <string name="label_size">Label size</string>
-    <string name="label_color">Label color</string>
-    <string name="set_layout_tip">Customize layout and icon as you needed</string>
+    <string name="label_size">Label Size</string>
+    <string name="label_color">Label Color</string>
+    <string name="set_layout_tip">Customize Layout and Icons</string>
     <string name="set_effect_tip">3D Transition Effects Available</string>
-    <string name="choose_color">Choose color</string>
+    <string name="choose_color">Choose Color</string>
     <string name="ok">OK</string>
     <string name="news_loading">News is loading…</string>
 </resources>

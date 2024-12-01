@@ -19,7 +19,7 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class AdBanner2 @JvmOverloads constructor(
+class ADBanner2 @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
 ) : FrameLayout(context, attrs), LifecycleEventObserver {
     private var job: Job? = null
@@ -68,7 +68,7 @@ class AdBanner2 @JvmOverloads constructor(
                         super.onLoad(adapter, status)
                         if (status == LambdaAd.AD_FILL) {
                             if (!isResume) return
-                            adapter.showBanner(this@AdBanner2, isLoadShow = false)
+                            adapter.showBanner(this@ADBanner2, isLoadShow = false)
                             isLoadedCollapse = true
                             showAutoShow(autoRefreshInterval)
                         } else if (status == LambdaAd.AD_LOAD_FAIL) {

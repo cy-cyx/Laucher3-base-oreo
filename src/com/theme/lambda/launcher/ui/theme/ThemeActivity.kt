@@ -77,7 +77,7 @@ class ThemeActivity : com.lambda.common.base.BaseActivity<ActivityThemeBinding>(
         return ActivityThemeBinding.inflate(layoutInflater)
     }
 
-    var pageFrom = ThemeActivity.sFromTheme
+    var pageFrom = sFromTheme
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,7 +88,7 @@ class ThemeActivity : com.lambda.common.base.BaseActivity<ActivityThemeBinding>(
         StatusBarUtil.setStatusBarLightMode(this.window)
         viewBinding.containerLl.marginStatusBarHeight()
 
-        pageFrom = intent.getStringExtra(sKeyFrom) ?: ThemeActivity.sFromTheme
+        pageFrom = intent.getStringExtra(sKeyFrom) ?: sFromTheme
 
         viewBinding.tabTl.apply {
             Constants.sThemeTag.forEach {
@@ -186,7 +186,6 @@ class ThemeActivity : com.lambda.common.base.BaseActivity<ActivityThemeBinding>(
                 })
             }
         })
-
 
         // https://stackoverflow.com/questions/77683434/the-getnextentry-method-of-zipinputstream-throws-a-zipexception-invalid-zip-ent/77697327#77697327
         if (Build.VERSION.SDK_INT >= 34) {
