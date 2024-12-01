@@ -32,7 +32,7 @@ val dataModule = module {
     }
     factory { AppViewModel(get()) }
     factory { NewsViewModel(get()) }
-    factory { com.lambda.weather.ui.SearchViewModel(get()) }
+    factory { SearchViewModel(get()) }
 }
 
 val allModules = appModule + dataModule
