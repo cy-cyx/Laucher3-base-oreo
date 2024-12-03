@@ -331,6 +331,17 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
         AdName.download_nat
     )
 
+    private val bannerIds = listOf(
+        AdName.home_ban
+    )
+
+    private val mrecIds = listOf(
+        AdName.news_detail_mrec,
+        AdName.news_list_mrec,
+        AdName.search_mrec,
+        AdName.weather_mrec
+    )
+
     /**
      * @param priority 是否优先初始化部分
      */

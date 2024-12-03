@@ -137,7 +137,7 @@
                 android:layout_gravity="end"
                 android:layout_marginRight="60dp"
                 android:scaleX="-1"
-                android:src="@drawable/ic_guide_arrow2" />
+                android:src="@drawable/ic_guide_arrow" />
 
             <TextView
                 android:layout_width="wrap_content"

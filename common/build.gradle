@@ -83,7 +83,7 @@ dependencies {
         exclude group: 'com.lambda.common', module: 'http'
     }
     api "com.lambda.common:remoteconfig:0.1.5"
-    api "com.lambda.common:lambdaad:1177"
+    api "com.lambda.common:lambdaad:1178"
     api "com.lambda.common:billing-google:0.0.0.10"
 
     api "com.applovin:applovin-sdk:13.0.1"
