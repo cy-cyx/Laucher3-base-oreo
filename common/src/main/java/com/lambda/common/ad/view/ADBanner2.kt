@@ -37,10 +37,7 @@ class ADBanner2 @JvmOverloads constructor(
         when (event) {
             Lifecycle.Event.ON_RESUME -> {
                 isResume = true
-                Looper.myQueue().addIdleHandler {
-                    showBannerAd()
-                    false
-                }
+                showBannerAd()
             }
 
             Lifecycle.Event.ON_PAUSE -> {
@@ -95,12 +92,7 @@ class ADBanner2 @JvmOverloads constructor(
             if (!isResume) {
                 return@launch
             }
-            if (mBannerAdapter?.isReady() == true) {
-                showBannerAd()
-            } else {
-                // 如果没有准备好 5秒后再试试
-                showAutoShow(5000)
-            }
+            showBannerAd()
         }
     }
 }

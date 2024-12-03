@@ -331,6 +331,17 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
         AdName.download_nat
     )
 
+    private val bannerIds = listOf(
+        AdName.home_ban
+    )
+
+    private val mrecIds = listOf(
+        AdName.news_detail_mrec,
+        AdName.news_list_mrec,
+        AdName.search_mrec,
+        AdName.weather_mrec
+    )
+
     /**
      * @param priority 是否优先初始化部分
      */
@@ -417,6 +428,20 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
                 }
             }
         }
+
+        // mrec
+        for (i in mrecIds) {
+            if (lAdMultipleAdapters[i] != null) {
+                continue
+            }
+            LAdMultipleAdapter(activity,
+                i,
+                object : LambdaAdAdapter.OnAdapterClose<LAdMultipleAdapter>() {
+                }).apply {
+                lAdMultipleAdapters[i] = this
+                loadMrec()
+            }
+        }
     }
 
     // 单独抽出来Launcher初始化
@@ -474,6 +499,21 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
     fun getADAdapter(scenes: String): LAdMultipleAdapter? {
         val temp = lAdMultipleAdapters[scenes]
         temp?.name = scenes
+        return temp
+    }
+
+    fun getADMrecAdapter(scenes: String): LAdMultipleAdapter? {
+        val temp = lAdMultipleAdapters[scenes]
+        temp?.name = scenes
+
+        // 存在同屏多位置不共用
+        lAdMultipleAdapters[scenes] = LAdMultipleAdapter(
+            getWapActivity(),
+            scenes,
+            object : LambdaAdAdapter.OnAdapterClose<LAdMultipleAdapter>() {
+            }).apply {
+            loadMrec()
+        }
         return temp
     }
 

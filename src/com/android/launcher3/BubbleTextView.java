@@ -256,7 +256,7 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver, 
         } else if (info.getIntent() != null && info.getIntent().getAction() != null && info.getIntent().getAction().equals(Constants.sAllppAction)) {
             showIcon = ThemeIconMappingV2.getIconBitmapIfNeedAsyn(this, Constants.sAllppAction, "");
         }
-        FastBitmapDrawable iconDrawable = DrawableFactory.get(getContext()).newIcon(showIcon, info);
+        FastBitmapDrawable iconDrawable = DrawableFactory.get(getContext()).newIcon(showIcon);
         iconDrawable.setIsDisabled(info.isDisabled());
         setIcon(iconDrawable);
 
@@ -664,9 +664,14 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver, 
         applyCompoundDrawables(mIcon);
     }
 
-    void setIcon(Bitmap icon) {
-        FastBitmapDrawable iconDrawable = DrawableFactory.get(getContext()).newIcon(icon, itemInfo);
-        iconDrawable.setIsDisabled(itemInfo.isDisabled());
+    public void setIcon(Bitmap icon) {
+        if (icon == null) return;
+        FastBitmapDrawable iconDrawable = DrawableFactory.get(getContext()).newIcon(icon);
+        if (itemInfo != null) {
+            iconDrawable.setIsDisabled(itemInfo.isDisabled());
+        } else {
+            iconDrawable.setIsDisabled(false);
+        }
         mIcon = iconDrawable;
         mIcon.setBounds(0, 0, mIconSize, mIconSize);
         applyCompoundDrawables(mIcon);

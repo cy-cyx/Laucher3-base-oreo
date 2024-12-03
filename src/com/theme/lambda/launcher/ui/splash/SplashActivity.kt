@@ -15,17 +15,17 @@ import com.lambda.common.ad.AdName
 import com.lambda.common.ad.AdUtil
 import com.lambda.common.ad.IAdCallBack
 import com.lambda.common.base.BaseActivity
-import com.theme.lambda.launcher.netstate.NetStateUtil
-import com.theme.lambda.launcher.netstate.NetworkType
 import com.lambda.common.statistics.EventName
 import com.lambda.common.statistics.EventUtil
-import com.theme.lambda.launcher.ui.theme.ThemeActivity
 import com.lambda.common.utils.CommonUtil
-import com.lambda.common.utils.visible
-import com.theme.lambda.launcher.utils.LauncherUtil
 import com.lambda.common.utils.StatusBarUtil
+import com.lambda.common.utils.visible
 import com.lambda.common.vip.VipManager
 import com.lambda.common.widget.dialog.LoadingDialog
+import com.theme.lambda.launcher.netstate.NetStateUtil
+import com.theme.lambda.launcher.netstate.NetworkType
+import com.theme.lambda.launcher.ui.theme.ThemeActivity
+import com.theme.lambda.launcher.utils.LauncherUtil
 import com.theme.lambda.launcher.widget.dialog.NetErrorDialog
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -43,7 +43,9 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         return ActivitySplashBinding.inflate(layoutInflater)
     }
 
-    private val adWaitingTime = if (VipManager.isVip.value == true) 3000L else 15000L
+    private val adWaitingTime = if (VipManager.isVip.value == true) 3000L else {
+        if (CommonUtil.getRegion() == "RU") 15000L else 30000L
+    }
     private var showTryAdTimestamp = 0L
     private var isResume = false
 

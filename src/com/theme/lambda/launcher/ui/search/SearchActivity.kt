@@ -12,6 +12,7 @@ import android.view.View.OnFocusChangeListener
 import android.view.inputmethod.EditorInfo
 import androidx.activity.viewModels
 import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -23,7 +24,6 @@ import com.lambda.common.utils.utilcode.util.GsonUtils
 import com.lambda.common.utils.utilcode.util.Utils
 import com.lambdaweather.data.model.NewsModel
 import com.lambdaweather.ui.news.NewsListActivity
-import com.lambda.weather.view.WeatherNewBanner
 import com.lambda.weather.view.WeatherNewBanner.OnRvBannerClickListener
 import com.lambda.common.ad.AdName
 import com.lambda.common.base.BaseActivity
@@ -62,6 +62,8 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
 
         var recentApps by Preference("recent_apps", "")
 
+        var recentAppLiveData = MediatorLiveData<ArrayList<String>>()
+
         @JvmStatic
         fun addRecentApps(packageName: String): List<String> {
             var list = if (recentApps.isNotEmpty()) {
@@ -80,7 +82,20 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
                 list = list.subList(0, 10)
             }
             recentApps = GsonUtils.toJson(list)
+            recentAppLiveData.value = list as ArrayList<String>?
             return list
+        }
+
+        @JvmStatic
+        fun initRecentApps() {
+            var list = if (recentApps.isNotEmpty()) {
+                GsonUtils.fromJson<MutableList<String>>(
+                    recentApps, GsonUtils.getListType(String::class.java)
+                )
+            } else {
+                mutableListOf()
+            }
+            recentAppLiveData.value = list as ArrayList<String>?
         }
     }
 

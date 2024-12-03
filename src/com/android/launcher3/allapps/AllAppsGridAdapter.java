@@ -69,6 +69,7 @@ public class AllAppsGridAdapter extends RecyclerView.Adapter<AllAppsGridAdapter.
     // A divider that separates the apps list and the search market button
     public static final int VIEW_TYPE_SEARCH_MARKET_DIVIDER = 1 << 5;
     // The divider under the search field
+    // todo 把他变成最近搜索
     public static final int VIEW_TYPE_SEARCH_DIVIDER = 1 << 6;
     // The divider that separates prediction icons from the app list
     public static final int VIEW_TYPE_PREDICTION_DIVIDER = 1 << 7;
@@ -124,14 +125,14 @@ public class AllAppsGridAdapter extends RecyclerView.Adapter<AllAppsGridAdapter.
 
         @Override
         public int getRowCountForAccessibility(RecyclerView.Recycler recycler,
-                RecyclerView.State state) {
+                                               RecyclerView.State state) {
             return super.getRowCountForAccessibility(recycler, state) -
                     getRowsNotForAccessibility(mApps.getAdapterItems().size() - 1);
         }
 
         @Override
         public void onInitializeAccessibilityNodeInfoForItem(RecyclerView.Recycler recycler,
-                RecyclerView.State state, View host, AccessibilityNodeInfoCompat info) {
+                                                             RecyclerView.State state, View host, AccessibilityNodeInfoCompat info) {
             super.onInitializeAccessibilityNodeInfoForItem(recycler, state, host, info);
 
             ViewGroup.LayoutParams lp = host.getLayoutParams();
@@ -186,8 +187,8 @@ public class AllAppsGridAdapter extends RecyclerView.Adapter<AllAppsGridAdapter.
             if (isIconViewType(mApps.getAdapterItems().get(position).viewType)) {
                 return 1;
             } else {
-                    // Section breaks span the full width
-                    return mAppsPerRow;
+                // Section breaks span the full width
+                return mAppsPerRow;
             }
         }
     }
@@ -370,6 +371,10 @@ public class AllAppsGridAdapter extends RecyclerView.Adapter<AllAppsGridAdapter.
                 holder.itemView.findViewById(R.id.loadingProgressBar).setVisibility(visLoading);
                 holder.itemView.findViewById(R.id.loadedDivider).setVisibility(visLoaded);
                 break;
+            case VIEW_TYPE_SEARCH_DIVIDER:
+                ((RecentView) holder.itemView.findViewById(R.id.recentVw)).notifyDataSetChanged();
+                break;
+
             case VIEW_TYPE_SEARCH_MARKET_DIVIDER:
                 // nothing to do
                 break;

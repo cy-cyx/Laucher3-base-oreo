@@ -38,7 +38,7 @@ class FirstGuideView @JvmOverloads constructor(
     private fun reset() {
         val lp = this.layoutParams as FrameLayout.LayoutParams
         lp.topMargin = -CommonUtil.getStatusBarHeight()
-        lp.bottomMargin = -CommonUtil.getActionBarHeight()
+        lp.bottomMargin = -CommonUtil.getActionBarHeight(context)
         requestLayout()
 
         showFirstStep()

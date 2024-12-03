@@ -1,6 +1,5 @@
 package com.lambda.common.ad.view
 
-import android.app.Activity
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.FrameLayout
@@ -11,6 +10,7 @@ import androidx.lifecycle.LifecycleOwner
 import com.lambda.adlib.LambdaAd
 import com.lambda.adlib.LambdaAdAdapter
 import com.lambda.adlib.adapter.LAdMultipleAdapter
+import com.lambda.common.ad.AdUtil
 
 class MRECBanner @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
@@ -26,30 +26,12 @@ class MRECBanner @JvmOverloads constructor(
         (context as? FragmentActivity)?.lifecycle?.addObserver(this)
     }
 
-    private fun initAdapter() {
-        if (mMRECBanner == null) {
-            mMRECBanner = LAdMultipleAdapter(this.context as Activity,
-                scenesName,
-                object : LambdaAdAdapter.OnAdapterClose<LAdMultipleAdapter>() {
-
-                    override fun onLoad(adapter: LAdMultipleAdapter, status: Int) {
-                        super.onLoad(adapter, status)
-                    }
-
-                    override fun onClose(adapter: LAdMultipleAdapter, status: Int) {
-                        super.onClose(adapter, status)
-                    }
-                })
-        }
-    }
-
     private val listen = object : LambdaAdAdapter.OnAdapterClose<LAdMultipleAdapter>() {
 
         override fun onLoad(adapter: LAdMultipleAdapter, status: Int) {
             super.onLoad(adapter, status)
             if (status == LambdaAd.AD_FILL) {
                 mMRECBanner?.showBanner(this@MRECBanner, isLoadShow = false)
-
             }
         }
 
@@ -62,33 +44,44 @@ class MRECBanner @JvmOverloads constructor(
     }
 
     fun loadAd() {
-        initAdapter()
+        if (mMRECBanner == null) {
+            mMRECBanner = AdUtil.getADMrecAdapter(scenesName)
+        }
         mMRECBanner?.onAdapterClose = listen
-        if (hasPreload){
-            if (mMRECBanner?.isReady() == true) {
-                mMRECBanner?.showBanner(this@MRECBanner, isLoadShow = false)
-            } else {
-                mMRECBanner?.loadBanner(false)
-            }
-            hasPreload = false
-        }else{
+
+        if (mMRECBanner?.isReady() == true) {
+            mMRECBanner?.showBanner(this@MRECBanner, isLoadShow = false)
+        } else {
             mMRECBanner?.loadBanner(false)
         }
     }
 
-    private var hasPreload = false
+    // 以下两个方法在特殊场景使用
 
-    fun preLoad() {
-        initAdapter()
-        mMRECBanner?.loadBanner(false)
-        hasPreload = true
+    fun preLoadAd() {
+        if (mMRECBanner == null) {
+            mMRECBanner = AdUtil.getADMrecAdapter(scenesName)
+        }
+        if (mMRECBanner?.isReady() != true) {
+            mMRECBanner?.loadBanner(false)
+        }
+    }
+
+    fun showWithPreLoad() {
+        if (mMRECBanner?.isReady() == true) {
+            mMRECBanner?.showBanner(this@MRECBanner, isLoadShow = false)
+        } else {
+            // 二次展示就需要load
+            mMRECBanner?.onAdapterClose = listen
+            mMRECBanner?.loadBanner(false)
+        }
     }
 
     fun isReady(): Boolean {
         return mMRECBanner?.isReady() ?: false
     }
 
-    private fun destroy() {
+    fun destroy() {
         mMRECBanner?.destroy()
         mMRECBanner = null
     }

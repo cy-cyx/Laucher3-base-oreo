@@ -7,29 +7,33 @@ import com.android.launcher3.databinding.ItemAdMrecBinding
 import com.lambda.common.ad.AdName
 import com.lambda.common.ad.AdUtil
 import com.lambda.common.ad.view.MRECBanner
+import com.theme.lambda.launcher.ui.news.item.AdItem
 
 class AdMRECViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
-    companion object {
-        val mrecAdBanner: MRECBanner by lazy {
-            MRECBanner(AdUtil.getWapActivity()!!).apply {
+    private var viewBinding = ItemAdMrecBinding.bind(view)
+    private var adItem: AdItem? = null
+
+    fun bind(item: AdItem) {
+        adItem = item
+        if (adItem?.mercBanner == null) {
+            adItem?.mercBanner = MRECBanner(AdUtil.getWapActivity()!!).apply {
                 scenesName = AdName.news_list_mrec
-                loadAd()
             }
         }
+
+        if (null != adItem?.mercBanner?.parent) {
+            (adItem?.mercBanner?.parent as? ViewGroup)?.removeAllViews()
+        }
+        viewBinding.adFl.addView(adItem?.mercBanner)
     }
 
-    var viewBinding = ItemAdMrecBinding.bind(view)
-
     fun onViewAttachedToWindow() {
-        if (null != mrecAdBanner.parent) {
-            (mrecAdBanner.parent as ViewGroup).removeAllViews()
-        }
-        viewBinding.adFl.addView(mrecAdBanner)
-        mrecAdBanner.loadAd()
+        adItem?.mercBanner?.loadAd()
     }
 
     fun onViewDetachedFromWindow() {
         viewBinding.adFl.removeAllViews()
+        adItem?.mercBanner?.destroy()
     }
 }

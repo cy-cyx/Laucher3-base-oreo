@@ -76,6 +76,11 @@ class NewsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     holder.bind(it.new)
                 }
             }
+            is AdMRECViewHolder -> {
+                (data[position] as? AdItem)?.let {
+                    holder.bind(it)
+                }
+            }
         }
     }
 
