@@ -28,8 +28,8 @@ class NewDetailsActivity : BaseActivity<ActivityNewDetailBinding>() {
         val sKeyNewDetail = "sKeyNewDetail"
         val newsConfig: NewsConfig by lazy {
             val string =
-                LambdaRemoteConfig.getInstance(CommonUtil.appContext!!).getString("NewsConfig")
-            GsonUtil.gson.fromJson(string, NewsConfig::class.java)
+                LambdaRemoteConfig.getInstance(CommonUtil.appContext!!).getString("NewsConfig") ?: ""
+            GsonUtil.gson.fromJson(string, NewsConfig::class.java) ?: NewsConfig()
         }
 
         fun start(context: Context, new: News) {
