@@ -3,7 +3,11 @@
 
     <application android:theme="@style/AppTheme">
         <activity
-            android:name="com.lambda.news.ui.splash.NewsSplashActivity"
+            android:name="com.lambda.news.ui.home.HomeActivity"
+            android:excludeFromRecents="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.lambda.news.ui.sort.SortActivity"
             android:excludeFromRecents="true"
             android:screenOrientation="portrait" />
     </application>

@@ -9,7 +9,7 @@ import com.android.launcher3.Launcher
 import com.android.launcher3.databinding.ActivityNewDetailBinding
 import com.lambda.common.base.BaseActivity
 import com.lambda.common.base.BaseItem
-import com.theme.lambda.launcher.data.model.News
+import com.lambda.news.data.model.News
 import com.theme.lambda.launcher.ui.news.adpater.NewDetailsAdapter
 import com.theme.lambda.launcher.ui.news.item.NewDetailsAdItem
 import com.theme.lambda.launcher.ui.news.item.NewDetailsItem

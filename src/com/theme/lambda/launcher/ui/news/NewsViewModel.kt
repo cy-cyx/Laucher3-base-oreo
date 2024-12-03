@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.lambda.common.base.BaseViewModel
 import com.theme.lambda.launcher.data.DataRepository
-import com.theme.lambda.launcher.data.model.News
+import com.lambda.news.data.model.News
 import com.theme.lambda.launcher.ui.news.item.AdItem
 import com.lambda.common.base.BaseItem
 import com.theme.lambda.launcher.ui.news.item.NewsItem

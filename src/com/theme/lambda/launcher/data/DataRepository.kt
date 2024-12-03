@@ -9,13 +9,12 @@ import com.theme.lambda.launcher.data.api.AppApi
 import com.lambda.common.net.RetrofitUtil
 import com.theme.lambda.launcher.data.model.ForestDayWeather
 import com.theme.lambda.launcher.data.model.ForestWeather
-import com.theme.lambda.launcher.data.model.NewResult
+import com.lambda.news.data.model.NewResult
 import com.theme.lambda.launcher.data.model.ResResult
 import com.theme.lambda.launcher.data.model.ThemeRes
 import com.theme.lambda.launcher.data.model.Weather
 import com.lambda.common.utils.CommonUtil
 import com.lambda.common.utils.TimeUtil
-import com.lambda.common.utils.utilcode.util.ResourceUtils
 import java.util.Locale
 
 object DataRepository {

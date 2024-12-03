@@ -10,7 +10,6 @@ import android.webkit.WebView
 import androidx.fragment.app.Fragment
 import com.android.launcher3.BuildConfig
 import com.android.launcher3.CycleTimer
-import com.lambda.common.Constants
 import com.lambda.common.http.Global
 import com.lambda.common.ad.AdUtil
 import com.theme.lambda.launcher.appinfo.AppInfoCache
@@ -26,6 +25,8 @@ import com.lambda.common.utils.FirebaseConfigUtil
 import com.lambda.common.utils.utilcode.util.ActivityUtils
 import com.theme.lambda.launcher.utils.OsUtil
 import com.lambda.common.vip.VipManager
+import com.lambda.news.LambdaNews
+import com.lambda.news.data.CategoriesManager
 import com.lambda.weather.LambdaWeather
 import com.theme.lambda.launcher.recall.RecallManager
 import com.theme.lambda.launcher.ui.news.NewDetailsActivity
@@ -69,6 +70,8 @@ class App : Application() {
                 Log.d(TAG, "init 5 : ${System.currentTimeMillis() - start}")
                 FirebaseConfigUtil.initRemoteConfig()
                 Log.d(TAG, "init 6 : ${System.currentTimeMillis() - start}")
+                initNew()
+                Log.d(TAG, "init 7 : ${System.currentTimeMillis() - start}")
 
                 Looper.myQueue().addIdleHandler {
                     CycleTimer.init()
@@ -103,6 +106,10 @@ class App : Application() {
             }
 
         }
+    }
+
+    private fun initNew() {
+        LambdaNews.init()
     }
 
     override fun attachBaseContext(base: Context?) {

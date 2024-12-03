@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="328dp"
+    android:background="#ffffff">
+
+    <ImageView
+        android:id="@+id/iconIv"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/autherTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:textColor="#FF717171"
+        android:textSize="14dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/iconIv"
+        app:layout_constraintStart_toEndOf="@id/iconIv"
+        app:layout_constraintTop_toTopOf="@id/iconIv" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/logoCv"
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="10dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="0dp"
+        app:layout_constraintTop_toBottomOf="@id/iconIv">
+
+        <ImageView
+            android:id="@+id/logoIv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/positionIv"
+        android:layout_width="11dp"
+        android:layout_height="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/news_ic_red_position"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logoCv" />
+
+    <TextView
+        android:id="@+id/positionTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:textColor="#FF717171"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="@id/positionIv"
+        app:layout_constraintStart_toEndOf="@id/positionIv"
+        app:layout_constraintTop_toTopOf="@id/positionIv" />
+
+    <TextView
+        android:id="@+id/pointTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="·"
+        android:textColor="#FF717171"
+        android:textSize="40dp"
+        app:layout_constraintBottom_toBottomOf="@id/positionTv"
+        app:layout_constraintStart_toEndOf="@id/positionTv"
+        app:layout_constraintTop_toTopOf="@id/positionTv" />
+
+    <TextView
+        android:id="@+id/timeTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:textColor="#FF717171"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="@id/pointTv"
+        app:layout_constraintStart_toEndOf="@id/pointTv"
+        app:layout_constraintTop_toTopOf="@id/pointTv" />
+
+    <TextView
+        android:id="@+id/titleTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="10dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textColor="#FF000000"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/positionIv" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

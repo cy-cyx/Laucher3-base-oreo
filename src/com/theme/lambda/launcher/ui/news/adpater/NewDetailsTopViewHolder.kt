@@ -4,7 +4,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.android.launcher3.R
 import com.android.launcher3.databinding.ItemNewDetailsTopBinding
-import com.theme.lambda.launcher.data.model.News
+import com.lambda.news.data.model.News
 import com.lambda.common.utils.GlideUtil
 
 class NewDetailsTopViewHolder(val view: View) : RecyclerView.ViewHolder(view) {

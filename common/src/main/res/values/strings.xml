@@ -424,4 +424,6 @@
     <string name="ok">OK</string>
     <string name="news_loading">News is loading…</string>
     <string name="news">News</string>
+    <string name="new_sort_tip">You will see more stories based on your interests.</string>
+    <string name="your_interests">Your Interests</string>
 </resources>

@@ -4,7 +4,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import com.lambda.common.utils.CommonUtil.appContext
-import com.lambda.news.ui.splash.NewsSplashActivity
+import com.lambda.news.ui.home.HomeActivity
 
 object InnerAppManager {
 
@@ -51,7 +51,7 @@ object InnerAppManager {
     private fun click(context: Context, action: String) {
         when (action) {
             InnerNewsAction -> {
-                NewsSplashActivity.start(context)
+                HomeActivity.start(context)
             }
         }
         NewInstallationManager.clickApp(action)

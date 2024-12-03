@@ -31,7 +31,7 @@ import com.lambda.common.utils.marginStatusBarHeight
 import com.lambda.common.utils.visible
 import com.lambda.common.utils.StatusBarUtil
 import com.lambda.common.vip.VipManager
-import com.theme.lambda.launcher.widget.adapter.LauncherFragmentAdapter
+import com.lambda.common.widget.adapter.LauncherFragmentAdapter
 import com.theme.lambda.launcher.widget.dialog.ApplyLauncherPermissionDialog
 import com.theme.lambda.launcher.widget.dialog.SetDefaultFailedDialog
 import dalvik.system.ZipPathValidator

@@ -62,4 +62,5 @@ object SpKey {
     const val keyFolderTextColor = "keyFolderTextColor"
 
     const val keyDefaultNewInstall = "keyDefaultNewInstall"
+    const val keyMyCategories = "keyMyCategories"
 }

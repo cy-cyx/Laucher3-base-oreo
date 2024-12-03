@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.launcher3.R
 import com.android.launcher3.ThemeManager
 import com.android.launcher3.databinding.ItemNewsBinding
-import com.theme.lambda.launcher.data.model.News
+import com.lambda.news.data.model.News
 import com.lambda.common.statistics.EventName
 import com.lambda.common.statistics.EventUtil
 import com.theme.lambda.launcher.ui.news.NewDetailsActivity

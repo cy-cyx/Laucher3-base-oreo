@@ -6,7 +6,7 @@ import android.view.View
 import android.widget.FrameLayout
 import com.android.launcher3.databinding.FragmentCustomBinding
 import com.lambda.common.base.BaseFragment
-import com.theme.lambda.launcher.widget.adapter.LauncherFragmentAdapter
+import com.lambda.common.widget.adapter.LauncherFragmentAdapter
 import com.theme.lambda.launcher.ui.news.NewsFragment
 
 class CustomFragment : BaseFragment<FragmentCustomBinding>() {

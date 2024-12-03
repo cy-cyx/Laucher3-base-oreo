@@ -1,9 +1,9 @@
 package com.theme.lambda.launcher.data.api
 
-import com.theme.lambda.launcher.data.model.BaseResult
+import com.lambda.common.data.model.BaseResult
 import com.theme.lambda.launcher.data.model.ForestDayWeather
 import com.theme.lambda.launcher.data.model.ForestWeather
-import com.theme.lambda.launcher.data.model.NewResult
+import com.lambda.news.data.model.NewResult
 import com.theme.lambda.launcher.data.model.ResResult
 import com.theme.lambda.launcher.data.model.Weather
 import retrofit2.http.GET

@@ -1,4 +1,4 @@
-package com.theme.lambda.launcher.widget.adapter
+package com.lambda.common.widget.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
