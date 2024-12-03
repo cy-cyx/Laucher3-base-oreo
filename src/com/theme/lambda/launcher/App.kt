@@ -26,10 +26,10 @@ import com.lambda.common.utils.utilcode.util.ActivityUtils
 import com.theme.lambda.launcher.utils.OsUtil
 import com.lambda.common.vip.VipManager
 import com.lambda.news.LambdaNews
-import com.lambda.news.data.CategoriesManager
+import com.lambda.news.ui.detail.NewsDetailActivity
+import com.lambda.news.ui.home.HomeFragment
 import com.lambda.weather.LambdaWeather
 import com.theme.lambda.launcher.recall.RecallManager
-import com.theme.lambda.launcher.ui.news.NewDetailsActivity
 import com.theme.lambda.launcher.ui.news.NewsFragment
 import com.theme.lambda.launcher.utils.WeatherTimerUtils
 
@@ -98,11 +98,11 @@ class App : Application() {
             }
 
             override fun getNewFragment(): Fragment {
-                return NewsFragment()
+                return HomeFragment()
             }
 
             override fun openNewDetailActivity(context: Context, new: String) {
-                NewDetailsActivity.start(context, new)
+                NewsDetailActivity.start(context, new,NewsDetailActivity.sFromWeatherBanner)
             }
 
         }

@@ -47,7 +47,7 @@ class NewsListFragment : BaseFragment<NewsFragmentNewsListBinding>() {
         }
 
         newsAdapter.clickNewItemCallback = {
-            NewsDetailActivity.start(requireContext(), it)
+            NewsDetailActivity.start(requireContext(), it, NewsDetailActivity.sFromHome)
         }
 
         viewBinding.swipeRefreshSrl.setOnRefreshListener {

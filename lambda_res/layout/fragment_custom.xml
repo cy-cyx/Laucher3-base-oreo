@@ -25,7 +25,7 @@
     </FrameLayout>
 
 
-    <com.theme.lambda.launcher.widget.ChildViewPager
+    <com.lambda.common.widget.ChildViewPager
         android:id="@+id/newVp"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

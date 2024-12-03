@@ -1,4 +1,4 @@
-package com.theme.lambda.launcher.widget;
+package com.lambda.common.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -18,6 +18,9 @@ public class ChildViewPager extends ViewPager {
     }
 
     private float x1;
+    private float lastX = 0;
+
+    private boolean useFastWQuit = false;
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
@@ -27,13 +30,21 @@ public class ChildViewPager extends ViewPager {
             case MotionEvent.ACTION_DOWN:
                 //告知父控件 把事件下发给子控件处理
                 getParent().requestDisallowInterceptTouchEvent(true);
-                x1 = ev.getX();
+                lastX = x1 = ev.getX();
                 break;
             case MotionEvent.ACTION_MOVE:
+                float x2 = ev.getX();
+
+                // 兼容负一屏快速滑动退出
+                if (useFastWQuit && Math.abs(x2 - lastX) > 150) {
+                    getParent().requestDisallowInterceptTouchEvent(false);
+                    break;
+                }
+
                 //拿到当前显示页下标
                 int curPosition = getCurrentItem();
                 //手指移动时的X坐标
-                float x2 = ev.getX();
+
                 if (curPosition == 0) {
                     if ((x2 - x1) > 50) {
                         //当当前页面在下标为0的时候，由父亲拦截触摸事件
@@ -51,6 +62,7 @@ public class ChildViewPager extends ViewPager {
                     //其他情况，由孩子拦截触摸事件
                     getParent().requestDisallowInterceptTouchEvent(true);
                 }
+                lastX = x2;
                 break;
         }
         return super.dispatchTouchEvent(ev);

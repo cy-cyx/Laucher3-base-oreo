@@ -29,17 +29,31 @@ class NewsDetailActivity : BaseActivity<NewsActivityDetailBinding>() {
 
     companion object {
         val sKeyNewDetail = "sKeyNewDetail"
+        val sKeyFrom = "sKeyFrom"
 
-        fun start(context: Context, new: News) {
+        val sFromHome = 1  // 来源从首页进入
+        val sFromCustom = 2  // 来源从负一屏进入
+        val sFromWeatherBanner = 3  // 来源从天气进入
+        val sFromSearch = 4  // 来源从搜索进入
+
+        fun start(context: Context, new: News, from: Int) {
             val data = GsonUtil.gson.toJson(new)
             context.startActivity(Intent(context, NewsDetailActivity::class.java).apply {
                 putExtra(sKeyNewDetail, data)
+                putExtra(sKeyFrom, from)
             })
         }
 
-        var newsDetailActivitiesCache = ArrayList<Activity>()
+        fun start(context: Context, new: String, from: Int) {
+            context.startActivity(Intent(context, NewsDetailActivity::class.java).apply {
+                putExtra(sKeyNewDetail, new)
+                putExtra(sKeyFrom, from)
+            })
+        }
 
-        fun closeAll() {
+        private var newsDetailActivitiesCache = ArrayList<Activity>()
+
+        private fun closeAll() {
             newsDetailActivitiesCache.forEach {
                 it.finish()
             }
@@ -51,6 +65,7 @@ class NewsDetailActivity : BaseActivity<NewsActivityDetailBinding>() {
         return NewsActivityDetailBinding.inflate(layoutInflater)
     }
 
+    private var from = sFromHome
     private var news: News? = null
     private val newDetailsAdapter: NewDetailsAdapter by lazy { NewDetailsAdapter() }
 
@@ -65,6 +80,7 @@ class NewsDetailActivity : BaseActivity<NewsActivityDetailBinding>() {
         StatusBarUtil.setStatusBarLightMode(this.window)
         viewBinding.containerLl.marginStatusBarHeight()
 
+        from = intent.getIntExtra(sKeyFrom, sFromHome)
         intent.getStringExtra(sKeyNewDetail)?.let {
             if (it.isNotBlank()) {
                 try {
@@ -107,23 +123,26 @@ class NewsDetailActivity : BaseActivity<NewsActivityDetailBinding>() {
             // 处理显示数据
             val data = arrayListOf<BaseItem>()
             data.add(NewDetailsTopItem(it))
+            if (viewModel.newsConfig.enableDetailTopAd) {
+                data.add(NewDetailsAdItem())
+            }
             for (s in stringList) {
                 data.add(NewDetailsItem(s))
-                if (interval % 10 == 0) {
+                if (interval % viewModel.newsConfig.detailAdInterval == 0) {
                     data.add(NewDetailsAdItem())
                 }
                 interval++
             }
-            if (data.last() is NewDetailsItem) {
+            if (data.last() is NewDetailsItem && viewModel.newsConfig.enableDetailBottomAd) {
                 data.add(NewDetailsAdItem())
+                // 最后塞点空格
+                data.add(NewDetailsItem("\n"))
             }
-            // 最后是文字几个换行
-            data.add(NewDetailsItem("\n"))
             newDetailsAdapter.upData(data)
         }
 
         newDetailsAdapter.clickNewItemCallback = {
-            start(this, it)
+            start(this, it, from)
         }
         viewBinding.backIv.setOnClickListener { finish() }
         viewBinding.homeLl.setOnClickListener {

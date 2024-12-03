@@ -1,4 +1,4 @@
-package com.theme.lambda.launcher.data.model
+package com.lambda.news.data.model
 
 import com.google.gson.annotations.SerializedName
 

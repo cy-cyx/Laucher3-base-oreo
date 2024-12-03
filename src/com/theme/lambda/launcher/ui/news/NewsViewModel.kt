@@ -10,8 +10,7 @@ import com.lambda.common.vip.VipManager
 import com.lambda.remoteconfig.LambdaRemoteConfig
 import com.theme.lambda.launcher.data.DataRepository
 import com.lambda.news.data.model.News
-import com.theme.lambda.launcher.data.model.News
-import com.theme.lambda.launcher.data.model.NewsConfig
+import com.lambda.news.data.model.NewsConfig
 import com.theme.lambda.launcher.ui.news.item.AdItem
 import com.theme.lambda.launcher.ui.news.item.NewsItem
 import kotlinx.coroutines.launch

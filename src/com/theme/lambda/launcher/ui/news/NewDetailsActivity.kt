@@ -14,8 +14,7 @@ import com.lambda.common.utils.GsonUtil
 import com.lambda.common.utils.StatusBarUtil
 import com.lambda.common.utils.marginStatusBarHeight
 import com.lambda.remoteconfig.LambdaRemoteConfig
-import com.theme.lambda.launcher.data.model.News
-import com.theme.lambda.launcher.data.model.NewsConfig
+import com.lambda.news.data.model.NewsConfig
 import com.lambda.news.data.model.News
 import com.theme.lambda.launcher.ui.news.adpater.NewDetailsAdapter
 import com.theme.lambda.launcher.ui.news.item.NewDetailsAdItem
