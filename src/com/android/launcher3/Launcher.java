@@ -526,6 +526,7 @@ public class Launcher extends BaseActivity
         if (mLauncherCallbacks != null) {
             mLauncherCallbacks.onCreate(savedInstanceState);
         }
+        SearchActivity.initRecentApps();
 
         long time = System.currentTimeMillis() - onCreateStartTime;
         if (LOGD) Log.d(TAG, "onCreate finish :" + time);

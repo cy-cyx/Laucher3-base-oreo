@@ -66,7 +66,7 @@ public class DrawableFactory {
     /**
      * Returns a FastBitmapDrawable with the icon.
      */
-    public FastBitmapDrawable newIcon(Bitmap icon, ItemInfo info) {
+    public FastBitmapDrawable newIcon(Bitmap icon) {
         return new FastBitmapDrawable(icon);
     }
 
