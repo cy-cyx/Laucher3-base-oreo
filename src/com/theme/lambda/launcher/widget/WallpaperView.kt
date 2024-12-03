@@ -29,7 +29,7 @@ class WallpaperView @JvmOverloads constructor(
     private fun reLayout() {
         val lp = this.layoutParams as FrameLayout.LayoutParams
         lp.topMargin = -CommonUtil.getStatusBarHeight()
-        lp.bottomMargin = -CommonUtil.getActionBarHeight()
+        lp.bottomMargin = -CommonUtil.getActionBarHeight(context)
         requestLayout()
     }
 }

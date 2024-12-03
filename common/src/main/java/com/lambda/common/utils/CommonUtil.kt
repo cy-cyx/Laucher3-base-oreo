@@ -34,9 +34,9 @@ object CommonUtil {
         return resources?.getDimensionPixelSize(resourceId ?: 0) ?: 0
     }
 
-    fun getActionBarHeight(): Int {
+    fun getActionBarHeight(context: Context): Int {
         val tv = TypedValue()
-        if (appContext!!.getTheme().resolveAttribute(R.attr.actionBarSize, tv, true)) {
+        if (context.getTheme().resolveAttribute(R.attr.actionBarSize, tv, true)) {
             return TypedValue.complexToDimensionPixelSize(
                 tv.data, appContext!!.getResources().getDisplayMetrics()
             )
