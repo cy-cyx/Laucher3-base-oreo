@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import com.lambda.common.base.BaseActivity
 import com.lambda.common.utils.StatusBarUtil
 import com.lambda.common.utils.marginStatusBarHeight
@@ -49,19 +50,26 @@ class SortActivity : BaseActivity<NewsActivitySortBinding>() {
         myCategories = ArrayList(CategoriesManager.myCategoriesLiveData.value ?: arrayListOf())
         allCategories = ArrayList(CategoriesManager.allCategories)
 
+        var showSelectFlexView = false
+        var showRemFlexView = false
+
         allCategories.forEach {
             if (myCategories.contains(it)) {
+                showSelectFlexView = true
                 viewBinding.selectTopicsFl.addView(SortItemView(this).apply {
                     bindData(true, it)
                     stateChangeCallback = sortStatusChangeCallback
                 })
             } else {
+                showRemFlexView = true
                 viewBinding.recommendedTopicFl.addView(SortItemView(this).apply {
                     bindData(false, it)
                     stateChangeCallback = sortStatusChangeCallback
                 })
             }
         }
+        viewBinding.selectTopicsFl.visibility = if (showSelectFlexView) View.VISIBLE else View.GONE
+        viewBinding.recommendedTopicFl.visibility = if (showRemFlexView) View.VISIBLE else View.GONE
 
         viewBinding.backIv.setOnClickListener {
             if (isChange) CategoriesManager.upDataMyCategories(myCategories)
