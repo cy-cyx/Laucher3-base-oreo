@@ -17,13 +17,11 @@ class NewDetailsAdViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
             item.mrecBanner = MRECBanner(viewBinding.root.context)
             item.mrecBanner?.scenesName = AdName.news_detail_mrec
             item.mrecBanner?.bindLifecycle(viewBinding.root.context)
-
-            if (null != item.mrecBanner?.parent) {
-                (item.mrecBanner?.parent as? ViewGroup)?.removeAllViews()
-            }
-
-            viewBinding.adContentFl.addView(item.mrecBanner)
-            item.mrecBanner?.loadAd()
         }
+        if (null != item.mrecBanner?.parent) {
+            (item.mrecBanner?.parent as? ViewGroup)?.removeAllViews()
+        }
+        viewBinding.adContentFl.addView(item.mrecBanner)
+        item.mrecBanner?.loadAd()
     }
 }

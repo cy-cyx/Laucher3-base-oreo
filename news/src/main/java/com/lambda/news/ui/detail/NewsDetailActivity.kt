@@ -109,15 +109,18 @@ class NewsDetailActivity : BaseActivity<NewsActivityDetailBinding>() {
             data.add(NewDetailsTopItem(it))
             for (s in stringList) {
                 data.add(NewDetailsItem(s))
-                if (interval % 10 == 0) {
+                if (interval % 20 == 0) {
                     data.add(NewDetailsAdItem())
                 }
                 interval++
             }
-            // 最后是文字几个换行
             if (data.last() is NewDetailsItem) {
                 (data.last() as NewDetailsItem).text += "\n\n"
             }
+            if (data.last() is NewDetailsItem) {
+                data.add(NewDetailsAdItem())
+            }
+            // 最后是文字几个换行
             newDetailsAdapter.upData(data)
         }
 
