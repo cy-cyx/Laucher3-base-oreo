@@ -149,7 +149,12 @@ class WeatherNewBanner @JvmOverloads constructor(
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
         linearLayoutParams.gravity = Gravity.BOTTOM or gravity
-        linearLayoutParams.setMargins(margin, margin, margin, margin + com.lambda.common.utils.CommonUtil.dp2px(60f))
+        linearLayoutParams.setMargins(
+            margin,
+            margin,
+            margin,
+            margin + com.lambda.common.utils.CommonUtil.dp2px(60f)
+        )
         addView(recyclerView, vpLayoutParams)
         addView(mLinearLayout, linearLayoutParams)
     }
@@ -244,7 +249,7 @@ class WeatherNewBanner @JvmOverloads constructor(
             mrecBanner?.scenesName =
                 if (from == fromSearch) AdName.search_mrec else AdName.weather_mrec
             mrecBanner?.bindLifecycle(context)
-            mrecBanner?.preLoad()
+            mrecBanner?.preLoadAd()
         }
     }
 
@@ -327,19 +332,26 @@ class WeatherNewBanner @JvmOverloads constructor(
         super.onWindowVisibilityChanged(visibility)
     }
 
+    private var isAdReady = false
+
     /**
      * RecyclerView适配器
      */
     private inner class RecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         override fun getItemViewType(position: Int): Int {
-            return if ((position % (mData.size + 1) == 4) && mrecBanner?.isReady() == true) return AD_TYPE else 0
+            if (!isAdReady) {
+                isAdReady = mrecBanner?.isReady() ?: false
+            }
+            return if ((position % (mData.size + 1) == 4) && isAdReady) return AD_TYPE else 0
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
             val img = ItemWeatherNewBinding.inflate(LayoutInflater.from(parent.context)).root
             val params = RecyclerView.LayoutParams(
-                com.lambda.common.utils.CommonUtil.getScreenWidth() - com.lambda.common.utils.CommonUtil.dp2px(20f),
+                com.lambda.common.utils.CommonUtil.getScreenWidth() - com.lambda.common.utils.CommonUtil.dp2px(
+                    20f
+                ),
                 ViewGroup.LayoutParams.MATCH_PARENT
             )
             img.layoutParams = params
@@ -352,7 +364,9 @@ class WeatherNewBanner @JvmOverloads constructor(
 
                     val fl = FrameLayout(parent.context)
                     val params2 = RecyclerView.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        com.lambda.common.utils.CommonUtil.getScreenWidth() - com.lambda.common.utils.CommonUtil.dp2px(
+                            20f
+                        ),
                         ViewGroup.LayoutParams.MATCH_PARENT
                     )
                     fl.layoutParams = params2
@@ -372,7 +386,7 @@ class WeatherNewBanner @JvmOverloads constructor(
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
             when (getItemViewType(position)) {
                 AD_TYPE -> {
-                    mrecBanner?.loadAd()
+                    mrecBanner?.showWithPreLoad()
                 }
 
                 else -> {
