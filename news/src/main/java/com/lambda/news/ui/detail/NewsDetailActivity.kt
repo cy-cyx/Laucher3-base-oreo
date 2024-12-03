@@ -1,5 +1,6 @@
 package com.lambda.news.ui.detail
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Rect
@@ -35,6 +36,15 @@ class NewsDetailActivity : BaseActivity<NewsActivityDetailBinding>() {
                 putExtra(sKeyNewDetail, data)
             })
         }
+
+        var newsDetailActivitiesCache = ArrayList<Activity>()
+
+        fun closeAll() {
+            newsDetailActivitiesCache.forEach {
+                it.finish()
+            }
+            newsDetailActivitiesCache.clear()
+        }
     }
 
     override fun initViewBinding(layoutInflater: LayoutInflater): NewsActivityDetailBinding {
@@ -49,6 +59,8 @@ class NewsDetailActivity : BaseActivity<NewsActivityDetailBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        newsDetailActivitiesCache.add(this)
+
         StatusBarUtil.transparencyBar(this)
         StatusBarUtil.setStatusBarLightMode(this.window)
         viewBinding.containerLl.marginStatusBarHeight()
@@ -62,8 +74,6 @@ class NewsDetailActivity : BaseActivity<NewsActivityDetailBinding>() {
                 }
             }
         }
-
-        viewBinding.backIv.setOnClickListener { finish() }
 
         viewBinding.newRv.apply {
             layoutManager = LinearLayoutManager(context).apply {
@@ -114,10 +124,19 @@ class NewsDetailActivity : BaseActivity<NewsActivityDetailBinding>() {
         newDetailsAdapter.clickNewItemCallback = {
             start(this, it)
         }
+        viewBinding.backIv.setOnClickListener { finish() }
+        viewBinding.homeLl.setOnClickListener {
+            closeAll()
+        }
 
         viewModel.moreNewsLiveData.observe(this, Observer {
             newDetailsAdapter.addMoreData(it.map { NewsItem(it) }.toMutableList())
         })
         viewModel.loadMoreNews()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        newsDetailActivitiesCache.remove(this)
     }
 }
