@@ -4,7 +4,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.lambda.common.base.BaseItem
 import com.lambda.common.base.BaseViewModel
+import com.lambda.common.vip.VipManager
 import com.lambda.news.data.DataRepository
+import com.lambda.news.data.model.News
+import com.lambda.news.ui.newslist.item.AdItem
 import com.lambda.news.ui.newslist.item.NewsItem
 import kotlinx.coroutines.launch
 
@@ -13,6 +16,9 @@ class NewsListViewModel : BaseViewModel() {
     var page = 0L
 
     var category = ""
+
+    private val adInterval = 5
+    private var curAdInterval = 3 // 间隔是5个 开始为2个故从3个起
 
     private fun getQueryCategory(): String {
         if (category == "Local") {
@@ -30,10 +36,9 @@ class NewsListViewModel : BaseViewModel() {
     fun refresh() {
         viewModelScope.launch() {
             page = 1L
-            val data = DataRepository.getNewData(page, getQueryCategory())
+            val data = DataRepository.getNewData(page)
             val newsList = data?.news ?: arrayListOf()
-            newsLiveData.value =
-                newsList.map { NewsItem(it) }.toMutableList() as ArrayList<BaseItem>
+            newsLiveData.value = assembleData(newsList, true)
             refreshFinishLiveData.value = true
         }
     }
@@ -44,13 +49,34 @@ class NewsListViewModel : BaseViewModel() {
 
         viewModelScope.launch() {
             page++
-            val data = DataRepository.getNewData(page, getQueryCategory())
+            val data = DataRepository.getNewData(page)
             val newsList = data?.news ?: arrayListOf()
             val allData = newsLiveData.value ?: arrayListOf()
-            allData.addAll(newsList.map { NewsItem(it) }.toMutableList())
+            allData.addAll(assembleData(newsList, false))
             newsLiveData.value = allData
             loadMoreFinishLiveData.value = true
             isLoadMore = false
         }
+    }
+
+    // 混入ad广告位
+    private fun assembleData(newsList: ArrayList<News>, upData: Boolean): ArrayList<BaseItem> {
+        if (upData) {
+            curAdInterval = 3
+        }
+
+        val list = ArrayList<BaseItem>()
+        newsList.forEach {
+            curAdInterval++
+            list.add(NewsItem(it))
+            if (curAdInterval >= adInterval) {
+                // vip去掉广告
+                if (VipManager.isVip.value == false) {
+                    list.add(AdItem())
+                }
+                curAdInterval = 0
+            }
+        }
+        return list
     }
 }
