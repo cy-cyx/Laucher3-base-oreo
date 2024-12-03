@@ -48,4 +48,9 @@ class RecentView @JvmOverloads constructor(
             }
         })
     }
+
+    fun notifyDataSetChanged(){
+        recentAdapter.notifyDataSetChanged()
+    }
+
 }

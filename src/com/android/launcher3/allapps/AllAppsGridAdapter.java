@@ -371,6 +371,10 @@ public class AllAppsGridAdapter extends RecyclerView.Adapter<AllAppsGridAdapter.
                 holder.itemView.findViewById(R.id.loadingProgressBar).setVisibility(visLoading);
                 holder.itemView.findViewById(R.id.loadedDivider).setVisibility(visLoaded);
                 break;
+            case VIEW_TYPE_SEARCH_DIVIDER:
+                ((RecentView) holder.itemView.findViewById(R.id.recentVw)).notifyDataSetChanged();
+                break;
+
             case VIEW_TYPE_SEARCH_MARKET_DIVIDER:
                 // nothing to do
                 break;
