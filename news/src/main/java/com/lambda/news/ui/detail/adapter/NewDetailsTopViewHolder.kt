@@ -13,7 +13,7 @@ class NewDetailsTopViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
     fun bind(new: News) {
         new?.let {
-            viewBinding.authorTv.text = it.author
+            viewBinding.authorTv.text = it.source
             viewBinding.titleTv.text = it.title
             viewBinding.timeTv.text = it.publishDate
             it.image.getOrNull(0)?.let {
@@ -22,6 +22,9 @@ class NewDetailsTopViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
                     it,
                     placeholder = R.drawable.ic_news_ph
                 )
+            }
+            if (it.sourceIcon.isNotBlank()) {
+                GlideUtil.load(viewBinding.iconIv, it.sourceIcon)
             }
         }
     }

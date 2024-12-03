@@ -20,6 +20,12 @@ class NewsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
                 placeholder = R.drawable.ic_news_ph
             )
         }
+        if (news.sourceIcon.isNotBlank()){
+            GlideUtil.load(
+                viewBinding.iconIv,
+                news.sourceIcon
+            )
+        }
         viewBinding.positionTv.text = news.sourceCountry
         viewBinding.timeTv.text = news.publishDate
         viewBinding.titleTv.text = news.title

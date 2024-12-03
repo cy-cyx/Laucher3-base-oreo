@@ -50,4 +50,7 @@ class News {
 
     @SerializedName("source")
     var source: String = ""
+
+    @SerializedName("source_icon")
+    var sourceIcon = ""
 }
