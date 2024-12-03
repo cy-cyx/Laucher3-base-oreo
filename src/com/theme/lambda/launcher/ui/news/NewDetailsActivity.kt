@@ -9,21 +9,29 @@ import com.android.launcher3.Launcher
 import com.android.launcher3.databinding.ActivityNewDetailBinding
 import com.lambda.common.base.BaseActivity
 import com.lambda.common.base.BaseItem
+import com.lambda.common.utils.CommonUtil
+import com.lambda.common.utils.GsonUtil
+import com.lambda.common.utils.StatusBarUtil
+import com.lambda.common.utils.marginStatusBarHeight
+import com.lambda.remoteconfig.LambdaRemoteConfig
+import com.theme.lambda.launcher.data.model.News
+import com.theme.lambda.launcher.data.model.NewsConfig
 import com.lambda.news.data.model.News
 import com.theme.lambda.launcher.ui.news.adpater.NewDetailsAdapter
 import com.theme.lambda.launcher.ui.news.item.NewDetailsAdItem
 import com.theme.lambda.launcher.ui.news.item.NewDetailsItem
 import com.theme.lambda.launcher.ui.news.item.NewDetailsTopItem
-import com.lambda.common.utils.CommonUtil
-import com.lambda.common.utils.marginStatusBarHeight
-import com.lambda.common.utils.GsonUtil
-import com.lambda.common.utils.StatusBarUtil
 
 class NewDetailsActivity : BaseActivity<ActivityNewDetailBinding>() {
 
     companion object {
 
         val sKeyNewDetail = "sKeyNewDetail"
+        val newsConfig: NewsConfig by lazy {
+            val string =
+                LambdaRemoteConfig.getInstance(CommonUtil.appContext!!).getString("NewsConfig")
+            GsonUtil.gson.fromJson(string, NewsConfig::class.java)
+        }
 
         fun start(context: Context, new: News) {
             val data = GsonUtil.gson.toJson(new)
@@ -94,14 +102,17 @@ class NewDetailsActivity : BaseActivity<ActivityNewDetailBinding>() {
             // 处理显示数据
             val data = arrayListOf<BaseItem>()
             data.add(NewDetailsTopItem(it))
+            if (newsConfig.enableDetailTopAd) {
+                data.add(NewDetailsAdItem())
+            }
             for (s in stringList) {
                 data.add(NewDetailsItem(s))
-                if (interval % 10 == 0) {
+                if (interval % newsConfig.detailAdInterval == 0) {
                     data.add(NewDetailsAdItem())
                 }
                 interval++
             }
-            if (data.last() is NewDetailsItem) {
+            if (data.last() is NewDetailsItem && newsConfig.enableDetailBottomAd) {
                 data.add(NewDetailsAdItem())
             }
             newDetailsAdapter.upData(data)

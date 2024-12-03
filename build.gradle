@@ -26,8 +26,8 @@ android {
     defaultConfig {
         minSdkVersion 24
         targetSdkVersion 34
-        versionCode 42
-        versionName "0.4.2"
+        versionCode 43
+        versionName "0.4.3"
         applicationId 'com.theme.lambda.launcher'
         testApplicationId 'com.theme.lambda.launcher.tests'
 

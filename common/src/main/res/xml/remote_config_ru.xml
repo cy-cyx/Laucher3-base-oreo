@@ -48,28 +48,20 @@
             "ecpm": 0
             },
             {
-            "adid": "b89sr0nsgf5k9ds9",
-            "order": 0,
-            "per": 0,
-            "plat": 8,
-            "type": 4,
-            "ecpm": 0
-            },
-            {
-            "adid": "10961146-10894488",
-            "order": 0,
-            "per": 0,
-            "plat": 4,
-            "type": 4,
-            "ecpm": 0
-            },
-            {
             "adid": "R-M-12398626-16",
             "order": 0,
             "per": 0,
             "plat": 7,
             "type": 4,
             "ecpm": 3.5
+            },
+            {
+            "adid": "d276441ea296a90b",
+            "order": 0,
+            "per": 0,
+            "plat": 2,
+            "type": 4,
+            "ecpm": 0
             }
             ]
             },

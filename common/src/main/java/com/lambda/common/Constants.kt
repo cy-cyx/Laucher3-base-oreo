@@ -26,5 +26,5 @@ object Constants {
     @JvmField
     val sAllppAction = "ALL_APPS"
 
-    val configKeys = arrayListOf("AdConfig", "SearchConfig", "OfferConfig")
+    val configKeys = arrayListOf("AdConfig", "SearchConfig", "OfferConfig", "NewsConfig")
 }
