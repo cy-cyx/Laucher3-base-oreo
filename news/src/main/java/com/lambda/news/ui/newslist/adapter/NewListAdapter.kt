@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.lambda.common.base.BaseItem
 import com.lambda.common.utils.CommonUtil
+import com.lambda.common.utils.noDoubleClick
+import com.lambda.news.data.model.News
 import com.lambda.news.databinding.NewsItemNewBinding
 import com.lambda.news.ui.newslist.item.NewsItem
 
@@ -24,6 +26,8 @@ class NewListAdapter : RecyclerView.Adapter<ViewHolder>() {
         data.addAll(d)
         notifyDataSetChanged()
     }
+
+    var clickNewItemCallback: ((News) -> Unit)? = null
 
     override fun getItemViewType(position: Int): Int {
         val baseItem = data[position]
@@ -52,8 +56,11 @@ class NewListAdapter : RecyclerView.Adapter<ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         when (holder) {
             is NewsViewHolder -> {
-                (data[position] as? NewsItem)?.let {
-                    holder.bind(it.news)
+                (data[position] as? NewsItem)?.let { item ->
+                    holder.bind(item.news)
+                    holder.itemView.noDoubleClick {
+                        clickNewItemCallback?.invoke(item.news)
+                    }
                 }
             }
         }

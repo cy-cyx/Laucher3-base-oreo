@@ -69,7 +69,9 @@ class SortActivity : BaseActivity<NewsActivitySortBinding>() {
             }
         }
         viewBinding.selectTopicsFl.visibility = if (showSelectFlexView) View.VISIBLE else View.GONE
+        viewBinding.selectTopicsTv.visibility = if (showSelectFlexView) View.VISIBLE else View.GONE
         viewBinding.recommendedTopicFl.visibility = if (showRemFlexView) View.VISIBLE else View.GONE
+        viewBinding.recommendedTopicTv.visibility = if (showRemFlexView) View.VISIBLE else View.GONE
 
         viewBinding.backIv.setOnClickListener {
             if (isChange) CategoriesManager.upDataMyCategories(myCategories)

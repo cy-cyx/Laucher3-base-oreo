@@ -12,6 +12,7 @@ import com.lambda.common.utils.CommonUtil
 import com.lambda.common.utils.gone
 import com.lambda.common.utils.visible
 import com.lambda.news.databinding.NewsFragmentNewsListBinding
+import com.lambda.news.ui.detail.NewsDetailActivity
 import com.lambda.news.ui.newslist.adapter.NewListAdapter
 
 class NewsListFragment : BaseFragment<NewsFragmentNewsListBinding>() {
@@ -43,6 +44,10 @@ class NewsListFragment : BaseFragment<NewsFragmentNewsListBinding>() {
                     outRect.top = CommonUtil.dp2px(4f)
                 }
             })
+        }
+
+        newsAdapter.clickNewItemCallback = {
+            NewsDetailActivity.start(requireContext(), it)
         }
 
         viewBinding.swipeRefreshSrl.setOnRefreshListener {

@@ -45,6 +45,7 @@
             android:textSize="15dp" />
 
         <TextView
+            android:id="@+id/selectTopicsTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
@@ -63,6 +64,7 @@
             android:layout_marginTop="14dp" />
 
         <TextView
+            android:id="@+id/recommendedTopicTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"

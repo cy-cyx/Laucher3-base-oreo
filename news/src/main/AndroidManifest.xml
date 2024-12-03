@@ -10,5 +10,8 @@
             android:name="com.lambda.news.ui.sort.SortActivity"
             android:excludeFromRecents="true"
             android:screenOrientation="portrait" />
+        <activity android:name="com.lambda.news.ui.detail.NewsDetailActivity"
+            android:excludeFromRecents="true"
+            android:screenOrientation="portrait" />
     </application>
 </manifest>
