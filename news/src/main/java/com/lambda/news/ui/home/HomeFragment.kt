@@ -4,14 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.lifecycle.Observer
-import com.lambda.common.Constants
 import com.lambda.common.base.BaseFragment
 import com.lambda.common.widget.adapter.LauncherFragmentAdapter
 import com.lambda.news.data.CategoriesManager
 import com.lambda.news.databinding.NewsFragmentHomeBinding
 import com.lambda.news.ui.newslist.NewsListFragment
 import com.lambda.news.ui.sort.SortActivity
-import net.pubnative.lite.sdk.vpaid.models.vast.BlockedAdCategories
 
 class HomeFragment : BaseFragment<NewsFragmentHomeBinding>() {
     override fun initViewBinding(inflater: LayoutInflater): NewsFragmentHomeBinding {
@@ -33,7 +31,8 @@ class HomeFragment : BaseFragment<NewsFragmentHomeBinding>() {
     }
 
     private fun bindData(categories: ArrayList<String>){
-        categories.add(0,"Local")
+        var temp = ArrayList(categories)
+        temp.add(0,"Local")
 
         // 移除旧
         childFragmentManager.fragments.forEach {
@@ -41,7 +40,7 @@ class HomeFragment : BaseFragment<NewsFragmentHomeBinding>() {
         }
 
         viewBinding.tabTl.apply {
-            categories.forEach {
+            temp.forEach {
                 addTab(viewBinding.tabTl.newTab())
             }
         }
@@ -51,7 +50,7 @@ class HomeFragment : BaseFragment<NewsFragmentHomeBinding>() {
             adapter = LauncherFragmentAdapter(childFragmentManager).apply {
 
                 // 多种主题
-                categories.forEach {
+                temp.forEach {
                     fragments.add(NewsListFragment().apply {
                         category = it
                     })

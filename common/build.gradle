@@ -66,6 +66,7 @@ dependencies {
     api 'me.relex:circleindicator:2.1.6'
     api 'net.lingala.zip4j:zip4j:2.11.5'
     api 'com.github.duanhong169:colorpicker:1.1.6'
+    api 'com.google.android.flexbox:flexbox:3.0.0'
 
     // firebase
     api(platform("com.google.firebase:firebase-bom:32.2.2"))

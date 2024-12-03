@@ -426,4 +426,6 @@
     <string name="news">News</string>
     <string name="new_sort_tip">You will see more stories based on your interests.</string>
     <string name="your_interests">Your Interests</string>
+    <string name="selected_topics">Selected topics</string>
+    <string name="recommended_topics">Recommended topics</string>
 </resources>

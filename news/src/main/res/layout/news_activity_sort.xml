@@ -2,6 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#ffffff">
 
 
@@ -42,5 +43,41 @@
             android:text="@string/new_sort_tip"
             android:textColor="#FF000000"
             android:textSize="15dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="40dp"
+            android:text="@string/selected_topics"
+            android:textColor="#FF000000"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/selectTopicsFl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            app:flexWrap="wrap"
+            android:layout_marginTop="14dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/recommended_topics"
+            android:textColor="#FF000000"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/recommendedTopicFl"
+            android:layout_width="wrap_content"
+            app:flexWrap="wrap"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="14dp" />
     </LinearLayout>
 </FrameLayout>

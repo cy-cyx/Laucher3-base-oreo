@@ -2,7 +2,6 @@ package com.lambda.news.data
 
 import android.util.Log
 import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
 import com.google.gson.reflect.TypeToken
 import com.lambda.common.utils.GsonUtil
 import com.lambda.common.utils.SpKey
@@ -47,7 +46,6 @@ object CategoriesManager {
                 // 过滤一下当前的
                 myCategoriesLiveData.postValue(myCategories.filter { allCategories.contains(it) } as ArrayList<String>?)
             }
-            cacheMyCategories()
         }
     }
 
@@ -62,8 +60,12 @@ object CategoriesManager {
         return arrayListOf()
     }
 
-    private fun cacheMyCategories() {
-        val list = myCategoriesLiveData.value
-        SpKey.keyMyCategories.putSpString(GsonUtil.gson.toJson(list))
+    private fun cacheMyCategories(data: ArrayList<String>) {
+        SpKey.keyMyCategories.putSpString(GsonUtil.gson.toJson(data))
+    }
+
+    fun upDataMyCategories(categories: ArrayList<String>) {
+        myCategoriesLiveData.value = categories
+        cacheMyCategories(categories)
     }
 }
