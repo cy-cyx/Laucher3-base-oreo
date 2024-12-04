@@ -43,9 +43,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         return ActivitySplashBinding.inflate(layoutInflater)
     }
 
-    private val adWaitingTime = if (VipManager.isVip.value == true) 3000L else {
-        if (CommonUtil.getRegion() == "RU") 15000L else 30000L
-    }
+    private val adWaitingTime = if (VipManager.isVip.value == true) 3 * 1000L else 30 * 1000L
     private var showTryAdTimestamp = 0L
     private var isResume = false
 
