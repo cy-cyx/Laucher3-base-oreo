@@ -22,6 +22,7 @@ object StatusBarUtil {
      * 已知系统类型时，设置状态栏黑色字体图标。
      * 适配4.4以上版本MIUIV、Flyme和6.0以上版本其他Android
      */
+    @JvmStatic
     fun setStatusBarLightMode(window: Window) {
         val type = getStatusBarLightMode(window)
         if (type == 1) {
@@ -38,6 +39,7 @@ object StatusBarUtil {
     /**
      * 清除MIUI或flyme或6.0以上版本状态栏黑色字体
      */
+    @JvmStatic
     fun setStatusBarDarkMode(window: Window) {
         val type = getStatusBarLightMode(window)
         if (type == 1) {

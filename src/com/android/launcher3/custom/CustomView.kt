@@ -11,7 +11,10 @@ import com.android.launcher3.Launcher
 import com.android.launcher3.databinding.LayoutCustomViewBinding
 import com.lambda.common.statistics.EventName
 import com.lambda.common.statistics.EventUtil
+import com.lambda.common.utils.CommonUtil
 import com.lambda.common.utils.PermissionUtil
+import com.lambda.common.utils.StatusBarUtil
+import com.theme.lambda.launcher.utils.DisplayUtil
 
 class CustomView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
@@ -29,10 +32,15 @@ class CustomView @JvmOverloads constructor(
 
 
         requestNotificationPermission()
+        if (context is Launcher) {
+            StatusBarUtil.setStatusBarLightMode((context as Launcher).window)
+        }
     }
 
     override fun onHide() {
-
+        if (context is Launcher) {
+            StatusBarUtil.setStatusBarDarkMode((context as Launcher).window)
+        }
     }
 
     override fun onScrollProgressChanged(progress: Float) {

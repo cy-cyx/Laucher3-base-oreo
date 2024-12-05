@@ -8,6 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
 
+import com.lambda.common.utils.CommonUtil;
+
 public class ChildViewPager extends ViewPager {
     public ChildViewPager(@NonNull Context context) {
         super(context);
@@ -18,7 +20,6 @@ public class ChildViewPager extends ViewPager {
     }
 
     private float x1;
-    private float lastX = 0;
 
     public boolean useFastWQuit = false;
 
@@ -29,17 +30,16 @@ public class ChildViewPager extends ViewPager {
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 //告知父控件 把事件下发给子控件处理
-                getParent().requestDisallowInterceptTouchEvent(true);
-                lastX = x1 = ev.getX();
+                //  快速退出模式，靠边缘是相应退出的
+                x1 = ev.getX();
+                if (x1 < CommonUtil.getScreenWidth() - (float) CommonUtil.getScreenWidth() / 6 || !useFastWQuit) {
+                    getParent().requestDisallowInterceptTouchEvent(true);
+                } else {
+                    return false;
+                }
                 break;
             case MotionEvent.ACTION_MOVE:
                 float x2 = ev.getX();
-
-                // 兼容负一屏快速滑动退出
-                if (useFastWQuit && Math.abs(x2 - lastX) > 150) {
-                    getParent().requestDisallowInterceptTouchEvent(false);
-                    break;
-                }
 
                 //拿到当前显示页下标
                 int curPosition = getCurrentItem();
@@ -62,7 +62,6 @@ public class ChildViewPager extends ViewPager {
                     //其他情况，由孩子拦截触摸事件
                     getParent().requestDisallowInterceptTouchEvent(true);
                 }
-                lastX = x2;
                 break;
         }
         return super.dispatchTouchEvent(ev);

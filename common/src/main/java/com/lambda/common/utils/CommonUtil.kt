@@ -44,6 +44,7 @@ object CommonUtil {
         return 0
     }
 
+    @JvmStatic
     fun getScreenWidth(): Int {
         return appContext?.resources?.displayMetrics?.widthPixels ?: 0
     }
