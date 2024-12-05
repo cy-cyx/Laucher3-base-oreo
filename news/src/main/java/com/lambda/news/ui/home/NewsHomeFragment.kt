@@ -12,7 +12,9 @@ import com.lambda.common.utils.CommonUtil
 import com.lambda.common.widget.adapter.LauncherFragmentAdapter
 import com.lambda.news.LambdaNews
 import com.lambda.news.data.CategoriesManager
+import com.lambda.news.data.LocalManager
 import com.lambda.news.databinding.NewsFragmentHomeBinding
+import com.lambda.news.ui.location.LocationActivity
 import com.lambda.news.ui.newslist.NewsListFragment
 import com.lambda.news.ui.sort.SortActivity
 
@@ -39,6 +41,9 @@ class NewsHomeFragment : BaseFragment<NewsFragmentHomeBinding>() {
                 putString("type", "add_tag")
             })
         }
+        viewBinding.locationLl.setOnClickListener {
+            LocationActivity.start(requireContext())
+        }
 
         CategoriesManager.myCategoriesLiveData.observe(viewLifecycleOwner, Observer {
             bindData(it)
@@ -46,6 +51,8 @@ class NewsHomeFragment : BaseFragment<NewsFragmentHomeBinding>() {
     }
 
     private fun bindData(categories: ArrayList<String>) {
+        viewBinding.countryTv.setText(LocalManager.getNewsCountryName())
+
         var temp = ArrayList(categories)
         temp.add(0, "Local")
         temp.add(1, "Headlines")

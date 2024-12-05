@@ -82,7 +82,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
                 list = list.subList(0, 10)
             }
             recentApps = GsonUtils.toJson(list)
-            recentAppLiveData.value = ArrayList(list)
+            recentAppLiveData.postValue(ArrayList(list))
             return list
         }
 

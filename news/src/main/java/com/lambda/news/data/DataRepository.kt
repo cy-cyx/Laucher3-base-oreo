@@ -24,8 +24,8 @@ object DataRepository {
     suspend fun getNewData(page: Long, categories: String = ""): NewResult? {
         try {
             return service.getNewData(
-                Locale.getDefault().country,
-                Locale.getDefault().language,
+                LocalManager.getNewsCountry(),
+                LocalManager.getNewsLanguage(),
                 "$page",
                 "25",
                 categories,

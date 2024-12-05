@@ -149,7 +149,7 @@
             "scenes": [
             {
             "asid": "",
-            "name": "splash, iap_close, app_open",
+            "name": "splash, iap_close, app_open, news_open",
             "ctrl": {
             "closeCountDown": 0,
             "closeDelay": 0,

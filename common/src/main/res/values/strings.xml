@@ -429,4 +429,24 @@
     <string name="selected_topics">Selected topics</string>
     <string name="recommended_topics">Recommended topics</string>
     <string name="home">Home</string>
+    <string name="current_location">Current location</string>
+    <string name="language">Language</string>
+    <string name="united_states">United states of america</string>
+    <string name="russia">Russia</string>
+    <string name="united_kingdom">United kingdom</string>
+    <string name="mexico">Mexico</string>
+    <string name="philippines">Philippines</string>
+    <string name="indonesia">Indonesia</string>
+    <string name="france">France</string>
+    <string name="poland">Poland</string>
+    <string name="netherland">Netherland</string>
+    <string name="english">English</string>
+    <string name="russian">Russian</string>
+    <string name="spanish">Spanish</string>
+    <string name="french">French</string>
+    <string name="portuguese">portuguese</string>
+    <string name="polish">Polish</string>
+    <string name="dutch">Dutch</string>
+    <string name="indonesian">Indonesian</string>
+    <string name="filipino">Filipino</string>
 </resources>

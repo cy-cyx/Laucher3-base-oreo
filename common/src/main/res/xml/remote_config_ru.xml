@@ -250,7 +250,7 @@
             },
             {
             "asid": "",
-            "name": "iap_close, app_open",
+            "name": "iap_close, app_open, news_open",
             "ctrl": {
             "closeCountDown": 0,
             "closeDelay": 0,
@@ -285,7 +285,8 @@
             ],
             "keys": [
             {
-            "key": "ziaXswlqLx7LCqxNXg6SewP_fz_BasfGL82KxU0kcTQZ7WRsacmw0FWHwn7zwemJHWomTSWyDKxgnK63EmyOaa",
+            "key":
+            "ziaXswlqLx7LCqxNXg6SewP_fz_BasfGL82KxU0kcTQZ7WRsacmw0FWHwn7zwemJHWomTSWyDKxgnK63EmyOaa",
             "plat": 2,
             "appId": ""
             },
@@ -571,7 +572,8 @@
             },
             {
             "name": "Healthline",
-            "icon_url": "https://i0.wp.com/post.healthline.com/wp-content/uploads/2023/05/HG-Logos__circle-icon_100w-1.png",
+            "icon_url":
+            "https://i0.wp.com/post.healthline.com/wp-content/uploads/2023/05/HG-Logos__circle-icon_100w-1.png",
             "click_url": "https://www.healthline.com/",
             "is_default": false
             },
@@ -583,7 +585,8 @@
             },
             {
             "name": "T Nation",
-            "icon_url": "https://global.discourse-cdn.com/tnation/original/4X/1/2/3/1235accdf867de3ed7049e6f1f44143c316c8fcf.jpeg",
+            "icon_url":
+            "https://global.discourse-cdn.com/tnation/original/4X/1/2/3/1235accdf867de3ed7049e6f1f44143c316c8fcf.jpeg",
             "click_url": "https://t-nation.com/",
             "is_default": false
             }

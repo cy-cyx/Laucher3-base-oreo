@@ -313,7 +313,8 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
 
     private val priorityLoadIntAndRawIds = listOf(
         AdName.splash,
-        AdName.app_open
+        AdName.app_open,
+        AdName.new_open
     )
 
     private val intAndRawIds = listOf(
@@ -322,6 +323,7 @@ object AdUtil : Application.ActivityLifecycleCallbacks {
         AdName.unlock,
         AdName.iap_close,
         AdName.app_open,
+        AdName.new_open,
         AdName.icon_unlock
     )
 

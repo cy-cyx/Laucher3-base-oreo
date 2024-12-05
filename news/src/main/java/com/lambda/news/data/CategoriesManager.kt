@@ -26,7 +26,8 @@ object CategoriesManager {
             myCategoriesLiveData.postValue(getMyCategoriesCache())
 
             var categories = DataRepository.getNewsCategories()
-            categories = categories.filter { it.isNotBlank() && !it.equals("top") } as ArrayList<String>
+            categories =
+                categories.filter { it.isNotBlank() && !it.equals("top") } as ArrayList<String>
             Log.d(TAG, "$categories")
             allCategories = categories
 
@@ -67,5 +68,10 @@ object CategoriesManager {
     fun upDataMyCategories(categories: ArrayList<String>) {
         myCategoriesLiveData.value = categories
         cacheMyCategories(categories)
+    }
+
+    // 偷鸡 用这法子顺便刷新新闻数据
+    fun upDataNewsData() {
+        myCategoriesLiveData.value = ArrayList(myCategoriesLiveData.value ?: arrayListOf())
     }
 }

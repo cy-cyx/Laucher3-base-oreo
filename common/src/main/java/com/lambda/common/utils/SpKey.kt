@@ -63,4 +63,7 @@ object SpKey {
 
     const val keyDefaultNewInstall = "keyDefaultNewInstall"
     const val keyMyCategories = "keyMyCategories"
+
+    const val keyNewsCountry = "keyNewsCountry"
+    const val keyNewsLanguage = "keyNewsLanguage"
 }

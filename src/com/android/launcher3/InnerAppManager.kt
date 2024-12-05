@@ -3,9 +3,11 @@ package com.android.launcher3
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import com.lambda.common.ad.AdName
+import com.lambda.common.ad.AdUtil
+import com.lambda.common.ad.IAdCallBack
 import com.lambda.common.utils.CommonUtil.appContext
 import com.lambda.news.ui.home.NewsHomeActivity
-import com.lambda.news.ui.home.NewsHomeFragment
 
 object InnerAppManager {
 
@@ -52,7 +54,15 @@ object InnerAppManager {
     private fun click(context: Context, action: String) {
         when (action) {
             InnerNewsAction -> {
-                NewsHomeActivity.start(context, NewsHomeActivity.sFromHome)
+                AdUtil.showAd(AdName.new_open, object : IAdCallBack {
+                    override fun onNoReady() {
+                        NewsHomeActivity.start(context, NewsHomeActivity.sFromHome)
+                    }
+
+                    override fun onAdClose(status: Int) {
+                        NewsHomeActivity.start(context, NewsHomeActivity.sFromHome)
+                    }
+                })
             }
         }
         NewInstallationManager.clickApp(action)
