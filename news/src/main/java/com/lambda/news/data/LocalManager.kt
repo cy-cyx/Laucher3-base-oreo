@@ -68,6 +68,7 @@ object LocalManager {
         )
     }
 
+    // 直接按国家找语言
     fun getNewsLanguage(): String {
         val language = SpKey.keyNewsLanguage.getSpString()
         if (language.isNotBlank()) {
