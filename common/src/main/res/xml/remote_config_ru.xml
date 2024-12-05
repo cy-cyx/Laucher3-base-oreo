@@ -433,7 +433,7 @@
             },
             {
             "name": "Fox News",
-            "icon_url": "https://cdn.lambda-launcher.com/resources/web_icon/Fox news.icon.png",
+            "icon_url": "https://cdn.lambda-launcher.com/resources/web_icon/Fox News.icon.png",
             "click_url": "https://www.foxnews.com/",
             "is_default": false
             },
