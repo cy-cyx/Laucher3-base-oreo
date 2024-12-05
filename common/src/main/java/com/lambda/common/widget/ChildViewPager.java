@@ -20,7 +20,7 @@ public class ChildViewPager extends ViewPager {
     private float x1;
     private float lastX = 0;
 
-    private boolean useFastWQuit = false;
+    public boolean useFastWQuit = false;
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {

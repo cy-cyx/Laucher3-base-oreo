@@ -86,6 +86,11 @@ class NewsHomeFragment : BaseFragment<NewsFragmentHomeBinding>() {
                     fragmentsTitle.add(it)
                 }
             }
+
+            // 负一屏支持快速滑动退出
+            if (mfrom == NewsHomeActivity.sFromCustom) {
+                viewBinding.themeVp.useFastWQuit = true
+            }
         }
         viewBinding.tabTl.setupWithViewPager(viewBinding.themeVp)
     }

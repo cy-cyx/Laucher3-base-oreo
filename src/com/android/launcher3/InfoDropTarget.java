@@ -109,6 +109,8 @@ public class InfoDropTarget extends UninstallDropTarget {
     public static boolean supportsDrop(Context context, ItemInfo info) {
         if (info.title == "Theme")
             return false;
+        if (info.getIntent() != null && info.getIntent().getAction() != null && info.getIntent().getAction().contains(InnerAppManager.getActionHost()))
+            return false;
         if (info.getIntent() != null && info.getIntent().getAction() != null && info.getIntent().getAction().contains(RecommendAppManager.getActionHost())) {
             return false;
         }

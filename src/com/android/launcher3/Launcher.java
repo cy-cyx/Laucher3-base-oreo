@@ -2488,6 +2488,11 @@ public class Launcher extends BaseActivity
 
             // Back button is a no-op here, but give at least some feedback for the button press
             mWorkspace.showOutlinesTemporarily();
+
+            // 返回支持退到首页
+            if (mWorkspace.mCurrentPage == 0) {
+                mWorkspace.snapToPage(1);
+            }
         }
     }
 
