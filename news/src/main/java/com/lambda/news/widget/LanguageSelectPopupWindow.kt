@@ -19,7 +19,7 @@ class LanguageSelectPopupWindow(context: Context) : PopupWindow(context) {
     init {
         contentView = viewBinding.root
         width = CommonUtil.getScreenWidth() - CommonUtil.dp2px(30f)
-        height = CommonUtil.dp2px(150f)
+        height = CommonUtil.dp2px(180f)
 
         setBackgroundDrawable(CommonUtil.getDrawable(R.drawable.shape_ffffff_radius_10))
         elevation = 10f
