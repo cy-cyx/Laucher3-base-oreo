@@ -8,6 +8,7 @@ import com.google.android.material.tabs.TabLayout
 import com.lambda.common.base.BaseFragment
 import com.lambda.common.statistics.EventName
 import com.lambda.common.statistics.EventUtil
+import com.lambda.common.utils.CommonUtil
 import com.lambda.common.widget.adapter.LauncherFragmentAdapter
 import com.lambda.news.LambdaNews
 import com.lambda.news.data.CategoriesManager
@@ -26,6 +27,11 @@ class NewsHomeFragment : BaseFragment<NewsFragmentHomeBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (mfrom == NewsHomeActivity.sFromCustom) {
+            viewBinding.topFl.layoutParams.height =
+                CommonUtil.dp2px(50f) + CommonUtil.getStatusBarHeight()
+        }
+
         viewBinding.sortIv.setOnClickListener {
             if (LambdaNews.isInPreviewMode()) return@setOnClickListener
             SortActivity.start(requireContext())
@@ -42,6 +48,7 @@ class NewsHomeFragment : BaseFragment<NewsFragmentHomeBinding>() {
     private fun bindData(categories: ArrayList<String>) {
         var temp = ArrayList(categories)
         temp.add(0, "Local")
+        temp.add(1, "Headlines")
 
         // 移除旧
         childFragmentManager.fragments.forEach {

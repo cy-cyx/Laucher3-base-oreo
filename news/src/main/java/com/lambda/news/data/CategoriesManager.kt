@@ -26,7 +26,7 @@ object CategoriesManager {
             myCategoriesLiveData.postValue(getMyCategoriesCache())
 
             var categories = DataRepository.getNewsCategories()
-            categories = categories.filter { it.isNotBlank() } as ArrayList<String>
+            categories = categories.filter { it.isNotBlank() && !it.equals("top") } as ArrayList<String>
             Log.d(TAG, "$categories")
             allCategories = categories
 

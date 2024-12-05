@@ -31,6 +31,8 @@ class NewsListViewModel : BaseViewModel() {
     private fun getQueryCategory(): String {
         if (category == "Local") {
             return ""
+        } else if (category == "Headlines") {
+            return "top"
         } else {
             return category
         }
@@ -46,6 +48,7 @@ class NewsListViewModel : BaseViewModel() {
             page = 1L
             val data = DataRepository.getNewData(page, getQueryCategory())
             val newsList = data?.news ?: arrayListOf()
+            newsList.shuffle()
             newsLiveData.value = assembleData(newsList, true)
             refreshFinishLiveData.value = true
         }
@@ -59,6 +62,7 @@ class NewsListViewModel : BaseViewModel() {
             page++
             val data = DataRepository.getNewData(page, getQueryCategory())
             val newsList = data?.news ?: arrayListOf()
+            newsList.shuffle()
             val allData = newsLiveData.value ?: arrayListOf()
             allData.addAll(assembleData(newsList, false))
             newsLiveData.value = allData
