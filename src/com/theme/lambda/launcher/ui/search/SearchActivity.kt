@@ -356,6 +356,9 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
                     GsonUtil.gson.toJson(date),
                     NewsHomeActivity.sFromSearch
                 )
+                EventUtil.logEvent(EventName.LNewsClick, Bundle().apply {
+                    putString("from", "web")
+                })
             }
         })
 

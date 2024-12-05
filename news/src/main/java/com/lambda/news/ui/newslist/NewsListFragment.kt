@@ -7,12 +7,15 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.OnScrollListener
+import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_DRAGGING
 import com.lambda.common.base.BaseFragment
 import com.lambda.common.statistics.EventName
 import com.lambda.common.statistics.EventUtil
 import com.lambda.common.utils.CommonUtil
 import com.lambda.common.utils.gone
 import com.lambda.common.utils.visible
+import com.lambda.news.LambdaNews
 import com.lambda.news.databinding.NewsFragmentNewsListBinding
 import com.lambda.news.ui.detail.NewsDetailActivity
 import com.lambda.news.ui.home.NewsHomeActivity
@@ -49,12 +52,30 @@ class NewsListFragment : BaseFragment<NewsFragmentNewsListBinding>() {
                 }
             })
         }
+        viewBinding.newsRv.addOnScrollListener(object : OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (newState == SCROLL_STATE_DRAGGING) {
+                    if (!EventUtil.hasLogNewsScroll) {
+                        EventUtil.logEvent(EventName.LNewsList, Bundle().apply {
+                            putString("type", "scroll")
+                        })
+                        EventUtil.hasLogNewsScroll = true
+                    }
+                }
+            }
+        })
 
         newsAdapter.clickNewItemCallback = {
-            NewsDetailActivity.start(requireContext(), it, from)
-            EventUtil.logEvent(EventName.LNewsList, Bundle().apply {
-                putString("from", "click_news")
-            })
+            if (!LambdaNews.isInPreviewMode()) {
+                NewsDetailActivity.start(requireContext(), it, from)
+                EventUtil.logEvent(EventName.LNewsList, Bundle().apply {
+                    putString("type", "click_news")
+                })
+                EventUtil.logEvent(EventName.LNewsClick, Bundle().apply {
+                    putString("from", "list")
+                })
+            }
         }
 
         viewBinding.swipeRefreshSrl.setOnRefreshListener {

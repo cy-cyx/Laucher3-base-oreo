@@ -22,6 +22,9 @@ object EventUtil {
     var hasLogHomeChangeTag = false
     var hasLogHomeScroll = false
 
+    var hasLogNewsChangeTag = false
+    var hasLogNewsScroll = false
+
     fun init(debug:Boolean) {
         if (init) {
             return

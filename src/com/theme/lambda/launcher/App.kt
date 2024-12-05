@@ -10,6 +10,7 @@ import android.util.Log
 import android.webkit.WebView
 import com.android.launcher3.BuildConfig
 import com.android.launcher3.CycleTimer
+import com.android.launcher3.ThemeManager
 import com.lambda.common.ad.AdUtil
 import com.lambda.common.http.Global
 import com.lambda.common.statistics.EventName
@@ -99,6 +100,9 @@ class App : Application() {
 
             override fun openNewDetailActivity(context: Context, new: String) {
                 NewsDetailActivity.start(context, new, NewsHomeActivity.sFromWeather)
+                EventUtil.logEvent(EventName.LNewsClick, Bundle().apply {
+                    putString("from", "weather")
+                })
             }
 
             override fun openNewHomeActivity(context: Context) {
@@ -113,6 +117,12 @@ class App : Application() {
 
     private fun initNew() {
         LambdaNews.init()
+        LambdaNews.lambdaNewsCallback = object : LambdaNews.LambdaNewsCallback {
+            override fun isInPreviewMode(): Boolean {
+                return ThemeManager.getThemeManagerIfExist()?.isPreviewMode ?: false
+            }
+
+        }
     }
 
     override fun attachBaseContext(base: Context?) {

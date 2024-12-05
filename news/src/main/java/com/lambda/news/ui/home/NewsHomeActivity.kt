@@ -1,10 +1,15 @@
 package com.lambda.news.ui.home
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import com.lambda.common.base.BaseActivity
+import com.lambda.common.statistics.EventName
+import com.lambda.common.statistics.EventUtil
+import com.lambda.common.utils.PermissionUtil
 import com.lambda.common.utils.StatusBarUtil
 import com.lambda.common.utils.marginStatusBarHeight
 import com.lambda.news.R
@@ -54,5 +59,34 @@ class NewsHomeActivity : BaseActivity<NewsActivityHomeBinding>() {
                 mfrom = openFrom
             }, "home")
         }.commitNow()
+
+        requestNotificationPermission()
+    }
+
+    private fun requestNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            PermissionUtil.requestRuntimePermissions(
+                this,
+                arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                object : PermissionUtil.IPermissionCallback {
+                    override fun nextStep() {
+                        EventUtil.logEvent(EventName.permissionGrant, Bundle().apply {
+                            putString("scene", "news")
+                            putString("permission", "notification")
+                        })
+                    }
+
+                    override fun noPermission() {
+
+                    }
+
+                    override fun gotoSet(internal: Boolean) {
+
+                    }
+                },
+                force = false,
+                showGotoSetDialog = false
+            )
+        }
     }
 }

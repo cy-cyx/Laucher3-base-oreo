@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.lifecycle.Observer
+import com.google.android.material.tabs.TabLayout
 import com.lambda.common.base.BaseFragment
 import com.lambda.common.statistics.EventName
 import com.lambda.common.statistics.EventUtil
 import com.lambda.common.widget.adapter.LauncherFragmentAdapter
+import com.lambda.news.LambdaNews
 import com.lambda.news.data.CategoriesManager
 import com.lambda.news.databinding.NewsFragmentHomeBinding
 import com.lambda.news.ui.newslist.NewsListFragment
@@ -25,9 +27,10 @@ class NewsHomeFragment : BaseFragment<NewsFragmentHomeBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         viewBinding.sortIv.setOnClickListener {
+            if (LambdaNews.isInPreviewMode()) return@setOnClickListener
             SortActivity.start(requireContext())
             EventUtil.logEvent(EventName.LNewsList, Bundle().apply {
-                putString("from", "add_tag")
+                putString("type", "add_tag")
             })
         }
 
@@ -36,9 +39,9 @@ class NewsHomeFragment : BaseFragment<NewsFragmentHomeBinding>() {
         })
     }
 
-    private fun bindData(categories: ArrayList<String>){
+    private fun bindData(categories: ArrayList<String>) {
         var temp = ArrayList(categories)
-        temp.add(0,"Local")
+        temp.add(0, "Local")
 
         // 移除旧
         childFragmentManager.fragments.forEach {
@@ -50,6 +53,24 @@ class NewsHomeFragment : BaseFragment<NewsFragmentHomeBinding>() {
                 addTab(viewBinding.tabTl.newTab())
             }
         }
+        viewBinding.tabTl.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                if (!EventUtil.hasLogNewsChangeTag) {
+                    EventUtil.logEvent(EventName.LNewsList, Bundle().apply {
+                        putString("type", "change_tag")
+                    })
+                    EventUtil.hasLogNewsChangeTag = true
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+
+            }
+        })
 
         viewBinding.themeVp.apply {
 
