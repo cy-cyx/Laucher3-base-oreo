@@ -8,11 +8,14 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lambda.common.base.BaseFragment
+import com.lambda.common.statistics.EventName
+import com.lambda.common.statistics.EventUtil
 import com.lambda.common.utils.CommonUtil
 import com.lambda.common.utils.gone
 import com.lambda.common.utils.visible
 import com.lambda.news.databinding.NewsFragmentNewsListBinding
 import com.lambda.news.ui.detail.NewsDetailActivity
+import com.lambda.news.ui.home.NewsHomeActivity
 import com.lambda.news.ui.newslist.adapter.NewListAdapter
 
 class NewsListFragment : BaseFragment<NewsFragmentNewsListBinding>() {
@@ -24,6 +27,7 @@ class NewsListFragment : BaseFragment<NewsFragmentNewsListBinding>() {
 
     private var viewModel = NewsListViewModel()
     private var newsAdapter = NewListAdapter()
+    var from = NewsHomeActivity.sFromHome
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -47,7 +51,10 @@ class NewsListFragment : BaseFragment<NewsFragmentNewsListBinding>() {
         }
 
         newsAdapter.clickNewItemCallback = {
-            NewsDetailActivity.start(requireContext(), it, NewsDetailActivity.sFromHome)
+            NewsDetailActivity.start(requireContext(), it, from)
+            EventUtil.logEvent(EventName.LNewsList, Bundle().apply {
+                putString("from", "click_news")
+            })
         }
 
         viewBinding.swipeRefreshSrl.setOnRefreshListener {

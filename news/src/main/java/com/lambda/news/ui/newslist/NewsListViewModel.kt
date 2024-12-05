@@ -23,8 +23,8 @@ class NewsListViewModel : BaseViewModel() {
 
     private val newsConfig: NewsConfig by lazy {
         val string =
-            LambdaRemoteConfig.getInstance(CommonUtil.appContext!!).getString("NewsConfig")
-        GsonUtil.gson.fromJson(string, NewsConfig::class.java)
+            LambdaRemoteConfig.getInstance(CommonUtil.appContext!!).getString("NewsConfig") ?: ""
+        GsonUtil.gson.fromJson(string, NewsConfig::class.java) ?: NewsConfig()
     }
     private var curAdInterval = 3 // 间隔是5个 开始为2个故从3个起
 
@@ -44,7 +44,7 @@ class NewsListViewModel : BaseViewModel() {
     fun refresh() {
         viewModelScope.launch() {
             page = 1L
-            val data = DataRepository.getNewData(page)
+            val data = DataRepository.getNewData(page, getQueryCategory())
             val newsList = data?.news ?: arrayListOf()
             newsLiveData.value = assembleData(newsList, true)
             refreshFinishLiveData.value = true
@@ -57,7 +57,7 @@ class NewsListViewModel : BaseViewModel() {
 
         viewModelScope.launch() {
             page++
-            val data = DataRepository.getNewData(page)
+            val data = DataRepository.getNewData(page, getQueryCategory())
             val newsList = data?.news ?: arrayListOf()
             val allData = newsLiveData.value ?: arrayListOf()
             allData.addAll(assembleData(newsList, false))

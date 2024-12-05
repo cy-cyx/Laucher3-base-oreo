@@ -3,34 +3,34 @@ package com.theme.lambda.launcher
 import android.app.Application
 import android.content.Context
 import android.os.Build
+import android.os.Bundle
 import android.os.Looper
 import android.text.TextUtils
 import android.util.Log
 import android.webkit.WebView
-import androidx.fragment.app.Fragment
 import com.android.launcher3.BuildConfig
 import com.android.launcher3.CycleTimer
-import com.lambda.common.http.Global
 import com.lambda.common.ad.AdUtil
-import com.theme.lambda.launcher.appinfo.AppInfoCache
-import com.theme.lambda.launcher.appwidget.utils.WeatherManager
-import com.theme.lambda.launcher.netstate.NetStateChangeReceiver
-import com.theme.lambda.launcher.service.FirebaseService
+import com.lambda.common.http.Global
+import com.lambda.common.statistics.EventName
 import com.lambda.common.statistics.EventUtil
 import com.lambda.common.statistics.FirebaseAnalyticsUtil
-import com.theme.lambda.launcher.utils.BluetoothUtil
 import com.lambda.common.utils.CommonUtil
-import com.lambda.common.utils.LogUtil
 import com.lambda.common.utils.FirebaseConfigUtil
+import com.lambda.common.utils.LogUtil
 import com.lambda.common.utils.utilcode.util.ActivityUtils
-import com.theme.lambda.launcher.utils.OsUtil
 import com.lambda.common.vip.VipManager
 import com.lambda.news.LambdaNews
 import com.lambda.news.ui.detail.NewsDetailActivity
-import com.lambda.news.ui.home.HomeFragment
+import com.lambda.news.ui.home.NewsHomeActivity
 import com.lambda.weather.LambdaWeather
+import com.theme.lambda.launcher.appinfo.AppInfoCache
+import com.theme.lambda.launcher.appwidget.utils.WeatherManager
+import com.theme.lambda.launcher.netstate.NetStateChangeReceiver
 import com.theme.lambda.launcher.recall.RecallManager
-import com.theme.lambda.launcher.ui.news.NewsFragment
+import com.theme.lambda.launcher.service.FirebaseService
+import com.theme.lambda.launcher.utils.BluetoothUtil
+import com.theme.lambda.launcher.utils.OsUtil
 import com.theme.lambda.launcher.utils.WeatherTimerUtils
 
 class App : Application() {
@@ -97,12 +97,15 @@ class App : Application() {
                 WeatherManager.init()
             }
 
-            override fun getNewFragment(): Fragment {
-                return HomeFragment()
+            override fun openNewDetailActivity(context: Context, new: String) {
+                NewsDetailActivity.start(context, new, NewsHomeActivity.sFromWeather)
             }
 
-            override fun openNewDetailActivity(context: Context, new: String) {
-                NewsDetailActivity.start(context, new,NewsDetailActivity.sFromWeatherBanner)
+            override fun openNewHomeActivity(context: Context) {
+                NewsHomeActivity.start(context, NewsHomeActivity.sFromWeather)
+                EventUtil.logEvent(EventName.LNews, Bundle().apply {
+                    putString("from", "weather")
+                })
             }
 
         }

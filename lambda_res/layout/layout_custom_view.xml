@@ -6,7 +6,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_new"
-        android:name="com.lambda.news.ui.home.HomeFragment"
+        android:name="com.lambda.news.ui.home.NewsHomeFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:tag="customFragment" />

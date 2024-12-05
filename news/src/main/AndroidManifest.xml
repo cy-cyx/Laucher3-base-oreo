@@ -3,7 +3,7 @@
 
     <application android:theme="@style/AppTheme">
         <activity
-            android:name="com.lambda.news.ui.home.HomeActivity"
+            android:name="com.lambda.news.ui.home.NewsHomeActivity"
             android:excludeFromRecents="true"
             android:screenOrientation="portrait" />
         <activity

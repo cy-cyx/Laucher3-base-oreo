@@ -28,18 +28,18 @@ object LambdaWeather {
         lambdaWeatherCallback?.callUpdateAboutWeather()
     }
 
-    fun getNewFragment(): Fragment? {
-        return lambdaWeatherCallback?.getNewFragment()
-    }
-
     fun openNewDetailActivity(context: Context, new: String) {
         lambdaWeatherCallback?.openNewDetailActivity(context, new)
+    }
+
+    fun openNewHomeActivity(context: Context){
+        lambdaWeatherCallback?.openNewHomeActivity(context)
     }
 
 
     interface LambdaWeatherCallback {
         fun callUpdateAboutWeather()
-        fun getNewFragment(): Fragment
         fun openNewDetailActivity(context: Context, new: String)
+        fun openNewHomeActivity(context: Context)
     }
 }

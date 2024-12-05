@@ -17,7 +17,6 @@ import com.lambdaweather.adapter.HomeUiAdapter
 import com.lambdaweather.data.model.ForestWeatherModel
 import com.lambdaweather.data.model.HomeUiModel
 import com.lambdaweather.data.model.WeatherModel
-import com.lambdaweather.ui.news.NewsListActivity
 import com.lambdaweather.utils.GlideUtil
 import com.lambdaweather.utils.LocalUtils
 import com.lambdaweather.utils.LocationManagerHelper
@@ -217,7 +216,7 @@ class WeatherFragment : BaseFragment<FragmentWeather2Binding>() {
     }
 
     fun intentToNews() {
-        NewsListActivity.start(requireContext())
+        LambdaWeather.openNewHomeActivity(requireContext())
     }
 
     private fun initLocalNew() {

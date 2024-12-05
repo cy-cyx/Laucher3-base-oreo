@@ -303,10 +303,6 @@
             android:excludeFromRecents="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.theme.lambda.launcher.ui.news.NewDetailsActivity"
-            android:excludeFromRecents="true"
-            android:screenOrientation="portrait" />
-        <activity
             android:name="com.theme.lambda.launcher.ui.theme.ThemeActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -354,10 +350,6 @@
             android:excludeFromRecents="true"
             android:noHistory="true"
             android:theme="@style/Translucent" />
-        <activity
-            android:name="com.lambdaweather.ui.news.NewsListActivity"
-            android:excludeFromRecents="true"
-            android:screenOrientation="portrait" />
         <activity
             android:name="com.theme.lambda.launcher.ui.effect.EffectActivity"
             android:excludeFromRecents="true"

@@ -17,8 +17,8 @@ class NewsDetailViewModel : BaseViewModel() {
     val moreNewsLiveData = MediatorLiveData<ArrayList<News>>()
     val newsConfig: NewsConfig by lazy {
         val string =
-            LambdaRemoteConfig.getInstance(CommonUtil.appContext!!).getString("NewsConfig")
-        GsonUtil.gson.fromJson(string, NewsConfig::class.java)
+            LambdaRemoteConfig.getInstance(CommonUtil.appContext!!).getString("NewsConfig") ?: ""
+        GsonUtil.gson.fromJson(string, NewsConfig::class.java) ?: NewsConfig()
     }
 
     var new: News? = null

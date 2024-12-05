@@ -20,7 +20,9 @@ class CustomView @JvmOverloads constructor(
     }
 
     override fun onShow(fromResume: Boolean) {
-        EventUtil.logEvent(EventName.LNews, Bundle())
+        EventUtil.logEvent(EventName.LNews, Bundle().apply {
+            putString("from", "slide")
+        })
     }
 
     override fun onHide() {

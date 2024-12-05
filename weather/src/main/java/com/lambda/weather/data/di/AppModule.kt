@@ -5,7 +5,6 @@ import com.lambdaweather.data.remote.AppRemoteData
 import com.lambdaweather.data.remote.api.AppService
 import com.lambdaweather.data.repository.AppRepository
 import com.lambdaweather.data.repository.AppRepositorySource
-import com.lambdaweather.ui.news.NewsViewModel
 import com.lambda.common.net.RetrofitUtil
 import com.lambda.weather.AppViewModel
 import com.lambda.weather.ui.SearchViewModel
@@ -31,7 +30,6 @@ val dataModule = module {
         )
     }
     factory { AppViewModel(get()) }
-    factory { NewsViewModel(get()) }
     factory { SearchViewModel(get()) }
 }
 

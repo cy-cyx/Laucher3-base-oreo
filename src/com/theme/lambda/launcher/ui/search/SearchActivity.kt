@@ -19,18 +19,25 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.launcher3.ThemeManager
 import com.android.launcher3.databinding.ActivitySearchBinding
-import com.lambda.common.http.Preference
-import com.lambda.common.utils.utilcode.util.GsonUtils
-import com.lambda.common.utils.utilcode.util.Utils
-import com.lambdaweather.data.model.NewsModel
-import com.lambdaweather.ui.news.NewsListActivity
-import com.lambda.weather.view.WeatherNewBanner.OnRvBannerClickListener
 import com.lambda.common.ad.AdName
 import com.lambda.common.base.BaseActivity
+import com.lambda.common.http.Preference
 import com.lambda.common.statistics.EventName
 import com.lambda.common.statistics.EventUtil
 import com.lambda.common.utils.GsonUtil
-import com.theme.lambda.launcher.ui.news.NewDetailsActivity
+import com.lambda.common.utils.PermissionUtil
+import com.lambda.common.utils.SpKey
+import com.lambda.common.utils.StatusBarUtil
+import com.lambda.common.utils.getSpString
+import com.lambda.common.utils.gone
+import com.lambda.common.utils.marginStatusBarHeight
+import com.lambda.common.utils.utilcode.util.GsonUtils
+import com.lambda.common.utils.utilcode.util.Utils
+import com.lambda.common.utils.visible
+import com.lambda.news.ui.detail.NewsDetailActivity
+import com.lambda.news.ui.home.NewsHomeActivity
+import com.lambda.weather.view.WeatherNewBanner.OnRvBannerClickListener
+import com.lambdaweather.data.model.NewsModel
 import com.theme.lambda.launcher.ui.search.adapter.FileAdapter
 import com.theme.lambda.launcher.ui.search.adapter.ImageAdapter
 import com.theme.lambda.launcher.ui.search.adapter.ItemTouchHelperCallback
@@ -42,13 +49,6 @@ import com.theme.lambda.launcher.ui.search.adapter.UrlShortcutAdapter
 import com.theme.lambda.launcher.ui.search.adapter.YourMayLikeAdapter
 import com.theme.lambda.launcher.ui.search.searchlib.FileSearchLib
 import com.theme.lambda.launcher.ui.search.searchlib.PicSearchLib
-import com.lambda.common.utils.PermissionUtil
-import com.lambda.common.utils.getSpString
-import com.lambda.common.utils.gone
-import com.lambda.common.utils.marginStatusBarHeight
-import com.lambda.common.utils.visible
-import com.lambda.common.utils.SpKey
-import com.lambda.common.utils.StatusBarUtil
 
 class SearchActivity : BaseActivity<ActivitySearchBinding>() {
 
@@ -344,11 +344,18 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
         itemTouchHelper.attachToRecyclerView(viewBinding.rvUrlShortcut)
         viewBinding.clWeather.setOnClickListener {
-            NewsListActivity.start(this)
+            NewsHomeActivity.start(this, NewsHomeActivity.sFromSearch)
+            EventUtil.logEvent(EventName.LNews, Bundle().apply {
+                putString("from", "web")
+            })
         }
         viewBinding.rvBanner.setOnRvBannerClickListener(object : OnRvBannerClickListener {
             override fun onClick(date: NewsModel.NewsDTO) {
-                NewDetailsActivity.start(this@SearchActivity, GsonUtil.gson.toJson(date))
+                NewsDetailActivity.start(
+                    this@SearchActivity,
+                    GsonUtil.gson.toJson(date),
+                    NewsHomeActivity.sFromSearch
+                )
             }
         })
 

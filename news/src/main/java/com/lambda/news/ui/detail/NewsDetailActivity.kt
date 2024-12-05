@@ -23,6 +23,7 @@ import com.lambda.news.ui.detail.adapter.NewDetailsAdapter
 import com.lambda.news.ui.detail.item.NewDetailsAdItem
 import com.lambda.news.ui.detail.item.NewDetailsItem
 import com.lambda.news.ui.detail.item.NewDetailsTopItem
+import com.lambda.news.ui.home.NewsHomeActivity
 import com.lambda.news.ui.newslist.item.NewsItem
 
 class NewsDetailActivity : BaseActivity<NewsActivityDetailBinding>() {
@@ -30,11 +31,6 @@ class NewsDetailActivity : BaseActivity<NewsActivityDetailBinding>() {
     companion object {
         val sKeyNewDetail = "sKeyNewDetail"
         val sKeyFrom = "sKeyFrom"
-
-        val sFromHome = 1  // 来源从首页进入
-        val sFromCustom = 2  // 来源从负一屏进入
-        val sFromWeatherBanner = 3  // 来源从天气进入
-        val sFromSearch = 4  // 来源从搜索进入
 
         fun start(context: Context, new: News, from: Int) {
             val data = GsonUtil.gson.toJson(new)
@@ -65,7 +61,7 @@ class NewsDetailActivity : BaseActivity<NewsActivityDetailBinding>() {
         return NewsActivityDetailBinding.inflate(layoutInflater)
     }
 
-    private var from = sFromHome
+    private var from = NewsHomeActivity.sFromHome
     private var news: News? = null
     private val newDetailsAdapter: NewDetailsAdapter by lazy { NewDetailsAdapter() }
 
@@ -80,7 +76,7 @@ class NewsDetailActivity : BaseActivity<NewsActivityDetailBinding>() {
         StatusBarUtil.setStatusBarLightMode(this.window)
         viewBinding.containerLl.marginStatusBarHeight()
 
-        from = intent.getIntExtra(sKeyFrom, sFromHome)
+        from = intent.getIntExtra(sKeyFrom, NewsHomeActivity.sFromHome)
         intent.getStringExtra(sKeyNewDetail)?.let {
             if (it.isNotBlank()) {
                 try {

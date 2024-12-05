@@ -5,24 +5,30 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.lifecycle.Observer
 import com.lambda.common.base.BaseFragment
+import com.lambda.common.statistics.EventName
+import com.lambda.common.statistics.EventUtil
 import com.lambda.common.widget.adapter.LauncherFragmentAdapter
 import com.lambda.news.data.CategoriesManager
 import com.lambda.news.databinding.NewsFragmentHomeBinding
 import com.lambda.news.ui.newslist.NewsListFragment
 import com.lambda.news.ui.sort.SortActivity
 
-class HomeFragment : BaseFragment<NewsFragmentHomeBinding>() {
+class NewsHomeFragment : BaseFragment<NewsFragmentHomeBinding>() {
     override fun initViewBinding(inflater: LayoutInflater): NewsFragmentHomeBinding {
         return NewsFragmentHomeBinding.inflate(inflater)
     }
 
-    private val viewModel = HomeViewModel()
+    private val viewModel = NewsHomeViewModel()
+    var mfrom = NewsHomeActivity.sFromCustom
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         viewBinding.sortIv.setOnClickListener {
             SortActivity.start(requireContext())
+            EventUtil.logEvent(EventName.LNewsList, Bundle().apply {
+                putString("from", "add_tag")
+            })
         }
 
         CategoriesManager.myCategoriesLiveData.observe(viewLifecycleOwner, Observer {
@@ -53,6 +59,7 @@ class HomeFragment : BaseFragment<NewsFragmentHomeBinding>() {
                 temp.forEach {
                     fragments.add(NewsListFragment().apply {
                         category = it
+                        from = mfrom
                     })
 
                     fragmentsTitle.add(it)

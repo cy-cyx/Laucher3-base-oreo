@@ -4,7 +4,8 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import com.lambda.common.utils.CommonUtil.appContext
-import com.lambda.news.ui.home.HomeActivity
+import com.lambda.news.ui.home.NewsHomeActivity
+import com.lambda.news.ui.home.NewsHomeFragment
 
 object InnerAppManager {
 
@@ -51,7 +52,7 @@ object InnerAppManager {
     private fun click(context: Context, action: String) {
         when (action) {
             InnerNewsAction -> {
-                HomeActivity.start(context)
+                NewsHomeActivity.start(context, NewsHomeActivity.sFromHome)
             }
         }
         NewInstallationManager.clickApp(action)
